@@ -1,0 +1,206 @@
+1. Added a new variable "ADMIN_EMAIL" in .env file
+
+2. Set value for ADMIN_EMAIL in bootstrap file using env variable.  
+
+3. Added a new variable "TIMEZONE" in .env file
+
+4. Added a new vairable in .env file
+	#Schedule discontinued date
+	export SCHEDULE_EFFECTIVE_PERIOD=45
+
+5. Added two new variables in .env file
+    #ADMIN Sender Info
+    export ADMIN_SENDER_EMAIL="admin@tuxedoair.com"
+    export ADMIN_SENDER_NAME="Tuxedo Air"
+
+6. Add a new variable for Subscription renew alert
+    #Renewal Expiration Alert Days
+    export SUBSCRIPTION_RENEW_ALERT_DAYS = "60";
+
+7. Add three new variables to show sender's details in welcome_user email template
+    export ADMIN_SENDER_NAME="Tuxedo  Air  America,  LLC"
+    export ADMIN_SENDER_PHONE="918-298-3718"
+    export ADMIN_SENDER_ADDRESS="107 West Piper Drive, Tulsa, OK 74132"        
+
+8. Added two new variables in .env file
+    #Error Message
+    export FEATURE_AVAILABLITY_MSG = "This feature would be available in next release";
+    #Booking days limit
+    export ADVANCE_BOOKING_LIMIT_DAYS=60
+
+9. Add new varible to set label for reservation slots
+    export RESERVATION_SLOTS = "Reservation Slots";
+
+10. Add two new variables for Subscription expired and not exist message
+    export SUBSCRIPTION_EXPIRED = "Your subscription plan have been expired.";
+    export SUBSCRIPTION_NOT_EXIST = "You have not assigned to any subscription plan. Please contact us to choose a subscription plan.";
+
+11. Added TICKET_NO and INVOICE_NO in bootstrap file
+
+12. Added DEFAULT_TIMEZONE in .env file
+    export DEFAULT_TIMEZONE="US/Central"
+
+13. Added BOOKING_TIME_LIMIT in .env file
+    #Booking time limit (in mints)
+    export BOOKING_TIME_LIMIT=20
+
+14. Updated message for SUBSCRIPTION_EXPIRED and SUBSCRIPTION_NOT_EXIST variables on .env file
+    export SUBSCRIPTION_EXPIRED = "Your Subscription Plan has expired on SUBSCRIPTION_EXPIRATION_DATE, to Renew please call us at +1-918-298-3718 or write to us at admin@tuxairamerica.com";
+    export SUBSCRIPTION_NOT_EXIST = "No Subscription Plan has been assigned to your account, please call us at +1-918-298-3718 or write to us at admin@tuxairamerica.com for subscription assignment.";    
+
+15. Change email from admin@tuxairamerica.com to admin@tuxedoair.com on env file for "SUBSCRIPTION_EXPIRED" and "SUBSCRIPTION_NOT_EXIST".
+
+16. Roles Name Added in .env file
+#Role Names
+export ROLE_ADMIN = "Admin";
+export ROLE_CORPORATE_ADMIN = "Corporate Admin";
+export ROLE_CORPORATE_USER = "Corporate User";
+export ROLE_INDIVIDUAL = "Individual";
+
+17. Change value for variable DEBUG="false" to set environment mode as production.
+
+18. TAX Added in .env file
+#tax
+export TAX=7.5
+
+19. Labels on loading
+#Sending email button and link text on loading.
+export SUBMITING = 'Submiting...';
+export SENDING_INVOICE = 'Sending Invoice...';
+export SENDING_PAYMENT_EMAIL = 'Sending Payment Email...';
+export BOOKING_NOW = 'BOOKING NOW...';
+
+20. TRANSACTION_FIELD Varailable added in env
+    #transaction_name
+    export TRANSACTION_FIELD = 'Transaction'
+
+21. Company address added in env file
+    #Company address
+    export COMPANY_NAME = 'Tuxedo Air America, LLC'
+    export COMPANY_ADDRESS = '107 West Piper Drive, Tulsa, OK, 74132'
+    export COMPANY_PHONE = '918-298-3718'
+    export COMPANY_EMAIL = 'info@tuxedoair.com'
+    export COMPANY_SITE = 'www.tuxedoair.com'
+
+22. COMPANION_CHARGE to added in env file
+    export COMPANION_CHARGE = 2
+
+23. Added CANCELLATION_TIME variable in .env file 
+    export CANCELLATION_TIME=48
+
+24. Added PASSENGER_MANIFEST_EMAIL_LIST variable in .env file
+    export PASSENGER_MANIFEST_EMAIL_LIST = 'ops@tuxedoair.com,ops@brazosvalleyair.com,info@tuxedoair.com,chandan.ahluwalia@evontech.com'
+
+25. Added varaible in .env file
+    #Default United State Id
+    export DEFAULT_COUNTRY_ID=231
+
+26. Added variable in .env file
+    #Quickbook API sandbox constants
+    export QUICKBOOK_SANDBOX_CLIENT_ID='Q0SnLkMweY2rlRajGCvIOa7oCv1okUSZC6xs67ZWzruYyZTPlu'
+    export QUICKBOOK_SANDBOX_CLIENT_SECRET='ccYuZoti8rzc8rv71nysgWiE5R9syw8ON2MUJXa1'
+    export QUICKBOOK_BASE_URL='Development'
+27. Add a variable to enable or disbale QuickBooks integration
+export QUICK_BOOK_INTEGRATION='Y'    
+
+
+28. Added a new error message related user subscription
+    export SUBSCRIPTION_ERROR_OF_SELECTED_USER = "No Subscription Plan has been assigned to selected user account, please call us at +1-918-298-3718 or write to us at admin@tuxedoair.com for subscription assignment or you can also do booking using any other user subscription."
+    export SUBSCRIPTION_EXPIRED_OF_SELECTED_USER = "Subscription Plan has expired on SUBSCRIPTION_EXPIRATION_DATE of selected user, to Renew please call us at +1-918-298-3718 or write to us at admin@tuxedoair.com"
+
+29. Variable added in env file
+    #Fee Types
+    export FEE_DEST = 'Destination'
+    export FEE_MONTH = 'Monthly'
+    export FEE_INITIATION = 'Initiation'
+
+30. Add new variable 'QUICKBOOK_QBOREALMID' for adding QBOREALMID
+    export QUICKBOOK_QBOREALMID=''  
+
+31. Add new variable 'PAGE_SIZE' for US 8.5X11
+    #Page size for US 8.5X11
+    export PAGE_SIZE='Letter'
+
+32. Add new variables to allow access to provided user for specified functionalities.
+    export RESTRICTED_EVONTECH_ADMIN_FUNCTIONALITIES='Roles,FeeTypes'
+    export RESTRICTED_ADMIN_METHODS='add,edit'
+    export EVONTECH_ADMIN_EMAIL='admin@tuxedoair.com'
+    export RESTRICTION_MESSAGE='functionality can only be performed by Evontech Administrator, please contact admin@tuxedoair.com'
+
+33. Add new variable 'APPLICATION_DEPLOYED_ON_SERVER' for displaying the server name on the email's subject line
+    export APPLICATION_DEPLOYED_ON_SERVER='DEVELOPMENT SERVER: '    
+
+
+34. Add new variable 'RETURN_BOOKING_TIME_LIMIT'  for retrun trip flight booking time check
+    export RETURN_BOOKING_TIME_LIMIT = '15'
+
+35. Page size for print option.
+    export PAGE_ORIENTATION_LANDSCAPE='landscape'
+
+36. Add new variable 'BCC_LIST_FOR_USER_WELCOME_EMAIL' to send user welcome email as bcc to defined email address.     
+
+37. Add new variable 'PILOTS' for pilots login
+    export PILOTS='Pilots'
+
+38. Add two new variables 'UPDATE_FLIGHT_REASONS' and 'CANCEL_FLIGHT_REASONS' to list the reasons for update and cancel flight used on passenger manifest report page.
+
+39. Add variable for pilot onboarded comment
+export PILOTS_COMMENT="Passenger didn't show up., Passenger was late., Passenger asked to delay the flight."
+
+40. Added Cancellation variable in env file
+    export CANCELLATION_FEE_48 = '100'
+    export CANCELLATION_FEE_24 = '250'
+
+41. Added Pilot Passenger Manifest Email Variables In ENV File
+export PILOTS_CLOSE_FLIGHT_CONFIRM_MESSAGE="Are you sure you want to close this flight."
+export PILOTS_CLOSE_FLIGHT_SUCCESS_MESSAGE="Flight closed successfully."
+export PILOTS_CLOSE_FLIGHT_ERROR_MESSAGE="Somthing went wrong. Please try again."
+export PILOTS_CLOSE_FLIGHT_ALERT_MESSAGE="Please select one option from boarded."
+#export PILOTS_PASSENGER_MANIFEST_EMAIL_LIST = 'info@tuxedoair.com,ops@tuxedoair.com,ops@brazosvalleyair.com,scobb@tuxedoair.com,crike@tuxedoair.com,kcashmore@brazosvalleyair.com'
+export PILOTS_PASSENGER_MANIFEST_EMAIL_LIST = 'qazi.raza@evontech.com,asheesh.silswal@evontech.com'
+
+42. Added a variable in ENV file to Close flight after 2 hours of arrival
+export PILOTS_CLOSE_FLIGHT_AFTER = '+2 hours'
+
+43. Add below code config/app.php under Log config array
+'cronLog' => [
+            'className' => 'Cake\Log\Engine\FileLog',
+            'path' => LOGS,
+            'file' => 'cronLog',
+            'scopes' => ['cronLog'],
+            'levels' => ['info'],
+        ],
+44. Add a new variable 'FLIGHT_BOARDING_NOTIFICATION_TIME' to define the time interval to send flight notification to passengers
+export FLIGHT_BOARDING_NOTIFICATION_TIME = '90';
+
+45. Add two new variables for defining Cancelation and Other fee item id's
+export CANCELATION_FEE_CODE="23"
+export OTHER_FEE_CODE="24"
+
+46. Add a new variables for defining TWILIO number
+    #Twilio number
+    export TWILIONO = '+18622608597'
+    export TWILIO_TEST_NUMBERS = '+91983773553'
+
+47. Add a new fee_type variables in env file
+    export FEE_COMPANION = 'Companion'
+    export FEE_CANCELLATION = 'Cancelation'
+
+48. Add a new variable to enable/disable TWILIO sms integration
+    export TWILIO_SMS_INTEGRATION = 'Y' or 'N';
+
+49. Add a new variable to env file
+    export SESSION_EXPIRED_MSG = 'Session Expired. Please Login Again.'
+
+50. Role ID to give permissions
+export PERMISSION_ROLE_ID = '7,8'
+
+51. Full permission access User ID
+export FULL_PERMISSION_ACCESS_ID = '1,100006'
+
+52. Add two new variables to env file
+    export CC_LIST_FOR_USER_WELCOME_EMAIL = ''
+    export CC_LIST_FOR_UPDATE_BOOKING_EMAIL = ''
+
+53. Add new variable for env file
+    export CONTACT_ADMIN_TOOLTIP_MESSAGE = 'Please contact Evontech Team (chandan.ahluwalia@evontech.com) to edit this data.'

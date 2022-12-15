@@ -1,0 +1,69 @@
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Timezones</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <!--serch box-->
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Timezone Details</h2>
+                    <?php
+                        echo $this->Html->link("<i class='fa fa-mail-reply'></i> Go Back", 'javascript:history.back()', array('class' => 'btn btn-primary pull-right', 'escape' => false));
+                    ?>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label pull-right">Timezone Id:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php echo $this->Number->format($timezone->id); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label pull-right">Timezone:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php echo h($timezone->timezone); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label pull-right">Description:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <p class="textwrap"><?php echo h($timezone->description); ?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label pull-right">Code:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <p class="textwrap"><?php echo h($timezone->code); ?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label pull-right">Serial No:</label>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php echo h($timezone->serial_no); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<?php $sessionUser = $this->request->session()->read('Auth.User'); ?>
+<script type="text/javascript">
+function action(e){
+    var msg = $(e).attr("data-msg");
+    if(confirm(msg)){
+        var url = $(e).attr("data-url");
+        var adsb_status_id = $(e).attr("data-adsb_status_id");
+        $("#actionForm").attr("action",url);
+        $("#actionForm").append("<input type='hidden' name='id' value='"+adsb_status_id+"'/>");
+         $("#actionForm").submit();
+     }
+     return false;  
+}
+$(document).ready(function() {
+    var dataTable = $('#datatable').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "lengthMenu": [[<?php echo PAGINATION_LIMIT;?>, 50, 100, -1], [<?php echo PAGINATION_LIMIT;?>, 50, 100, "All"]],
+        "lengthChange": false,
+        "order": [[ 1, "asc" ]],
+        "aoColumnDefs": [
+            {
+                bSortable: false,
+                aTargets: [ 3 ]
+            }
+        ],
+        "ajax":{
+            url:"<?php echo $this->Url->build(['controller'=>'AdsbStatus', 'action'=>'ajaxManageAdsbStatusSearch']); ?>",
+            accepts: 'application/json', 
+            type: "post",
+            error: function() {
+                
+            }
+        }
+    } );
+} );
+</script>
+
+<div class="content sliding">
+    <div class="outerWrapper">
+        <div class="btnWrapper">
+            <h2 class="heading">AD/SB Status List</h2>
+            <?php
+            if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
+            echo $this->Html->link("<i class='fa fa-plus'></i> Add AD/SB Status", array('action' => 'add'), array('class' => 'btn btn-default', 'escape' => false));
+            }
+            ?>
+        </div>
+        
+        <div class="page-content mt-35">
+            <div class="tableScroll">
+                <table id="datatable" class="table dataTable" width="100%">
+                    <thead>
+                        <tr>
+                            <th style="vertical-align: top;" scope="col">#</th>
+                            <th style="vertical-align: top;" scope="col"><?php echo __('AD/SB Status'); ?></th>
+                            <th style="vertical-align: top;" scope="col"><?php echo __('Status'); ?></th>
+                            <th style="vertical-align: top;" scope="col" class="actions" width="20%"><?php echo __('Actions'); ?></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-hidden">
+    <form id="actionForm" method="post"></form>
+</div>

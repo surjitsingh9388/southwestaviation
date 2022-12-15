@@ -1,0 +1,474 @@
+// Added a new field 'fbo_name' on 'airports' table
+ALTER TABLE  `airports` ADD  `fbo_name` VARCHAR( 100 ) NOT NULL AFTER  `airport_code` ;
+
+//Created new table for schedule flights
+CREATE TABLE IF NOT EXISTS `schedule_flights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedule_id` int(11) NOT NULL,
+  `plane_id` int(11) NOT NULL,
+  `running_day` varchar(20) NOT NULL,
+  `deleted` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+//Schedules table column dropped 18 June 2018
+ALTER TABLE schedules DROP FOREIGN KEY schedules_ibfk_4
+ALTER TABLE `schedules`
+  DROP `plane_id`,
+  DROP `running_day`;
+
+//Schedules table realtonship changed 19 June 2018
+ALTER TABLE `schedules` DROP FOREIGN KEY `schedules_ibfk_5` ;
+
+ALTER TABLE `schedules` ADD CONSTRAINT `schedules_ibfk_5` FOREIGN KEY ( `route_id` ) REFERENCES `routes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+// Allow null for latitude in electronic_addresses table
+ALTER TABLE `electronic_addresses` CHANGE `latitude` `latitude` DOUBLE NULL ;
+
+//Column Added in schdeules table
+ALTER TABLE `schedules` ADD `start_date` DATE DEFAULT NULL AFTER `flight_number` ,
+ADD `end_date` DATE DEFAULT NULL AFTER `start_date`
+
+//Added and Alter tables for Booking sections
+ALTER TABLE  `payments` DROP FOREIGN KEY  `payments_ibfk_5` ;
+ALTER TABLE  `payments` DROP INDEX  `ach_id` ;
+ALTER TABLE  `payments` DROP  `ach_id` ;
+ALTER TABLE  `invoices` ADD  `booking_id` INT NULL AFTER  `company_id` ;
+ALTER TABLE  `invoices` ADD INDEX (  `booking_id` ) COMMENT  '';
+ALTER TABLE  `invoices` ADD FOREIGN KEY (  `booking_id` ) REFERENCES  `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE  `invoice_items` DROP FOREIGN KEY  `invoice_items_ibfk_2` ;
+
+ALTER TABLE  `invoice_items` ADD CONSTRAINT  `invoice_items_ibfk_2` FOREIGN KEY (  `fee_type_id` ) REFERENCES `subscription_fees` (`fee_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+CREATE TABLE IF NOT EXISTS `payment_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_id` int(11) NOT NULL,
+  `fee_type_id` int(11) NOT NULL,
+  `fee_amount` double NOT NULL,
+  `fee_discount` double NOT NULL,
+  `comment` varchar(250) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int(11) NOT NULL,
+  `deleted` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fee_type_id` (`fee_type_id`),
+  KEY `updated_by` (`updated_by`),
+  KEY `payment_id` (`payment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `payment_items`
+  ADD CONSTRAINT `payment_items_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`),
+  ADD CONSTRAINT `payment_items_ibfk_2` FOREIGN KEY (`fee_type_id`) REFERENCES `invoice_items` (`fee_type_id`),
+  ADD CONSTRAINT `payment_items_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+  
+ALTER TABLE  `payments` DROP FOREIGN KEY  `payments_ibfk_4` ;
+ALTER TABLE  `payments` DROP  `subscription_fee_id` ;
+ALTER TABLE `bookings` CHANGE `journey_date` `journey_date` DATE NOT NULL ;
+
+ALTER TABLE `bookings` ADD `seat_count` INT NOT NULL AFTER `seat_id` ;
+
+//Routes table cloumn modified
+ALTER TABLE `routes` CHANGE `modified` `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `routes` CHANGE `start_date` `start_date` DATE NULL;
+ALTER TABLE `routes` CHANGE `end_date` `end_date` DATE NULL;
+
+//Invoice table modified
+ALTER TABLE `invoices` CHANGE `company_id` `company_id` INT( 11 ) NULL DEFAULT NULL ;
+ALTER TABLE `invoices` CHANGE `currency` `currency` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;
+ALTER TABLE `invoices` CHANGE `departure_time` `departure_time` TIME NOT NULL ,
+CHANGE `arrival_time` `arrival_time` TIME NOT NULL ;
+ALTER TABLE `invoice_items` CHANGE `comment` `comment` VARCHAR( 250 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;
+ALTER TABLE `invoice_items` CHANGE `fee_discount` `fee_discount` DOUBLE NULL DEFAULT NULL ;
+
+
+// Bookings table changes
+ALTER TABLE bookings DROP FOREIGN KEY bookings_ibfk_4 ; 
+ALTER TABLE bookings DROP INDEX updated_by;
+ALTER TABLE  `bookings` ADD FOREIGN KEY (  `updated_by` ) REFERENCES  `users` (
+`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+// Schedules table changes
+ALTER TABLE  `schedule_flights` ADD FOREIGN KEY (  `schedule_id` ) REFERENCES `schedules` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+// schedule_flights table changes
+ALTER TABLE  `schedule_flights` ADD FOREIGN KEY (  `plane_id` ) REFERENCES `planes` (
+`id`
+) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+//Invoice address_line2 column updated
+ALTER TABLE `invoices` CHANGE `address_line2` `address_line2` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+
+
+ALTER TABLE `invoices` CHANGE `invoice_no` `invoice_no` VARCHAR( 20 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;
+ALTER TABLE `bookings` CHANGE `ticket_no` `ticket_no` VARCHAR( 20 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ;
+
+//Add composite unique key on `tier_levels`
+ALTER TABLE `tier_levels` DROP INDEX `tier_level`, ADD INDEX `tier_level` (`tier_level`) USING BTREE; 
+ALTER TABLE `tier_levels` ADD UNIQUE (`membership_type_id`, `tier_level`);
+
+//New table created reset_passwords
+CREATE TABLE `reset_passwords` (                    
+                   `id` int(11) NOT NULL AUTO_INCREMENT,             
+                   `user_id` int(11) NOT NULL,                       
+                   `token` varchar(255) NOT NULL,                    
+                   `password_reset_link` varchar(255) DEFAULT NULL,  
+                   `expired` datetime NOT NULL,                      
+                   `created` datetime NOT NULL,                      
+                   `modified` datetime DEFAULT NULL,                 
+                   `deleted` datetime DEFAULT NULL,                  
+                   PRIMARY KEY (`id`)                                
+                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+//Alter users table to store height, weight, emergency contact names and emergency phone list
+ALTER TABLE `users` ADD `height_ft` INT(2) NULL AFTER `tsa_pre_check_expiry`, ADD `height_inch` INT(2) NULL AFTER `height_ft`, ADD `weight` INT(3)  NULL AFTER `height_inch`, ADD `emergency_contact_names` VARCHAR(200)  NULL AFTER `weight`, ADD `emergency_phone_list` VARCHAR(100)  NULL AFTER `emergency_contact_names`;
+
+//Chnages in INVOICE table
+  ALTER TABLE `invoices` CHANGE `flight_number` `flight_number` VARCHAR( 20 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ,
+  CHANGE `from_airport_name` `from_airport_name` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ,
+  CHANGE `from_airport_code` `from_airport_code` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ,
+  CHANGE `to_airport_name` `to_airport_name` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ,
+  CHANGE `to_airport_code` `to_airport_code` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL ,
+  CHANGE `departure_time` `departure_time` TIME NULL DEFAULT NULL ,
+  CHANGE `arrival_time` `arrival_time` TIME NULL DEFAULT NULL ;
+
+//Changes in payment_items table
+ALTER TABLE `payment_items` CHANGE `fee_discount` `fee_discount` DOUBLE NULL;
+  ALTER TABLE `payments` ADD `client_comment` VARCHAR(500) NULL AFTER `comment`;
+  ALTER TABLE `payments` ADD `payment_mail_sent_count` INT(3) NOT NULL DEFAULT '0' AFTER `client_comment`;
+
+//chnages in invoice_item table
+  ALTER TABLE  `invoice_items` ADD  `booking_id` INT NOT NULL AFTER  `invoice_id` ;
+  ALTER TABLE  `invoice_items` ADD FOREIGN KEY (  `booking_id` ) REFERENCES `bookings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+  ALTER TABLE `invoice_items` ADD `tax_percentage` DOUBLE NULL AFTER `fee_discount`;
+  ALTER TABLE `invoice_items` ADD `tax_amount` DOUBLE NULL AFTER `tax_percentage`;
+  ALTER TABLE `invoice_items` ADD `total_amount` DOUBLE NULL AFTER `tax_amount`;
+
+//changes in booking table
+  ALTER TABLE  `bookings` DROP `seat_count` ;
+  ALTER TABLE  `bookings` ADD  `full_name` VARCHAR( 50 ) NOT NULL AFTER  `trip_type` ;
+  ALTER TABLE  `bookings` ADD  `email` varchar(50) NOT NULL AFTER  `full_name` ;
+  ALTER TABLE  `bookings` ADD  `phone` varchar(20) NOT NULL AFTER  `email` ;
+  ALTER TABLE  `bookings` ADD  `phone_ext` varchar(10) NOT NULL AFTER  `phone` ;
+  ALTER TABLE  `bookings` ADD  `address_line1` varchar(100) NOT NULL AFTER  `phone_ext` ;
+  ALTER TABLE  `bookings` ADD  `address_line2` varchar(100) NOT NULL AFTER  `address_line1` ;
+  ALTER TABLE  `bookings` ADD  `zip_code` varchar(10) NOT NULL AFTER  `address_line2` ;
+  ALTER TABLE  `bookings` ADD  `city` varchar(50) NOT NULL AFTER  `zip_code` ;
+  ALTER TABLE  `bookings` ADD  `state` varchar(50) NOT NULL AFTER  `city` ;
+  ALTER TABLE  `bookings` ADD  `country` varchar(50) NOT NULL AFTER  `state` ;
+  ALTER TABLE  `bookings` ADD  `flight_number` varchar(20) NOT NULL AFTER  `country` ;
+  ALTER TABLE  `bookings` ADD  `from_airport_name` varchar(100) NOT NULL AFTER  `flight_number` ;
+  ALTER TABLE  `bookings` ADD  `from_airport_code` varchar(10) NOT NULL AFTER  `from_airport_name` ;
+  ALTER TABLE  `bookings` ADD  `to_airport_name` varchar(100) NOT NULL AFTER  `from_airport_code` ;
+  ALTER TABLE  `bookings` ADD  `to_airport_code` varchar(10) NOT NULL AFTER  `to_airport_name` ;
+  ALTER TABLE  `bookings` ADD  `departure_time` time NOT NULL AFTER  `to_airport_code` ;
+  ALTER TABLE  `bookings` ADD  `arrival_time` time NOT NULL AFTER  `departure_time` ;
+
+//changes in invoices table
+  ALTER TABLE `invoices`
+  DROP `flight_number`,
+  DROP `booking_id`,
+  DROP `from_airport_name`,
+  DROP `from_airport_code`,
+  DROP `to_airport_name`,
+  DROP `to_airport_code`,
+  DROP `departure_time`,
+  DROP `arrival_time`,
+  DROP `seat_number`;
+
+  ALTER TABLE  `invoices` DROP FOREIGN KEY  `invoices_ibfk_4` ;
+  ALTER TABLE `invoices` ADD `client_comment` VARCHAR(500) NULL AFTER `comment`;
+  ALTER TABLE `invoices` ADD `invoice_mail_sent_count` INT(3) NOT NULL DEFAULT '0' AFTER `client_comment`;
+
+  ALTER TABLE  `invoices` ADD  `currency` INT NOT NULL AFTER  `comment` ;
+  ALTER TABLE invoices ADD INDEX currency (currency);
+  ALTER TABLE  `invoices` ADD FOREIGN KEY (  `currency` ) REFERENCES `currencies` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+//A new column add in table companions
+alter table `companions` add column `deleted` datetime   NULL  after `updated_by`
+
+//Changes in users table
+ALTER TABLE `users` ADD `first_name` VARCHAR(35) NOT NULL AFTER `id`; 
+ALTER TABLE `users` ADD `middle_name` VARCHAR(35) NOT NULL AFTER `first_name`;
+ALTER TABLE `users` ADD `last_name` VARCHAR(35) NOT NULL AFTER `middle_name`;
+
+
+//emergency_contacts table created
+  CREATE TABLE `emergency_contacts` (
+    `id` int(11) NOT NULL,
+    `first_name` varchar(35) NOT NULL,
+    `middle_name` varchar(35) NULL,
+    `last_name` varchar(35) NOT NULL,
+    `phone_ext` varchar(10) NOT NULL,  
+    `phone` varchar(20) NOT NULL,
+    `user_id` int(11) NOT NULL,
+    `created` datetime NOT NULL,
+    `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `updated_by` int(11) NOT NULL,
+    `deleted` datetime DEFAULT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+  ALTER TABLE `emergency_contacts`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `updated_by_index` (`updated_by`),
+    ADD KEY `user_id` (`user_id`);
+
+
+  ALTER TABLE `emergency_contacts`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+  ALTER TABLE `emergency_contacts`
+    ADD CONSTRAINT `emergency_contacts_ibfk_1` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
+    ADD CONSTRAINT `emergency_contacts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+//Add new field in subscription_fees table
+  ALTER TABLE `subscription_fees` ADD `total_amount` DOUBLE NULL AFTER `fee_discount`;
+	
+// Set default values for fields in payments items
+  ALTER TABLE `payment_items` CHANGE `fee_discount` `fee_discount` DOUBLE NOT NULL DEFAULT '0';
+  ALTER TABLE `payment_items` CHANGE `comment` `comment` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ;
+
+//Added show_on_customer_portal column
+  ALTER TABLE `airports` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `fbo_name`;
+  ALTER TABLE `memberships` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `description`;
+  ALTER TABLE `routes` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `end_date`;
+  ALTER TABLE `schedules` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `block_min`;
+
+// Addded new table advances
+  CREATE TABLE `advances` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `invoice_id` int(11) NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int(11) NOT NULL,
+  `deleted` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+  ALTER TABLE `advances`
+    ADD KEY `user_id` (`user_id`),
+    ADD KEY `invoice_id` (`invoice_id`),
+    ADD KEY `updated_by` (`updated_by`);
+
+  ALTER TABLE `advances`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+  ALTER TABLE `advances`
+    ADD CONSTRAINT `advances_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+    ADD CONSTRAINT `advances_ibfk_2` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`),
+    ADD CONSTRAINT `advances_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+
+  ALTER TABLE `invoice_items` ADD `advance_id` INT NULL AFTER `total_amount`;
+  ALTER TABLE `invoice_items` ADD INDEX (`advance_id`);
+  ALTER TABLE `invoice_items` ADD FOREIGN KEY (`advance_id`) REFERENCES `advances`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+//New column show_on_customer_portal added in airports, memberships, membership_types, routes, schedules
+  ALTER TABLE `airports` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `fbo_name`;
+  ALTER TABLE `memberships` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `description`;
+  ALTER TABLE `membership_types` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `membership_description`;
+  ALTER TABLE `routes` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `end_date`;
+  ALTER TABLE `schedules` ADD `show_on_customer_portal` BOOLEAN NOT NULL DEFAULT TRUE AFTER `block_min`;
+
+//Add new fields in payment_items table
+  ALTER TABLE `payment_items` ADD `total_amount` DOUBLE NULL AFTER `fee_discount`;
+  ALTER TABLE `payment_items` ADD  `invoice_item_id` INT NULL AFTER  `payment_id`;
+  ALTER TABLE `payment_items` ADD INDEX (`invoice_item_id`);
+  ALTER TABLE `payment_items` ADD FOREIGN KEY (  `invoice_item_id` ) REFERENCES  `invoices` (  `id` ) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+// Change in payment_items table
+ ALTER TABLE `payment_items` DROP FOREIGN KEY `payment_items_ibfk_4`; ALTER TABLE `payment_items` ADD CONSTRAINT `payment_items_ibfk_4` FOREIGN KEY (`invoice_item_id`) REFERENCES `invoice_items`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+
+// Added a new column for slug to create url in membership_types table
+ALTER TABLE `membership_types` ADD `slug` VARCHAR(255) NOT NULL AFTER `updated_by`;
+
+//New field added in users table for home phone.
+ALTER TABLE `users` ADD `home_phone` VARCHAR(20) NULL AFTER `phone`;
+
+//Invoice_item table updated
+  ALTER TABLE `invoice_items` ADD `date` DATETIME NOT NULL AFTER `booking_id`;
+  ALTER TABLE `invoice_items` CHANGE `invoice_id` `invoice_id` INT(11) NULL;
+  ALTER TABLE `invoice_items` ADD `user_id` INT NULL AFTER `id`;
+  ALTER TABLE  `invoice_items` ADD INDEX (`user_id`);
+  ALTER TABLE `invoice_items` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ //Added colum in invoice_items and subscription_fees table
+  ALTER TABLE `invoice_items` ADD `subscription_fee_id` INT NULL DEFAULT NULL AFTER `booking_id` ;
+  ALTER TABLE `invoice_items` ADD INDEX (`subscription_fee_id`);
+  ALTER TABLE `invoice_items` ADD FOREIGN KEY (`subscription_fee_id`) REFERENCES `subscription_fees`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+  ALTER TABLE `subscription_fees` ADD `membership_fee_id` INT NULL AFTER `id`;
+  ALTER TABLE  `subscription_fees` ADD INDEX (`membership_fee_id`);
+  ALTER TABLE `subscription_fees` ADD FOREIGN KEY (`membership_fee_id`) REFERENCES `membership_fees`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+  ALTER TABLE `invoice_items` ADD `extra_fee_type` VARCHAR(20) NULL AFTER `tax_amount`;
+  ALTER TABLE `invoice_items` ADD `extra_fee` DOUBLE NULL AFTER `extra_fee_type`;
+  
+  ALTER TABLE `invoice_items` CHANGE `date` `transaction_date` DATETIME NOT NULL ;
+
+// change datatype for `commitment_period` in `subscriptions` table
+ALTER TABLE  `subscriptions` CHANGE  `commitment_period`  `commitment_period` DOUBLE NULL DEFAULT NULL ; 
+
+
+//Title and Suffix field added in users table
+  ALTER TABLE `users` ADD `title` VARCHAR(16) NULL AFTER `id`;
+  ALTER TABLE `users` ADD `suffix` VARCHAR(16) NULL AFTER `last_name`;
+
+//
+  ALTER TABLE `users_audit` ADD `title` VARCHAR(16) NULL AFTER `id`;
+  ALTER TABLE `users_audit` ADD `suffix` VARCHAR(16) NULL AFTER `last_name`
+
+//Chage in bookings table
+  ALTER TABLE  `bookings` DROP INDEX  `ticket_no` ;
+
+// changes for `payment_items` and `invoice_items` tables
+ALTER TABLE `payment_items` DROP FOREIGN KEY `payment_items_ibfk_2`; ALTER TABLE `payment_items` ADD CONSTRAINT `payment_items_ibfk_2` FOREIGN KEY (`fee_type_id`) REFERENCES `fee_types`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `invoice_items` DROP FOREIGN KEY `invoice_items_ibfk_2`; ALTER TABLE `invoice_items` ADD CONSTRAINT `invoice_items_ibfk_2` FOREIGN KEY (`fee_type_id`) REFERENCES `fee_types`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+//Added passenger_id column in bookings table
+  ALTER TABLE `bookings` ADD `passenger_id` INT NULL AFTER `user_id` ;
+  ALTER TABLE `bookings_audit` ADD `passenger_id` INT NULL AFTER `user_id`;
+
+//
+ALTER TABLE  `routes` ADD  `disable` INT NOT NULL DEFAULT  '0';
+ALTER TABLE  `routes_audit` ADD  `disable` INT NOT NULL ;
+
+ALTER TABLE  `schedules` ADD  `disable` INT NOT NULL DEFAULT  '0';
+ALTER TABLE  `schedules_audit` ADD  `disable` INT NOT NULL ;
+
+// Changes in payments (if column not exist in table)
+ALTER TABLE `payments` ADD `client_comment` VARCHAR(500) NULL AFTER `comment`;
+ALTER TABLE `payments` ADD `payment_mail_sent_count` INT(3) NOT NULL DEFAULT '0' AFTER `client_comment`;
+
+// Changes in payment_audit table
+ALTER TABLE  `payments_audit` ADD  `client_comment` VARCHAR( 500 ) NULL AFTER  `comment` ;
+ALTER TABLE  `payments_audit` ADD  `payment_mail_sent_count` INT( 3 ) NOT NULL DEFAULT  '0' AFTER  `client_comment` ;
+
+// Added new table to save email sending jobs
+CREATE TABLE IF NOT EXISTS `email_queues` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email_type` varchar(100) NOT NULL,
+  `email_data` mediumtext NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
+  `updated_by` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB
+
+// change field type for status in email_queues
+ALTER TABLE  `email_queues` CHANGE  `status`  `status` TINYINT NOT NULL DEFAULT  '0'; 
+
+//Added status column in invoice_items table
+  ALTER TABLE `invoice_items` ADD `status` VARCHAR( 20 ) NULL DEFAULT NULL AFTER `advance_id` ;
+
+//Added column in booking table
+  ALTER TABLE `bookings` ADD `original_ticket_no` VARCHAR(20) NULL AFTER `id`;
+  ALTER TABLE `bookings_audit` ADD `original_ticket_no` VARCHAR(20) NULL AFTER `id`;
+
+  ALTER TABLE `bookings` ADD `payer_id` INT NOT NULL AFTER `passenger_id`;
+  ALTER TABLE `bookings_audit` ADD `payer_id` INT NOT NULL AFTER `passenger_id`;
+  ALTER TABLE `bookings` ADD INDEX (`payer_id`);
+  ALTER TABLE `bookings` ADD FOREIGN KEY (`payer_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+
+//Columns added in booking table
+  ALTER TABLE `bookings` ADD `schedule_flight_id` INT NULL AFTER `schedule_id`;
+  ALTER TABLE `bookings_audit` ADD `schedule_flight_id` INT NULL AFTER `schedule_id`;
+  ALTER TABLE `bookings` ADD INDEX (`schedule_flight_id`);
+  ALTER TABLE `bookings` ADD FOREIGN KEY (`schedule_flight_id`) REFERENCES `schedule_flights`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+//Added original_ticket_number in invoice_items table
+  ALTER TABLE `invoice_items` ADD `original_ticket_number` INT NULL DEFAULT NULL AFTER `booking_id` ;
+
+// Added new field 'advance_id' on payment_items and  payment_items_audit tables
+  ALTER TABLE  `payment_items` ADD  `advance_id` INT NULL DEFAULT NULL AFTER  `total_amount` ;
+
+  ALTER TABLE  `payment_items_audit` ADD  `advance_id` INT NULL AFTER  `total_amount` ;
+
+//Added column in schedule_flights table
+  ALTER TABLE `schedule_flights` ADD `status` VARCHAR( 20 ) NULL AFTER `running_day` ;
+
+//Updated column name postal_code table
+ALTER TABLE `states` CHANGE `postal_code` `state_code` VARCHAR( 10 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ;
+
+//Added column in booking table
+
+  ALTER TABLE `bookings` ADD `booked_by` INT NULL AFTER `payer_id`;
+  ALTER TABLE `bookings` ADD `cancelled_by` INT NULL AFTER `booked_by`;
+  ALTER TABLE `bookings` ADD `changed_by` INT NULL AFTER `cancelled_by`;
+  ALTER TABLE `bookings` ADD `onboarded` TINYINT NOT NULL DEFAULT '0' AFTER `changed_by`;
+
+  ALTER TABLE `bookings_audit` ADD `booked_by` INT NULL AFTER `payer_id`;
+  ALTER TABLE `bookings_audit` ADD `cancelled_by` INT NULL AFTER `booked_by`;
+  ALTER TABLE `bookings_audit` ADD `changed_by` INT NULL AFTER `cancelled_by`;
+  ALTER TABLE `bookings_audit` ADD `onboarded` TINYINT NOT NULL DEFAULT '0' AFTER `changed_by`;
+
+  ALTER TABLE `bookings` ADD INDEX (`booked_by`);
+  ALTER TABLE `bookings` ADD INDEX (`cancelled_by`);
+  ALTER TABLE `bookings` ADD INDEX (`changed_by`);
+
+  ALTER TABLE `bookings` ADD FOREIGN KEY (`booked_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ALTER TABLE `bookings` ADD FOREIGN KEY (`cancelled_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ALTER TABLE `bookings` ADD FOREIGN KEY (`changed_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ // Added new table for saving refresh tokens for QuickBooks online API
+ CREATE TABLE IF NOT EXISTS `quick_books_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `refresh_token` varchar(255) NOT NULL,
+  `expiration_date` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB 
+
+// Users table full_name charector is now 141
+ALTER TABLE `users` CHANGE `full_name` `full_name` VARCHAR(141) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `users_audit` CHANGE `full_name` `full_name` VARCHAR(141) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+
+//Add new trigger for email_queues table and create new email_queues_audit table
+
+CREATE TABLE `email_queues_audit` (
+  `id` int(11) NOT NULL,
+  `email_type` varchar(100) NOT NULL,
+  `email_data` mediumtext NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `updated_by` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DELIMITER $$
+CREATE TRIGGER `email_queues_delete_trigger` BEFORE DELETE ON `email_queues` FOR EACH ROW BEGIN
+  INSERT INTO email_queues_audit select * from email_queues where id = OLD.id;
+  UPDATE email_queues_audit SET deleted=now(), status=1 where id = OLD.id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `email_queues_update_trigger` BEFORE UPDATE ON `email_queues` FOR EACH ROW BEGIN
+  INSERT INTO email_queues_audit select * from email_queues where id = NEW.id;
+END
+$$
+DELIMITER ;
+
+//Change in membership_fees table
+ALTER TABLE  `membership_fees` CHANGE  `description`  `description` VARCHAR( 500 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL ; 
+
+//Changes in payments and payments_audit table
+ALTER TABLE  `payments` ADD  `quickbook_payment_id` INT NULL AFTER  `client_comment` ;
+ALTER TABLE  `payments_audit` ADD  `quickbook_payment_id` INT NULL AFTER  `client_comment` ;
+
+//Changes in user_menu_items Table
+ALTER TABLE `user_menu_items` ADD `role_id` INT(11) NOT NULL AFTER `user_id`;
+ALTER TABLE `user_menu_items` CHANGE `user_id` `user_id` INT(11) NULL;
+
+INSERT INTO `roles` (`id`, `role_name`, `created`, `modified`, `deleted`, `updated_by`, `serial_no`) VALUES (NULL, 'Admin Operations', '2019-03-04 13:46:22', '2019-03-04 13:47:18', NULL, '1', '7');
+INSERT INTO `roles` (`id`, `role_name`, `created`, `modified`, `deleted`, `updated_by`, `serial_no`) VALUES (NULL, 'Admin Sales', '2019-03-04 13:46:22', '2019-03-04 13:47:18', NULL, '1', '8');
+INSERT INTO `roles` (`id`, `role_name`, `created`, `modified`, `deleted`, `updated_by`, `serial_no`) VALUES (NULL, 'Financial', '2019-03-04 13:46:22', '2019-03-04 13:47:18', NULL, '1', '9');
