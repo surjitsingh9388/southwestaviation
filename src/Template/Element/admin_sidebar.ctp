@@ -701,6 +701,44 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 </li>
             <?php
             }
+
+            if(in_array('Parts', $userMenu)) {
+                $partsSubStyle = '';
+                $partsSection = array('Parts');
+
+                if (in_array($controller, $partsSection)) {
+                    $partsSubStyle = 'style="display: block;"';
+                ?>
+                <li class="current-page active dropdown">
+                <?php } else { ?>
+                <li class="dropdown">
+                <?php 
+                }
+                ?>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="icon-size"><i class="fa fa-plane"></i></span>Parts</a>
+                    <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $partsSubStyle; ?>>
+                        <?php 
+                        if(in_array('Parts', $userMenu)) {
+                            if($controller == 'Parts' && (in_array($action, array('index')))) { 
+                        ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Parts</span>", 
+                                array('controller' => 'Parts', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+                    ?>
+                    </ul>
+                </li>
+            <?php
+            }
             ?>
         </div>
     </ul>
