@@ -339,6 +339,7 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemInfo">Item Information</a></li>
                             <li><a data-toggle="tab" href="#subItems">Sub Items</a></li>
+                            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="itemInfo" class="tab-pane fade in active">
@@ -914,7 +915,7 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                                                 if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1){
                                                 ?>
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <input type="button" value="Create Group" class="btn btn-primary pull-right gpBtnCls" data-planeid="<?php echo $airCompParts['plane_id']; ?>" data-compid="<?php echo $airCompParts['airframe_component_id']; ?>" data-partid="<?php echo $airCompParts['id']; ?>" data-groupid="<?php echo $airCompParts['group']['id']; ?>" style="margin-right: 16px;">
+                                                    <input type="button" value="Create Group" class="btn btn-primary pull-right gpBtnCls" data-planeid="<?php echo $airCompParts['plane_id']; ?>" data-compid="<?php echo $airCompParts['airframe_component_id']; ?>" data-partid="<?php echo $airCompParts['id']; ?>" data-groupid="<?php echo isset($airCompParts['group']['id']) ? $airCompParts['group']['id'] : ''; ?>" style="margin-right: 16px;">
                                                 </div>
                                                 <?php
                                                 }
@@ -997,6 +998,40 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                                     <input type="hidden" name="subPartIds" id="subPartIds" data-subpartids="<?= h(implode(",", $subPartIds)); ?>">
                                 </div>
                             </div>
+
+                            <div id="itemAttachment" class="tab-pane fade">
+                                <div class="g-0 bg-light position-relative mt10">
+                                    <div class="">
+                                        
+                                        <div class="pull-right">
+                                            <input type="file" name="files[]" id="component_part_attachment" style="display:none !important;" />
+                                            <button class="btn btn-primary pull-right" type="button" onclick="$('#component_part_attachment').trigger('click'); return false;" id="component_part_upload">Upload File</button>
+                                        </div>
+                                    </div>
+
+                                    <table class="table upload-area" id="uploadfile">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="col-sm-2">File Name</th>
+                                                <th class="col-sm-1">Size</th>
+                                                <th class="col-sm-2">Uploaded</th>
+                                                <th class="col-sm-2">Uploaded By</th>
+                                                <th class="col-sm-1"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="component_part_file_list">
+                                            <?php 
+                                            if(!empty($partfiletblrow)){ 
+                                                echo $partfiletblrow;
+                                            }else{ ?>
+                                                <tr>
+                                                    <td colspan="5">No Attachments.</td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1016,12 +1051,17 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
 <?php echo $this->Html->script('parts'); ?>
 <script> 
 var getComponents = "<?php echo Router::url(['controller'=>'AirframeComponents', 'action'=>'getComponents']); ?>";   
+var uploadAirframeCompPartAttachmentURL = "<?php echo Router::url(['controller'=>'AirframeComponentParts', 'action'=>'uploadAirframeCompPartAttachment']); ?>";   
+var deleteAirframeCompPartAttachmentURL = "<?php echo Router::url(['controller'=>'AirframeComponentParts', 'action'=>'deleteAirframeCompPartAttachment']); ?>"; 
 
 $(document).ready(function() {
     //Enable/disable form and few buttons
     $("#frmAirCompPart :input").prop("disabled", true);
     $('#frmAirCompPart .actionCls').prop("disabled", false);
     $('#frmAirCompPart .gpBtnCls').prop("disabled", false);
+
+    $('#component_part_search, #component_part_upload, #component_part_attachment').prop("disabled", false);
+
     $(document).on("click", ".reviseCls", function() {
         $("#frmAirCompPart :input").prop("disabled", false);
         $('.selectpicker').selectpicker('refresh');
@@ -1891,5 +1931,62 @@ $(document).ready(function() {
         });
     });
     
-});    
+});  
+
+$(document).on("change", "#component_part_attachment", function(){
+    // Read selected files
+    var fldid = 'component_part_attachment';
+    var tableid = 'component_part_file_list';
+    uploadFileToServer(fldid, tableid, uploadAirframeCompPartAttachmentURL);
+});
+
+function uploadFileToServer(fldid, tableid, url){
+    var totalfiles = document.getElementById(fldid).files.length;
+    for (var index = 0; index < totalfiles; index++) {
+        var form_data = new FormData();
+        form_data.append("file_name", document.getElementById(fldid).files[index]);
+        var airframe_component_part_id = window.location.pathname.split('/').pop();
+        form_data.append("airframe_component_part_id", airframe_component_part_id);
+        
+        $.ajax({
+            url: url, 
+            type: 'post',
+            data: form_data,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                var obj = JSON.parse(response);
+                if(obj.status == 'success') {
+                    $("#"+tableid).html(obj.tblrow);
+                } else {
+                    //$('#'+tableid).html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
+                    alert(obj.message);
+                }
+            }
+        });
+    }
+}
+
+$(document).on('click', '.delete_comp_part_attachment', function (e) {
+    if(confirm('Are you sure want to delete this attachment?')){
+        if($(this).attr('data-val') != undefined){
+            $(this).parent().parent().remove();
+            var airframe_component_part_id = window.location.pathname.split('/').pop();
+            $.ajax({
+                url: deleteAirframeCompPartAttachmentURL, 
+                type: 'POST',
+                data: {'id':$(this).attr('data-val'), 'airframe_component_part_id':airframe_component_part_id},
+                dataType: "text",
+                success: function (response) {
+                    var obj = JSON.parse(response);
+                    if(obj.status == 'success') {
+                        $("#component_part_file_list").html(obj.tblrow);
+                    } else {
+                        alert(obj.message);
+                    }
+                }
+            });
+        }
+    }
+});
 </script>

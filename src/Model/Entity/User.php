@@ -55,7 +55,13 @@ class User extends Entity
         'suspended' => true,
         'role' => true,
         'addresses' => true,
-        'home_phone' => true
+        'home_phone' => true,
+        'time_clock_code'=>true,
+        'certification_code'=>true,
+        'is_manager'=>true,
+        'direct_manager_id'=>true,
+        'employment_date'=>true,
+        'salary'=>true,
     ];
 
     /**

@@ -1,0 +1,100 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Part Number</th>
+                                        <th>Serial / Lot</th>
+                                        <th>Display Name</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Qty.</th>
+                                        <th>UOM</th>
+                                        <th>Expiration</th>
+                                        <th>Unit Cost</th>
+                                        <th>Total Cost</th>
+                                        <th>Exchange Cost</th>
+                                        <th>Currency Code</th>
+                                        <th>ATA Chapter</th>
+                                        <th>Vendor</th>
+                                        <th>Manufacturer</th>
+                                        <th>Notes</th>
+                                        <th>Warranty Expiration</th>
+                                        <th>Condition</th>
+                                        <th>Item Type</th>
+                                        <th>Capital Equipment</th>
+                                        <th>PhysicalInventoryId</th>
+                                        <th>InventoryItemId</th>
+                                        <th>Inventory Tags</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>test manufacturer</td>
+                                <td>43654365-3452</td>
+                                <td>524354325</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Mathura</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>LBS</td>
+                                <td>2023-04-30</td>
+                                <td>43654365-3452</td>
+                                <td>test manufacturer</td>
+                                <td>USD</td>
+                                <td>20</td>
+                                <td>15</td>
+                                <td>1</td>
+                                <td></td>
+                                <td>3</td>
+                                <td></td>
+                                <td>5</td>
+                                <td></td><td>43654365-3452</td>
+                                <td>test manufacturer</td>
+                                <td>USD</td>
+                                <td>20</td>
+                                <td>15</td>
+                                <td>1</td>
+                                <td></td>
+                                <td>3</td>
+                                <td></td>
+                                <td>5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>85789456-848</td>
+                                <td>52365465</td>
+                                <td>test name 123</td>
+                                <td></td>
+                                <td></td>
+                                <td>Gorakhpur</td>
+                                <td>Quarantine</td>
+                                <td>1</td>
+                                <td>LBS</td>
+                                <td>2023-03-29</td>
+                                <td>85789456-848</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td>20</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                                <td>6</td>
+                                <td></td>
+                                <td>0</td>
+                                <td></td><td>85789456-848</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td>20</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                                <td>6</td>
+                                <td></td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>  </tbody></table>

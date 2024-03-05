@@ -10,8 +10,16 @@ $action = $this->request->getParam('action');
 $type = !empty($_GET['type']) ? $_GET['type'] : '';
 ?>
 <div id="sidebar-menu" class="side-bar sliding">
-    <ul style="max-height: 700px; overflow-y: auto;">
+    <ul style="max-height: calc(100vh - 57px); overflow-y: auto;">
         <div class="menu">
+            <li class="current-page">
+                <a href="<?php echo $this->Url->build(['controller'=>'Dashboard']); ?>">
+                    <span class="icon-size">
+                    <?php echo $this->Html->image('/images/icons/Dashboard.png'); ?>
+                    </span> 
+                    Dashboard
+                </a>
+            </li>
             <?php
             if(in_array('User Management', $userMenu)) {
                 $userStyle = '';
@@ -77,6 +85,19 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                                 ?>
                             </li>
                             <?php 
+                        }
+
+                        if(in_array('Active Time Clock', $userMenu)) {
+                            if ($controller == 'UserTimeClocks') { ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php } ?>
+                                <?php
+                                    echo $this->Html->link("<i class='fa fa-clock-o'></i> Active Time Clock", array('controller' => 'UserTimeClocks', 'action' => 'index'), array('escape' => false));
+                                ?>
+                            </li>
+                        <?php 
                         }
                         ?>
                     </ul>
@@ -383,7 +404,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         }
 
                         if(in_array('Work Orders', $userMenu)) {
-                            if ($controller == 'Reports' && $action == 'Work Orders') { 
+                            if ($controller == 'InventoryCustomers' && $action == 'Work Orders') { 
                             ?>
                             <li class="current-page">
                             <?php } else { ?>
@@ -391,7 +412,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             <?php 
                             } 
                             echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Work Orders</span>", 
-                                    array('controller' => 'Reports', 'action' => '#'), 
+                                    array('controller' => 'InventoryCustomers', 'action' => 'loadWorkOrder'), 
                                     array('escape' => false));   
                             ?>
                             </li>
@@ -702,9 +723,9 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
             <?php
             }
 
-            if(in_array('Parts', $userMenu)) {
+            if(in_array('Inventory', $userMenu)) {
                 $partsSubStyle = '';
-                $partsSection = array('Parts');
+                $partsSection = array('Inventory');
 
                 if (in_array($controller, $partsSection)) {
                     $partsSubStyle = 'style="display: block;"';
@@ -716,25 +737,203 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size"><i class="fa fa-plane"></i></span>Parts</a>
+                        <span class="icon-size"><i class="fa fa-gears"></i></span>Inventory</a>
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $partsSubStyle; ?>>
                         <?php 
-                        if(in_array('Parts', $userMenu)) {
-                            if($controller == 'Parts' && (in_array($action, array('index')))) { 
+                        if(in_array('Information Center', $userMenu)) {
+                            if($controller == 'Inventories' && (in_array($action, array('index')))) { 
                         ?>
                             <li class="current-page">
                             <?php } else { ?>
                             <li>
                             <?php 
                             } 
-                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Parts</span>", 
-                                array('controller' => 'Parts', 'action' => 'index'), 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Information Center</span>", 
+                                array('controller' => 'Inventories', 'action' => 'index'), 
                                 array('escape' => false)); 
                             ?>
                             </li>                            
                         <?php
                         }
-                    ?>
+
+                        if(in_array('Item Catalog', $userMenu)) {
+                            if($controller == 'InventoryItems' && (in_array($action, array('index')))) { 
+                        ?>
+
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Item Catalog</span>", 
+                                array('controller' => 'InventoryItems', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Locations', $userMenu)) {
+                            if($controller == 'InventoryLocations' && (in_array($action, array('index')))) { 
+                        ?>
+
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Locations</span>", 
+                                array('controller' => 'InventoryLocations', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Requests', $userMenu)) {
+                            if($controller == 'InventoryRequests' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Requests</span>", 
+                                array('controller' => 'InventoryRequests', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Reports', $userMenu)) {
+                            if($controller == 'InventoryReports' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Reports</span>", 
+                                array('controller' => 'InventoryReports', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Purchase Orders', $userMenu)) {
+                            if($controller == 'InventoryPurchaseOrders' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Purchase Orders</span>", 
+                                array('controller' => 'InventoryPurchaseOrders', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Repair Orders', $userMenu)) {
+                            if($controller == 'InventoryRepairOrders' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Repair Orders</span>", 
+                                array('controller' => 'InventoryRepairOrders', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Shipping Orders', $userMenu)) {
+                            if($controller == 'InventoryShippingOrders' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Shipping Orders</span>", 
+                                array('controller' => 'InventoryShippingOrders', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Customer/OTC', $userMenu)) {
+                            if($controller == 'InventoryCustomers' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Customer/OTC</span>", 
+                                array('controller' => 'InventoryCustomers', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Vendors', $userMenu)) {
+                            if($controller == 'InventoryVendors' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Vendors</span>", 
+                                array('controller' => 'InventoryVendors', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+
+                        if(in_array('Manufacturers', $userMenu)) {
+                            if($controller == 'InventoryManufacturers' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Manufacturers</span>", 
+                                array('controller' => 'InventoryManufacturers', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+                        
+                        if(in_array('Tools', $userMenu)) {
+                            if($controller == 'InventoryTools' && (in_array($action, array('index')))) { 
+                        ?>
+                        <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Tools</span>", 
+                                array('controller' => 'InventoryTools', 'action' => 'index'), 
+                                array('escape' => false)); 
+                            ?>
+                            </li>                            
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </li>
             <?php

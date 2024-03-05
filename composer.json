@@ -14,7 +14,8 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "mpdf/mpdf": "^8.0",
         "pgbi/cakephp3-soft-delete": "~1.0",
-		"phpoffice/phppresentation": "dev-master"
+        "phpoffice/phppresentation": "dev-master",
+        "twilio/sdk": "^7.3"
     },
     "require-dev": {
         "cakephp/bake": "^1.1",
@@ -52,6 +53,9 @@
     },
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cakephp/plugin-installer": true
+        }
     }
 }

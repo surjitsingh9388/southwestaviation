@@ -1,0 +1,214 @@
+<?php 
+$sessionUser = $this->request->session()->read('Auth.User');
+$sessionArray = $this->Session->read('Auth.User');
+use Cake\Routing\Router;
+
+if(!empty($part->plane_id) && !empty($subResults)) {
+    $pdfCheck = 'style="pointer-events: auto;"';
+} else {
+    $pdfCheck = 'style="pointer-events: none;"';
+}
+?>
+<style>
+
+    #itemGeneral{
+        padding:10px;
+    }
+
+    .mb-3 {
+        margin-bottom: 5px !important;
+    }
+    h5{
+        text-align:center;
+        font-weight:bold;
+    }
+    
+    .sinfo{
+        margin-top: 15px;
+    }
+
+    .tab-content th{
+        background-color:#2c3e50;
+        color:white;
+    }
+
+    .addPageHeading {
+        font-size: 11pt;
+        background-color: #2C3E50;
+        color: #ecf0f1;
+        padding: 10px 15px;
+        margin-top: 0;
+        margin-left: 0px;
+        height: 40px;
+    }
+
+    .plusbtn{
+        margin-top: 0px;
+        padding-left: 0px;
+    }
+
+</style>
+
+<div class="content sliding">
+    <div class="outerWrapper">
+        <?php
+        echo $this->Form->create($invenotries, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInvenotry', 'autocomplete'=>'off'));
+        ?>  
+        <div class="btnWrapper">
+            <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotryitems->name. ' (PN: '.$invenotryitems->part_number.')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotryitems->id]).' / Add Inventory'; ?> <i class="fa fa-info-circle" data-html="true" rel="tooltip" data-toggle="tooltip" title="<div style='padding: 5px; text-align:left;'>This is for manual entry of physical inventory. If receiving from a Purchase Order, Repair Order, or Shipping Order, use the receive function.</div>"></i></h2>
+            <div class="btnWrap">
+             <?php
+                echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
+                ?>
+                
+                <?php
+                if((!empty($actionItems) && $actionItems['action']['action_add'] == 1) || $sessionUser['id'] == 1) {
+                    echo $this->Form->button('Save', ['type' => 'submit', 'class' => 'btn btn-primary ml-10 inventorysavebtn']);
+                }
+                ?>
+            </div>
+        </div>
+        
+        <div class="page-content mt-35">
+            <div class="formBGCls">
+                <?php echo $this->element('Inventory/create_new_inventory'); ?>
+                <div style="clear: both;"></div>
+
+                <!-- Tabs Start -->
+                <div id="aircraftTabs" style="padding: 15px 0 15px 0;">
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#itemGUsageTimes">Usage Times</a></li>
+                            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="itemGUsageTimes" class="tab-pane fade in active"><!-- general-tab-section start -->
+                                <div class="g-0 bg-light position-relative">
+                                    <table class="table upload-area" id="uploadfile">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="col-sm-1"></th>
+                                                <th class="col-sm-2">New</th>
+                                                <th class="col-sm-2">Overhaul</th>
+                                                <th class="col-sm-2">Repair</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if($invenotryitems->is_this_item_serialized == 1){ ?>
+                                            <tr>
+                                                <td>Months</td>
+                                                <td><?php echo $this->Form->control('months_new', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('months_overhaul', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('months_repair', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hours</td>
+                                                <td><?php echo $this->Form->Text('hours_new', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->Text('hours_overhaul', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->Text('hours_repair', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Landings</td>
+                                                <td><?php echo $this->Form->control('landings_new', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('landings_overhaul', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('landings_repair', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cycles</td>
+                                                <td><?php echo $this->Form->control('cycles_new', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('cycles_overhaul', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                                <td><?php echo $this->Form->control('cycles_repair', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?></td>
+                                            </tr>
+                                            <?php }else{ ?>
+                                            <tr>
+                                                <td colspan="4"><i>Only serialized components track usage times</i></td>
+                                            </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div id="itemAttachment" class="tab-pane fade"><!-- general-tab-section start -->
+                                <div class="g-0 bg-light position-relative">
+                                    <div class="">
+                                        <div class="search-control" style="width: 220px; margin-right:10px;display: inline-block;position: relative;">
+                                            <input type="text" class="form-control" placeholder="Search Attachments">
+                                            <div style="display: inline; position:absolute; right: 10px; top: 6px; color: darkgray">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="pull-right">
+                                            <input type="file" name="files[]" id="inventoryattachment" style="display:none" multiple />
+                                            <button class="btn btn-primary pull-right" type="button" onclick="$('#inventoryattachment').trigger('click'); return false;">Upload</button>
+                                        </div>
+                                    </div>
+
+                                    <table class="table upload-area" id="uploadfile">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="col-sm-2">File Name</th>
+                                                <th class="col-sm-1">Size</th>
+                                                <th class="col-sm-2">Uploaded</th>
+                                                <th class="col-sm-2">Uploaded By</th>
+                                                <th class="col-sm-1"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="filetbody">
+                                            
+                                            <tr id="noattachmenttr">
+                                                <td colspan="5" id="noattachmentmsg">No Attachments. Click 'Upload...' or drag and drop file to this area.</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- general-tab-section end -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Tabs end -->
+            </div>
+        </div>
+    <?php 
+    echo $this->Form->end(); 
+    ?>
+    </div>
+</div>
+
+<div id="vendorAddModel" class="modal fade page-content" role="dialog" style="background: transparent;">
+    <div class="modal-dialog" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #e5e5e5;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="gpTypeCls"></span>Create Vendor</h4>
+            </div>
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+                <?php echo $this->element('Inventory/create_vendor', array('inventoryvendors'=>'')); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary vendorsavebtn" disabled>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script> 
+var is_this_item_serialized = "<?php echo $invenotryitems->is_this_item_serialized; ?>";
+var uploadInventoriesAttURL = "<?php echo $this->Url->build(['controller'=>'Inventories', 'action'=>'bulkInventoryupload']); ?>";
+var deleteInventoriesAttURL = "<?php echo $this->Url->build(['controller'=>'Inventories', 'action'=>'deleteInventoryAttachment']); ?>";
+var saveInventoryVendorURL = "<?php echo $this->Url->build(['controller'=>'InventoryVendors', 'action'=>'saveInventoryVendor']); ?>";
+var getStatesList = "<?php echo $this->Url->build(['controller' => 'addresses', 'action' => 'getStatesList']); ?>";
+
+var ajaxListPageSearchURL = '';
+var pagelimit = '';
+var pdfPagTitle = '';
+</script>
+
+<?php 
+echo $this->Html->script('inventories'); 
+echo $this->Html->script('inventory_common');
+?>

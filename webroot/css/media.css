@@ -24,13 +24,13 @@
 	.actionbar-lft .lftWrap .inputWrap{margin-right: 22px;}
 	.actionbar-lft .lftWrap{width: 100%;}
 	.actionbar-lft .split-btn {margin: 10px 0px;}
-	.side-bar{position: absolute;bottom: 0;top: 0px;}
+	.side-bar{position: absolute;top: 47px;}
 	
 }
 @media screen and (max-width: 1024px){
 	.side-bar ul .menu li a{padding: 14px 6px;}
 	/**********side bar **********/
-	.side-bar{position: absolute;bottom: 0;top: 0px;}
+	.side-bar{position: absolute;top: 47px;}
 	.content{width: 100%;   transform:translateX(0px);
     -ms-transform:translateX(0px);
     -webkit-transform:translateX(0px);}

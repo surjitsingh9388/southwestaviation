@@ -439,7 +439,10 @@ class AirframeComponentPartsController extends AppController
         $dispArr   = $this->Disposition->getDispositions($airCompParts->disposition);
         $adsbArr   = $this->AdsbStatus->getAdsbStatus($airCompParts->ab_sb_status);
         $airCPComp = $this->AirframeComponentPart;
-        $this->set(compact('airCompParts', 'actionItems', 'subResults', 'planes', 'airComps', 'ataCode', 'dispArr', 'adsbArr', 'airCPComp', 'typ', 'act'));
+
+        $partfiletblrow = $this->AirframeComponentPart->getAirframeComponentPartAttachments($id);
+
+        $this->set(compact('airCompParts', 'actionItems', 'subResults', 'planes', 'airComps', 'ataCode', 'dispArr', 'adsbArr', 'airCPComp', 'typ', 'act', 'partfiletblrow'));
     }
 
     /**
@@ -1212,6 +1215,68 @@ class AirframeComponentPartsController extends AppController
             $result = array('status'=>'failure', 'message'=>'Something Wrong. Please try again.');
             echo json_encode($result);die;
         }
+    }
+
+    //Upload airframe component part attachment
+    public function uploadAirframeCompPartAttachment(){
+        $postData = $this->request->data;
+        if(!empty($postData['file_name']) && !empty($postData['airframe_component_part_id'])) 
+        {
+            $isvalidfile = 1;
+            $arr_ext = array('pdf','doc', 'docx', 'xls', 'xlsx');
+            
+            $temp = $postData['file_name']['tmp_name'];
+            $name = $postData['file_name']['name'];
+            $ext = substr(strrchr($name , '.'), 1);
+            
+            if (!in_array($ext, $arr_ext)) {
+                $isvalidfile = 0;
+            }
+            
+            if($isvalidfile){
+                $foldername = 'airframe_component_parts';
+                $filelocation = WWW_ROOT . $foldername.'/' . $name;
+                $tableName = 'airframe_component_part_files';
+
+                $tblrow = $this->AirframeComponentPart->uploadComponentPartFilesToServer($postData, $filelocation, $foldername, $tableName);
+                
+                if($tblrow != ''){
+                    $result = array('status'=>'success', 'message'=>"Saved successfully.", 'tblrow'=>$tblrow);
+                } else {
+                    $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                }
+            } else {
+                $result = array('status'=>'failed', 'message'=>'Please upload correct format.');
+            }
+            echo json_encode($result);die;
+        } else {
+            $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+            echo json_encode($result);die;
+        }
+    }
+
+    public function deleteAirframeCompPartAttachment(){
+        if($this->request->is(['patch', 'post', 'put'])) 
+        {
+            $postData = $this->request->getData();
+            
+            if(!empty($postData['id'])){
+                $attachments = $this->AirframeComponentPart->deleteAirframeComponentPartAttachments($postData['id']);
+                if(!empty($attachments)){
+                    $tblrow = $this->AirframeComponentPart->getAirframeComponentPartAttachments($postData['airframe_component_part_id']);
+
+                    $result = array('status'=>'success', 'message'=>"Deleted successfully.", 'tblrow'=>$tblrow);
+                }else{
+                    $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                }
+            } else {
+                $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+            }
+        } else {
+            $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+        }
+
+        echo json_encode($result);die;
     }
 
 }

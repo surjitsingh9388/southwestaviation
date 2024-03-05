@@ -31,6 +31,7 @@ class ResetPassword extends Entity
     protected $_accessible = [
         'user_id' => true,
         'token' => true,
+        'otp_code' => true,
         'password_reset_link' => true,
         'expired' => true,
         'created' => true,

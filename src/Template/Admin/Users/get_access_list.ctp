@@ -5,7 +5,7 @@ if(!empty($menuItems)) {
     <tr style="background-color: #f0f0f0;">
         <th style="vertical-align: bottom; text-align: center;">Allow</th>
         <th style="vertical-align: bottom; text-align: center;" rowspan="3" colspan="3">Menu Items</th>
-        <th style="text-align: center;" colspan="4">Actions</th>
+        <th style="text-align: center;" colspan="7">Actions</th>
     </tr>
     <tr style="background-color: #f0f0f0;">
         <td style="vertical-align: middle; text-align: center;" rowspan="2"><?php echo $this->Form->input('allCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'allCheckUncheck', 'label' => false, 'title' => 'Check All']); ?></td>
@@ -13,12 +13,18 @@ if(!empty($menuItems)) {
         <th class="text-alignment">Edit</th>
         <th class="text-alignment">View</th>
         <th class="text-alignment">Delete</th>
+        <th class="text-alignment">Approve/Deny</th>
+        <th class="text-alignment">Reopen Work Order</th>
+        <th class="text-alignment">Final Inspections</th>
     </tr>
     <tr style="background-color: #f0f0f0;">
         <th class="text-alignment"><?php echo $this->Form->input('allAddCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllAdd', 'label' => false, 'title' => 'Check All Add']); ?></th>
         <th class="text-alignment"><?php echo $this->Form->input('allEditCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllEdit', 'label' => false, 'title' => 'Check All Edit']); ?></th>
         <th class="text-alignment"><?php echo $this->Form->input('allViewCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllView', 'label' => false, 'title' => 'Check All View']); ?></th>
         <th class="text-alignment"><?php echo $this->Form->input('allDeleteCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllDelete', 'label' => false, 'title' => 'Check All Delete']); ?></th>
+        <th class="text-alignment"><?php echo $this->Form->input('allApproveDenyCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllApproveDeny', 'label' => false, 'title' => 'Check All Approve/Deny']); ?></th>
+        <th class="text-alignment"><?php echo $this->Form->input('allReopenWorkOrderCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllReopenWorkOrder', 'label' => false, 'title' => 'Check All Reopen Work Order']); ?></th>
+        <th class="text-alignment"><?php echo $this->Form->input('allFinalInspectionsCheckUncheck', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkAllFinalInspections', 'label' => false, 'title' => 'Check All Final Inspections']); ?></th>
     </tr>
     <?php 
     foreach ($menuItems as $key => $menuItem) {
@@ -35,14 +41,43 @@ if(!empty($menuItems)) {
                 $data['action_delete']=0;
             }
             foreach ($menuItem as $key1 => $subItems) {
-                echo '<tr style="background-color: #f0f0f0;">
-                        <th style="vertical-align: top; text-align: center;">'.$this->Form->input('menu_item_id.'.$key.'.menu_item_id', ['type' => 'checkbox', 'class' => 'selectAll-Chield checkBoxClass parent-term parent_'.$key, 'label' => false, 'value' => $key, 'id' => $key, 'checked' => $checked]).'</th>
-                        <th style="" colspan="3"><span style="margin-left:5px;">'.$key1.'</span></th>
-                        <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_add check_add main_action_add_'.$key]).'</td>
-                        <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_edit check_edit main_action_edit_'.$key]).'</td>
-                        <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_view check_view main_action_view_'.$key]).'</td>
-                        <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_delete check_delete main_action_delete_'.$key]).'</td>
-                    <tr>';
+                if($key1 == 'Inventory'){
+                    echo '<tr style="background-color: #f0f0f0;">
+                            <th style="vertical-align: top; text-align: center;">'.$this->Form->input('menu_item_id.'.$key.'.menu_item_id', ['type' => 'checkbox', 'class' => 'selectAll-Chield checkBoxClass parent-term parent_'.$key, 'label' => false, 'value' => $key, 'id' => $key, 'checked' => $checked]).'</th>
+                            <th style="" colspan="3"><span style="margin-left:5px;">'.$key1.'</span></th>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_add check_add main_action_add_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_edit check_edit main_action_edit_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_view check_view main_action_view_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_delete check_delete main_action_delete_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_approve_deny', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_approve_deny check_approve_deny main_action_approve_deny_'.$key]).'</td>
+                            <td class="text-alignment"></td>
+                            <td class="text-alignment"></td>
+                        <tr>';
+                }else if($key1 == 'Maintenance'){
+                    echo '<tr style="background-color: #f0f0f0;">
+                            <th style="vertical-align: top; text-align: center;">'.$this->Form->input('menu_item_id.'.$key.'.menu_item_id', ['type' => 'checkbox', 'class' => 'selectAll-Chield checkBoxClass parent-term parent_'.$key, 'label' => false, 'value' => $key, 'id' => $key, 'checked' => $checked]).'</th>
+                            <th style="" colspan="3"><span style="margin-left:5px;">'.$key1.'</span></th>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_add check_add main_action_add_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_edit check_edit main_action_edit_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_view check_view main_action_view_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_delete check_delete main_action_delete_'.$key]).'</td>
+                            <td class="text-alignment"></td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_reopen_work_order', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_reopen_work_order check_reopen_work_order main_action_reopen_work_order_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_final_inspections', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_final_inspections check_final_inspections main_action_final_inspections_'.$key]).'</td>
+                        <tr>';
+                }else{
+                    echo '<tr style="background-color: #f0f0f0;">
+                            <th style="vertical-align: top; text-align: center;">'.$this->Form->input('menu_item_id.'.$key.'.menu_item_id', ['type' => 'checkbox', 'class' => 'selectAll-Chield checkBoxClass parent-term parent_'.$key, 'label' => false, 'value' => $key, 'id' => $key, 'checked' => $checked]).'</th>
+                            <th style="" colspan="3"><span style="margin-left:5px;">'.$key1.'</span></th>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_add check_add main_action_add_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_edit check_edit main_action_edit_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_view check_view main_action_view_'.$key]).'</td>
+                            <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key, 'class' => 'chield_'.$key. ' action_'.$key. ' action_delete check_delete main_action_delete_'.$key]).'</td>
+                            <td class="text-alignment"></td>
+                            <td class="text-alignment"></td>
+                            <td class="text-alignment"></td>
+                        <tr>';
+                }
                     
                 foreach ($subItems as $key2 => $value) {
                     if(!is_array($value)) {
@@ -55,6 +90,9 @@ if(!empty($menuItems)) {
                             $data['action_edit']=0;
                             $data['action_view']=0;
                             $data['action_delete']=0;
+                            $data['action_approve_deny']=0;
+                            $data['action_reopen_work_order']=0;
+                            $data['action_final_inspections']=0;
                         }
                         if(!empty($value) && $value == 'Generate Report') {
                             echo '<tr>
@@ -62,7 +100,7 @@ if(!empty($menuItems)) {
                                     <td style="vertical-align: top; text-align: center">'.$this->Form->input('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
                                     <td style="" colspan="2"><span style="margin-left:5px;">'.$value.'</span></td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_add_'.$key2, 'class' => 'chield_'.$key. ' action_add_'.$key. ' action check_add add', 'checked' => $data['action_add']=='1'?true:false]).'</td>
-                                    <td colspan="3"></td>
+                                    <td colspan="4"></td>
                                 </tr>';
                         } elseif(!empty($value) && $value == 'Aircraft') {
                             echo '<tr>
@@ -81,8 +119,11 @@ if(!empty($menuItems)) {
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
                                 </tr>';
-                        } else {
+                        } elseif(!empty($value) && $value == 'Requests') {
                             echo '<tr>
                                     <td></td>
                                     <td style="vertical-align: top; text-align: center">'.$this->Form->input('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
@@ -91,6 +132,37 @@ if(!empty($menuItems)) {
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_approve_deny', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_approve_deny_'.$key2, 'class' => 'chield_'.$key. ' action_approve_deny_'.$key. ' action check_approve_deny approve_deny', 'checked' => $data['action_approve_deny']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                </tr>';
+                            
+                        } elseif(!empty($value) && $value == 'Work Orders') {
+                            echo '<tr>
+                                    <td></td>
+                                    <td style="vertical-align: top; text-align: center">'.$this->Form->input('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
+                                    <td style="" colspan="2"><span style="margin-left:5px;">'.$value.'</span></td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_add_'.$key2, 'class' => 'chield_'.$key. ' action_add_'.$key. ' action check_add add', 'checked' => $data['action_add']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_reopen_work_order', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_reopen_work_order_'.$key2, 'class' => 'chield_'.$key. ' action_reopen_work_order_'.$key. ' action check_reopen_work_order reopen_work_order', 'checked' => (!empty($data['action_reopen_work_order']) && $data['action_reopen_work_order']=='1') ?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_final_inspections', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_final_inspections_'.$key2, 'class' => 'chield_'.$key. ' action_final_inspections_'.$key. ' action check_final_inspections final_inspections', 'checked' => (!empty($data['action_final_inspections']) && $data['action_final_inspections']=='1') ?true:false]).'</td>
+                                </tr>';
+                            
+                        }else {
+                            echo '<tr>
+                                    <td></td>
+                                    <td style="vertical-align: top; text-align: center">'.$this->Form->input('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
+                                    <td style="" colspan="2"><span style="margin-left:5px;">'.$value.'</span></td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_add_'.$key2, 'class' => 'chield_'.$key. ' action_add_'.$key. ' action check_add add', 'checked' => $data['action_add']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
                                 </tr>';
                         }
                     } else {
@@ -104,6 +176,9 @@ if(!empty($menuItems)) {
                                 $data['action_edit']=0;
                                 $data['action_view']=0;
                                 $data['action_delete']=0;
+                                $data['action_approve_deny']=0;
+                                $data['action_reopen_work_order']=0;
+                                $data['action_final_inspections']=0;
                             }
                             echo '<tr>
                                     <td></td>
@@ -113,6 +188,9 @@ if(!empty($menuItems)) {
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'__view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
                                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
                                 </tr>';
                             foreach ($valueLast as $key4 => $value4) {
                                 foreach ($value4 as $key5 => $value5) {
@@ -125,6 +203,9 @@ if(!empty($menuItems)) {
                                         $data['action_edit']=0;
                                         $data['action_view']=0;
                                         $data['action_delete']=0;
+                                        $data['action_approve_deny']=0;
+                                        $data['action_reopen_work_order']=0;
+                                        $data['action_final_inspections']=0;
                                     }
                                     echo '<tr>
                                             <td></td>
@@ -135,6 +216,9 @@ if(!empty($menuItems)) {
                                             <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key5.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
                                             <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key5.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
                                             <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key5.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                            <td class="text-alignment"></td>
+                                            <td class="text-alignment"></td>
+                                            <td class="text-alignment"></td>
                                         </tr>';
                                 }
                             }
@@ -152,6 +236,9 @@ if(!empty($menuItems)) {
                 $data['action_edit']=0;
                 $data['action_view']=0;
                 $data['action_delete']=0;
+                $data['action_approve_deny']=0;
+                $data['action_reopen_work_order']=0;
+                $data['action_final_inspections']=0;
             }
             echo '<tr>
                     <th style="vertical-align: top; text-align: center">'.$this->Form->input('menu_item_id.'.$key.'.menu_item_id', ['type' => 'checkbox', 'class' => 'selectAll-Chield checkBoxClass parent-term parent_'.$key, 'label' => false, 'value' => $key, 'id' => $key, 'checked' => $checked ]).'</th>
@@ -160,6 +247,9 @@ if(!empty($menuItems)) {
                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_edit', ['type' => 'checkbox', 'label' => false, 'id' => $key, 'class' => 'singleRow chield_'.$key.' check_edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_view', ['type' => 'checkbox', 'label' => false, 'id' => $key, 'class' => 'singleRow chield_'.$key.' check_view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
                     <td class="text-alignment">'.$this->Form->input('menu_item_id.'.$key.'.action_delete', ['type' => 'checkbox', 'label' => false, 'id' => $key, 'class' => 'singleRow chield_'.$key.' check_delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                    <td class="text-alignment"></td>
+                    <td class="text-alignment"></td>
+                    <td class="text-alignment"></td>
                 </tr>';
         }  
     }
@@ -182,7 +272,10 @@ function allowAll() {
     var editAll = $('.checkAllEdit').is(':checked');
     var viewAll = $('.checkAllView').is(':checked');
     var deletAll = $('.checkAllDelete').is(':checked');
-    if(addAll === true && editAll === true && viewAll === true && deletAll === true){
+    var approveDenyAll = $('.checkAllApproveDeny').is(':checked');
+    var reopenWorkOrderAll = $('.checkAllReopenWorkOrder').is(':checked');
+    var finalInspectionsAll = $('.checkAllFinalInspections').is(':checked');
+    if(addAll === true && editAll === true && viewAll === true && deletAll === true && approveDenyAll === true && reopenWorkOrderAll === true && finalInspectionsAll === true){
         $('.allCheckUncheck').prop('checked', 'checked');
     }
 }
@@ -200,6 +293,9 @@ $(document).ready(function() {
             $('.checkAllEdit').removeAttr('checked');
             $('.checkAllView').removeAttr('checked');
             $('.checkAllDelete').removeAttr('checked');
+            $('.checkAllApproveDeny').removeAttr('checked');
+            $('.checkAllReopenWorkOrder').removeAttr('checked');
+            $('.checkAllFinalInspections').removeAttr('checked');
         }
         $('.chield_'+id).prop('checked', this.checked);
 
@@ -207,6 +303,9 @@ $(document).ready(function() {
         var edit = $("input[type='checkbox'].check_edit");
         var view = $("input[type='checkbox'].check_view");
         var delet = $("input[type='checkbox'].check_delete");
+        var approvedeny = $("input[type='checkbox'].check_approve_deny");
+        var reopenworkorder = $("input[type='checkbox'].check_reopen_work_order");
+        var finalinspections = $("input[type='checkbox'].check_final_inspections");
         if(add.length == add.filter(":checked").length){
             $('#alladdcheckuncheck').prop('checked', this.checked);
         }
@@ -221,6 +320,15 @@ $(document).ready(function() {
 
         if(delet.length == delet.filter(":checked").length){
             $('#alldeletecheckuncheck').prop('checked', this.checked);
+        }
+        if(approvedeny.length == approvedeny.filter(":checked").length){
+            $('#allapprovedenycheckuncheck').prop('checked', this.checked);
+        }
+        if(reopenworkorder.length == reopenworkorder.filter(":checked").length){
+            $('#allreopenworkordercheckuncheck').prop('checked', this.checked);
+        }
+        if(finalinspections.length == finalinspections.filter(":checked").length){
+            $('#allfinalinspectionscheckuncheck').prop('checked', this.checked);
         }
         allowAll();
     });
@@ -241,10 +349,17 @@ $(document).ready(function() {
             $('.checkAllEdit').removeAttr('checked');
             $('.checkAllView').removeAttr('checked');
             $('.checkAllDelete').removeAttr('checked');
+            $('.checkAllApproveDeny').removeAttr('checked');
+            $('.checkAllReopenWorkOrder').removeAttr('checked');
+            $('.checkAllFinalInspections').removeAttr('checked');
+
             $('.main_action_add_'+array[1]).prop('checked', this.checked);
             $('.main_action_edit_'+array[1]).prop('checked', this.checked);
             $('.main_action_view_'+array[1]).prop('checked', this.checked);
             $('.main_action_delete_'+array[1]).prop('checked', this.checked);
+            $('.main_action_approve_deny_'+array[1]).prop('checked', this.checked);
+            $('.main_action_reopen_work_order_'+array[1]).prop('checked', this.checked);
+            $('.main_action_final_inspections_'+array[1]).prop('checked', this.checked);
         }
         if(status === false){ 
             $('#'+array[1]).prop('checked', this.checked);
@@ -256,6 +371,10 @@ $(document).ready(function() {
         var editParentCheck = $("input[type='checkbox'].action_edit_"+array[1]);
         var viewParentCheck = $("input[type='checkbox'].action_view_"+array[1]);
         var deleteParentCheck = $("input[type='checkbox'].action_delete_"+array[1]);
+        var approveDenyParentCheck = $("input[type='checkbox'].action_approve_deny_"+array[1]);
+        var reopenWorkOrderParentCheck = $("input[type='checkbox'].action_reopen_work_order_"+array[1]);
+        var finalInspectionsParentCheck = $("input[type='checkbox'].action_final_inspection_"+array[1]);
+
         if(addParentCheck.length == addParentCheck.filter(":checked").length){
             $('.main_action_add_'+array[1]).prop('checked', this.checked);
         }
@@ -268,11 +387,24 @@ $(document).ready(function() {
         if(deleteParentCheck.length == deleteParentCheck.filter(":checked").length){
             $('.main_action_delete_'+array[1]).prop('checked', this.checked);
         }
+        if(approveDenyParentCheck.length == approveDenyParentCheck.filter(":checked").length){
+            $('.main_action_approve_deny_'+array[1]).prop('checked', this.checked);
+        }
+        if(reopenWorkOrderParentCheck.length == reopenWorkOrderParentCheck.filter(":checked").length){
+            $('.main_action_reopen_work_order_'+array[1]).prop('checked', this.checked);
+        }
+        if(finalInspectionsParentCheck.length == finalInspectionsParentCheck.filter(":checked").length){
+            $('.main_action_final_inspections_'+array[1]).prop('checked', this.checked);
+        }
 
         var add = $("input[type='checkbox'].check_add");
         var edit = $("input[type='checkbox'].check_edit");
         var view = $("input[type='checkbox'].check_view");
         var delet = $("input[type='checkbox'].check_delete");
+        var approve_deny = $("input[type='checkbox'].check_approve_deny");
+        var reopen_work_order = $("input[type='checkbox'].check_reopen_work_order");
+        var final_inspections = $("input[type='checkbox'].check_final_inspections");
+
         if(add.length == add.filter(":checked").length){
             $('#alladdcheckuncheck').prop('checked', this.checked);
         }
@@ -287,6 +419,15 @@ $(document).ready(function() {
 
         if(delet.length == delet.filter(":checked").length){
             $('#alldeletecheckuncheck').prop('checked', this.checked);
+        }
+        if(approve_deny.length == approve_deny.filter(":checked").length){
+            $('#allapprovedenycheckuncheck').prop('checked', this.checked);
+        }
+        if(reopen_work_order.length == reopen_work_order.filter(":checked").length){
+            $('#allreopenworkordercheckuncheck').prop('checked', this.checked);
+        }
+        if(final_inspections.length == final_inspections.filter(":checked").length){
+            $('#allfinalinspectionscheckuncheck').prop('checked', this.checked);
         }
         allowAll();
     });
@@ -343,6 +484,15 @@ $(document).ready(function() {
             }
             if(lastItem == 'delete'){
                 $('.checkAllDelete').removeAttr('checked');
+            }
+            if(lastItem == 'approve_deny'){
+                $('.checkAllApproveDeny').removeAttr('checked');
+            }
+            if(lastItem == 'reopen_work_order'){
+                $('.checkAllReopenWorkOrder').removeAttr('checked');
+            }
+            if(lastItem == 'final_inspections'){
+                $('.checkAllFinalInspections').removeAttr('checked');
             }
         }
         allowAll();
@@ -456,7 +606,88 @@ $(document).ready(function() {
         allowAll();
     });
 
-    //If menu item has no chield after selecting (Add,Edit,View and Delete) parent node should be select.
+    //If only approve denay action is checked then all approve deny action should be checked and as well as all parents will checked
+    $(".action_approve_deny").click(function(e) {
+        var id = $(this).attr('id');
+        var classes = $(this).attr('class').split(' ').pop();
+        var viewStatus = $(this).is(':checked');
+        var array = id.split('_');
+        var classArray = classes.split('_');
+
+        var status = $('#'+array[1]).is(':checked');
+        if(status === false){ 
+            $('#'+array[1]).prop('checked', this.checked);
+        }
+        if(viewStatus === true){ 
+            $('.action_approve_deny_'+array[1]).prop('checked', this.checked);
+            $('.action_parent_'+array[1]).prop('checked', this.checked);
+        }else{
+            $('.action_approve_deny_'+array[1]).prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+            $('.checkAllApproveDeny').prop('checked', this.checked);
+        }
+        var b = $("input[type='checkbox'].check_"+classArray[2]);
+        if(b.length == b.filter(":checked").length){
+            $('#all'+classArray[2]+'checkuncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //If only reopen work order action is checked then all reopen work order action should be checked and as well as all parents will checked
+    $(".action_reopen_work_order").click(function(e) {
+        var id = $(this).attr('id');
+        var classes = $(this).attr('class').split(' ').pop();
+        var viewStatus = $(this).is(':checked');
+        var array = id.split('_');
+        var classArray = classes.split('_');
+
+        var status = $('#'+array[1]).is(':checked');
+        if(status === false){ 
+            $('#'+array[1]).prop('checked', this.checked);
+        }
+        if(viewStatus === true){ 
+            $('.action_reopen_work_order_'+array[1]).prop('checked', this.checked);
+            $('.action_parent_'+array[1]).prop('checked', this.checked);
+        }else{
+            $('.action_reopen_work_order_'+array[1]).prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+            $('.checkAllReopenWorkOrder').prop('checked', this.checked);
+        }
+        var b = $("input[type='checkbox'].check_"+classArray[2]);
+        if(b.length == b.filter(":checked").length){
+            $('#all'+classArray[2]+'checkuncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //If only final inspections action is checked then all final inspections action should be checked and as well as all parents will checked
+    $(".action_final_inspections").click(function(e) {
+        var id = $(this).attr('id');
+        var classes = $(this).attr('class').split(' ').pop();
+        var viewStatus = $(this).is(':checked');
+        var array = id.split('_');
+        var classArray = classes.split('_');
+
+        var status = $('#'+array[1]).is(':checked');
+        if(status === false){ 
+            $('#'+array[1]).prop('checked', this.checked);
+        }
+        if(viewStatus === true){ 
+            $('.action_final_inspections_'+array[1]).prop('checked', this.checked);
+            $('.action_parent_'+array[1]).prop('checked', this.checked);
+        }else{
+            $('.action_final_inspections_'+array[1]).prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+            $('.checkAllFinalInspections').prop('checked', this.checked);
+        }
+        var b = $("input[type='checkbox'].check_"+classArray[2]);
+        if(b.length == b.filter(":checked").length){
+            $('#all'+classArray[2]+'checkuncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //If menu item has no chield after selecting (Add,Edit,View, Delete and Approve Deny) parent node should be select.
     $(".singleRow").click(function(e) {
         var id = $(this).attr('id');
         var classes = $(this).attr('class').split(' ').pop();
@@ -475,6 +706,15 @@ $(document).ready(function() {
             }
             if(classArray[1] === 'delete'){
                 $('.checkAllDelete').removeAttr('checked');
+            }
+            if(classArray[1] === 'approve_deny'){
+                $('.checkAllApproveDeny').removeAttr('checked');
+            }
+            if(classArray[1] === 'reopen_work_order'){
+                $('.checkAllReopenWorkOrder').removeAttr('checked');
+            }
+            if(classArray[1] === 'final_inspections'){
+                $('.checkAllFinalInspections').removeAttr('checked');
             }
         }
         var status = $('#'+id).is(':checked');
@@ -549,6 +789,48 @@ $(document).ready(function() {
             $(".checkBoxClass").prop('checked', this.checked);
         }else{
             $(".check_delete").prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //Make all approve deny checkboxes checked/uncheck
+    $(".checkAllApproveDeny").click(function(e) {
+        var status = $(this).is(':checked');
+        if(status === true){
+            $(".check_approve_deny").prop('checked', this.checked);
+            $(".selectAll-Chield").prop('checked', this.checked);
+            $(".checkBoxClass").prop('checked', this.checked);
+        }else{
+            $(".check_approve_deny").prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //Make all reopen work order checkboxes checked/uncheck
+    $(".checkAllReopenWorkOrder").click(function(e) {
+        var status = $(this).is(':checked');
+        if(status === true){
+            $(".check_reopen_work_order").prop('checked', this.checked);
+            $(".selectAll-Chield").prop('checked', this.checked);
+            $(".checkBoxClass").prop('checked', this.checked);
+        }else{
+            $(".check_reopen_work_order").prop('checked', this.checked);
+            $('.allCheckUncheck').prop('checked', this.checked);
+        }
+        allowAll();
+    });
+
+    //Make all final inspections checkboxes checked/uncheck
+    $(".checkAllFinalInspections").click(function(e) {
+        var status = $(this).is(':checked');
+        if(status === true){
+            $(".check_final_inspections").prop('checked', this.checked);
+            $(".selectAll-Chield").prop('checked', this.checked);
+            $(".checkBoxClass").prop('checked', this.checked);
+        }else{
+            $(".check_final_inspections").prop('checked', this.checked);
             $('.allCheckUncheck').prop('checked', this.checked);
         }
         allowAll();

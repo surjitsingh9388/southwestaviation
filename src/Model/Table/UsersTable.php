@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Model
@@ -59,6 +60,8 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
             'dependent' => true
         ]);
+
+        $this->Planes = TableRegistry::get('Planes');
     }
 
     /**
@@ -125,6 +128,18 @@ class UsersTable extends Table
             ->requirePresence('timezone_id', 'create')
             ->notEmpty('timezone_id');*/
 
+        $validator
+            ->integer('time_clock_code')
+            ->maxLength('time_clock_code', 4)
+            ->requirePresence('time_clock_code', 'create')
+            ->allowEmpty('time_clock_code');
+
+        $validator
+            ->integer('certification_code')
+            ->maxLength('certification_code', 4)
+            ->requirePresence('certification_code', 'create')
+            ->allowEmpty('certification_code');
+
         return $validator;
     }
 
@@ -159,5 +174,16 @@ class UsersTable extends Table
         $query
             ->contain(['Roles' => ['fields' => ['Roles.role_name']]]);
         return $query;
+    }
+
+    public function beforeSave($options = array())
+    {
+        $entity = $options->getData('entity');
+
+        if(!empty($entity->employment_date)) {
+            $entity->employment_date = $this->Planes->dateFormatBeforeSave($entity->employment_date);
+        }
+
+        return true;
     }
 }

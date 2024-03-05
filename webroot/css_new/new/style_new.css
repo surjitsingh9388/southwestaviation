@@ -1,0 +1,751 @@
+body{
+	background: #F7F7F7;
+}
+.page-content {
+	/*background: white;*/
+	background: transparent;
+	margin: 0px 0 6px 0;
+	padding-bottom: 5px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+.heading {
+	padding: 4px 10px 2px 10px;
+	border-bottom: 1px solid #bababa;
+	margin: 0;
+	position: relative;
+	background-color: #ffffff;
+	height: 45px;
+}
+.heading > h2{
+	color: #73879C;
+	font-size: 28px;
+	display: inline-block;
+	margin: 0;
+}
+.action-bar {
+	border-radius: 0;
+	padding: 10px 42px;
+	background-color: #f5f5f5;
+	min-height: 59px;
+	position: relative;
+}
+.action-bar > .search-control {
+	width: 220px;
+	margin-right: 20px;
+	display: inline-block;
+	position: relative;
+}
+.form-control {
+	display: block;
+	width: 100%;
+	height: 34px;
+	border-radius: 4px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+}
+.search-btn{
+	display: inline;
+	position: absolute;
+	right: 5px;
+	top: 12px;
+	color: darkgray;
+}
+.action-bar > .form-group{
+	width: auto;
+	display: inline-block;
+	margin-right: 10px !important;
+	margin-bottom: 5px;
+	position: relative;
+}
+.action-bar > .form-group label {
+	font-size: 14px;
+	color: #4c4c4d;
+	font-weight: normal;
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+}
+.action-bar > .form-group select {
+	width: 150px;
+	display: inline;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	padding-right: 28px;
+	/*background-image: url(download.png);*/
+	background-position: right;
+	background-repeat: no-repeat;
+}
+.action-bar > .btn {
+	margin-right: 4px;
+	width: auto;
+	display: inline-block;
+	cursor: pointer;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.action-bar > .btn:hover{
+	background-color: #fff;
+}
+
+.btn-default {
+	color: #002e6d;
+	border: solid 1px #bfbfbf;
+	background: #FFFFFF;
+}
+.btn-primary {
+	color: #fff;
+	border: 1px solid #000;
+	background: #1455ae;
+	background: -moz-linear-gradient(top, #1455ae 0%, #283a97 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1455ae), color-stop(100%, #283a97));
+	background: -webkit-linear-gradient(top, #1455ae 0%, #283a97 100%);
+	background: -o-linear-gradient(top, #1455ae 0%, #283a97 100%);
+	background: -ms-linear-gradient(top, #1455ae 0%, #283a97 100%);
+	background: linear-gradient(to bottom, #1455ae 0%, #283a97 100%);
+}
+.page-content  .table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
+}
+
+.page-content .table > thead > tr > th {
+	background-color: #2e3238;
+	color: #e3e3e3;
+	font-weight: normal;
+	padding: 5px 10px;
+	border-collapse: collapse;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	vertical-align: bottom;
+	border-bottom: none;
+	font-size: 14px;
+}
+.page-content .table > thead > tr > th:first-child{
+	padding-left: 45px;
+	border-top: 0;
+}
+.page-content .table > tbody > tr > td:first-child{
+	padding-left: 45px;
+}
+.page-content .table > thead > tr > th:first-child input[type="checkbox"],
+.page-content .table > tbody > tr > td:first-child input[type="checkbox"]{
+	margin: 4px 0 0;
+}
+.page-content .table > tbody > tr > td{
+	padding: 10px;
+	padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #000
+}
+.text-left{
+	text-align: left;
+}
+.table-hover>tbody>tr{
+	cursor: pointer;
+}
+.table-hover>tbody>tr:hover {
+	background-color: #f5f5f5;
+}
+.btn-group{
+	position: relative;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	vertical-align: middle;
+}
+button:not(:disabled) {
+	cursor: pointer;
+}
+.btn-group>.btn {
+	position: relative;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+}
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.btn-dropdown{	
+	padding: 6px 12px;
+	margin: 0;
+	border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    width: 80px;
+    float: left;
+    position: relative;
+}
+.split-btn{
+	width: 110px;
+	position: relative;
+	display: inline-block;
+    vertical-align: middle;
+}
+.dropdown-content {
+	position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown-content a {
+	color: black;
+	padding: 4px 16px;
+	text-decoration: none;
+	display: block;
+}
+.dropdown-content a:hover {background-color: #ddd}
+
+.btn:hover, .dropdown:hover .btn-dropdown {
+	background-color: #0b7dda;
+}
+.icon-part {
+    padding: 6px 8px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin: 0;
+    color: #002e6d;
+    border: solid 1px #bfbfbf;
+    background: #FFFFFF;
+    border-left: none;
+    width: 25px;
+    float: left;
+    position: relative;
+}
+.status {
+	width: 80px;
+    display: inline-block;
+    padding: .4em .6em .4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+ }
+div.due-status-overdue {
+    background-color: #c0392b;
+}
+div.not-due-status {
+    background-color: #27ae60;
+}
+div.coming-due-status {
+	background-color: #f39c12;
+}
+div.tolerance-status {
+	background-color: #d35400;
+}
+.expand-tr{
+	text-align: right;
+	cursor: pointer;
+}
+.expand-tr:before{
+	font-family:'FontAwesome';
+	content: '\f0da';
+	font-size: 12px;
+}
+.overflow-x-axis{
+	overflow-x: auto;
+}
+.position-relative{
+	position: relative;
+}
+.maintenance-info{
+	display: flex;
+	flex-wrap: wrap;
+}
+/*.tile-row {
+	width: 150px;
+    position: relative;
+    display: inline-block;
+    height: 120px;
+    text-align: center;
+    color: #FFF;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.tile-body {
+	background-color: #c0392b;
+    font-size: 68px;
+}
+.past-due-label {
+    background-color: #982e21;
+}*/
+.page-content .table td > a{
+	    color: #092E6E;
+	    text-decoration: underline;
+}
+.overview-detail{
+	display: none;
+}
+
+/***** New CSS for boxes ******/
+.content {
+    padding: 5px 42px;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+.content .widget-6 {
+    width: 60%;
+    overflow: auto;
+    float: left;
+}
+
+.widget-4 > .widget-group, .widget-6 > .widget-group {
+    width: 50%;
+    float: left;
+    margin-right: 0;
+    padding-right: 3px;
+}
+
+.content .widget-group .header {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.content .tilerow .tile:first-child {
+    margin-left: 0;
+}
+
+.content .tilerow-3 .tile {
+    width: 32.5%;
+}
+
+.content .tilerow .tile {
+    position: relative;
+    display: inline-block;
+    height: 120px;
+    text-align: center;
+    color: #FFF;
+}
+
+.content .past-due-widget {
+    background-color: #c0392b;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/*.content .tile {
+    min-width: 125px;
+}*/
+
+.content .tile .tilebody {
+    font-size: 68px;
+}
+
+.content .past-due-label {
+    background-color: #982e21;
+}
+
+.content .tolerance-widget {
+    background-color: #d35400;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.content .tolerance-label {
+    background-color: #a04000;
+}
+
+.content .tilerow .tile:last-child {
+    margin-right: 0;
+}
+
+.content .coming-due-widget {
+    background-color: #f39c12;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.content .coming-due-label {
+    background-color: #bc780e;
+}
+
+.content .alert-due-widget {
+    background-color: #f39c12;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.content .alert-due-label {
+    background-color: #bc780e;
+}
+@media screen and (max-width: 1383px){
+	.widget-6 > .widget-group {
+	    width: 100%;
+	    float: left;
+	    margin-right: 0;
+	}
+}
+@media screen and (max-width: 767px){
+	.content .widget-6 {
+	    width: 100%;
+	    
+	}
+}
+
+/******* Maintenance boxes ******/
+
+.bootstrap-datetimepicker-widget{
+	width:250px !important;
+}
+
+.items-title {
+	background: #99a1a6; 
+	font-weight: bold; 
+	padding: 2px; 
+	margin: 5px;
+}
+
+.historicalInfo .table > tbody > tr > td:first-child {
+    padding-left: 0 !important;
+}
+
+/* a span.check-mark {
+    position: relative !important;
+    right: 9px !important;;
+    margin-top: 5px;
+    float: left;
+}
+
+a span.text {
+    margin-right: 34px;
+    float: right;
+}*/
+
+#aircraftDetailsPopup {
+    top: 50px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 650px;
+}
+
+.partDetailsPopup {
+	top: 50px;
+	position: absolute;
+	z-index: 9;
+	background:
+	rgb(255, 255, 255) none repeat scroll 0% 0%;
+	border: 1px solid;
+	width: 900px;
+}
+
+#airCompDetailsPopup {
+    top: 50px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 880px;
+}
+
+#myCarousel .carousel-control {
+    top: 22px !important;
+    bottom: auto !important;
+    width: 5% !important;
+    color: navy;
+}
+
+#myCarousel .carousel-control.right {
+    right: 0;
+    left: 25px;
+}
+
+.air-detail-title {
+	background-color:#2e3238; 
+	color:#e3e3e3; 
+	font-weight:bold; 
+	padding:8px 0 8px 10px;
+}
+
+.airDetailPopupHeader {
+	height: 40px;
+	text-align: center;
+	padding-top: 10px; 
+	font-size: 16px;
+}
+
+.partDetailHeader {
+	height: 40px;
+	text-align: left;
+	/*padding-top: 5px;*/
+	font-size: 25px;
+	padding-left: 65px;
+}
+
+.partDetailPopupHeader {
+	height: 45px;
+	text-align: left;
+	padding-top: 10px;
+	font-size: 18px;
+	padding-left: 65px;
+}
+
+.partDetailPopupHeader button {
+	float: right;
+}
+
+.airDetailPopupHeader button {
+	float: right;
+}
+
+#myCarousel table td{
+	font-size: 12px !important;
+}
+
+#aircraftTabs ul.nav-tabs li a {
+	color: #555;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#aircraftTabs ul li {
+	padding: 5px 5px 0 5px;
+}
+
+#aircraftTabs ul {
+	background-color: #e5e5e5;
+}
+
+#aircraftTabs #itemInfo {
+	padding-top: 10px;
+}
+
+#aircraftTabs #subItems {
+	padding-top: 10px;
+}
+
+.parent-child-circle {
+	border-radius: 50%;
+	border: 1px solid #aaa;
+	display: inline-block;
+	text-align: center;
+	line-height: 13px;
+	font-size: 10px;
+	padding: 0px 3px 0px;
+	text-transform: uppercase;
+	margin-left: 2px;
+	font-weight: bold;
+	color: #aaa;
+}
+
+#customReport .lblColor {
+	color:#c0c0c0;
+}
+
+#customReportPopup .lblColor {
+	color:#c0c0c0;
+}
+
+.required {
+	color:red;
+}
+
+.itemInfoCls {
+	display: flex;
+	padding: 0 4px;
+}
+
+.itemInfoCls .itemCls {
+	width: calc(100% / 5);
+	margin: 0 3px;
+}
+
+.partInfoCls {
+	display: flex;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.partInfoCls .itemCls {
+	width: calc(100% / 7);
+	margin: 5px 10px 5px 10px;
+}
+
+.addPartInfoCls {
+	display: flex;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.addPartInfoCls .itemCls {
+	width: calc(100% / 9);
+	margin: 5px 10px 5px 10px;
+	text-align: left;
+}
+
+.editPartInfoCls {
+	display: flex;
+	padding: 0 4px;
+	text-align: center;
+}
+
+.editPartInfoCls .itemCls {
+	width: calc(100% / 8);
+	margin: 5px 10px 5px 10px;
+	text-align: left;
+}
+
+.corrPageHeading {
+	display: flex;
+	padding: 8px 2px;
+	text-align: left;
+}
+
+.corrPageHeading .corrPH {
+	width: calc(100% / 5);
+	background: #99a1a6; 
+	font-weight: bold; 
+	padding: 2px; 
+	height: 24px;
+}
+
+.multi-step .btn {
+	margin:0;
+}
+
+.multi-step .toggleTextCls {
+	font-size: 13px;
+	font-weight: bold;
+	padding-left: 16px;
+	padding-top: 5px;
+}
+
+.multi-step .toggleTextCls span {
+	color:#3b8c29;
+	padding-left: 10px;
+}
+
+.multi-step .modal-body {
+	max-height: 500px; 
+	overflow-y: auto;
+}
+
+.multi-step .toggleAdjTextCls {
+	font-size: 13px;
+	font-weight: bold;
+	padding-left: 16px;
+	padding-top: 5px;
+}
+
+.multi-step .toggleAdjTextCls span {
+	color:#3b8c29;
+	padding-left: 10px;
+}
+
+/**** Progress Bar *****/
+.multi-step .m-progress-bar {
+    min-height: 1em;
+    background: #3b8c29;
+    width: 5%;
+}
+
+.multi-step ul {
+    padding-left: 0;
+    white-space:nowrap;
+}
+.multi-step ul li{
+    display: inline;
+    color: #092E6E;
+}
+
+.multi-step .multi-step-title {
+	padding-top: 15px;
+}
+
+.multi-step .x_panel {
+	padding: 10px 0 10px 0;
+}
+
+.multi-step .x_content {
+	padding: 0;
+}
+
+.multi-step .step12 {
+	padding-left: 25px;
+}
+
+.multi-step .step13 {
+	padding-left: 25px;
+}
+
+#compReportTimeModel .x_panel {
+	padding: 10px 0 10px 0;
+}
+
+#compReportTimeModel .x_content {
+	padding: 0;
+}
+
+/*** Edit page group section clsaa ***/
+.partsGpCls {
+	padding: 0 0 8px 0;
+}
+
+.partsGpCls div {
+	padding: 0;
+	font-size: 15px;
+}
+
+.addPageHeading {
+	background: #99a1a6; 
+	font-weight: bold; 
+	padding: 2px; 
+	margin: 5px; 
+	height: 24px;
+}
+
+#frmAirCompPart label {
+	text-align: left;
+	font-weight: normal;
+}
+
+.addPartBorder {
+	border: 1px solid #c0c0c0;
+}
+
+
+/*********************************************************
+	Style-19/12/2022
+***************************************/

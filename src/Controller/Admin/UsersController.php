@@ -12,6 +12,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Http\Response;
 use Cake\Database\Expression\QueryExpression;
+use Twilio\Rest\Client;
 
 /**
  * Users Controller
@@ -44,7 +45,7 @@ class UsersController extends AppController
      */
     public function beforeFilter(Event $event) {
         parent::beforeFilter($event);
-        $this->Auth->allow(['isEmailExist','forgotPassword','sendPasswordDetails','isEmailNotExist','generateToken','resetPassword','setNewPassword']);
+        $this->Auth->allow(['isEmailExist','forgotPassword','sendPasswordDetails','isEmailNotExist','generateToken','resetPassword','setNewPassword','isEmailORPhoneNotExist','verifyotp']);
     }
 
     /**
@@ -54,7 +55,7 @@ class UsersController extends AppController
      * @return
      */
     public function resetPassword($token=null) {
-        $url = Router::url( $this->here, true );
+        $url = Router::url( $this->request->here(), true );
         $prefix = $this->checkIsPilot($url);
         $prefix = lcfirst($prefix);
         //pr($prefix);exit;
@@ -97,18 +98,20 @@ class UsersController extends AppController
             $user['id'] = $password['user_id'];
             $prefix = $password['prefix'];
             $id = $password['ResetPasswords']['id'];
-            //$resetModel = TableRegistry::get('ResetPasswords');
+            $resetModel = TableRegistry::get('ResetPasswords');
             $resetPasswords = $this->ResetPasswords->get($id);
             $user = $this->Users->get($resetPasswords->user_id, [
             'contain' => ['Roles']]);
             //pr($user->role->role_name);exit;
             $user['password'] = $password['password'];
-            if($user->role->role_name == 'Admin' || $user->role->role_name == ROLE_PILOTS)
+            $permissionRoles = PERMISSION_ROLE_ID;
+            $permissionRoles = explode(',', $permissionRoles);
+            if($user->role->role_name == 'Admin' || in_array($user['role_id'], $permissionRoles))
             {
                 if ($this->Users->save($user)) {
                     $resetModel->delete($resetPasswords);
                     $this->Flash->success(__('Password reset successfully.'));
-                    if($user->role->role_name == 'Admin' || $user->role->role_name == ROLE_PILOTS){
+                    if($user->role->role_name == 'Admin' || in_array($user['role_id'], $permissionRoles)){
                         return $this->redirect(['controller' => 'users', 'action' => 'login', 'prefix' => $prefix]);
                     }else{
                         return $this->redirect(['controller' => 'Pages', 'action' => 'home']);
@@ -145,7 +148,8 @@ class UsersController extends AppController
 
         $this->viewBuilder()->setLayout('admin_login');
         if ($this->Auth->user('role') == 'Admin') {
-            return $this->redirect(['controller'=>'Reports', 'action'=>'customReport']);    
+            //return $this->redirect(['controller'=>'Reports', 'action'=>'customReport']);  
+            return $this->redirect(['controller'=>'Dashboard']);    
         }
 
         if ($this->request->is('post')) {
@@ -186,7 +190,7 @@ class UsersController extends AppController
                     $this->Auth->setUser($user);
                     $this->updateLastLoginTime();
                     //return $this->redirect($this->Auth->redirectUrl());
-                    return $this->redirect(['controller'=>'Reports', 'action'=>'customReport']);
+                    return $this->redirect(['controller'=>'Dashboard']);
                 } else {
                     if($prefix == PILOTS_PREFIX) {
                         $this->Flash->error(__(UNAUTHORIZED_PILOT_USER));
@@ -433,6 +437,9 @@ class UsersController extends AppController
             $role = $this->Roles->find('all')->where(['id' => $postData['role_id']])->first()->toArray();
             
             $postData['email'] = trim($postData['email']);
+            $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
+            $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
+            
             $user = $this->Users->patchEntity($user, $postData, array('associated' => array('Addresses')));
             $user['timezone_id'] = '1';
                        
@@ -517,9 +524,10 @@ class UsersController extends AppController
             }
         }
 
+        $users = $this->User->getUsers();
         //pr($user);die;
         
-        $this->set(compact('user', 'roles', 'countries', 'actionItems'));
+        $this->set(compact('user', 'roles', 'countries', 'actionItems', 'users'));
     }
 
     /**
@@ -563,7 +571,8 @@ class UsersController extends AppController
             $postData['email'] = trim($postData['email']);
             $new_password = isset($postData['new_password']) ? $postData['new_password'] : '';
             $confirm_password = isset($postData['confirm_password']) ? $postData['confirm_password'] : '';
-            
+            $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
+            $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
             // check if new password not empty, set the new password
             if (!empty($new_password) && !empty($confirm_password)) {
                 if ($new_password == $confirm_password) {
@@ -711,8 +720,10 @@ class UsersController extends AppController
                 $user['role_id'] = $selectedUser['role']['id'];
             }
         }
+
+        $users = $this->User->getUsers();
        
-        $this->set(compact('user', 'roles', 'countries', 'states', 'cities', 'users', 'action', 'actionItems'));
+        $this->set(compact('user', 'roles', 'countries', 'states', 'cities', 'users', 'action', 'actionItems', 'users'));
     }
     
     /**
@@ -773,6 +784,25 @@ class UsersController extends AppController
             $this->autoRender = false;
             $email = $this->request->getData('email');
             $exists = $this->Users->exists(['email' => $email]);
+            if ($exists) {
+                echo 'true';
+            } else {
+                echo 'false';
+            }
+        }
+    }
+
+    /**
+     * IsEmailExist method
+     * This function is used to check is email already exist.
+     * 
+     * @return boolean true/false
+     */
+    public function isEmailORPhoneNotExist() {
+        if ($this->request->is('post')) {
+            $this->autoRender = false;
+            $email = $this->request->getData('email');
+            $exists = $this->Users->exists(['OR'=>['email' => $email, 'phone' => $email]]);
             if ($exists) {
                 echo 'true';
             } else {
@@ -863,23 +893,49 @@ class UsersController extends AppController
                 } else {
                     $prefix = 'admin';
                 }
-                $result = $this->sendPasswordDetails($userData);
+
+                $isphone = 0;
+                $isemail = 0;
+                if(is_numeric($userData['email'])){
+                    $phone = preg_replace("/[^\d]/", "", $userData['email']);
+                    if (strlen($phone) < 10) { 
+                        $this->Flash->error(__("Please provide valid Phone Number"));
+                        return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+                    }
+                    $isphone = 1;
+                    $userData['isphone'] = $isphone;
+                }else{
+                    if(filter_var($userData['email'], FILTER_VALIDATE_EMAIL)){
+                        $this->Flash->error(__("Please provide valid Email Address"));
+                        return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+                    }
+                    $isemail = 1;
+                    $userData['isemail'] = $isemail;
+                }
+                
+                if($isemail == 1){
+                    $result = $this->sendPasswordDetails($userData);
+                    $message = 'Your password reset details successfully sent to your email address.';
+                }else if($isphone == 1 ){
+                    $result = $this->sendPasswordDetails($userData);
+                    $message = 'Your password reset details successfully sent to your phone number.';
+                }
                 //pr($result);exit;
                 if ($result) {
-                    $this->Flash->success(__('Your password reset details successfully sent to your email address.'));
+                    $this->Flash->success(__($message));
                 } else {
-                    $userData=$this->Users->find('all', ['conditions' => ['email'=>$userData['email']]])->first()->toArray();
+                    $userData=$this->Users->find('all', ['conditions' => ['OR'=>['email'=>$userData['email'], 'phone'=>$userData['email']]]])->first()->toArray();
                     //pr($prefix);exit;
-                    if($userData['role_id'] != PILOTS_ID && $prefix == 'pilots'){
+                    if($userData['role_id'] != PILOTS_ID && $prefix == 'pilots' && count($userData) == '0'){
                         $this->Flash->error(__("Please provide valid Pilot Email Id."));
-                    }elseif($userData['role_id'] != '1' && $prefix == 'admin'){
+                    }elseif($userData['role_id'] != '1' && $prefix == 'admin' && count($userData) == '0'){
                         $this->Flash->error(__("Please provide valid Admin Email Id"));
-                    }elseif($userData['role_id'] == PILOTS_ID && $prefix == 'admin'){
+                    }elseif($userData['role_id'] == PILOTS_ID && $prefix == 'admin' && count($userData) == '0'){
                         $this->Flash->error(__("Please provide valid Admin Email Id"));
-                    }elseif($userData['role_id'] == '1' && $prefix == 'pilots'){
+                    }elseif($userData['role_id'] == '1' && $prefix == 'pilots' && count($userData) == '0'){
                         $this->Flash->error(__("Please provide valid Pilot Email Id"));
                     }else{
-                    $this->Flash->error(__('The request could not be sent. Please try again.'));
+                        $this->Flash->error(__('The request could not be sent. Please try again.'));
                     }
                 }
             } else {
@@ -908,30 +964,64 @@ class UsersController extends AppController
             }
             $resetPasswords = $this->ResetPasswords->newEntity();
             $email = $emailData['email'];
-            $userData=$this->Users->find('all', ['conditions' => ['email'=>$emailData['email']]])->first()->toArray();
+            $userData=$this->Users->find('all', ['conditions' => ['OR'=>['email'=>$emailData['email'],'phone'=>$emailData['email']]]])->first()->toArray();
             //return $userData;
-            if($userData['role_id'] != PILOTS_ID && $userData['role_id'] != '1'){
+            if($userData['role_id'] != PILOTS_ID && $userData['role_id'] != '1' && count($userData) == '0'){
                 return 0;
-            }elseif($userData['role_id'] == PILOTS_ID && $prefix == 'admin'){
+            }elseif($userData['role_id'] == PILOTS_ID && $prefix == 'admin' && count($userData) == '0'){
                 return 0;
-            }elseif($userData['role_id'] == '1' && $prefix == 'pilots'){
+            }elseif($userData['role_id'] == '1' && $prefix == 'pilots' && count($userData) == '0'){
                 return 0;
             }
-            $passwordToken = $this->generateToken($userData['id']);
-            $resetUrlLink = Router::url('/'.$prefix.'/users/reset-password/'.$passwordToken, true);
+            $optCode = '0';
+            $passwordToken = '';
+            if($emailData['isphone'] != 0){
+                $n = 6;
+                $optCode = $this->generateNumericOTP($n);
+            }else{
+                $passwordToken = $this->generateToken($userData['id']);
+            }
+            if (empty($passwordToken) && empty($optCode)) {
+                $this->Flash->error(__('Somthing went worng. Please try again.'));
+                return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+            }
+
+            $resetUrlLink = !empty($passwordToken) ? Router::url('/'.$prefix.'/users/reset-password/'.$passwordToken, true) : '';
             //pr($resetUrlLink);exit;
             $resetPasswords['user_id'] = $userData['id'];
             $resetPasswords['token'] = $passwordToken;
+            $resetPasswords['otp_code'] = $optCode;
             $resetPasswords['password_reset_link'] = $resetUrlLink;
-            $resetPasswords['expired'] = date('Y-m-d H:i:s', strtotime('+24 hours'));
-            
+            $resetPasswords['expired'] = !empty($passwordToken) ? date('Y-m-d H:i:s', strtotime('+24 hours')) : date('Y-m-d H:i:s', strtotime('+5 minutes'));
+            //pr($resetPasswords);exit;
             //If token already exist delete them
-            //$tokenModel = TableRegistry::get('ResetPasswords');
-            $tokenExist = $this->ResetPasswords->find('all', ['conditions' => ['user_id' => $userData['id']]])->toArray();
+            $tokenModel = TableRegistry::get('ResetPasswords');
+            //$tokenExist = $this->ResetPasswords->find('all', ['conditions' => ['user_id' => $userData['id']]])->toArray();
             $tokenModel->deleteAll(['user_id'=>$userData['id']]);
             if (!$this->ResetPasswords->save($resetPasswords)) {
                 $this->Flash->error(__('Somthing went worng. Please try again.'));
                 return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+            }
+            if(!empty($optCode)){
+                //send otp code function call here
+                //$this->Flash->success(__('Otp send to your mobile number.'));
+
+                $account_sid = TWILIO_ACCOUNT_SID;
+                $auth_token = TWILIO_AUTH_TOKEN;
+                
+                $twilio_number = TWILIO_PHONE_NUMBER;
+
+                $client = new Client($account_sid, $auth_token);
+                $tophone = $userData['phone_ext'].$userData['phone'];
+                $message = $client->messages->create(
+                    $tophone,
+                    array(
+                        'from' => $twilio_number,
+                        'body' => OTP_MESSAGE_TEXT.$optCode
+                    )
+                );
+                print($message->sid);exit;
+                return $this->redirect(['controller' => 'Users', 'action' => 'verifyotp', 'prefix' => $prefix, $userData['id']]);
             }
                         
             $data['email'] = $emailData['email'];
@@ -971,7 +1061,7 @@ class UsersController extends AppController
                 return 0;
             }
             // Setting email config
-            /*try{
+            try{
                 $email = new Email();
                 $email->transport('smtp');
                 $email->template('forgotPassword');
@@ -990,7 +1080,7 @@ class UsersController extends AppController
                 }
             }catch(\Exception $e){
                 $this->Flash->error(__('Unable to send email. Please contact admin.'));
-            }*/
+            }
         } else {
             $this->Flash->error(__('Invalid request. Please try again.'));
         }
@@ -1012,10 +1102,23 @@ class UsersController extends AppController
         do {
             unset($exists);
             $token = bin2hex(openssl_random_pseudo_bytes(16));            
-            $exists = $this->ResetPasswords->find('all', ['conditions' => ['token' => $token]])->first();
-        }while(count($exists) != 0);
+            $exists = $this->ResetPasswords->find('all', ['conditions' => ['token' => $token]])->count();
+        }while($exists != 0);
             
         return $token;
+    }
+
+    public function generateNumericOTP($n)
+    {
+    
+        $generator = "1357902468";
+        $result = "";
+
+        for($i = 1; $i <= $n; $i++) {
+            $result .= substr($generator, rand() % strlen($generator), 1);
+        }
+
+        return $result;
     }
 
     public function checkIsPilot($url=null){
@@ -1091,6 +1194,24 @@ class UsersController extends AppController
                         $insertData[$key]['action_delete'] = $value['action_delete'];
                     } else {
                         $insertData[$key]['action_delete'] = '0';
+                    }
+
+                    if(isset($value['action_approve_deny']) && $value['action_approve_deny'] != 0) {
+                        $insertData[$key]['action_approve_deny'] = $value['action_approve_deny'];
+                    } else {
+                        $insertData[$key]['action_approve_deny'] = '0';
+                    }
+
+                    if(isset($value['action_reopen_work_order']) && $value['action_reopen_work_order'] != 0) {
+                        $insertData[$key]['action_reopen_work_order'] = $value['action_reopen_work_order'];
+                    } else {
+                        $insertData[$key]['action_reopen_work_order'] = '0';
+                    }
+
+                    if(isset($value['action_final_inspections']) && $value['action_final_inspections'] != 0) {
+                        $insertData[$key]['action_final_inspections'] = $value['action_final_inspections'];
+                    } else {
+                        $insertData[$key]['action_final_inspections'] = '0';
                     }
                     $insertData[$key]['updated_by'] = $postData['updated_by'];
                 }
@@ -1200,7 +1321,7 @@ class UsersController extends AppController
                 //pr($userMenuItems);die;
                 $selAirIds = [];
                 foreach ($userMenuItems as $key6 => $value6) {
-                    $temp[$value6['menu_item_id']] = array('action_add' => $value6['action_add'], 'action_edit' => $value6['action_edit'], 'action_view' => $value6['action_view'], 'action_delete' => $value6['action_delete']);
+                    $temp[$value6['menu_item_id']] = array('action_add' => $value6['action_add'], 'action_edit' => $value6['action_edit'], 'action_view' => $value6['action_view'], 'action_delete' => $value6['action_delete'], 'action_approve_deny' => $value6['action_approve_deny'], 'action_reopen_work_order' => $value6['action_reopen_work_order'], 'action_final_inspections' => $value6['action_final_inspections']);
                 }
 
                 //User selected aircraft ids
@@ -1229,6 +1350,66 @@ class UsersController extends AppController
             }
         }
         return $chieldMenu;
+    }
+
+    public function verifyotp($user_id){
+        $url = Router::url( $this->request->here(), true );
+        $prefix = $this->checkIsPilot($url);
+        $prefix = lcfirst($prefix);
+        //pr($prefix);exit;
+        
+        $this->viewBuilder()->setLayout('admin_login');
+        
+        $tokenExist = $this->ResetPasswords->find('all', ['conditions' => ['user_id' => $user_id]])->first();
+        
+        $this->set(compact('prefix'));
+        if(empty($tokenExist)){
+            $this->Flash->error(__('Invalid token. Please try again.'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+        }
+        $currentDateTime = strtotime(date('Y-m-d H:i:s'));
+        $expired = strtotime(date('Y-m-d H:i:s',strtotime($tokenExist->expired)));
+        if($currentDateTime > $expired){
+            $this->Flash->error(__('OTP expired. Please try again lost your password?.'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+
+        if ($this->request->is('post')) {
+            $userData = $this->request->getData();  
+            //pr($userData);exit;
+            if (!empty($userData)) {
+                if(!empty($userData['login_type'])) {
+                    $prefix = lcfirst($userData['login_type']);
+                } else {
+                    $prefix = 'admin';
+                }
+
+                $tokenModel = TableRegistry::get('ResetPasswords');
+                $opValid = $this->ResetPasswords->find('all', ['conditions' => ['id'=>$userData['id'], 'user_id'=>$userData['user_id'],'otp_code'=>$userData['otp_code']]])->toArray();
+                if (empty($opValid)) {
+                    $this->Flash->error(__('Incorrect OTP.'));
+                }else{
+                    $passwordToken = $this->generateToken($userData['user_id']);
+
+                    $resetpassworddata = [];
+                    $resetpassworddata['token'] = $passwordToken;
+                    
+                    $resetPasswords = $this->ResetPasswords->get($userData['id']);
+                    $resetPasswords = $this->ResetPasswords->patchEntity($resetPasswords, $resetpassworddata);
+                    if ($this->ResetPasswords->save($resetPasswords)) {
+                        $this->Flash->success(__('OTP verified.'));
+
+                        return $this->redirect(['action' => 'reset-password', $passwordToken]);
+                    }else{
+                        $this->Flash->error(__('Something went wrong, please try again.'));
+                    }
+                }
+            }
+        }
+        $id = $tokenExist->id;
+        $resetPasswords = $this->ResetPasswords->get($id);
+
+        $this->set(compact('tokenExist','prefix'));
     }
     
 }

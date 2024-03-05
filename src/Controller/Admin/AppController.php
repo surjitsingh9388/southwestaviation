@@ -95,8 +95,9 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event) {
         $this->viewBuilder()->setLayout('admin');
-        $this->Auth->allow('login');
-        if($this->request->is('ajax')){
+        $requestallowed = ['login','isEmailExist','forgotPassword','sendPasswordDetails','isEmailNotExist','generateToken','resetPassword','setNewPassword','isEmailORPhoneNotExist','verifyotp'];
+        $this->Auth->allow($requestallowed);
+        if($this->request->is('ajax') && !in_array($this->request->params['action'], $requestallowed)){
             //return response to ajax call when session expired
             if (!$this->Auth->user()) { 
                 //$url = Router::url(['controller' => 'Users', 'action' => 'login', 'prefix' => 'admin'],TRUE);
@@ -209,7 +210,7 @@ class AppController extends Controller
         $userID = $this->Auth->user('id');
         $roleID = $this->Auth->user('role_id');
         $allMenu = $this->menuItemObj->find('all')
-            ->select(['MenuItems.name','UserMenuItems.action_add', 'UserMenuItems.action_edit', 'UserMenuItems.action_view', 'UserMenuItems.action_delete'])
+            ->select(['MenuItems.name','UserMenuItems.action_add', 'UserMenuItems.action_edit', 'UserMenuItems.action_view', 'UserMenuItems.action_delete', 'UserMenuItems.action_approve_deny'])
             ->join([
                 'UserMenuItems' => [
                     'table' => 'user_menu_items',

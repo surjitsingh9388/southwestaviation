@@ -266,7 +266,7 @@ class RolesController extends AppController
                         }
                     }
                     foreach ($roleMenuItems as $key6 => $value6) {
-                        $temp[$value6['menu_item_id']] = array('action_add' => $value6['action_add'], 'action_edit' => $value6['action_edit'], 'action_view' => $value6['action_view'], 'action_delete' => $value6['action_delete']);
+                        $temp[$value6['menu_item_id']] = array('action_add' => $value6['action_add'], 'action_edit' => $value6['action_edit'], 'action_view' => $value6['action_view'], 'action_delete' => $value6['action_delete'], 'action_approve_deny' => $value6['action_approve_deny'], 'action_reopen_work_order' => $value6['action_reopen_work_order'], 'action_final_inspections' => $value6['action_final_inspections']);
                     }
                 } else {
                     $menuItemsModel = TableRegistry::get('MenuItems');
@@ -341,6 +341,21 @@ class RolesController extends AppController
                             $insertData[$key]['action_delete'] = $value['action_delete'];
                         }else{
                             $insertData[$key]['action_delete'] = '0';
+                        }
+                        if(isset($value['action_approve_deny']) && $value['action_approve_deny'] != 0){
+                            $insertData[$key]['action_approve_deny'] = $value['action_approve_deny'];
+                        }else{
+                            $insertData[$key]['action_approve_deny'] = '0';
+                        }
+                        if(isset($value['action_reopen_work_order']) && $value['action_reopen_work_order'] != 0){
+                            $insertData[$key]['action_reopen_work_order'] = $value['action_reopen_work_order'];
+                        }else{
+                            $insertData[$key]['action_reopen_work_order'] = '0';
+                        }
+                        if(isset($value['action_final_inspections']) && $value['action_final_inspections'] != 0){
+                            $insertData[$key]['action_final_inspections'] = $value['action_final_inspections'];
+                        }else{
+                            $insertData[$key]['action_final_inspections'] = '0';
                         }
                         $insertData[$key]['updated_by'] = $this->Auth->User('id');
                     }

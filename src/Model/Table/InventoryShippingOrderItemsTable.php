@@ -1,0 +1,59 @@
+<?php
+namespace App\Model\Table;
+
+use Cake\ORM\Query;
+use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+use Cake\ORM\TableRegistry;
+//use SoftDelete\Model\Table\SoftDeleteTrait;
+
+/**
+ * Parts Model
+ *
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Users
+ *
+ * @method \App\Model\Entity\Parts get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Parts newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Parts[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Parts|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Parts patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Parts[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Parts findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ */
+class InventoryShippingOrderItemsTable extends Table
+{
+    //use SoftDeleteTrait;
+
+    /**
+     * Initialize method
+     *
+     * @param array $config The configuration for the Table.
+     * @return void
+     */
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->setTable('inventory_shipping_order_items');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
+
+        $this->Planes = TableRegistry::get('Planes');
+    }
+    
+    public function beforeSave($options = array())
+    {
+        $entity = $options->getData('entity');
+
+        if(!empty($entity->eta)) {
+            $entity->eta = $this->Planes->dateFormatBeforeSave($entity->eta);
+        }
+        
+        return true;
+    }
+}

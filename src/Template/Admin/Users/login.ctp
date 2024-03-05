@@ -10,11 +10,11 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p>
-                    Please enter your registered Email Id and we will send you details to reset your password.
+                    Please enter your registered Email Id/Phone Number and we will send you details to reset your password.
                 </p>
                 <?php echo $this->Form->create(null, ['url' => ['action' => 'forgotPassword'], 'id' => 'frmForgotPassword']); ?>
                     <div class="form-group">
-                        <?php echo $this->Form->control('email',['type' => 'email', 'class'=>'form-control','placeholder'=>'Enter Email', 'required'=>true, 'label'=>false]); ?>
+                        <?php echo $this->Form->control('email',['type' => 'text', 'class'=>'form-control','placeholder'=>'Enter Email/Phone', 'required'=>true, 'label'=>false]); ?>
                         <?php echo $this->Form->control('login_type', array('type' => 'hidden', 'value' => (!empty($prefix)?$prefix:''))); ?>
                     </div>
                     <!-- Modal footer -->
@@ -52,6 +52,8 @@
                 </div>
                 <div>
                     <?php echo $this->Form->button(__d('gentelella','Login'),['class'=>'btn btn-default submit']); ?>
+
+                    <a href="javascript:void(0);" style="color:blue !important;" onclick='$("#passwordForgot").modal("show");'><b>Forgot Password?</b></a>
                 </div>
                 <div class="clearfix"></div>
             <?php echo $this->Form->end(); ?>
@@ -74,8 +76,8 @@
             },
             messages: {
                 email: {
-                    required: "Please enter email",
-                    email: "Please enter valid email"
+                    required: "Please enter email/hone",
+                    email: "Please enter valid email/phone"
                 }
             },
             errorClass: "error",
@@ -87,15 +89,15 @@
                 'email': {
                     required: true,
                     remote: {
-                        url: "<?php echo $this->Url->build(array('controller'=>'Users', 'action'=>'isEmailNotExist')); ?>",
+                        url: "<?php echo $this->Url->build(array('controller'=>'Users', 'action'=>'isEmailORPhoneNotExist')); ?>",
                         type: "post"
                     }
                 }  
             },
             messages: {
                 'email': {
-                    required: "Please enter valid email address.",
-                    remote: "Not a registered email address."
+                    required: "Please enter valid email/phone.",
+                    remote: "Not a registered email/phone."
                 }
             },
             errorClass: "error",

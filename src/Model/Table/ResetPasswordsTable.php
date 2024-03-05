@@ -61,8 +61,12 @@ class ResetPasswordsTable extends Table
         $validator
             ->scalar('token')
             ->maxLength('token', 255)
-            ->requirePresence('token', 'create')
-            ->notEmpty('token');
+            ->allowEmpty('token');
+
+        $validator
+            ->scalar('otp_code')
+            ->maxLength('otp_code', 6)
+            ->allowEmpty('otp_code');
 
         $validator
             ->scalar('password_reset_link')

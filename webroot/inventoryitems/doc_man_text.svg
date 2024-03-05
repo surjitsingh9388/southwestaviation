@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<g>
+	<g>
+		<path style="fill:#FFFFFF;" d="M18.916,3H6.021C5.458,3,5,3.425,5,3.948v24.104C5,28.575,5.458,29,6.021,29h19.958
+			C26.542,29,27,28.575,27,28.052V11h-8.084V3z"/>
+		<polygon style="fill:#FFFFFF;" points="26.578,10 19.916,3.407 19.916,10 		"/>
+		<path style="fill:#737B7F;" d="M19.916,2h-1H6.021C4.905,2,4,2.872,4,3.948v24.104C4,29.128,4.905,30,6.021,30h19.958
+			C27.095,30,28,29.128,28,28.052V11v-1L19.916,2z M26.578,10h-6.663V3.407L26.578,10z M27,28.052C27,28.575,26.542,29,25.979,29
+			H6.021C5.458,29,5,28.575,5,28.052V3.948C5,3.425,5.458,3,6.021,3h12.895v8H27V28.052z"/>
+	</g>
+	<rect x="8" y="10" style="opacity:0.75;fill:#737B7F;" width="8" height="1"/>
+	<rect x="8" y="7" style="opacity:0.75;fill:#737B7F;" width="8" height="1"/>
+	<rect x="8" y="13" style="opacity:0.75;fill:#737B7F;" width="16" height="1"/>
+	<rect x="8" y="16" style="opacity:0.75;fill:#737B7F;" width="16" height="1"/>
+	<rect x="8" y="19" style="opacity:0.75;fill:#737B7F;" width="16" height="1"/>
+	<rect x="8" y="22" style="opacity:0.75;fill:#737B7F;" width="16" height="1"/>
+	<rect x="8" y="25" style="opacity:0.75;fill:#737B7F;" width="16" height="1"/>
+</g>
+</svg>
