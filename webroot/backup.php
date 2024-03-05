@@ -4,8 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $dbHost = 'localhost';
-$dbUsername = 'i4642462_report';
-$dbPassword = 'lLwbuU(=TD-A';
+$dbUsername = 'root';
+$dbPassword = '';
 $dbName = 'i4642462_report';
 
 //connect & select the database
