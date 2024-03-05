@@ -1,0 +1,69 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Reference</th>
+                                        <th>Vendor</th>
+                                        <th>Requestor</th>
+                                        <th>Status</th>
+                                        <th>Account Code</th>
+                                        <th>Cost</th>
+                                        <th>Currency Code</th>
+                                        <th>Submitted</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <tr>
+                                <td>6464365</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>Shipped To Vendor</td>
+                                <td>0</td>
+                                <td>77.50</td>
+                                <td>USD</td>
+                                <td>03/23/2023</td>
+                            </tr>
+                            <tr>
+                                <td>543254325</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>Shipped To Vendor</td>
+                                <td>0</td>
+                                <td>35.90</td>
+                                <td>USD</td>
+                                <td>03/23/2023</td>
+                            </tr>
+                            <tr>
+                                <td>76548768</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>Shipped To Vendor</td>
+                                <td>0</td>
+                                <td>141.60</td>
+                                <td>USD</td>
+                                <td>03/23/2023</td>
+                            </tr>
+                            <tr>
+                                <td>4325435</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>Draft</td>
+                                <td>0</td>
+                                <td>20.00</td>
+                                <td>USD</td>
+                                <td>03/23/2023</td>
+                            </tr>  </tbody></table>

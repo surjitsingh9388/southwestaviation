@@ -6,9 +6,9 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <div class="adminLogo">
-                    <?php
-                        echo $this->Html->image('tuxedo-logo.png', ['alt' => 'Tuxedo Air']);
-                    ?>
+                <?php
+                    echo $this->Html->link($this->Html->image('/images/logo.png'), array('controller' => 'Users', 'action'=>'login'), array('alt'=>'SOUTHWEST AVAITION SPECIALTIES, LLC', 'escape' => false));
+                ?>
                 </div>
                 <?php echo $this->Form->create('', array('action' => 'setNewPassword', 'id' => 'frmSetPassword')); ?>
                     <h1>Set New Password</h1>

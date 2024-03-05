@@ -9,8 +9,11 @@ use Cake\Core\Configure;
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Database\Expression\QueryExpression;
+use Cake\Datasource\ConnectionManager;
+use Cake\Routing\Router;
 
 class AirframeComponentPartComponent extends Component {
+	public $components = ['Timezone', 'Auth'];
     /**
      * GetAirframeComponentParts method
      * This function is used to get list of all parts.
@@ -668,5 +671,117 @@ class AirframeComponentPartComponent extends Component {
     		return $result['full_name'];
     	}
     	
+    }
+
+	public function uploadComponentPartFilesToServer($postData, $filelocation, $foldername, $tableName=''){
+        ini_set('post_max_size', '100M');
+        ini_set('upload_max_filesize', '100M');
+        
+        $temp = $postData['file_name']['tmp_name'];
+        $name = $postData['file_name']['name'];
+        $ext = substr(strrchr($name , '.'), 1);
+        
+        $iconcss = '';
+        if($ext == 'pdf'){
+            $iconcss = 'icon-pdf';
+        }else if($ext == 'doc' || $ext == 'docx'){
+            $iconcss = 'icon-doc';
+        }else if($ext == 'xls' || $ext == 'xlsx'){
+            $iconcss = 'icon-excel';
+        }else if($ext == 'txt'){
+            $iconcss = 'icon-text';
+        }else{
+            $iconcss = 'icon-generic';
+        }
+        
+        $tblrow = '';
+        if(move_uploaded_file($temp, $filelocation)) {
+            $filesize = ($postData['file_name']['size']/1000).' KB';
+            $tblrow = '<tr>
+                <td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).$foldername.'/' . $name.'">'.$name.'</a>
+                <input type="hidden" name="filenames[]" value="'.$name.'">
+                <input type="hidden" name="filesize[]" value="'.$filesize.'">
+                </td>
+                <td></td>
+            </tr>';
+            if(!empty($tableName)){
+                $connection = ConnectionManager::get('default');
+
+                $componentpartfiles = $connection
+                        ->execute(
+                            'SELECT max(position) as positions FROM '.$tableName.' WHERE airframe_component_part_id = :airframe_component_part_id and status = "1" limit 1',
+                            ['airframe_component_part_id' => $postData['airframe_component_part_id']],
+                            ['created' => 'datetime']
+                        )
+                        ->fetch('assoc');
+                
+                $position = !empty($componentpartfiles) ? $componentpartfiles['positions']+1 : '1';
+                
+                $attachmentdata = [
+                                    'airframe_component_part_id'=>$postData['airframe_component_part_id'],
+                                    'file_name' => $name,
+                                    'file_size' => $filesize,
+                                    'position'=>$position,
+                                    'added_by' => $this->Auth->user('id'),
+                                    'created_at'=>date("Y-m-d H:i:s")
+                                ];
+
+                $resp = $connection->insert($tableName, $attachmentdata, ['created' => 'datetime']);
+                $inserted_id = $resp->lastInsertId($tableName);
+				
+                $tblrow = $this->getAirframeComponentPartAttachments($postData['airframe_component_part_id']);
+            }
+        }
+
+        return $tblrow;
+    }
+
+	public function getAirframeComponentPartAttachments($airframe_component_part_id){
+		$connection = ConnectionManager::get('default');
+
+		$componentpartfiles = $connection
+                        ->execute(
+                            'SELECT pf.id, pf.file_name, pf.file_size, pf.`created_at`, u.full_name FROM `airframe_component_part_files` pf join users u on pf.added_by=u.id WHERE u.suspended="0" and pf.airframe_component_part_id=:airframe_component_part_id',
+							['airframe_component_part_id' => $airframe_component_part_id],
+                            ['created' => 'datetime']
+                        )
+                        ->fetchAll('assoc');
+		
+		$trclassName = 'airframe-component-part-file';
+		
+		$tblrow = '';
+		foreach($componentpartfiles as $partfiles){
+			$ext = substr(strrchr($partfiles['file_name'] , '.'), 1);
+        
+			$iconcss = '';
+			if($ext == 'pdf'){
+				$iconcss = 'icon-pdf';
+			}else if($ext == 'doc' || $ext == 'docx'){
+				$iconcss = 'icon-doc';
+			}else if($ext == 'xls' || $ext == 'xlsx'){
+				$iconcss = 'icon-excel';
+			}else if($ext == 'txt'){
+				$iconcss = 'icon-text';
+			}else{
+				$iconcss = 'icon-generic';
+			}
+			
+			$tblrow .= '<tr class="airframe-component-part-file" data-val="'.$partfiles['id'].'">
+				<td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).'airframe_component_parts/' . $partfiles['file_name'].'">'.$partfiles['file_name'].'</a>
+				</td>
+				<td>'.$partfiles['file_size'].'</td>
+				<td>'.date('m-d-Y', strtotime($partfiles['created_at'])).'</td>
+				<td>'.$partfiles['full_name'].'</td>
+				<td><i class="fa fa-times delete_comp_part_attachment" title="Remove File" data-val="'.$partfiles['id'].'"></i></td>
+			</tr>';
+		}
+		return $tblrow;
+	}
+
+	public function deleteAirframeComponentPartAttachments($id){
+        $connection = ConnectionManager::get('default');
+        $resp = $connection->delete('airframe_component_part_files', ['id' => $id]);
+
+        return $resp;
     }
 }

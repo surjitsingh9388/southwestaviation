@@ -1,0 +1,105 @@
+@media screen and (max-width: 1800px){
+	.outerWrapper .boxWrapper .box{    width: 310px;}
+}
+@media screen and (max-width: 1600px){
+	.outerWrapper .boxWrapper .box{width: 300px;margin: 0px 25px;}
+}
+@media screen and (max-width: 1500px){
+	.outerWrapper .boxWrapper .box .title {font-size: 40px;}
+	.outerWrapper .boxWrapper .box .lbltxt{font-size: 18px;}
+	.outerWrapper .boxWrapper .box{max-width: 250px;margin: 0px;}
+	.outerWrapper .boxWrapper{justify-content: space-between;}
+	.table>thead>tr>th {width: 148px;}
+	.action-bar .input-group input{width: 230px;}
+}
+@media screen and (max-width: 1300px){
+	.action-bar .input-group input{width: 173px;}
+}
+@media screen and (max-width: 1200px){
+	.outerWrapper .boxWrapper .box .title{font-size: 30px;}
+	.outerWrapper .boxWrapper .box .lbltxt{font-size: 16px;}
+	.outerWrapper .boxWrapper .box {max-width: 200px;height: 140px;}
+	.side-bar ul .menu li a{padding: 14px 12px;}	
+	.action-bar .input-group{margin-right: 20px;}
+	.actionbar-lft .lftWrap .inputWrap{margin-right: 22px;}
+	.actionbar-lft .lftWrap{width: 100%;}
+	.actionbar-lft .split-btn {margin: 10px 0px;}
+	.side-bar{position: absolute;bottom: 0;top: 0px;}
+	
+}
+@media screen and (max-width: 1024px){
+	.side-bar ul .menu li a{padding: 14px 6px;}
+	/**********side bar **********/
+	.side-bar{position: absolute;bottom: 0;top: 0px;}
+	.content{width: 100%;   transform:translateX(0px);
+    -ms-transform:translateX(0px);
+    -webkit-transform:translateX(0px);}
+    .side-bar.sliding{
+    	 transform:translateX(-310px);
+    -ms-transform:translateX(-310px);
+    -webkit-transform:translateX(-310px);
+    }
+    .side-bar.sliding.left{
+		transform: translateX(0);
+		-ms-transform: translateX(0px);
+		-webkit-transform: translateX(0px);
+    }
+    /******************/
+
+}
+@media screen and (max-width: 991px){
+	.wrapper.active .side-bar ul .menu li span {float: right;text-align: center;margin-right: 0px;}
+	.wrapper.active .side-bar ul .menu li a {padding: 14px 5px;}
+	.wrapper.active .side-bar ul .menu li .icon-size, .icon-size{margin-right: 0px;}
+	.wrapper.active .side-bar .btmIcon{padding: 14px 0px !important;flex-direction: column;align-items: flex-end;}
+    .wrapper.active .side-bar .btmIcon li span{margin-right: 4px;margin-top: 15px;}
+    /*.push_menu{display: none;}*/
+	.wrapper.active .side-bar ul .menu .dropdown-menu li span{display: none;}
+	.wrapper.active .side-bar ul .menu .dropdown-menu li i{float: right;width: 35px;text-align: center;}
+    /************/
+	.action-bar{justify-content: space-between;}
+	/*.action-bar .input-group input {width: 255px;}*/
+	.action-bar .input-group{margin-right: 0px;}
+}
+
+@media screen and (max-width: 767px){
+	.outerWrapper .boxWrapper .box {max-width: 170px;height: 110px;}
+	.sortWrap .dropdown button{width: 150px;}
+	.action-bar .input-group input{width: 220px;}
+	.sortWrap .sortTxt{font-size: 16px;margin-right: 10px;}
+	
+}
+@media screen and (max-width: 575px){
+	/*.action-bar .input-group , .action-bar .input-group input{width: auto;}*/
+	.action-bar{flex-direction: column;    align-items: center;}
+	.sortWrap{margin-top: 15px;}
+	.outerWrapper .boxWrapper .box {
+    max-width: 150px;
+    min-height: 110px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.outerWrapper .boxWrapper .box .lbltxt{font-size: 14px;}
+.outerWrapper .boxWrapper .box .title{font-size: 25px;}
+.wrapper .side-bar ul .menu li .icon-size, .icon-size{width: 28px;}
+.topHeader{padding: 10px 0px;}
+.topHeader ul{ right: 10px;min-width: 126px;}
+}
+@media screen and (max-width: 520px){
+	.outerWrapper .boxWrapper .box {width: 135px;}
+	.outerWrapper .boxWrapper {flex-direction: column;align-items: center;}
+	.outerWrapper .boxWrapper .box + .box{margin-top: 10px;}
+}
+@media screen and (max-width: 480px){
+	
+	.icon {font-size: 22px;margin-left: 8px;}
+	.topHeader .dropdown .dropdown-toggle{font-size: 14px;}
+	.topHeader ul li.menu-head, a.push_menu{font-size: 18px;}
+	.wrapper .side-bar ul .menu li .icon-size, .icon-size {width: 25px;}
+	.content{padding: 15px;}
+	.action-bar .input-group input{width: 200px;}
+}
+@media screen and (max-width: 320px){
+	.active>.side-bar {margin-left: -497px;}
+	.side-bar{width: 100%;}
+}

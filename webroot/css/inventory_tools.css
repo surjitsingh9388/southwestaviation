@@ -1,0 +1,13 @@
+.certified_history_list, .inventory_tool_list{
+    cursor: pointer;
+}
+
+.certified_history_list_active, .inventory_tool_list_active {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
+
+.inventory-tool-photo a, .inventory-tool-file a{
+    color: blue;
+}

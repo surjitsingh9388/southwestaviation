@@ -1,0 +1,90 @@
+.dataTables_filter {
+    display: none;
+}
+
+/*table.dataTable>thead .sorting::before,
+table.dataTable>thead .sorting_asc::before,
+table.dataTable>thead .sorting_desc::before,
+table.dataTable>thead .sorting_asc_disabled::before,
+table.dataTable>thead .sorting_desc_disabled::before {
+    right: 0;
+    content: "";
+}
+
+table.dataTable>thead .sorting::after,
+table.dataTable>thead .sorting_asc::after,
+table.dataTable>thead .sorting_desc::after,
+table.dataTable>thead .sorting_asc_disabled::after,
+table.dataTable>thead .sorting_desc_disabled::after {
+    right: 0;
+    content: "";
+}
+
+table.dataTable>thead>tr>th:not(.sorting_disabled),
+table.dataTable>thead>tr>td:not(.sorting_disabled) {
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+table.dataTable>thead>tr>th,
+table.dataTable>thead>tr>td {
+    padding-right: 4px;
+    padding-left: 4px;
+}*/
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.btnWrapper .btn {
+    margin: 5px;
+    height: 36px;
+}
+
+.dt-buttons{
+    display:none;
+}
+
+label.btn.btn-default.active {
+    background-color: #5cca5c;
+    color: #fff;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.total-cost-block{
+    display: inline; 
+    color:#fff;
+}
+
+.complete-search-box{
+    width:170px !important;
+}
+
+.expiring-block{
+    color: white;
+    font-size: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.expiring-input{
+    width: 175px !important;
+    border-radius: 5px !important;
+}
+
+.transaction-det-block{
+    font-size: 14px;
+    padding-left: 30px;
+}
+
+.transaction-block{
+    font-size: 14px;
+    padding-left: 30px;
+}
+
+.btnspace{
+    margin-right: 5px !important;
+}

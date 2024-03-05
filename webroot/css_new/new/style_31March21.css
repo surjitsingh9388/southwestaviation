@@ -1,0 +1,1410 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #5865a2;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.dflex {
+    display: flex;    flex-wrap: wrap;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.p-0 {
+    padding: 0px !important;
+}
+
+.mt-35{
+    margin-top: 12px;
+}
+
+.border-btm {
+    border-bottom: 1px solid #97a3d9;
+    padding-bottom: 8px;
+}
+
+.topHeader {
+    filter: drop-shadow(0px 2px 1.5px rgba(0, 0, 0, 0.13));
+    background-color: #39478b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-right: -15px;
+    margin-left: -15px;
+    z-index: 10;
+    /*position: relative;*/
+    position: fixed;
+    width: 100%;
+}
+
+.topHeader .dropdown-menu>li>a {
+    padding: 3px 12px;
+}
+
+.icon {
+    font-size: 26px;
+    margin-left: 12px;
+}
+
+.topHeader .dropdown .dropdown-toggle {
+    font-size: 16px;
+    color: #fffefe;
+    font-weight: 400;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+}
+
+.wrapper {
+    width: 100%;
+    /*display: flex;*/
+    min-height: calc(100vh - 60px);
+}
+.custWrapper{
+    position: relative;
+}
+/*.custWrapper .side-bar{position: absolute;top: 0px;bottom: 0px;}*/
+.side-bar {
+    position: fixed;
+    /*left: -310px;*/
+    background: #39478b;
+    min-height: 100%;
+    width: 310px;
+    color: #fff;
+    transition: margin-left 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 10px 9px #2b3358;
+    margin-bottom: 12px;
+    z-index: 9;
+    top:60px;
+}
+.side-bar ul{padding-bottom: 60px;}
+.side-bar ul,
+.topHeader ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.side-bar ul li .dropdown-menu span {
+    margin-left: 10px;
+}
+
+/*.wrapper.active .side-bar ul .menu .dropdown-menu li span {
+    display: none;
+}
+
+.wrapper.active .side-bar ul .menu .dropdown-menu li i {
+    float: right;
+    width: 35px;
+    text-align: center;
+}*/
+
+.topHeader .toogleWrap {
+    width: 310px;
+    margin-bottom: 0px;
+}
+
+.side-bar ul li.menu-head {
+    padding: 20px;
+}
+
+.topHeader ul li.menu-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topHeader ul li.menu-head .txt {
+    display: inline-block;
+    vertical-align:sub;
+    /*vertical-align: -webkit-baseline-middle;*/
+}
+
+.push_menu:hover {
+    color: #fffefe !important;
+}
+
+.topHeader ul li.menu-head,
+a.push_menu {
+    font-size: 21px;
+    color: #fffefe;
+    font-family: "Roboto";
+    font-weight: 700;
+    padding-left: 12px;
+}
+
+.side-bar ul li.menu-head a {
+    color: #fff;
+    text-decoration: none;
+    height: 50px;
+}
+
+.side-bar ul .menu-head a {
+    color: #fff;
+    text-decoration: none;
+    height: 50px;
+}
+
+.side-bar ul .menu li a {
+    text-decoration: none;
+    display: inline-table;
+    width: 100%;
+    padding:22px 20px;
+    font-size: 16px;
+    color: #fffefe;
+    font-weight: 400;
+    border-bottom: 1px solid #24306a;
+    border-left: 6px solid transparent;
+}
+
+.side-bar ul .menu li:hover {
+    border-left: 3px solid #ECECEA;
+    padding-left: 17px;
+}
+
+/*.side-bar ul .menu li a.active,*/
+.side-bar ul .menu li.active,
+.side-bar ul .menu li:hover {
+    padding-left: 17px;
+    background: #1f2a5e;
+    border-left: 6px solid #ffc107;
+}
+
+.content {
+    width: calc(100% - 310px);
+    padding: 25px;
+    transform:translateX(310px);
+    -ms-transform:translateX(310px);
+    -webkit-transform:translateX(310px);
+}
+
+.active>.side-bar {
+    margin-left: -255px;
+    transition: margin-left 0.5s;
+}
+
+.active>.content {
+    transition: padding-left 0.5s;
+}
+
+
+/******************/
+
+.side-bar ul .menu li.dropdown {
+    position: unset;
+}
+
+.side-bar ul .menu li.dropdown .dropdown-menu {
+    width: 100%;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: unset;
+}
+
+.wrapper .side-bar ul .menu li .icon-size,
+.icon-size {
+    display: inline-block;
+    width: 35px;
+    margin-right: 10px;
+}
+.wrapper .side-bar ul .menu li .icon-size img {max-width: 30px;height: 25px;padding-right: 5px;}
+
+
+.wrapper.active .side-bar ul .menu li span {
+    float: right;
+    text-align: center;
+    margin-right: 0px;
+}
+
+.wrapper.active .side-bar ul .menu li a {
+    padding: 14px 5px;
+}
+
+.outerWrapper .heading {
+    font-size: 22px;
+    color: #fffefe;
+    font-weight: 400;
+}
+
+.outerWrapper h6 {
+    font-size: 18px;
+    color: #fffefe;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.outerWrapper .boxWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.outerWrapper .boxWrapper .box {
+    text-align: center;
+    margin: 0px 40px;
+    width: 364px;
+    height: 155px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fffefe;
+    cursor: pointer;
+}
+
+.box1 {
+    background: #bf392a !important;
+}
+
+.box2 {
+   background: #27ae60 !important;
+}
+
+.box3 {
+    background: #f39c12 !important;
+}
+
+.outerWrapper .boxWrapper .box .title {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.outerWrapper .boxWrapper .box .lbltxt {
+    font-size: 23px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.btn-due, .btn-status, .btn-notdue {
+    width: 80px;
+    height: 29px;
+    border-radius: 0px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+}
+
+.btnStatus {
+    width: 80px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    height: 29px;
+    border: none;
+    border-radius: 0px;
+ }
+
+.btn-due {
+    background-color: #bf392a;
+}
+
+.btn-notdue {
+    background-color: #c0c0c0;
+}
+
+.action-bar {
+    background-color: #39478b;
+    padding: 6px 10px 6px 10px;
+    margin-bottom: 12px;
+}
+
+.action-bar .input-group {
+    width: 220px;
+    margin-right: 10px;
+    margin-bottom: 0px
+}
+
+.action-bar .input-group input {
+    width: 294px;
+    height: 40px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: #ffffff;
+    font-size: 16px;
+    color: #818384;
+    font-weight: 400;
+    border: none;
+}
+
+.action-bar .input-group .input-group-btn button {
+    height: 40px;
+    color: #818384;
+    border-radius: 0px 5px 5px 0px;
+    font-size: 20px;
+    border: transparent;
+}
+.action-bar .zoom-img{max-width: 64px;}
+.sortWrap {
+    display: inline-flex;
+    align-items: center;
+}
+
+.sortWrap .sortTxt {
+    font-size: 18px;
+    color: #818ecd;
+    font-weight: 400;
+    margin-right: 12px;
+}
+
+.sortWrap .bootstrap-select{    width: auto !important;}
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    vertical-align: middle;
+}
+.innerTbl{display: none;}
+.table {
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #434446;
+    font-weight: 500;
+    border-bottom: 1px solid #ddd;
+    /*table-layout: fixed;*/
+}
+.table .check{width: 70px;text-align: center;}
+.veiw-link, .view-link {
+    color: #6e8eb6;
+    font-weight: 400;
+    text-decoration: underline;
+}
+.table thead {
+    background-color: #1f2a5e;
+    font-size: 15px;
+    color: #97a3d9;
+    font-weight: 400;
+}
+
+.split-btn {
+    width: 110px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.split-btn .btn-dropdown {
+    padding: 0 12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    float: left;
+    position: relative;
+    height: 36px;
+    border: 1px solid #e5e5e5;
+    color: #6e8eb6;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.split-btn .icon-part {
+    padding: 6px 3px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin: 0;
+    color: #002e6d;
+    border: 1px solid #e5e5e5;
+    background: #FFFFFF;
+    border-left: none;
+    width: 25px;
+    float: left;
+    position: relative;
+    height: 36px;
+}
+
+.sortWrap .dropdown button {
+    width: 184px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #434446;
+    font-weight: 400;
+}
+
+.sortWrap .dropdown button .arrow-icon {
+    font-size: 26px;
+    color: #b0b0b0;
+}
+
+.split-btn .dropdown-menu a,
+.sortWrap .dropdown-menu a,
+.topHeader .dropdown-menu>li>a {
+    color: #434446;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+}
+.topHeader .dropdown-menu>li>a {
+     padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.split-btn .dropdown-menu a:hover,
+.sortWrap .dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
+.btmIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px !important;
+    position: fixed;
+    bottom: 0;
+    width: 310px;
+    background: #39478b;
+}
+
+.wrapper.active .side-bar .btmIcon {
+    padding: 14px 0px !important;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.wrapper.active .side-bar .btmIcon li span {
+    margin-right: 4px;
+    margin-top: 15px;
+}
+
+
+/*******************************User.html*************************/
+
+.btnGroup .btn {
+    width: 95px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.btnGroup .btn-veiw {}
+
+.btnGroup .btn-edit {}
+
+.btnGroup .btn-delete {}
+
+.sliding {
+    transition: all 0.4s ease-in-out;
+}
+.left {
+    transform:translateX(0px);
+    -ms-transform:translateX(0px);
+    -webkit-transform:translateX(0px);
+}
+
+.side-bar.sliding.left{
+     transform:translateX(-310px);
+    -ms-transform:translateX(-310px);
+    -webkit-transform:translateX(-310px);
+}
+.content.sliding.left{
+    width: 100%;
+}
+
+/****************************New CSS By Arun *****************/
+div.due-status-overdue {
+    background-color: #c0392b;
+}
+div.not-due-status {
+    background-color: #27ae60;
+}
+div.coming-due-status {
+    background-color: #f39c12;
+}
+div.tolerance-status {
+    background-color: #d35400;
+}
+
+#aircraftDetailsPopup {
+    top: 178px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 650px;
+}
+
+.partDetailsPopup {
+    top: 42px;
+    position: absolute;
+    z-index: 9;
+    background:
+    rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 900px;
+}
+
+#airCompDetailsPopup {
+    top: 178px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 880px;
+}
+
+#myCarousel .carousel-control {
+    top: 15px !important;
+    bottom: auto !important;
+    width: 5% !important;
+    color: navy;
+}
+
+#myCarousel .carousel-control.right {
+    right: 0;
+    left: 25px;
+}
+
+.air-detail-title {
+    background-color:#2e3238; 
+    color:#e3e3e3; 
+    font-weight:bold; 
+    padding:8px 0 8px 10px;
+}
+
+.airDetailPopupHeader {
+    height: 40px;
+    text-align: left;
+    padding-top: 6px;
+    font-size: 16px;
+    padding-left: 60px;
+}
+
+.partDetailHeader {
+    height: 40px;
+    text-align: left;
+    font-size: 25px;
+    padding-left: 80px;
+}
+
+.partDetailPopupHeader {
+    height: 45px;
+    text-align: left;
+    padding-top: 2px;
+    font-size: 18px;
+    padding-left: 65px;
+}
+
+.partDetailPopupHeader button {
+    float: right;
+}
+
+.airDetailPopupHeader button {
+    float: right;
+}
+
+#myCarousel table td{
+    font-size: 12px !important;
+}
+
+#aircraftTabs ul.nav-tabs li a {
+    color: #555;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#aircraftTabs ul li {
+    padding: 5px 5px 0 5px;
+}
+
+#aircraftTabs ul {
+    background-color: #e5e5e5;
+}
+
+#aircraftTabs #itemInfo {
+    padding-top: 10px;
+}
+
+#aircraftTabs #subItems {
+    padding-top: 10px;
+}
+
+.parent-child-circle {
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    display: inline-block;
+    text-align: center;
+    line-height: 13px;
+    font-size: 10px;
+    padding: 0px 3px 0px;
+    text-transform: uppercase;
+    margin-left: 2px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+#customReport .lblColor {
+    color:#c0c0c0;
+}
+
+#customReportPopup .lblColor {
+    color:#c0c0c0;
+}
+
+.required {
+    color:red;
+}
+
+.itemInfoCls {
+    display: flex;
+    padding: 0 4px;
+}
+
+.itemInfoCls .itemCls {
+    width: calc(100% / 5);
+    margin: 0 3px;
+}
+
+.partInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.partInfoCls .itemCls {
+    width: calc(100% / 7);
+    margin: 5px 10px 5px 10px;
+}
+
+.addPartInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.addPartInfoCls .itemCls {
+    width: calc(100% / 9);
+    margin: 5px 10px 5px 10px;
+    text-align: left;
+}
+
+.editPartInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.editPartInfoCls .itemCls {
+    width: calc(100% / 8);
+    margin: 5px 10px 5px 10px;
+    text-align: left;
+}
+
+.corrPageHeading {
+    display: flex;
+    padding: 8px 2px;
+    text-align: left;
+}
+
+.corrPageHeading .corrPH {
+    width: calc(100% / 5);
+    background: #99a1a6; 
+    font-weight: bold; 
+    padding: 2px 2px 2px 10px; 
+    height: 24px;
+}
+
+.multi-step .btn {
+    margin:0;
+}
+
+.multi-step .toggleTextCls {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 5px;
+}
+
+.multi-step .toggleTextCls span {
+    color:#3b8c29;
+    padding-left: 10px;
+}
+
+.multi-step .modal-body {
+    max-height: 500px; 
+    overflow-y: auto;
+}
+
+.multi-step .toggleAdjTextCls {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 5px;
+}
+
+.multi-step .toggleAdjTextCls span {
+    color:#3b8c29;
+    padding-left: 10px;
+}
+
+/**** Progress Bar *****/
+.multi-step .m-progress-bar {
+    min-height: 1em;
+    background: #3b8c29;
+    width: 5%;
+}
+
+.multi-step ul {
+    padding-left: 0;
+    white-space:nowrap;
+}
+.multi-step ul li{
+    display: inline;
+    color: #092E6E;
+}
+
+.multi-step .multi-step-title {
+    padding-top: 15px;
+}
+
+.multi-step .x_panel {
+    padding: 10px 0 10px 0;
+}
+
+.multi-step .x_content {
+    padding: 0;
+}
+
+.multi-step .step12 {
+    padding-left: 25px;
+}
+
+.multi-step .step13 {
+    padding-left: 25px;
+}
+
+#compReportTimeModel .x_panel {
+    padding: 10px 0 10px 0;
+}
+
+#compReportTimeModel .x_content {
+    padding: 0;
+}
+
+/*** Edit page group section clsaa ***/
+.partsGpCls {
+    padding: 0 0 8px 0;
+}
+
+.partsGpCls div {
+    padding: 0;
+    font-size: 15px;
+}
+
+.addPageHeading {
+    background: #99a1a6; 
+    font-weight: bold; 
+    padding: 2px; 
+    margin: 5px; 
+    height: 24px;
+}
+
+#frmAirCompPart label {
+    text-align: left;
+    font-weight: normal;
+}
+
+.addPartBorder {
+    border: 1px solid #c0c0c0;
+}
+
+.formBGCls {
+    background: #fff;
+}
+
+.pastDue {
+    color: red;
+}
+.btnWrapper{
+   border-bottom: 1px solid #97a3d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+.btnWrapper .btn{margin: 0px;    height: 36px;}
+
+.tableBg{
+    background: #fff;
+    padding: 10px 0px;
+}
+.tableScroll{
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #fff;
+    min-height: 450px;
+}
+.tableScroll table{
+    width: 100% !important;
+    margin-top: 0px !important;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+        height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #818384;
+    font-weight: 400;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    padding: 10px 12px 6px;
+    font-size: 18px;
+    color: #434446;
+    font-weight: 400;
+}
+.dataTables_info , .dataTables_paginate{display: inline-block;padding: 12px;font-size: 14px;}
+.dataTables_paginate{float: right;}
+
+/**********maintenance page******************/
+.btnWrapper .btnWrap .btn + .btn{
+    margin-left: 10px;
+}
+.ml-10{margin-left: 10px !important;}
+.actionbar-lft {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.actionbar-lft .lftWrap {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.actionbar-lft .lftWrap  .inputWrap{margin-right: 15px;}
+.actionbar-lft .lftWrap  .inputWrap button{height: 40px;}
+.actionbar-lft .split-btn , .btnWrapper .split-btn{width: auto;}
+table.dataTable{margin-top: 0px !important;}
+/*.table>thead>tr>th{min-width: 120px;}*/
+@media screen and (max-width: 1200px){
+    .tableScroll table{
+        width: 1200px !important
+    }    
+}
+.reportTimeCls {
+    color: #434446;
+}
+
+.mvleft {
+    float: left;
+}
+
+.mvright {
+    float: right;
+    margin-left: 26px;
+}
+
+.partInfoHeading {
+    margin-top: 2px;
+    padding-left: 70px;
+}
+
+/*********** Pilots Status ************/
+
+#pilotStatusCls .table-borderless td,
+#pilotStatusCls .table-borderless th {
+    border: 0;
+}
+
+#pilotStatusCls .table-borderless td {
+    font-weight: normal;
+}
+
+#pilotStatusCls .input-group {
+    margin-bottom: 0px;
+}
+
+#pilotStatusCls a.nextDTTip, #pilotStatusCls a.nextDTTip:hover, #pilotStatusCls a.nextDTTip:visited {
+    color: black;
+}
+
+#pilotStatusCls .ndyellow {
+    color:#f8ac59;
+}
+
+#pilotStatusCls .ndred {
+    color:red;
+}
+
+#pilotStatusCls .ndblue {
+    color:blue;
+}
+
+#pilotStatusCls .ndgreen {
+    color:green;
+}
+
+#pilotStatusCls .selectpicker {
+    text-transform: capitalize;
+}
+
+table#customReport td.sorting_1{ background-color: white; border:1px lightgrey; }
+table#customReport td{ background-color: white;  border:1px lightgrey;}
+table#customReport tr.odd td{ background-color: white; border:1px lightgrey;}
+table#customReport tr.even td{ background-color: #ced4f2; border:1px lightgrey; }
+
+/************************ calender Page************************/
+.calendarCls .verticle-char {
+    writing-mode: tb-rl;
+}
+
+.calendarCls th {
+    text-align:center;
+    height:30px;
+}
+
+.calendarTime a{
+    color: #337ab7;
+    text-decoration: none;
+}
+.daysTxt{
+    text-align: center;
+    background-color: #DDDDDD;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+.rgt-Wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+.dataTxt span:first-child{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+.blackFill{
+    /*background-color: #000;*/
+    background-color: #008000;
+}
+.blueFill{
+    background-color: #0C82C0;
+}
+.yellowFill{
+    background-color: #F2F248;
+}
+.greyFill{
+    background-color: #A09F9F;
+}
+.redFill{
+    background-color: #DC8273;
+}
+
+.lineFill {
+    height: 25px;
+    z-index: 100;
+}
+.redLine , .blueline{
+    height: 25px;
+    z-index: 101;
+}
+.yellowLine{
+    height: 25px;
+    z-index: 101;
+}
+.blackLine {
+    height: 25px;
+    z-index: 100;
+}
+.calenderWrap {
+    padding: 15px;
+    background: #fff;
+}
+.calenderWrap table{
+    font: 8pt verdana;
+    width: 99%;
+    margin: 0 auto;
+}
+.headingTxt{
+    background-color: #EEEEEE;
+    font-weight: bold;
+    font-size: 8pt;
+    font-family: verdana, arial;
+}
+.calenderWrap table td{
+    text-align: center;
+    /*padding: 4px 0px !important;*/
+    border:1px solid #000;
+    height: 30px;
+    min-width: 26px;
+}
+.calenderWrap table td.day{
+    text-align: unset;
+}
+.calenderWrap table td a{
+    text-decoration: underline;
+    color: #337ab7;
+}
+.b-TL-none{
+    border-top: none !important;
+    border-left: none;
+}
+.border-btm {
+    border-bottom: 2px solid #000;
+}
+.b-none{
+    border-top: none !important;
+    border: none;
+}
+.bt{
+    border-top: 2px solid #000000
+}
+
+.b-trl {
+    border-top: 2px solid #000 !important;
+    border-right: 2px solid #000 !important;
+    border-left: 2px solid #000 !important;
+}
+.b-lft{
+    border-left: 2px solid #000;
+}
+.b-rgt{
+    border-right: 2px solid #000;
+}
+.b-top{
+    border-top: 2px solid #000 !important;
+    width: 48px;
+}
+.selectWrap{
+    margin-bottom: 10px;
+    display: flex;
+    color: #676a6c;
+    font-size: 13px;
+    margin: 0px 6px 10px;
+}
+.dataTxt {
+    display: flex;
+    align-items: center;
+}
+.dataTxt:not(:last-child){
+    margin-right: 15px;
+}
+.lft-Wrapper .form-control{
+    border-radius: 0px;
+}
+.lft-Wrapper {
+    display: flex;
+}
+
+.selPilotCls{
+    max-width: 200px;
+    margin: 0 107px 0 0;
+}
+.selMonthCls{
+    max-width: 125px;
+    margin: 0 60px;
+}
+.selYearCls{
+    max-width: 85px;
+}
+.border-none{
+    border: none !important;
+}
+@media screen and (max-width: 991px){
+    .selectWrap{
+        flex-wrap: wrap;
+        margin: 0 0px 15px;
+        justify-content: center;
+    }
+    .lft-Wrapper {
+        display: flex;
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+    .rgt-Wrapper{
+        margin-left: 0px;
+    }
+}
+@media screen and (max-width: 480px){
+    .rgt-Wrapper{
+        flex-wrap: wrap;
+    }
+    .dataTxt {
+        display: flex;
+        align-items: center;
+        max-width: 150px;
+        flex: 0 0 115px;
+        flex-wrap: wrap;
+        margin-right: 0px !important;
+    }
+}
+
+.timesResCls {
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+}
+
+.timesResCls thead {
+    background-color: #ffffff;
+    color:#727373; 
+    font-size: 12px;
+}
+
+.dtUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.doUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.flUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dtDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.doDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.flDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+/*****************************/
+
+#totalTimeCls td{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+#detailedTimeCls td{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.docborder {
+    border-top: 2px solid #DCDCDC;
+}
+
+.docborder h5 {
+    width: 82%;
+    float:left;
+}
+
+.docbadge {
+    margin-top: 10px;
+    width:18%;
+    background: #c0c0c0;
+    color: #000;
+    float: right;
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.displayDoc {
+    padding: 5px 0px 35px 0px; 
+}
+
+.displayDoc h5 {
+    width: 82%;
+    float:left;
+}
+
+.docAction {
+    margin-top: 10px;
+    width:18%;
+    float: right;
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.documentsCls {
+    padding: 5px;
+}
+
+.drugCls {
+    padding: 5px;
+}
+
+.trainingCls {
+    padding: 5px;
+}
+
+.priaCls {
+    padding: 5px;
+}
+
+.checkingCls {
+    padding: 5px;
+}
+
+.actionCls {
+    font-size:16px;
+    cursor: pointer;
+}
+
+.displayDoc .dateStyl {
+    font-size:10px;
+    padding-left:20px;
+    font-weight:normal;
+}
+
+/** Multiselect Dropdown **/
+.airSelCls button.multiselect {
+    padding: 3px;
+    margin: 0 !important;
+    min-width: 125px;
+}
+
+.airSelCls .checkbox input[type="checkbox"] {
+    margin-left: -24px;
+}
+
+.childRInp label {
+    font-size: 10px;
+}
+
+#logbookAddItem label {
+    text-align: left;
+    font-weight: normal;
+}
+
+.menu li.active > a {
+    background-color: #24306a;
+}
+
+.content {
+    padding-top: 70px;
+}
+
+/*#customReport thead {
+    position: fixed;
+}*/
+
+.dataTables_scrollHeadInner {
+    width: 100% !important;
+}
+
+.dataTable {
+    width: 100% !important;
+}
+
+#activeHistId {
+    margin: 0 0 6px 0;
+    padding: 0;
+}
+
+#activeHistId .dropdown-menu {
+    top:35px;
+}
+
+
+/******* Flight Log CSS ******************/
+
+.flHeading {
+    display: flex;
+    padding: 8px 2px;
+    text-align: left;
+}
+
+.flHeading .flHElmCls {
+    width: calc(100% / 3);
+    font-weight: bold; 
+    padding: 2px 2px 2px 10px; 
+    height: 24px;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.flItemCls {
+    display: flex;
+    padding: 0 4px;
+}
+
+.flItemCls .flElmCls {
+    width: calc(100% / 3);
+    margin: 0 3px;
+}
+
+.floghtInfoCls label {
+    padding-top: 15px;
+}
+
+#frmFlightLogs h4 {
+    color:#5b6069;
+}
+
+#flightLogModel label {
+    padding-top: 15px;
+}
+
+#flightLogUpdateModel label {
+    padding-top: 15px;
+}
+
+#frmFlightLogs span.chgValCls {
+    padding-top: 15px;
+    float: right;
+    color: green;
+    font-weight: bold;
+}
+
+#frmFlightLogs span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+#flightLogModel span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+#flightLegFrm select.selectpicker {
+    display: block !important;
+}
+
+#crewMemberList tr td{
+    padding-top: 7px;
+}
+
+#flightLogReportList .flRow {
+    line-height: 2.5;
+}

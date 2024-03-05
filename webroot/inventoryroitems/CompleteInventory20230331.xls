@@ -1,0 +1,144 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Part Number</th>
+                                        <th>Serial / Lot</th>
+                                        <th>Display Name</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Qty.</th>
+                                        <th>UOM</th>
+                                        <th>Expiration</th>
+                                        <th>Unit Cost</th>
+                                        <th>Total Cost</th>
+                                        <th>Exchange Cost</th>
+                                        <th>Currency Code</th>
+                                        <th>ATA Chapter</th>
+                                        <th>Vendor</th>
+                                        <th>Manufacturer</th>
+                                        <th>Notes</th>
+                                        <th>Warranty Expiration</th>
+                                        <th>Condition</th>
+                                        <th>Item Type</th>
+                                        <th>Capital Equipment</th>
+                                        <th>PhysicalInventoryId</th>
+                                        <th>InventoryItemId</th>
+                                        <th>Inventory Tags</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>test new part1</td>
+                                <td>34567123-5478</td>
+                                <td>0000025</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test location1</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td></td>
+                                <td>20</td>
+                                <td>20</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>0</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>test items 24</td>
+                                <td>24032023</td>
+                                <td>1234524032023</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test location</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td>03/31/2023</td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Consumable</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>test name</td>
+                                <td>12345</td>
+                                <td>235457-6465</td>
+                                <td>test disp</td>
+                                <td></td>
+                                <td></td>
+                                <td>test location</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td>03/06/2023</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td></td>
+                                <td></td>
+                                <td>test manufacturer</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Expandable</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>test name</td>
+                                <td>12345</td>
+                                <td>535765878</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test location1</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td>03/13/2023</td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td></td>
+                                <td>USD</td>
+                                <td></td>
+                                <td></td>
+                                <td>test manufacturer</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Expandable</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td></td>
+                            </tr>  </tbody></table>

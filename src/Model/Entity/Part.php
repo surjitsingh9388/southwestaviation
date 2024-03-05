@@ -50,7 +50,7 @@ class Part extends Entity
         'warranty_expires' => true,
         'invoice' => true,
         'purchase_order' => true,
-        'lot' => true,
+        'sku' => true,
         'shelf_life' => true,
         'approved_by' => true,
         'created' => true,

@@ -1,0 +1,17 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Reference</th>
+                                        <th>Vendor</th>
+                                        <th>Requestor</th>
+                                        <th>Status</th>
+                                        <th>Account Code</th>
+                                        <th>Cost</th>
+                                        <th>Currency Code</th>
+                                        <th>Submitted</th>
+                                    </tr>
+                                </thead>
+                                <tbody>  </tbody></table>

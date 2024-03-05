@@ -1,0 +1,31 @@
+.time_clock_adjustment_fieldset{
+    height: 250px;
+    overflow-y: scroll;
+}
+
+.time_clock_adjustment_legend{
+    font-size: inherit;
+}
+
+.pd0{
+    padding: 0px;
+}
+
+.label-heading-left{
+    width:40% !important; 
+    text-align:left !important;
+}
+
+.label-heading-right{
+    float: right !important;
+    padding-top: 8px !important;
+}
+
+.time_clock_adjustment_tr{
+    cursor: pointer;
+}
+
+.time_clock_adjustment_tr_active {
+    background-color: blue;
+    color: white;
+}

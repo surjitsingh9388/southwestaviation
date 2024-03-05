@@ -1,0 +1,85 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Part Number</th>
+                                        <th>Line Item Description</th>
+                                        <th>Quantity</th>
+                                        <th>Unit of Measure</th>
+                                        <th>Location Needed</th>
+                                        <th>Line Item Created Date</th>
+                                        <th>Line Item Created By</th>
+                                        <th>Line Item Last Updated Date</th>
+                                        <th>Line Item Last Updated By</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Date Requested</th>
+                                        <th>Requested By</th>
+                                        <th>Date Required</th>
+                                        <th>Urgency</th>
+                                        <th>Is Urgent?</th>
+                                        <th>Status</th>
+                                        <th>Approver Comments</th>
+                                        <th>Created By</th>
+                                        <th>Last Updated Date</th>
+                                        <th>Last Updated By</th>
+                                        <th>Is Active</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>000001</td>
+                                <td>test request</td>
+                                <td>test</td>
+                                <td>43654365-3452</td>
+                                <td>test item name 5689</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td>Delhi</td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td>Admin</td>
+                                <td>03/21/2023</td>
+                                <td>AOG</td>
+                                <td>1</td>
+                                <td>PO Created</td>
+                                <td>test</td>
+                                <td>admin@aircraft.com</td>
+                                <td>03/07/2023</td>
+                                <td>admin@aircraft.com</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>000001</td>
+                                <td>test request</td>
+                                <td>test</td>
+                                <td></td>
+                                <td>test non inventory</td>
+                                <td>1</td>
+                                <td>EA</td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td>Admin</td>
+                                <td>03/21/2023</td>
+                                <td>AOG</td>
+                                <td>1</td>
+                                <td>PO Created</td>
+                                <td>test</td>
+                                <td>admin@aircraft.com</td>
+                                <td>03/07/2023</td>
+                                <td>admin@aircraft.com</td>
+                                <td>1</td>
+                            </tr>  </tbody></table>

@@ -8,7 +8,11 @@ html, body {
     height: 100%;
     margin: 0;
 }
-
+@media screen and (max-width: 1024px){
+	#listOfOpenWorkOrdersModal .modal-dialog, #aircarftCreateWOModel .modal-dialog {
+		width: 95% !important;
+	}
+}
 * {
     padding: 0px;
     margin: 0px;
@@ -67,7 +71,7 @@ img {
     color: #fffefe;
     font-weight: 400;
     text-decoration: none;
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     margin: 0px;
 }
@@ -119,8 +123,12 @@ img {
 }*/
 
 .topHeader .toogleWrap {
-    width: 310px;
+    width: 20%;
     margin-bottom: 0px;
+}
+
+.topHeader {
+    width: 100%;
 }
 
 .side-bar ul li.menu-head {
@@ -392,10 +400,10 @@ a.push_menu {
     font-weight: 400;
     text-decoration: underline;
 }
-.table thead {
+.table > thead > tr > th {
     background-color: #1f2a5e;
     font-size: 15px;
-    color: #97a3d9;
+    color: #ecf0f1;
     font-weight: 400;
 }
 
@@ -891,6 +899,7 @@ div.tolerance-status {
     margin-left: 10px;
 }
 .ml-10{margin-left: 10px !important;}
+.ml-5{margin-left: 5px !important;}
 .actionbar-lft {
     display: flex;
     justify-content: space-between;
@@ -1566,4 +1575,667 @@ table.borderless td, table.borderless tbody {
 #flightClosed_paginate {
     float: left;
     padding-left: 0;
+}
+
+
+/*********************************************************
+	Style-19/12/2022
+***************************************/
+.page-content .action-bar.dflex {
+	justify-content: space-between;
+}
+
+.page-content .formBGCls .top-form-section,
+.page-content .formBGCls .bottom-form-section {
+	padding: 10px 20px;
+}
+.page-content .formBGCls .form-input-frame textarea {
+	height: 106px;
+}
+.page-content .formBGCls .btn-frame {
+	padding: 30px 10px 10px;
+	text-align: right;
+}
+
+
+/****************************************
+inventory section style
+****************************************/
+
+.invbox1 {
+    background: #c0392b !important;
+}
+
+.invbox2 {
+   background: #f1c40f !important;
+}
+
+.invbox3 {
+    background: #f39c12 !important;
+}
+
+.invbox4 {
+    background: #8e44ad !important;
+}
+
+.invbox5 {
+    background: #3498db !important;
+}
+
+.outerWrapper .boxWrapper .box .invlbltxt {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.outerWrapper .boxWrapper .invbox {
+    text-align: center;
+    margin: 5px 5px;
+    width: 19%;
+    height: 155px;
+    /* border-radius: 15px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fffefe;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.invtilebody{
+    font-size: 40px;
+}
+
+.document-management-icon {
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.upload-area{
+    width: 100%;
+    min-height: .01%;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    overflow: auto;
+}
+
+#filetbody a{
+    color:blue !important;
+}
+
+.document-name {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.deleteattachment{
+    cursor: pointer;
+}
+
+.icon-generic {
+    background: url('../../images/icons/doc_man_generic.svg');
+}
+
+.icon-doc {
+    background: url('../../images/icons/doc_man_word.svg');
+}
+
+.icon-excel {
+    background: url('../../images/icons/doc_man_excel.svg');
+}
+
+.icon-pdf {
+    background: url('../../images/icons/doc_man_pdf.svg');
+}
+
+.icon-text {
+    background: url('../../images/icons/doc_man_text.svg');
+}
+
+.inventory_request_status {
+    display: inline-block;
+    padding: 0.4em 0.6em 0.4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    width: 100px;
+    background-color: #777777;
+}
+
+.inventory-requests-created {
+    background-color: #3498DB !important;
+}
+
+.inventory-requests-pending {
+    background-color: #F39C12 !important;
+}
+
+.inventory-requests-denied {
+    background-color: #E74C3C !important;
+}
+
+.inventory-requests-closed {
+    background-color: #2C3E50 !important;
+}
+.inventory-requests-approved {
+    background-color: #2ECC71;
+}
+
+.inventory-requests-canceled {
+    background-color: #E74C3C;
+}
+
+.inventory-requests-sent {
+    background-color: #16A085;
+}
+
+#datatableListingPage_paginate a {
+    color: #333 !important;
+}
+
+.link-order-text {
+    background: #dfeaf6;
+    padding: 15px;
+    color: #2977af;
+    font-size: 16px;
+}
+
+.linkordercountblock {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+.so-partial{
+    background-color: #9B59B6;
+}
+
+.so-pending{
+    background-color: #6B00CC;
+}
+
+.so-shipped{
+    background-color: #3498DB;
+}
+
+.so-received{
+    background-color: #2ECC71;
+}
+
+.so-cancelled{
+    background-color: #E74C3C;
+}
+
+.top-holding-box {
+    background: #5D8518;
+    color: #fff;
+    margin: 0;
+    padding: 5px 15px;
+    border-radius: 2px;
+    margin-top: 6px;
+}
+
+.holding-box {
+    border: dashed 1px transparent;
+    border-radius: 10px;
+    text-align: center;
+    /* min-width: 80px; */
+    /*padding: 5px;
+    margin: 5px 15px 5px 5px;*/
+    -webkit-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    -moz-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    -o-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+}
+
+.top-header-brand {
+    background-color: #222A35;
+    color: #fff;
+    padding-left: 11px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 80%);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: 0 0 8px rgb(0 0 0 / 80%);
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+}
+
+.top-holding-box .badge {
+    background-color: #456311;
+    margin-left: 5px;
+}
+
+.holding-box span:hover {
+    color: white;
+}
+
+#holdingBoxDropZone a:hover {
+    color: white;
+}
+
+.inventorystatus.pi-status-active {
+    background-color: #0096D9;
+}
+
+.inventorystatus.pi-status-outforrepair {
+    background-color: #00D3B4;
+}
+
+.inventorystatus.pi-status-installed {
+    background-color: #27AE60;
+}
+
+.inventorystatus.pi-status-quarantined {
+    background-color: #F46323;
+}
+
+.inventorystatus.pi-status-allocated {
+    background-color: #FF0000;
+}
+
+.inventorystatus.pi-status-onorder {
+    background-color: #9B4EB5;
+}
+
+.inventorystatus.pi-status-shipped {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-damaged {
+    background-color: #E74C3C;
+}
+
+.inventorystatus.pi-status-discarded {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-unavailable {
+    background-color: #3498DB;
+}
+
+.inventorystatus.pi-status-needs-repair {
+    background-color: #E74C3C;
+}
+
+.inventorystatus.pi-status-consumed {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-unrepairable {
+    background-color: #E74C3C;
+}
+
+.inventorystatus{
+    display: inline-block;
+    padding: 0.4em 0.6em 0.4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    width: 120px;
+    background-color: #777777;
+}
+
+.po-inactive {
+    background-color: #CE0000;
+}
+
+.text-right{
+    text-align: right !important;
+}
+
+.exchange-status-indicator .exchange-status-badge .fa-exchange {
+    font-size: 12px;
+    float: left;
+}
+
+.exchange-status-indicator .exchange-status-open {
+    background-color: #FABE58 !important;
+    border-color: #b78b40 !important;
+}
+
+.exchange-status-indicator .exchange-status-returned {
+    background-color: #87D37C !important;
+    border-color: #5f9657 !important;
+}
+
+.exchange-status-indicator .badge {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+.exchange-status-indicator .exchange-status-badge {
+    border-radius: 1px;
+    min-width: 100px;
+    font-weight: 400;
+    border: 1px solid #AAA;
+    background-color: #FFF;
+    color: #343a40;
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+
+.form-control-static {
+    padding-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.form-control-static {
+    border-bottom: 1px solid #dfdfdf;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.form-control-static a {
+    color: #23527c;
+    cursor: pointer;
+}
+
+.invaddPageHeading {
+    font-size: 11pt;
+    background-color: #1f2a5e;
+    color: #ecf0f1;
+    padding: 10px 15px;
+    margin-top: 0;
+    margin-left: 0px;
+    height: 40px;
+}
+
+.mt10{
+    margin-top:10px !important;
+}
+
+.mt5{
+    margin-top:5px !important;
+}
+
+.tab-pad{
+    padding: 15px 0 15px 0;
+}
+
+.hide-block{
+    display:none;
+}
+
+.show-block{
+    display: block;
+}
+
+.holding-box-icon{
+    width:20px; 
+    height:20px;
+}
+
+.text-left{
+    text-align:left;
+}
+
+.pt5{
+    padding-top: 5px !important;
+}
+
+.pt10{
+    padding-top: 10px !important;
+}
+
+.pl10{
+    padding-left: 10px !important;
+}
+
+.plus-new-btn{
+    margin-top: -28px;
+    padding-left: 16px;
+    float:right;
+}
+
+.plusbtn{
+    margin-top: 0px;
+    padding-left: 0px;
+}
+
+.attachemtment-search-block{
+    width: 220px; 
+    margin-right:10px;
+    display: inline-block;
+    position: relative;
+}
+
+.attachemnt-search-icon{
+    display: inline; 
+    position:absolute; 
+    right: 10px; 
+    top: 6px; 
+    color: darkgray
+}
+
+.plus-btn-h{
+    height:34px;
+}
+
+.label-width-auto{
+    width:auto !important;
+}
+
+#is-this-item-serialized-0, #accept-install-0{
+    margin-left:5px;
+}
+
+.valign-t{
+    vertical-align: top;
+}
+
+.brd-5{
+    border-radius: 5px;
+}
+
+.table-width{
+    width:100% !important;
+}
+
+.mb-10{
+    margin-bottom: 10px !important;
+}
+
+#inventoryattachment{
+    display: none !important;
+}
+
+.heading a{
+    color:white;
+}
+
+.inventory_request_status{
+    padding: 5px !important;
+    margin-left: 10px !important;
+}
+
+.addnewinvaddresspopup, .vendorModelbtn{
+    height:34px;
+}
+
+.special-instruction-label{
+    width:125px !important
+}
+
+.pr-0{
+    padding-right: 0px !important;
+}
+
+.prorder-total{
+    margin-right: 42px;
+}
+
+.prorder-subtotal{
+    min-width:200px;
+}
+
+.po-order-sortby{
+    color: white; 
+    font-size: 20px; 
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.reference-white-space{
+    white-space: pre-wrap;
+}
+
+.float-right{
+    float: right;
+}
+
+.float-left{
+    float: left;
+}
+
+.po-shipping-input{
+    width: 83%;
+    display: inline-block;
+}
+
+.inventory-select-item{
+    color:blue !important;
+}
+
+.tblinvpo th{
+    background-color:#2c3e50;
+    color:white;
+}
+
+.toggleplusminus, .toggleplusminus_aircraft{
+    color:blue !important;
+    cursor: pointer;
+}
+
+.header-time-clock-link{
+    width: 42px;
+    height: 40px; 
+    float: left;
+}
+
+.otcinvoice_ship_to_address{
+    float:right;
+    color: blue;
+    cursor:pointer;
+}
+
+.wo-option-message-active {
+    background-color: blue;
+    color: white;
+}
+
+.wo-option-message-tr{
+    cursor: pointer;
+}
+
+.mh .dropdown-menu {
+    height: 270px;
+    overflow: auto;
+}
+
+.message-counter {   
+    position: absolute;
+    top: -5px;
+    left: 12px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font: 10px Verdana;
+    font-weight: bold;
+}
+
+.wo_new_message{
+    background-color:red !important;
+    color: white;
+    cursor: pointer;
+}
+
+.dashboard_heading_bar{
+    background-color: #39478b;
+    margin-bottom: 12px;
+    padding: 5px;
+}
+
+.dashboard_heading{
+    font-size: 18px;
+    color: #fffefe;
+    font-weight: 400;
+}
+
+.clock_log_table_scroll{
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#dropdownMenuButton ~ .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.header-icon-container {
+    display: flex;
+    align-items: center;
+}
+.topheader_right_block{
+    display: flex;
+    justify-content: space-between;
+}
+.header-icon-container > div {
+    margin-right: 10px;
+}
+.header-icon-container > div img {
+    width: 30px;
+    height: auto;
+}
+.header-icon-container > div img.header-time-clock-link {
+    width: 30px !important;
+    height: auto;
+}
+
+#component_part_file_list a{
+    color: blue;
+}
+
+.delete_comp_part_attachment{
+    cursor: pointer;
 }

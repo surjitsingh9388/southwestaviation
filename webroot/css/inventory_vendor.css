@@ -1,0 +1,28 @@
+.dataTables_filter {
+    display: none;
+}
+
+.btnspace{
+    margin-right: 5px !important;
+}
+
+.mt5{
+    margin-top:10px;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.btnWrapper .btn {
+    margin: 5px;
+    height: 36px;
+}
+
+td.check{
+    display:none !important;
+}
+
+.dt-buttons{
+    display:none;
+}

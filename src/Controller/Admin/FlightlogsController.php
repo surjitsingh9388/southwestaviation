@@ -2150,6 +2150,7 @@ class FlightlogsController extends AppController
         }
     }
 
+    
     //Itinerary passenger email form
     public function itineraryPassenger($tripId=null)
     {

@@ -1,0 +1,62 @@
+<?php
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
+class CustomerAircraftWOItemPart extends entity{
+    protected $_accessible = [
+        'wo_item_id'=>true,
+        'part_number'=>true,
+        'superseding_part_number'=>true,
+        'part_description'=>true,
+        'qty_needed'=>true,
+        'qty_stock'=>true,
+        'qty_cust_owned'=>true,
+        'give_discount'=>true,
+        'price_each'=>true,
+        'give_discount_percentage'=>true,
+        'part_total_prices'=>true,
+        'part_conditions'=>true,
+        'old_serial_number'=>true,
+        'serial_number'=>true,
+        'date_needed'=>true,
+        'part_ship_in'=>true,
+        'drop_ship_charges'=>true,
+        'part_ship_out'=>true,
+        'misc_charges'=>true,
+        'hazardous_fee'=>true,
+        'part_taxable'=>true,
+        'not_deduct_from_stock'=>true,
+        'is_loaner'=>true,
+        'general_location'=>true,
+        'cost_in_mparts'=>true,
+        'retail_price_in_mparts'=>true,
+        'dealer_price'=>true,
+        'qty_on_other_otc_quotes'=>true,
+        'supplier'=>true,
+        'discount_code'=>true,
+        'core_charges'=>true,
+        'hazardous_notes'=>true,
+        'notes'=>true,
+        'unit_measure'=>true,
+        'part_weight'=>true,
+        'part_notes'=>true,
+        'date_received'=>true,
+        'warranty_expires'=>true,
+        'invoice'=>true,
+        'purchase_order'=>true,
+        'lot'=>true,
+        'shelf_life'=>true,
+        'approved'=>true,
+        'initials'=>true,
+        'general_retail'=>true,
+        'superseding_no'=>true,
+        'part_status'=>true,
+        'added_by'=>true,
+        'updated_by'=>true,
+        'created_at'=>true,
+        'updated_at'=>true,
+    ];
+}
+
+?>

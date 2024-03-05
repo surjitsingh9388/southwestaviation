@@ -99,6 +99,8 @@ class PartsTable extends Table
             $entity->warranty_expires = $this->Planes->dateFormatBeforeSave($entity->warranty_expires);
         }
 
+        $entity->part_classification = (int)$entity->part_classification;
+
         return true;
     }
 }

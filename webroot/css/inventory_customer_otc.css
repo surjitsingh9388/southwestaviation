@@ -1,0 +1,604 @@
+.btnspace{
+    margin-right: 5px !important;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+.dt-buttons{
+    display:none;
+}
+
+.mt5{
+    margin-top:10px;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.btnWrapper .btn {
+    margin: 5px;
+    height: 36px;
+}
+
+/*td.check{
+    display:none !important;
+}*/
+
+.modal-body {
+    max-height: calc(100vh - 143px);
+    overflow-y: auto; 
+}
+
+.mt10{
+    margin-top:10px;
+}
+
+.ml0{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 0.4em 0.4em 0.4em !important;
+    margin: 0 0 0.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+.headings {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.title {
+    margin: 0;
+}
+
+.hr {
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: #D4D4D4;
+}
+.woheadingblue{
+    color:blue !important;
+}
+
+.customerinfoTab{
+    padding: 15px 0 15px 0;
+}
+
+.label-heading-left{
+    width:40% !important; 
+    text-align:left !important;
+}
+
+.label-chkbox-right{
+    float: right !important;
+    padding-top: 8px !important;
+}
+
+.customeraddtitle{
+    width: 60%;float: left;
+}
+
+.text-right{
+    float:right;
+}
+
+.padding0{
+    padding: 0px;
+}
+
+.txtblue{
+    color:blue;
+}
+
+.aircraft-inspection-fieldset{
+    height:170px; overflow:scroll;
+}
+
+.aircraft-notes{
+    width: 438px; height: 214px;
+}
+
+.quote-table-height{
+    height:10%;
+}
+
+.quote-table-height tbody tr{
+    cursor: pointer;
+}
+
+.listitems{
+    height:290px;
+    overflow:hidden;
+    word-wrap:break-word; 
+    border:1px solid black;
+}
+
+.maintenance-notes{
+    width:100%; 
+    text-align:left;
+}
+
+.aircraft-ad-notes{
+    width: 414px; 
+    height: 102px;
+}
+
+.ads-table-scroll{
+    height:150px; 
+    overflow:scroll;
+}
+
+.hide-block{
+    display: none;
+}
+
+.sign-off-fldset{
+    height:215px;
+}
+
+.sign-off-tbl-scroll{
+    height:125px; 
+    overflow:scroll;
+}
+
+.appliance-tbl-scroll{
+    height:150px; 
+    overflow:scroll;
+}
+
+.appliance-notes{
+    width: 423px; 
+    height: 186px;
+}
+
+.text-center{
+    text-align: center !important;
+}
+
+.aircraft-maintenance-tbl-scroll{
+    height:125px; 
+    overflow:scroll;
+}
+
+.contract-rate-tbl-scroll{
+    height:149px; 
+    overflow:scroll;
+}
+
+.use-hobbs-chkbox{
+    height:42px;
+}
+
+.text-red{
+    color:red;
+}
+
+.update-time-btn{
+    border-top: 1px solid; 
+    margin-top: 5px;
+}
+
+.aircraft-specific-rate{
+    width: 50%;
+}
+
+h7{
+    font-size: 1.2rem;
+    color: red;
+    font-weight: bold;
+}
+.wosummaryh1::after {
+    display: inline-block;
+    content: "";
+    border-top: 0.1rem solid black;
+    width: 84%;
+    margin-left: 5px;
+    transform: translateY(-0.3rem);
+}
+
+.wosummaryh2::after {
+    display: inline-block;
+    content: "";
+    border-top: 0.1rem solid black;
+    width: 76%;
+    margin-left: 5px;
+    transform: translateY(-0.3rem);
+}
+
+.aircraftwotable a{
+    color:blue;
+}
+
+.woinspinfo{
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+}
+.woinspinfo::after {
+    display: inline-block;
+    content: "";
+    border-top: 0.1rem solid black;
+    width: 54%;
+    margin-left: 5px;
+    transform: translateY(-0.3rem);
+}
+
+.wosignoffleg{
+    margin-bottom: 5px !important;
+}
+
+.wosignoffallitm{
+    height:200px; 
+    overflow:scroll;
+}
+
+.wosignoffcategory{
+    height:240px; 
+    overflow:scroll;
+}
+
+.text-left{
+    text-align: left !important;
+}
+
+.pd0{
+    padding: 0px !important;
+}
+
+.wosignoff-color-box1 {
+    background-color: #74e4e9;
+    width: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
+}
+
+.wosignoff-color-box2{
+    background-color: #f77979;
+    width: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
+}
+
+.wopartaddbtn{
+    width:131px;
+    margin-top: 10px;
+}
+
+.wopartaddclosebtn{
+    width:131px;
+    margin-top: 5px;
+}
+
+.aircraftregbox, .addlshipaddrbox{
+    padding: 5px;
+    background-color: white;
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
+
+.aircraftregbox-active, .addlshipaddrbox-active{
+    background-color: blue;
+    color:white;
+}
+
+.listofaircraft, .listofadlshipaddr{
+    background-color: darkgray;
+}
+
+#contractratetbl tr{
+    cursor: pointer;
+}
+
+#contractratetbl .active{
+    background-color: gray;
+}
+
+.aricraftcomplengblock .col-md-12{
+    margin-bottom: 5px;
+}
+
+.aricraftcomplengblock label{
+    padding-left: 0px !important;
+}
+
+.aricraftcomplairframeblock .col-md-12{
+    margin-bottom: 5px;
+}
+
+.aricraftcomplairframeblock label{
+    padding-left: 0px !important;
+}
+
+.aricraftcomplinspectblock .col-md-12{
+    margin-bottom: 5px;
+}
+
+.aricraftcomplinspectblock label{
+    padding-left: 0px !important;
+}
+
+#aircraftInfoMoreModal .col-md-12{
+    margin-bottom: 10px;
+}
+
+#aircraftuploadmediatbl a{
+    color:blue !important;
+}
+
+.aircraft-compliance-list{
+    height:250px; 
+    overflow:scroll;
+}
+
+.aircraft-compliance-list td{
+    cursor: pointer;
+}
+
+.cyclinderhistblock .col-md-1{
+    width: 85px !important;
+    margin-left: 5px;
+}
+
+.air-maint-engine-btn{
+    width: 80px;
+    margin-left: 20px;
+}
+
+.repair-order-info-tbl-scroll{
+    height:440px; 
+    overflow:scroll;
+}
+
+.airmaintapplrow{
+    cursor: pointer;
+}
+
+.airmaintapplrow_active{
+    background-color: blue;
+    color: white;
+}
+
+.airmaintadsrow{
+    cursor: pointer;
+}
+
+.airmaintadsrow_active{
+    background-color: blue;
+    color: white;
+}
+
+.customerinfolistblock{
+    cursor: pointer;
+}
+
+.otc-invoice-addpart-btn{
+    width:131px;
+    margin-top: 10px;
+}
+
+.otc-invoice-addpartclose-btn{
+    width:131px;
+    margin-top: 5px;
+}
+
+.otcinfotblrow{
+    cursor: pointer;
+}
+
+.otcinfotblrow .active{
+    background-color: gray;
+    color: white;
+}
+
+.otcinvoicetblrow{
+    cursor: pointer;
+}
+
+.otcinvoicetblrow_active{
+    background-color: blue !important;
+    color:white !important;
+}
+
+.work-order-item-box span{
+    background-color: white;
+    padding: 5px 20px 5px 20px;
+}
+
+.work-order-item-box{
+    border: 1px solid black;
+    height: 50px;
+    width: 100px;
+    padding-left: 5px;
+    background: lightgray;
+}
+
+.aircraftworkordertr{
+    cursor: pointer;
+}
+
+.aircraftworkordertr_active{
+    background-color: blue;
+    color: white;
+}
+
+.wo-technican-list{
+    height:290px;
+    overflow:scroll;
+    word-wrap:break-word; 
+    border:1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.wo-service-technician-list, .wo-option-extra-taxes-list{
+    padding: 5px;
+    background-color: white;
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
+
+.wo-service-technician-list-active, .wo-option-extra-taxes-list-active{
+    background-color: blue !important;
+    color:white !important;
+}
+
+#technician-add-item{
+    height:238px;
+    overflow:scroll;
+    word-wrap:break-word; 
+    border:1px solid black;
+    cursor: pointer;
+}
+
+.wo-osr-list{
+    padding: 5px;
+    background-color: white;
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
+
+.wo-osr-list-active{
+    background-color: blue !important;
+    color:white !important;
+}
+
+.woosr-ro-list-sec, .wo-vendor-list-sec, .woosr-po-link, .osr-more-tracking-number{
+    color: #337ab7;
+    cursor: pointer;
+}
+
+#aircraftwoosrmediatbl a, #aircraftwoosrpomediatbl a{
+    color: blue !important;
+    cursor: pointer !important;
+}
+
+.parts-not-checkedin-list{
+    height:435px;
+    overflow:scroll;
+    word-wrap:break-word; 
+    border:1px solid black;
+    cursor: pointer;
+}
+
+.parts-not-checkedin-list table{
+    width: 100% !important;
+}
+
+.parts_not_checked_in tr {
+    height: 30px;
+}
+
+.parts_not_checked_in td {
+    padding: 3px;
+}
+
+.loadaircraftworkordertr, .signoff-categories-tr, .wo-signoff-tr{
+    cursor: pointer;
+}
+
+.parts_not_checked_in_active, 
+.osr-po_item-active, 
+.wo-gen-info-deposit-active, 
+.wo-item-photo-active, 
+.wo-item-file-active, 
+.wo-option-message-active,
+.wo-item-part-list-active,
+.woitem-tools-tblrow-active,
+.loadaircraftworkordertr-active,
+.wopartsrequisiterow_active,
+.discrepancyhistorylist_active,
+.correctiveactionhistorylist_active,
+.signoff-categories-tr-active,
+.wo-signoff-tr-active {
+    background-color: blue;
+    color: white;
+}
+
+#otcosrpoitemstbl, .woitem-tools-tblrow, .wopartsrequisiterow, .woitempartstblrow{
+    cursor: pointer;
+}
+
+.list-of-extra-taxes{
+    height:385px;
+    overflow:hidden;
+    word-wrap:break-word; 
+    border:1px solid black;
+    background-color: darkgray;
+}
+
+.aircraft-work-order-history {
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.wo-item-photo-active a, .wo-item-file-active a{
+    color: white !important;
+}
+
+#aircraftWOOptionViewMsgModel label{
+    padding-top: 0px;
+}
+
+.mt-25{
+    margin-top: 25px;
+}
+
+.starttimestatus{
+    color:red !important;
+}
+
+.woitem-start-service-timer{
+    background-color: red !important;
+}
+
+.discrepancy_history_table{
+    height:200px; 
+    overflow-y:scroll;
+}
+
+.item_with_line {
+    /*height: 1px;*/
+    border-top: 1px solid black;
+    position: relative;
+    margin-left:-10px;
+    margin-top: 20px !important;
+}
+  
+.item_with_line span {
+    position: relative;
+    top: -.7em;
+    background: white;
+    display: inline-block;
+    padding-left: 10px !important;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.wo_item_history_scroll{
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#aircraftWOAddToolModel .modal-body, #woCreateNewWOModal .modal-body{
+    height: 350px !important;
+}

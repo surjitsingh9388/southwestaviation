@@ -1,0 +1,134 @@
+<?php 
+$sessionUser = $this->request->session()->read('Auth.User');
+$sessionArray = $this->Session->read('Auth.User');
+use Cake\Routing\Router;
+
+?>
+
+<div class="content sliding">
+    <div class="outerWrapper">
+         
+        <div class="btnWrapper">
+            <?php
+            $serialmsg = 'No Lot';
+            if(!empty($invenotries->serial_no)){
+                $serialmsg = $invenotries->serial_no;
+            }
+            ?>
+            <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name'], ['action' => 'detail', $invenotries->id]).' / Install';?></h2>
+            <div class="btnWrap">
+                <?php
+                echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
+
+                echo $this->Form->button('Install', ['type' => 'submit', 'class' => 'btn btn-primary ml-10 inventoriesinstallsave', 'disabled'=>'disabled']);
+                ?>
+            </div>
+        </div>
+        
+        <div class="page-content mt-35">
+            <div class="formBGCls">
+                <?php
+                 echo $this->Form->create($invenotries, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoriesInstall'));
+                ?>
+                
+                <div class="addPartBorder">
+                <div class="invaddPageHeading">Item Details</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="uom">Part Number</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <p class="form-control-static"><?php echo $invenotries['_matchingData']['InventoryItems']['part_number']; ?></p>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Item Name</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <p class="form-control-static"><?php echo $invenotries['_matchingData']['InventoryItems']['name']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="location_name">Current Location</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <p class="form-control-static">
+                                    <?php echo isset($invenotries['_matchingData']['InventoryLocations']['location_name']) ? $invenotries['_matchingData']['InventoryLocations']['location_name'] : ''; ?>
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="quantities">Available Qty</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <p class="form-control-static"><?php echo $invenotries->qty; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="invaddPageHeading">Installation</div>
+                    
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="install_to">Install To&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <?php 
+                                        echo $this->Form->control('install_to', array('options' => $installto, 'empty' => 'Physical Inventory...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'install_to', 'value'=>'')); 
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="qty">Install Quantity (EA)&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <?php echo $this->Form->control('qty', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => 'Quantity', 'label' => false, 'id'=>'qty', 'value'=>'', 'required'=>'required', 'value'=>'')); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="account_code">Account Code</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <?php 
+                                        echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+                <?php 
+                echo $this->Form->end(); 
+                ?>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<script>
+var ajaxListPageSearchURL = '';
+var pagelimit = '';
+var pdfPagTitle = '';
+var is_this_item_serialized ='';
+</script>
+
+<?php 
+echo $this->Html->css('inventory'); 
+echo $this->Html->script('inventories'); 
+?>

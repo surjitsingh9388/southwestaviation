@@ -70,6 +70,7 @@
                     <?php echo $this->Flash->render(); ?>
                     <?php echo $this->fetch('content'); ?>
                 </div>
+                <div id="usertimeclockpopup"></div>
             </div>
         </div>
 
@@ -141,9 +142,26 @@
         <script src="https://cdn.datatables.net/rowgroup/1.1.1/js/dataTables.rowGroup.min.js"></script>
         
         <?php echo $this->Html->script('new/custom'); ?>
+        <?php echo $this->Html->script('user_time_clock'); ?>
+
+        <script>
+            var fetchUserTimeClockPopupURL = "<?php echo $this->Url->build(['controller'=>'UserTimeClocks', 'action'=>'fetchUserTimeClockPopup']); ?>";
+            var checkUserTimeClockStatusURL = "<?php echo $this->Url->build(['controller'=>'UserTimeClocks', 'action'=>'checkUserTimeClockStatus']); ?>";
+            var markUserTimeClockURL = "<?php echo $this->Url->build(['controller'=>'UserTimeClocks', 'action'=>'markUserTimeClock']); ?>";
+            
+            var fetchMessageSendPopupURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'fetchMessageSendPopup']); ?>";
+            var fetchMessageViewPopupURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'fetchMessageViewPopup']); ?>";
+            var fetchMessageListPopupURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'fetchMessageListPopup']); ?>";
+            var sendWOViewMessageURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'sendWOViewMessage']); ?>";
+            var refreshWOViewMessageListURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'refreshWOViewMessageList']); ?>";
+            var deleteWOViewMessageURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'deleteWOViewMessage']); ?>";
+            var checkNewMessageURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'checkNewMessage']); ?>";
+        </script>
         
         <script type="text/javascript">
         $(document).ready(function() {
+            checkNewMessageCount();
+
             $('.clicked').on('click', function(){
                 var formId = this.form.id;
                 if($('#'+formId).valid()) {
@@ -161,6 +179,18 @@
                     $('body').removeClass('backgroundFixed');
                     $('.clicked').attr("disabled", false);
                     return false;
+                }
+            });
+
+            //get holdingbox count
+
+            $.ajax({
+                url:"<?php echo $this->Url->build(['controller'=>'HoldingBoxes', 'action'=>'getHoldingBoxCount']); ?>",
+                type: 'POST',
+                data: {},
+                dataType: "text",
+                success: function (response) {
+                    $('.holdingitemcount').html(response);
                 }
             });
         });

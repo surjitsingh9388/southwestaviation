@@ -134,6 +134,46 @@ $companyUserRoles = array(ROLE_ADMIN);
                             </div>
                             <?php }?>
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Is Manager </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php 
+                                $ismanagerchk = '';
+                                $isdisabled = 'disabled';
+                                if(!empty(@$user->is_manager)){
+                                    $ismanagerchk = 'checked';
+                                    $isdisabled = '';
+                                }
+                                echo $this->Form->control('is_manager', array('type'=>'checkbox', 'label' => '', 'id'=>'is_manager_chk', 'checked'=>$ismanagerchk)); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">Direct Manager </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php echo $this->Form->control('direct_manager_id', array('options' => $users, 'empty' => 'Select Direct Manager', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'disabled'=>$isdisabled)); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reference">Employment Date</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="input-group date datePicker">
+                                    <?php echo $this->Form->Text('employment_date', array('class' => 'form-control col-md-7 col-xs-12', 'id' => 'employment_date', 'placeholder' => '', 'label' => false)); ?>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="home_phone">Salary</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php echo $this->Form->control('salary', array('class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Salary', 'label' => false)); ?>
+                            </div>
+                        </div>
                         
                         <?php if(!isset($action)){ ?>
                         <div class="form-group">
@@ -185,7 +225,7 @@ $companyUserRoles = array(ROLE_ADMIN);
                                     } else {
                                         echo $this->Form->control('addresses.0.country_id', array('options' => $countries, 'empty' => 'Select Country', 'required' => 'required', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'value' => '231', 'label' => false));
                                     }
-                                     ?>
+                                ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -210,6 +250,27 @@ $companyUserRoles = array(ROLE_ADMIN);
                             </div>
                         </div>                           
                     </div>
+
+                    <!--Start Add Access Code Section-->
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Access Code</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address_line1">Time Clock Code</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php echo $this->Form->control('time_clock_code', array('type'=>'password', 'class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'placeholder'=>'Enter 4 digit time clock code')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address_line1">Inspection/Certification Code</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php echo $this->Form->control('certification_code', array('type'=>'password', 'class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'placeholder'=>'Enter 4 digit certification code')); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Add Access Code Section-->
                     
                     <div class="panel-body">
                         <div class="form-group">
@@ -489,4 +550,14 @@ function getStates(countryId) {
         $('#addresses-0-city-id').selectpicker('refresh');
     }
 }
+
+$(document).on('click', '#is_manager_chk', function(e){
+    if($(this).is(':checked') == true){
+        $('#direct-manager-id').prop('disabled', false);
+    }else{
+        $('#direct-manager-id').val('');
+        $('#direct-manager-id').prop('disabled', true);
+    }
+    $('#direct-manager-id').selectpicker('refresh');
+});
 </script>

@@ -1,0 +1,40 @@
+.dataTables_filter {
+    display: none;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.btnWrapper .btn {
+    margin: 5px;
+    height: 36px;
+}
+.dt-buttons{
+    display:none;
+}
+
+.ro-request-is-urgent {
+    color: #ce2127;
+}
+
+.tab-content th{
+    background-color:#2c3e50;
+    color:white;
+}
+
+#invRequestHistoryTable a {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#invPOHistoryTable a {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btnspace{
+    margin-right: 5px !important;
+}

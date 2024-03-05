@@ -94,4 +94,13 @@ class UserComponent extends Component {
         return $name;
     }
 
+    public function getUsers() {
+        $userModel = TableRegistry::get('Users');
+        $users = $userModel->find('list', array (
+            'keyField' => 'id', 
+            'valueField' => 'full_name'
+        ))->where(['id != '=>'1'])->toArray();
+
+        return $users;
+    }
 }

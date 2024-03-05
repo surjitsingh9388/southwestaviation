@@ -1,0 +1,49 @@
+<table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Type</th>
+                                    <th>Div. Abbr.</th>
+                                    <th>Division Name</th>
+                                    <th>Reference</th> 
+                                    <th>Vendor</th>
+                                    <th>Requestor</th>
+                                    <th>Status</th>
+                                    <th>Account Code</th> 
+                                    <th>Cost</th> 
+                                    <th>Currency Code</th> 
+                                    <th>Submitted</th>
+                                    <th>Is Active</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                            <tr>
+                                <td>000001</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Admin</td>
+                                <td>Partial Received</td>
+                                <td></td>
+                                <td>35.45</td>
+                                <td>USD</td>
+                                <td>03/06/2023</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>36543665</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>Partial Received</td>
+                                <td></td>
+                                <td>20.30</td>
+                                <td>USD</td>
+                                <td>05/08/2023</td>
+                                <td>1</td>
+                            </tr>  </tbody></table>

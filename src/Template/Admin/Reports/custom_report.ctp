@@ -133,7 +133,7 @@ use Cake\Routing\Router;
                                                         <li><a tabindex="-1" href="javascript:void(0);" class="adSBStatusCls" data-plane_id="<?= h($row['plane']['plane_id']) ?>" data-action="historical">Historical</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="javascript:void(0);" class="pptReportCls" data-plane_id="<?= h($row['plane']['plane_id']) ?>">PPT Report</a></li>
+                                                <!--li><a href="javascript:void(0);" class="pptReportCls" data-plane_id="<?= h($row['plane']['plane_id']) ?>">PPT Report</a></li-->
                                                 <?php
                                                 if((!empty($reportTime) && ($reportTime['action']['action_add']==1 || $reportTime['action']['action_edit']==1)) || $sessionUser['id'] == 1){
                                                 ?>
@@ -589,6 +589,10 @@ $(document).ready(function() {
             format: 'MM-DD-YYYY',
             useCurrent: false,
             //maxDate: new Date()
+        });
+
+        $(".log_date_0").on("dp.change", function() {
+            $(".logDatepicker").val($(".log_date_0").val());
         });
 
         //Update hours
