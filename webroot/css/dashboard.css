@@ -14,12 +14,12 @@ Calendar Styling */
   padding: 10px;
 }
 
-.month {
+.eventcalmonth {
   font-size: 2rem;
 }
 
 @media (min-width: 992px) {
-  .month {
+  .eventcalmonth {
     font-size: 3.5rem;
   }
 }
@@ -86,8 +86,8 @@ Calendar Styling */
 }
 
 .py-5{
-    padding-left:15px;
-    padding-right:15px;
+  padding-left:15px;
+  padding-right:15px;
 }
 
 .prevnextbtn{
@@ -103,7 +103,7 @@ Calendar Styling */
   line-height:35px;
 }
 
-.next{
+.nextbtn{
   float:right;
   color:#fff;
 }
@@ -174,10 +174,11 @@ a:focus, a:hover {
 .news_feed_dashboard img{
   width: 100px;
   height: 100px;
+  color:#fff;
 }
 
 .news_feed_dashboard{
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: scroll;
   width: 100%;
 }
