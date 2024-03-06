@@ -10,12 +10,12 @@ $filternext = date('Y-m', strtotime(" +1 month", $filter));
         <div class="cheadingblock">
             <div class="d-flex align-items-center cheading">  
                 <i class="fa fa-calendar fa-1x cicon"></i>
-                <h2 class="month font-weight-bold mb-0 text-uppercase ch2"><?php echo date("F Y", $filter); ?></h2>
+                <h2 class="eventcalmonth font-weight-bold mb-0 text-uppercase ch2"><?php echo date("F Y", $filter); ?></h2>
             </div>
         </div>
     </div>
     <div class="col-md-4 pd0">
-        <a href="javascript:void(0);" data-val="<?php echo $filternext; ?>" class="clknextprevbtn next">Next »</a>
+        <a href="javascript:void(0);" data-val="<?php echo $filternext; ?>" class="clknextprevbtn nextbtn">Next »</a>
     </div>
 </div>
 <div class="clearboth">
@@ -56,7 +56,7 @@ $filternext = date('Y-m', strtotime(" +1 month", $filter));
 
                     if(strtotime($date) >= strtotime($event_start) && strtotime($date) <= strtotime($event_end)){
             ?>
-            <div class="event" title="<?php echo $event['event_name']; ?>"><?php echo (strlen($event['event_name']) >= 30) ? substr($event['event_name'], 0, 30).'..' : $event['event_name'];?></div>
+            <div class="event" title="<?php echo !empty($event['event_description']) ? $event['event_description'] : $event['event_name']; ?>"><?php echo (strlen($event['event_name']) >= 30) ? substr($event['event_name'], 0, 30).'..' : $event['event_name'];?></div>
             <?php }}} ?>
         </li>
     <?php } ?>
