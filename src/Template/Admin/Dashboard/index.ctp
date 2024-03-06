@@ -15,7 +15,7 @@
         }
         ?>
         <div class="page-content">
-            <div class="col-md-12 pd0">
+            <div class="col-xs-12 pd0">
                 <h6>News Feed
                     <?php if(!empty($newsfeedmenu) || $user_id == '1'){ ?>    
                         <button type="button" class="btn btn-default float-right fetchDashboardPopup" data-val="news_feed_list">News Feed List</button>
@@ -26,14 +26,14 @@
                 </div>
             </div>            
         </div>
-        <div class="col-md-12 pd0" style="background-color:#fff;">
-            <div class="col-md-6 pd0" style="padding-right:5px !important;">
+        <div class="col-xs-12 pd0" style="background-color:#fff;">
+            <div class="col-md-6 col-xs-12 pd0" style="padding-right:5px !important;">
                 <div class="dashboard_heading_bar"><span class="dashboard_heading">Time Off Request</span></div>
                 <div class="col-md-12">
                     
                 </div>
             </div>
-            <div class="col-md-6 pd0">
+            <div class="col-md-6 col-xs-12 pd0">
                 <div class="dashboard_heading_bar"><span class="dashboard_heading">Time Clock</span></div>
                 <div class="btnWrapper" style="display:flow-root !important;">
                     <div class="float-left">
@@ -73,13 +73,14 @@
             </div>
         </div>
         <div class="col-md-12 pd0">
-            <h6>Event 
-            <?php if(!empty($eventmenu) || $user_id == '1'){ ?>    
-                <button type="button" class="btn btn-default float-right fetchDashboardPopup" data-val="dashboard_event_list">Event List</button>
-            <?php } ?>
-            </h6>
+            <div class="align-center-items justify-content-between">
+                <h6>Event </h6>
+                <?php if(!empty($eventmenu) || $user_id == '1'){ ?>    
+                    <button type="button" class="btn btn-default fetchDashboardPopup mb-0" data-val="dashboard_event_list">Event List</button>
+                <?php } ?>
+            </div>
             
-            <div class="calendar shadow bg-white p-5 event_calender_block">
+            <div class="calendar shadow bg-white p-5 event_calender_block mb-10">
                 <?php echo $this->element('Dashboard/event_calender'); ?>
             </div>
         </div>

@@ -11,7 +11,7 @@
     </ul>
 
     <div class="topheader_right_block col-md-12">
-        <div class="header-icon-container">
+        <div class="header-icon-container hide-in-mob">
             <div>
                 <a href="javascript:void(0);" class="wo-list-all-message" data-val="all-user" click-source="top_message" title='Time Clock'>
                     <?php echo $this->Html->image('/images/icons/mail_icon.png', array('class'=>'header-time-clock-link')); ?>
@@ -36,7 +36,7 @@
                 </a>
             </div>
             
-            <div id="holdingBoxDropZone" class="holding-box top-holding-box">
+            <div id="holdingBoxDropZone" class="holding-box top-holding-box hide-in-mob">
                 
                 <a class="holdingboxlink" href="<?php echo $this->Url->build(['controller' => 'HoldingBoxes', 'action' => 'index']); ?>">
                     <div id="holding-box">
