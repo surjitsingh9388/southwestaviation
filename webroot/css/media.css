@@ -24,13 +24,11 @@
 	.actionbar-lft .lftWrap .inputWrap{margin-right: 22px;}
 	.actionbar-lft .lftWrap{width: 100%;}
 	.actionbar-lft .split-btn {margin: 10px 0px;}
-	.side-bar{position: absolute;top: 47px;}
 	
 }
 @media screen and (max-width: 1024px){
 	.side-bar ul .menu li a{padding: 14px 6px;}
 	/**********side bar **********/
-	.side-bar{position: absolute;top: 47px;}
 	.content{width: 100%;   transform:translateX(0px);
     -ms-transform:translateX(0px);
     -webkit-transform:translateX(0px);}
@@ -69,6 +67,26 @@
 	.sortWrap .sortTxt{font-size: 16px;margin-right: 10px;}
 	
 }
+
+@media screen and (max-width: 650px){
+	.hide-in-mob{
+		display: none
+	}
+	.show-in-mob{
+		display: block;
+	}
+    .side-bar ul .menu li.for-mobile a{
+        border: 0 !important;
+    }
+    .side-bar ul .menu li.for-mobile .mobButton {
+       width: 90%;
+       margin: 10px auto;
+    }
+    .side-bar ul .menu li.for-mobile .mobButton a{
+       padding: 5px;
+    }
+}
+
 @media screen and (max-width: 575px){
 	/*.action-bar .input-group , .action-bar .input-group input{width: auto;}*/
 	.action-bar{flex-direction: column;    align-items: center;}
@@ -82,7 +100,6 @@
 .outerWrapper .boxWrapper .box .lbltxt{font-size: 14px;}
 .outerWrapper .boxWrapper .box .title{font-size: 25px;}
 .wrapper .side-bar ul .menu li .icon-size, .icon-size{width: 28px;}
-.topHeader{padding: 10px 0px;}
 .topHeader ul{ right: 10px;min-width: 126px;}
 }
 @media screen and (max-width: 520px){
@@ -96,7 +113,7 @@
 	.topHeader .dropdown .dropdown-toggle{font-size: 14px;}
 	.topHeader ul li.menu-head, a.push_menu{font-size: 18px;}
 	.wrapper .side-bar ul .menu li .icon-size, .icon-size {width: 25px;}
-	.content{padding: 15px;}
+	.content{padding-left: 15px; padding-right: 15px}
 	.action-bar .input-group input{width: 200px;}
 }
 @media screen and (max-width: 320px){

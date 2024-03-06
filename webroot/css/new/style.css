@@ -42,7 +42,7 @@ img {
     border-bottom: 1px solid #97a3d9;
     padding-bottom: 8px;
 }
-
+.mb-10{margin-bottom: 10px}
 .topHeader {
     filter: drop-shadow(0px 2px 1.5px rgba(0, 0, 0, 0.13));
     background-color: #39478b;
@@ -56,7 +56,13 @@ img {
     position: fixed;
     width: 100%;
 }
-
+.align-center-items {
+    display: flex;
+    align-items: center;
+}
+.justify-content-between {
+    justify-content: space-between;
+}
 .topHeader .dropdown-menu>li>a {
     padding: 3px 12px;
 }
@@ -99,8 +105,9 @@ img {
     box-shadow: 0px 10px 9px #2b3358;
     margin-bottom: 12px;
     z-index: 9;
-    top:60px;
+    top:43px;
 }
+#sidebar-menu .dropdown-backdrop {display: none;}
 .side-bar ul{padding-bottom: 60px;}
 .side-bar ul,
 .topHeader ul {
@@ -199,7 +206,7 @@ a.push_menu {
 
 .content {
     width: calc(100% - 310px);
-    padding: 25px;
+    padding: 15px;
     transform:translateX(310px);
     -ms-transform:translateX(310px);
     -webkit-transform:translateX(310px);
@@ -2239,3 +2246,10 @@ inventory section style
 .delete_comp_part_attachment{
     cursor: pointer;
 }
+
+
+
+.show-in-mob{
+	display: none;
+}
+
