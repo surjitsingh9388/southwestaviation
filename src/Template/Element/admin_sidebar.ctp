@@ -957,6 +957,16 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             <?php echo $this->Html->image('/images/icons/work_order.png', array('title'=>'Work Order')); ?>
                         </a>
                     </div>
+                    <div>
+                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryCustomers']); ?>">
+                            <?php echo $this->Html->image('/images/icons/customer_otc.png', array('title'=>'Customer/OTC')); ?>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="<?php echo $this->Url->build(['controller' => 'Reports', 'action'=>'customReport']); ?>">
+                            <?php echo $this->Html->image('/images/icons/information_center.png', array('title'=>'Information Center')); ?>
+                        </a>
+                    </div>
                 </div>
             </li>
             <li class="show-in-mob for-mobile" style="clear: both">
