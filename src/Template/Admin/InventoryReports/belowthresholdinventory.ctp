@@ -63,7 +63,7 @@ echo $this->Html->script('inventory_common');
         <div class="page-content mt-35">
             
             <div class="action-bar dflex">
-                <div class="input-group search-control mb-0">
+                <div class="input-group search-control mb-5">
                     <input id="searchItem" name="searchItem" type="text" class="form-control" placeholder="Search Below Threshold Inventory" >
                     <div class="input-group-btn valign-t">
                         <button class="btn btn-default" type="button">
@@ -72,7 +72,7 @@ echo $this->Html->script('inventory_common');
                     </div>
                 </div>
                 
-                <div class="inputWrap btn-group sortWrap">                    
+                <div class="inputWrap btn-group sortWrap mb-5">                    
                     <label class="po-order-sortby">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
@@ -85,8 +85,8 @@ echo $this->Html->script('inventory_common');
                         <option value="7">Cost Per Unit</option>
                     </select>
                     <div class="ml-10">
-                        <button type="button" class="btn ml-5 resetfilterbtn">Clear</button>
-                        <button type="button" class="btn btn-primary btnOpenFilterPopup ml-5">Filter</button>
+                        <button type="button" class="btn ml-5 resetfilterbtn mb-5">Clear</button>
+                        <button type="button" class="btn btn-primary btnOpenFilterPopup ml-5 mb-5">Filter</button>
                     </div>
                 </div>
             </div>

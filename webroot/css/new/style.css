@@ -1638,7 +1638,7 @@ inventory section style
 .outerWrapper .boxWrapper .invbox {
     text-align: center;
     margin: 5px 5px;
-    width: 19%;
+    width: 23%;
     height: 155px;
     /* border-radius: 15px; */
     display: flex;
@@ -2080,6 +2080,9 @@ inventory section style
 
 .mb-10{
     margin-bottom: 10px !important;
+}
+.mb-5{
+    margin-bottom: 5px !important;
 }
 
 #inventoryattachment{

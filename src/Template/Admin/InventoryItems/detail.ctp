@@ -184,7 +184,6 @@ echo $this->Html->css('inventory_item');
                                     </div>
 
                                     <div class="">
-
                                         <table id="datatableQuantities" class="table dataTable table2excel" width="100%">
                                             <thead>
                                                 <tr>

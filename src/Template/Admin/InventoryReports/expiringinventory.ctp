@@ -37,8 +37,8 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
-            <h2 class="heading"><?php echo $this->Html->link('Inventory Reports', ['action' => 'index']).' / Inventory Expiring as of '; ?> 
+        <div class="btnWrapper flex-column-mob">
+            <h2 class="heading" style="flex-basis: 49%;"><?php echo $this->Html->link('Inventory Reports', ['action' => 'index']).' / Inventory Expiring as of '; ?> 
                 <span id="expirationheading">
                     <?php 
                     $hexpirationdate = str_replace('-', '/', $expirationdate);
@@ -49,7 +49,7 @@ echo $this->Html->script('inventory_common');
                     </span>
             </h2>
             
-            <div class="float-right">
+            <div>
                 <?php
                 if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
                     echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default', 'id'=>'export-button-pdf', 'escape' => false));
@@ -72,7 +72,7 @@ echo $this->Html->script('inventory_common');
         <div class="page-content mt-35">
             
             <div class="action-bar dflex">
-                <div class="input-group search-control mb-0">
+                <div class="input-group search-control mb-5">
                     <input id="searchItem" name="searchItem" type="text" class="form-control" placeholder="Search Expiring Inventory" >
                     <div class="input-group-btn valign-t">
                         <button class="btn btn-default" type="button">
@@ -80,8 +80,7 @@ echo $this->Html->script('inventory_common');
                         </button>
                     </div>
                 </div>
-                
-                <div class="inputWrap btn-group sortWrap">
+                <div class="sortWrap mb-5">
                     <label class="expiring-block">Expiring as of</label>
                     <div class="input-group datePicker expirationdate">
                         <?php echo $this->Form->Text('search_expiration_date', array('class' => 'form-control col-md-3 col-xs-12 datePicker expiring-input', 'id' => 'expiration_date', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'value'=>$expirationdate)); ?>
@@ -89,7 +88,8 @@ echo $this->Html->script('inventory_common');
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    
+                </div>
+                <div class="inputWrap btn-group sortWrap mb-5">
                     <label class="expiring-block">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
@@ -101,8 +101,8 @@ echo $this->Html->script('inventory_common');
                         <option value="7" selected>Expiration Date</option>
                     </select>
                     <div class="ml-10">
-                        <button type="button" class="btn ml-5 resetfilterbtn">Clear</button>
-                        <button type="button" class="btn btn-primary btnOpenFilterPopup ml-5">Filter</button>
+                        <button type="button" class="btn ml-5 resetfilterbtn mb-5">Clear</button>
+                        <button type="button" class="btn btn-primary btnOpenFilterPopup ml-5 mb-5">Filter</button>
                     </div>
                 </div>
             </div>
