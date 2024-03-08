@@ -208,7 +208,7 @@ echo $this->Html->css('inventory_item');
                             <div id="itemsThresholds" class="tab-pane fade">
                                 <div class="mt5">
                                     <div class="col-sm-12">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4 mb-5">
                                             <div class="search-control threshold-search-box">
                                                 <input type="text" class="form-control thresholdSearchItem" placeholder="Search thresholds list">
                                                 <div class="threshold-search-box-icon">
@@ -216,11 +216,11 @@ echo $this->Html->css('inventory_item');
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-8">
                                             <?php
                                             if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) {
                                             ?>
-                                            <div class="text-right">
+                                            <div>
                                                 <button type="button" class="btn btn-primary dispinvdetpagepopup" data-val="thresholds">Create Thresholds</button>
 
                                                 <div class="inputWrap btn-group threshold-action">
