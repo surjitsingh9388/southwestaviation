@@ -152,13 +152,13 @@ echo $this->Html->css('inventory_item');
                                     <div class="action-bar">
                                         <div class="col-sm-12">
 
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-4 mb-5">
                                                 <input type="text" id="quantitesSearchItem" name="search" class="form-control brd-5" placeholder="Search Inventory">
                                                 <div class="inventory-search-box">
                                                     <i class="fa fa-search"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-4 mb-5">
                                                 <a ng-href="" class="btn btn-primary dispinvdetpagepopup" data-val="invqantitiesfilter">Filter</a>
                                                 <a ng-href="" class="btn btn-default resetquantitiesfilterbtn">Clear</a>
                                                 <span class="ml-10" for="showinactive">
@@ -169,7 +169,7 @@ echo $this->Html->css('inventory_item');
                                             <?php
                                             if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) {
                                             ?>
-                                            <div class="btn-group col-sm-4 text-right">
+                                            <div class="btn-group col-sm-4 text-right mb-5">
                                                 <select class="selectpicker actionSel invquantitiesaction" id="actionSel">
                                                     <option value="">Action on Selected</option>
                                                     <option value="1" disabled>Add to Holding Box</option>

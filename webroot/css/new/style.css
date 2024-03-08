@@ -2250,8 +2250,14 @@ inventory section style
     cursor: pointer;
 }
 
-
-
+#datatableQuantities_wrapper {
+    overflow: scroll;
+}
+.plus-new-btn{
+    width: auto;
+    position: relative;
+    margin-right: -15px;
+}
 .show-in-mob{
 	display: none;
 }
