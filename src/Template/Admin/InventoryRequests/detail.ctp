@@ -11,7 +11,7 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($invenotryrequests, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRequest', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php 
                 echo $this->Html->link('Inventory Requests', ['action' => 'index']).' / '.$invenotryrequests->request_number.'&nbsp;'; 

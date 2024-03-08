@@ -57,7 +57,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
         <div class="page-content mt-35">
             <div class="formBGCls">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Name</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -67,7 +67,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Status</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -80,7 +80,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                 </div>
                 <?php if(isset($locationdata['location_name'])){ ?>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Parent Location</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -91,7 +91,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                 </div>
                 <?php } ?>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Description</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -102,7 +102,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Barcode</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -135,7 +135,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                             
                                 <div class="mt5">
                                     <div class="col-sm-12 mb-10">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-3 mb-5">
                                             <input type="text" id="quantitesSearchItem" name="search" class="form-control brd-5" placeholder="Search Inventory">
                                             <div class="inventory-search-icon">
                                                 <i class="fa fa-search"></i>
@@ -151,7 +151,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                                         if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) {
                                         ?>
                                         <div class="btn-group col-sm-6 text-right">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 mb-5">
                                                 <select class="selectpicker actionSel invquantitiesaction col-sm-12" id="actionSel">
                                                     <option value="">Action on Selected</option>
                                                     <option value="2" disabled>Bulk Transfer</option>

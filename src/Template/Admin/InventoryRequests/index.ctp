@@ -38,7 +38,7 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Inventory Requests</h2>
             
             <div clas="float-right">
@@ -55,7 +55,7 @@ echo $this->Html->script('inventory_common');
         
         <div class="page-content mt-35">
             <div class="action-bar dflex">
-                <div class="input-group search-control mb-0">
+                <div class="input-group search-control mb-5">
                     <input id="searchItem" name="searchItem" type="text" class="form-control" placeholder="Search Inventory Requests">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="button">
