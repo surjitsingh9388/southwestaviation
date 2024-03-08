@@ -102,7 +102,7 @@ echo $this->Html->css('inventory_purchase_order');
             <div class="formBGCls">
                 <div class="po-detail-block">
                     <div class="">
-                        <div class="col-lg-4">
+                        <div class="col-sm-4">
 
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Type</label>
@@ -161,7 +161,7 @@ echo $this->Html->css('inventory_purchase_order');
                             </div>
 
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-sm-4">
 
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Requestor</label>
@@ -214,7 +214,7 @@ echo $this->Html->css('inventory_purchase_order');
                             <?php } ?>
                         </div>
 
-                        <div class="col-lg-4 vendor-address-box">
+                        <div class="col-sm-4 vendor-address-box">
                             <div class="vendordispblock">
                                 <label>Company</label>&nbsp;<span id="company"><?php echo isset($vendors->name) ? $vendors->name : ''; ?></span><br>
                                 <label>Contact</label> &nbsp;<span><span id="contact"><?php echo isset($vendors->firstname) ? $vendors->firstname : ''; ?></span>
@@ -253,7 +253,7 @@ echo $this->Html->css('inventory_purchase_order');
                             <li><a data-toggle="tab" href="#itemHistory">History</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
+                            <div id="itemGeneral" class="tab-pane fade in active" style="overflow-x: scroll"><!-- general-tab-section start -->
                                 <div class="g-0 bg-light position-relative">
                                     
                                     <table class="table upload-area" id="uploadfile">

@@ -40,10 +40,10 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
-            <h2 class="heading"><?php echo $this->Html->link('Inventory Reports', ['action' => 'index']).' / Complete Inventory Report'; ?></h2>
+        <div class="btnWrapper flex-column-mob">
+            <h2 class="heading" style="flex-basis: 49%;"><?php echo $this->Html->link('Inventory Reports', ['action' => 'index']).' / Complete Inventory Report'; ?></h2>
             
-            <div class="float-right">
+            <div>
                 <?php
                 if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
                     echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default', 'id'=>'export-button-pdf', 'escape' => false));
@@ -65,7 +65,7 @@ echo $this->Html->script('inventory_common');
         
         <div class="page-content mt-35">
             <div class="action-bar dflex">
-                <div class="input-group search-control mb-0">
+                <div class="input-group search-control mb-5">
                     <input id="searchItem" name="searchItem" type="text" class="form-control complete-search-box" placeholder="Search Complete Inventory">
                     <div class="input-group-btn valign-t">
                         <button class="btn btn-default" type="button">
@@ -73,16 +73,16 @@ echo $this->Html->script('inventory_common');
                         </button>
                     </div>
                 </div>
-                
-                <div class="inputWrap btn-group sortWrap">
+                <div class="input-group mb-5">
                     <select class="selectpicker" id="SearchBy" name="SearchBy">
                         <option value="">Select filter</option>
                         <option value="1">Active Inventory</option>
                         <option value="11">Allocated</option>
                         <option value="2">Installed Inventory</option>
                         <option value="7">Out for Repair</option>
-                    </select>    
-
+                    </select> 
+                </div>
+                <div class="inputWrap btn-group sortWrap mb-5">
                     <label class="po-order-sortby">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
@@ -95,12 +95,11 @@ echo $this->Html->script('inventory_common');
                         <option value="5">Location</option>
                         <option value="6">Status</option>
                     </select>
-                    <div class="ml-10">
+                </div>
+                <div class="ml-10">
                         <button type="button" class="btn ml-5 resetfilterbtn">Clear</button>
                         <button type="button" class="btn btn-primary btnOpenFilterPopup ml-5">Filter</button>
                     </div>
-                </div>
-
                 <div class="inputWrap btn-group sortWrap actionWrap ml-10">
                     <select class="selectpicker invquantitiesaction" id="actionSel">
                         <option value="">Action on Selected</option>
