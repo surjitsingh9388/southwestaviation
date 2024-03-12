@@ -270,7 +270,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
         </ul>
         <div class="tab-content">
             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
-                <div class="g-0 bg-light position-relative">
+                <div class="g-0 bg-light position-relative tableScroll">
                     
                     <table class="table opinvitemtable">
                         <thead class="thead-dark">
@@ -421,7 +421,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
             </div><!-- attachment-tab-section end -->
             
             <div id="itemHistory" class="tab-pane fade"><!--history-tab-section start -->
-                <div class="g-0 bg-light position-relative">
+                <div class="g-0 bg-light position-relative tableScroll">
                     <table class="table upload-area tblinvpo">
                         <thead class="thead-dark">
                             <tr class="tblinvpo">

@@ -31,92 +31,96 @@
     </div>
 </div>
 <div class="g-0 bg-light position-relative">
-    <div class="linked-orders">
+    <div class="linked-orders pl10 pr10">
         <?php
         if($linkorderdata['linkedpurchaseorderscount'] > 0 || $linkorderdata['linkedrequestscount'] > 0 || $linkorderdata['linkedshippingorderscount'] > 0 || $linkorderdata['linkedrepairorderscount'] > 0){
         
         if($linkorderdata['linkedpurchaseorderscount'] > 0){
         ?>
         <label>Purchase Orders (<?php echo $linkorderdata['linkedpurchaseorderscount']; ?>)</label>
-        <table class="table" id="invPOHistoryTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th style="vertical-align: top; width:5%;" class="check"><input type="checkbox" name="air_check" id="ckbPOCheckAll"></th>
-                    <th>Number / Type</th>
-                    <th>Reference</th>
-                    <th>Vendor</th>
-                    <th>Submitted</th>
-                    <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="linkedPurchaseOrderList">
-                <?php
-                foreach($linkorderdata['linkedpurchaseorders'] as $purchaseorder){//echo "<pre>";print_r($purchaseorder['purchase_order']);exit;
-                    $vendor_name = isset($purchaseorder['vendor']['name']) ? $purchaseorder['vendor']['name'] : '';
-                    
-                    $statushtml = $this->InventoryStatusHTML->getPurchaseOrderOrderStatusHTML($purchaseorder['status'], $purchaseorder['po_status'], $purchaseorder['po_type'], $purchaseorder['exchange_status']);
-                    
-                ?>
+        <div style="overflow-x: auto">
+            <table class="table" id="invPOHistoryTable">
+                <thead class="thead-dark">
                     <tr>
-                        <td style="text-align:center"><input type="checkbox" value="<?php echo $purchaseorder['id']; ?>" class="chkBoxPO linkedOrderChkbox"></td>
-                        <td>
-                            <a href="<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'detail', $purchaseorder['id']]); ?>"><?php echo $purchaseorder['po_number']; ?></a>
-                        </td>
-                        <td><?php echo $purchaseorder['reference']; ?></td>
-                        <td><?php echo $vendor_name; ?></td>
-                        <td><?php echo date('d-M-Y', strtotime($purchaseorder['created'])); ?></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><?php echo $statushtml; ?></td>
+                        <th style="vertical-align: top; width:5%;" class="check"><input type="checkbox" name="air_check" id="ckbPOCheckAll"></th>
+                        <th>Number / Type</th>
+                        <th>Reference</th>
+                        <th>Vendor</th>
+                        <th>Submitted</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>Status</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="linkedPurchaseOrderList">
+                    <?php
+                    foreach($linkorderdata['linkedpurchaseorders'] as $purchaseorder){//echo "<pre>";print_r($purchaseorder['purchase_order']);exit;
+                        $vendor_name = isset($purchaseorder['vendor']['name']) ? $purchaseorder['vendor']['name'] : '';
+                        
+                        $statushtml = $this->InventoryStatusHTML->getPurchaseOrderOrderStatusHTML($purchaseorder['status'], $purchaseorder['po_status'], $purchaseorder['po_type'], $purchaseorder['exchange_status']);
+                        
+                    ?>
+                        <tr>
+                            <td style="text-align:center"><input type="checkbox" value="<?php echo $purchaseorder['id']; ?>" class="chkBoxPO linkedOrderChkbox"></td>
+                            <td>
+                                <a href="<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'detail', $purchaseorder['id']]); ?>"><?php echo $purchaseorder['po_number']; ?></a>
+                            </td>
+                            <td><?php echo $purchaseorder['reference']; ?></td>
+                            <td><?php echo $vendor_name; ?></td>
+                            <td><?php echo date('d-M-Y', strtotime($purchaseorder['created'])); ?></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td><?php echo $statushtml; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
         <?php } ?>
 
         <?php
         if($linkorderdata['linkedrequestscount'] > 0){
         ?>
         <label>Requests (<?php echo $linkorderdata['linkedrequestscount']; ?>)</label>
-        <table class="table" id="invPOHistoryTable">
-            <thead class="thead-dark">
-                <tr>
-                    <th style="vertical-align: top; width:5%;" class="check noExl"><input type="checkbox" name="air_check" id="ckbReqCheckAll"></th>
-                    <th>Number</th>
-                    <th>Title</th>
-                    <th>&nbsp;</th>
-                    <th>Date Requested</th>
-                    <th>Date Required</th>
-                    <th>Urgency</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="linkedRequestList">
-                <?php
-                foreach($linkorderdata['linkedrequests'] as $requests){
-                    $requests = isset($requests['requests']) ? $requests['requests'] : $requests;
-                    $urgency = unserialize(URGENCY);
-
-                    $statushtml = $this->InventoryStatusHTML->getInventoryRequestStatusHTML($requests['status'], $requests['request_status']);
-                    
-                ?>
+        <div style="overflow-x: auto">
+            <table class="table" id="invPOHistoryTable">
+                <thead class="thead-dark">
                     <tr>
-                        <td style="text-align:center"><input type="checkbox" value="<?php echo $requests['id']; ?>" class="chkBoxReq linkedOrderChkbox"></td>
-                        <td>
-                            <a href="<?php echo $this->Url->build(['controller'=>'InventoryRequests', 'action'=>'detail', $requests['id']]); ?>"><?php echo $requests['request_number']; ?></a>
-                        </td>
-                        <td><?php echo $requests['title']; ?></td>
-                        <td>&nbsp;</td>
-                        <td><?php echo date('d-M-Y', strtotime($requests['created'])); ?></td>
-                        <td><?php echo date('d-M-Y', strtotime($requests['need_by'])); ?></td>
-                        <td><?php echo !empty($requests['urgency']) ? $urgency[$requests['urgency']] : ''; ?></td>
-                        <td><?php echo $statushtml; ?></td>
+                        <th style="vertical-align: top; width:5%;" class="check noExl"><input type="checkbox" name="air_check" id="ckbReqCheckAll"></th>
+                        <th>Number</th>
+                        <th>Title</th>
+                        <th>&nbsp;</th>
+                        <th>Date Requested</th>
+                        <th>Date Required</th>
+                        <th>Urgency</th>
+                        <th>Status</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="linkedRequestList">
+                    <?php
+                    foreach($linkorderdata['linkedrequests'] as $requests){
+                        $requests = isset($requests['requests']) ? $requests['requests'] : $requests;
+                        $urgency = unserialize(URGENCY);
+
+                        $statushtml = $this->InventoryStatusHTML->getInventoryRequestStatusHTML($requests['status'], $requests['request_status']);
+                        
+                    ?>
+                        <tr>
+                            <td style="text-align:center"><input type="checkbox" value="<?php echo $requests['id']; ?>" class="chkBoxReq linkedOrderChkbox"></td>
+                            <td>
+                                <a href="<?php echo $this->Url->build(['controller'=>'InventoryRequests', 'action'=>'detail', $requests['id']]); ?>"><?php echo $requests['request_number']; ?></a>
+                            </td>
+                            <td><?php echo $requests['title']; ?></td>
+                            <td>&nbsp;</td>
+                            <td><?php echo date('d-M-Y', strtotime($requests['created'])); ?></td>
+                            <td><?php echo date('d-M-Y', strtotime($requests['need_by'])); ?></td>
+                            <td><?php echo !empty($requests['urgency']) ? $urgency[$requests['urgency']] : ''; ?></td>
+                            <td><?php echo $statushtml; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
         <?php } ?>
 
         <?php
