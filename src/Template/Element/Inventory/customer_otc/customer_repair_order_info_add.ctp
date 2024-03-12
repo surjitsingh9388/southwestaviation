@@ -1,8 +1,8 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <?php echo $this->Form->create($repairorderrates, array('class' => 'form-horizontal form-label-left', 'id' => 'frmCustRepairOrderRates')); ?>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <input type="hidden" name="customer_id" value="<?php echo $inventorycustomers->id; ?>" />
                 <input type="hidden" name="repair_order_rates_id" id="repair_order_rates_id" value="<?php echo @$repairorderrates->id; ?>" />
                 <div class="form-group">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 pd0">
+            <div class="col-xs-12 pd0">
                 <div class="col-md-6">
                     <div class="form-group">
                         <?php
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 pd0">
+            <div class="col-xs-12 pd0">
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="form-input-frame">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Notes</label>
                     <span class="label-chkbox-right">
@@ -71,11 +71,11 @@
                         <span class="form-check-label" for="flexCheckDefault">Parts Discount Is % Over Cost</span>
                     </span>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('notes', array('type'=>'textarea', 'class' => 'form-control aircraft-notes', 'label'=> false, 'style'=>'width: 542px; height: 246px;', 'id'=>'repair_order_info_notes')); ?>
+                        <?php echo $this->Form->control('notes', array('type'=>'textarea', 'class' => 'form-control aircraft-notes', 'label'=> false, 'style'=>'width: 542px; height: 246px;    max-width: 100%;', 'id'=>'repair_order_info_notes')); ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <?php
                     $show_notes_on_ro_createchk = '';
@@ -87,12 +87,12 @@
                     <span class="form-check-label" for="show_notes_on_ro_create">Show Notes on R/O Create</span>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <button type="button" class="btn btn-primary float-right saveCustRepairOrderRates">Save</button>
             </div>
             <?php echo $this->Form->end(); ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <label class="control-label" for="reference">Repair Order History</label>
             <div class="repair-order-info-tbl-scroll">
                 <table class="table table-bordered">

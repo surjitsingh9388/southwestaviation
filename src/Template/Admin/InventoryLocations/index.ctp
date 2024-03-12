@@ -76,7 +76,7 @@ echo $this->Html->script('inventory_common');
                 </div>
                 
                 <div class="inputWrap btn-group sortWrap ml-10">
-                    <label class="location-sort-by">Sort By</label>
+                    <label class="location-sort-by dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="1" selected>Name</option>
