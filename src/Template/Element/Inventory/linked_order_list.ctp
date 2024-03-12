@@ -3,9 +3,9 @@
         width:14%;
     }
 </style>
-<div class="purchaseorder mt5">
+<div class="purchaseorder mt5 row">
     <div class="col-sm-12" style="margin-bottom: 10px;">
-        <div class="col-sm-4">
+        <div class="col-sm-4 mb-5">
             <input type="text" id="quantitesSearchItem" name="search" class="form-control linkedOrderSearchItem" placeholder="Search Line Item" style="border-radius: 5px">
             <div style="display: inline; position:absolute;right: 20px;top: 6px;color: darkgray">
                 <i class="fa fa-search"></i>
@@ -13,7 +13,7 @@
         </div>
         <?php if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) { ?>
         <div class="split-btn pull-right actionMenu sortWrap col-sm-8" style="width:auto; padding-right:3%;">
-            <div class="col-sm-8">
+            <div class="col-sm-7 mb-5">
                 <button type="button" class="btn-dropdown btn-default">Action on Selected<span class="selectCount"></span></button>
                 <button type="button" class="icon-part dropdown-toggle actionCls" data-toggle="dropdown">
                     <i class="fa fa-caret-down"></i>
@@ -23,7 +23,7 @@
                     <a href="javascript:void(0);" class="actionOnSelected" id="unlinkOrder" style="pointer-events: none">Unlink</a>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5 mb-5">
                 <button type="button" class="btn btn-primary linktoanotherorder">+ Linked Order</button>
             </div>
         </div>

@@ -36,8 +36,8 @@ echo $this->Html->script('inventory_common');
 
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
-    <div class="outerWrapper">
-        <div class="btnWrapper">
+    <div class="outerWrapper flex-column-mob">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Inventory Reports', ['action' => 'index']).' / Inventory Below Threshold Report'; ?></h2>
             
             <div class="float-right">

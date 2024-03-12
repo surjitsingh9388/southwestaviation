@@ -48,19 +48,19 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Inventory Locations</h2>
             
-            <div class="text-right">
-            <?php
-            if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $sessionUser['id'] == 1) {
-                echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default btnspace', 'id'=>'export-button-pdf', 'escape' => false));
-                echo $this->Html->link("Export", 'javascript:void(0);', array('class' => 'btn btn-default btnspace exportListingDataExcel', 'escape' => false));
-            }
-            if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
-                echo $this->Html->link("Create", array('action' => 'create'), array('class' => 'btn btn-primary btnspace', 'escape' => false));
-            }
-            ?>
+            <div class="text-right mb-5">
+                <?php
+                if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $sessionUser['id'] == 1) {
+                    echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default btnspace', 'id'=>'export-button-pdf', 'escape' => false));
+                    echo $this->Html->link("Export", 'javascript:void(0);', array('class' => 'btn btn-default btnspace exportListingDataExcel', 'escape' => false));
+                }
+                if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
+                    echo $this->Html->link("Create", array('action' => 'create'), array('class' => 'btn btn-primary btnspace', 'escape' => false));
+                }
+                ?>
             </div>
         </div>
         

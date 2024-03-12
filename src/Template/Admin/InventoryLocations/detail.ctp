@@ -14,14 +14,14 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
         <?php
         echo $this->Form->create($invenotrylocations, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInvenotryLocations', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Inventory Locations', ['action' => 'index']).' / '.$invenotrylocations->location_name;?>&nbsp;
             <?php if($invenotrylocations->status == '1'){ ?>
             <span class="badge heading-success badge-status">Active</span>
             <?php }else{ ?>
             <span class="badge badge-status">Inactive</span>
             <?php } ?></h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
                 <?php
                 echo $this->Html->link("Back", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
 

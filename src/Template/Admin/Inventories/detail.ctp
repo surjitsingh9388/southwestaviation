@@ -8,7 +8,7 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
          
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <?php
             $serialmsg = 'No Lot';
             if(!empty($invenotries->serial_no)){
@@ -18,7 +18,7 @@ use Cake\Routing\Router;
             <h2 class="heading" style="flex-basis: 60%"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name']. '(PN: '.$invenotries['_matchingData']['InventoryItems']['part_number'].')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotries['_matchingData']['InventoryItems']['id']]).' / '.$serialmsg;?>&nbsp;
             <?php echo $statushtml; ?>
             </h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Back", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>

@@ -37,7 +37,7 @@ echo $this->Html->script('inventory_purchase_order');
 
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Purchase Orders</h2>
             
             <div class="text-right">

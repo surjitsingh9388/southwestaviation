@@ -10,11 +10,11 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($invenotryrequests, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryApproveDenyRequest', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php echo $this->Html->link('Inventory Requests', ['action' => 'index']).' / Inventory Request #'.$invenotryrequests->request_number; ?>
             </h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Back", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 
