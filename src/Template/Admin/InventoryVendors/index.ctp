@@ -52,7 +52,7 @@ echo $this->Html->script('inventory_common');
                 </div>
                 
                 <div class="inputWrap btn-group sortWrap ml-10">
-                    <label class="po-order-sortby">Sort By</label>
+                    <label class="po-order-sortby dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="0" selected>Name</option>

@@ -1,15 +1,15 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12">
+        <div class="col-md-6 col-xs-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Equipment Description</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('equipment_description', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'style'=>'height: 113px; width: 442px;')); ?>
+                        <?php echo $this->Form->control('equipment_description', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'style'=>'height: 113px; width: 100%;')); ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Manufacturer</label>
                     <div class="form-input-frame">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.</label>
                     <div class="form-input-frame">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Vendor</label>
                     <div class="form-input-frame">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Calibration Schedule</label>
                     <div class="form-input-frame">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Cost</label>
                     <div class="form-input-frame">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <?php
                 $tool_status_chk = '';
                 /*if(!empty(@$aircraftwoitemparts->tool_status)){
@@ -69,13 +69,13 @@
                 <input type="checkbox" name="tool_status" value="1" <?php echo $tool_status_chk; ?> />&nbsp;Inactive
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
+        <div class="col-md-6 col-xs-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Calibration Date</label>
                     <div class="form-input-frame">
                         <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('calibration_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'calibration_date', 'placeholder' => '', 'label' => false)); ?>
+                            <?php echo $this->Form->Text('calibration_date', array('class' => 'form-control col-xs-3 col-xs-12', 'id' => 'calibration_date', 'placeholder' => '', 'label' => false)); ?>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -83,12 +83,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Due Date</label>
                     <div class="form-input-frame">
                         <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('due_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'due_date', 'placeholder' => '', 'label' => false)); ?>
+                            <?php echo $this->Form->Text('due_date', array('class' => 'form-control col-xs-3 col-xs-12', 'id' => 'due_date', 'placeholder' => '', 'label' => false)); ?>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -96,12 +96,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Date Labeled</label>
                     <div class="form-input-frame">
                         <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('date_labeled', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'date_labeled', 'placeholder' => '', 'label' => false)); ?>
+                            <?php echo $this->Form->Text('date_labeled', array('class' => 'form-control col-xs-3 col-xs-12', 'id' => 'date_labeled', 'placeholder' => '', 'label' => false)); ?>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Certification</label>
                     <div class="form-input-frame">
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">General Location</label>
                     <div class="form-input-frame">
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Tool Location</label>
                     <div class="form-input-frame">
@@ -136,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Company Location</label>
                     <div class="form-input-frame">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Calibration Status</label>
                     <div class="form-input-frame">
@@ -155,12 +155,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Date Purchased</label>
                     <div class="form-input-frame">
                         <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('date_purchased', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'date_purchased', 'placeholder' => '', 'label' => false)); ?>
+                            <?php echo $this->Form->Text('date_purchased', array('class' => 'form-control col-xs-3 col-xs-12', 'id' => 'date_purchased', 'placeholder' => '', 'label' => false)); ?>
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>

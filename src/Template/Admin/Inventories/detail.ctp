@@ -8,17 +8,17 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
          
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <?php
             $serialmsg = 'No Lot';
             if(!empty($invenotries->serial_no)){
                 $serialmsg = $invenotries->serial_no;
             }
             ?>
-            <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name']. '(PN: '.$invenotries['_matchingData']['InventoryItems']['part_number'].')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotries['_matchingData']['InventoryItems']['id']]).' / '.$serialmsg;?>&nbsp;
+            <h2 class="heading" style="flex-basis: 60%"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name']. '(PN: '.$invenotries['_matchingData']['InventoryItems']['part_number'].')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotries['_matchingData']['InventoryItems']['id']]).' / '.$serialmsg;?>&nbsp;
             <?php echo $statushtml; ?>
             </h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Back", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>
@@ -142,7 +142,7 @@ use Cake\Routing\Router;
                             <div id="itemsInstalledComp" class="tab-pane fade">
                                 <div class="mt10">
                                     <div class="col-sm-12">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 mb-5">
                                             <div class="search-control attachemtment-search-block">
                                                 <input type="text" class="form-control installedSearchItem" placeholder="Search Inventory">
                                                 <div class="attachemnt-search-icon">
@@ -150,7 +150,7 @@ use Cake\Routing\Router;
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 mb-5">
                                             <div class="text-right">
                                                 <button type="button" class="btn btn-default addInvHoldingToBox">Add to Holding Box<span class="<?php echo PAGINATION_LIMIT;?>"></span></button>
                                             </div>
@@ -203,7 +203,7 @@ use Cake\Routing\Router;
                             </div>
                             <div id="itemsAttachments" class="tab-pane fade"><!-- general-tab-section start -->
                                 <div class="g-0 bg-light position-relative">
-                                    <div class="mt10">
+                                    <div class="mt10" style="padding-left: 10px;">
                                         <div class="search-control attachemtment-search-block">
                                             <input type="text" id="attachmentSearch" class="form-control" placeholder="Search Attachments">
                                             <div class="attachemnt-search-icon">

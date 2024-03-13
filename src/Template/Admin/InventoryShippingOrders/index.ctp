@@ -35,10 +35,10 @@ echo $this->Html->script('inventory_purchase_order');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Shipping Orders</h2>
             
-            <div class="float-right">
+            <div class="float-right mb-5">
             <?php
             if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $sessionUser['id'] == 1) {
                 echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default', 'id'=>'export-button-pdf', 'escape' => false));
@@ -63,7 +63,7 @@ echo $this->Html->script('inventory_purchase_order');
                 </div>
                 
                 <div class="inputWrap btn-group sortWrap" class="ml-10">
-                    <label class="po-order-sortby">Sort By</label>
+                    <label class="po-order-sortby dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="0">Order Number</option>

@@ -2027,6 +2027,9 @@ inventory section style
 .pl10{
     padding-left: 10px !important;
 }
+.pr10{
+    padding-right: 10px !important;
+}
 
 .plus-new-btn{
     margin-top: -28px;
@@ -2250,8 +2253,14 @@ inventory section style
     cursor: pointer;
 }
 
-
-
+#datatableQuantities_wrapper {
+    overflow: scroll;
+}
+.plus-new-btn{
+    width: auto;
+    position: relative;
+    margin-right: -15px;
+}
 .show-in-mob{
 	display: none;
 }

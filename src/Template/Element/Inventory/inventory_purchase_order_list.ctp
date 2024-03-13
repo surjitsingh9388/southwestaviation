@@ -1,6 +1,6 @@
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="action-bar dflex">
-    <div class="input-group search-control mb-0">
+    <div class="input-group search-control mb-5">
         <input id="poSearchItem" name="searchItem" type="text" class="form-control" placeholder="Search Purchase Orders">
         <div class="input-group-btn">
             <button class="btn btn-default" type="button">
@@ -9,8 +9,8 @@
         </div>
     </div>
     
-    <div class="inputWrap btn-group sortWrap ml-10">
-        <label class="po-order-sortby">Sort By</label>
+    <div class="inputWrap btn-group sortWrap ml-10 mb-5">
+        <label class="po-order-sortby dNoneMOb">Sort By</label>
         <select class="selectpicker" id="FilterBy" name="sortBy">
             <option value="">Sort By</option>
             <option value="0">Order Number</option>

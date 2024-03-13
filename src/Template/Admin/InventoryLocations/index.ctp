@@ -48,25 +48,25 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Inventory Locations</h2>
             
-            <div class="text-right">
-            <?php
-            if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $sessionUser['id'] == 1) {
-                echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default btnspace', 'id'=>'export-button-pdf', 'escape' => false));
-                echo $this->Html->link("Export", 'javascript:void(0);', array('class' => 'btn btn-default btnspace exportListingDataExcel', 'escape' => false));
-            }
-            if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
-                echo $this->Html->link("Create", array('action' => 'create'), array('class' => 'btn btn-primary btnspace', 'escape' => false));
-            }
-            ?>
+            <div class="text-right mb-5">
+                <?php
+                if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $sessionUser['id'] == 1) {
+                    echo $this->Html->link("Print", 'javascript:void(0);', array('class' => 'btn btn-default btnspace', 'id'=>'export-button-pdf', 'escape' => false));
+                    echo $this->Html->link("Export", 'javascript:void(0);', array('class' => 'btn btn-default btnspace exportListingDataExcel', 'escape' => false));
+                }
+                if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1) {
+                    echo $this->Html->link("Create", array('action' => 'create'), array('class' => 'btn btn-primary btnspace', 'escape' => false));
+                }
+                ?>
             </div>
         </div>
         
         <div class="page-content mt-35">
             <div class="action-bar dflex">
-                <div class="input-group search-control mb-0">
+                <div class="input-group search-control mb-5">
                     <input id="searchItem" name="searchItem" type="text" class="form-control" placeholder="Search Locations">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="button">
@@ -76,7 +76,7 @@ echo $this->Html->script('inventory_common');
                 </div>
                 
                 <div class="inputWrap btn-group sortWrap ml-10">
-                    <label class="location-sort-by">Sort By</label>
+                    <label class="location-sort-by dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="1" selected>Name</option>

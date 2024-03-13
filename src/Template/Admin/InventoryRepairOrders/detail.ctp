@@ -22,7 +22,7 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRepairOrders', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php 
                 echo $this->Html->link('Repair Orders', ['action' => 'index']).' / '.$InventoryRepairOrders->ro_number.'&nbsp;'; 
@@ -31,7 +31,7 @@ use Cake\Routing\Router;
                 ?>
                 
             </h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
                 <?php
                 echo $this->Html->link("Back", 'javascript:history.go(-1);', array('class' => 'btn btn-default', 'escape' => false));
                 ?>
@@ -218,8 +218,7 @@ use Cake\Routing\Router;
                         </ul>
                         <div class="tab-content">
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
-                                <div class="g-0 bg-light position-relative">
-                                    
+                                <div class="g-0 bg-light position-relative tableScroll">
                                     <table class="table upload-area" id="uploadfile">
                                         <thead class="thead-dark">
                                             <tr class="tblinvpo">
@@ -444,7 +443,7 @@ use Cake\Routing\Router;
                                 </div>
                             </div><!-- attachment-tab-section end -->
                             <div id="itemHistory" class="tab-pane fade">
-                                <div class="g-0 bg-light position-relative">
+                                <div class="g-0 bg-light position-relative tableScroll">
                                     
                                     <table class="table" id="invROHistoryTable">
                                         <thead class="thead-dark">

@@ -10,10 +10,10 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryShippingOrderReceive', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Shipping Orders', ['action' => 'index']).' / '.$this->Html->link($InventoryShippingOrders->shipping_order_number, ['action' => 'detail', $InventoryShippingOrders->id]).' / Receive'; ?></h2>
             
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
                 <?php
                 echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>
@@ -118,7 +118,7 @@ use Cake\Routing\Router;
                         </ul>
                         <div class="tab-content">
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
-                                <div class="g-0 bg-light position-relative">
+                                <div class="g-0 bg-light position-relative tableScroll">
                                     
                                     <table class="table upload-area" id="uploadfile">
                                         <thead class="thead-dark">

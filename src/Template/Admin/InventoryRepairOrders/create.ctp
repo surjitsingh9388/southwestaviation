@@ -8,9 +8,9 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
          
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Repair Orders', ['action' => 'index']).' / Create'; ?></h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>

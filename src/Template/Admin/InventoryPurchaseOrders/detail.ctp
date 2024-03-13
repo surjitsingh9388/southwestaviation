@@ -15,7 +15,7 @@ echo $this->Html->css('inventory_purchase_order');
         <?php
         echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryPurchaseOrders', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php 
                 echo $this->Html->link('Purchase Orders', ['action' => 'index']).' / '.$inventorypurchaseorders->po_number.'&nbsp;'; 

@@ -1,4 +1,4 @@
-<div id="inventoryToolDetailModel" class="modal fade page-content" role="dialog" style="background: transparent;">
+<div id="inventoryToolDetailModel" class="modal fade page-content" role="dialog" style="background: transparent; margin-left: -17px ;">
     <div class="modal-dialog" style="width: 65%;">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #e5e5e5;">

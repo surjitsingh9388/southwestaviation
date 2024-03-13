@@ -8,7 +8,7 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
          
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php 
                 echo $this->Html->link('Vendors', ['action' => 'index']).' / '.$inventoryvendors->name; 
@@ -22,7 +22,7 @@ use Cake\Routing\Router;
                 ?>
                 
             </h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>
@@ -45,7 +45,7 @@ use Cake\Routing\Router;
         <div class="page-content mt-35">
             <div class="formBGCls">
                 
-                <div class="addPartBorder pt10">
+                <div class="addPartBorder pt10 pl10 pr10">
                     <?php echo $this->element("Inventory/create_vendor", array('reqtype'=>'detail')); ?>
                 </div>
             </div>

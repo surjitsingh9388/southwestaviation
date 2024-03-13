@@ -11,7 +11,7 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($invenotryrequests, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRequest', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">
                 <?php 
                 echo $this->Html->link('Inventory Requests', ['action' => 'index']).' / '.$invenotryrequests->request_number.'&nbsp;'; 
@@ -81,26 +81,26 @@ use Cake\Routing\Router;
         <div class="page-content mt-35">
             <div class="formBGCls">
                 
-                <div class="addPartBorder pt10 pl10">
+                <div class="addPartBorder pt10 pl10 pr10">
                     <div class="row">
-                        <label class="col-lg-2" for="plane_id">Title</label>
-                        <div class="content-display col-lg-4"><p class="form-control-static"><?php echo $invenotryrequests->title; ?></p></div>
+                        <label class="col-sm-2 col-xs-4" for="plane_id">Title</label>
+                        <div class="content-display col-sm-4 col-xs-6"><p class="form-control-static"><?php echo $invenotryrequests->title; ?></p></div>
                         
-                        <label class="col-lg-2" for="plane_id">Description</label>
-                        <div class="content-display col-lg-4"><p class="form-control-static"><?php echo $invenotryrequests->description; ?></p></div>
+                        <label class="col-sm-2 col-xs-4" for="plane_id">Description</label>
+                        <div class="content-display col-sm-4 col-xs-6"><p class="form-control-static"><?php echo $invenotryrequests->description; ?></p></div>
                         
                     </div>
                     <div class="row">
-                        <label class="col-lg-2" for="plane_id">Requested By</label>
-                        <div class="content-display col-lg-4"><p class="form-control-static"><?php echo $invenotryrequests->requested_by; ?></p></div>
+                        <label class="col-sm-2 col-xs-4" for="plane_id">Requested By</label>
+                        <div class="content-display col-sm-4 col-xs-6"><p class="form-control-static"><?php echo $invenotryrequests->requested_by; ?></p></div>
                     
-                        <label class="col-lg-2" for="plane_id" >Need By</label>
-                        <div class="content-display col-lg-4"><p class="form-control-static"><?php echo date('d-M-Y',strtotime($invenotryrequests->need_by)); ?></p></div>
+                        <label class="col-sm-2 col-xs-4" for="plane_id" >Need By</label>
+                        <div class="content-display col-sm-4 col-xs-6"><p class="form-control-static"><?php echo date('d-M-Y',strtotime($invenotryrequests->need_by)); ?></p></div>
                        
                     </div>
                     <div class="row">
-                        <label class="col-lg-2">Urgency</label>
-                        <div class="content-display col-lg-4"><?php 
+                        <label class="col-sm-2 col-xs-4">Urgency</label>
+                        <div class="content-display col-sm-4 col-xs-6"><?php 
                         $urgency = unserialize(URGENCY);
 
                         $urgency = !empty($invenotryrequests->urgency) ? $urgency[$invenotryrequests->urgency] : ''; 
@@ -109,8 +109,8 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-lg-2">Comments</label>
-                        <div class="col-lg-4">
+                        <label class="col-sm-2 col-xs-4">Comments</label>
+                        <div class="col-sm-4 col-xs-6">
                         <p class="form-control-static"><?php echo $invenotryrequests->comment; ?></p>
                         </div>
                     </div>
@@ -139,8 +139,8 @@ use Cake\Routing\Router;
                                     <table class="table upload-area" id="uploadfile">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <th class="col-sm-2">Item</th>
-                                                <th class="col-sm-2">Qty Requested</th>
+                                                <th class="col-sm-2 col-xs-4">Item</th>
+                                                <th class="col-sm-2 col-xs-4">Qty Requested</th>
                                                 <th class="col-sm-1">Location Needed</th>
                                             </tr>
                                         </thead>
@@ -162,7 +162,7 @@ use Cake\Routing\Router;
                             </div><!-- general-tab-section end -->
 
                             <div id="itemsLinkedOrder" class="tab-pane fade">
-                            <?php echo $this->element('Inventory/linked_order_list', array('sessionUser'=>$sessionUser)); ?>
+                                <?php echo $this->element('Inventory/linked_order_list', array('sessionUser'=>$sessionUser)); ?>
                             </div>
 
                             <div id="itemHistory" class="tab-pane fade">
@@ -171,9 +171,9 @@ use Cake\Routing\Router;
                                     <table class="table" id="invRequestHistoryTable">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <th class="col-sm-2">Date</th>
-                                                <th class="col-sm-2">User</th>
-                                                <th class="col-sm-2">Description</th>
+                                                <th class="col-sm-2 col-xs-4">Date</th>
+                                                <th class="col-sm-2 col-xs-4">User</th>
+                                                <th class="col-sm-2 col-xs-4">Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
