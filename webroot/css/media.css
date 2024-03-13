@@ -65,7 +65,7 @@
 	.action-bar .input-group input{width: 220px;}
 	.sortWrap .sortTxt{font-size: 16px;margin-right: 10px;}
 	.flex-column-mob{flex-direction: column; align-items: self-start;}
-	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog {width: 90% !important;margin: auto;}
+	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog {width: 90% !important;margin: auto;}
 }
 
 @media screen and (max-width: 740px){
@@ -93,6 +93,7 @@
     padding: 10px;
     box-sizing: border-box;
 }
+.tableScrollable{overflow-x: scroll; width: 100%}
 .outerWrapper .boxWrapper .box .lbltxt{font-size: 14px;}
 .outerWrapper .boxWrapper .box .title{font-size: 25px;}
 .wrapper .side-bar ul .menu li .icon-size, .icon-size{width: 28px;}

@@ -11,7 +11,7 @@ echo $this->Html->css('inventory_item');
         <?php
         echo $this->Form->create($invenotryitems, array('class' => 'form-horizontal form-label-left', 'id' => 'frmItemCatalog'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['action' => 'index']).' / '.$this->Html->link($invenotryitems->name. '(PN: '.$invenotryitems->part_number.')', ['action' => 'detail', $invenotryitems->id]); ?> / Edit</h2>
             <div class="btnWrap">
              <?php
@@ -53,7 +53,7 @@ echo $this->Html->css('inventory_item');
                                             <button class="btn btn-primary pull-right" type="button" onclick="$('#inventoryattachment').trigger('click'); return false;">Upload</button>
                                         </div>
                                     </div>
-
+                                <div class="table-responsive">
                                     <table class="table upload-area" id="uploadfile">
                                         <thead class="thead-dark">
                                             <tr>
@@ -100,6 +100,7 @@ echo $this->Html->css('inventory_item');
                                             <?php }} ?>
                                         </tbody>
                                     </table>
+                                </div>
                                 </div>
                             </div><!-- general-tab-section end -->
 

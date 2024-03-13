@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <p>Work Order History </p>
-            <div class="table-responsive" style="overflow-x: auto">
+            <div>
                 <table id="inventoryToolsCertHistTbl" class="table mb-0">
                     <thead>
                         <tr>

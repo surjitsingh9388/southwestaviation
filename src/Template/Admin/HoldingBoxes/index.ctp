@@ -309,13 +309,13 @@ if(!empty($part->plane_id) && !empty($subResults)) {
                                     ?>
                                     <div class="action-bar">
                                         <div class="col-sm-12">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-3 col-xs-12 mb-5">
                                                 <input type="text" id="itemCatalogSearchItem" name="searchItem" class="form-control" placeholder="Search Inventory" style="border-radius: 5px">
                                                 <div style="display: inline; position:absolute;right: 20px;top: 6px;color: darkgray">
                                                     <i class="fa fa-search"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-5 col-xs-12 mb-5">
                                                 <select class="selectpicker" id="CatalogFilterBy" name="sortBy">
                                                     <option value="1">Date Added</option>
                                                     <option value="2">Part Number</option>
@@ -328,13 +328,13 @@ if(!empty($part->plane_id) && !empty($subResults)) {
                                                 <a class="btn btn-primary" onclick="$('#itemCatalogFilterModel').modal('show');">Filter</a>
                                             </div>
 
-                                            <div class="btn-group col-sm-4" style="float:right;">
+                                            <div class="btn-group col-sm-4 col-xs-12" style="float:right;">
                                             <?php
                                             if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) {
                                             ?>
                                             
-                                                <button id="removeallitemcatalogs" type="button" class="btn btn-danger" data-val='inventory items'>Remove All</button>&nbsp;
-                                                <select class="selectpicker actionSel itemcatalogaction" id="actionSel">
+                                                <button id="removeallitemcatalogs" type="button" class="btn btn-danger mb-5" data-val='inventory items'>Remove All</button>&nbsp;
+                                                <select class="selectpicker actionSel itemcatalogaction mb-5" id="actionSel">
                                                     <option value="">Action on Selected</option>
                                                     <option value="1" disabled>Remove</option>
                                                     <option value="2" disabled>Export</option>
@@ -347,7 +347,7 @@ if(!empty($part->plane_id) && !empty($subResults)) {
                                         </div>
                                     </div>
 
-                                    <div class="">
+                                    <div class="tableScrollable">
                                         <table id="datatableItemCatalog" class="table dataTable" width="100%">
                                             <thead>
                                                 <tr>
@@ -413,7 +413,7 @@ if(!empty($part->plane_id) && !empty($subResults)) {
                                             </div>
                                             <?php } ?>
                                         </div>
-                                        <div class="">
+                                        <div class="tableScrollable">
 
                                             <table id="datatablePhysicalInventory" class="table dataTable" width="100%">
                                                 <thead>
