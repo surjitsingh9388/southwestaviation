@@ -698,7 +698,7 @@ class AirframeComponentPartComponent extends Component {
         if(move_uploaded_file($temp, $filelocation)) {
             $filesize = ($postData['file_name']['size']/1000).' KB';
             $tblrow = '<tr>
-                <td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).$foldername.'/' . $name.'">'.$name.'</a>
+                <td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).$foldername.'/' . $name.'" download="'.$name.'">'.$name.'</a>
                 <input type="hidden" name="filenames[]" value="'.$name.'">
                 <input type="hidden" name="filesize[]" value="'.$filesize.'">
                 </td>
@@ -767,7 +767,7 @@ class AirframeComponentPartComponent extends Component {
 			}
 			
 			$tblrow .= '<tr class="airframe-component-part-file" data-val="'.$partfiles['id'].'">
-				<td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).'airframe_component_parts/' . $partfiles['file_name'].'">'.$partfiles['file_name'].'</a>
+				<td class="document-name"><span class="document-management-icon '.$iconcss.'"></span><a href="'.Router::url('/', true).'airframe_component_parts/' . $partfiles['file_name'].'" download="'.$partfiles['file_name'].'">'.$partfiles['file_name'].'</a>
 				</td>
 				<td>'.$partfiles['file_size'].'</td>
 				<td>'.date('m-d-Y', strtotime($partfiles['created_at'])).'</td>

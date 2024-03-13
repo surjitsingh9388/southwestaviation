@@ -37,7 +37,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" name="osr_tax_labor" value="1">&nbsp;Tax Labor
+                    <?php
+                    $osr_tax_labor_chk = '';
+                    if(!empty($wooutstandingoutside->osr_tax_labor)){
+                        $osr_tax_labor_chk = 'checked';
+                    }
+                    ?>
+                    <input type="checkbox" name="osr_tax_labor" value="1" <?php echo $osr_tax_labor_chk; ?> />&nbsp;Tax Labor
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="reference">Shipping Out</label>
@@ -69,7 +75,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" name="osr_tax_parts" value="1">&nbsp;Tax Parts
+                    <?php
+                    $osr_tax_parts_chk = '';
+                    if(!empty($wooutstandingoutside->osr_tax_parts)){
+                        $osr_tax_parts_chk = 'checked';
+                    }
+                    ?>
+                    <input type="checkbox" name="osr_tax_parts" value="1" <?php echo $osr_tax_parts_chk; ?> />&nbsp;Tax Parts
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="reference">Shipping In</label>

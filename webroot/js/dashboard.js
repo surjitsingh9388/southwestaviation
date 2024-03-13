@@ -193,7 +193,7 @@ $(document).on('dblclick', '.editdashboardevent', function(e){
 $(document).on('click', '.delete_dashboard_event', function(e){
     var dashboard_event_id = $('.editdashboardevent-active').attr('data-val');
     if(dashboard_event_id != '' && dashboard_event_id != undefined){
-        if(confirm('Are you sure want to remove this event?')){
+        if(confirm('Are you sure want to delete this event?')){
             $.ajax({
                 url: deleteDashboardEventURL, 
                 type: 'post',
@@ -258,7 +258,7 @@ $(document).on('dblclick', '.editnewsfeed', function(e){
 $(document).on('click', '.delete_dashboard_news_feed', function(e){
     var news_feed_id = $('.editnewsfeed-active').attr('data-val');
     if(news_feed_id != '' && news_feed_id != undefined){
-        if(confirm('Are you sure want to remove this news feed?')){
+        if(confirm('Are you sure want to delete this news feed?')){
             $.ajax({
                 url: deleteDashboardNewsFeedURL, 
                 type: 'post',
