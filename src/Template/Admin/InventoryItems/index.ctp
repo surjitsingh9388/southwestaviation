@@ -33,7 +33,7 @@ echo $this->Html->script('inventory_common');
 <?php echo $this->Form->create('', ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Item Catalog</h2>
             
             <div class="text-right">
@@ -60,7 +60,7 @@ echo $this->Html->script('inventory_common');
                 </div>
                 
                 <div class="inputWrap btn-group sortWrap ml-10">
-                    <label class="invsearchby">Sort By</label>
+                    <label class="invsearchby dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="1">Part Number</option>

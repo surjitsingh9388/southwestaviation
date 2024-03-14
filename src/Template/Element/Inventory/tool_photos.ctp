@@ -7,9 +7,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt10" style="overflow-x: auto">
+        <div class="col-md-12 mt10">
             <input type="file" name="files[]" id="inventory_tool_photo" class="hide-block" multiple  accept=".png, .gif, .jpeg" style="display:none;" />
-            <table class="table table-bordered toolphototable">
+            <table class="table table-bordered toolphototable" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th scope="col">File Name</th>

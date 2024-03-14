@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <p>Certification History For Tool</p>
-            <div class="table-responsive">
+            <div>
                 <table id="inventoryToolsCertHistTbl" class="table mb-0">
                     <thead>
                         <tr>
