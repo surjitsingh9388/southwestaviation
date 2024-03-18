@@ -388,7 +388,9 @@
 
             $customeraddrdropdown = $this->CustomerOTC->getCustomerShippingAddrDropdown($id);
 
-            $this->set(compact('inventorycustomers', 'actionItems', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraftmakes', 'aircraftregdet', 'customerotcaircrafts', 'aircraftmodels', 'customerotcinfoes', 'invoiceparthisttblrow', 'repairorderhistory', 'aircraftworkorderdata', 'customeraddrdropdown', 'repairorderrates'));
+            $customerInfoMedia = $this->CustomerOTC->getCustomerInfoAttachment($id);
+
+            $this->set(compact('inventorycustomers', 'actionItems', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraftmakes', 'aircraftregdet', 'customerotcaircrafts', 'aircraftmodels', 'customerotcinfoes', 'invoiceparthisttblrow', 'repairorderhistory', 'aircraftworkorderdata', 'customeraddrdropdown', 'repairorderrates', 'customerInfoMedia'));
         }
 
         public function getInvItemsWithInventoriesList(){
@@ -3308,7 +3310,7 @@
 
             $postData['owner_authentication'] = !empty($postData['owner_authentication']) ? $postData['owner_authentication'] : '2';
             $postData['way_of_billing'] = !empty($postData['way_of_billing']) ? $postData['way_of_billing'] : '1';
-            $postData['department'] = !empty($postData['department']) ? $postData['department'] : '3';
+            $postData['department'] = !empty($postData['department']) ? $postData['department'] : '1';
             $postData['wo_category'] = !empty($postData['wo_category']) ? $postData['wo_category'] : '7';
             
             $woitemoverviews = $this->CustomerAircraftWOItemOverviews->patchEntity($woitemoverviews, $postData);
@@ -4600,7 +4602,7 @@
 
                     $wo_item_id = $postData['wo_item_id'];
                     $aircraftwoitemphotoes = $this->CustomerOTC->getAircraftWOItemPhotoes($wo_item_id);
-
+                    
                     $woitemphototr = '';
                     if(!empty($aircraftwoitemphotoes)){
                         foreach($aircraftwoitemphotoes as $key=>$photes){
@@ -4630,8 +4632,8 @@
                             $woitemphototr .='</tr>';
                         }
                     }
-
-                    $result = array('status'=>'success', 'message'=>"Deleted successfully.", 'woitemphototr'=>$woitemphototr);
+                    $woitemphotocount = count($aircraftwoitemphotoes);
+                    $result = array('status'=>'success', 'message'=>"Deleted successfully.", 'woitemphototr'=>$woitemphototr, 'woitemphotocount'=>$woitemphotocount);
                 } else {
                     $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
                 }
@@ -4682,8 +4684,8 @@
                             $woitemfiletr .='</tr>';
                         }
                     }
-
-                    $result = array('status'=>'success', 'message'=>"Deleted successfully.", 'woitemfiletr'=>$woitemfiletr);
+                    $woitemfilecount = count($aircraftwoitemfiles);
+                    $result = array('status'=>'success', 'message'=>"Deleted successfully.", 'woitemfiletr'=>$woitemfiletr, 'woitemfilecount'=>$woitemfilecount);
                 } else {
                     $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
                 }

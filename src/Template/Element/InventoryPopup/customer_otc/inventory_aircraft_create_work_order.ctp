@@ -18,7 +18,7 @@
                                 <button type="button" class="btn btn-default work-order-new-item-btn" data-val="new-item">New Item</button>
                                 <button type="button" class="btn btn-default work-order-item-notes-btn">Notes</button>
                                 <button type="button" class="btn btn-default work-order-item-delete">Delete Item</button>
-                                <button type="button" class="btn btn-default" onclick="$('#aircarftCreateWOModel').modal('hide');">Go To Cust.</button>
+                                <button type="button" class="btn btn-default go_to_customer_section">Go To Cust.</button>
                                 <button type="button" class="btn btn-default work-order-item-list">List</button>
                                 <!--button type="button" class="btn btn-default">Options</button-->
                                 <div class="split-btn actionMenu sortWrap label-width-auto" style="float:left;">
@@ -113,7 +113,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Go To Item</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('wo_go_to', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                                    <?php echo $this->Form->control('wo_go_to', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'go_to_wo_item')); ?>
                                 </div>
                             </div>
                         </div>

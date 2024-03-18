@@ -29,8 +29,8 @@ echo $this->Form->create($inventorytools, array('class' => 'form-horizontal form
             <li><a data-toggle="tab" href="#toolCustomFieldsSection">Custom Fields</a></li>
             <li><a data-toggle="tab" href="#toolCertificationHistSection">Certification History</a></li>
             <li><a data-toggle="tab" href="#toolWOHistorySection">W/O History</a></li>
-            <li><a data-toggle="tab" href="#toolPhotoSection">Photos</a></li>
-            <li><a data-toggle="tab" href="#toolFileSection">Files</a></li>
+            <li><a data-toggle="tab" href="#toolPhotoSection">Photos <span class="count_circle inventory_tool_photo_count"><?php echo count($invtoolphotoes); ?></span></a></li>
+            <li><a data-toggle="tab" href="#toolFileSection">Files <span class="count_circle inventory_tool_file_count"><?php echo count($invtoolfiles); ?></span></a></li>
             <li><a data-toggle="tab" href="#toolNoteSection">Notes</a></li>
         </ul>
         <div class="tab-content">

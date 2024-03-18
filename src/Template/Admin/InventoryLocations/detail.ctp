@@ -126,7 +126,7 @@ echo $this->Html->script(array('jquery-qrcode-master/src/jquery.qrcode', 'jquery
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemQuantities">Quantities</a></li>
                             <li><a data-toggle="tab" href="#itemSubLocations">Sub Locations</a></li>
-                            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+                            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a></li>
                             <li><a data-toggle="tab" href="#itemHistory">History</a></li>
                         </ul>
                         <div class="tab-content">

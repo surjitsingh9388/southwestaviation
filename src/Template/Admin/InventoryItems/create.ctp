@@ -35,7 +35,7 @@ echo $this->Html->css('inventory_item');
                 <div id="aircraftTabs" class="tab-pad">
                     <div class="container">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#itemGeneral">Attachments</a></li>
+                            <li class="active"><a data-toggle="tab" href="#itemGeneral">Attachments <span class="count_circle inventory_attachment_count">0</span></a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->

@@ -4,9 +4,9 @@ $(document).ready(function(e){
 });
 
 $(document).on('click', '#datatableListingPage tbody td', function (e) {
-    if ($(this).index() == 0 ) {
+    /*if ($(this).index() == 0 ) {
         return;
-    }
+    }*/
     var row = $(this).closest("tr");    // Find the row
     var values = row.find(".chkBoxCls").val();
     if(values != undefined){
@@ -453,6 +453,14 @@ function uploadFileToServer(fldid, tableid, url){
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $("#"+tableid).append(obj.tblrow);
+                    if(fldid == 'aircraft_wo_photo'){
+                        var photocount = parseInt($('.count_wo_item_photo').html())+1;
+                        $('.count_wo_item_photo').html(photocount);
+                    }
+                    if(fldid == 'aircraft_wo_files'){
+                        var filecount = parseInt($('.count_wo_item_file').html())+1;
+                        $('.count_wo_item_file').html(filecount);
+                    }
                 } else {
                     //$('#'+tableid).html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
                     alert(obj.message);
@@ -3441,6 +3449,7 @@ $(document).on('click', '.woremovephotobtn', function(e){
                     if(obj.status == 'failure'){
                         alert(obj.message);
                     }else{
+                        $('.count_wo_item_photo').html(obj.woitemphotocount);
                         $('#wophotosattachlist').html(obj.woitemphototr);
                     }
                 }
@@ -3465,6 +3474,7 @@ $(document).on('click', '.woremovefilebtn', function(e){
                     if(obj.status == 'failure'){
                         alert(obj.message);
                     }else{
+                        $('.count_wo_item_file').html(obj.woitemfilecount);
                         $('#wofileattachlist').html(obj.woitemfiletr);
                     }
                 }
@@ -5337,4 +5347,41 @@ $(document).on('keyup', '#fuel-gallons, #fuel-price', function(e){
 
     var total = parseFloat(fuel_gallons)*parseFloat(fuel_price);
     $('#epa_total_charges').val(total);
+});
+
+$(document).on('keyup', '#go_to_wo_item', function(e){
+    var id = e.which;
+    var last_item_position = $('#last_item_position').val();
+    var current_item_position = $(this).val();
+    if (id == '13' && current_item_position <= last_item_position) {
+        
+        var work_order_id = $('#work_order_id').val();
+        var item_no = $('#wo_item_no').val();
+        item_no = parseInt(item_no)+1;
+        if(work_order_id != '' && work_order_id != undefined){
+            $('.work-order-prev-btn').prop('disabled', false);
+            $('.work-order-next-btn').prop('disabled', false);
+
+            $('#current_item_position').val(current_item_position);
+            var seltabid = $('.aircraftWOItemTabs').find('ul.nav').children('li.active').children('a').attr('href');
+            
+            var is_new_item = 0;
+            if(is_new_item == '1'){
+                seltabid = '#aircraftWOOverviewSection';
+            }
+
+            var btnclickattr = '';
+
+            var customer_id = $('#wo_customer_id').val();
+            
+            var dataval = {work_order_id:work_order_id, item_no:item_no, current_item_position:current_item_position, is_new_item:is_new_item, customer_id:customer_id};
+
+            submitWOFormData(btnclickattr, dataval, seltabid);
+        }
+    }
+});
+
+$(document).on('click', '.go_to_customer_section', function(e){
+    var customer_id = $('#wo_customer_id').val();
+    window.location.href = goToCustomerURL+'/'+customer_id;
 });

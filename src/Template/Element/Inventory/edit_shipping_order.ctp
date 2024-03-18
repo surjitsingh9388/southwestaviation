@@ -265,7 +265,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#itemGeneral">Line Items</a></li>
-            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a></li>
             <li><a data-toggle="tab" href="#itemHistory">History</a></li>
         </ul>
         <div class="tab-content">
@@ -382,12 +382,10 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
                             </tr>
                         </thead>
                         <tbody id="filetbody">
-                            <?php if(empty($attachments)){ ?>
-                                <tr id="noattachmenttr">
-                                    <td colspan="5">No Attachments. Click 'Upload...' or drag and drop file to this area.</td>
-                                </tr>
-                            <?php 
-                            }else{ 
+                            <tr id="noattachmenttr" <?php if(!empty($attachments)){ ?> class="hide-block" <?php } ?>>
+                                <td colspan="5" id="noattachmentmsg">No Attachments. Click 'Upload...' or drag and drop file to this area.</td>
+                            </tr>
+                            <?php if(!empty($attachments)){
                             foreach($attachments as $attachment){
                                 $ext = substr(strrchr($attachment['file_name'] , '.'), 1);
 

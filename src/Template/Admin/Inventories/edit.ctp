@@ -35,7 +35,7 @@ use Cake\Routing\Router;
                     <div class="container">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemGUsageTimes">Usage Times</a></li>
-                            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+                            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="itemGUsageTimes" class="tab-pane fade in active"><!-- general-tab-section start -->

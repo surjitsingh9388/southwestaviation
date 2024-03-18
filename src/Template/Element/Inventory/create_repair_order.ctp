@@ -157,7 +157,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#itemGeneral">Items to be Repaired</a></li>
-            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle inventory_attachment_count">0</span></a></li>
         </ul>
         <div class="tab-content">
             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->

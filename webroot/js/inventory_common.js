@@ -290,31 +290,36 @@ $(document).on('change', '#country', function (e) {
 });
 
 $(document).on('click', '.deleteattachment', function (e) {
-    
-    if($(this).attr('data-val') != undefined){
-        $(this).parent().parent().remove();
-        $.ajax({
-            url: deleteInventoriesAttURL, 
-            type: 'POST',
-            data: {'id':$(this).attr('data-val')},
-            dataType: "text",
-            success: function (response) {
-                var obj = JSON.parse(response);
-                if(obj.status == 'success') {
-                    var rowCount = $('#filetbody tr').length;
-                    if(rowCount == '1'){
-                        $('#noattachmenttr').css('display', '');
+    if('Are you sure want to delete this attachment'){
+        if($(this).attr('data-val') != undefined){
+            $(this).parent().parent().remove();
+            $.ajax({
+                url: deleteInventoriesAttURL, 
+                type: 'POST',
+                data: {'id':$(this).attr('data-val')},
+                dataType: "text",
+                success: function (response) {
+                    var obj = JSON.parse(response);
+                    if(obj.status == 'success') {
+                        var rowCount = $('#filetbody tr').length;
+                        if(rowCount == '1'){
+                            $('#noattachmenttr').css('display', '');
+                        }
+                        rowCount = rowCount >= '1' ? rowCount-1 : '0';
+                        $('.inventory_attachment_count').html(rowCount);
+                    } else {
+                        $('#filetbody').html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
                     }
-                } else {
-                    $('#filetbody').html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
                 }
+            });
+        }else{
+            $(this).parent().parent().remove();
+            var rowCount = $('#filetbody tr').length;
+            if(rowCount == '1'){
+                $('#noattachmenttr').css('display', '');
             }
-        });
-    }else{
-        $(this).parent().parent().remove();
-        var rowCount = $('#filetbody tr').length;
-        if(rowCount == '1'){
-            $('#noattachmenttr').css('display', '');
+            rowCount = rowCount >= '1' ? rowCount-1 : '0';
+            $('.inventory_attachment_count').html(rowCount);
         }
     }
     
@@ -335,6 +340,10 @@ function uploadData(form_data){
                     $('#noattachmenttr').css('display', 'none');
                 }
                 $("#filetbody").append(obj.tblrow);
+
+                rowCount = $('#filetbody tr').length;
+                rowCount = rowCount >= '1' ? rowCount-1 : '0';
+                $('.inventory_attachment_count').html(rowCount);
             } else {
                 $('#filetbody').html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
             }

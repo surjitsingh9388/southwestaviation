@@ -264,7 +264,7 @@ use Cake\Routing\Router;
                                     <span class="linkordercountblock"><?php echo ($linkorderdata['linkedpurchaseorderscount']+$linkorderdata['linkedrepairorderscount']+$linkorderdata['linkedshippingorderscount']+$linkorderdata['linkedrequestscount']); ?></span>
                                 </a>
                             </li>
-                            <li><a data-toggle="tab" href="#itemsAttachments">Attachments</a></li>
+                            <li><a data-toggle="tab" href="#itemsAttachments">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a></li>
                             <li><a data-toggle="tab" href="#itemHistory">History</a></li>
                         </ul>
                         <div class="tab-content">
