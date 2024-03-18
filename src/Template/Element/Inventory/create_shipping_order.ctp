@@ -266,7 +266,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#itemGeneral">Line Items</a></li>
-            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle inventory_attachment_count">0</span></a></li>
             <li><a data-toggle="tab" href="#itemHistory">History</a></li>
         </ul>
         <div class="tab-content">

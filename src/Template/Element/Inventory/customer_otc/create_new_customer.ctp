@@ -194,7 +194,12 @@
                 <div class="form-group d-flex">
                     <label class="control-label" for="reference">Customer Since:</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('customer_since', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>date('m-d-Y'), 'readonly'=>'readonly')); ?>
+                        <?php 
+                        $customer_since = date('m-d-Y');
+                        if(!empty($inventorycustomers->created)){
+                            $customer_since = date('m-d-Y', strtotime($inventorycustomers->created));
+                        }
+                        echo $this->Form->control('customer_since', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$customer_since, 'readonly'=>'readonly')); ?>
                     </div>
                 </div>
             </div>
@@ -310,7 +315,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
-                <button type="button" class="btn btn-default fetchCustOTCPopup" id="uploadedMedia" title="Click here to upload media" data-val="upload_new_cust_media">Media</button>
+                <button type="button" class="btn btn-default fetchCustOTCPopup" id="uploadedMedia" title="Click here to upload media" data-val="upload_new_cust_media">Media <span class="count_circle count_customer_otc_file"><?php echo count($customerInfoMedia); ?></span></button>
                 <button type="button" class="btn btn-default fetchCustOTCPopup" id="notes" title="Click here to add notes" data-val="new_cust_note">Notes</button>
             </div>
 

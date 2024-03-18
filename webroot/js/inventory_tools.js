@@ -241,6 +241,14 @@ function uploadFileToServer(fldid, tableid, url){
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $("#"+tableid).append(obj.tblrow);
+                    if(fldid == 'inventory_tool_photo'){
+                        var toolphotocount = parseInt($('.inventory_tool_photo_count').html())+1;
+                        $('.inventory_tool_photo_count').html(toolphotocount);
+                    }
+                    if(fldid == 'inventory_tool_files'){
+                        var toolfilecount = parseInt($('.inventory_tool_file_count').html())+1;
+                        $('.inventory_tool_file_count').html(toolfilecount);
+                    }
                 } else {
                     //$('#'+tableid).html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
                     alert(obj.message);

@@ -339,7 +339,7 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemInfo">Item Information</a></li>
                             <li><a data-toggle="tab" href="#subItems">Sub Items</a></li>
-                            <li><a data-toggle="tab" href="#itemAttachment">Attachments</a></li>
+                            <li><a data-toggle="tab" href="#itemAttachment">Attachments <span class="count_circle airframe_part_attachment_count">0</span></a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="itemInfo" class="tab-pane fade in active">
@@ -1023,11 +1023,8 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                                             <?php 
                                             if(!empty($partfiletblrow)){ 
                                                 echo $partfiletblrow;
-                                            }else{ ?>
-                                                <tr>
-                                                    <td colspan="5">No Attachments.</td>
-                                                </tr>
-                                            <?php } ?>
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1930,6 +1927,11 @@ $(document).ready(function() {
             }
         });
     });
+
+    //update Airframe part component attachment count
+
+    var rowCount = $('#component_part_file_list tr').length;
+    $('.airframe_part_attachment_count').html(rowCount);
     
 });  
 
@@ -1945,7 +1947,7 @@ function uploadFileToServer(fldid, tableid, url){
     for (var index = 0; index < totalfiles; index++) {
         var form_data = new FormData();
         form_data.append("file_name", document.getElementById(fldid).files[index]);
-        var airframe_component_part_id = window.location.pathname.split('/').pop();
+        var airframe_component_part_id = $('#part_id').val();
         form_data.append("airframe_component_part_id", airframe_component_part_id);
         
         $.ajax({
@@ -1958,6 +1960,9 @@ function uploadFileToServer(fldid, tableid, url){
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $("#"+tableid).html(obj.tblrow);
+
+                    var rowCount = $('#component_part_file_list tr').length;
+                    $('.airframe_part_attachment_count').html(rowCount);
                 } else {
                     //$('#'+tableid).html('<tr><td colspan="5"><span style="color:red;">'+obj.message+'</span></td></tr>');
                     alert(obj.message);
@@ -1971,7 +1976,7 @@ $(document).on('click', '.delete_comp_part_attachment', function (e) {
     if(confirm('Are you sure want to delete this attachment?')){
         if($(this).attr('data-val') != undefined){
             $(this).parent().parent().remove();
-            var airframe_component_part_id = window.location.pathname.split('/').pop();
+            var airframe_component_part_id = $('#part_id').val();
             $.ajax({
                 url: deleteAirframeCompPartAttachmentURL, 
                 type: 'POST',
@@ -1981,6 +1986,9 @@ $(document).on('click', '.delete_comp_part_attachment', function (e) {
                     var obj = JSON.parse(response);
                     if(obj.status == 'success') {
                         $("#component_part_file_list").html(obj.tblrow);
+
+                        var rowCount = $('#component_part_file_list tr').length;
+                        $('.airframe_part_attachment_count').html(rowCount);
                     } else {
                         alert(obj.message);
                     }

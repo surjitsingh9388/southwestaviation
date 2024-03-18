@@ -78,7 +78,7 @@ echo $this->Html->css('inventory_item');
                                 </a>
                             </li>
                             <li><a data-toggle="tab" href="#itemsPurchaseorders">Purchase Orders</a></li>
-                            <li><a data-toggle="tab" href="#itemsAttachments">Attachments</a></li>
+                            <li><a data-toggle="tab" href="#itemsAttachments">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a></li>
                             <li><a data-toggle="tab" href="#itemsHistory">History</a></li>
                         </ul>
                         <div class="tab-content">

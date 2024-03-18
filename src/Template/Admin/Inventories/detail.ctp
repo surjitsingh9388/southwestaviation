@@ -88,7 +88,9 @@ use Cake\Routing\Router;
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemUsageTimes">Usage Times</a></li>
                             <li><a data-toggle="tab" href="#itemsInstalledComp">Installed Components</a></li>
-                            <li><a data-toggle="tab" href="#itemsAttachments">Attachments</a></li>
+                            <li>
+                                <a data-toggle="tab" href="#itemsAttachments">Attachments <span class="count_circle inventory_attachment_count"><?php echo count($attachments); ?></span></a>
+                            </li>
                             <li><a data-toggle="tab" href="#itemsTransactions">Transactions</a></li>
                             <li><a data-toggle="tab" href="#itemsHistory">History</a></li>
                         </ul>

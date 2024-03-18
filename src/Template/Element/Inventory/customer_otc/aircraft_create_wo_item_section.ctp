@@ -94,8 +94,13 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
                 <li><a data-toggle="tab" href="#aircraftWOOSRSection">OSR</a></li>
                 <li><a data-toggle="tab" href="#aircraftWOPartsSection">Parts</a></li>
                 <li><a data-toggle="tab" href="#aircraftWOToolsSection">Tools</a></li>
-                <li><a data-toggle="tab" href="#aircraftWOPhotosSection">Photos</a></li>
-                <li><a data-toggle="tab" href="#aircraftWOFilesSection">Files</a></li>
+                <li>
+                    <a data-toggle="tab" href="#aircraftWOPhotosSection">Photos <span class="count_circle count_wo_item_photo"><?php echo count($aircraftwoitemphotoes); ?></span></a>
+                    
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#aircraftWOFilesSection">Files <span class="count_circle count_wo_item_file"><?php echo count($aircraftwoitemfiles); ?></span></a>
+                </li>
                 <li><a data-toggle="tab" href="#aircraftWOSummarySection">Summary</a></li>
                 <li><a data-toggle="tab" href="#aircraftWOHistorySection">History</a></li>
             </ul>
@@ -186,4 +191,5 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
 
     var reorganizeWorkOrderItemURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'reorganizeWorkOrderItem']); ?>";
     var checkWOItemSignoffComplURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'checkWOItemSignoffCompl']); ?>";
+    var goToCustomerURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'customerinfo']); ?>";
 </script>
