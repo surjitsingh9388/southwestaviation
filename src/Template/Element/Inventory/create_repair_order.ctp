@@ -161,7 +161,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </ul>
         <div class="tab-content">
             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
-                <div class="g-0 bg-light position-relative">
+                <div class="g-0 bg-light position-relative tableScroll">
                     
                     <table class="table opinvitemtable">
                         <thead class="thead-dark">

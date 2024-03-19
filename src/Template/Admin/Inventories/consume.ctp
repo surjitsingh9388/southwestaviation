@@ -41,26 +41,26 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="plane_id">Consume To</label>
-                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label col-sm-2 col-xs-12" for="plane_id">Consume To</label>
+                                <div class="col-sm-6 col-xs-12 input-dropdown">
                                     <?php 
                                         echo $this->Form->control('consume_to', array('options' => $consumeto, 'empty' => 'Physical Inventory...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'consume_to', 'value'=>'')); 
                                     ?>
                                 </div>
-                                <div class="col-md-7 col-sm-7 col-xs-12"></div>
+                                <div class="col-sm-7 col-xs-12"></div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="qty">Quantity&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label col-sm-2 col-xs-12" for="qty">Quantity&nbsp;<span class="required">*</span></label>
+                                <div class="col-sm-2 col-xs-12">
                                     <?php echo $this->Form->control('qty', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'id'=>'consume_qty', 'value'=>'1')); ?>
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-sm-6 col-xs-12">
                                     <?php 
                                     $defaultUOM = unserialize(DEFAULT_UOM);
                                     echo !empty($invenotries->uom) ? $defaultUOM[$invenotries->uom] : '';
@@ -70,32 +70,32 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="discard_reason">Reason</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                <label class="control-label col-sm-2 col-xs-12" for="discard_reason">Reason</label>
+                                <div class="col-sm-7 col-xs-12">
                                     <?php echo $this->Form->control('discard_reason', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'placeholder'=>"Optional notes related to consumption.")); ?>
                                 </div>
-                                <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                                <div class="col-sm-3 col-xs-12"></div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="account_code">Account Code</label>
-                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label col-sm-2 col-xs-12" for="account_code">Account Code</label>
+                                <div class="col-sm-6 col-xs-12">
                                     <?php 
                                         echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
                                     ?>
                                 </div>
-                                <div class="col-md-5 col-sm-5 col-xs-12"></div>
+                                <div class="col-sm-4 col-xs-12"></div>
                             </div>
                         </div>
                     </div>
                     <div class="invaddPageHeading">Item Information</div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Item Name</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -104,7 +104,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="status">Status</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -119,7 +119,7 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="uom">Unit of Measure</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -128,7 +128,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="quantities">Quantity</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -139,7 +139,7 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="revision">Revision</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -148,7 +148,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="location_name">Location</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -161,7 +161,7 @@ use Cake\Routing\Router;
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="expiration">Expiration</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -170,7 +170,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="serial_no">Lot/Serial</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -181,7 +181,7 @@ use Cake\Routing\Router;
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="cost">Cost</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -193,7 +193,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="received">Received</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
