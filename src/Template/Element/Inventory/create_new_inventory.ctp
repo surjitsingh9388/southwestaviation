@@ -156,7 +156,7 @@
                 <div class="form-group"> 
                     <label class="control-label col-md-4" for="plane_id">Supplier:</label>
                     
-                    <div class="col-md-7 col-sm-7 supplier-content" id="airCompsList">
+                    <div class="col-md-6 col-sm-7 supplier-content" id="airCompsList">
                         <?php 
                             echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Enter a vendor ...', 'class' => 'form-control col-md-7 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor')); 
                         ?>

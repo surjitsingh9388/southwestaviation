@@ -15,7 +15,7 @@ use Cake\Routing\Router;
                 $serialmsg = $invenotries->serial_no;
             }
             ?>
-            <h2 class="heading" style="flex-basis: 60%"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name']. '(PN: '.$invenotries['_matchingData']['InventoryItems']['part_number'].')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotries['_matchingData']['InventoryItems']['id']]).' / '.$serialmsg;?>&nbsp;
+            <h2 class="heading" style="flex-basis: 70%"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotries['_matchingData']['InventoryItems']['name']. '(PN: '.$invenotries['_matchingData']['InventoryItems']['part_number'].')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotries['_matchingData']['InventoryItems']['id']]).' / '.$serialmsg;?>&nbsp;
             <?php echo $statushtml; ?>
             </h2>
             <div class="btnWrap mb-5">
@@ -84,7 +84,6 @@ use Cake\Routing\Router;
                 <!-- Tabs Start -->
                 <div id="aircraftTabs" class="tab-pad">
                     <div class="container">
-                        
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#itemUsageTimes">Usage Times</a></li>
                             <li><a data-toggle="tab" href="#itemsInstalledComp">Installed Components</a></li>

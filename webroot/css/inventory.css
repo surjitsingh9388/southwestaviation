@@ -18,7 +18,7 @@
 }
 
 .label-cost{
-    width:40px;
+    min-width:40px;
 }
 
 .supplier-content{
