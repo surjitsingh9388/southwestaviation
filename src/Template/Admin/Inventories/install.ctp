@@ -34,7 +34,7 @@ use Cake\Routing\Router;
                 <div class="addPartBorder">
                 <div class="invaddPageHeading">Item Details</div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="uom">Part Number</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -50,7 +50,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="location_name">Current Location</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -72,10 +72,10 @@ use Cake\Routing\Router;
                     <div class="invaddPageHeading">Installation</div>
                     
                     <div class="row" style="margin-top:10px;">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="install_to">Install To&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12 input-dropdown">
                                     <?php 
                                         echo $this->Form->control('install_to', array('options' => $installto, 'empty' => 'Physical Inventory...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'install_to', 'value'=>'')); 
                                     ?>
@@ -83,7 +83,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
                     
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="qty">Install Quantity (EA)&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -94,7 +94,7 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row" style="margin-top:10px;">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="account_code">Account Code</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -103,10 +103,6 @@ use Cake\Routing\Router;
                                     ?>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            
                         </div>
                     </div>
                 </div>

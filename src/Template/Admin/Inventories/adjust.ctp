@@ -39,10 +39,10 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="qty">New Quantity&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="qty">New Quantity&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-2 col-sm-8 col-xs-12">
                                     <?php echo $this->Form->control('qty', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => 'Quantity', 'label' => false, 'id'=>'adjust_qty', 'value'=>'', 'required'=>'required')); ?>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12"></div>
@@ -51,20 +51,20 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="discard_reason">Reason&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="discard_reason">Reason&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php echo $this->Form->control('discard_reason', array('class' => 'form-control col-md-10 col-xs-12', 'placeholder'=>'Enter a reason why you are manually adjusting the inventory quantity.', 'label'=> false, 'rows'=>2, 'value'=>'', 'required'=>'required', 'id'=>'discard_reason')); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="account_code">Account Code</label>
-                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="account_code">Account Code</label>
+                                <div class="col-md-2 col-sm-8 col-xs-12">
                                     <?php 
                                         echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
                                     ?>
@@ -75,7 +75,7 @@ use Cake\Routing\Router;
                     </div>
                     <div class="invaddPageHeading">Item Information</div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Item Name</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -116,7 +116,7 @@ use Cake\Routing\Router;
 
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="quantities">Quantity</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">

@@ -57,6 +57,7 @@
 	.action-bar{justify-content: space-between;}
 	/*.action-bar .input-group input {width: 255px;}*/
 	.action-bar .input-group{margin-right: 0px;}
+	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog, #printInventoriesListBarcodesModel .modal-dialog, .modal-dialog {width: 70% !important;margin: auto;}
 }
 
 @media screen and (max-width: 767px){
@@ -65,7 +66,7 @@
 	.action-bar .input-group input{width: 220px;}
 	.sortWrap .sortTxt{font-size: 16px;margin-right: 10px;}
 	.flex-column-mob{flex-direction: column; align-items: self-start;}
-	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog {width: 90% !important;margin: auto;}
+	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog, #printInventoriesListBarcodesModel .modal-dialog, .modal-dialog {width: 90% !important;margin: auto;}
 }
 
 @media screen and (max-width: 740px){

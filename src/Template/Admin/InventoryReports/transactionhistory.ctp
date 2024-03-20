@@ -84,7 +84,7 @@ echo $this->Html->script('inventory_common');
                         <option value="3">Recently Uninstall</option>
                     </select>    
 
-                    <label class="expiring-block">Sort By</label>
+                    <label class="expiring-block dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="0" selected>Create Date</option>

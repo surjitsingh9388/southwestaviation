@@ -90,7 +90,7 @@ echo $this->Html->script('inventory_common');
                     </div>
                 </div>
                 <div class="inputWrap btn-group sortWrap mb-5">
-                    <label class="expiring-block">Sort By</label>
+                    <label class="expiring-block dNoneMOb">Sort By</label>
                     <select class="selectpicker" id="FilterBy" name="sortBy">
                         <option value="">Sort By</option>
                         <option value="1">Item Name</option>
