@@ -96,7 +96,6 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
                 <li><a data-toggle="tab" href="#aircraftWOToolsSection">Tools</a></li>
                 <li>
                     <a data-toggle="tab" href="#aircraftWOPhotosSection">Photos <span class="count_circle count_wo_item_photo"><?php echo count($aircraftwoitemphotoes); ?></span></a>
-                    
                 </li>
                 <li>
                     <a data-toggle="tab" href="#aircraftWOFilesSection">Files <span class="count_circle count_wo_item_file"><?php echo count($aircraftwoitemfiles); ?></span></a>

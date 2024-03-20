@@ -53,8 +53,8 @@
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-default work-order-mark-items-btn">Mark Items</button>
-                                <button type="button" class="btn btn-default">Preview</button>
-                                <button type="button" class="btn btn-default">Print</button>
+                                <button type="button" class="btn btn-default wo-preview-btn">Preview</button>
+                                <button type="button" class="btn btn-default wo-print-btn">Print</button>
                             </div>
                         </div>
                     </div>
