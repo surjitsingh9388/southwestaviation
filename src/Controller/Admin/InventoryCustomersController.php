@@ -1168,6 +1168,8 @@
 
                     $correctiveactionhistorylist = $this->CustomerOTC->getWOItemCorrectiveActionHistory($wo_item_id);
                     $this->set(compact('correctiveactionhistorylist'));
+                }else if($section == 'work_order_print_preview'){
+                    $fileName .= 'work_order_print_preview';
                 }
                 
                 $this->layout = 'ajax';

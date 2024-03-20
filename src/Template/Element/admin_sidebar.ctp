@@ -948,22 +948,22 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryItems']); ?>">
+                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryItems']); ?>",  title="Item Catalog">
                             <?php echo $this->Html->image('/images/icons/inventory_icon.png', array('title'=>'Item Catalog')); ?>
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryCustomers', 'action'=>'loadWorkOrder']); ?>">
+                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryCustomers', 'action'=>'loadWorkOrder']); ?>" title="Work Order">
                             <?php echo $this->Html->image('/images/icons/work_order.png', array('title'=>'Work Order')); ?>
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryCustomers']); ?>">
+                        <a href="<?php echo $this->Url->build(['controller' => 'InventoryCustomers', 'action'=>'index']); ?>" title="Customer/OTC">
                             <?php echo $this->Html->image('/images/icons/customer_otc.png', array('title'=>'Customer/OTC')); ?>
                         </a>
                     </div>
                     <div>
-                        <a href="<?php echo $this->Url->build(['controller' => 'Reports', 'action'=>'customReport']); ?>">
+                        <a href="<?php echo $this->Url->build(['controller' => 'Reports', 'action'=>'customReport']); ?>" title="Information Center">
                             <?php echo $this->Html->image('/images/icons/information_center.png', array('title'=>'Information Center')); ?>
                         </a>
                     </div>

@@ -665,6 +665,8 @@ function appendCustomerOTCPopupData(section, response){
         sectionId = 'woItemCorrectiveActionModal';
     }else if(section == 'wo_item_corrective_action_history'){
         sectionId = 'woItemCorrectiveActionHistoryModal';
+    }else if(section == 'work_order_print_preview'){
+        sectionId = 'workOrderPrintPreviewModal';
     }
 
     $('#'+sectionId).remove();
@@ -5377,6 +5379,7 @@ $(document).on('keyup', '#go_to_wo_item', function(e){
             var dataval = {work_order_id:work_order_id, item_no:item_no, current_item_position:current_item_position, is_new_item:is_new_item, customer_id:customer_id};
 
             submitWOFormData(btnclickattr, dataval, seltabid);
+            $('#go_to_wo_item').val('');
         }
     }
 });
@@ -5385,3 +5388,17 @@ $(document).on('click', '.go_to_customer_section', function(e){
     var customer_id = $('#wo_customer_id').val();
     window.location.href = goToCustomerURL+'/'+customer_id;
 });
+
+$(document).on('click', '.wo-preview-btn, .wo-print-btn', function(e){
+    var wo_item_id = $('#wo_item_id').val();
+    var work_order_id = $('#work_order_id').val();
+    var section = 'work_order_print_preview';
+    if(section != '' && section != undefined){
+        var customer_id = $('#wo_customer_id').val();
+        var aircraft_id = $('#wo_aircraft_id').val();
+        var dataval = {section:section, customer_id:customer_id, aircraft_id:aircraft_id, wo_item_id:wo_item_id, work_order_id:work_order_id};
+
+        fetchOTCCustomPopupDataFromServer(section, dataval);
+    }
+});
+
