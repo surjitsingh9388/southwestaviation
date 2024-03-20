@@ -8,7 +8,7 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
          
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-mob-column">
             <?php
             $serialmsg = 'No Lot';
             if(!empty($invenotries->serial_no)){
@@ -36,7 +36,7 @@ use Cake\Routing\Router;
                 
                 <div class="addPartBorder">
                     <div class="row mt10">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="uom">Lot/Serial</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -45,7 +45,7 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Item Name</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -68,7 +68,7 @@ use Cake\Routing\Router;
                     <br>
                     <hr>
                     <div class="row tranfer-block">
-                        <div class="col-md-5">
+                        <div class="col-sm-5 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Current Location</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -94,13 +94,13 @@ use Cake\Routing\Router;
                             
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-sm-2 col-xs-12">
                             <div class="text-center transfer-arrow">
                                 <i class="fa fa-long-arrow-right fa-2x"></i>
                             </div>
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col-sm-5 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="quantities">Destination Location&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">

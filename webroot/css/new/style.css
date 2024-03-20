@@ -2280,3 +2280,10 @@ inventory section style
 .input-dropdown .dropdown-menu.open {
     max-width: 100%;
 }
+.input-dropdown .bootstrap-select .dropdown-menu li a span.text {
+    word-break: break-all;
+    white-space: break-spaces;
+}
+.history-detail-block{
+    white-space: break-spaces;
+}
