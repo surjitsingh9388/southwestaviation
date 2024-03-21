@@ -10,7 +10,7 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryROReceive', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Repair Orders', ['action' => 'index']).' / '.$this->Html->link($InventoryRepairOrders->ro_number, ['action' => 'detail', $InventoryRepairOrders->id]).' / Receive'; ?></h2>
             
             <div class="btnWrap">
