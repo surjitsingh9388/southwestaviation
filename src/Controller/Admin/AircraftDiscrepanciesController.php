@@ -337,7 +337,7 @@ class AircraftDiscrepanciesController extends AppController
                                 </div>
                                 <div class="sig sigWrapper" style="height:auto;">
                                     <div class="typed"></div>
-                                    <canvas class="sign-pad" id="sign-pad" width="405" height="100"></canvas>
+                                    <canvas class="sign-pad" id="sign-pad" width="100%" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -395,7 +395,7 @@ class AircraftDiscrepanciesController extends AppController
                                 </div>
                                 <div class="sig sigWrapper" style="height:auto;">
                                     <div class="typed"></div>
-                                    <canvas class="sign-pad" id="sign-pad" width="405" height="100"></canvas>
+                                    <canvas class="sign-pad" id="sign-pad" style="width: 100%;" height="100"></canvas>
                                 </div>
                             </div>';
             }

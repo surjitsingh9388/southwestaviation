@@ -2288,3 +2288,6 @@ inventory section style
 .history-detail-block{
     white-space: break-spaces;
 }
+.tags-bootstrap-tagsinput .bootstrap-tagsinput {
+    width: calc(100% - 18px);
+}

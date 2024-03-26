@@ -15,7 +15,7 @@ if(!empty($planeId)) {
 
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Aircraft Discrepancies</h2>
             <div class="btnWrap">
                 <span style="font-weight: bold; color: #fff;"><?php echo $this->Form->checkbox('show_closed', array('id'=>'showClosedDicp', 'label'=>false, 'data-plane_id'=>$planeId, 'disabled'=>$disabled)); ?> Show Closed</span>
