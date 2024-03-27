@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary float-left" onclick="$('#addNewCustomerModal').modal('show');">Create New Customer</button>
                 <button type="button" class="btn btn-primary continueToCreateWO">Continue</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
