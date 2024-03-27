@@ -11,37 +11,37 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Aircraft Name:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo isset($subComps->plane->plane_code) ? h($subComps->plane->plane_code) : ''; ?>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Aircraft Component:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo isset($subComps->airframe_component->log_book) ? h($subComps->airframe_component->log_book) : ''; ?>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Sub Component:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo !empty($subComps->parent_id) ? h($subCompM->subCompName($subComps->parent_id)) : ''; ?>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Sub Component 1-1:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo !empty($subComps->title) ? h($subComps->title) : ''; ?>
                         </div>
                     </div>

@@ -4703,7 +4703,3 @@ table.dataTable thead .no-sort::after{display: none !important;}
     padding: 15px 0;
     font-size: 14px;
 }
-
-.bootstrap-tagsinput input {
-    width: 950px;
-}

@@ -35,7 +35,7 @@ $pilotId = $pilot['duty_assignments'][0]['pilot_id'];
 
     <div class="form-group">
         <label class="col-md-2 col-sm-2 col-xs-12">PIC: </label>
-        <div class="col-md-1 col-sm-1 col-xs-12">
+        <div class="col-md-1 col-sm-2 col-xs-6">
             <a href="javascript:void(0);" class="btn btn-success dutySpUpCls" data-title="Captain" data-datype="PIC" data-da_id="<?php echo $daId; ?>" data-pilot_id="<?php echo $pilotId; ?>">Specify</a>
             <input type="hidden" name="PIC_type1" class="PICtypeCheck1" value="<?php echo $pilot['duty_assignments'][0]['PIC_type1']; ?>">
             <input type="hidden" name="PIC_designation1" class="PICdesignation1" value="<?php echo $pilot['duty_assignments'][0]['PIC_designation1']; ?>">
@@ -46,7 +46,7 @@ $pilotId = $pilot['duty_assignments'][0]['pilot_id'];
             <input type="hidden" name="PIC_date_assigned2" class="PICdate_assigned2" value="<?php echo !empty($pilot['duty_assignments'][0]['PIC_date_assigned2']) ? date('m/d/Y', strtotime($pilot['duty_assignments'][0]['PIC_date_assigned2'])) : ''; ?>">
             <input type="hidden" name="PIC_date_unassigned2" class="PICdate_unassigned2" value="<?php echo !empty($pilot['duty_assignments'][0]['PIC_date_unassigned2']) ? date('m/d/Y', strtotime($pilot['duty_assignments'][0]['PIC_date_unassigned2'])) : ''; ?>">
         </div>
-        <div class="col-md-1 col-sm-1 col-xs-12 PICDisplay">
+        <div class="col-md-1 col-sm-1 col-xs-6 PICDisplay">
             <?php
             if($pilot['duty_assignments'][0]['PIC_type1'] == 'true' && $pilot['duty_assignments'][0]['PIC_type2'] == 'true') {
                 echo $pilot['duty_assignments'][0]['PIC_designation1'].', '.$pilot['duty_assignments'][0]['PIC_designation2'];
@@ -61,7 +61,7 @@ $pilotId = $pilot['duty_assignments'][0]['pilot_id'];
 
     <div class="form-group">
         <label class="col-md-2 col-sm-2 col-xs-12">SIC: </label>
-        <div class="col-md-1 col-sm-1 col-xs-12">
+        <div class="col-md-1 col-sm-2 col-xs-6">
             <a href="javascript:void(0);" class="btn btn-success dutySpUpCls" data-title="First Officer" data-datype="SIC" data-da_id="<?php echo $daId; ?>" data-pilot_id="<?php echo $pilotId; ?>">Specify</a>
             <input type="hidden" name="SIC_type1" class="SICtypeCheck1" value="<?php echo $pilot['duty_assignments'][0]['SIC_type1']; ?>">
             <input type="hidden" name="SIC_designation1" class="SICdesignation1" value="<?php echo $pilot['duty_assignments'][0]['SIC_designation1']; ?>">
@@ -72,7 +72,7 @@ $pilotId = $pilot['duty_assignments'][0]['pilot_id'];
             <input type="hidden" name="SIC_date_assigned2" class="SICdate_assigned2" value="<?php echo !empty($pilot['duty_assignments'][0]['SIC_date_assigned2']) ? date('m/d/Y', strtotime($pilot['duty_assignments'][0]['SIC_date_assigned2'])) : ''; ?>">
             <input type="hidden" name="SIC_date_unassigned2" class="SICdate_unassigned2" value="<?php echo !empty($pilot['duty_assignments'][0]['SIC_date_unassigned2']) ? date('m/d/Y', strtotime($pilot['duty_assignments'][0]['SIC_date_unassigned2'])) : ''; ?>">
         </div>
-        <div class="col-md-1 col-sm-1 col-xs-12 SICDisplay">
+        <div class="col-md-1 col-sm-1 col-xs-6 SICDisplay">
             <?php
             if($pilot['duty_assignments'][0]['SIC_type1'] == 'true' && $pilot['duty_assignments'][0]['SIC_type2'] == 'true') {
                 echo $pilot['duty_assignments'][0]['SIC_designation1'].', '.$pilot['duty_assignments'][0]['SIC_designation2'];

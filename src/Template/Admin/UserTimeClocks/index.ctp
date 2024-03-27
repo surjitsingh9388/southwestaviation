@@ -8,9 +8,9 @@
 
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Active Time Clock Users</h2>
-            <div class="float-right">
+            <div class="float-right mb-5">
                 <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock_log">Time Clocks Log</button>
                 <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock_adjustment">Time Clock Adjustment</button>
             </div>

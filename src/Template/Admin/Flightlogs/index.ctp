@@ -15,16 +15,16 @@ $itinPassnURL = BASE_URL.ROOT_DIR.'admin/flightlogs/itineraryPassenger/';
 </style>
 <div class="content sliding">
     <div class="outerWrapper">
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading">Flight Center</h2>
             <div style="float: right;">
-            <?php
-            if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1){
-                echo $this->Html->link("<i class='fa fa-plane'></i> Initiate New Flight", array('action'=>'dispatch'), array('class' => 'btn btn-default', 'escape' => false));
-                echo "&nbsp;&nbsp";
-                echo $this->Html->link("<i class='fa fa-plus'></i> Create Trip From Flightlog", array('action'=>'flightlog'), array('class' => 'btn btn-default', 'escape' => false));
-            }
-            ?>
+                <?php
+                if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1){
+                    echo $this->Html->link("<i class='fa fa-plane'></i> Initiate New Flight", array('action'=>'dispatch'), array('class' => 'btn btn-default mb-5', 'escape' => false));
+                    echo "&nbsp;&nbsp";
+                    echo $this->Html->link("<i class='fa fa-plus'></i> Create Trip From Flightlog", array('action'=>'flightlog'), array('class' => 'btn btn-default mb-5', 'escape' => false));
+                }
+                ?>
             </div>
         </div>
         

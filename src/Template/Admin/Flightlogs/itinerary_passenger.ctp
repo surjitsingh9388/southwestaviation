@@ -68,7 +68,7 @@ $tripNotes = $fls[0]['notes'];
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" style="overflow: auto;">
                             <div class="col-md-12">
                                 <?php
                                     $itinHtml = '<div class="emailmsg" style="margin:0;padding:0;">

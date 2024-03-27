@@ -113,6 +113,9 @@
 	.content{padding-left: 15px; padding-right: 15px}
 	.action-bar .input-group input{width: 200px;}
 	.dNoneMOb {display: none;}
+	.lft-Wrapper {
+		flex-direction: column;
+	}
 }
 @media screen and (max-width: 320px){
 	.active>.side-bar {margin-left: -497px;}
