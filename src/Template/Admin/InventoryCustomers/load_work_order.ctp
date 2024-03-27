@@ -270,6 +270,8 @@ use Cake\Routing\Router;
 
 <?php echo $this->element('InventoryPopup/customer_otc/load_create_new_work_order'); ?>
 
+<?php echo $this->element('InventoryPopup/customer_otc/create_new_customer'); ?>
+
 <div id="customerotcpopup"></div>
 
 <?php echo $this->element('Inventory/customer_otc/aircraft_work_order_ajax_url'); ?>
