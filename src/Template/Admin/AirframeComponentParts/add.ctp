@@ -180,8 +180,8 @@ use Cake\Routing\Router;
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 18px; width: 95%;')); ?>
+                                <div class="col-md-11 col-sm-11 col-xs-12">
+                                    <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 43px; width: 95%;')); ?>
                                 </div>
                             </div>
                         </div>

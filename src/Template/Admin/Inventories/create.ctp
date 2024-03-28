@@ -11,9 +11,9 @@ use Cake\Routing\Router;
         <?php
         echo $this->Form->create($invenotries, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInvenotry', 'autocomplete'=>'off'));
         ?>  
-        <div class="btnWrapper">
+        <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotryitems->name. ' (PN: '.$invenotryitems->part_number.')', ['controller'=>'InventoryItems', 'action' => 'detail', $invenotryitems->id]).' / Add Inventory'; ?> <i class="fa fa-info-circle" data-html="true" rel="tooltip" data-toggle="tooltip" title="<div class='heading-tooltip'>This is for manual entry of physical inventory. If receiving from a Purchase Order, Repair Order, or Shipping Order, use the receive function.</div>"></i></h2>
-            <div class="btnWrap">
+            <div class="btnWrap mb-5">
              <?php
                 echo $this->Html->link("Cancel", 'javascript:history.back()', array('class' => 'btn btn-default', 'escape' => false));
                 ?>
