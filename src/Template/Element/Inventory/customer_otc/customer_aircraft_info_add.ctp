@@ -1,6 +1,6 @@
 <section class="top-form-section" id="aircraft_info_add_section">    
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12">
             <div class="form-group">
                 <label class="control-label" for="reference">List of Aircraft <span class="required">*</span>
                 </label>
@@ -25,11 +25,11 @@
             
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-12">
             <?php echo $this->Form->create($customerotcaircrafts, ['class' => 'form-horizontal form-label-left', 'id' => 'frmUpdateCustomerOTCAircrafts', 'autocomplete'=>'off']); ?>
             <input type="hidden" name="aircraft_id" id="aircraft_id" value="<?php echo $aircraft_id; ?>" />
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Reg. Number</label>
                         <div class="form-input-frame">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                     
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-4">
                     <div class="form-group d-flex">
                         <label class="control-label" for="reference">Make</label>
                         <div class="form-input-frame">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-4">
                     <div class="form-group d-flex">
                         <label class="control-label" for="reference">Model</label>
                         <div class="form-input-frame">
@@ -134,7 +134,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-6">
                     <div class="form-group d-flex">
                         <label class="control-label" for="reference">Year</label>
                         <div class="form-input-frame">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-6">
                     <div class="form-group d-flex">
                         <label class="control-label" for="reference">Engine Type</label>
                         <div class="form-input-frame">
@@ -204,7 +204,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         <div class="form-check">
                             <?php
@@ -239,7 +239,7 @@
                         <button type="button" class="btn btn-default contractpricesbtn fetchCustOTCPopup" data-val='aircraft_view_contract_price_btn' <?php echo $viewcontractpricebtn; ?>>View Contract Prices</button>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <div class="form-check">
                             <?php
@@ -270,7 +270,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-12">
                     <div class="form-group">
                         <div class="form-check">
                             <?php
@@ -313,7 +313,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 aircraft-work-order-history">
+        <div class="col-md-6 col-sm-6 col-xs-12 aircraft-work-order-history">
             <label>Work Order / Service Quote History</label>
             <table class="table table-bordered quote-table-height">
                 <thead>
@@ -336,7 +336,7 @@
             <button type="button" class="btn btn-default fetchCustOTCPopup" data-val='aircraft_upload_media_btn'>Media</button>
         </div>
 
-        <div class="col-md-6 aircraft-work-order-history">
+        <div class="col-md-6 col-sm-6 col-xs-12 aircraft-work-order-history">
             <label>Scheduled Events</label>
             <table class="table table-bordered quote-table-height">
                 <thead>

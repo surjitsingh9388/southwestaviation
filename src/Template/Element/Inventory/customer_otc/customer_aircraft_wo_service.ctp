@@ -7,8 +7,8 @@
     <input type="hidden" name="service_wo_item_id" id="wo_services_item_id" value="<?php echo @$aircraftwoitemservices->wo_item_id; ?>" />
 
     <div class="row">
-        <div class="col-md-3">
-            <div class="col-md-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12  col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Technicians</label>
                 </div>
@@ -44,13 +44,13 @@
                     ?>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12">
                 <button type="button" class="btn btn-default services_add_technician_btn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>New</button>
                 <button type="button" class="btn btn-default deleteWOServicesBtn" <?php echo $disabledchkbox; ?>>Delete</button>
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-12">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="reference">Repair Technician</label>
                             <div class="form-input-frame">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="reference">Rate an Hour</label>
                             <div class="form-input-frame">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="reference">Add Time</label>
                             <div class="form-input-frame">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label class="control-label" for="reference">Technician Billing Style</label>
                             <div class="form-input-frame">

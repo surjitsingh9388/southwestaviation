@@ -10,7 +10,7 @@
                     <?php echo $this->Form->create($inventorycustomeraddresses, ['action'=>'saveaddress', 'id' => 'frmCustomerAddAddress', 'autocomplete'=>'off']); ?>
                     <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>" />
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Name&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Address&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Address 2</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">City&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Country&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <?php
                             $stateblock = 1;
                             if(empty($inventoryaddresses->country) || $inventoryaddresses->country != '231'){
@@ -99,7 +99,7 @@
                     </div>
                     
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Zip&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Phone Number</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">

@@ -11,7 +11,7 @@ use Cake\Routing\Router;
         </div>
        
         <div class="page-content mt-35">
-            <div class="formBGCls">
+            <div class="formBGCls pt10 pb10">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-6">

@@ -2021,8 +2021,11 @@ inventory section style
     padding-top: 5px !important;
 }
 
-.pt10{
+.pt10 {
     padding-top: 10px !important;
+}
+.pb10 {
+    padding-bottom: 10px !important;
 }
 
 .pl10{
@@ -2293,4 +2296,7 @@ inventory section style
 }
 #airCompsList label:nth-child(3){
     margin-left: 10px;
+}
+.larger-modal-body {
+    min-height: 80vh;
 }

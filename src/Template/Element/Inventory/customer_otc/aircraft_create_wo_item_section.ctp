@@ -55,15 +55,15 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
 </div>
 
 <div class="row">
-    <div class="col-md-7 form-group">
-        <label class="control-label col-md-4" for="plane_id" style="width:27%;">Created By</label>
-        <div class="col-md-8">
+    <div class="col-md-7 col-sm-5 form-group">
+        <label class="control-label col-md-4 col-sm-4" for="plane_id" style="width:27%;">Created By</label>
+        <div class="col-md-8 col-sm-8">
             <?php
             echo $this->Form->control('added_by', array('options' => $userlist, 'empty' => 'Select created by...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_created_by', 'disabled'=>'disabled')); 
             ?>
         </div>
     </div>
-    <div class="col-md-5 form-group"> 
+    <div class="col-md-5 col-sm-7 form-group"> 
         <label class="control-label col-md-3" for="plane_id">Item Status</label>
         <div class="col-md-6">
             <?php
