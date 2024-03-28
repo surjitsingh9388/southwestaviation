@@ -86,9 +86,9 @@ echo $this->Html->script('inventory_common');
                     </button>
                                            
                     <div class="dropdown-content dropdown-menu actionLinks">
-                        <a href="javascript:void(0);" class="actionOnSelected invitmdetaction inv-item-action" data-val="1">Add to Holding Box</a>
-                        <a href="javascript:void(0);" class="actionOnSelected invitmdetaction inv-item-action" data-val="2">Apply Tags</a>
-                        <a href="javascript:void(0);" class="actionOnSelected inv-item-action" onclick="$('#printCatalogBarcodesModel').modal('show');">Print Barcode</a>
+                        <a href="javascript:void(0);" class="actionOnSelected invitmdetaction" data-val="1">Add to Holding Box</a>
+                        <a href="javascript:void(0);" class="actionOnSelected invitmdetaction" data-val="2">Apply Tags</a>
+                        <a href="javascript:void(0);" class="actionOnSelected" onclick="$('#printCatalogBarcodesModel').modal('show');">Print Barcode</a>
                     </div>
                 </div>
                 <?php } ?>

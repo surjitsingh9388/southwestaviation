@@ -40,10 +40,6 @@ h5{
     overflow: auto;
 }
 
-#filetbody a{
-    color:blue !important;
-}
-
 .document-name {
     white-space: nowrap;
     overflow: hidden;

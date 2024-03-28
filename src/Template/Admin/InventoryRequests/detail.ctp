@@ -136,7 +136,7 @@ use Cake\Routing\Router;
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
                                 <div class="g-0 bg-light position-relative">
                                     
-                                    <table class="table upload-area" id="uploadfile">
+                                    <table class="table">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th class="col-sm-2 col-xs-4">Item</th>

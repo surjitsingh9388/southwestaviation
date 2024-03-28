@@ -1,0 +1,101 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Title</th>
+                                        <th>Requested By</th>
+                                        <th>Date Requested</th>
+                                        <th>Date Required</th>
+                                        <th>Urgency</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>000010</td>
+                                <td>trwete</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td></td>
+                                <td>Denied</td>
+                            </tr>
+                            <tr>
+                                <td>eretrew</td>
+                                <td>gfdsgfds</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000003</td>
+                                <td>ewrewqr</td>
+                                <td>test user</td>
+                                <td>03/07/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000004</td>
+                                <td>test request</td>
+                                <td>Admin</td>
+                                <td>03/17/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000005</td>
+                                <td>test reqos</td>
+                                <td>Admin</td>
+                                <td>03/17/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000006</td>
+                                <td>daswte</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000007</td>
+                                <td>rtetre</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000009</td>
+                                <td>retwrewt</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>
+                            <tr>
+                                <td>000014</td>
+                                <td>test request dastre</td>
+                                <td>Admin</td>
+                                <td>03/22/2023</td>
+                                <td>03/29/2023</td>
+                                <td><div id="ro-request-line-item-urgency-1" title="AOG" class="ro-request-urgency-column ro-request-is-urgent">
+                                <img src="../images/icons/urgenticon.png" width="20px" height="auto">&nbsp;AOG</div></td>
+                                <td>Pending Review</td>
+                            </tr>  </tbody></table>

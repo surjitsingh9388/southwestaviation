@@ -95,7 +95,7 @@
                     
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Manufacturered By:</label>
+                            <label class="control-label pull-right">Manufactured By:</label>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php echo h($plane->manufacturered_by); ?>
@@ -104,7 +104,7 @@
 
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Manufacturered On:</label>
+                            <label class="control-label pull-right">Manufactured On:</label>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php echo !empty($plane->manufacturered_on) ? (date('d-M-Y', strtotime($plane->manufacturered_on))) : ''; ?>
