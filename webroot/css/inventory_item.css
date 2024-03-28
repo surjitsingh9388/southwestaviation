@@ -291,10 +291,6 @@ label.btn.btn-default.active {
     overflow: auto;
 }
 
-#filetbody a{
-    color:blue !important;
-}
-
 .document-name {
     white-space: nowrap;
     overflow: hidden;

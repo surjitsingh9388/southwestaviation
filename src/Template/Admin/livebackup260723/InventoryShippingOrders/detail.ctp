@@ -49,10 +49,6 @@ if(!empty($part->plane_id) && !empty($subResults)) {
         overflow: auto;
     }
 
-    #filetbody a{
-        color:blue !important;
-    }
-
     .document-name {
         white-space: nowrap;
         overflow: hidden;

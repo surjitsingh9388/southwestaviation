@@ -28,7 +28,7 @@ $sessionArray = $this->Session->read('Auth.User');
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_serial_number">Serial Nnumber
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_serial_number">Serial Number
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <?php echo $this->Form->control('plane_serial_number', array('class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Serial Nnumber', 'label' => false)); ?>
@@ -99,19 +99,19 @@ $sessionArray = $this->Session->read('Auth.User');
                         </div>
                         
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="manufacturered_by">Manufacturered By
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="manufacturered_by">Manufactured By
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <?php echo $this->Form->control('manufacturered_by', array('class' => 'form-control col-md-7 col-xs-12', 'requred' => 'required', 'placeholder' => 'Manufacturered By', 'label' => false)); ?>
+                                <?php echo $this->Form->control('manufacturered_by', array('class' => 'form-control col-md-7 col-xs-12', 'requred' => 'required', 'placeholder' => 'Manufactured By', 'label' => false)); ?>
                             </div>
                         </div>
 
                         <div class="form-group"> 
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="manufacturered_on">Manufacturered On 
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="manufacturered_on">Manufactured On 
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="input-group date datePicker">
-                                    <?php echo $this->Form->Text('manufacturered_on', array('class' => 'form-control col-md-7 col-xs-12 datePicker', 'placeholder' => 'Manufacture Date', 'label' => false, 'value' => !empty($plane->manufacturered_on) ? date('m-d-Y', strtotime($plane->manufacturered_on)) : '')); ?>
+                                    <?php echo $this->Form->Text('manufacturered_on', array('class' => 'form-control col-md-7 col-xs-12 datePicker', 'placeholder' => 'Manufactured Date', 'label' => false, 'value' => !empty($plane->manufacturered_on) ? date('m-d-Y', strtotime($plane->manufacturered_on)) : '')); ?>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

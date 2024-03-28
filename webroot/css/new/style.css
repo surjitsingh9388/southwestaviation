@@ -1673,7 +1673,7 @@ inventory section style
 }
 
 #filetbody a{
-    color:blue !important;
+    color:#337ab7 !important;
 }
 
 .document-name {
@@ -2290,4 +2290,17 @@ inventory section style
 }
 .tags-bootstrap-tagsinput .bootstrap-tagsinput {
     width: calc(100% - 18px);
+}
+
+.upload-area a{
+    color:#337ab7;
+}
+
+.actionOnSelected{
+    cursor: pointer;
+}
+
+.shipping_order_item_link, #linkedPurchaseOrderList a, #linkedRequestList a, #linkedShippingOrderList a, #linkedRepairOrderList a{
+    color:#337ab7;
+    cursor: pointer;
 }

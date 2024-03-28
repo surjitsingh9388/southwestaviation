@@ -1209,7 +1209,7 @@ class ReportsController extends AppController
             foreach ($reports['airframe_components'] as $key => $value) {
 
                 $dataAtr = "";
-                if(in_array($value['log_book'], ['Airframe','Air Conditioner'])) {
+                if(in_array($value['log_book'], ['Airframe'/*,'Air Conditioner'*/])) {
                     $readonly = '';
                     $logBook = $value['log_book'];
                     if($logBook == 'Airframe') {
@@ -1313,7 +1313,7 @@ class ReportsController extends AppController
                                             </table>
                                         </td>
                                         <td class="mainRTD">';
-                                        if(!in_array($value['log_book'], ['Airframe','Air Conditioner'])) {
+                                        if(!in_array($value['log_book'], ['Airframe'/*,'Air Conditioner'*/])) {
                                             $tHtml .= '<table class="table">
                                                 <tr>
                                                     <td class="childChk">

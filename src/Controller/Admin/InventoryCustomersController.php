@@ -574,7 +574,7 @@
                 }else if($section == 'cust_otc_aircraft_maintenance'){
                     $fileName .= 'inventory_customer_aircarft_maintenance';
 
-                    $engine_type = $postData['engine_type'];
+                    $engine_type = !empty($postData['engine_type']) ? $postData['engine_type'] : '1';
                     
                     if($aircraftregdetail->aircraft_engine_type != $engine_type){
                         $res = $this->CustomerOTCAircrafts->updateAll(
@@ -1683,6 +1683,7 @@
                     }
                     //echo "<pre>";print_r($customerotcaircraftsdata);exit;
                     if(!$customerotcaircraftsdata){
+                        $postData['aircraft_engine_type'] = !empty($postData['aircraft_engine_type']) ? $postData['aircraft_engine_type'] : '1';
                         $postData['added_by'] = $this->Auth->user('id');
                         $postData['created_at'] = date('Y-m-d H:i:s');
                         $customerotcaircrafts = $this->CustomerOTCAircrafts->patchEntity($customerotcaircrafts, $postData);

@@ -160,18 +160,26 @@ $(document).on('change', "#f_expiration_date", function(e){
 })
 
 $(document).on('click', '.invitmdetaction', function(e){
-    if($(this).attr('data-val') == '1'){
-        var ids = [];
-        $("input:checkbox[name=childcheckbox]:checked").each(function(){
-            ids.push($(this).val());
-        });
-        
-        $("#actionForm").attr("action",addToHoldingBoxURL);
-        $("#actionForm").append("<input type='hidden' name='ids' value='"+ids+"'/>");
+    $(".chkBoxCls").prop('checked', $(this).prop('checked'));
 
-        $("#actionForm").submit();
-    }else if($(this).attr('data-val') == '2'){
-        $("#applyTagsModel").modal('show');
+    var checkedcount = $('input.chkBoxCls:checked').length;
+    
+    if(checkedcount > '0'){
+        if($(this).attr('data-val') == '1'){
+            var ids = [];
+            $("input:checkbox[name=childcheckbox]:checked").each(function(){
+                ids.push($(this).val());
+            });
+            
+            $("#actionForm").attr("action",addToHoldingBoxURL);
+            $("#actionForm").append("<input type='hidden' name='ids' value='"+ids+"'/>");
+
+            $("#actionForm").submit();
+        }else if($(this).attr('data-val') == '2'){
+            $("#applyTagsModel").modal('show');
+        }
+    }else{
+        alert("Please select atleast one item.");
     }
 });
 

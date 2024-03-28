@@ -109,12 +109,16 @@ class AirframeComponentsController extends AppController
         $totalFiltered = $totalData;
         $results = $conn->execute( $totalCount )->fetchAll('assoc');
         $totalRecords = isset($results[0]['count']) ? $results[0]['count'] : 0;
-        $sidx = $columns[$requestData['order'][0]['column']];
-        $sord = $requestData['order'][0]['dir'];
+        //$sidx = $columns[$requestData['order'][0]['column']];
+        //$sord = $requestData['order'][0]['dir'];
+        $sortby = $columns[$requestData['order'][0]['column']].' '.$requestData['order'][0]['dir'];
+        if(!empty($requestData['order'][1]['column'])){
+            $sortby .= ', '.$columns[$requestData['order'][1]['column']].' '.$requestData['order'][1]['dir'];
+        }
         $start = $requestData['start'];
         $length = PAGINATION_LIMIT;
 
-        $SQL = $detail." ORDER BY $sidx $sord LIMIT $start , $length ";
+        $SQL = $detail." ORDER BY $sortby LIMIT $start , $length ";
         $results = $conn->execute( $SQL )->fetchAll('assoc');
 
         $i = 0;
