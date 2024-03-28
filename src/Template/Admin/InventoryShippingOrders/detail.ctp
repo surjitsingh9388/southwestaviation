@@ -271,7 +271,7 @@ use Cake\Routing\Router;
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
                                 <div class="g-0 bg-light position-relative tableScroll">
                                     
-                                    <table class="table upload-area" id="uploadfile">
+                                    <table class="table">
                                         <thead class="thead-dark">
                                             <tr class="tblinvpo">
                                                 <th>#</th>
@@ -324,7 +324,7 @@ use Cake\Routing\Router;
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <?php echo isset($val['invitms']['name']) ? '<a href="'.$this->Url->build(['controller'=>'Inventories', 'action'=>'detail', $val['inv']['id']]).'">'.$val['invitms']['name'].' ('.$val['invitms']['part_number'].') ('.$val['inv']['serial_no'].')</a>' : $val['noninventory_item']; ?>
+                                                        <?php echo isset($val['invitms']['name']) ? '<a href="'.$this->Url->build(['controller'=>'Inventories', 'action'=>'detail', $val['inv']['id']]).'" class="shipping_order_item_link">'.$val['invitms']['name'].' ('.$val['invitms']['part_number'].') ('.$val['inv']['serial_no'].')</a>' : $val['noninventory_item']; ?>
                                                     </td>
                                                     <td>
                                                         <?php echo $val['qty'].' '.$defaultUOM[$val['inv']['uom']]; ?>

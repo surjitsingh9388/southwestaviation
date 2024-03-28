@@ -1673,7 +1673,7 @@ inventory section style
 }
 
 #filetbody a{
-    color:blue !important;
+    color:#337ab7 !important;
 }
 
 .document-name {
@@ -2023,6 +2023,11 @@ inventory section style
 
 .pt10 {
     padding-top: 10px !important;
+    padding-top: 10px !important;
+}
+
+.pb10 {
+    padding-bottom: 10px !important;
 }
 .pb10 {
     padding-bottom: 10px !important;
@@ -2293,10 +2298,24 @@ inventory section style
 }
 .tags-bootstrap-tagsinput .bootstrap-tagsinput {
     width: calc(100% - 18px);
+    width: calc(100% - 18px);
 }
 #airCompsList label:nth-child(3){
     margin-left: 10px;
 }
 .larger-modal-body {
     min-height: 80vh;
+}
+
+.upload-area a{
+    color:#337ab7;
+}
+
+.actionOnSelected{
+    cursor: pointer;
+}
+
+.shipping_order_item_link, #linkedPurchaseOrderList a, #linkedRequestList a, #linkedShippingOrderList a, #linkedRepairOrderList a{
+    color:#337ab7;
+    cursor: pointer;
 }

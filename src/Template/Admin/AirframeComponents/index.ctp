@@ -33,7 +33,7 @@ $(document).ready(function() {
         "serverSide": true,
         "lengthMenu": [[<?php echo PAGINATION_LIMIT;?>, 50, 100, -1], [<?php echo PAGINATION_LIMIT;?>, 50, 100, "All"]],
         "lengthChange": false,
-        "order": [[ 1, "asc" ]],
+        "order": [[ 1, "asc" ], [ 2, "asc" ]],
         "aoColumnDefs": [
             {
                 bSortable: false,

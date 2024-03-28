@@ -219,7 +219,7 @@ use Cake\Routing\Router;
                         <div class="tab-content">
                             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
                                 <div class="g-0 bg-light position-relative tableScroll">
-                                    <table class="table upload-area" id="uploadfile">
+                                    <table class="table">
                                         <thead class="thead-dark">
                                             <tr class="tblinvpo">
                                                 <th></th>
