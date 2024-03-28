@@ -58,6 +58,7 @@
 	/*.action-bar .input-group input {width: 255px;}*/
 	.action-bar .input-group{margin-right: 0px;}
 	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog, #printInventoriesListBarcodesModel .modal-dialog, .modal-dialog {width: 70% !important;margin: auto;}
+	.flex-column-mob{flex-direction: column; align-items: self-start;}
 }
 
 @media screen and (max-width: 767px){
@@ -65,7 +66,6 @@
 	.sortWrap .dropdown button{width: 150px;}
 	.action-bar .input-group input{width: 220px;}
 	.sortWrap .sortTxt{font-size: 16px;margin-right: 10px;}
-	.flex-column-mob{flex-direction: column; align-items: self-start;}
 	#vendorAddModel .modal-dialog, #addressAddModel .modal-dialog, #popupFilterModel .modal-dialog, #customerMediaUploadModel .modal-dialog, #customerNotesModel .modal-dialog, #inventoryToolDetailModel .modal-dialog, #aircarftWOOptoinMsgForAllUsersModel .modal-dialog, #printInventoriesListBarcodesModel .modal-dialog, .modal-dialog {width: 90% !important;margin: auto;}
 }
 
@@ -103,6 +103,9 @@
 @media screen and (max-width: 520px){
 	.outerWrapper .boxWrapper .box {width: 135px;}
 	.outerWrapper .boxWrapper .box + .box{margin-top: 10px;}
+	.addPartInfoCls .itemCls {
+		width: calc(100% / 22);
+	}
 }
 @media screen and (max-width: 480px){
 	
@@ -115,6 +118,9 @@
 	.dNoneMOb {display: none;}
 	.lft-Wrapper {
 		flex-direction: column;
+	}
+	.mxl-0 {
+		margin-left: 0 !important;
 	}
 }
 @media screen and (max-width: 320px){

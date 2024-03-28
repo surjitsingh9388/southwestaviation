@@ -11,19 +11,19 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Disposition:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo h($dispRes->title); ?>
                         </div>
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-md-3 col-sm-6 col-xs-6">
                             <label class="control-label pull-right">Status:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
                             <?php echo h($dispRes->status); ?>
                         </div>
                     </div> 

@@ -6,7 +6,7 @@
     
     <div class="page-content">
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Part Type</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Capital Equipment</label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Location</label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Min Unit Cost</label>
                     <div class="col-sm-4 col-sm-4 col-xs-12">
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Max Unit Cost</label>
                     <div class="col-sm-4 col-sm-4 col-xs-12">
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="row mt10">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
                     <div class="col-md-4 col-sm-4 col-xs-12" id="airCompsList">

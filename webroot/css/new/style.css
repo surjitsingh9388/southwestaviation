@@ -2291,3 +2291,6 @@ inventory section style
 .tags-bootstrap-tagsinput .bootstrap-tagsinput {
     width: calc(100% - 18px);
 }
+#airCompsList label:nth-child(3){
+    margin-left: 10px;
+}
