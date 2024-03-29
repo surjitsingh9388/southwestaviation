@@ -7,6 +7,8 @@
             <div class="modal-header" style="background-color: #e5e5e5;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Select a Report</h4>
+                <input type="hidden" name="work_order_id" value="<?php echo $work_order_id; ?>" />
+                <input type="hidden" name="wo_item_id" value="<?php echo $wo_item_id; ?>" />
             </div>
             <div class="modal-body">
                 <div class="row">

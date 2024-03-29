@@ -1170,6 +1170,11 @@
                     $this->set(compact('correctiveactionhistorylist'));
                 }else if($section == 'work_order_print_preview'){
                     $fileName .= 'work_order_print_preview';
+
+                    $work_order_id = $postData['work_order_id'];
+                    $wo_item_id = $postData['wo_item_id'];
+
+                    $this->set(compact('work_order_id', 'wo_item_id'));
                 }
                 
                 $this->layout = 'ajax';
@@ -6333,6 +6338,86 @@ Send: '.$messagedata['created_at'].'
                 }else{
                     $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
                     echo json_encode($response);die;
+                }
+            }
+        }
+
+        public function printPreviewWO()
+        {
+            if (!$this->request->is('ajax')) {
+                return $this->redirect(['action' => 'index']);
+            }else{
+                if ($this->request->is('post') || $this->request->is('put')) {
+                    $postData = $this->request->data;
+                    
+                    $mainHtml = $this->CustomerOTC->getWOPrintPreviewReport($postData);
+echo $mainHtml;exit;
+                    if(!empty($mainHtml)){
+                        $html ='<html lang="en">
+                        <head>
+                        <meta charset="utf-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                        <title></title>
+                        <style>
+                        body{
+                            font-family: Arial, Helvetica, sans-serif;
+                        }
+                        .top-header {
+                            font-size: 13px;
+                            font-weight: 600;
+                            line-height: 22px;
+                            border-bottom: 2px solid #000;
+                            padding-bottom: 6px;
+                        }
+                        .main-table {
+                            margin-top: 50px;
+                        }
+                        table {
+                            width: 100%;
+                        }
+                        .mid-header {
+                            font-size: 21px;
+                            text-align: center;
+                            font-weight: 600;
+                            padding-top: 8px;
+                            line-height: 26px;
+                        }
+                        .main-td {
+                            border-bottom: 4px solid #000;
+                            padding-bottom: 15px;
+                        }
+                        </style>
+                        </head>
+                        
+                        <body>'.$mainHtml.'</body></html>';
+                        //echo $html;exit;
+                        $mpdf = new \Mpdf\Mpdf();
+                        $mpdf->SetDisplayMode('fullpage');
+                        $mpdf->AddPage('L', // L - landscape, P - portrait 
+                        '', '', '', '',
+                        5, // margin_left
+                        5, // margin right
+                        15, // margin top
+                        10, // margin bottom
+                        0, // margin header
+                        0); // margin footer
+
+                        $mpdf->WriteHTML($html);
+                        
+                        //save the file on particular location
+                        //https://mpdf.github.io/reference/mpdf-functions/output.html
+                        $fileName = "work_order_reports_".date('YmdHis').".pdf";
+                        $mpdf->Output(WWW_ROOT.PDF_DIR.$fileName, "F");
+
+                        $result = array('status'=>'success', 'data'=>ROOT_DIR.PDF_DIR.$fileName);
+                        echo json_encode($result);die;
+                    }else{
+                        $result = array('status'=>'failure', 'message'=>'There were no records.');
+                        echo json_encode($result);die;
+                    }
+                }else{
+                    $result = array('status'=>'failure', 'message'=>'Something went wrong, please try again.');
+                    echo json_encode($result);die;
                 }
             }
         }
