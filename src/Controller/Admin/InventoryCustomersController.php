@@ -6351,7 +6351,7 @@ Send: '.$messagedata['created_at'].'
                     $postData = $this->request->data;
                     
                     $mainHtml = $this->CustomerOTC->getWOPrintPreviewReport($postData);
-echo $mainHtml;exit;
+
                     if(!empty($mainHtml)){
                         $html ='<html lang="en">
                         <head>
@@ -6390,7 +6390,7 @@ echo $mainHtml;exit;
                         </head>
                         
                         <body>'.$mainHtml.'</body></html>';
-                        //echo $html;exit;
+                        echo $html;exit;
                         $mpdf = new \Mpdf\Mpdf();
                         $mpdf->SetDisplayMode('fullpage');
                         $mpdf->AddPage('L', // L - landscape, P - portrait 

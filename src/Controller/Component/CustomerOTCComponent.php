@@ -2266,25 +2266,49 @@ Remove the Purchase Order Number information on this screen and try again.';
 
     public function getWOPrintPreviewReport($postData){
         $report_type = $postData['wo_report_type'];
+        $reportHtml = '';
         if($report_type == '1'){
             $reportHtml = $this->getWOCustomerAddrReport($postData);
         }
+        return $reportHtml;
     }
 
     public function getWOCustomerAddrReport($postData){
         $work_order_id = $postData['work_order_id'];
         $wocustomerdet = $this->getWOCustomerDetails($work_order_id);
 
-        $builder = $this->viewBuilder()->templatePath('Element');
-
-        $builder->setTemplate('Inventory/customer_otc/work_order_report/customer_address_report');   //Here you can use elements also
-        $builder->setHelpers(['Html']);
-
-        // create a view instance
-        $view = $builder->build(compact('wocustomerdet'));   //Pass the variables to the view
-
-        // render to a variable
-        $reportHtml = $view->render();
+        $reportHtml = '<table>';
+        if(!empty($wocustomerdet['customers']['customer_name'])){
+            $reportHtml .= '<tr>
+                                <td>'.$wocustomerdet['customers']['customer_name'].'</td>
+                            </tr>';
+        }
+        if(!empty($wocustomerdet['customers']['address'])){
+            $reportHtml .= '<tr>
+                                <td>'.$wocustomerdet['customers']['address'].'</td>
+                            </tr>';
+        }
+        if(!empty($wocustomerdet['customers']['address2'])){
+            $reportHtml .= '<tr>
+                                <td>'.$wocustomerdet['customers']['address2'].'</td>
+                            </tr>';
+        }
+        $citystatepin = '';
+        if(!empty($wocustomerdet['customers']['city'])){
+            $citystatepin .= $wocustomerdet['customers']['city'];
+        }
+        if(!empty($wocustomerdet['customers']['state'])){
+            $citystatepin .= !empty($citystatepin) ? ', '.$wocustomerdet['customers']['state'].' ' : $wocustomerdet['customers']['state'].' ';
+        }
+        if(!empty($wocustomerdet['customers']['zip'])){
+            $citystatepin .= $wocustomerdet['customers']['zip'];
+        }
+        if(!empty($citystatepin)){
+            $reportHtml .= '<tr>
+                                <td>'.$citystatepin.'</td>
+                            </tr>';
+        }
+        $reportHtml .= '</table>';
 
         return $reportHtml;
     }
