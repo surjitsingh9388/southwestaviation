@@ -191,4 +191,5 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
     var reorganizeWorkOrderItemURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'reorganizeWorkOrderItem']); ?>";
     var checkWOItemSignoffComplURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'checkWOItemSignoffCompl']); ?>";
     var goToCustomerURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'customerinfo']); ?>";
+    var printPreviewWOURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'printPreviewWO']); ?>";
 </script>

@@ -616,7 +616,3 @@ $(document).on('click', '.mark_msg_read_unread', function(e){
         alert("Please select atleast one message.");
     }
 });
-
-function touchStart(e){
-    alert("hello");
-   }

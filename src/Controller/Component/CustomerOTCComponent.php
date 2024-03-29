@@ -10,6 +10,7 @@ use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Database\Expression\QueryExpression;
 use Cake\Datasource\ConnectionManager;
+use Cake\View\viewBuilder;
 
 class CustomerOTCComponent extends Component {
     public $components = ['Timezone', 'Auth'];
@@ -2243,4 +2244,48 @@ Remove the Purchase Order Number information on this screen and try again.';
         return $userMenuItems;
     }
 
+    public function getWOCustomerDetails($work_order_id){
+        $whereArr = ['CustomerAircraftWorkOrders.id'=> $work_order_id];
+        $whereArr['CustomerAircraftWorkOrders.order_type'] = '1';
+
+        $this->CustomerAircraftWorkOrders = TableRegistry::get('CustomerAircraftWorkOrders');
+        $wocustomerdet = $this->CustomerAircraftWorkOrders->find('all');
+        $wocustomerdet = $wocustomerdet->where($whereArr)
+                                        ->select(['customers.customer_name', 'customers.address', 'customers.cellular_phone', 'customers.address2', 'customers.city', 'customers.state', 'customers.zip', 'customers.country'])
+                                        ->join([
+                                            'customers' => [
+                                                'table' => 'inventory_customers',
+                                                'type' => 'INNER',
+                                                'conditions' => 'customers.id = CustomerAircraftWorkOrders.wo_customer_id',
+                                            ]
+                                        ])
+                                        ->first();
+
+        return $wocustomerdet;
+    }
+
+    public function getWOPrintPreviewReport($postData){
+        $report_type = $postData['wo_report_type'];
+        if($report_type == '1'){
+            $reportHtml = $this->getWOCustomerAddrReport($postData);
+        }
+    }
+
+    public function getWOCustomerAddrReport($postData){
+        $work_order_id = $postData['work_order_id'];
+        $wocustomerdet = $this->getWOCustomerDetails($work_order_id);
+
+        $builder = $this->viewBuilder()->templatePath('Element');
+
+        $builder->setTemplate('Inventory/customer_otc/work_order_report/customer_address_report');   //Here you can use elements also
+        $builder->setHelpers(['Html']);
+
+        // create a view instance
+        $view = $builder->build(compact('wocustomerdet'));   //Pass the variables to the view
+
+        // render to a variable
+        $reportHtml = $view->render();
+
+        return $reportHtml;
+    }
 }

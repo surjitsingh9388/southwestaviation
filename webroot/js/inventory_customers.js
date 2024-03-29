@@ -5402,3 +5402,8 @@ $(document).on('click', '.wo-preview-btn, .wo-print-btn', function(e){
     }
 });
 
+$(document).on('click', '.continueWOPrintBtn', function(e){
+    var params = $('#frmWOPrintPreview').serialize();
+    downloadPDFAjax(printPreviewWOURL, params);
+    
+});
