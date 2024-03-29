@@ -177,23 +177,22 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
-                                <div class="col-md-11 col-sm-11 col-xs-12">
-                                    <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 43px; width: 95%;')); ?>
+                        <div class="col-md-12 form-group">
+                            <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 18px; width: 97%;')); ?>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label col-md-5 col-sm-5 col-xs-12" for="avg_man_hrs">Man Hours</label>
+                                    <div class="col-md-7 col-sm-7 col-xs-12">
+                                        <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="avg_man_hrs">Man Hours</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     
                     <div class="row">
