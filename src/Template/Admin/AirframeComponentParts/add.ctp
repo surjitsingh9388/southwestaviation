@@ -159,7 +159,7 @@ use Cake\Routing\Router;
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12" for="description">Item Name</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:18px;width:97%;')); ?>
+                                    <?php echo $this->Form->control('description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:97%;')); ?>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ use Cake\Routing\Router;
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12" for="notes">Notes</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:18px;width:97%;')); ?>
+                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:97%;')); ?>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@ use Cake\Routing\Router;
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 18px; width: 97%;')); ?>
+                                <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 25px; width: 97%;')); ?>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -199,7 +199,7 @@ use Cake\Routing\Router;
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12 " for="tags">Tags</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12 tags-bootstrap-tagsinput" style='margin-left: 18px;'>
+                                <div class="col-md-8 col-sm-8 col-xs-12 tags-bootstrap-tagsinput" style='margin-left: 25px;'>
                                     <input type="text" name="tags" value="" data-role="tagsinput" class="form-control" placeholder="Enter a tag"></input>
                                 </div>
                             </div>

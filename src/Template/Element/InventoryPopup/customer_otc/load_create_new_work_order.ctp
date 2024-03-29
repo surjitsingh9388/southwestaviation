@@ -10,12 +10,12 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Registration Number</label>
                             <div class="form-input-frame">
                                 <?php
-                                    echo $this->Form->control('filter_aircraft_registration_number', array('options' => $aircraftoptiondata, 'empty' => '', 'class' => 'form-control selectpicker mh', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'filter_aircraft_registration_number'));
+                                    echo $this->Form->control('filter_aircraft_registration_number', array('options' => $aircraftoptiondata, 'empty' => '', 'class' => 'form-control selectpicker ', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'filter_aircraft_registration_number'));
                                 ?>
                             </div>
                         </div>

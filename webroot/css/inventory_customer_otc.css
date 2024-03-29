@@ -600,5 +600,5 @@ h7{
 }
 
 #aircraftWOAddToolModel .modal-body, #woCreateNewWOModal .modal-body{
-    height: 350px !important;
+    min-height: 400px !important;
 }
