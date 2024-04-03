@@ -11,7 +11,7 @@
                 ?>
                 <div  class="row">
                     <input type="hidden" name="tool_id" id="certified_hist_tool_id" value="<?php echo $tool_id; ?>" />
-                    <div class="col-md-6">
+                    <div class="col-sm-6 col-xs-12">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Date Sent Out</label>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-6 col-xs-12">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Date Received Back</label>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-12"></div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Sent to</label>
@@ -70,7 +70,7 @@
                             <input type="checkbox" name="was_in_calibration" id="was_in_calibration" value="1" />&nbsp;Was in calibration
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Adjustment Needed</label>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Notes</label>

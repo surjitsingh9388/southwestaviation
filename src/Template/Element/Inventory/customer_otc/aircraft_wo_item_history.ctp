@@ -1,6 +1,6 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-12 wo_item_history_scroll">
+        <div class="col-xs-12 wo_item_history_scroll">
             <table class="table invitmhistory">
                 <thead class="thead-dark">
                     <tr>

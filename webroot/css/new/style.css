@@ -2319,3 +2319,4 @@ inventory section style
     color:#337ab7;
     cursor: pointer;
 }
+#workOrderPrintPreviewModal .modal-dialog .modal-body, .mh .dropdown-menu{min-height: 500px;     height: auto;}
