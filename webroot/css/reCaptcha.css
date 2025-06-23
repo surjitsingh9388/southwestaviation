@@ -1,0 +1,21 @@
+/* For recaptch validation on contact us page */
+/* 
+    Created on : 7 May, 2019, 11:40:14 AM
+    Author     : Asheesh
+*/
+.msg-error {
+    color: red;
+}
+.g-recaptcha.error { 
+    border: solid 2px #c64848;
+    padding: .2em;
+    width: 22.2em;
+    display: block;
+}
+
+#recaptchaBecomeMember.g-recaptcha.error {
+    border: solid 2px #c64848;
+    padding: .1em;
+    width: 24.2em;
+    display: block;
+} 

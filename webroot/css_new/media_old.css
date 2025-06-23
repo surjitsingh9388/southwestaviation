@@ -1,0 +1,11 @@
+@media screen and (max-width: 580px){
+	.action-bar > .form-group select{
+		width: 100px;
+	}
+}
+@media screen and (max-width: 480px){
+	.action-bar > .form-group{
+		display: block;
+		margin: 10px 0;
+	}
+}

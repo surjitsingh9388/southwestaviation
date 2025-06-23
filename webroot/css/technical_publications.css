@@ -1,0 +1,54 @@
+.technical_publication_create_box {
+    background-color: black;
+    width: 150px;
+    padding:13px;
+    margin:10px;
+    border-radius:10px;
+    color:white;
+    cursor: pointer;
+}
+
+.technical_publication_upload_box {
+    width: 150px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    color: black;
+    border: dotted 0.2em;
+    cursor: pointer;
+}
+
+.technical_publication_folder_box {
+    width: 150px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    color: black;
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+
+.create_btn_dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+  
+.create_btn_dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.create_btn_dropdown a:hover {background-color: #ddd;}
+
+.create_btn_dropdown_show {display: block;}
+
+.tech_publ_link a, .techpubl_h5 a{
+    color: #337ab7;
+}

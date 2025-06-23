@@ -1,0 +1,220 @@
+<table class="table">
+                            <thead>
+                                <tr>
+                                    <th>PO Number</th>
+                                    <th>Type</th> 
+                                    <th>Div. Abbr.</th> 
+                                    <th>Division Name</th> 
+                                    <th>Status</th> 
+                                    <th>Vendor</th>
+                                    <th>Requestor</th>
+                                    <th>PO Date</th> 
+                                    <th>Reference</th> 
+                                    <th>Sales Person</th> 
+                                    <th>Tax Amount</th> 
+                                    <th>Shipping Amount</th> 
+                                    <th>Subtotal</th>
+                                    <th>Total Cost</th> 
+                                    <th>Ship To</th> 
+                                    <th>Bill To</th> 
+                                    <th>Shipment Method</th> 
+                                    <th>Account Code</th> 
+                                    <th>PO Created</th>
+                                    <th>PO Last Changed</th> 
+                                    <th>Line Item Num.</th> 
+                                    <th>Part Number</th> 
+                                    <th>Line Item Description</th> 
+                                    <th>Quantity</th> 
+                                    <th>Line Item Status</th> 
+                                    <th>UOM</th> 
+                                    <th>Unit Price</th> 
+                                    <th>ETA</th> 
+                                    <th>Line Item Created</th> 
+                                    <th>Line Item Last Changed</th> 
+                                    <th>Currency</th> 
+                                    <th>Is Active</th> 
+                                    <th>Line Item ID</th> 
+                                    <th>Request Number</th> 
+                                </tr>
+                            </thead>
+                        <tbody>
+                            <tr>
+                                <td>000001</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td>Partial Received</td>
+                                <td></td>
+                                <td>Admin</td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td>0.45</td>
+                                <td>20.00</td>
+                                <td>15.00</td>
+                                <td>35.45</td>
+                                <td></td>
+                                <td>sgfsdgf</td>
+                                <td></td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td>05/09/2023</td>
+                                <td>1</td>
+                                <td>43654365-3452</td>
+                                <td>test item name 5689(PN: 43654365-3452)</td>
+                                <td>1</td>
+                                <td>Pending Shipment</td>
+                                <td>LBS</td>
+                                <td>10</td>
+                                <td>2023-03-07</td>
+                                <td>03/06/2023</td>
+                                <td>03/23/2023</td>
+                                <td>USD</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>000001</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td>Partial Received</td>
+                                <td></td>
+                                <td>Admin</td>
+                                <td>03/06/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td>0.45</td>
+                                <td>20.00</td>
+                                <td>15.00</td>
+                                <td>35.45</td>
+                                <td></td>
+                                <td>sgfsdgf</td>
+                                <td></td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td>05/09/2023</td>
+                                <td>2</td>
+                                <td></td>
+                                <td>1234568</td>
+                                <td>1</td>
+                                <td>Pending Shipment</td>
+                                <td>LBS</td>
+                                <td>5</td>
+                                <td></td>
+                                <td>03/06/2023</td>
+                                <td>03/06/2023</td>
+                                <td>USD</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>36543665</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td>Partial Received</td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>05/08/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td>0.30</td>
+                                <td>5.00</td>
+                                <td>15.00</td>
+                                <td>20.30</td>
+                                <td>yterytr</td>
+                                <td>uytruytr fterwtr</td>
+                                <td>FedEx Early AM</td>
+                                <td></td>
+                                <td>05/08/2023</td>
+                                <td>05/09/2023</td>
+                                <td>1</td>
+                                <td>43654365</td>
+                                <td>wwwwrrrrr(PN: 43654365)</td>
+                                <td>1</td>
+                                <td>Pending Shipment</td>
+                                <td>Gallons</td>
+                                <td>5</td>
+                                <td>2023-05-30</td>
+                                <td>05/08/2023</td>
+                                <td>05/08/2023</td>
+                                <td>USD</td>
+                                <td>1</td>
+                                <td>17</td>
+                                <td>000005</td>
+                            </tr>
+                            <tr>
+                                <td>36543665</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td>Partial Received</td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>05/08/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td>0.30</td>
+                                <td>5.00</td>
+                                <td>15.00</td>
+                                <td>20.30</td>
+                                <td>yterytr</td>
+                                <td>uytruytr fterwtr</td>
+                                <td>FedEx Early AM</td>
+                                <td></td>
+                                <td>05/08/2023</td>
+                                <td>05/09/2023</td>
+                                <td>2</td>
+                                <td>43654365</td>
+                                <td>wwwwrrrrr(PN: 43654365)</td>
+                                <td>1</td>
+                                <td>Pending Shipment</td>
+                                <td>Gallons</td>
+                                <td>5</td>
+                                <td>2023-05-30</td>
+                                <td>05/08/2023</td>
+                                <td>05/08/2023</td>
+                                <td>USD</td>
+                                <td>1</td>
+                                <td>17</td>
+                                <td>000005</td>
+                            </tr>
+                            <tr>
+                                <td>36543665</td>
+                                <td>Standard</td>
+                                <td></td>
+                                <td></td>
+                                <td>Partial Received</td>
+                                <td>test vendor</td>
+                                <td>Admin</td>
+                                <td>05/08/2023</td>
+                                <td></td>
+                                <td></td>
+                                <td>0.30</td>
+                                <td>5.00</td>
+                                <td>15.00</td>
+                                <td>20.30</td>
+                                <td>yterytr</td>
+                                <td>uytruytr fterwtr</td>
+                                <td>FedEx Early AM</td>
+                                <td></td>
+                                <td>05/08/2023</td>
+                                <td>05/09/2023</td>
+                                <td>2</td>
+                                <td></td>
+                                <td>test</td>
+                                <td>1</td>
+                                <td>Pending Shipment</td>
+                                <td>Gallons</td>
+                                <td>10</td>
+                                <td>2023-06-08</td>
+                                <td>05/08/2023</td>
+                                <td>05/08/2023</td>
+                                <td>USD</td>
+                                <td>1</td>
+                                <td>18</td>
+                                <td>000005</td>
+                            </tr>  </tbody></table>

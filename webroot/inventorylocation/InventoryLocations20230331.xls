@@ -1,0 +1,84 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Location Full Path</th>
+                                        <th>Description</th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basti</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi > Old Delhi > dsafdsfd > Basti</td>
+                                <td>test description</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Delhi</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>dsafdsfd</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi > Old Delhi > dsafdsfd</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Gorakhpur</td>
+                                <td></td>
+                                <td></td>
+                                <td>Gorakhpur</td>
+                                <td>test</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Lucknow</td>
+                                <td></td>
+                                <td></td>
+                                <td>Lucknow</td>
+                                <td>test</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Mathura</td>
+                                <td></td>
+                                <td></td>
+                                <td>Mathura</td>
+                                <td>test</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Mumbai</td>
+                                <td></td>
+                                <td></td>
+                                <td>Mumbai</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Old Delhi</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi > Old Delhi</td>
+                                <td>test</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>tyrww</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi > Old Delhi > dsafdsfd > tyrww</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>  </tbody></table>

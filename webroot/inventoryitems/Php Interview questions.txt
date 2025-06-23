@@ -1,0 +1,61 @@
+*****************Divesh's interview
+1: Singleton Pattern (A Class has one instance, It provides a global access point to it)
+2: Get and Post Difference
+3: What is Static class and what is the use ? (A static class in PHP is a type of class which is instantiated only once in a program. It must contain a static member (variable) or a static member function (method) or both. The variables and methods are accessed without the creation of an object, using the scope resolution operator(::).)
+4: Difference between innodb and myisam?
+5: What is Transaction ? (A transaction is the logical work unit that performs a single activity or multiple activities in a database)
+6: What is normaliization , and how many types of normalization and explain ?
+7: What is recursion ?
+8: $arr= ['a','b','c','a','f'];How to find the occurence of each charactor //output [a=>2,b=>1,c=>1]
+9: Difference between Session and cookies ?
+10: if file size is 2 GB but 50 % data uploaded but if upload same file to upload it will start from 51% not zero .How to handle this in application.
+11: What is request ?
+12: Write sql query for id ,name ,team_lead_id and find those name,team_lead_name which has team lead . 
+
+*********** Kartikeyan interview
+Q1.What are sessions?
+Q2.How do browsers detect different sessions being used by users?
+Q3.How do you validate sessions?
+Q4.What are cookies?
+Q5.What are PSR Coding Standards?
+Q6.Define and difference between stateful and stateless process with examples?
+Q7.What are web services?
+Q8.Difference between REST AND SOAP?
+Q9.What is path in setcookie() function?
+Q10.JOIN IN SQL query?
+Q11.Write code for infinite loop.
+Q12.What are observers in laravel?
+Q13.Where can you store tokens?
+Q14.Is HTTP and HTTPS Protocol stateless?
+
+************Divya Shukla interview
+Q-1 What is INDEX?
+Q-2 What is routing?
+Q-3 What is Anonymous function and anonymous method in php?
+Q-4 Design Pattern and name any one of them.
+Q-5 Difference between Skeleton Design pattern and Factory pattern?
+Q-6 Which one is better between CI and Laravel and list points which shows Laravel is better.
+Q-7 What is JWT token? (A JSON web token(JWT) is JSON Object which is used to securely transfer information over the web(between two parties). It can be used for an authentication system and can also be used for information exchange.The token is mainly composed of header, payload, signature.)
+Q-8 What is VIEWS in MySQL? (It is essential to know that a view does not store the data physically. When we execute the SELECT statement for the view, MySQL uses the query specified in the view's definition and produces the output. Due to this feature, it is sometimes referred to as a virtual table.)
+Q-9 What is Store Procedure in MYSQL?
+Q-10 What is Trigger in MySQL?
+Q-11 How many types of joins and Why we need LEFT JOIN we can swip tables also?
+Q-12 DB Schema for Admin?
+Q-13 How to optimize your application?
+Q-14 How to set max execution time and how much is default execution time? (By default, the maximum execution time for PHP scripts is set to 30 seconds)
+Q-15 Apache config file name?
+Q-16 Difference between eloquent and Query builder which one is better and why? (Eloquent ORM is best suited working with fewer data in a particular table. On the other side, query builder takes less time to handle numerous data whether in one or more tables faster than Eloquent ORM. In my case, I use ELoquent ORM in an application with tables that will hold less than 17500 entries.)
+Q-17 Difference between Index and assosiative array?
+Q-18 Does PHP support multiple inheritence and what is Interface?
+Q-19 How can we Do overloading in PHP?
+Q-20 What are magic methods?
+Q-21 Does __construt function calls in default or we have to call is explicitly?
+Q-22 What is PORT ?
+Q-23 Can we run two applications on same port? (Two applications can certainly listen on the same port. But the socket for each connection can not be bound to the same IP address on the same port.)
+Q-24 How much data size we can send through POST method? (The default PHP values are 2 MB for upload_max_filesize, and 8 MB for post_max_size.)
+Q-25 Encryption methods in PHP.
+Q-26 What is SHA1 (SHA-1 or Secure Hash Algorithm 1 is a cryptographic hash function which takes an input and produces a 160-bit (20-byte) hash value. This hash value is known as a message digest. )
+Q-27 What are observors and closure in Laravel? (Observers are basically predefined events that happen only on Eloquent Models (creating a record, updating a record, deleting, etc). Events are generic, aren't predefined, and can be used anywhere, not just in models.) (Closures are anonymous functions that don't belong to any class or object. Closures don't have specified names and can also access variables outside of scope without using any global variables)
+Q-28 Difference in feature of PHP5 and PHP7.
+Q-29 Which is faster between SELECT and INSERT?
+Q-30 How to find Duplicate files in a folder in PHP?

@@ -1,0 +1,28 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Location Full Path</th>
+                                        <th>Description</th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>dsafdsfd</td>
+                                <td></td>
+                                <td></td>
+                                <td>Delhi > Old Delhi > dsafdsfd</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>Gorakhpur</td>
+                                <td></td>
+                                <td></td>
+                                <td>Gorakhpur</td>
+                                <td>test</td>
+                                <td>1</td>
+                            </tr>  </tbody></table>

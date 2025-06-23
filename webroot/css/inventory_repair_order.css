@@ -1,0 +1,128 @@
+.tblinvpo th{
+    background-color:#2c3e50;
+    color:white;
+}
+
+.tab-content td{
+    text-align:left;
+}
+.inventory-request-item{
+    color: #092E6E !important;
+    text-decoration:none;
+}
+
+.heading div {
+    padding: 5px !important;
+    margin-left: 10px !important;
+}
+
+.form-control-static {
+    padding-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.form-control-static {
+    border-bottom: 1px solid #dfdfdf;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.vendor-address-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+.disabled {
+    pointer-events:none;
+    opacity:0.6;
+}
+
+label.btn.btn-default.active {
+    background-color: #5cca5c;
+    color: #fff;
+}
+
+.linked-orders .table-header {
+    background-color: #2c3e50;
+    color: #FFF;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+.list-group-item {
+    padding-left: 42px;
+    padding-right: 42px;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px !important;
+    margin-bottom: -1px !important;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.linkordercountblock {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+#invROHistoryTable a {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#invPOHistoryTable a {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btnspace{
+    margin-right: 5px !important;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.btnWrapper .btn {
+    margin: 2px;
+    height: 36px;
+}
+.dt-buttons{
+    display:none;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+.th-cost{
+    width:7%;
+}

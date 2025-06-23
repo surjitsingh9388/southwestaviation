@@ -1,0 +1,50 @@
+sudo service apache2 stop
+sudo service mysql stop
+sudo /opt/lampp/lampp restart
+
+
+
+CREATE TABLE `pm_server_rooms` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `server_name` varchar(255) NOT NULL,
+  `status` enum('0','1','2') NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ALTER TABLE `pm_server_rooms` ADD PRIMARY KEY (`id`);
+ALTER TABLE `pm_server_rooms` MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+ALTER TABLE `pm_assets` ADD `assigned_to_server` INT(11) NOT NULL AFTER `is_deleted`;
+ALTER TABLE `pm_asset_logs` ADD `server_room_id` INT(11) NOT NULL AFTER `assigned_date`;
+
+
+
+ALTER TABLE `pm_infraissue` CHANGE `action_date` `accepted_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00';
+ALTER TABLE `pm_infraissue` ADD `resolved_by_user` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `pm_infraissue` ADD `resolved_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00';
+ALTER TABLE `pm_infraissue` CHANGE `issue_date` `issue_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00';
+
+INSERT INTO `pm_master_devices` (`id`, `device_type_name`) VALUES (NULL, 'RAM'), (NULL, 'SSD'), (NULL, 'HDD'), (NULL, 'Router'), (NULL, 'Switches'), (NULL, 'Printer'), (NULL, 'CCTV Camera'), (NULL, 'Graphic Card'), (NULL, 'UPS Battery'), (NULL, 'Accessories');
+
+INSERT INTO `pm_device_master_attributes` (`id`, `device_id`, `attribute`) VALUES (NULL, 12, 'LAPTOP/DESKTOP'),(NULL, 12, 'Frequency DDR3/DDR4'),(NULL, 13, 'SATA/M.2'),(NULL, 13, 'Company name'),(NULL, 15, 'WiFi (Access point)'),(NULL, 19, 'IN GB? 2/4/6GB'),(NULL, 12, 'Size'),(NULL, 13, 'Size'),(NULL, 14, 'Size'),(NULL, 4, 'Type'),(NULL, 21, 'Device Type');
+
+
+CREATE TABLE `pm_infraissue` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(10) DEFAULT NULL,
+  `issue` varchar(40) DEFAULT NULL,
+  `issue_date` datetime DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `user_status` enum('0','1','2') NOT NULL COMMENT '0=not resolved, 1=resolved, 2=others',
+  `status` enum('0','1','2','3') DEFAULT '0' COMMENT '0=pending, 1= accepted, 2=rejected, 3=resolved/deleted(for import last db)',
+  `comment` varchar(300) DEFAULT NULL,
+  `accepted_date` datetime DEFAULT NULL,
+  `resolved_date` datetime DEFAULT NULL,
+  `resolved_by_user` int(11) NOT NULL DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+ALTER TABLE `pm_requests` ADD `accepted_date` DATETIME DEFAULT NULL;
+ALTER TABLE `pm_requests` ADD `resolved_by_user` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `pm_requests` ADD `resolved_date` DATETIME DEFAULT NULL;

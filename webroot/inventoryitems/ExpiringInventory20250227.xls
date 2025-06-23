@@ -1,0 +1,43 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Part Number</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Serial / Lot</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Qty.</th>
+                                        <th>Expiration</th>
+                                        <th>Capital Equipment</th>
+                                        <th>Inventory Tags</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>yuytiuyi</td>
+                                <td>65345425</td>
+                                <td></td>
+                                <td></td>
+                                <td>rtwetre5435</td>
+                                <td>Jodhpur</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>02/27/2025</td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>gfsdgfd</td>
+                                <td>6546543</td>
+                                <td></td>
+                                <td></td>
+                                <td>wtrew5423</td>
+                                <td>Old Delhi</td>
+                                <td>Active</td>
+                                <td>1</td>
+                                <td>02/28/2025</td>
+                                <td>1</td>
+                                <td></td>
+                            </tr>  </tbody></table>

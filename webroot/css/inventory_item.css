@@ -1,0 +1,349 @@
+.dataTables_filter {
+    display: none;
+}
+
+.actionWrap .dropdown-toggle {
+    width:100px !important;
+}
+
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.1em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+#itemGeneral{
+    padding:10px;
+}
+
+h5{
+    text-align:center;
+    font-weight:bold;
+}
+
+.sinfo{
+    margin-top: 15px;
+}
+
+.heading-success {
+    color: #FFF;
+    background-color: #27ae60;
+}
+
+.badge-status{
+    width:100px;
+    border-radius: 0 !important;
+}
+
+.item-counts-row {
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+.item-counts-row .inventory-tile {
+    color: #FFF;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    -webkit-transition: background-color 2000ms ease;
+    -moz-transition: background-color 2000ms ease;
+    -ms-transition: background-color 2000ms ease;
+    -o-transition: background-color 2000ms ease;
+    transition: background-color 2000ms ease;
+}
+
+.item-counts-row .instock-count {
+    background-color: #0096D9;
+}
+.tile {
+    min-width: 125px;
+}
+
+.item-counts-row .outforrepair-count {
+    background-color: #00D3B4;
+}
+
+.item-counts-row .installed-count {
+    background-color: #27AE60;
+}
+
+.item-counts-row .quarantined-count {
+    background-color: #F46323;
+}
+
+.item-counts-row .allocated-count {
+    background-color: #FF0000;
+}
+
+.item-counts-row .onorder-count {
+    background-color: #9B4EB5;
+}
+
+.status.pi-status-active {
+    background-color: #0096D9;
+}
+
+.status.pi-status-outforrepair {
+    background-color: #00D3B4;
+}
+
+.status.pi-status-installed {
+    background-color: #27AE60;
+}
+
+.status.pi-status-quarantined {
+    background-color: #F46323;
+}
+
+.status.pi-status-allocated {
+    background-color: #FF0000;
+}
+
+.status.pi-status-onorder {
+    background-color: #9B4EB5;
+}
+
+.status.pi-status-shipped {
+    background-color: #2C3E50;
+}
+
+.status.pi-status-damaged {
+    background-color: #E74C3C;
+}
+
+.status.pi-status-discarded {
+    background-color: #2C3E50;
+}
+
+.status.pi-status-unavailable {
+    background-color: #3498DB;
+}
+
+.status.pi-status-needs-repair {
+    background-color: #E74C3C;
+}
+
+.status.pi-status-consumed {
+    background-color: #2C3E50;
+}
+
+.status.pi-status-unrepairable {
+    background-color: #E74C3C;
+}
+
+.po-inactive {
+    background-color: #CE0000;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.4em 0.6em 0.4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    width: 150px;
+    background-color: #777777;
+}
+
+.dataTable tbody tr{
+    cursor:pointer;
+}
+
+.badge-threshold {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #e74c3c !important;
+    border-radius: 10px;
+}
+
+.form-control-static {
+    padding-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.form-control-static {
+    border-bottom: 1px solid #dfdfdf;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.action-bar {
+    background-color: #39478b;
+    padding: 6px 10px 6px 10px;
+    margin-bottom: 12px;
+}
+
+.action-bar {
+    border-radius: 0;
+    background-color: #f5f5f5;
+    height: 59px;
+}
+
+#itemsPurchaseorders .action-bar {
+    background-color: #39478b;
+    padding: 6px 10px 6px 10px;
+    margin-bottom: 12px;
+    height:auto !important;
+}
+
+.dataTables_paginate a {
+    color: #333 !important;
+}
+
+.dt-buttons{
+    display:none;
+}
+
+.inventory-item-belowthresholds {
+    color: #2ecc71;
+    font-size: 17px;
+    vertical-align: middle;
+}
+
+.history-detail-block {
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.invitmhistory a {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btnspace{
+    margin-right: 5px !important;
+}
+
+.btnWrapper .btn {
+    margin: 2px;
+    height: 36px;
+}
+
+label.btn.btn-default.active {
+    background-color: #5cca5c;
+    color: #fff;
+}
+
+.error-text {
+    color: red;
+}
+
+.document-management-icon {
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.upload-area{
+    width: 100%;
+    min-height: .01%;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+.document-name {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.upload-area tr{
+    text-align: left;
+}
+
+.inventory-search-box{
+    display: inline; 
+    position:absolute;
+    right: 20px;top: 6px;
+    color: darkgray;
+}
+
+.threshold-search-box{
+    width: 220px; 
+    margin-right:10px;
+    display: inline-block;
+    position: relative;
+}
+
+.threshold-search-box-icon{
+    display: inline; 
+    position:absolute; 
+    right: 10px; 
+    top: 6px; 
+    color: darkgray
+}
+
+.threshold-action{
+    margin-left:10px;
+    margin-bottom: 5px;
+}
+
+.invitemThresholdTable tr{
+    cursor: pointer;
+}
+
+.invsearchby{
+    color: white; 
+    font-size: 20px; 
+    padding-right: 10px;
+}
+
+.inv-item-action{
+    pointer-events: none;
+}
+
+.dataTables_filter {
+    display: none;
+}

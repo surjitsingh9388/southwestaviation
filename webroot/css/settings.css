@@ -1,0 +1,20 @@
+.settings_tbl a{
+    color:#337ab7;
+}
+
+.deletesettings{
+    cursor: pointer;
+}
+.pd0{
+    padding:0px;
+}
+.label-heading-left{
+    width:40% !important; 
+    text-align:left !important;
+}
+
+.label-chkbox-right{
+    float: right !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}

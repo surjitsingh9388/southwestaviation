@@ -1,0 +1,44 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Div. Abbr.</th>
+                                        <th>Division Name</th>
+                                        <th>Location Full Path</th>
+                                        <th>Description</th>
+                                        <th>Active</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>test location</td>
+                                <td></td>
+                                <td></td>
+                                <td>test location</td>
+                                <td>test description</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>test location 2</td>
+                                <td></td>
+                                <td></td>
+                                <td>test location 2</td>
+                                <td>test location description</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>test location1</td>
+                                <td></td>
+                                <td></td>
+                                <td>test location1</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>test sublocation</td>
+                                <td></td>
+                                <td></td>
+                                <td>test location1 > test sublocation</td>
+                                <td></td>
+                                <td>1</td>
+                            </tr>  </tbody></table>

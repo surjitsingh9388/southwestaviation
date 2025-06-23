@@ -1,0 +1,30 @@
+<table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Part No.</th>
+                                        <th>Name</th>
+                                        <th>Currency Code</th>
+                                        <th>Cost</th>
+                                        <th>Exchange Cost</th>
+                                        <th>Serialized</th>
+                                        <th>Type</th>
+                                        <th>In Stock</th>
+                                        <th>Default UOM</th>
+                                        <th>On Order</th>
+                                        <th>Inventory Tags</th>
+                                    </tr>
+                                </thead>
+                        <tbody>
+                            <tr>
+                                <td>5435435</td>
+                                <td>ytryrrr</td>
+                                <td></td>
+                                <td>2</td>
+                                <td>0.00</td>
+                                <td>1</td>
+                                <td>Expandable</td>
+                                <td>0</td>
+                                <td>LBS</td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>  </tbody></table>
