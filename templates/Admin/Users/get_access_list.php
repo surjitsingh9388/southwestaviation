@@ -282,6 +282,7 @@ if(!empty($menuItems)) {
 .text-alignment{
     text-align: center;
 }
+
 </style>
 
 <script type="text/javascript">

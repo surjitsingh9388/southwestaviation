@@ -17,8 +17,8 @@
         </div>
         
         <div class="page-content mt-35">
-            <div class="table-responsive">
-                <table class="table mb-0">
+            <div>
+                <table class="table table-striped table-bordered table-responsivemb-0">
                     <thead>
                         <tr>
                             <th id="toolName">Employee <i class="fa fa-fw fa-sort"></i></th>

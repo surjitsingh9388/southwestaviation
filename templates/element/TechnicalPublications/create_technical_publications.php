@@ -59,8 +59,8 @@ $sessionUser = $this->request->getSession()->read('Auth');;
         }
         ?>
     </h5>
-    <div class="">
-        <table class="table mb-0">
+    <div >
+        <table class="table mb-0 table-striped table-bordered table-responsive">
             <thead>
                 <tr>
                     <th>Name</th>

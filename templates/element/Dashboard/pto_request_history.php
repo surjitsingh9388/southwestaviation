@@ -11,12 +11,12 @@
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th>Employee Name</th>
-                                    <th>Date</th>
-                                    <th>Previous Balance</th>
-                                    <th>Hours Used/Gained</th>
-                                    <th>New Balance</th>
-                                    <th>PTO Request Status</th>
+                                    <th class="text-nowrap">Employee Name</th>
+                                    <th class="text-nowrap">Date</th>
+                                    <th class="text-nowrap">Previous Balance</th>
+                                    <th class="text-nowrap">Hours Used/Gained</th>
+                                    <th class="text-nowrap">New Balance</th>
+                                    <th class="text-nowrap">PTO Request Status</th>
                                 </tr>
                             </thead>
                             <tbody id="ptoRequestsList">
@@ -24,7 +24,7 @@
                                 foreach($ptorequestslist as $ptorequest){
                                 ?>
                                 <tr>
-                                    <td><?php echo $ptorequest['users']['full_name']; ?></td>
+                                    <td ><?php echo $ptorequest['users']['full_name']; ?></td>
                                     <td><?php echo date('m/d/Y', strtotime($ptorequest['created_at'])); ?></td>
                                     <td><?php echo $ptorequest['previous_balance']; ?></td>
                                     <td><?php echo $ptorequest['hours_used_gained']; ?></td>

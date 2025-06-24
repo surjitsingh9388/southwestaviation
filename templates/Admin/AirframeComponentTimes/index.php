@@ -52,7 +52,7 @@ $(document).ready(function() {
         
         <div class="page-content mt-35">
             <div class="tableScroll">
-                <table id="datatable" class="table dataTable" width="100%">
+                <table id="datatable" class="table dataTable table-striped table-bordered table-responsive" width="100%">
                     <thead>
                         <tr>
                             <th>#</th>

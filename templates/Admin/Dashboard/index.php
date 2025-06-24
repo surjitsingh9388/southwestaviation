@@ -44,11 +44,11 @@
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th id="toolName">Date <i class="fa fa-fw fa-sort"></i></th>
-                                    <th id="toolDescription">Previous Balance <i class="fa fa-fw fa-sort"></i></th>
-                                    <th id="toolDescription">Hours Used/Gained <i class="fa fa-fw fa-sort"></i></th>
-                                    <th id="toolModel">New Balance <i class="fa fa-fw fa-sort"></i></th>
-                                    <th id="toolModel">Approved <i class="fa fa-fw fa-sort"></i></th>
+                                    <th class="text-nowrap" id="toolName">Date <i class="fa fa-fw fa-sort"></i></th>
+                                    <th  class="text-nowrap" id="toolDescription">Previous Balance <i class="fa fa-fw fa-sort"></i></th>
+                                    <th class="text-nowrap" id="toolDescription">Hours Used/Gained <i class="fa fa-fw fa-sort"></i></th>
+                                    <th  class="text-nowrap" id="toolModel">New Balance <i class="fa fa-fw fa-sort"></i></th>
+                                    <th class="text-nowrap" id="toolModel">Approved <i class="fa fa-fw fa-sort"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,7 +135,7 @@ echo $this->Html->css('user_time_clock');
 echo $this->Html->css('dashboard'); 
 echo $this->Html->script('dashboard');
 echo $this->Html->script('tinymce/tinymce.min');
-echo $this->Html->script('user_pto_requests');                                                
+echo $this->Html->script('user_pto_requests');
 ?>
 <script type="text/javascript">
     var loadTimeClockForDateURL = "<?php echo $this->Url->build(['controller'=>'UserTimeClocks', 'action'=>'loadTimeClockForDate',]); ?>";

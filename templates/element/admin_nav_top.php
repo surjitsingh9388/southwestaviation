@@ -59,28 +59,43 @@ $sessionUser = $this->request->getSession()->read('Auth');
             </div>
         </div>
         
-        <div class="col-md-6 searchBox">
-            <div class="col-md-4" style="margin-bottom:0px;">
-                <?php 
-                $searchDropDown = unserialize(SEARCHDROPDOWN);
-                echo $this->Form->control('header_filter', array('options' => $searchDropDown, 'empty' => 'Select Filter', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'header_filter', 'value'=>'all')); 
-                ?>
-            </div>
-            <div class="col-md-8 input-group" style="margin-bottom:0px;">
-                <input type="text" id="search_txt" class="form-control" placeholder="Search..." />
+      <div class="col-md-6 searchBox">
+
+    <div class="row">
+        <!-- Filter Dropdown -->
+        <div class="col-md-4 col-xs-4">
+            <?php 
+            $searchDropDown = unserialize(SEARCHDROPDOWN);
+            echo $this->Form->control('header_filter', [
+                'options' => $searchDropDown,
+                'empty' => 'Select Filter',
+                'class' => 'form-control selectpicker',
+                'data-show-subtext' => true,
+                'data-live-search' => true,
+                'label' => false,
+                'id' => 'header_filter',
+                'value' => 'all'
+            ]); 
+            ?>
+        </div>
+        <!-- Search Input + Button  -->
+        <div class="col-md-8 col-xs-8">
+            <div class="input-group">
+                <input type="text" id="search_txt" class="form-control" placeholder="Search..." aria-label="Search">
                 <span class="input-group-btn">
                     <button class="btn btn-info" type="button" id="header_search_btn">
-                    <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+                        <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
                     </button>
                 </span>
             </div>
-
-            <div class="searchList">
-                <ul class="list-group" id="header_search_list">
-                    
-                </ul>
-            </div>
         </div>
+    </div>
+
+    <!-- Search List -->
+    <div class="searchList" style="margin-top: 10px;">
+        <ul class="list-group" id="header_search_list"></ul>
+    </div>
+</div>
         <div class="header-icon-container">
             <!--div id="holdingBoxDropZone" class="holding-box top-holding-box hide-in-mob">
                 
@@ -97,20 +112,23 @@ $sessionUser = $this->request->getSession()->read('Auth');
             <?php 
             if ( !empty($sessionUser) ) {
             ?>
-            <div class="dropdown" style="text-align:right !important;">
-                <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
-                    <span><?php echo $sessionUser['full_name']; ?></span>
-                    <span class="fa fa-angle-down icon"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <?php
-                        echo $this->Html->link("<span>Log Out</span><i class='fa fa-sign-out'></i>",
-                        array('controller' => 'Users', 'action' => 'logout'), array('escape' => false));
-                        ?>
-                    </li>
-                </ul>
-            </div>
+           <div class="dropdown text-right">
+             <button class="btn btn-link dropdown-toggle d-flex align-items-center" type="button" data-toggle="dropdown">
+              <span class="mr-2"><?php echo $sessionUser['full_name']; ?></span>
+              <i class="fa fa-angle-down"></i>
+             </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+             <li>
+            <?php
+            echo $this->Html->link(
+                "<span>Log Out</span> <i class='fa fa-sign-out'></i>",
+                ['controller' => 'Users', 'action' => 'logout'],
+                ['escape' => false]
+            );
+            ?>
+        </li>
+    </ul>
+</div>
             <?php } ?>
         </div>
     </div>

@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3  mt-25" >
                         <div class="col-sm-12 col-xs-3">
                             <button type="button" class="btn btn-default col-sm-12 previewTimeClockReports">Preview</button>
                         </div>

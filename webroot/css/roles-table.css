@@ -1,0 +1,17 @@
+
+/* Roles Css */
+.col-name {
+    width: 35%;
+}
+
+
+@media screen and  (max-width: 898px) {
+    .col-id {
+        width: 5% !important;
+    }
+
+    .col-name {
+        width: 25% !important;
+    }
+
+}

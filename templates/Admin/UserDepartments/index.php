@@ -9,7 +9,7 @@
         
         <div class="page-content mt-35">
             <div class="table-responsive">
-                <table class="table mb-0" id="user_departments_table">
+                <table class="table mb-0 table-striped table-bordered" id="user_departments_table">
                     <thead>
                         <tr>
                             <th id="user_department_td">Department/Job Title</th>

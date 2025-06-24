@@ -60,14 +60,14 @@ $(document).ready(function() {
         
         <div class="page-content mt-35">
             <div class="tableScroll">
-                <table id="datatable" class="table dataTable" width="100%">                
+                <table id="datatable" class="table table-striped table-bordered table-responsive" width="100%">                
                     <thead>
                         <tr>
                             <th><?php echo __('User ID'); ?></th>
                             <th><?php echo __('Full Name'); ?></th>
                             <th><?php echo __('Email'); ?></th>
-                            <th><?php echo __('Phone'); ?></th>
-                            <th><?php echo __('Role'); ?></th>
+                           <th class="nowrap" style="min-width: 120px;"><?php echo __('Phone'); ?></th>
+                            <th ><?php echo __('Role'); ?></th>
                             <th><?php echo __('Department/Job Title'); ?></th>
                             <th><?php echo __('Status'); ?></th>
                             <th><?php echo __('Actions'); ?></th>

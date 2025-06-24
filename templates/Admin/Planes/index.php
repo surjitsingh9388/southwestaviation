@@ -57,15 +57,15 @@
         
         <div class="page-content mt-35">
             <div class="tableScroll">
-                <table id="datatable" class="table dataTable" width="100%">
+                <table id="datatable" class="table dataTable table-striped table-bordered table-responsive" width="100%">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th><?php echo __('Aircraft'); ?></th>
                             <th><?php echo __('Model'); ?></th>
                             <th><?php echo __('Serial'); ?></th>
-                            <th><?php echo __('Airworthiness Date'); ?></th>
-                            <th><?php echo __('Operator Name'); ?></th>
+                            <th class="text-nowrap"><?php echo __('Airworthiness Date'); ?></th>
+                            <th class="text-nowrap"><?php echo __('Operator Name'); ?></th>
                             <th class="actions"><?php echo __('Actions'); ?></th>
                         </tr>
                     </thead>

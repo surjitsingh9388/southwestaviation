@@ -17,10 +17,10 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Event Name</th>
-                                        <th scope="col">Event Description</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">End Date</th>
+                                        <th class="text-nowrap" scope="col">Event Name</th>
+                                        <th class="text-nowrap" scope="col">Event Description</th>
+                                        <th  class="text-nowrap" scope="col">Start Date</th>
+                                        <th class="text-nowrap" scope="col">End Date</th>
                                     </tr>
                                 </thead>
                                 <tbody class="dashboard-event-list">
