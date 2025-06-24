@@ -58,20 +58,20 @@ use Cake\Routing\Router;
                     <table id="customReport" class="table mb-0" width="100%">
                         <thead>
                             <tr>
-                                <th width="4%" class="check"><input type="checkbox" name="air_check" id="ckbCheckAll"></th>
-                                <th width="2%"></th>
-                                <th width="2%">Aircraft</th>
-                                <th width="4%">ATA</th>
-                                <th width="14%">Reference & Component & Item Type</th>
-                                <th width="20%">Description</th>
-                                <th width="11%">Current Hr/Cy</th>
-                                <th width="10%">Last C/W</th>
-                                <th width="8%">Intervals</th>
-                                <th width="10%">Next Due</th>
-                                <th width="8%">Remaining</th>
-                                <th width="7%">Status</th>
-                                <th width="0%" style="display: none;"></th>
-                                <th width="0%" style="display: none;"></th>
+                                <th width="4%" class="check text-nowrap"><input type="checkbox" name="air_check" id="ckbCheckAll"></th>
+                                <th width="2%" class="text-nowrap"></th>
+                                <th width="2%" class="text-nowrap">Aircraft</th>
+                                <th width="4%" class="text-nowrap">ATA</th>
+                                <th width="14%" class="text-nowrap">Reference & Component & Item Type</th>
+                                <th width="20%" class="text-nowrap">Description</th>
+                                <th width="11%"class="text-nowrap">Current Hr/Cy</th>
+                                <th width="10%"class="text-nowrap">Last C/W</th>
+                                <th width="8%" class="text-nowrap">Intervals</th>
+                                <th width="10%" class="text-nowrap">Next Due</th>
+                                <th width="8%" class="text-nowrap">Remaining</th>
+                                <th width="7%" class="text-nowrap">Status</th>
+                                <th width="0%" class="text-nowrap" style="display: none;"></th>
+                                <th width="0%" class="text-nowrap" style="display: none;"></th>
                             </tr>
                         </thead>
                         <tbody id="aircraftPartsList">

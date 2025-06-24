@@ -9,7 +9,7 @@
         <div class="page-content mt-35">
             <div class="table-responsive">
                 <div class="col-md-12 pd0">
-                    <div class="col-md-6 pd0" style="padding-right:5px !important;">
+                    <div class="col-md-6 pd0 col-sm-12 col-xs-12" style="padding-right:5px !important;">
                         <div class="dashboard_heading_bar">
                             <span class="dashboard_heading">Statement</span>
                         </div>
@@ -45,7 +45,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6 pd0">
+                    <div class="col-md-6 pd0 col-sm-12 col-xs-12">
                         <div class="dashboard_heading_bar">
                             <span class="dashboard_heading">Settings</span>
                         </div>

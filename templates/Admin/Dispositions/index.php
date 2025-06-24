@@ -49,7 +49,7 @@ $(document).ready(function() {
         
         <div class="page-content mt-35">
             <div class="tableScroll">
-                <table id="datatable" class="table dataTable" width="100%">
+               <table id="datatable" class="dataTable table table-striped table-bordered table-responsive table-Width" width="100%">
                     <thead>
                         <tr>
                             <th style="vertical-align: top;" scope="col">#</th>

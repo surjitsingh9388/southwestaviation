@@ -2,6 +2,7 @@
     #datatable_filter {
         display: none;
     }
+
 </style>
 
 <div class="content sliding">
@@ -25,7 +26,7 @@
                             <th class="text-nowrap" style="vertical-align: top;" scope="col"><?php echo __('Hours Used/Gained'); ?></th>
                             <th class="text-nowrap" style="vertical-align: top;" scope="col"><?php echo __('New Balance'); ?></th>
                             <th class="text-nowrap" style="vertical-align: top;" scope="col"><?php echo __('PTO Request Status'); ?></th>
-                            <th class="text-nowrap" style="vertical-align: top;" scope="col" class="actions"><?php echo __('Actions'); ?></th>
+                            <th class="text-nowrap white-space-nowrap" style="vertical-align: top;" scope="col" class="actions"><?php echo __('Actions'); ?></th>
                         </tr>
                     </thead>
                 </table>
