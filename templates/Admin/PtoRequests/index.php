@@ -3,6 +3,7 @@
         display: none;
     }
 
++
 </style>
 
 <div class="content sliding">

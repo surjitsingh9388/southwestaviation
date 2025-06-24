@@ -83,7 +83,11 @@ img {
 .topHeader .dropdown-menu>li>a {
     padding: 3px 12px;
 }
-
+.dashboard-news-feed-list tr td p span,
+.dashboard-news-feed-list tr td h1,
+.dashboard-news-feed-list tr td h2 {
+    font-size: 21px !important;
+}
 .icon {
     font-size: 26px;
     margin-left: 12px;
@@ -2704,6 +2708,11 @@ table th {
         max-width: 100%;
 
     }
+.dashboard-news-feed-list tr td p span,
+.dashboard-news-feed-list tr td h1,
+.dashboard-news-feed-list tr td h2 {
+    font-size: 16px !important;
+}
 }
 
 @media (max-width: 598px) {
