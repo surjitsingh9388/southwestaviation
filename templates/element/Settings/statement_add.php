@@ -13,7 +13,7 @@
                     <input type="hidden" name="statement_id" value="<?php echo @$statements->id; ?>" />
                     
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12  col-xs-12">
                             <div class="form-group">
                                 <label class="control-label label-heading-left" for="reference">Statement Name</label>
                                 <span class="label-chkbox-right">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Statement Description</label>
                                 <div class="form-input-frame">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12  col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label" for="reference">Status</label>
                                 <div class="form-input-frame">

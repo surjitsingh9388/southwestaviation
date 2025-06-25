@@ -48,19 +48,19 @@ use Cake\Routing\Router;
                 </div>
 
                 <div class="table-responsive">
-                    <table id="customReport" class="table mb-0">
+                    <table id="customReport" class="table mb-0 ">
                         <thead>
                             <tr>
-                                <th width="5%" class="check"><input type="checkbox" name="air_check" id="ckbCheckAll" checked="checked"></th>
-                                <th width="3%" class="hidden-xs"></th>
-                                <th width="13%" id="aircraftId">Aircraft <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%" id="reportedDateId">Reported Date <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%" id="reportedHrsId">Reported Hours <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="12%" id="reportedAflId">Reported Landings <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%">Next Item Due</th>
-                                <th width="10%">Availability</th>
-                                <th width="10%">Action</th>
-                                <th width="8%" id="statusId">Status <i class="fa fa-fw fa-sort"></i></th>
+                                <th width="5%" class="check text-nowrap"><input type="checkbox" name="air_check" id="ckbCheckAll" checked="checked"></th>
+                                <th width="3%" class="hidden-xs"  class="text-nowrap"></th>
+                                <th style="min-width:180px" id="aircraftId" class="text-nowrap">Aircraft <i class="fa fa-fw fa-sort"></i></th>
+                                <th width="13%" id="reportedDateId"  class="text-nowrap">Reported Date <i class="fa fa-fw fa-sort"></i></th>
+                                <th width="13%" id="reportedHrsId"  class="text-nowrap">Reported Hours <i class="fa fa-fw fa-sort"></i></th>
+                                <th width="12%" id="reportedAflId"  class="text-nowrap">Reported Landings <i class="fa fa-fw fa-sort"></i></th>
+                                <th width="13%"  class="text-nowrap">Next Item Due</th>
+                                <th width="10%"  class="text-nowrap">Availability</th>
+                                <th width="8%"  class="text-nowrap">Action</th>
+                                <th width="8%" id="statusId"  class="text-nowrap">Status <i class="fa fa-fw fa-sort"></i></th>
                             </tr>
                         </thead>
                         <tbody id="aircraftList">
@@ -230,7 +230,7 @@ use Cake\Routing\Router;
                                 ?>
                                 <tr class="overview-detail" style="display: none;">
                                     <td colspan="11" style="padding: 0">
-                                        <table class="table mb-0">
+                                        <table class="table mb-0  ">
                                             <thead>
                                                 <tr>
                                                     <th width="8%">&nbsp;</th>

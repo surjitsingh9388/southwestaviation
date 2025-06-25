@@ -46,6 +46,10 @@ img {
     margin-top: 12px;
 }
 
+.mb-15 {
+    margin-bottom: 15px !important;
+}
+
 .border-btm {
     border-bottom: 1px solid #97a3d9;
     padding-bottom: 8px;
@@ -80,6 +84,12 @@ img {
 
 .topHeader .dropdown-menu>li>a {
     padding: 3px 12px;
+}
+
+.dashboard-news-feed-list tr td p span,
+.dashboard-news-feed-list tr td h1,
+.dashboard-news-feed-list tr td h2 {
+    font-size: 21px !important;
 }
 
 .icon {
@@ -122,7 +132,7 @@ img {
     box-shadow: 0px 10px 9px #2b3358;
     margin-bottom: 12px;
     z-index: 9;
-    top: 43px;
+    top: 53px;
 }
 
 #sidebar-menu .dropdown-backdrop {
@@ -639,6 +649,7 @@ div.tolerance-status {
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
     border: 1px solid;
     width: 880px;
+    max-width: 100%;
 }
 
 #myCarousel .carousel-control {
@@ -2669,6 +2680,14 @@ div.searchBox .filter-option-inner-inner {
     overflow-y: auto;
 }
 
+table th {
+    white-space: nowrap;
+}
+
+#datatable tbody tr:last-child {
+    white-space: nowrap;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
         width: 100% !important;
@@ -2678,5 +2697,38 @@ div.searchBox .filter-option-inner-inner {
 
     .table-Width tbody tr td:last-child {
         white-space: nowrap;
+    }
+
+    .form-horizontal .text-space-left {
+        text-align: left;
+        margin-bottom: 12;
+    }
+
+}
+
+@media (max-width: 998px) {
+    #airCompDetailsPopup {
+        width: 720px;
+        max-width: 100%;
+
+    }
+
+    .dashboard-news-feed-list tr td p span,
+    .dashboard-news-feed-list tr td h1,
+    .dashboard-news-feed-list tr td h2 {
+        font-size: 18px !important;
+    }
+    
+}
+
+@media (max-width: 598px) {
+    .table>thead>tr>th {
+        font-size: 13px;
+    }
+
+    .dashboard-news-feed-list tr td p span,
+    .dashboard-news-feed-list tr td h1,
+    .dashboard-news-feed-list tr td h2 {
+        font-size: 13px !important;
     }
 }
