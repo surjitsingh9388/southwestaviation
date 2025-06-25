@@ -247,7 +247,7 @@ class AircraftDiscrepanciesController extends AppController
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 checkbox-align  btnWrap" style="gap:3px;">
                         <input type="checkbox" name="discrepancy_mel" id="discrepMelId"> Defer this discrepancy (MEL/NEF)
                     </div>
                 </div>
@@ -304,7 +304,7 @@ class AircraftDiscrepanciesController extends AppController
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 checkbox-align btnWrap" style="gap:3px;">
                         <input type="checkbox" name="discrepancy_corrected" id="discrepCorrectId"> Add corrective action for this discrepancy 
                     </div>
                 </div>

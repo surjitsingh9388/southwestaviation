@@ -101,7 +101,7 @@ echo $this->Html->css('inventory_item');
                                                     <?php echo $outforrepair; ?>
                                                 </div>
                                                 <div class="tile-label">
-                                                    <div href="">Out For Repair</div>
+                                                    <div href="" class="text-nowrap">Out For Repair</div>
                                                 </div>
                                             </div>
                                         </div>
