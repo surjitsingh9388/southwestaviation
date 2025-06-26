@@ -208,3 +208,25 @@ p.error {
   color: #fff;
   font-weight: bold;
 }
+
+ .btnWrap .bs3 {
+        width: 243px !important;
+
+    }
+    .btnWrap {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .checkbox-alignment {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+    .checkbox-align input{
+      margin: 0;
+    }
+
+
