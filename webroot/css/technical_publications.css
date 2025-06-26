@@ -52,3 +52,14 @@
 .tech_publ_link a, .techpubl_h5 a{
     color: #337ab7;
 }
+
+.tech-btn{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+}
+@media screen and (max-width:498px) {
+    .tech-btn{
+        flex-wrap: wrap;
+    }
+}

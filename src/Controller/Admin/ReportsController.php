@@ -1649,19 +1649,19 @@ class ReportsController extends AppController
                             '.$datasort.'
                             '.$action.'
                             <div class="row">
-                                <div class="col-md-12" style="padding:0 15px 25px 15px;">
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0 15px 25px 15px;">
                                     <label>Date</label>
                                     <input type="text" name="log_date" class="form-control projDatepicker">
                                 </div> 
                             </div>
                             <div class="row">
-                                <div class="col-md-12" style="padding:0 15px 25px 15px;">
+                                <div class="col-md-12 col-sm-12 col-xs-12"style="padding:0 15px 25px 15px;">
                                     <label>Hours</label>
                                     <input type="text" name="hours" class="form-control">
                                 </div> 
                             </div>
                             <div class="row">
-                                <div class="col-md-12" style="padding:0 15px 25px 15px;">
+                                <div cclass="col-md-12 col-sm-12 col-xs-12" style="padding:0 15px 25px 15px;">
                                     <label>Landing/Cycles</label>
                                     <input type="number" name="cycles" class="form-control">
                                 </div> 
