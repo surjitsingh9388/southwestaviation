@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4><?php if(!empty(@$newsfeeds->id)){ echo 'Edit'; }else{echo 'Add';} ?> News Feed</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body overflow-visible" >
                 <div class="page-content">
                     <?php
                     echo $this->Form->create($newsfeeds, array('class' => 'form-horizontal form-label-left', 'id' => 'frmDashboardNewsFeedAdd'));
