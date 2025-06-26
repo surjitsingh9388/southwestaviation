@@ -2,8 +2,8 @@
 $sessionUser = $this->request->getSession()->read('Auth');; 
 //pr($sessionUser);die;
 ?>
-<div class="col-md-12 upload-file-area">
-    <div class="col-md-4">
+<div class="col-md-12 upload-file-area col-sm-12 col-xs-12">
+    <div >
         <!--div class="col-md-4">
             <div class="technical_publication_create_box" onclick="myFunction()">
                 <i class="fa fa-plus" aria-hidden="true"></i>
@@ -15,14 +15,16 @@ $sessionUser = $this->request->getSession()->read('Auth');;
             </div>
         </div-->
         <?php if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1){ ?>
-        <div class="col-md-6">
+            <div class="tech-btn">
+        <div >
             <div class="technical_publication_folder_box" data-val="folder">
                 <i class="fa fa-folder-o" aria-hidden="true"></i>
                 <div>Create folder</div>
             </div>
         </div>
+     
 
-        <div class="col-md-6">
+        <div >
             <div class="technical_publication_upload_box" onclick="$('#tech_publication_attachment').trigger('click'); return false;">
                 <input type="hidden" name="folderpath" id="folderpath" value="<?php echo $folderpath; ?>" />
                 <input type="hidden" name="pageaction" id="pageaction" value="<?php echo $action; ?>" />
@@ -34,11 +36,12 @@ $sessionUser = $this->request->getSession()->read('Auth');;
             </div>
             <input type="file" name="files[]" id="tech_publication_attachment" style="display:none;" multiple="">
         </div>
+           </div>
         <?php } ?>
     </div>
-    <div class="col-md-8"></div>
+    <!-- <div class="col-md-8"></div> -->
 </div>
-<div class="col-md-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
     <h3><?php echo $heading.' Publications'; ?></h3>
     <h5 class="techpubl_h5">
         <?php 
@@ -60,7 +63,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
         ?>
     </h5>
     <div >
-        <table class="table mb-0 table-striped table-bordered table-responsive">
+        <table class="table mb-0 table-striped table-bordered table-responsive" width="100%">
             <thead>
                 <tr>
                     <th>Name</th>

@@ -61,11 +61,11 @@
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-default wo-option-refresh-message">Refresh List</button>
                             </div>
-                            <div class="col-md-6">
-                                <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6 " style="display:flex; gap: 12px">
+                                <div >
                                     <button type="button" class="btn btn-default wo-send-new-message" data-val="new-msg">New Message</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div >
                                     <button type="button" class="btn btn-default wo-option-delete-message">Delete</button>
                                 </div>
                             </div>

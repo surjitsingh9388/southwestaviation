@@ -24,14 +24,14 @@ echo $this->Form->create($userptorequests, array('class' => 'form-horizontal for
     I request the following days and/or times off.(use a new line for each day you will be using)
 </div>
 <div class="col-md-12 col-xs-12">
-    <div class="table-responsive"> 
+    <div  class="table-responsive" style="min-height:500px"> 
         <table class="table table-striped table-bordered" id="tbluserpto" width="100%">
             <thead>
                 <tr>
                     <th class="text-nowrap">Day of the week</th>
-                    <th class="text-nowrap" style="min-width: 155px;">Date</th>
+                    <th class="text-nowrap" style="min-width: 150px;">Date</th>
                     <th class="text-nowrap">Time From</th>
-                    <th class="text-nowrap" style="min-width: 150px;">Time To</th>
+                    <th class="text-nowrap" style="min-width: 100px;">Time To</th>
                     <th class="text-nowrap">#PTO Hrs. to Use</th>
                     <th class="text-nowrap"></th>
                 </tr>
