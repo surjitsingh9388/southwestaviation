@@ -2690,6 +2690,9 @@ table th {
 #datatable tbody tr:last-child {
     white-space: nowrap;
 }
+.overflow-visible{
+    overflow: visible !important;
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {

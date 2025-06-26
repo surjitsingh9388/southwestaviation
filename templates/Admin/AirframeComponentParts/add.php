@@ -278,7 +278,7 @@ use Cake\Routing\Router;
                         <div class="corrPH">Tolerance</div>
                         <div class="corrPH">Alert</div>
                     </div>
-                    <div class="itemInfoCls">
+                    <div class="itemInfoCls ">
                         <div class="itemCls">
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
