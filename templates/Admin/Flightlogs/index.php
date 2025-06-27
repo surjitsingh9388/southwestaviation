@@ -60,7 +60,7 @@ $itinPassnURL = BASE_URL.ROOT_DIR.'admin/flightlogs/itineraryPassenger/';
                                 <div class="tab-content">
                                     <div id="open" class="tab-pane fade in active">
                                         <div class="table-responsive" style="padding:10px;height: 450px;">
-                                            <table width="100%">
+                                            <table  width="100%" class="table table-striped table-bordered">
                                                 <thead style="border-bottom: 1px solid #c0c0c0;">
                                                     <tr>
                                                         <th width="12%">Trip ID</th>
