@@ -65,7 +65,9 @@ $notifCnt = !empty($notifications) ? count($notifications) : 0;
                             <div class="col-sm-4 col-xs-12" id="crewAlert">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Crew Member Compliance Alerts <span class="badge right" style="font-weight: normal;font-size: 12px !important;"><?php echo $pilotCnt; ?> Alerts</span></h5>
+                                       
+                                        <h5 class="card-title card-flight">Crew Member Compliance Alerts <span class="badge right" style="font-weight: normal;font-size: 12px !important;padding-right:15px;"><?php echo $pilotCnt; ?> Alerts</span></h5>
+                                      
                                         <div class="card-text" style="padding: 0 20px 0 5px;">
                                             <?php
                                             if(!empty($allPilots)) {
@@ -222,7 +224,7 @@ $notifCnt = !empty($notifications) ? count($notifications) : 0;
                             <div class="col-sm-4 col-xs-12" id="aircraftAlert">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Aircraft Compliance Alerts <span class="badge right" style="font-weight: normal;font-size: 13px !important;"><?php echo $airCnt; ?> Alerts</span></h5>
+                                        <h5 class="card-title card-flight">Aircraft Compliance Alerts <span class="badge right" style="font-weight: normal;font-size: 13px !important;"><?php echo $airCnt; ?> Alerts</span></h5>
                                         <div class="card-text">
                                             <?php
                                             if(!empty($aircrafts)){
@@ -265,7 +267,7 @@ $notifCnt = !empty($notifications) ? count($notifications) : 0;
                             <div class="col-sm-4 col-xs-12" id="discrepAlert">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Aircraft Discrepancies <span class="badge right" style="font-weight: normal;font-size: 13px !important;"><?php echo $discpCnt; ?> Alerts</span></h5>
+                                        <h5 class="card-title card-flight">Aircraft Discrepancies <span class="badge right" style="font-weight: normal;font-size: 13px !important;"><?php echo $discpCnt; ?> Alerts</span></h5>
                                         <div class="card-text">
                                             <?php
                                             if(!empty($discrepancies)) {

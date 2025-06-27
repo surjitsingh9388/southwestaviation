@@ -2693,7 +2693,11 @@ table th {
 .overflow-visible{
     overflow: visible !important;
 }
-
+.card-flight{
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
         width: 100% !important;

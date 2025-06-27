@@ -12,14 +12,14 @@
                 </div>
                 <div class="modal-body" style="max-height: 580px; padding:30px;">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Crew Member</label>
                             <div class="crewListCls"></div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Crew Member Type</label>
                             <select name="member_type" class="form-control col-md-6 col-xs-12 landingCls">
                                 <option value="pic">PIC</option>
@@ -29,34 +29,34 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <input type="checkbox" name="pilot_flying"> Pilot Flying
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Duty Start Date</label>
                             <input type="text" name="duty_start_date" class="form-control datePicker dtStartD">
                         </div> 
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Estimated Duty On</label>
                             <input type="text" name="duty_on" class="form-control timePicker" placeholder="00.00">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Estimated Duty Off</label>
                             <input type="text" name="duty_off" class="form-control timePicker" placeholder="00.00">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Required Rest</label>
                             <select name="required_rest" class="form-control col-md-6 col-xs-12 requiredRestCls">
                                 <option value="8">8 Hours</option>
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Which legs should this apply to</label>
                             <div class="allLegsList">
                                 <input type="checkbox" name="legs_apply" checked="checked" disabled><input type="hidden" name="leg_info" class="legInfoCls"> <span class="crewLegInfo"></span>
@@ -129,14 +129,14 @@
                 </div>
                 <div class="modal-body" style="max-height: 580px; padding:30px;">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
                             <label>Crew Member</label>
                             <div id="flsCrewListId"></div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <label>Crew Member Type</label>
                             <select name="member_type" class="form-control col-md-6 col-xs-12 landingCls">
                                 <option value="pic">PIC</option>
@@ -144,26 +144,26 @@
                             </select>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <label>Duty Start Date</label>
                             <input type="text" name="duty_start_date" class="form-control datePicker dtStartD">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div  class="col-md-6 col-sm-6 col-xs-12">
                             <label>Estimated Duty On</label>
                             <input type="text" name="duty_on" class="form-control timePicker" placeholder="00.00">
                         </div>
 
-                        <div class="col-md-6">
+                        <div  class="col-md-6 col-sm-6 col-xs-12">
                             <label>Estimated Duty Off</label>
                             <input type="text" name="duty_off" class="form-control timePicker" placeholder="00.00">
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label>Required Rest</label>
                             <select name="required_rest" class="form-control col-md-6 col-xs-12 requiredRestCls">
                                 <option value="8">8 Hours</option>
