@@ -59,9 +59,10 @@ img {
     margin-bottom: 10px
 }
 
-.ml-6{
-    margin-left: 6px  !important;
+.ml-6 {
+    margin-left: 6px !important;
 }
+
 .topHeader {
     filter: drop-shadow(0px 2px 1.5px rgba(0, 0, 0, 0.13));
     background-color: #39478b;
@@ -2690,14 +2691,25 @@ table th {
 #datatable tbody tr:last-child {
     white-space: nowrap;
 }
-.overflow-visible{
+
+.overflow-visible {
     overflow: visible !important;
 }
-.card-flight{
-    display:flex;
-    justify-content:space-between;
-    align-items:center
+
+.card-flight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
 }
+
+.ml-22 {
+    margin-left: 22px !important;
+}
+
+.mr-22 {
+    margin-right: 22px !important;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
         width: 100% !important;
@@ -2728,7 +2740,7 @@ table th {
     .dashboard-news-feed-list tr td h2 {
         font-size: 18px !important;
     }
-    
+
 }
 
 @media (max-width: 598px) {
