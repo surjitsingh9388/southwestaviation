@@ -1,0 +1,974 @@
+<style type="text/css">
+	.tableTd {
+	   	border-width: 0.5pt; 
+		border: solid; 
+	}
+	.tableTdContent{
+		border-width: 0.5pt; 
+		border: solid;
+	}
+	#titles{
+		font-weight: bolder;
+	}
+</style>
+<table>
+<tr id="titles">
+	<td colspan="20" style="text-align:center; font-size:14px; font-family:Verdana, Geneva, sans-serif;"><b>Talent Details</b></td>
+</tr>
+<tr id="titles">
+	<td colspan="20">&nbsp;</td>
+</tr>
+<tr id="titles">
+    <td class="tableTd">SL. NO</td>
+    <td class="tableTd">TALENT<br />CODE</td>
+    <td class="tableTd">USERNAME</td>
+    <td class="tableTd">FIRST NAME</td>
+    <td class="tableTd">MIDDLE NAME</td>
+    <td class="tableTd">LAST NAME</td>
+    <td class="tableTd">EMAIL</td>
+    <td class="tableTd">GENDER</td>
+    <td class="tableTd">DATE OF BIRTH</td>
+    <td class="tableTd">EDUCATION</td>
+    <td class="tableTd">ADDRESS 1</td>
+    <td class="tableTd">ADDRESS 2</td>
+    <td class="tableTd">SPECIAL <br /> SKILLS</td>
+    <td class="tableTd">STATE</td>
+    <td class="tableTd">CITY</td>
+    <td class="tableTd">ETHNICITY</td>
+    <td class="tableTd">ZIP CODE 1</td>
+    <td class="tableTd">ZIP CODE 2</td>
+    <td class="tableTd">HOME PHONE 1</td>
+    <td class="tableTd">HOME PHONE 2</td>
+    <td class="tableTd">HOME PHONE 3</td>
+    <td class="tableTd">WORK PHONE 1</td>
+    <td class="tableTd">WORK PHONE 2</td>
+    <td class="tableTd">WORK PHONE 3</td>
+    <td class="tableTd">WORK PHONE 4</td>
+    <td class="tableTd">CELL PHONE 1</td>
+    <td class="tableTd">CELL PHONE 2</td>
+    <td class="tableTd">CELL PHONE 3</td>
+    <td class="tableTd">DRIVING<br />LICENCE</td>
+    <td class="tableTd">STATE<br />ISSUED</td>
+    <td class="tableTd">DRIVING<br />CLASS</td>
+    <td class="tableTd">HAIR<br />COLOR</td>
+    <td class="tableTd">EYE<br />COLOR</td>
+</tr>
+<tr><td class="tableTdContent">1</td><td class="tableTdContent">RTN2505116</td><td class="tableTdContent">trwtrwe</td><td class="tableTdContent">Surjit</td><td class="tableTdContent"></td><td class="tableTdContent">Singh</td><td class="tableTdContent">surjit.singh@evontech.com</td><td class="tableTdContent">Male</td><td class="tableTdContent">11/21/1990</td><td class="tableTdContent">High School </td><td class="tableTdContent">new york</td><td class="tableTdContent">new york</td><td class="tableTdContent"></td><td class="tableTdContent">New Jersey</td><td class="tableTdContent">new york</td><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3db5b-trace').style.display = (document.getElementById('cakeErr685e7b9c3db5b-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Trying to access array offset on value of type null [<b>APP/Template/Export/talent_single_export.ctp</b>, line <b>76</b>]<div id="cakeErr685e7b9c3db5b-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3db5b-code').style.display = (document.getElementById('cakeErr685e7b9c3db5b-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3db5b-context').style.display = (document.getElementById('cakeErr685e7b9c3db5b-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr685e7b9c3db5b-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">)&nbsp;{</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">(</span><span style="color: #0000BB">$code</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$line</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$context</span><span style="color: #007700">);</span></span></code></span>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span></span></code></pre><pre id="cakeErr685e7b9c3db5b-context" class="cake-context" style="display: none;">$viewFile = &#039;/opt/lampp/htdocs/readysetgostaffing/src/Template/Export/talent_single_export.ctp&#039;
+$dataForView = [
+	&#039;sess_menu_access&#039; =&gt; [
+		(int) 0 =&gt; &#039;Talent&#039;,
+		(int) 1 =&gt; &#039;Event Mgmt&#039;,
+		(int) 2 =&gt; &#039;Client&#039;,
+		(int) 3 =&gt; &#039;Job Invites&#039;,
+		(int) 4 =&gt; &#039;Grades&#039;,
+		(int) 5 =&gt; &#039;Email&#039;,
+		(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+		(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+		(int) 8 =&gt; &#039;City Management&#039;,
+		(int) 9 =&gt; &#039;Talent Management&#039;,
+		(int) 10 =&gt; &#039;Spreadsheet&#039;,
+		(int) 11 =&gt; &#039;Brand Management&#039;,
+		(int) 12 =&gt; &#039;Services&#039;
+	],
+	&#039;sess_access_perm&#039; =&gt; [
+		(int) 0 =&gt; [
+			&#039;id&#039; =&gt; (int) 214,
+			&#039;permission&#039; =&gt; &#039;Delete&#039;
+		],
+		(int) 1 =&gt; [
+			&#039;id&#039; =&gt; (int) 215,
+			&#039;permission&#039; =&gt; &#039;Export&#039;
+		]
+	],
+	&#039;loggedInUserDetail&#039; =&gt; object(App\Model\Entity\User) {
+
+		&#039;id&#039; =&gt; (int) 1,
+		&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+		&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+		&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+		&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+		&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+		&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;image_name&#039; =&gt; null,
+		&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+		&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+		&#039;isactive&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;madified&#039; =&gt; null,
+		&#039;role&#039; =&gt; &#039;user&#039;,
+		&#039;[new]&#039; =&gt; false,
+		&#039;[accessible]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[dirty]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[original]&#039; =&gt; [[maximum depth reached]],
+		&#039;[virtual]&#039; =&gt; [[maximum depth reached]],
+		&#039;[errors]&#039; =&gt; [[maximum depth reached]],
+		&#039;[invalid]&#039; =&gt; [[maximum depth reached]],
+		&#039;[repository]&#039; =&gt; &#039;Users&#039;
+	
+	},
+	&#039;talentDetails&#039; =&gt; [
+		&#039;id&#039; =&gt; (int) 7049,
+		&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+		&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+		&#039;middle_name&#039; =&gt; null,
+		&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+		&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+		&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+		&#039;address_first&#039; =&gt; &#039;new york&#039;,
+		&#039;address_second&#039; =&gt; &#039;new york&#039;,
+		&#039;special_skills&#039; =&gt; null,
+		&#039;city&#039; =&gt; &#039;new york&#039;,
+		&#039;state_id&#039; =&gt; (int) 30,
+		&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+		&#039;zip_code2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;home_phone2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;work_phone2&#039; =&gt; &#039;&#039;,
+		&#039;work_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone4&#039; =&gt; &#039;&#039;,
+		&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+		&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+		&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;ethnicity_id&#039; =&gt; (int) 0,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {},
+		&#039;education_id&#039; =&gt; (int) 3,
+		&#039;driving_licence&#039; =&gt; null,
+		&#039;state_issued&#039; =&gt; null,
+		&#039;driving_class&#039; =&gt; null,
+		&#039;eye_id&#039; =&gt; (int) 0,
+		&#039;hair_id&#039; =&gt; (int) 0,
+		&#039;height_feets&#039; =&gt; &#039;6&#039;,
+		&#039;height_inches&#039; =&gt; &#039;0&#039;,
+		&#039;weight&#039; =&gt; &#039;0&#039;,
+		&#039;waist&#039; =&gt; &#039;0&#039;,
+		&#039;suits_id&#039; =&gt; (int) 0,
+		&#039;shirts&#039; =&gt; &#039;Large&#039;,
+		&#039;pants_id&#039; =&gt; (int) 0,
+		&#039;shoes&#039; =&gt; null,
+		&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+		&#039;isadmin&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;hair&#039; =&gt; null,
+		&#039;eye&#039; =&gt; null,
+		&#039;education&#039; =&gt; [
+			&#039;education_type&#039; =&gt; &#039;High School &#039;
+		],
+		&#039;ethnicity&#039; =&gt; null,
+		&#039;state&#039; =&gt; [
+			&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+		]
+	],
+	&#039;fileName&#039; =&gt; &#039;TalentReport&#039;
+]
+$sess_menu_access = [
+	(int) 0 =&gt; &#039;Talent&#039;,
+	(int) 1 =&gt; &#039;Event Mgmt&#039;,
+	(int) 2 =&gt; &#039;Client&#039;,
+	(int) 3 =&gt; &#039;Job Invites&#039;,
+	(int) 4 =&gt; &#039;Grades&#039;,
+	(int) 5 =&gt; &#039;Email&#039;,
+	(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+	(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+	(int) 8 =&gt; &#039;City Management&#039;,
+	(int) 9 =&gt; &#039;Talent Management&#039;,
+	(int) 10 =&gt; &#039;Spreadsheet&#039;,
+	(int) 11 =&gt; &#039;Brand Management&#039;,
+	(int) 12 =&gt; &#039;Services&#039;
+]
+$sess_access_perm = [
+	(int) 0 =&gt; [
+		&#039;id&#039; =&gt; (int) 214,
+		&#039;permission&#039; =&gt; &#039;Delete&#039;
+	],
+	(int) 1 =&gt; [
+		&#039;id&#039; =&gt; (int) 215,
+		&#039;permission&#039; =&gt; &#039;Export&#039;
+	]
+]
+$loggedInUserDetail = object(App\Model\Entity\User) {
+
+	&#039;id&#039; =&gt; (int) 1,
+	&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+	&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+	&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+	&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+	&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+	&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;image_name&#039; =&gt; null,
+	&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+	&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+	&#039;isactive&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;madified&#039; =&gt; null,
+	&#039;role&#039; =&gt; &#039;user&#039;,
+	&#039;[new]&#039; =&gt; false,
+	&#039;[accessible]&#039; =&gt; [
+		&#039;user_code&#039; =&gt; true,
+		&#039;username&#039; =&gt; true,
+		&#039;password&#039; =&gt; true,
+		&#039;first_name&#039; =&gt; true,
+		&#039;middle_name&#039; =&gt; true,
+		&#039;last_name&#039; =&gt; true,
+		&#039;cell_no&#039; =&gt; true,
+		&#039;email&#039; =&gt; true,
+		&#039;birth&#039; =&gt; true,
+		&#039;gender&#039; =&gt; true,
+		&#039;image_name&#039; =&gt; true,
+		&#039;last_login_date&#039; =&gt; true,
+		&#039;last_login_ip&#039; =&gt; true,
+		&#039;isactive&#039; =&gt; true,
+		&#039;isdisplay&#039; =&gt; true,
+		&#039;isdeleted&#039; =&gt; true,
+		&#039;isblocked&#039; =&gt; true,
+		&#039;created&#039; =&gt; true,
+		&#039;madified&#039; =&gt; true,
+		&#039;userMenus&#039; =&gt; true
+	],
+	&#039;[dirty]&#039; =&gt; [
+		&#039;role&#039; =&gt; true
+	],
+	&#039;[original]&#039; =&gt; [],
+	&#039;[virtual]&#039; =&gt; [],
+	&#039;[errors]&#039; =&gt; [],
+	&#039;[invalid]&#039; =&gt; [],
+	&#039;[repository]&#039; =&gt; &#039;Users&#039;
+
+}
+$talentDetails = [
+	&#039;id&#039; =&gt; (int) 7049,
+	&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+	&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+	&#039;middle_name&#039; =&gt; null,
+	&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+	&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+	&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+	&#039;address_first&#039; =&gt; &#039;new york&#039;,
+	&#039;address_second&#039; =&gt; &#039;new york&#039;,
+	&#039;special_skills&#039; =&gt; null,
+	&#039;city&#039; =&gt; &#039;new york&#039;,
+	&#039;state_id&#039; =&gt; (int) 30,
+	&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+	&#039;zip_code2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;home_phone2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;work_phone2&#039; =&gt; &#039;&#039;,
+	&#039;work_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone4&#039; =&gt; &#039;&#039;,
+	&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+	&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+	&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;ethnicity_id&#039; =&gt; (int) 0,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {
+
+		&#039;time&#039; =&gt; &#039;1990-11-21T00:00:00+00:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;UTC&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;education_id&#039; =&gt; (int) 3,
+	&#039;driving_licence&#039; =&gt; null,
+	&#039;state_issued&#039; =&gt; null,
+	&#039;driving_class&#039; =&gt; null,
+	&#039;eye_id&#039; =&gt; (int) 0,
+	&#039;hair_id&#039; =&gt; (int) 0,
+	&#039;height_feets&#039; =&gt; &#039;6&#039;,
+	&#039;height_inches&#039; =&gt; &#039;0&#039;,
+	&#039;weight&#039; =&gt; &#039;0&#039;,
+	&#039;waist&#039; =&gt; &#039;0&#039;,
+	&#039;suits_id&#039; =&gt; (int) 0,
+	&#039;shirts&#039; =&gt; &#039;Large&#039;,
+	&#039;pants_id&#039; =&gt; (int) 0,
+	&#039;shoes&#039; =&gt; null,
+	&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+	&#039;isadmin&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T01:05:31-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T02:06:57-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;hair&#039; =&gt; null,
+	&#039;eye&#039; =&gt; null,
+	&#039;education&#039; =&gt; [
+		&#039;education_type&#039; =&gt; &#039;High School &#039;
+	],
+	&#039;ethnicity&#039; =&gt; null,
+	&#039;state&#039; =&gt; [
+		&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+	]
+]
+$fileName = &#039;TalentReport&#039;
+$i = (int) 1</pre><pre class="stack-trace">Cake\Core\Plugin::{closure}() - ROOT/vendor/cakephp/debug_kit/config/bootstrap.php, line 42
+include - APP/Template/Export/talent_single_export.ctp, line 76
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1240
+Cake\View\View::_render() - CORE/src/View/View.php, line 1201
+Cake\View\View::render() - CORE/src/View/View.php, line 803
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 790
+App\Controller\User\TalentsController::talentSingleExport() - APP/Controller/User/TalentsController.php, line 1214
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 609
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 120
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 94
+Cake\Http\BaseApplication::__invoke() - CORE/src/Http/BaseApplication.php, line 235
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE/src/Routing/Middleware/RoutingMiddleware.php, line 156
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE/src/Routing/Middleware/AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE/src/Error/Middleware/ErrorHandlerMiddleware.php, line 98</pre></div></pre><td class="tableTdContent"></td><td class="tableTdContent">88888</td><td class="tableTdContent"></td><td class="tableTdContent">+1</td><td class="tableTdContent"></td><td class="tableTdContent"></td><td class="tableTdContent">+1</td><td class="tableTdContent"></td><td class="tableTdContent"></td><td class="tableTdContent"></td><td class="tableTdContent">+1</td><td class="tableTdContent">888</td><td class="tableTdContent">8888888</td><td class="tableTdContent"></td><td class="tableTdContent"></td><td class="tableTdContent"></td><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3ec14-trace').style.display = (document.getElementById('cakeErr685e7b9c3ec14-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Trying to access array offset on value of type null [<b>APP/Template/Export/talent_single_export.ctp</b>, line <b>92</b>]<div id="cakeErr685e7b9c3ec14-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3ec14-code').style.display = (document.getElementById('cakeErr685e7b9c3ec14-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3ec14-context').style.display = (document.getElementById('cakeErr685e7b9c3ec14-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr685e7b9c3ec14-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">)&nbsp;{</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">(</span><span style="color: #0000BB">$code</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$line</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$context</span><span style="color: #007700">);</span></span></code></span>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span></span></code></pre><pre id="cakeErr685e7b9c3ec14-context" class="cake-context" style="display: none;">$viewFile = &#039;/opt/lampp/htdocs/readysetgostaffing/src/Template/Export/talent_single_export.ctp&#039;
+$dataForView = [
+	&#039;sess_menu_access&#039; =&gt; [
+		(int) 0 =&gt; &#039;Talent&#039;,
+		(int) 1 =&gt; &#039;Event Mgmt&#039;,
+		(int) 2 =&gt; &#039;Client&#039;,
+		(int) 3 =&gt; &#039;Job Invites&#039;,
+		(int) 4 =&gt; &#039;Grades&#039;,
+		(int) 5 =&gt; &#039;Email&#039;,
+		(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+		(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+		(int) 8 =&gt; &#039;City Management&#039;,
+		(int) 9 =&gt; &#039;Talent Management&#039;,
+		(int) 10 =&gt; &#039;Spreadsheet&#039;,
+		(int) 11 =&gt; &#039;Brand Management&#039;,
+		(int) 12 =&gt; &#039;Services&#039;
+	],
+	&#039;sess_access_perm&#039; =&gt; [
+		(int) 0 =&gt; [
+			&#039;id&#039; =&gt; (int) 214,
+			&#039;permission&#039; =&gt; &#039;Delete&#039;
+		],
+		(int) 1 =&gt; [
+			&#039;id&#039; =&gt; (int) 215,
+			&#039;permission&#039; =&gt; &#039;Export&#039;
+		]
+	],
+	&#039;loggedInUserDetail&#039; =&gt; object(App\Model\Entity\User) {
+
+		&#039;id&#039; =&gt; (int) 1,
+		&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+		&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+		&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+		&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+		&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+		&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;image_name&#039; =&gt; null,
+		&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+		&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+		&#039;isactive&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;madified&#039; =&gt; null,
+		&#039;role&#039; =&gt; &#039;user&#039;,
+		&#039;[new]&#039; =&gt; false,
+		&#039;[accessible]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[dirty]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[original]&#039; =&gt; [[maximum depth reached]],
+		&#039;[virtual]&#039; =&gt; [[maximum depth reached]],
+		&#039;[errors]&#039; =&gt; [[maximum depth reached]],
+		&#039;[invalid]&#039; =&gt; [[maximum depth reached]],
+		&#039;[repository]&#039; =&gt; &#039;Users&#039;
+	
+	},
+	&#039;talentDetails&#039; =&gt; [
+		&#039;id&#039; =&gt; (int) 7049,
+		&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+		&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+		&#039;middle_name&#039; =&gt; null,
+		&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+		&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+		&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+		&#039;address_first&#039; =&gt; &#039;new york&#039;,
+		&#039;address_second&#039; =&gt; &#039;new york&#039;,
+		&#039;special_skills&#039; =&gt; null,
+		&#039;city&#039; =&gt; &#039;new york&#039;,
+		&#039;state_id&#039; =&gt; (int) 30,
+		&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+		&#039;zip_code2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;home_phone2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;work_phone2&#039; =&gt; &#039;&#039;,
+		&#039;work_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone4&#039; =&gt; &#039;&#039;,
+		&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+		&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+		&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;ethnicity_id&#039; =&gt; (int) 0,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {},
+		&#039;education_id&#039; =&gt; (int) 3,
+		&#039;driving_licence&#039; =&gt; null,
+		&#039;state_issued&#039; =&gt; null,
+		&#039;driving_class&#039; =&gt; null,
+		&#039;eye_id&#039; =&gt; (int) 0,
+		&#039;hair_id&#039; =&gt; (int) 0,
+		&#039;height_feets&#039; =&gt; &#039;6&#039;,
+		&#039;height_inches&#039; =&gt; &#039;0&#039;,
+		&#039;weight&#039; =&gt; &#039;0&#039;,
+		&#039;waist&#039; =&gt; &#039;0&#039;,
+		&#039;suits_id&#039; =&gt; (int) 0,
+		&#039;shirts&#039; =&gt; &#039;Large&#039;,
+		&#039;pants_id&#039; =&gt; (int) 0,
+		&#039;shoes&#039; =&gt; null,
+		&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+		&#039;isadmin&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;hair&#039; =&gt; null,
+		&#039;eye&#039; =&gt; null,
+		&#039;education&#039; =&gt; [
+			&#039;education_type&#039; =&gt; &#039;High School &#039;
+		],
+		&#039;ethnicity&#039; =&gt; null,
+		&#039;state&#039; =&gt; [
+			&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+		]
+	],
+	&#039;fileName&#039; =&gt; &#039;TalentReport&#039;
+]
+$sess_menu_access = [
+	(int) 0 =&gt; &#039;Talent&#039;,
+	(int) 1 =&gt; &#039;Event Mgmt&#039;,
+	(int) 2 =&gt; &#039;Client&#039;,
+	(int) 3 =&gt; &#039;Job Invites&#039;,
+	(int) 4 =&gt; &#039;Grades&#039;,
+	(int) 5 =&gt; &#039;Email&#039;,
+	(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+	(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+	(int) 8 =&gt; &#039;City Management&#039;,
+	(int) 9 =&gt; &#039;Talent Management&#039;,
+	(int) 10 =&gt; &#039;Spreadsheet&#039;,
+	(int) 11 =&gt; &#039;Brand Management&#039;,
+	(int) 12 =&gt; &#039;Services&#039;
+]
+$sess_access_perm = [
+	(int) 0 =&gt; [
+		&#039;id&#039; =&gt; (int) 214,
+		&#039;permission&#039; =&gt; &#039;Delete&#039;
+	],
+	(int) 1 =&gt; [
+		&#039;id&#039; =&gt; (int) 215,
+		&#039;permission&#039; =&gt; &#039;Export&#039;
+	]
+]
+$loggedInUserDetail = object(App\Model\Entity\User) {
+
+	&#039;id&#039; =&gt; (int) 1,
+	&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+	&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+	&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+	&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+	&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+	&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;image_name&#039; =&gt; null,
+	&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+	&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+	&#039;isactive&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;madified&#039; =&gt; null,
+	&#039;role&#039; =&gt; &#039;user&#039;,
+	&#039;[new]&#039; =&gt; false,
+	&#039;[accessible]&#039; =&gt; [
+		&#039;user_code&#039; =&gt; true,
+		&#039;username&#039; =&gt; true,
+		&#039;password&#039; =&gt; true,
+		&#039;first_name&#039; =&gt; true,
+		&#039;middle_name&#039; =&gt; true,
+		&#039;last_name&#039; =&gt; true,
+		&#039;cell_no&#039; =&gt; true,
+		&#039;email&#039; =&gt; true,
+		&#039;birth&#039; =&gt; true,
+		&#039;gender&#039; =&gt; true,
+		&#039;image_name&#039; =&gt; true,
+		&#039;last_login_date&#039; =&gt; true,
+		&#039;last_login_ip&#039; =&gt; true,
+		&#039;isactive&#039; =&gt; true,
+		&#039;isdisplay&#039; =&gt; true,
+		&#039;isdeleted&#039; =&gt; true,
+		&#039;isblocked&#039; =&gt; true,
+		&#039;created&#039; =&gt; true,
+		&#039;madified&#039; =&gt; true,
+		&#039;userMenus&#039; =&gt; true
+	],
+	&#039;[dirty]&#039; =&gt; [
+		&#039;role&#039; =&gt; true
+	],
+	&#039;[original]&#039; =&gt; [],
+	&#039;[virtual]&#039; =&gt; [],
+	&#039;[errors]&#039; =&gt; [],
+	&#039;[invalid]&#039; =&gt; [],
+	&#039;[repository]&#039; =&gt; &#039;Users&#039;
+
+}
+$talentDetails = [
+	&#039;id&#039; =&gt; (int) 7049,
+	&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+	&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+	&#039;middle_name&#039; =&gt; null,
+	&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+	&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+	&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+	&#039;address_first&#039; =&gt; &#039;new york&#039;,
+	&#039;address_second&#039; =&gt; &#039;new york&#039;,
+	&#039;special_skills&#039; =&gt; null,
+	&#039;city&#039; =&gt; &#039;new york&#039;,
+	&#039;state_id&#039; =&gt; (int) 30,
+	&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+	&#039;zip_code2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;home_phone2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;work_phone2&#039; =&gt; &#039;&#039;,
+	&#039;work_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone4&#039; =&gt; &#039;&#039;,
+	&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+	&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+	&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;ethnicity_id&#039; =&gt; (int) 0,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {
+
+		&#039;time&#039; =&gt; &#039;1990-11-21T00:00:00+00:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;UTC&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;education_id&#039; =&gt; (int) 3,
+	&#039;driving_licence&#039; =&gt; null,
+	&#039;state_issued&#039; =&gt; null,
+	&#039;driving_class&#039; =&gt; null,
+	&#039;eye_id&#039; =&gt; (int) 0,
+	&#039;hair_id&#039; =&gt; (int) 0,
+	&#039;height_feets&#039; =&gt; &#039;6&#039;,
+	&#039;height_inches&#039; =&gt; &#039;0&#039;,
+	&#039;weight&#039; =&gt; &#039;0&#039;,
+	&#039;waist&#039; =&gt; &#039;0&#039;,
+	&#039;suits_id&#039; =&gt; (int) 0,
+	&#039;shirts&#039; =&gt; &#039;Large&#039;,
+	&#039;pants_id&#039; =&gt; (int) 0,
+	&#039;shoes&#039; =&gt; null,
+	&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+	&#039;isadmin&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T01:05:31-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T02:06:57-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;hair&#039; =&gt; null,
+	&#039;eye&#039; =&gt; null,
+	&#039;education&#039; =&gt; [
+		&#039;education_type&#039; =&gt; &#039;High School &#039;
+	],
+	&#039;ethnicity&#039; =&gt; null,
+	&#039;state&#039; =&gt; [
+		&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+	]
+]
+$fileName = &#039;TalentReport&#039;
+$i = (int) 1</pre><pre class="stack-trace">Cake\Core\Plugin::{closure}() - ROOT/vendor/cakephp/debug_kit/config/bootstrap.php, line 42
+include - APP/Template/Export/talent_single_export.ctp, line 92
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1240
+Cake\View\View::_render() - CORE/src/View/View.php, line 1201
+Cake\View\View::render() - CORE/src/View/View.php, line 803
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 790
+App\Controller\User\TalentsController::talentSingleExport() - APP/Controller/User/TalentsController.php, line 1214
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 609
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 120
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 94
+Cake\Http\BaseApplication::__invoke() - CORE/src/Http/BaseApplication.php, line 235
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE/src/Routing/Middleware/RoutingMiddleware.php, line 156
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE/src/Routing/Middleware/AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE/src/Error/Middleware/ErrorHandlerMiddleware.php, line 98</pre></div></pre><td class="tableTdContent"></td><pre class="cake-error"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3f6ef-trace').style.display = (document.getElementById('cakeErr685e7b9c3f6ef-trace').style.display == 'none' ? '' : 'none');"><b>Notice</b> (8)</a>: Trying to access array offset on value of type null [<b>APP/Template/Export/talent_single_export.ctp</b>, line <b>93</b>]<div id="cakeErr685e7b9c3f6ef-trace" class="cake-stack-trace" style="display: none;"><a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3f6ef-code').style.display = (document.getElementById('cakeErr685e7b9c3f6ef-code').style.display == 'none' ? '' : 'none')">Code</a> <a href="javascript:void(0);" onclick="document.getElementById('cakeErr685e7b9c3f6ef-context').style.display = (document.getElementById('cakeErr685e7b9c3f6ef-context').style.display == 'none' ? '' : 'none')">Context</a><pre id="cakeErr685e7b9c3f6ef-code" class="cake-code-dump" style="display: none;"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">)&nbsp;{</span></span></code>
+<span class="code-highlight"><code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">return&nbsp;</span><span style="color: #0000BB">$previousHandler</span><span style="color: #007700">(</span><span style="color: #0000BB">$code</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$message</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$line</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$context</span><span style="color: #007700">);</span></span></code></span>
+<code><span style="color: #000000"><span style="color: #0000BB">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}</span></span></code></pre><pre id="cakeErr685e7b9c3f6ef-context" class="cake-context" style="display: none;">$viewFile = &#039;/opt/lampp/htdocs/readysetgostaffing/src/Template/Export/talent_single_export.ctp&#039;
+$dataForView = [
+	&#039;sess_menu_access&#039; =&gt; [
+		(int) 0 =&gt; &#039;Talent&#039;,
+		(int) 1 =&gt; &#039;Event Mgmt&#039;,
+		(int) 2 =&gt; &#039;Client&#039;,
+		(int) 3 =&gt; &#039;Job Invites&#039;,
+		(int) 4 =&gt; &#039;Grades&#039;,
+		(int) 5 =&gt; &#039;Email&#039;,
+		(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+		(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+		(int) 8 =&gt; &#039;City Management&#039;,
+		(int) 9 =&gt; &#039;Talent Management&#039;,
+		(int) 10 =&gt; &#039;Spreadsheet&#039;,
+		(int) 11 =&gt; &#039;Brand Management&#039;,
+		(int) 12 =&gt; &#039;Services&#039;
+	],
+	&#039;sess_access_perm&#039; =&gt; [
+		(int) 0 =&gt; [
+			&#039;id&#039; =&gt; (int) 214,
+			&#039;permission&#039; =&gt; &#039;Delete&#039;
+		],
+		(int) 1 =&gt; [
+			&#039;id&#039; =&gt; (int) 215,
+			&#039;permission&#039; =&gt; &#039;Export&#039;
+		]
+	],
+	&#039;loggedInUserDetail&#039; =&gt; object(App\Model\Entity\User) {
+
+		&#039;id&#039; =&gt; (int) 1,
+		&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+		&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+		&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+		&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+		&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+		&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;image_name&#039; =&gt; null,
+		&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+		&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+		&#039;isactive&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;madified&#039; =&gt; null,
+		&#039;role&#039; =&gt; &#039;user&#039;,
+		&#039;[new]&#039; =&gt; false,
+		&#039;[accessible]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[dirty]&#039; =&gt; [
+			[maximum depth reached]
+		],
+		&#039;[original]&#039; =&gt; [[maximum depth reached]],
+		&#039;[virtual]&#039; =&gt; [[maximum depth reached]],
+		&#039;[errors]&#039; =&gt; [[maximum depth reached]],
+		&#039;[invalid]&#039; =&gt; [[maximum depth reached]],
+		&#039;[repository]&#039; =&gt; &#039;Users&#039;
+	
+	},
+	&#039;talentDetails&#039; =&gt; [
+		&#039;id&#039; =&gt; (int) 7049,
+		&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+		&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+		&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+		&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+		&#039;middle_name&#039; =&gt; null,
+		&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+		&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+		&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+		&#039;address_first&#039; =&gt; &#039;new york&#039;,
+		&#039;address_second&#039; =&gt; &#039;new york&#039;,
+		&#039;special_skills&#039; =&gt; null,
+		&#039;city&#039; =&gt; &#039;new york&#039;,
+		&#039;state_id&#039; =&gt; (int) 30,
+		&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+		&#039;zip_code2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;home_phone2&#039; =&gt; &#039;&#039;,
+		&#039;home_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+		&#039;work_phone2&#039; =&gt; &#039;&#039;,
+		&#039;work_phone3&#039; =&gt; &#039;&#039;,
+		&#039;work_phone4&#039; =&gt; &#039;&#039;,
+		&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+		&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+		&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+		&#039;gender&#039; =&gt; &#039;Male&#039;,
+		&#039;ethnicity_id&#039; =&gt; (int) 0,
+		&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {},
+		&#039;education_id&#039; =&gt; (int) 3,
+		&#039;driving_licence&#039; =&gt; null,
+		&#039;state_issued&#039; =&gt; null,
+		&#039;driving_class&#039; =&gt; null,
+		&#039;eye_id&#039; =&gt; (int) 0,
+		&#039;hair_id&#039; =&gt; (int) 0,
+		&#039;height_feets&#039; =&gt; &#039;6&#039;,
+		&#039;height_inches&#039; =&gt; &#039;0&#039;,
+		&#039;weight&#039; =&gt; &#039;0&#039;,
+		&#039;waist&#039; =&gt; &#039;0&#039;,
+		&#039;suits_id&#039; =&gt; (int) 0,
+		&#039;shirts&#039; =&gt; &#039;Large&#039;,
+		&#039;pants_id&#039; =&gt; (int) 0,
+		&#039;shoes&#039; =&gt; null,
+		&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+		&#039;isadmin&#039; =&gt; (int) 0,
+		&#039;isdisplay&#039; =&gt; (int) 0,
+		&#039;isdeleted&#039; =&gt; (int) 0,
+		&#039;isblocked&#039; =&gt; (int) 0,
+		&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+		&#039;hair&#039; =&gt; null,
+		&#039;eye&#039; =&gt; null,
+		&#039;education&#039; =&gt; [
+			&#039;education_type&#039; =&gt; &#039;High School &#039;
+		],
+		&#039;ethnicity&#039; =&gt; null,
+		&#039;state&#039; =&gt; [
+			&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+		]
+	],
+	&#039;fileName&#039; =&gt; &#039;TalentReport&#039;
+]
+$sess_menu_access = [
+	(int) 0 =&gt; &#039;Talent&#039;,
+	(int) 1 =&gt; &#039;Event Mgmt&#039;,
+	(int) 2 =&gt; &#039;Client&#039;,
+	(int) 3 =&gt; &#039;Job Invites&#039;,
+	(int) 4 =&gt; &#039;Grades&#039;,
+	(int) 5 =&gt; &#039;Email&#039;,
+	(int) 6 =&gt; &#039;Talent Search Mgmt&#039;,
+	(int) 7 =&gt; &#039;State / Region Mgmt&#039;,
+	(int) 8 =&gt; &#039;City Management&#039;,
+	(int) 9 =&gt; &#039;Talent Management&#039;,
+	(int) 10 =&gt; &#039;Spreadsheet&#039;,
+	(int) 11 =&gt; &#039;Brand Management&#039;,
+	(int) 12 =&gt; &#039;Services&#039;
+]
+$sess_access_perm = [
+	(int) 0 =&gt; [
+		&#039;id&#039; =&gt; (int) 214,
+		&#039;permission&#039; =&gt; &#039;Delete&#039;
+	],
+	(int) 1 =&gt; [
+		&#039;id&#039; =&gt; (int) 215,
+		&#039;permission&#039; =&gt; &#039;Export&#039;
+	]
+]
+$loggedInUserDetail = object(App\Model\Entity\User) {
+
+	&#039;id&#039; =&gt; (int) 1,
+	&#039;user_code&#039; =&gt; &#039;RUN7775491&#039;,
+	&#039;username&#039; =&gt; &#039;qaziraza&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Qazi&#039;,
+	&#039;middle_name&#039; =&gt; &#039;Zawed&#039;,
+	&#039;last_name&#039; =&gt; &#039;Raza&#039;,
+	&#039;cell_no&#039; =&gt; &#039;9359694716&#039;,
+	&#039;email&#039; =&gt; &#039;sonudeoria786@gmail.com&#039;,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;image_name&#039; =&gt; null,
+	&#039;last_login_date&#039; =&gt; &#039;2025-06-27 04:02:43&#039;,
+	&#039;last_login_ip&#039; =&gt; &#039;::1&#039;,
+	&#039;isactive&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {},
+	&#039;madified&#039; =&gt; null,
+	&#039;role&#039; =&gt; &#039;user&#039;,
+	&#039;[new]&#039; =&gt; false,
+	&#039;[accessible]&#039; =&gt; [
+		&#039;user_code&#039; =&gt; true,
+		&#039;username&#039; =&gt; true,
+		&#039;password&#039; =&gt; true,
+		&#039;first_name&#039; =&gt; true,
+		&#039;middle_name&#039; =&gt; true,
+		&#039;last_name&#039; =&gt; true,
+		&#039;cell_no&#039; =&gt; true,
+		&#039;email&#039; =&gt; true,
+		&#039;birth&#039; =&gt; true,
+		&#039;gender&#039; =&gt; true,
+		&#039;image_name&#039; =&gt; true,
+		&#039;last_login_date&#039; =&gt; true,
+		&#039;last_login_ip&#039; =&gt; true,
+		&#039;isactive&#039; =&gt; true,
+		&#039;isdisplay&#039; =&gt; true,
+		&#039;isdeleted&#039; =&gt; true,
+		&#039;isblocked&#039; =&gt; true,
+		&#039;created&#039; =&gt; true,
+		&#039;madified&#039; =&gt; true,
+		&#039;userMenus&#039; =&gt; true
+	],
+	&#039;[dirty]&#039; =&gt; [
+		&#039;role&#039; =&gt; true
+	],
+	&#039;[original]&#039; =&gt; [],
+	&#039;[virtual]&#039; =&gt; [],
+	&#039;[errors]&#039; =&gt; [],
+	&#039;[invalid]&#039; =&gt; [],
+	&#039;[repository]&#039; =&gt; &#039;Users&#039;
+
+}
+$talentDetails = [
+	&#039;id&#039; =&gt; (int) 7049,
+	&#039;talent_code&#039; =&gt; &#039;RTN2505116&#039;,
+	&#039;username&#039; =&gt; &#039;trwtrwe&#039;,
+	&#039;password&#039; =&gt; &#039;VGVzdEAxMjM0NQ==&#039;,
+	&#039;first_name&#039; =&gt; &#039;Surjit&#039;,
+	&#039;middle_name&#039; =&gt; null,
+	&#039;last_name&#039; =&gt; &#039;Singh&#039;,
+	&#039;email&#039; =&gt; &#039;surjit.singh@evontech.com&#039;,
+	&#039;resume&#039; =&gt; &#039;Surjit-Resume-1751011531.docx&#039;,
+	&#039;address_first&#039; =&gt; &#039;new york&#039;,
+	&#039;address_second&#039; =&gt; &#039;new york&#039;,
+	&#039;special_skills&#039; =&gt; null,
+	&#039;city&#039; =&gt; &#039;new york&#039;,
+	&#039;state_id&#039; =&gt; (int) 30,
+	&#039;zip_code1&#039; =&gt; &#039;88888&#039;,
+	&#039;zip_code2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;home_phone2&#039; =&gt; &#039;&#039;,
+	&#039;home_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone1&#039; =&gt; &#039;+1&#039;,
+	&#039;work_phone2&#039; =&gt; &#039;&#039;,
+	&#039;work_phone3&#039; =&gt; &#039;&#039;,
+	&#039;work_phone4&#039; =&gt; &#039;&#039;,
+	&#039;cell_no1&#039; =&gt; &#039;+1&#039;,
+	&#039;cell_no2&#039; =&gt; &#039;888&#039;,
+	&#039;cell_no3&#039; =&gt; &#039;8888888&#039;,
+	&#039;gender&#039; =&gt; &#039;Male&#039;,
+	&#039;ethnicity_id&#039; =&gt; (int) 0,
+	&#039;birth&#039; =&gt; object(Cake\I18n\FrozenDate) {
+
+		&#039;time&#039; =&gt; &#039;1990-11-21T00:00:00+00:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;UTC&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;education_id&#039; =&gt; (int) 3,
+	&#039;driving_licence&#039; =&gt; null,
+	&#039;state_issued&#039; =&gt; null,
+	&#039;driving_class&#039; =&gt; null,
+	&#039;eye_id&#039; =&gt; (int) 0,
+	&#039;hair_id&#039; =&gt; (int) 0,
+	&#039;height_feets&#039; =&gt; &#039;6&#039;,
+	&#039;height_inches&#039; =&gt; &#039;0&#039;,
+	&#039;weight&#039; =&gt; &#039;0&#039;,
+	&#039;waist&#039; =&gt; &#039;0&#039;,
+	&#039;suits_id&#039; =&gt; (int) 0,
+	&#039;shirts&#039; =&gt; &#039;Large&#039;,
+	&#039;pants_id&#039; =&gt; (int) 0,
+	&#039;shoes&#039; =&gt; null,
+	&#039;saluation&#039; =&gt; &#039;Mr.&#039;,
+	&#039;isadmin&#039; =&gt; (int) 0,
+	&#039;isdisplay&#039; =&gt; (int) 0,
+	&#039;isdeleted&#039; =&gt; (int) 0,
+	&#039;isblocked&#039; =&gt; (int) 0,
+	&#039;created&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T01:05:31-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;modified&#039; =&gt; object(Cake\I18n\FrozenTime) {
+
+		&#039;time&#039; =&gt; &#039;2025-06-27T02:06:57-07:00&#039;,
+		&#039;timezone&#039; =&gt; &#039;America/Los_Angeles&#039;,
+		&#039;fixedNowTime&#039; =&gt; false
+	
+	},
+	&#039;hair&#039; =&gt; null,
+	&#039;eye&#039; =&gt; null,
+	&#039;education&#039; =&gt; [
+		&#039;education_type&#039; =&gt; &#039;High School &#039;
+	],
+	&#039;ethnicity&#039; =&gt; null,
+	&#039;state&#039; =&gt; [
+		&#039;state_name&#039; =&gt; &#039;New Jersey&#039;
+	]
+]
+$fileName = &#039;TalentReport&#039;
+$i = (int) 1</pre><pre class="stack-trace">Cake\Core\Plugin::{closure}() - ROOT/vendor/cakephp/debug_kit/config/bootstrap.php, line 42
+include - APP/Template/Export/talent_single_export.ctp, line 93
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1240
+Cake\View\View::_render() - CORE/src/View/View.php, line 1201
+Cake\View\View::render() - CORE/src/View/View.php, line 803
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 790
+App\Controller\User\TalentsController::talentSingleExport() - APP/Controller/User/TalentsController.php, line 1214
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 609
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 120
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 94
+Cake\Http\BaseApplication::__invoke() - CORE/src/Http/BaseApplication.php, line 235
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE/src/Routing/Middleware/RoutingMiddleware.php, line 156
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE/src/Routing/Middleware/AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE/src/Http/Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE/src/Error/Middleware/ErrorHandlerMiddleware.php, line 98</pre></div></pre><td class="tableTdContent"></td></tr></table>

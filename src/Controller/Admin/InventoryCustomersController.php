@@ -7075,6 +7075,7 @@ Send: '.$messagedata['created_at'].'
 
                     $wooptionmessages = $this->CustomerAircraftWOMessages->get($postData['replay_message_id']);
                     $wooptionmessages->message = $messages;
+                    $wooptionmessages->message_to = $wooptionmessages->added_by;
                 }
 
                 $is_from_part = !empty($postData['is_from_part']) ? $postData['is_from_part'] : '';
