@@ -2740,7 +2740,24 @@ table th {
     .dashboard-news-feed-list tr td h2 {
         font-size: 18px !important;
     }
+}
 
+.btn-upload {
+    margin-right: 0;
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .btn-upload {
+        margin-right: 140px;
+    }
+}
+
+/* Mobile (less than 768px) */
+@media (max-width: 767px) {
+    .btn-upload {
+        margin-right: 14px;
+    }
 }
 
 @media (max-width: 598px) {

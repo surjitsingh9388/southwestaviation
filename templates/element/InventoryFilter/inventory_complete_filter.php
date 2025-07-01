@@ -6,20 +6,20 @@
     <?php echo $this->Form->create(null, ['url' =>'', 'id' => 'formPopupSearch', 'autocomplete'=>'off']); ?>
     <div class="page-content">
         <div class="row mt10">
-                <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Item Type</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="col-md-8 col-sm-8 col-xs-12">
                         <?php 
                             $invItemType = unserialize(INVENTORY_ITEM_TYPE);
-                            echo $this->Form->control('item_type', array('options' => $invItemType, 'empty' => 'Enter Type ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_item_type')); 
+                            echo $this->Form->control('item_type', array('options' => $invItemType, 'empty' => 'Enter Type ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_item_type')); 
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Part Type</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Capital Equipment</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">System Managed</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+               <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Installed To</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Part Number</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+               <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Location</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Status</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -140,7 +140,7 @@
                 </div>
             </div-->
             <div class="row mt10">
-                <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Has Expiration</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -160,7 +160,7 @@
             </div>
             
             <div class="row mt10">
-                <div class="col-md-12">
+               <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Expiration Date</label>
                         <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Cost</label>
                         <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
@@ -220,7 +220,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+               <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Condition</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -233,11 +233,11 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Vendor</label>
                         
-                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList" style="padding-right: 0px !important;">
+                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList" >
                             <?php 
                                 echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Enter a vendor ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_vendor')); 
                             ?>
@@ -247,11 +247,11 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+              <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">ATA Code</label>
                         
-                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList" style="padding-right: 0px !important;">
+                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList">
                             <?php 
                                 echo $this->Form->control('ata_chapter', array('options' => $ataCode, 'empty' => 'Enter a code ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_ata_chapter')); 
                             ?>
@@ -261,7 +261,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
                         

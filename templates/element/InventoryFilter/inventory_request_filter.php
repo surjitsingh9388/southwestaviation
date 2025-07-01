@@ -7,7 +7,7 @@
         <div class="modal-body" style="max-height: 500px;">
             <div class="page-content">
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Request Date</label>
                             <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Required Date</label>
                             <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Urgent Item?</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Urgency</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="row mt10">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                         <div class="checkbox"><label for="show_inactive"><input id="show_inactive" name="show_inactive" type="checkbox" value="1">Include Inactive</label></div>
                         </div>
