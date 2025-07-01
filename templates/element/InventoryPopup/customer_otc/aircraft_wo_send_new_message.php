@@ -51,7 +51,7 @@
 
                         <!-- W/O or R/O Field -->
                         <div class="form-group row mb-15  ">
-                            <label class="col-md-2  col-sm-12 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O</label>
+                            <label class="col-md-2  col-sm-12 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O (Optional)</label>
                             <div class="col-md-9  col-sm-12 col-xs-12 mb-15">
                                 <?php
                                 echo $this->Form->control('message_wo_ro', [
@@ -63,10 +63,11 @@
                                     'label' => false
                                 ]);
                                 ?>
+                              
                             </div>
-                            <div class="col-md-1 col-sm-12 col-xs-12 d-flex align-items-center">
-                                <span>(Optional)</span>
-                            </div>
+                               <!-- <span>(Optional)</span> -->
+                            <!-- <div class="col-md-2 col-sm-12 col-xs-12 d-flex align-items-center">
+                            </div> -->
                         </div>
 
                         <!-- Message Body -->

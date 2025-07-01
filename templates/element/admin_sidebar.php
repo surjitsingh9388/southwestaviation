@@ -1313,3 +1313,61 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
         </div>
     </ul>
 </div>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.side-bar');
+    const content = document.querySelector('.content'); 
+
+    if (sidebar) {
+      sidebar.classList.remove('active');
+      sidebar.classList.add('left');
+    }
+
+    if (content) {
+      content.classList.add('sliding','left');
+    }
+  });
+
+
+//   function applySidebarClasses() {
+//   const sidebar = document.querySelector('.side-bar');
+//   const content = document.querySelector('.content');
+//   const isMobile = window.matchMedia('(max-width: 224px)').matches;
+
+
+
+
+//   if (isMobile) {
+//     if (sidebar) {
+//       sidebar.classList.remove('active');
+//       sidebar.classList.add('left');
+//     }
+//     if (content) {
+//       content.classList.add('sliding', 'left');
+//     }
+//   } 
+
+//   else{
+
+//       if (sidebar) {
+//       sidebar.classList.remove('active');
+//       sidebar.classList.add('left');
+//     }
+
+//     if (content) {
+//       content.classList.add('sliding','left');
+//     }
+//   }
+
+   
+  
+// }
+
+// window.addEventListener('DOMContentLoaded', applySidebarClasses);
+// window.addEventListener('resize', applySidebarClasses); 
+
+</script>
+
+
+
+
