@@ -407,7 +407,7 @@ $(document).on('click', '.sendWOViewMessage', function(e){
                 if(obj.status == 'success') {
                     $('#aircraftWOSendNewMsgModel').modal('hide');
                     $('.wo-option-message-list').html(obj.msgtr);
-                    alert('Message send successfully.');
+                    alert('Message sent successfully.');
                 }else{
                     alert(obj.message);
                 }

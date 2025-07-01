@@ -95,17 +95,31 @@ class TechnicalPublicationComponent extends Component {
         $user_id = $authUserData['id'];
 
         $whereArr = ['main_page_id'=>$main_page_id, 'subpage_id'=>$subpage_id];
+        
+        $parentidarr = [];
         if($authUserData['role_id'] != '1' && !empty($user_id)){
-            $whereArr = ['main_page_id'=>$main_page_id, 'subpage_id'=>$subpage_id, 'OR'=>[['TechnicalPublications.added_by' => $user_id], ['FIND_IN_SET('.$user_id.', TechnicalPublications.permission_user_ids)']]];
+            $parentidarr = $this->getFolderDetailForUser($main_page_id, $user_id, $parent_folder_name);
         }
         
-        if(!empty($parent_folder_name)){
-            $parentdet = $this->TechnicalPublications->find('all')->where(['folder_file_name'=>$parent_folder_name])->select(['id'])->first();
-            $parent_id = $parentdet->id;
+        if($authUserData['role_id'] == '1'){
+            if(!empty($parent_folder_name)){
+                $parentdet = $this->TechnicalPublications->find('all')->where(['folder_file_name'=>$parent_folder_name])->select(['id'])->first();
+                $parent_id = $parentdet->id;
+            }else{
+                $parent_id = 0;
+            }
+            $whereArr['parent_id'] = $parent_id;
         }else{
-            $parent_id = 0;
+            if(!empty($parentidarr)){
+                $whereArr['TechnicalPublications.id IN'] = $parentidarr;
+            }else{
+                $parentdet = $this->TechnicalPublications->find('all')->where(['folder_file_name'=>$parent_folder_name])->select(['id'])->first();
+                $parent_id = $parentdet->id;
+
+                $whereArr = ['main_page_id'=>$main_page_id, 'subpage_id'=>$subpage_id, 'OR'=>[['TechnicalPublications.added_by' => $user_id], ['FIND_IN_SET('.$user_id.', TechnicalPublications.permission_user_ids)']]];
+                $whereArr['parent_id'] = $parent_id;
+            }
         }
-        $whereArr['parent_id'] = $parent_id;
         
         $technicalPublicationdata = $this->TechnicalPublications->find('all')
                                                     ->where($whereArr)
@@ -119,21 +133,128 @@ class TechnicalPublicationComponent extends Component {
                                                         ]
                                                     ]);
         $technicalPublications = [];
-        foreach($technicalPublicationdata as $key=>$row){
-            $usernamearr = [];
-            $technicalPublications[] = $row;
+        if(!empty($technicalPublicationdata)){
+            foreach($technicalPublicationdata as $key=>$row){
+                $usernamearr = [];
+                $technicalPublications[] = $row;
 
-            if(!empty($row['permission_user_ids'])){
-                $useridarr = explode(',', $row['permission_user_ids']);
-                $userarr = $this->Users->find('all')->where(['id IN'=> $useridarr])->select('full_name');
-                
-                foreach($userarr as $users){
-                    $usernamearr[] = $users['full_name'];
+                if(!empty($row['permission_user_ids'])){
+                    $useridarr = explode(',', $row['permission_user_ids']);
+                    $userarr = $this->Users->find('all')->where(['id IN'=> $useridarr])->select('full_name');
+                    
+                    foreach($userarr as $users){
+                        $usernamearr[] = $users['full_name'];
+                    }
                 }
+                $technicalPublications[$key]['permission_users'] = $usernamearr;
             }
-            $technicalPublications[$key]['permission_users'] = $usernamearr;
         }
         return $technicalPublications;
+    }
+
+    public function getFolderDetailForUser($main_page_id, $userId, $parent_folder_name){
+        // Step 1: Get all rows where the user has access
+        
+        $whereCond = [
+                        'TechnicalPublications.main_page_id' => $main_page_id,
+                        'OR' => [
+                            'TechnicalPublications.added_by' => $userId,
+                            "FIND_IN_SET(:userId, TechnicalPublications.permission_user_ids) >" => 0
+                        ]
+                    ];
+        if(!empty($parent_folder_name)){
+            //$whereCond['folder_file_name'] = $parent_folder_name;
+        }
+
+        $initialRows = $this->TechnicalPublications->find()
+                                                ->where($whereCond)
+                                                ->bind(':userId', $userId, 'integer')
+                                                ->limit(1000) // Optional but recommended to avoid huge memory use
+                                                ->all();
+
+        // Step 2: Collect all folders including their parents
+        $allFolders = [];
+        $visitedIds = [];
+
+        foreach ($initialRows as $row) {
+            $current = $row;
+
+            // Traverse upward until parent_id == 0 or null
+            while ($current && $current->parent_id !== null && $current->parent_id != 0) {
+                if (!isset($allFolders[$current->id])) {
+                    $allFolders[$current->id] = $current;
+                }
+
+                // Prevent circular reference
+                if (in_array($current->parent_id, $visitedIds)) {
+                    break;
+                }
+
+                $visitedIds[] = $current->id;
+
+                $current = $this->TechnicalPublications->find()
+                    ->where(['id' => $current->parent_id])
+                    ->first();
+            }
+
+            // Also include the root node (parent_id = 0)
+            if ($current && !isset($allFolders[$current->id])) {
+                $allFolders[$current->id] = $current;
+            }
+        }
+
+        $finalFolders = array_values($allFolders);
+
+        // Sort by parent_id
+        usort($finalFolders, function ($a, $b) {
+            return $a->parent_id <=> $b->parent_id;
+        });
+
+        // Step 3: Create a lookup array for fast access by ID
+        $folderMap = [];
+        foreach ($finalFolders as $folder) {
+            $folderMap[$folder->id] = $folder;
+        }
+
+        $finaldata = [];
+        // Step 4: Generate the URL (breadcrumb-style path) for each folder
+        foreach ($finalFolders as $folder) {
+            $pathParts = [];
+            $current = $folder;
+            while ($current) {
+                $pathParts[] = $current->folder_file_name;
+                if ($current->parent_id == 0 || !isset($folderMap[$current->parent_id])) {
+                    break;
+                }
+                $current = $folderMap[$current->parent_id];
+            }
+            $url = '/' . implode('/', array_reverse($pathParts));
+            $folder->url = $url;
+
+            if(empty($parent_folder_name) && $folder->parent_id == 0){
+                $finaldata[] = $folder->id;
+            }else if($folder->parent_id != 0 && $folder->folder_file_name != $parent_folder_name){
+                $parentdata = $this->TechnicalPublications->find()
+                                                        ->select(['id'])
+                                                        ->where(['folder_file_name' => $parent_folder_name])
+                                                        ->first();
+                if(!empty($parentdata)){
+                    
+                    $childRows = $this->TechnicalPublications->find()
+                                        ->where([
+                                            'parent_id' => $parentdata['id'],
+                                            'id'=>$folder->id
+                                        ])
+                                        ->first();
+              
+                    if(!empty($childRows)){
+                        $finaldata[] = $folder->id;
+                    }
+                }
+            }
+        }
+        
+        return $finaldata;
     }
 
     public function getTechPublByFolderName($name){
