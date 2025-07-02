@@ -6,7 +6,7 @@
     <?php echo $this->Form->create(null, ['url' =>'', 'id' => 'frmInventoryQuantitiesFilter', 'autocomplete'=>'off']); ?>
     <div class="page-content">
         <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Item Type</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Part Type</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Capital Equipment</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">System Managed</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Installed To</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Part Number</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Location</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Status</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Active</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Has Expiration</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -160,28 +160,28 @@
             </div>
             
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Expiration Date</label>
-                        <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
-                            <div class="col-xs-4">
-                                <select id="f_expiration_date" name="expiration_date" class="form-control">
+                        <div class="col-sm-9 col-md-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
+                            <div class="col-xs-4 col-md-4 col-xs-12">
+                                <select id="f_expiration_date" name="expiration_date" class="form-control" style="width:100%">
                                     <option value="1" selected="selected">Equals</option>
                                     <option value="2">Between</option>
                                     <option value="3">Before</option>
                                     <option value="4">After</option>
                                 </select>
                             </div>
-                            <div class="col-xs-4">
-                                <div class="input-group date datePicker">
+                            <div class="col-sm-4 col-md-4 col-xs-12">
+                                <div class="input-group date datePicker" style="width:100%">
                                     <?php echo $this->Form->Text('expiration_date_start', array('class' => 'form-control col-md-3 col-xs-12 etaDatepicker', 'id' => 'expiration_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
                                     <span class="input-group-addon" style="display:none;">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
-                                <div class="input-group date datePicker">
+                            <div class="col-sm-4 col-md-4 col-xs-12">
+                                <div class="input-group date datePicker" style="width:100%">
                                     <?php echo $this->Form->Text('expiration_date_end', array('class' => 'form-control col-md-3 col-xs-12 etaDatepicker', 'id' => 'expiration_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'disabled'=>'disabled')); ?>
                                     <span class="input-group-addon" style="display:none;">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -193,11 +193,11 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Cost</label>
                         <div class="col-sm-9 col-xs-12" style="padding-left:0px; padding-right:0px;">
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 col-md-4 col-xs-12">
                                 <select id="f_cost_condition" name="cost_condition" class="form-control">
                                     <option value="1" selected="selected">Equals</option>
                                     <option value="2">Between</option>
@@ -205,14 +205,14 @@
                                     <option value="4">Less Than</option>
                                 </select>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 col-md-4 col-xs-12" >
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <?php echo $this->Form->control('cost_start', array('class'=>'form-control col-md-12 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+                                    <?php echo $this->Form->control('cost_start', array('class'=>'form-control', 'placeholder' => '', 'label' => false)); ?>
                                 </div>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 col-md-4 col-xs-12">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <?php echo $this->Form->control('cost_end', array('class'=>'form-control col-md-12 col-xs-12', 'placeholder' => '', 'label' => false, 'disabled' => 'disabled')); ?>
+                                    <?php echo $this->Form->control('cost_end', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'disabled' => 'disabled')); ?>
                                 </div>
                             </div>
                         </div>
@@ -220,10 +220,10 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Condition</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="col-md-9 col-sm-9 col-xs-12" >
                             <?php 
                                 $inventorycondition = unserialize(INVENTORY_CONDITION);
                                 echo $this->Form->control('conditions', array('options' => $inventorycondition, 'empty' => 'Enter condition ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_conditions')); 
@@ -233,11 +233,11 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Vendor</label>
                         
-                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList" style="padding-right: 0px !important;">
+                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList">
                             <?php 
                                 echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Enter a vendor ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_vendor')); 
                             ?>
@@ -247,11 +247,11 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">ATA Code</label>
                         
-                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList" style="padding-right: 0px !important;">
+                        <div class="col-md-9 col-sm-9 col-xs-12" id="airCompsList">
                             <?php 
                                 echo $this->Form->control('ata_chapter', array('options' => $ataCode, 'empty' => 'Enter a code ...', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'f_ata_chapter')); 
                             ?>
@@ -261,7 +261,7 @@
                 </div>
             </div>
             <div class="row mt10">
-                <div class="col-md-12">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group"> 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
                         

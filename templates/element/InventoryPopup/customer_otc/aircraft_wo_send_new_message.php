@@ -51,8 +51,8 @@
 
                         <!-- W/O or R/O Field -->
                         <div class="form-group row mb-15  ">
-                            <label class="col-md-2  col-sm-12 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O (Optional)</label>
-                            <div class="col-md-9  col-sm-12 col-xs-12 mb-15">
+                            <label class="col-md-2 col-sm-12 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O (Optional)</label>
+                            <div class="col-md-10 col-sm-12 col-xs-12 mb-15">
                                 <?php
                                 echo $this->Form->control('message_wo_ro', [
                                     'options' => $worodata,
@@ -61,6 +61,7 @@
                                     'data-show-subtext' => true,
                                     'data-live-search' => true,
                                     'label' => false
+                                    
                                 ]);
                                 ?>
                               
@@ -71,7 +72,7 @@
                         </div>
 
                         <!-- Message Body -->
-                        <div class="form-group row  mb-15  col-sm-12 col-xs-12">
+                        <div class="form-group row  mb-15  ">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <?php
                                 echo $this->Form->control('message', [
@@ -87,8 +88,8 @@
 
                         <!-- Send Button -->
                         <div class="form-group row col-md-12">
-                            <div class="col-md-9"></div>
-                            <div class="col-md-3 text-right">
+                            <!-- <div class="col-md-9"></div> -->
+                            <div class=" text-right">
                                 <button type="button" class="btn btn-primary sendWOViewMessage">Send</button>
                             </div>
                         </div>

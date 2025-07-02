@@ -159,7 +159,7 @@ echo $this->Html->script('inventory_common');
             </div>
             <div class="modal-body">
                 <div  class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Select a CSV File
                             </label>
@@ -171,7 +171,7 @@ echo $this->Html->script('inventory_common');
                 </div>
 
                 <div class="row mt5">
-                    <div  class="col-md-12">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Download sample csv file</label>
                             <div class="col-sm-9 form-label-input-wrapper">
