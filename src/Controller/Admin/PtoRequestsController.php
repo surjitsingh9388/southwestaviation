@@ -18,6 +18,7 @@
         protected \App\Model\Table\UserPTORequestLogsTable $UserPTORequestLogs;
         protected \App\Model\Table\CustomerAircraftWOMessagesTable $CustomerAircraftWOMessages;
         protected \App\Model\Table\PTOAccrualRatesTable $PTOAccrualRates;
+        protected \App\Model\Table\UsersTable $Users;
 
         public function initialize(): void
         {
@@ -27,6 +28,7 @@
             $this->UserPTORequestLogs = $this->fetchTable('UserPTORequestLogs');
             $this->CustomerAircraftWOMessages = $this->fetchTable('CustomerAircraftWOMessages');
             $this->PTOAccrualRates = $this->fetchTable('PTOAccrualRates');
+            $this->Users = $this->fetchTable('Users');
 
             $this->loadComponent('PTORequests');
         }
@@ -325,7 +327,23 @@
                     $this->updatePTORequestDetail($user_id);
                 }
 
-                if(!empty($authUserData['direct_manager_id']) && empty($postData['pto_request_id'])){
+                $ismanager = false;
+                if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+                    $manageridarr = explode(', ', $authUserData['team_member_id']);
+                    $ismanager = !empty($manageridarr) && in_array($row['user_id'], $manageridarr) ? true : false;
+                }
+
+                $managerdet = [];
+                if($authUserData['role_id'] != 1 && empty($authUserData['is_manager']) && empty($postData['pto_request_id'])){
+                   $managerdet = $this->Users->find()
+                                                ->where([
+                                                    'FIND_IN_SET(:userId, Users.team_member_id) >' => 0
+                                                ])
+                                                ->bind(':userId', $authUserData['id'], 'integer')
+                                                ->first(); 
+                }
+
+                if(!empty($managerdet)){
                     $sessionUser = $this->request->getSession()->read('Auth');
                     $customerAircraftWOMessages = $this->fetchTable('CustomerAircraftWOMessages');
 
@@ -333,7 +351,7 @@
                     $messagepost = [];
 
                     $messagepost['pto_request_id'] = $pto_request_id;
-                    $messagepost['message_to'] = $sessionUser['direct_manager_id'];
+                    $messagepost['message_to'] = $managerdet['id'];
                     $messagepost['message_subject'] = 'PTO Request';
                     $messagepost['message'] = $sessionUser['full_name'].' is requesting PTO for '.$todaydate.' for '.$totaltime.' hours of work. Please select APPROVE or DENY.';
                     $messagepost['added_by'] = $authUserData['id'];
