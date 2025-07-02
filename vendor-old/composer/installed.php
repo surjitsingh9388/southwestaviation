@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'cakephp/app',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'b60525c96c54d096b4f1460098a118199384d435',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => true,
         ),
         'cakephp/app' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'b60525c96c54d096b4f1460098a118199384d435',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

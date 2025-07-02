@@ -5,25 +5,25 @@
 <div class="modal-body" style="max-height: 500px;">
     
     <div class="page-content">
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row ">
+          <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Part Type</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                       <label class="control-label c" for="status">Part Type</label>
+                      <div >
                     <?php 
                         $itemSerialized = array('2'=>'All', '1'=>'Serialized', '0'=>'Non-Serialized');
-                        echo $this->Form->control('is_this_item_serialized', array('options' => $itemSerialized, 'empty' => 'Enter a part type ...', 'class' => 'form-control col-md-3 col-sm-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'is_this_item_serialized')); 
+                        echo $this->Form->control('is_this_item_serialized', array('options' => $itemSerialized, 'empty' => 'Enter a part type ...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'is_this_item_serialized')); 
                         ?>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12"></div>
                 </div>
             </div>
         </div>
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row ">
+           <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Capital Equipment</label>
-                    <div class="col-md-9 col-sm-9 col-xs-12">
+                    <label class="control-label">Capital Equipment</label>
+                 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="capital_equipment" id="f_capital_equipment" value="1" checked>
                             <label class="form-check-label" for="capital_equipment">All</label>&nbsp;&nbsp;
@@ -38,24 +38,24 @@
                 </div>
             </div>
         </div>
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row ">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Location</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    <?php echo $this->Form->control('location_id', array('options' => $location, 'empty' => 'Select a location...', 'class' => 'form-control col-md-6 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'f_location_id'));  ?>
+                    <label class="control-label " for="plane_id">Location</label>
+                    <div >
+                    <?php echo $this->Form->control('location_id', array('options' => $location, 'empty' => 'Select a location...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'f_location_id'));  ?>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12"></div>
                 </div>
             </div>
         </div>
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row ">
+             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Min Expiration</label>
-                    <div class="col-sm-9 col-sm-9 col-xs-12">
-                        <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('expiration_date_start', array('class' => 'form-control col-md-3 col-xs-12 datePicker', 'id' => 'expiration_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'value'=>$minexpiration)); ?>
+                    <label class="control-label ">Min Expiration</label>
+                    <div >
+                        <div class="input-group date datePicker" style="width: 100%;">
+                            <?php echo $this->Form->Text('expiration_date_start', array('class' => 'form-control  datePicker', 'id' => 'expiration_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'value'=>$minexpiration)); ?>
                             <span class="input-group-addon" style="display:none;">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -64,13 +64,13 @@
                 </div>
             </div>
         </div>
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row ">
+             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Max Expiration</label>
-                    <div class="col-sm-6 col-sm-6 col-xs-12">
-                        <div class="input-group date datePicker">
-                            <?php echo $this->Form->Text('expiration_date_end', array('class' => 'form-control col-md-3 col-xs-12 datePicker', 'id' => 'expiration_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.$expirationdate, 'value'=>$expirationdate)); ?>
+                    <label class="control-label ">Max Expiration</label>
+                    <div  >
+                        <div class="input-group date datePicker"  style="width: 100%;">
+                            <?php echo $this->Form->Text('expiration_date_end', array('class' => 'form-control  datePicker', 'id' => 'expiration_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.$expirationdate, 'value'=>$expirationdate)); ?>
                             <span class="input-group-addon" style="display:none;">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -80,18 +80,18 @@
                 </div>
             </div>
         </div>
-        <div class="row mt10">
-            <div class="col-md-12">
+        <div class="row">
+           <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
-                    <div class="col-md-4 col-sm-4 col-xs-12" id="airCompsList">
+                    <label class="control-label " for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
+                    <div  id="airCompsList">
                         <?php echo $this->Form->control('tags', array('class'=>'form-control col-md-4 col-xs-12', 'placeholder' => 'Enter a tag', 'label' => false)); ?>
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12"></div>
                 </div>
             </div>
         </div>
-        <div class="row mt10"></div>
+        <div class="row "></div>
 
     </div>
     

@@ -7,9 +7,9 @@
     <div class="page-content">
         <div class="row mt10">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="form-group"> 
+                <div class="form-group "> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Part Type</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-8  col-sm-8 col-xs-12">
                     <?php 
                         $itemSerialized = array('2'=>'All', '1'=>'Serialized', '0'=>'Non-Serialized');
                         echo $this->Form->control('is_this_item_serialized', array('options' => $itemSerialized, 'empty' => 'Enter a part type ...', 'class' => 'form-control col-md-3 col-sm-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'is_this_item_serialized')); 
@@ -42,7 +42,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Location</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
                     <?php echo $this->Form->control('location_id', array('options' => $location, 'empty' => 'Select a location...', 'class' => 'form-control col-md-6 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'f_location_id'));  ?>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-12"></div>
@@ -53,7 +53,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Min Unit Cost</label>
-                    <div class="col-sm-4 col-sm-4 col-xs-12">
+                    <div class="col-sm-8 col-sm-8 col-xs-12">
                         <?php echo $this->Form->Text('min_unit_cost', array('type'=>'number','class' => 'form-control col-md-4 col-xs-12', 'id' => 'min_unit_cost', 'placeholder' => '', 'label' => false)); ?>
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12"></div>
@@ -64,7 +64,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Max Unit Cost</label>
-                    <div class="col-sm-4 col-sm-4 col-xs-12">
+                    <div class="col-sm-8 col-sm-8 col-xs-12">
                         <?php echo $this->Form->Text('max_unit_cost', array('type'=>'number','class' => 'form-control col-md-4 col-xs-12', 'id' => 'max_unit_cost', 'placeholder' => '', 'label' => false)); ?>
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12"></div>
@@ -75,7 +75,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i></label>
-                    <div class="col-md-4 col-sm-4 col-xs-12" id="airCompsList">
+                    <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
                         <?php echo $this->Form->control('tags', array('class'=>'form-control col-md-4 col-xs-12', 'placeholder' => 'Enter a tag', 'label' => false)); ?>
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12"></div>
