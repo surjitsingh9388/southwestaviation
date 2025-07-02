@@ -108,7 +108,29 @@ if(!empty($menuItems)) {
                                     <td class="text-alignment">'.$this->Form->control('menu_item_id.'.$key2.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_add_'.$key2, 'class' => 'chield_'.$key. ' action_add_'.$key. ' action check_add add', 'checked' => $data['action_add']=='1'?true:false]).'</td>
                                     <td colspan="5"></td>
                                 </tr>';
-                        } elseif(!empty($value) && $value == 'Aircraft') {
+                        }/* elseif(!empty($value) && ($value == 'PTO Request' || $value == 'Report')) {
+                            echo '<tr>
+                                    <td></td>
+                                    <td style="vertical-align: top; text-align: center">'.$this->Form->control('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
+                                    
+                                    <td colspan="2">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-12"><span style="margin-left:10px;">'.$value.'</span></div>
+                                            
+                                            <div class="col-md-7 col-sm-7 col-xs-12 airSelCls" style="padding:2px;min-width:200px;">'.$this->Form->control('user_ids', array('options'=>$userArr, 'class'=>'form-control col-md-12 col-sm-12 col-xs-12', 'label'=>false, 'id'=>'userSelId', 'style'=>'', 'multiple'=>'multiple', 'value'=>$selUserIds)).'</div>
+                                        </div>
+                                    </td>
+                                    
+                                    <td class="text-alignment">'.$this->Form->control('menu_item_id.'.$key2.'.action_add', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_add_'.$key2, 'class' => 'chield_'.$key. ' action_add_'.$key. ' action check_add add', 'checked' => $data['action_add']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->control('menu_item_id.'.$key2.'.action_edit', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_edit_'.$key2, 'class' => 'chield_'.$key. ' action_edit_'.$key. ' action check_edit edit', 'checked' => $data['action_edit']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->control('menu_item_id.'.$key2.'.action_view', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_view_'.$key2, 'class' => 'chield_'.$key. ' action_view_'.$key. ' action check_view view', 'checked' => $data['action_view']=='1'?true:false]).'</td>
+                                    <td class="text-alignment">'.$this->Form->control('menu_item_id.'.$key2.'.action_delete', ['type' => 'checkbox', 'div'=>false, 'label' => false, 'id' => 'chield_'.$key.'_delete_'.$key2, 'class' => 'chield_'.$key. ' action_delete_'.$key. ' action check_delete delete', 'checked' => $data['action_delete']=='1'?true:false]).'</td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                    <td class="text-alignment"></td>
+                                </tr>';
+                        } */elseif(!empty($value) && $value == 'Aircraft') {
                             echo '<tr>
                                     <td></td>
                                     <td style="vertical-align: top; text-align: center">'.$this->Form->control('menu_item_id.'.$key2.'.menu_item_id', ['type' => 'checkbox', 'div'=>false, 'class' => 'checkBoxClass child-term action_parent_'.$key. ' chield_'.$key, 'label' => false, 'value' => $key2, 'id' => 'chield_'.$key, 'checked' => $checked]).'</td>
@@ -303,6 +325,7 @@ function allowAll() {
 
 $(document).ready(function() {
     $('#airSelId').multiselect();
+    $('#userSelId').multiselect();
     $("div").removeClass("checkbox");
     //Make checked all chield checkbox
     $('.selectAll-Chield').click(function(e){
