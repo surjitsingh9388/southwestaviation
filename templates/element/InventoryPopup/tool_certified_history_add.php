@@ -55,8 +55,8 @@
                         </div>
                         <div class="col-md-12"></div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-8">
+                 <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div >
                             <div class="form-group">
                                 <label class="control-label" for="reference">Sent to</label>
                                 <div class="form-input-frame">

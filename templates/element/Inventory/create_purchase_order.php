@@ -128,7 +128,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="form-group" style="margin-left: 22px;margin-right:22px">
                 <label class="control-label " for="plane_id">Account Code</label>
                 <div class="">
@@ -173,7 +173,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class=" col-md-4 col-sm-4 col-xs-12">
+        <div class=" col-md-4 col-sm-6 col-xs-12">
             <div class="form-group mr-22 ml-22">
                 <label class="control-label" for="plane_id">Sales Person</label>
                 <div >
@@ -186,7 +186,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group ml-22 mr-22">
                 <label class="control-label " for="plane_id">Ship Via</label>
                 <div>
@@ -201,7 +201,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="form-group mr-22 ml-22">
                 <label class="control-label  special-instruction-label" for="plane_id">Special Instructions</label>
                 <div >

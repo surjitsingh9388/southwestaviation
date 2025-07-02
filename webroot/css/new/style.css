@@ -2297,6 +2297,10 @@ inventory section style
     margin-top: 25px !important;
 }
 
+.ml-8 {
+    margin-left: 8px !important;
+}
+
 #inventoryattachment {
     display: none !important;
 }
@@ -2415,15 +2419,14 @@ inventory section style
 }
 
 .count_circle {
-    top: -5px;
-    left: 12px;
+
     background-color: rgba(212, 19, 13, 1);
     color: #fff;
     border-radius: 10px;
-    padding: 2px 5px;
+    padding: 1px 4px;
     font: 10px Verdana;
     font-weight: bold;
-    vertical-align: top;
+    vertical-align: baseline;
 }
 
 .dashboard_heading_bar {
