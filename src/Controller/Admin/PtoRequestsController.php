@@ -60,7 +60,7 @@
             
             $query['count']  = "SELECT count( UserPtoRequests.`id`) AS count  FROM `user_pto_requests` UserPtoRequests WHERE 1=1";
 
-            $query['detail'] = "SELECT UserPtoRequests.`id`, UserPtoRequests.`previous_balance`, UserPtoRequests.`hours_used_gained`, UserPtoRequests.`new_balance`, UserPtoRequests.`pto_requests_status`, UserPtoRequests.is_first_paycheck, UserPtoRequests.is_pto_add, UserPtoRequests.created_at, Users.full_name FROM `user_pto_requests` UserPtoRequests JOIN `users` Users ON UserPtoRequests.`user_id` = Users.`id` WHERE 1=1";
+            $query['detail'] = "SELECT UserPtoRequests.`id`, UserPtoRequests.`user_id`, UserPtoRequests.`previous_balance`, UserPtoRequests.`hours_used_gained`, UserPtoRequests.`new_balance`, UserPtoRequests.`pto_requests_status`, UserPtoRequests.is_first_paycheck, UserPtoRequests.is_pto_add, UserPtoRequests.created_at, Users.full_name FROM `user_pto_requests` UserPtoRequests JOIN `users` Users ON UserPtoRequests.`user_id` = Users.`id` WHERE 1=1";
             
             return $query;
         }
@@ -85,6 +85,14 @@
             if( isset($requestData['search']['value']) && !empty( $requestData['search']['value'] ) ) {
                 //$search = $requestData['search']['value'];
                 //$cond.=" AND ( Users.full_name LIKE '%".$search."%' OR DATE(UserPtoRequests.created_at) LIKE '%".$search."%' OR Users.full_name LIKE '%".$search."%' OR Users.phone_ext LIKE '%".$search."%' OR Users.phone LIKE '%".$search."%' OR  Users.email LIKE '%".$search."%' OR Roles.role_name LIKE '%".$search."%' )";
+            }
+
+            $ismanager = false;
+            if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+                $teamIds = $authUserData['team_member_id'];
+                $cond .= " AND (FIND_IN_SET(UserPtoRequests.user_id, '$teamIds') OR UserPtoRequests.user_id = ".$authUserData['id'].")";
+            }else if($authUserData['role_id'] != 1){
+                $cond .= " AND UserPtoRequests.user_id = ".$authUserData['id'];
             }
             
             $columns = array(
@@ -124,9 +132,10 @@
             $sessionUser = $this->request->getSession()->read('Auth');
 
             $data = array();
-            $view = $edit = $delete = '';
             $dataval = [];
             foreach ($results as $row) {
+                $view = $edit = $delete = '';
+
                 $nestedData= [];
                 $nestedData[] = $j++;
                 $nestedData[] = $row['full_name'];
@@ -142,19 +151,25 @@
                 }
                 $nestedData[] = $requetstatus;
                 
+                $ismanager = false;
+                if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+                    $manageridarr = explode(', ', $authUserData['team_member_id']);
+                    $ismanager = !empty($manageridarr) && in_array($row['user_id'], $manageridarr) ? true : false;
+                }
+
                 $approvedenybtn = '';
-                if($row['pto_requests_status'] == '1' && ($sessionUser['role_id'] == '1' || $row['manager_id'] == $authUserData['id'])){
+                if($row['pto_requests_status'] == '1' && ($authUserData['role_id'] == 1 || !empty($ismanager))){
                     $approvedenybtn .= '<a href="javascript:void(0);" class="btn btn-primary btn-xs pto-request-approve-deny-btn" pto-request-id="'.$row['id'].'" data-val="2" source=\'pto\'> Approve</a>';
                     $approvedenybtn .= '<a href="javascript:void(0);" class="btn btn-primary btn-xs pto-request-approve-deny-btn" pto-request-id="'.$row['id'].'" data-val="3" source=\'pto\'> Deny</a>';
                 }
 
-                if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $authUserData['id'] == 1){
+                if(((!empty($actionItems) && $actionItems['action']['action_view']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
                     $view = '<a href="javascript:void(0);" class="btn btn-primary btn-xs view_pto_request_det" pto-request-id="'.$row['id'].'"><i class="fa fa-folder"></i> View</a>';
                 }
-                if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $authUserData['id'] == 1){
+                if(((!empty($actionItems) && $actionItems['action']['action_edit']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
                     $edit = ' <a href="javascript:void(0);" data-val="'.$row['id'].'" class="btn btn-info btn-xs pto_request_create_btn"><i class="fa fa-pencil"></i> Edit</a>';
                 }
-                if((!empty($actionItems) && $actionItems['action']['action_delete']==1) || $authUserData['id'] == 1){
+                if(((!empty($actionItems) && $actionItems['action']['action_delete']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
                     $delete = '<a href="javascript:void(0);" data-val="'.$row['id'].'" data-url="pto_requests/delete" class="btn btn-danger btn-xs pto_request_delete_btn"><i class="fa fa-trash-o"></i> Delete</a>';
                 }
                 $nestedData[] = $approvedenybtn.$view.$edit.$delete;
@@ -246,7 +261,7 @@
                 $ptorequestpost['created_at'] = $currentdatetime;*/
 
                 $ptorequests->user_id = $authUserData['id'];
-                $ptorequests->manager_id = $authUserData['direct_manager_id'];
+                //$ptorequests->manager_id = $authUserData['direct_manager_id'];
                 $ptorequests->added_by = $authUserData['id'];
                 $ptorequests->created_at = $currentdatetime;
             }

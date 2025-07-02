@@ -59,6 +59,7 @@ class User extends Entity
         'time_clock_code'=>true,
         'certification_code'=>true,
         'is_manager'=>true,
+        'team_member_id'=>true,
         'direct_manager_id'=>true,
         'employment_date'=>true,
         'salary'=>true,
