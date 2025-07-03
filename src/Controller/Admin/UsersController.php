@@ -490,6 +490,7 @@ class UsersController extends AppController
             $postData['email'] = trim($postData['email']);
             $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
             $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
+            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(', ', $postData['team_member_id']) : '';
             
             if(!empty($postData['user_initials'])){
                 $is_valid = $this->User->validateUserInitials($postData['user_initials']);
@@ -588,7 +589,10 @@ class UsersController extends AppController
             }
         }
 
-        $users = $this->User->getUsers();
+        $users = $this->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'full_name'
+        ])->where(array('Users.id !=' => $id, 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
         //pr($user);die;
         $userdepartmentlist = $this->UserDepartments->find('all')->select($this->UserDepartments);
         $departmentlist = [];
@@ -652,6 +656,8 @@ class UsersController extends AppController
             $confirm_password = isset($postData['confirm_password']) ? $postData['confirm_password'] : '';
             $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
             $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
+            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(', ', $postData['team_member_id']) : '';
+            
             // check if new password not empty, set the new password
             if (!empty($new_password) && !empty($confirm_password)) {
                 if ($new_password == $confirm_password) {
@@ -790,11 +796,6 @@ class UsersController extends AppController
         if (isset($user->addresses[0]->country_id)) {
             $cities = $this->Address->getCityListByStateId($user->addresses[0]->state_id);
         }
-                  
-        $users = $this->Users->find('list', [
-            'keyField' => 'id',
-            'valueField' => 'full_name'
-        ])->where(array('Users.id !=' => $id, 'Users.role_id'=>'4', 'Users.suspended'=>'0'))->toArray();
         
         if(isset($id)) {
             $selectedUser = $this->Users->get($id, [
@@ -810,8 +811,11 @@ class UsersController extends AppController
                 $user['role_id'] = $selectedUser['role']['id'];
             }
         }
-                                                                                                                                                                                                                                        
-        $users = $this->User->getUsers();
+        $users = $this->Users->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'full_name'
+        ])->where(array('Users.id !=' => $id, 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
+
         $userdepartmentlist = $this->UserDepartments->find('all')->select($this->UserDepartments);
         $departmentlist = [];
         foreach($userdepartmentlist as $department){
@@ -824,7 +828,7 @@ class UsersController extends AppController
             $ptoaccrualratelist[$ptoaccrualrate['id']] = $ptoaccrualrate['pto_accrual_rate'];
         }*/
        
-        $this->set(compact('user', 'roles', 'countries', 'states', 'cities', 'users', 'action', 'actionItems', 'users', 'departmentlist'/*, 'ptoaccrualratelist'*/));
+        $this->set(compact('user', 'roles', 'countries', 'states', 'cities', 'users', 'action', 'actionItems', 'departmentlist'/*, 'ptoaccrualratelist'*/));
     }
     
     /**
@@ -1409,6 +1413,7 @@ class UsersController extends AppController
             $userMenuItems = $this->UserMenuItems->find('all')->where(['UserMenuItems.user_id' => $postData['user_id']])->toArray();
             //pr($userMenuItems);die; 
             $airArr = $this->Plane->getPlanes();
+            $userArr = $this->User->getUsers();
             
             if(!empty($userMenuItems)) {
                 $menuItems = [];
@@ -1454,9 +1459,10 @@ class UsersController extends AppController
                 if(isset($userAirRes['aircraft_ids'])){
                     $selAirIds = unserialize($userAirRes['aircraft_ids']);
                 }
-                $this->set(compact('menuItems', 'temp', 'airArr', 'selAirIds'));
+                $selUserIds = [];
+                $this->set(compact('menuItems', 'temp', 'airArr', 'selAirIds', 'userArr', 'selUserIds'));
             } else {
-                echo 'hello';die;
+                echo '';die;
             }
         }
     }

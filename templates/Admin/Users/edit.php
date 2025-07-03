@@ -141,11 +141,35 @@ $companyUserRoles = array(ROLE_ADMIN);
                                 <?php 
                                 $ismanagerchk = '';
                                 $isdisabled = 'disabled';
+                                $isdisabled_team_memaber = 'disabled';
                                 if(!empty(@$user->is_manager)){
                                     $ismanagerchk = 'checked';
                                     $isdisabled = '';
+                                    $isdisabled_team_memaber = '';
+                                }
+                                
+                                if(!empty(@$user->team_member_id)){
+                                    $user->team_member_id = explode(',', $user->team_member_id);
                                 }
                                 echo $this->Form->control('is_manager', array('type'=>'checkbox', 'label' => '', 'id'=>'is_manager_chk', 'checked'=>$ismanagerchk)); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">Select your team members</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?= $this->Form->control('team_member_id', [
+                                    'type' => 'select',
+                                    'multiple' => true,
+                                    'options' => $users,
+                                    'empty' => false, // for multi-select, usually not needed
+                                    'class' => 'form-control col-md-7 col-xs-12 selectpicker',
+                                    'data-show-subtext' => true,
+                                    'data-live-search' => true,
+                                    'label' => false,
+                                    'disabled'=>$isdisabled_team_memaber,
+                                    'id' => 'team_member_id'
+                                ]); ?>
                             </div>
                         </div>
 
@@ -350,8 +374,30 @@ $companyUserRoles = array(ROLE_ADMIN);
 <div id="showPopup" style="display: none;"></div>
 <?php echo $this->element('user_add_substract_pto_popup'); ?>
 
+<?php echo $this->Html->script('user'); ?>
+
 <script>
+var getCitiesListURL = "<?php echo $this->Url->build(['controller'=>'addresses', 'action'=>'getCitiesList']); ?>";
+var getStatesListURL = "<?php echo $this->Url->build(['controller' => 'addresses', 'action' => 'getStatesList']); ?>";
+var savePTOReqeustAutoApproveURl = "<?php echo $this->Url->build(['controller' => 'PtoRequests', 'action' => 'savePTOReqeustAutoApprove']); ?>";
+
 $(document).ready(function() {
+
+    $.validator.addMethod("teamRequiredIfManager", function(value, element) {
+        $('.selectpicker').selectpicker('refresh');
+        
+        console.log($('#team_member_id').val());
+
+        const selected = $('#team_member_id').val(); // Should be array if 'multiple' is set
+        const isManager = $('#is_manager_chk').is(':checked');
+        console.log('isManager:', isManager, 'selected:', selected);
+
+        if (isManager) {
+            return selected && selected.length > 0;
+        }
+        return true;
+    }, "Please select at least one team member.");
+
     // To remove error message on change of select picker
     $('#frmUser select.selectpicker').on('change', function(e) {
         $('#frmUser').validate().element($(this));
@@ -406,7 +452,10 @@ $(document).ready(function() {
             },
             'addresses[0][city_id]': {
                 required: true
-            }      
+            },
+            'team_member_id': {
+                teamRequiredIfManager: true
+            }
         },
         messages: {
             'first_name': {
@@ -432,12 +481,16 @@ $(document).ready(function() {
             'addresses[0][zip_code]': {
                 maxlength: "Zip code could not be more than 6 digits."
             },
+            'team_member_id': {
+                teamRequiredIfManager: "Please select at least one team member."
+            },
         },
         errorClass: "error",
         errorElement: "label",
         errorPlacement: function(error, element) {
             if (element.hasClass('selectpicker')) {
                 error.insertAfter(element.next('.btn-group'));
+                error.insertAfter(element.siblings('.bootstrap-select'));
             } else {
                 error.insertAfter(element);
             }
@@ -453,109 +506,11 @@ $(document).ready(function() {
             });
         }
     });
-       
-    $('#reset').click(function() {
-       var validator = $("#frmUser").validate();
-       validator.resetForm();
-    });
-            
-    $("#chkWelcomeEmail").click(function () {
-        if ($(this).is(":checked")) {
-            $("#new-password").rules("add", {
-                required: true,
-                checkPassword: true,
-                messages: {
-                    required: "Please provide new Password for re-sending new credentials."
-                }
-            });
-            $("#confirm-password").rules("add", {
-                required: true,
-                equalTo: '[name="new_password"]',
-                messages: {
-                    required: "Please re-enter password.",
-                    equalTo: "Confirm password should be same as new password."
-                }
-            });   
-        } else {
-            $("#new-password").rules("remove", "required");
-            $("#new-password").rules("remove", "checkPassword");
-            $("#confirm-password").rules("remove", "required");
-            $("#confirm-password").rules("remove", "equalTo");
-        }
-    });    
 
-    $("#new-password").on("keyup", function() {
-        if ($("#new-password").val() != '') {
-            $( "#new-password" ).rules( "add", {
-                checkPassword: true,
-            });
-        } else {
-            $( "#new-password" ).rules("remove", "checkPassword");
-        }
-    });
-        
-    // To show list of cities on change of country dropdown
-    $('#addresses-0-state-id').on('change', function() {
-        var stateId = $( this ).val();
-        $('#addresses-0-city-id').children('option:not(:first)').remove();
-        if (stateId != '') {
-            $.ajax({
-                type: "POST",
-                url: "<?php echo $this->Url->build(['controller'=>'addresses', 'action'=>'getCitiesList']); ?>",
-                data: {stateId:stateId},
-                async : true,
-                success: function(response) {
-                    if (response != '') {
-                        $('#addresses-0-city-id').append(response);
-                    }
-                    $('#addresses-0-city-id').selectpicker('refresh');
-                }                   
-            });
-        } else {
-            $('#addresses-0-city-id').selectpicker('refresh');
-        }
+    $('#team_member_id').on('change', function () {
+        $('#frmUser').validate().element(this);
     });
     
-    //Set full name by concatenate first, middle and last name fields value
-    $('#title, #first-name, #middle-name, #last-name, #suffix').on('keyup input change', function() {
-        var fullName = '';
-        var title = $("#title").val();
-        if (title != '') {
-            fullName += title; 
-        }
-        var firstName = $("#first-name").val();
-        if (firstName != '') {
-            if(title!=''){
-                fullName += ' '+firstName; 
-            }else{
-                fullName += firstName; 
-            }
-        }
-        var middleName = $("#middle-name").val();
-        if (middleName != '') {
-            fullName += ' '+middleName; 
-        }
-        var lastName = $("#last-name").val();
-        if (lastName != '') {
-            fullName += ' '+lastName;
-        }
-        var suffix = $("#suffix").val();
-        if (suffix != '') {
-            fullName += ' '+suffix;
-        }
-        $("#full-name").val(fullName);
-    });
-
-    // Validation rule to check email
-    jQuery.validator.addMethod("checkEmail", function (value, element) {
-        var pattern = /\s*[-+.'\w]+@[-.\w]+\.[-.\w]+\s*/;
-        if (pattern.test(value)) {
-            return true;
-        } else {
-            return false;
-        }
-    }, "Please enter valid email.");
-
     $('#frmClicked').on('click', function(e) {
         if ($("#frmUser").valid()) {
             var suspended = $('#suspended').is(":checked");
@@ -570,72 +525,5 @@ $(document).ready(function() {
             return false;
         }
     });
-});
-
-function getStates(countryId) {
-    $('#addresses-0-state-id').children('option:not(:first)').remove();
-    $('#addresses-0-city-id').children('option:not(:first)').remove();
-    if (countryId != '') {
-        $.ajax({
-            type: "POST",
-            url: "<?php echo $this->Url->build(['controller' => 'addresses', 'action' => 'getStatesList']); ?>",
-            data: {countryId:countryId},
-            async : true,
-            success: function(response) {
-                if (response != '') {
-                    $('#addresses-0-state-id').append(response);
-                }
-                $('#addresses-0-state-id').selectpicker('refresh');
-                $('#addresses-0-city-id').selectpicker('refresh');
-            }                   
-        });
-    } else {
-        $('#addresses-0-state-id').selectpicker('refresh');
-        $('#addresses-0-city-id').selectpicker('refresh');
-    }
-}
-
-$(document).on('click', '#is_manager_chk', function(e){
-    if($(this).is(':checked') == true){
-        $('#direct-manager-id').prop('disabled', false);
-    }else{
-        $('#direct-manager-id').val('');
-        $('#direct-manager-id').prop('disabled', true);
-    }
-    $('#direct-manager-id').selectpicker('refresh');
-});
-
-$(document).on('click', '#user_add_pto_popup_btn', function(e){
-    $('#add_pto_hours').val('');
-    $('#substract_pto_hours').val('');
-    var user_id = window.location.pathname.split('/').pop();
-    $('#pto_user_id').val(user_id);
-
-    $('#addSubstractPTOPopupModel').modal('show');
-});
-
-$(document).on('click', '.pto_hours_savebtn', function(e){
-    var add_pto_hours = $.trim($('#add_pto_hours').val());
-    var substract_pto_hours = $.trim($('#substract_pto_hours').val());
-    if((add_pto_hours != '' && add_pto_hours != undefined) || (substract_pto_hours != '' && substract_pto_hours != undefined)){
-        $.ajax({
-            type: "POST",
-            url: "<?php echo $this->Url->build(['controller' => 'PtoRequests', 'action' => 'savePTOReqeustAutoApprove']); ?>",
-            data: $('#frmPTORequestAddSub').serialize(),
-            dataType: 'text',
-            success: function (response) {
-                var obj = JSON.parse(response);
-                if(obj.status == 'success') {
-                    $('#add_pto_hours').val('');
-                    $('#substract_pto_hours').val('');
-
-                    $('#addSubstractPTOPopupModel').modal('hide');
-                }
-                alert(obj.message);                   
-            }
-        });
-    }else{
-        alert("Please fill PTO Hours");
-    }
 });
 </script>
