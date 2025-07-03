@@ -4,25 +4,25 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
 ?> 
 <div class="addPartBorder pt10">
     <div class="row">
-        <div class="col-md-4">
+         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Number&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('shipping_order_number', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'shipping_order_number', 'value'=>$so_number)); ?>
+                    <?php echo $this->Form->control('shipping_order_number', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'shipping_order_number', 'value'=>$so_number)); ?>
                 </div>
             </div>
 
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Reference</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('reference', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'id'=>'reference')); ?>
+                    <?php echo $this->Form->control('reference', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'id'=>'reference')); ?>
                 </div>
             </div>
 
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Order Date&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="input-group date datePicker">
+                    <div class="input-group date datePicker" style="width:100%">
                         <?php 
                         $shipping_order_date = date('m-d-Y');
                         echo $this->Form->Text('shipping_order_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'shipping_order_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$shipping_order_date)); 
@@ -53,18 +53,18 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Requestor</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('requestor', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'value'=>$userData['full_name'], 'required' => 'required')); ?>
+                    <?php echo $this->Form->control('requestor', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'value'=>$userData['full_name'], 'required' => 'required')); ?>
                 </div>
             </div>
 
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Shipper&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('shipper', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+                    <?php echo $this->Form->control('shipper', array('class'=>'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
 
@@ -88,9 +88,10 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
                     <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="shipping"><i class="fa fa-plus"></i></button></div>
                 </div>
             </div>
+            
         </div>
 
-        <div class="col-md-4">
+          <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Destination&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -104,7 +105,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Attention&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('attention', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+                    <?php echo $this->Form->control('attention', array('class'=>'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
 
@@ -114,7 +115,7 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
                     <?php
                     echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor', 'required' => 'required')); 
                     ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></div>
+                    <div class="input-group plus-new-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></div>
                 </div>
             </div>
 
@@ -246,17 +247,16 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+       <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group"> 
-                <label class="control-label col-md-2 col-sm-2 col-xs-12 special-instruction-label" for="plane_id">Special Instructions</label>
-                <div class="col-md-10 col-sm-10 col-xs-12">
-                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class'=>'form-control col-md-10 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+                <label class="control-label  col-md-3 col-sm-3 col-xs-12 special-instruction-label" for="plane_id">Special Instructions</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                 </div>
             </div>
         </div>
-
     </div>
-
+ 
 </div>
 
 <div style="clear: both;"></div>

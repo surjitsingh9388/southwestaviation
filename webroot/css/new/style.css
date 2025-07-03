@@ -408,6 +408,10 @@ a.push_menu {
     border: none;
 }
 
+.action-bar .btn-group input {
+    width: 100% !important;
+}
+
 .action-bar .input-group .input-group-btn button {
     height: 40px;
     color: #818384;
@@ -2279,6 +2283,10 @@ inventory section style
 
 .brd-5 {
     border-radius: 5px;
+}
+
+.text-left {
+    text-align: left !important;
 }
 
 .table-width {

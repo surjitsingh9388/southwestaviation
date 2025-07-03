@@ -8,26 +8,26 @@
             
             <div class="page-content">
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-lg-3 col-sm-3 col-xs-12" for="status">Status</label>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
                             <?php 
                                 $invShippingStatus = unserialize(SHIPPING_ORDER_STATUS);
                                 echo $this->Form->control('shipping_order_status', array('options' => $invShippingStatus, 'empty' => 'Enter a status ...', 'class' => 'form-control col-md-3 col-sm-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'shipping_order_status')); 
                                 ?>
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                            <!-- <div class="col-md-3 col-sm-3 col-xs-12"></div> -->
                         </div>
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Start Date</label>
                             <div class="col-sm-9 col-sm-9 col-xs-12">
-                                <div class="input-group date datePicker">
-                                    <?php echo $this->Form->Text('shipping_order_date_start', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'shipping_order_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
+                                <div class="input-group date datePicker" style="width:100%">
+                                    <?php echo $this->Form->Text('shipping_order_date_start', array('class' => 'form-control', 'id' => 'shipping_order_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
                                     <span class="input-group-addon" style="display:none;">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -37,12 +37,12 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">End Date</label>
-                            <div class="col-sm-6 col-sm-6 col-xs-12">
-                                <div class="input-group date datePicker">
-                                    <?php echo $this->Form->Text('shipping_order_date_end', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'shipping_order_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
+                                <div class="input-group date datePicker" style="width:100%">
+                                    <?php echo $this->Form->Text('shipping_order_date_end', array('class' => 'form-control', 'id' => 'shipping_order_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
                                     <span class="input-group-addon" style="display:none;">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -53,34 +53,34 @@
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Min Cost</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <?php echo $this->Form->control('shipping_order_min_amount', array('type'=>'number', 'class'=>'form-control col-md-3 col-xs-12', 'placeholder' => '', 'label' => false, 'id'=>'shipping_order_min_amount')); ?>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
+                                <?php echo $this->Form->control('shipping_order_min_amount', array('type'=>'number', 'class'=>'form-control', 'placeholder' => '', 'label' => false, 'id'=>'shipping_order_min_amount')); ?>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="item_type">Max Cost</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <?php echo $this->Form->control('shipping_order_max_amount', array('type'=>'number', 'class'=>'form-control col-md-3 col-xs-12', 'placeholder' => '', 'label' => false, 'id'=>'shipping_order_max_amount')); ?>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
+                                <?php echo $this->Form->control('shipping_order_max_amount', array('type'=>'number', 'class'=>'form-control', 'placeholder' => '', 'label' => false, 'id'=>'shipping_order_max_amount')); ?>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row mt10">
-                    <div class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Account Code</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
                                 <?php
-                                echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter Type ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_account_code')); 
+                                echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter Type ...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_account_code')); 
                                 ?>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12"></div>
