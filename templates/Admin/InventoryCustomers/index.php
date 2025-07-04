@@ -24,7 +24,7 @@ echo $this->Html->script('inventory_common');
 <div class="content sliding">
     <div class="outerWrapper">
         <div class="btnWrapper">
-            <h2 class="heading">Customer/OTC</h2>
+            <h2 class="heading">Customerd/OTC</h2>
             
             <div style="float:right;">
                 <?php
