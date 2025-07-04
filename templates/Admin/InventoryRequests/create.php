@@ -30,51 +30,51 @@ use Cake\Routing\Router;
                 
                 <div class="addPartBorder pt10">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Request Number&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                <?php echo $this->Form->control('request_number', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$request_number, 'readonly'=>'readonly')); ?>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="plane_id">Request Number&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9">
+                                <?php echo $this->Form->control('request_number', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$request_number, 'readonly'=>'readonly')); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Title&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
-                                <?php echo $this->Form->control('title', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="airframe_component_id">Title&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9" id="airCompsList">
+                                <?php echo $this->Form->control('title', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Description</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                <?php echo $this->Form->control('description', array('class' => 'form-control col-md-8 col-xs-12', 'label'=> false, 'rows'=>2)); ?>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="plane_id">Description</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9">
+                                <?php echo $this->Form->control('description', array('class' => 'form-control ', 'label'=> false, 'rows'=>2)); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Requested By&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
-                                <?php echo $this->Form->control('requested_by', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$userData['full_name'])); ?>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="airframe_component_id">Requested By&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9" id="airCompsList">
+                                <?php echo $this->Form->control('requested_by', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$userData['full_name'])); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Need By<span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="plane_id">Need By<span class="required">*</span>
                                 </label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9">
                                     <div class="input-group date datePicker">
                                         <?php echo $this->Form->Text('need_by', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'need_by', 'placeholder' => '', 'label' => false)); ?>
                                         <span class="input-group-addon">
@@ -86,13 +86,13 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-8">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Urgency</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-left col-lg-2 " for="airframe_component_id">Urgency</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 col-lg-9" id="airCompsList">
                                     <?php 
                                     $urgency = unserialize(URGENCY);
-                                    echo $this->Form->control('urgency', array('options' => $urgency, 'empty' => 'Select urgency ...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'currency')); 
+                                    echo $this->Form->control('urgency', array('options' => $urgency, 'empty' => 'Select urgency ...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'currency')); 
                                     ?>
                                 </div>
                             </div>

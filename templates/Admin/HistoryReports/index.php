@@ -56,10 +56,8 @@ use Cake\Routing\Router;
                     <div class="col-md-7">
                         <div class="form-group row">
                             <label class="col-md-2 col-xs-12 control-label text-nowrap" style="color: white; font-size: 15px;">Date Range</label>
-
-
-                            <div class="col-md-5  col-xs-6">
-                                <div class="input-group date datePicker" style="width: 100%;">
+                            <div class="col-md-5  col-xs-12 mb-5">
+                                <div class="input-group btn-group date datePicker" style="width: 100%;" >
                                     <?php
                                     echo $this->Form->text('date_from', [
                                         'class' => 'form-control',
@@ -75,8 +73,8 @@ use Cake\Routing\Router;
                             </div>
 
 
-                            <div class="col-md-5 col-xs-6">
-                                <div class="input-group date datePicker" style="width: 100%;">
+                            <div class="col-md-5 col-xs-12">
+                                <div class="input-group  btn-group date datePicker" style="width: 100%;">
                                     <?php
                                     echo $this->Form->text('date_to', [
                                         'class' => 'form-control',
