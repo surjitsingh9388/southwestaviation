@@ -29,7 +29,7 @@ class UserDepartmentsController extends AppController
             $actionStatus = $this->checkAction();
             if(array_key_exists('User Department', $actionStatus))
             {
-                $actionItems = $actionStatus['Home'];
+                $actionItems = $actionStatus['User Department'];
             }
         }
         
