@@ -30,19 +30,19 @@ use Cake\Routing\Router;
                 
                 <div class="addPartBorder pt10">
                     <div class="row">
-                        <div class="col-md-6">
+                           <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Request Number&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                <?php echo $this->Form->control('request_number', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Request Number&nbsp;<span class="required">*</span></label>
+                                <div class="col-md-9 col-sm-8 col-xs-12">
+                                <?php echo $this->Form->control('request_number', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Title&nbsp;<span class="required">*</span></label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airframe_component_id">Title&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
                                 <?php echo $this->Form->control('title', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                                 </div>
@@ -50,9 +50,9 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Description</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Description</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php echo $this->Form->control('description', array('class' => 'form-control col-md-8 col-xs-12', 'label'=> false, 'rows'=>2)); ?>
                                 </div>
@@ -60,9 +60,9 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Requested By&nbsp;<span class="required">*</span></label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airframe_component_id">Requested By&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
                                 <?php echo $this->Form->control('requested_by', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                                 </div>
@@ -70,9 +70,9 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group"> 
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Need By<span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Need By<span class="required">*</span>
                                 </label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <div class="input-group date datePicker">
@@ -86,9 +86,9 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Urgency</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airframe_component_id">Urgency</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
                                     <?php 
                                     $urgency = unserialize(URGENCY);

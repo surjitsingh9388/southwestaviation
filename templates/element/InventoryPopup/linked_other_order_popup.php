@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="row mt5">
-                        <div class="col-md-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12" style="padding:5px;">
                                 <?php 
