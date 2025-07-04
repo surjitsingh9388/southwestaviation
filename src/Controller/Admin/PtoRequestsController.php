@@ -91,8 +91,10 @@
 
             $ismanager = false;
             if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
-                $teamIds = $authUserData['team_member_id'];
-                $cond .= " AND (FIND_IN_SET(UserPtoRequests.user_id, '$teamIds') OR UserPtoRequests.user_id = ".$authUserData['id'].")";
+                $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+                $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+                
+                $cond .= " AND (UserPtoRequests.user_id IN $teamIdsSql OR UserPtoRequests.user_id = " . (int)$authUserData['id'] . ")";
             }else if($authUserData['role_id'] != 1){
                 $cond .= " AND UserPtoRequests.user_id = ".$authUserData['id'];
             }
@@ -155,7 +157,7 @@
                 
                 $ismanager = false;
                 if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
-                    $manageridarr = explode(', ', $authUserData['team_member_id']);
+                    $manageridarr = explode(',', $authUserData['team_member_id']);
                     $ismanager = !empty($manageridarr) && in_array($row['user_id'], $manageridarr) ? true : false;
                 }
 
@@ -329,7 +331,7 @@
 
                 $ismanager = false;
                 if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
-                    $manageridarr = explode(', ', $authUserData['team_member_id']);
+                    $manageridarr = explode(',', $authUserData['team_member_id']);
                     $ismanager = !empty($manageridarr) && in_array($row['user_id'], $manageridarr) ? true : false;
                 }
 

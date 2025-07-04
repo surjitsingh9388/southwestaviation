@@ -490,7 +490,7 @@ class UsersController extends AppController
             $postData['email'] = trim($postData['email']);
             $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
             $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
-            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(', ', $postData['team_member_id']) : '';
+            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(',', $postData['team_member_id']) : '';
             
             if(!empty($postData['user_initials'])){
                 $is_valid = $this->User->validateUserInitials($postData['user_initials']);
@@ -656,7 +656,7 @@ class UsersController extends AppController
             $confirm_password = isset($postData['confirm_password']) ? $postData['confirm_password'] : '';
             $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
             $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
-            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(', ', $postData['team_member_id']) : '';
+            $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(',', $postData['team_member_id']) : '';
             
             // check if new password not empty, set the new password
             if (!empty($new_password) && !empty($confirm_password)) {

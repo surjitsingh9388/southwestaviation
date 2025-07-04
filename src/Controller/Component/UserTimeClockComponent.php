@@ -12,6 +12,7 @@ use Cake\Database\Expression\QueryExpression;
 use Cake\Datasource\ConnectionManager;
 use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\Query\SelectQuery;
 
 class UserTimeClockComponent extends Component {
     public array $components = ['Timezone', 'Authentication.Authentication'];
@@ -47,27 +48,50 @@ class UserTimeClockComponent extends Component {
         
         $connection = ConnectionManager::get('default');
         
-        /*$usertimeclocks = $connection->execute(
-            "SELECT tc.id, tc.in_time, (CASE WHEN tc.out_time is not NULL THEN (ROUND(SUM(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time )) / 3600, 2)) ELSE 0 END) as totaltime, u.full_name FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) = '".$todaydate."' group by tc.user_id order by tc.in_time")->fetchAll('assoc');*/
+        $authUserData = $this->Authentication->getResult()->getData();
 
+        $cond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $cond .= " AND (tc.user_id IN $teamIdsSql OR tc.user_id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != 1){
+            $cond .= " AND tc.user_id = ".$authUserData['id'];
+        }
+        
         $usertimeclocks = $connection->execute(
-            "SELECT tc.id, tc.in_time, ROUND(SUM(TIMESTAMPDIFF(SECOND, tc.in_time, '".date("Y-m-d H:i:s ")."')) / 3600, 2) AS totaltime, u.full_name FROM user_time_clocks tc JOIN users u ON tc.user_id = u.id WHERE DATE(tc.in_time) = '".$todaydate."' and tc.out_time is NULL GROUP BY tc.user_id ORDER BY tc.in_time")->fetchAll('assoc');
+            "SELECT tc.id, tc.in_time, ROUND(SUM(TIMESTAMPDIFF(SECOND, tc.in_time, '".date("Y-m-d H:i:s ")."')) / 3600, 2) AS totaltime, u.full_name FROM user_time_clocks tc JOIN users u ON tc.user_id = u.id WHERE DATE(tc.in_time) = '".$todaydate."' and tc.out_time is NULL $cond GROUP BY tc.user_id ORDER BY tc.in_time")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
 
     public function getUserListDropDown($user_id=''){
         $this->Users = $this->getController()->fetchTable('Users');
-        $wherecond = ['suspended'=>'0'];
-        /*if(!empty($user_id) && $user_id != '1'){
-            $wherecond['id'] = $user_id;
-        }*/
-        $userdet = $this->Users->find('all')->where($wherecond)->select(['Users.id', 'Users.full_name']);
+        
+        $wherecond = ['Users.suspended' => '0'];
+
+        $authUserData = $this->Authentication->getResult()->getData();
+        $teamIdsArray = array_map('trim', explode(',', $authUserData['team_member_id'])); // [24, 33, 40]
+
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $wherecond['OR'] = [
+                                    'Users.id IN' => $teamIdsArray,
+                                    'Users.id' => $authUserData['id']
+                                ];
+        }else if($authUserData['role_id'] != 1){
+            $wherecond['Users.id'] = $authUserData['id'];
+        }
+
+        $userdet = $this->Users->find()
+            ->select(['Users.id', 'Users.full_name'])
+            ->where($wherecond);
+                                
         $userlist = [];
         foreach($userdet as $users){
             $userlist[$users['id']] = $users['full_name'];
         }
-
+        
         return $userlist;
     }
 
@@ -79,19 +103,23 @@ class UserTimeClockComponent extends Component {
         return $usertimeclockdata;
     }
 
-    public function filterTimeClockUserLogs($postData){
+    public function filterTimeClockUserLogs($postData, $report_date){
         $connection = ConnectionManager::get('default');
         
-        $datefrom = date('Y-m-d', strtotime($postData['date_from']));
-        $dateto = date('Y-m-d', strtotime($postData['date_to']));
+        $authUserData = $this->Authentication->getResult()->getData();
 
         $wherecond = '';
         if(isset($postData['user_id']) && !empty($postData['user_id'])){
             $wherecond = " and tc.user_id = '".$postData['user_id']."'";
+        }else if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $wherecond .= " AND (tc.user_id IN $teamIdsSql OR tc.user_id = " . (int)$authUserData['id'] . ")";
         }
 
         $usertimeclocks = $connection->execute(
-            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, (CASE WHEN tc.out_time is not NULL THEN (ROUND(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time ) / 3600, 2)) ELSE 0 END) as totaltime, u.full_name FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) between '".$datefrom."' and '".$dateto."'".$wherecond." order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
+            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, (CASE WHEN tc.out_time is not NULL THEN (ROUND(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time ) / 3600, 2)) ELSE 0 END) as totaltime, u.full_name FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) = '".$report_date."'".$wherecond." order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
@@ -101,21 +129,20 @@ class UserTimeClockComponent extends Component {
         $todate = date('Y-m-d', strtotime($postData['date_to']));
         
         $connection = ConnectionManager::get('default');
-        
-        $usertimeclocks = $connection->execute(
-            "SELECT u.full_name, (select ROUND(SUM(TIMESTAMPDIFF(SECOND, in_time, out_time )) / 3600, 2) from user_time_clocks where user_id = u.id and DATE(in_time) BETWEEN '".$fromdate."' and '".$todate."' and out_time != '') as totaltime FROM users u order by u.full_name")->fetchAll('assoc');
-        //print_r($usertimeclocks);exit;
-        return $usertimeclocks;
-    }
 
-    public function getTechnicianProductivityData($postData){
-        $fromdate = date('Y-m-d', strtotime($postData['date_from']));
-        $todate = date('Y-m-d', strtotime($postData['date_to']));
-        
-        $connection = ConnectionManager::get('default');
+        $authUserData = $this->Authentication->getResult()->getData();
+        $wherecond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $wherecond = " AND (u.id IN $teamIdsSql OR u.id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != '1'){
+            $wherecond = " AND u.id = " . (int)$authUserData['id'];
+        }
         
         $usertimeclocks = $connection->execute(
-            "SELECT u.full_name, (select ROUND(SUM(TIMESTAMPDIFF(SECOND, in_time, out_time )) / 3600, 2) from user_time_clocks where user_id = u.id and DATE(in_time) BETWEEN '".$fromdate."' and '".$todate."' and out_time != '') as totaltime FROM users u order by u.full_name")->fetchAll('assoc');
+            "SELECT u.full_name, (select ROUND(SUM(TIMESTAMPDIFF(SECOND, in_time, out_time )) / 3600, 2) from user_time_clocks where user_id = u.id and DATE(in_time) BETWEEN '".$fromdate."' and '".$todate."' and out_time != '') as totaltime FROM users u where 1=1 $wherecond order by u.full_name")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
@@ -126,8 +153,19 @@ class UserTimeClockComponent extends Component {
         
         $connection = ConnectionManager::get('default');
         
+        $authUserData = $this->Authentication->getResult()->getData();
+        $wherecond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $wherecond = " AND (u.id IN $teamIdsSql OR u.id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != '1'){
+            $wherecond = " AND u.id = " . (int)$authUserData['id'];
+        }
+        
         $usertimeclocks = $connection->execute(
-            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, u.full_name, (CASE WHEN tc.out_time is not NULL THEN (ROUND(SUM(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time )) / 3600, 2)) ELSE 0 END) as totaltime, COUNT(DISTINCT DATE(tc.in_time)) as days FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) between '".$fromdate."' and '".$todate."' group by tc.user_id order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
+            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, u.full_name, (CASE WHEN tc.out_time is not NULL THEN (ROUND(SUM(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time )) / 3600, 2)) ELSE 0 END) as totaltime, COUNT(DISTINCT DATE(tc.in_time)) as days FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) between '".$fromdate."' and '".$todate."' $wherecond group by tc.user_id order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
@@ -135,8 +173,19 @@ class UserTimeClockComponent extends Component {
     public function getAllUsersTimeClockReportSummary($report_date){
         $connection = ConnectionManager::get('default');
         
+        $authUserData = $this->Authentication->getResult()->getData();
+        $wherecond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $wherecond = " AND (u.id IN $teamIdsSql OR u.id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != '1'){
+            $wherecond = " AND u.id = " . (int)$authUserData['id'];
+        }
+
         $usertimeclocks = $connection->execute(
-            "SELECT u.full_name, (select ROUND(SUM(TIMESTAMPDIFF(SECOND, in_time, out_time )) / 3600, 2) from user_time_clocks where user_id = u.id and DATE(in_time) = '".$report_date."' and out_time != '') as totaltime FROM users u order by u.full_name")->fetchAll('assoc');
+            "SELECT u.full_name, (select ROUND(SUM(TIMESTAMPDIFF(SECOND, in_time, out_time )) / 3600, 2) from user_time_clocks where user_id = u.id and DATE(in_time) = '".$report_date."' and out_time != '') as totaltime FROM users u where 1=1 $wherecond order by u.full_name")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
@@ -144,8 +193,19 @@ class UserTimeClockComponent extends Component {
     public function getAllEmpTimeClockDetail($report_date){
         $connection = ConnectionManager::get('default');
         
+        $authUserData = $this->Authentication->getResult()->getData();
+        $wherecond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+
+            $wherecond = " AND (tc.user_id IN $teamIdsSql OR tc.user_id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != '1'){
+            $wherecond = " AND tc.user_id = " . (int)$authUserData['id'];
+        }
+
         $usertimeclocks = $connection->execute(
-            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, (CASE WHEN tc.out_time is not NULL THEN (ROUND(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time ) / 3600, 2)) ELSE 0 END) as totaltime, u.full_name FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) = '".$report_date."' and tc.out_time != '' order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
+            "SELECT tc.id, tc.in_time, tc.out_time, tc.user_id, (CASE WHEN tc.out_time is not NULL THEN (ROUND(TIMESTAMPDIFF(SECOND, tc.in_time, tc.out_time ) / 3600, 2)) ELSE 0 END) as totaltime, u.full_name FROM `user_time_clocks` tc join users u on tc.user_id = u.id WHERE DATE(tc.in_time) = '".$report_date."' and tc.out_time != '' $wherecond order by DATE(tc.in_time), u.full_name")->fetchAll('assoc');
         //print_r($usertimeclocks);exit;
         return $usertimeclocks;
     }
@@ -170,175 +230,184 @@ class UserTimeClockComponent extends Component {
     }
 
     public function individualEmpTimeClockDetReport($postData){
-        $usertimeclocklist = $this->filterTimeClockUserLogs($postData);
+        $this->Users = $this->getController()->fetchTable('Users');
+        
+        $userdet = $this->Users->get($postData['user_id']);
         $mainHtml = '';
-        if(isset($usertimeclocklist[0]['full_name'])){
+        if(!empty($userdet)){
             $datemsg = $postData['date_from'].' to '.$postData['date_to'];
             if($postData['date_from'] == $postData['date_to']){
                 $datemsg = $postData['date_from'];
             }
-
+            
             $mainHtml .= '<table class="main-table" cellspacing="0">
-            <tr class="main-tr">
-                <td class="main-td">
-                    <table>
-                        <tr>
-                            <td valign="top">
-                                <table>
-                                    <tr>
-                                        <td class="mid-header">
-                                            Time Clock Report for: '.$usertimeclocklist[0]['full_name'].' ('.$datemsg.')
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>';
-            
-            $mainHtml .= '<tr>
-                            <td>
-                                <table cellspacing="0" cellpadding="0">';
-            $total_hour_worked = 0;
-            $totaltime = 0;
-            $dates = '';
-            
-            foreach($usertimeclocklist as $clock){
-                $total_hour_worked += $clock['totaltime'];
-                
-                $intimestr = strtotime(date('Y-m-d', strtotime($clock['in_time'])));
-
-                $out_time = !empty($clock['out_time']) ? date('h:i:s A', strtotime($clock['out_time'])) : '';
-                
-                if(empty($dates)){
-                    $mainHtml .= '<tr>
-                                <td valign="top" class="time-table-td">
-                                    <span class="date-class">'.date('m/d/Y', strtotime($clock['in_time'])).'</span>
-                                </td>
-                                <td align="right" class="time-table-td">
-                                    <table cellspacing="0" class="time-table" >';
-                }
-
-                if(!empty($dates) && $dates != $intimestr){
-                    
-                    $mainHtml .= '<tr class="second-row">
-                                                    <td colspan="3" align="right" >Hours Worked for Day:</td>
-                                                    <td align="right">'.$totaltime.'</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>';
-                    $totaltime = $clock['totaltime'];
-                    $dates = $intimestr;
-                    $mainHtml .= '<tr>
-                                <td valign="top" class="time-table-td">
-                                    <span class="date-class">'.date('m/d/Y', strtotime($clock['in_time'])).'</span>
-                                </td>
-                                <td align="right" class="time-table-td">
-                                    <table cellspacing="0" class="time-table" >';
-                }else{
-                    $totaltime += $clock['totaltime'];
-                    $dates = $intimestr;
-                }
-
-                $mainHtml .= '<tr class="first-row">
-                                    <td width="150">In: '.date('h:i:s A', strtotime($clock['in_time'])).'</td>
-                                    <td width="150" align="right">Out: '.$out_time.'</td>
-                                    <td width="100" align="right">Time:</td>
-                                    <td width="100" align="right">'.$clock['totaltime'].'</td>
+                                <tr class="main-tr">
+                                    <td class="main-td" colspan="2">
+                                        <table>
+                                            <tr>
+                                                <td valign="top">
+                                                    <table>
+                                                        <tr>
+                                                            <td class="mid-header">
+                                                                Time Clock Report for: '.$userdet['full_name'].' ('.$datemsg.')
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>';
-            }
+            
+            $from = new \DateTime($postData['date_from']);
+            $to = new \DateTime($postData['date_to']);
+            $to->modify('+1 day'); // Include the end date
 
-            $mainHtml .= '<tr class="second-row">
-                                                    <td colspan="3" align="right" >Hours Worked for Day:</td>
-                                                    <td align="right">'.$totaltime.'</td>
-                                                </tr>
-                                            </table>
-                                        </td>
+            $interval = new \DateInterval('P1D'); // 1 Day
+            $period = new \DatePeriod($from, $interval, $to);
+
+            $noofdays = 0;
+            $total_hour_worked = 0;
+
+            foreach ($period as $date) {
+                $totaltime = 0;
+
+                $report_date = $date->format('Y-m-d');
+
+                $mainHtml .= '<tr>
+                                    <td valign="top" class="time-table-td">
+                                        <span class="date-class">'.$date->format('m/d/Y').'</span>
+                                    </td>
+                                    <td align="right" class="time-table-td">
+                                        <table cellspacing="0" class="time-table" >';
+            
+                $totaltime = 0;
+                $dates = '';
+                
+                $usertimeclocklist = $this->filterTimeClockUserLogs($postData, $report_date);
+                foreach($usertimeclocklist as $clock){
+                    $total_hour_worked += $clock['totaltime'];
+                    $totaltime += $clock['totaltime'];
+                    
+                    $intimestr = strtotime(date('Y-m-d', strtotime($clock['in_time'])));
+
+                    $out_time = !empty($clock['out_time']) ? date('h:i:s A', strtotime($clock['out_time'])) : '';
+                    
+                    $mainHtml .= '<tr class="first-row">
+                                        <td width="150">In: '.date('h:i:s A', strtotime($clock['in_time'])).'</td>
+                                        <td width="150" align="right">Out: '.$out_time.'</td>
+                                        <td width="100" align="right">Time:</td>
+                                        <td width="100" align="right">'.$clock['totaltime'].'</td>
                                     </tr>';
+                }
+
+                $mainHtml .= '<tr class="second-row">
+                                <td colspan="3" align="right" >Hours Worked for Day:</td>
+                                <td align="right">'.$totaltime.'</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>';
+            }
 
             $mainHtml .= '<tr>
                                 <td colspan="2" align="right">
-                                <table cellspacing="0" border="0">
-                                    <tr class="second-row">
-                                    <td colspan="3" align="right" >Total Hours Worked:</td>
-                                    <td align="right" width="98">'.$total_hour_worked.'</td>
-                                    </tr>
-                                </table>
+                                    <table cellspacing="0" border="0">
+                                        <tr class="second-row">
+                                            <td colspan="3" align="right" >Total Hours Worked:</td>
+                                            <td align="right" width="98">'.$total_hour_worked.'</td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-
-                            </table>
-                        </td>
-                        </tr>
-                    </table>';
+                        </table>';
         }
         return $mainHtml;
     }
 
     public function indEmpTechnicianComparison($postData){
-        $usertimeclocklist = $this->filterTimeClockUserLogs($postData);
+        $this->Users = $this->getController()->fetchTable('Users');
+
+        $userdet = $this->Users->get($postData['user_id']);
         $mainHtml = '';
-        if(isset($usertimeclocklist[0]['full_name'])){
+        if(!empty($userdet)){
             $datemsg = $postData['date_from'].' to '.$postData['date_to'];
             if($postData['date_from'] == $postData['date_to']){
                 $datemsg = $postData['date_from'];
             }
 
             $mainHtml .= '<table class="main-table" cellspacing="0">
-            <tr class="main-tr">
-                <td class="main-td">
-                    <table>
-                        <tr>
-                            <td valign="top">
-                                <table>
-                                    <tr>
-                                        <td class="mid-header">
-                                            Time Clock vs. Time Worked for: '.$usertimeclocklist[0]['full_name'].' ('.$datemsg.')
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>';
-            
-            $total_hour_worked = 0;
-            $totaltime = 0;
-            $noofdays = 0;
-            foreach($usertimeclocklist as $clock){
-                $total_hour_worked += $clock['totaltime'];
-                
-                $intimestr = strtotime(date('Y-m-d', strtotime($clock['in_time'])));
-
-                $out_time = !empty($clock['out_time']) ? date('h:i:s A', strtotime($clock['out_time'])) : '';
-                
-                if(empty($dates)){
-                    $noofdays = 1;
-                    $mainHtml .= '<tr>
-                                    <td class="time-table-td">
-                                        <span class="date-class-bg">'.date('m/d/Y', strtotime($clock['in_time'])).'</span>';
-                }
-
-                if(!empty($dates) && $dates != $intimestr){
-                    $noofdays += 1;
-
-                    $mainHtml .= '<table border="0" cellspacing="0" cellpadding="0">
+                            <tr class="main-tr">
+                                <td class="main-td">
+                                    <table>
                                         <tr>
                                             <td valign="top">
                                                 <table>
+                                                    <tr>
+                                                        <td class="mid-header">
+                                                            Time Clock vs. Time Worked for: '.$userdet['full_name'].' ('.$datemsg.')
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>';
+            
+            $from = new \DateTime($postData['date_from']);
+            $to = new \DateTime($postData['date_to']);
+            $to->modify('+1 day'); // Include the end date
+
+            $interval = new \DateInterval('P1D'); // 1 Day
+            $period = new \DatePeriod($from, $interval, $to);
+
+            $noofdays = 0;
+            $total_hour_worked = 0;
+
+            foreach ($period as $date) {
+                $totaltime = 0;
+
+                $report_date = $date->format('Y-m-d');
+                $noofdays++;
+
+                $mainHtml .= '<tr>
+                                    <td class="time-table-td">
+                                        <span class="date-class-bg">'.$date->format('m/d/Y').'</span>';
+
+                $usertimeclocklist = $this->filterTimeClockUserLogs($postData, $report_date);
+                foreach($usertimeclocklist as $clock){
+                    $totaltime += $clock['totaltime'];
+
+                    $in_time = !empty($clock['in_time']) ? date('h:i:s A', strtotime($clock['in_time'])) : '';
+                    $out_time = !empty($clock['out_time']) ? date('h:i:s A', strtotime($clock['out_time'])) : '';
+
+                    $total_hour_worked += $clock['totaltime'];
+
+                    $mainHtml .= '<table cellpadding="10" cellspacing="0" class="table-time-work">
+                                    <tr>
+                                        <td width="200">'.$in_time.'</td>
+                                        <td>'.$clock['totaltime'].'</td>
+                                        <td align="right">'.$out_time.'</td>
+                                    </tr>
+                                </table>';
+
+                }
+                
+                $mainHtml .= '<table border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td valign="top">
+                                            <table>
                                                 <tr>
                                                     <td class="summary-style">Summary for:</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="summary-date">'.date('m/d/Y', strtotime($clock['in_time'])).'</td>
+                                                    <td class="summary-date">'.$date->format('m/d/Y').'</td>
                                                 </tr>
-                                                </table>
-                                            </td>
-                                            <td>
-                                                <table border="0" cellpadding="5" class="table-hrs">
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table border="0" cellpadding="5" class="table-hrs">
                                                 <tr>
                                                     <td align="right">Total Time Clock Hours:</td>
                                                     <td width="100">'.$totaltime.'</td>
@@ -359,30 +428,12 @@ class UserTimeClockComponent extends Component {
                                                     <td align="right">Override hours not accounted for:</td>
                                                     <td width="100">0.00</td>
                                                 </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                </tr>';
-
-                    $totaltime = $clock['totaltime'];
-                    $dates = $intimestr;
-                    $mainHtml .= '<tr>
-                                    <td class="time-table-td">
-                                        <span class="date-class-bg">'.date('m/d/Y', strtotime($clock['in_time'])).'</span>';
-                }else{
-                    $totaltime += $clock['totaltime'];
-                    $dates = $intimestr;
-                }
-
-                $mainHtml .= '<table cellpadding="10" cellspacing="0" class="table-time-work">
-                            <tr>
-                                <td width="200">'.date('h:i:s A', strtotime($clock['in_time'])).'</td>
-                                <td>'.$clock['totaltime'].'</td>
-                                <td align="right">'.$out_time.'</td>
-                            </tr>
-                            </table>';
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            </tr>';
             }
             $mainHtml .= '<tr>
                             <td>
@@ -439,6 +490,7 @@ class UserTimeClockComponent extends Component {
                         </tr>
                         </table>';
         }
+        
         return $mainHtml;
     }
 
@@ -511,36 +563,42 @@ class UserTimeClockComponent extends Component {
 
         $mainHtml .= '<table class="main-table" >
                         <tr class="main-tr">
-                        <td class="main-td rm-border">
-                            <table>
-                            <tr>
-                                <td valign="top">
+                            <td class="main-td rm-border">
                                 <table>
-                                    <tr>
-                                    <td class="mid-header">
-                                        All Employees - Time Clock Detail ('.$datemsg.')
-                                    </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="mid-header">
+                                                        All Employees - Time Clock Detail ('.$datemsg.')
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
-                                </td>
-                            </tr>
-                            </table>
-                        </td>
+                            </td> 
                         </tr>';
+        
+        $from = new \DateTime($postData['date_from']);
+        $to = new \DateTime($postData['date_to']);
+        $to->modify('+1 day'); // Include the end date
 
-        $mainHtml .= '<tr>
-                    <td>';
-
-        $fromdate = strtotime($postData['date_from']);
-        $todate = strtotime($postData['date_to']);
+        $interval = new \DateInterval('P1D'); // 1 Day
+        $period = new \DatePeriod($from, $interval, $to);
         $total_hour_worked = 0;
         
-        for ( $i = $fromdate; $i <= $todate; $i = $i + 86400 ) {
+        foreach ($period as $date) {
+            $report_date = $date->format('Y-m-d');
+            $mainHtml .= '<tr>
+                    <td>';
             $tothrsworkedforallemps = 0;
-            $report_date = date('Y-m-d', $i);
             $mainHtml .= '<table class="date-group-table">
                                 <tr>
-                                <td><span>'.date('m/d/Y', $i).'</span></td>
+                                <td><span>'.$date->format('m/d/Y').'</span></td>
                                 </tr>
                             </table>';
             
@@ -619,6 +677,8 @@ class UserTimeClockComponent extends Component {
                                 </td>
                             </tr>';
             }
+            $mainHtml .= '</td>
+                    </tr>';
         }
         $mainHtml .= '<tr>
                             <td class="emp-td-border">
@@ -735,15 +795,19 @@ class UserTimeClockComponent extends Component {
                         </td>
                     </tr>';
 
-        $fromdate = strtotime($postData['date_from']);
-        $todate = strtotime($postData['date_to']);
-        
-        for ( $i = $fromdate; $i <= $todate; $i = $i + 86400 ) {
-            $report_date = date('Y-m-d', $i);
+        $from = new \DateTime($postData['date_from']);
+        $to = new \DateTime($postData['date_to']);
+        $to->modify('+1 day'); // Include the end date
+
+        $interval = new \DateInterval('P1D'); // 1 Day
+        $period = new \DatePeriod($from, $interval, $to);
+
+        foreach ($period as $date) {
+            $report_date = $date->format('Y-m-d');
             $mainHtml .= '<tr><td>';
             $mainHtml .= '<table class="date-group-table">
                             <tr>
-                            <td><span class="tcs_date_heading">'.date('m/d/Y', $i).'</span></td>
+                            <td><span class="tcs_date_heading">'.$date->format('m/d/Y').'</span></td>
                             </tr>
                         </table>';
             $usertimeclocklist = $this->getAllUsersTimeClockReportSummary($report_date);

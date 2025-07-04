@@ -8,6 +8,8 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Http\Response;
 use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\Entity;
+use Cake\Chronos\ChronosInterface;
 
 /**
  * Dashboard Controller
@@ -74,8 +76,18 @@ class HistoryReportsController extends AppController
             4 => 'itemhistory.description'
         );
 
-        $count = $query['count'];
-        $detail = $query['detail'];
+        $cond = '';
+        if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
+            $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
+            
+            $cond .= " AND (itemhistory.user_id IN $teamIdsSql OR itemhistory.user_id = " . (int)$authUserData['id'] . ")";
+        }else if($authUserData['role_id'] != 1){
+            $cond .= " AND itemhistory.user_id = ".$authUserData['id'];
+        }
+
+        $count = $query['count'].$cond;
+        $detail = $query['detail'].$cond;
         $totalCount = $query['count'];
 
         $conn = ConnectionManager::get('default');
@@ -97,12 +109,15 @@ class HistoryReportsController extends AppController
         $data = array();
         
         foreach ( $results as $row){
-            $description = @unserialize($row['description']); 
+            /*$description = @unserialize($row['description']); 
             if ($description === false){
                 $description = $row['description'];
             }else{
                 $description = json_encode($description, JSON_PRETTY_PRINT);
-            }
+            }*/
+
+            $description = $this->safeUnserializeAndFormat($row['description']);
+            
             $nestedData= [];
             $nestedData[] = $row["id"];
             $nestedData[] = $row["title"];
@@ -122,4 +137,41 @@ class HistoryReportsController extends AppController
     
         echo json_encode($returndata);die;
     }
+
+    public function safeUnserializeAndFormat($serialized) {
+        try {
+            $data = @unserialize($serialized);
+
+            // unserialize might succeed but return an incomplete object
+            if ($data === false) {
+                return $serialized; // not a valid serialized string
+            }
+
+            // If it's a Cake Entity, safely convert to array
+            if ($data instanceof Entity) {
+                $array = $data->toArray();
+
+                // Recursively walk and safely format Chronos/DateTime objects
+                array_walk_recursive($array, function (&$value) {
+                    if ($value instanceof ChronosInterface || $value instanceof \DateTimeInterface) {
+                        $value = $value->format('Y-m-d H:i:s');
+                    }
+                });
+
+                return json_encode($array, JSON_PRETTY_PRINT);
+            }
+
+            // If it's an array or object, JSON encode it directly
+            if (is_array($data) || is_object($data)) {
+                return json_encode($data, JSON_PRETTY_PRINT);
+            }
+
+            // Fallback
+            return $data;
+
+        } catch (\Throwable $e) {
+            return json_encode(['error' => $e->getMessage()]);
+        }
+    }
+
 }

@@ -436,6 +436,9 @@
                 
                 <body>'.$mainHtml.'</body></html>';
                 //echo $html;exit;
+                
+                ini_set('pcre.backtrack_limit', '10000000');
+
                 $mpdf = new Mpdf();
                 $mpdf->SetDisplayMode('fullpage');
                 $mpdf->AddPage('', // L - landscape, P - portrait 
