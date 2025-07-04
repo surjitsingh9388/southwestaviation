@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="row mt10">
-                      <div class="col-md-12 col-sm-12 col-xs-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Show Inactive</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">

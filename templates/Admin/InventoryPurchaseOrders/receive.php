@@ -53,10 +53,10 @@ echo $this->Html->css('inventory_purchase_order');
                             </div>
                         </div>
                         <?php $count++;}} ?>
-                        <div class="row mb-3">
+                        <div class="row mb-3 mr-22 ml-22">
                             <div class="col-md-12">
-                                <div class="form-group" style="float: right; padding-right: 50px;">
-                                    <button id="po-receive-continue-button" type="button" class="btn btn-primary" data-val="countinue" disabled>Continue</button>
+                                <div class="form-group" style="display: flex; justify-content:flex-end">
+                                    <button id="po-receive-continue-button"  type="button" class="btn btn-primary" data-val="countinue" disabled>Continue</button>
                                 </div>
                             </div>
                         </div>

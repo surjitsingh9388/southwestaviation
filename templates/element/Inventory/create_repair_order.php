@@ -1,30 +1,30 @@
 <?php
-echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRepairOrders', 'autocomplete'=>'off'));
-?> 
+echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRepairOrders', 'autocomplete' => 'off'));
+?>
 <div class="addPartBorder pt10">
     <div class="row">
-        <div class="col-md-4"></div>
+        <!-- <div class="col-md-4 col-sm-6 col-xs-12"></div> -->
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
-                <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
+                <div class="input-group">
                     <?php
-                    echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor', 'required' => 'required')); 
+                    echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor', 'required' => 'required'));
                     ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></div>
+                    <span class="input-group-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></span>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">RO Date&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="input-group date datePicker">
-                        <?php 
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">RO Date&nbsp;<span class="required">*</span></label>
+                <div>
+                    <div class="input-group date datePicker" style="width: 100%;">
+                        <?php
                         $ro_date = !empty($inventorypurchaseorders->ro_date) ? date('m-d-Y', strtotime($inventorypurchaseorders->ro_date)) : date('m-d-Y');
-                        echo $this->Form->Text('ro_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'ro_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$ro_date)); 
+                        echo $this->Form->Text('ro_date', array('class' => 'form-control ', 'id' => 'ro_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value' => $ro_date));
                         ?>
                         <span class="input-group-addon hide-block">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -36,112 +36,116 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Number&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('ro_number', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'ro_number', 'value'=>$ro_number)); ?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Number&nbsp;<span class="required">*</span></label>
+                <div>
+                    <?php echo $this->Form->control('ro_number', array('class' => 'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id' => 'ro_number', 'value' => $ro_number)); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Contact</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('contact', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group  mr-22 ml-22">
+                <label class="control-label " for="plane_id">Contact</label>
+                <div>
+                    <?php echo $this->Form->control('contact', array('class' => 'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship Via&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php 
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Ship Via&nbsp;<span class="required">*</span></label>
+                <div>
+                    <?php
                     $shipviaarr = unserialize(SHIP_VIA);
 
-                    echo $this->Form->control('ship_via', array('options' => $shipviaarr, 'empty' => 'Select a shipment method...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required')); ?>
+                    echo $this->Form->control('ship_via', array('options' => $shipviaarr, 'empty' => 'Select a shipment method...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required')); ?>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Requestor&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('requestor', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'value'=>$userData['full_name'], 'required' => 'required')); ?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Requestor&nbsp;<span class="required">*</span></label>
+                <div>
+                    <?php echo $this->Form->control('requestor', array('class' => 'form-control ', 'placeholder' => '', 'label' => false, 'value' => $userData['full_name'], 'required' => 'required')); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Account Code</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Select account code...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code'));  ?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Account Code</label>
+                <div>
+                    <?php echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Select account code...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code'));  ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Reference</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('reference', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22 ">
+                <label class="control-label " for="plane_id">Reference</label>
+                <div>
+                    <?php echo $this->Form->control('reference', array('class' => 'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Currency&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php 
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Currency&nbsp;<span class="required">*</span></label>
+                <div>
+                    <?php
                     $currencyarr = unserialize(CURRENCY);
                     $currency = !empty($inventorypurchaseorders->currency) ? $inventorypurchaseorders->currency : '1';
-                    echo $this->Form->control('currency', array('options' => $currencyarr, 'empty' => 'Enter a currency ...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_currency', 'required' => 'required', 'value'=>$currency)); 
+                    echo $this->Form->control('currency', array('options' => $currencyarr, 'empty' => 'Enter a currency ...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_currency', 'required' => 'required', 'value' => $currency));
                     ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
-                
-                <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group mr-22 ml-22">
+                <label class="control-label " for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
+
+                <div class="input-group">
                     <?php
-                    echo $this->Form->control('bill_to_address', array('options' => $billingaddress, 'empty' => 'Select Address...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required', 'id' => 'bill_to_address'));
+                    echo $this->Form->control('bill_to_address', array('options' => $billingaddress, 'empty' => 'Select Address...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required', 'id' => 'bill_to_address'));
                     ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="billing"><i class="fa fa-plus"></i></button></div>
+                    <span class="input-group-btn"><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="billing"><i class="fa fa-plus"></i></button></span>
+
+
+
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship To&nbsp;<span class="required">*</span></label>
-                <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group ml-22 mr-22">
+                <label class="control-label " for="plane_id">Ship To&nbsp;<span class="required">*</span></label>
+                <div class="input-group">
                     <?php
-                    echo $this->Form->control('ship_to_address', array('options' => $shippingaddress, 'empty' => 'Select Address...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'ship_to_address', 'required' => 'required')); 
+                    echo $this->Form->control('ship_to_address', array('options' => $shippingaddress, 'empty' => 'Select Address...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'ship_to_address', 'required' => 'required'));
                     ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="shipping"><i class="fa fa-plus"></i></button></div>
+                    <span class="input-group-btn "> ><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="shipping"><i class="fa fa-plus"></i></button></span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group"> 
-                <label class="control-label col-md-2 col-sm-2 col-xs-12 special-instruction-label" for="plane_id">Special Instructions</label>
-                <div class="col-md-10 col-sm-10 col-xs-12">
-                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class'=>'form-control col-md-10 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="form-group ml-22 mr-22">
+
+                <label class="control-label  special-instruction-label" for="plane_id">Special Instructions</label>
+                <div >
+                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class' => 'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                 </div>
             </div>
         </div>
@@ -162,7 +166,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         <div class="tab-content">
             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
                 <div class="g-0 bg-light position-relative tableScroll">
-                    
+
                     <table class="table opinvitemtable">
                         <thead class="thead-dark">
                             <tr class="tblinvro">
@@ -184,9 +188,9 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
                             $ro_tax_amount = '0.00';
                             $ro_shipping = '0.00';
 
-                            $totalAmount = $subTotalAmount+$ro_tax_amount+$ro_shipping;
-                            foreach($InventoryROItems as $key=>$invreqitem){
-                                echo $this->element("Inventory/inventory_ro_item_add", array('invreqitem'=>$invreqitem, 'srcount'=>$key+1));
+                            $totalAmount = $subTotalAmount + $ro_tax_amount + $ro_shipping;
+                            foreach ($InventoryROItems as $key => $invreqitem) {
+                                echo $this->element("Inventory/inventory_ro_item_add", array('invreqitem' => $invreqitem, 'srcount' => $key + 1));
                             }
                             ?>
                             <tr id="invrequeststbl">
@@ -209,21 +213,21 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
                                 <td></td>
                                 <td colspan="3">
                                     <div class="col-md-6">
-                                        <div class="form-group"> 
-                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id" >Tax &nbsp;&nbsp;<input type="radio" name="ro_tax" class="potaxcal" value="1" checked="checked"> %</label>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Tax &nbsp;&nbsp;<input type="radio" name="ro_tax" class="potaxcal" value="1" checked="checked"> %</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <?php echo $this->Form->input('ro_tax_percentage', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'value'=>$ro_tax_percentage, 'id'=>'po-tax-percentage')); ?>
+                                                <?php echo $this->Form->input('ro_tax_percentage', array('type' => 'number', 'class' => 'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'value' => $ro_tax_percentage, 'id' => 'po-tax-percentage')); ?>
                                             </div>
-                                        </div>    
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6 pr-0">
-                                        <div class="form-group"> 
-                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id" ><input type="radio" name="ro_tax" class="potaxcal" value="0"> $</label>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id"><input type="radio" name="ro_tax" class="potaxcal" value="0"> $</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 pr-0">
-                                                <?php echo $this->Form->input('ro_tax_amount', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'disabled'=>'disabled', 'value'=>$ro_tax_amount, 'id'=>'po-tax-amount')); ?>
+                                                <?php echo $this->Form->input('ro_tax_amount', array('type' => 'number', 'class' => 'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'disabled' => 'disabled', 'value' => $ro_tax_amount, 'id' => 'po-tax-amount')); ?>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -232,7 +236,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
                                 <td></td>
                                 <td colspan="5" class="text-right">Shipping</td>
                                 <td>
-                                    <?php echo $this->Form->input('ro_shipping', array('type'=>'number', 'class'=>'form-control col-md-6 col-xs-6', 'placeholder' => '', 'label' => false, 'value'=>$ro_shipping, 'id'=>'po-shipping')); ?>
+                                    <?php echo $this->Form->input('ro_shipping', array('type' => 'number', 'class' => 'form-control col-md-6 col-xs-6', 'placeholder' => '', 'label' => false, 'value' => $ro_shipping, 'id' => 'po-shipping')); ?>
                                 </td>
                             </tr>
                             <tr>
@@ -286,6 +290,6 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
     </div>
 </div>
-<?php 
-echo $this->Form->end(); 
+<?php
+echo $this->Form->end();
 ?>
