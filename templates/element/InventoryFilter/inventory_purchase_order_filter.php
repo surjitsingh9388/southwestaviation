@@ -94,7 +94,7 @@
                             <div class=" col-sm-9 col-md-9  col-xs-12">
                                 <div class="input-group date datePicker">
                                     <?php echo $this->Form->Text('po_date_start', array('class' => 'form-control datePicker', 'id' => 'po_date_start', 'placeholder' => '', 'label' => false, 'placeholder' => 'e.g. ' . date('m-d-Y'))); ?>
-                                    <span class="input-group-addon" style="display:none;">
+                                    <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
