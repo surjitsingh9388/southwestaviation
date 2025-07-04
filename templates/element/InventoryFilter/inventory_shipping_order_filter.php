@@ -28,7 +28,7 @@
                             <div class="col-sm-9 col-sm-9 col-xs-12">
                                 <div class="input-group date datePicker" style="width:100%">
                                     <?php echo $this->Form->Text('shipping_order_date_start', array('class' => 'form-control', 'id' => 'shipping_order_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
-                                    <span class="input-group-addon" style="display:none;">
+                                    <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
@@ -43,7 +43,7 @@
                             <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12">
                                 <div class="input-group date datePicker" style="width:100%">
                                     <?php echo $this->Form->Text('shipping_order_date_end', array('class' => 'form-control', 'id' => 'shipping_order_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
-                                    <span class="input-group-addon" style="display:none;">
+                                    <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>

@@ -35,7 +35,7 @@
                                 <div class="col-xs-4">
                                     <div class="input-group date datePicker">
                                         <?php echo $this->Form->Text('request_date_start', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'request_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
-                                        <span class="input-group-addon" style="display:none;">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -43,7 +43,7 @@
                                 <div class="col-xs-4">
                                     <div class="input-group date datePicker">
                                         <?php echo $this->Form->Text('request_date_end', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'request_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'disabled'=>'disabled')); ?>
-                                        <span class="input-group-addon" style="display:none;">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -68,7 +68,7 @@
                                 <div class="col-xs-4">
                                     <div class="input-group date datePicker">
                                         <?php echo $this->Form->Text('required_date_start', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'required_date_start', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'))); ?>
-                                        <span class="input-group-addon" style="display:none;">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
@@ -76,7 +76,7 @@
                                 <div class="col-xs-4">
                                     <div class="input-group date datePicker">
                                         <?php echo $this->Form->Text('required_date_end', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'required_date_end', 'placeholder' => '', 'label' => false, 'placeholder'=>'e.g. '.date('m-d-Y'), 'disabled'=>'disabled')); ?>
-                                        <span class="input-group-addon" style="display:none;">
+                                        <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
