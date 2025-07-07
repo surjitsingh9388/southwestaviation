@@ -14,7 +14,7 @@ $(document).ready(function () {
         $('.flash-message').fadeOut('slow', function () {
             $('.outerWrapper').parent().addClass('left');
         });
-    }, 100);
+    }, 1000);
 });
 
 </script>

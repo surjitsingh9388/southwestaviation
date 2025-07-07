@@ -148,10 +148,10 @@ use Cake\Routing\Router;
                                                         <?php echo isset($val['invitms']['name']) ? '<a href="'.$this->Url->build(['controller'=>'Inventories', 'action'=>'detail', $val['inv']['id']]).'" class="inventory-select-item">'.$val['invitms']['name'].' (PN: '.$val['invitms']['part_number'].') (SN: '.$val['inv']['serial_no'].')</a>' : $val['noninventory_item']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $val['qty'].' '.$defaultUOM[$val['inv']['uom']]; ?>
+                                                        <?php echo !empty($defaultUOM[$val['inv']['uom']]) ? $val['qty'].' '.$defaultUOM[$val['inv']['uom']] : $val['qty']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $val['qty']-$val['received'].' '.$defaultUOM[$val['inv']['uom']]; ?>
+                                                        <?php echo !empty($defaultUOM[$val['inv']['uom']]) ? $val['qty']-$val['received'].' '.$defaultUOM[$val['inv']['uom']] : ($val['qty']-$val['received']); ?>
                                                     </td>
                                                     <td>
                                                         <?php
