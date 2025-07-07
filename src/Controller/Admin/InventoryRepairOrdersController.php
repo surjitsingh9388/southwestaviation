@@ -272,7 +272,7 @@
                         $invrequestpost['inventory_id'] = $inventory_id;
                         $invrequestpost['noninventory_item'] = isset($postData['noninventory_item'][$i]) && !empty($postData['noninventory_item'][$i]) ? $postData['noninventory_item'][$i] : '';
                         $invrequestpost['qty'] = $postData['qty'][$i];
-                        
+                        $invrequestpost['eta'] = $postData['eta'][$i];
                         $invrequestpost['cost'] = $postData['cost'][$i];
                         $invrequestpost['location_id'] = isset($postData['location_id'][$i]) ? $postData['location_id'][$i] : '';
                         
@@ -460,6 +460,7 @@
                         $invrequestpost['inventory_id'] = $inventory_id;
                         $invrequestpost['noninventory_item'] = isset($postData['noninventory_item'][$i]) && !empty($postData['noninventory_item'][$i]) ? $postData['noninventory_item'][$i] : '';
                         $invrequestpost['qty'] = $postData['qty'][$i];
+                        $invrequestpost['eta'] = $postData['eta'][$i];
                         $invrequestpost['cost'] = $postData['cost'][$i];
                         $invrequestpost['location_id'] = isset($postData['location_id'][$i]) ? $postData['location_id'][$i] : '';
                         
