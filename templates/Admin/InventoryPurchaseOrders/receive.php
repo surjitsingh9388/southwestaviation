@@ -37,7 +37,7 @@ echo $this->Html->css('inventory_purchase_order');
                         foreach($inventoryitems as $key=>$invitem){
                         if(empty($invitem['noninventory_item'])){
                         ?>
-                        <div class="col-md-12">
+                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id" data-val="<?php echo $invitem['id']; ?>"><?php echo $invitem['invitms']['name'].' (PN: '.$invitem['invitms']['part_number'].')';?>&nbsp;<span class="required">*</span></label>
                                 <div class="col-sm-3">
