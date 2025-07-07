@@ -3,9 +3,9 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
 ?> 
 <div class="addPartBorder pt10">
     <div class="row">
-        <div class="col-md-4"></div>
+       <!-- <div class="col-md-6 col-sm-5 col-xs-12"></div> -->
 
-        <div class="col-md-4">
+        <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
                 <div class="col-md-7 col-sm-7 col-xs-12">
@@ -17,11 +17,11 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">RO Date&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div class="input-group date datePicker">
+                    <div class="input-group date datePicker" style="width:100%">
                         <?php 
                         $ro_date = !empty($InventoryRepairOrders->ro_date) ? date('m-d-Y', strtotime($InventoryRepairOrders->ro_date)) : date('m-d-Y');
                         echo $this->Form->Text('ro_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'ro_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$ro_date)); 
@@ -36,7 +36,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Number&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -45,7 +45,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Contact</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -54,7 +54,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship Via&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -68,7 +68,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Requestor&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -77,7 +77,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Account Code</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -86,7 +86,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Reference</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -97,7 +97,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Currency&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -110,7 +110,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
                 
@@ -123,7 +123,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
             </div>
         </div>
 
-        <div class="col-md-4">
+       <div class="col-md-6 col-sm-5 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship To&nbsp;<span class="required">*</span></label>
                 <div class="col-md-7 col-sm-7 col-xs-12">
@@ -137,11 +137,11 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group"> 
-                <label class="control-label col-md-2 col-sm-2 col-xs-12 special-instruction-label" for="plane_id">Special Instructions</label>
-                <div class="col-md-10 col-sm-10 col-xs-12">
-                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class'=>'form-control col-md-10 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+       <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label special-instruction-label" for="plane_id">Special Instructions</label>
+                <div >
+                    <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                 </div>
             </div>
         </div>

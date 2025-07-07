@@ -107,17 +107,17 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
                 </div>
             </div>
   
-            <div class="form-group vendorblock"
+            <div class="form-group vendorblock ml-22 mr-22"
 
             <?php if($InventoryShippingOrders->destination != '2'){ ?>style="display:none;" <?php } ?>> 
-                <label class="control-label " for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
+                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
                 <div class="input-group">
                     <?php
                     echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor', 'required' => 'required')); 
                     ?>
                     <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></div>
 
-                     <span class="input-group-btn">
+                     <span class="input-group-btn ">
                         <button class="btn btn-primary vendorModelbtn" type="button"  >
                             <i class="fa fa-plus"></i>
                         </button>

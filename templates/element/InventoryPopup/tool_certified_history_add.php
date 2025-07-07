@@ -9,10 +9,10 @@
                 <?php
                 echo $this->Form->create($certificationhistories, array('class' => 'form-horizontal form-label-left', 'id' => 'frmToolCertifiedHistory', 'autocomplete' => 'off'));
                 ?>
-                <div  class="row">
+                <div class="row">
                     <input type="hidden" name="tool_id" id="certified_hist_tool_id" value="<?php echo $tool_id; ?>" />
-                    <div class="col-md-6">
-                        <div class="col-md-12">
+                  
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Date Sent Out</label>
                                 <div class="form-input-frame">
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Date of Calibration</label>
                                 <div class="form-input-frame">
@@ -38,25 +38,25 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Date Received Back</label>
-                                <div class="form-input-frame">
-                                    <div class="input-group date datePicker">
-                                        <?php echo $this->Form->Text('date_received_back', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'date_received_back', 'placeholder' => '', 'label' => false)); ?>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
+                   
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Date Received Back</label>
+                            <div class="form-input-frame">
+                                <div class="input-group date datePicker">
+                                    <?php echo $this->Form->Text('date_received_back', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'date_received_back', 'placeholder' => '', 'label' => false)); ?>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-12"></div>
                     </div>
-                 <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div >
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div>
                             <div class="form-group">
                                 <label class="control-label" for="reference">Sent to</label>
                                 <div class="form-input-frame">
@@ -70,23 +70,20 @@
                             <input type="checkbox" name="was_in_calibration" id="was_in_calibration" value="1" />&nbsp;Was in calibration
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Adjustment Needed</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('adjustment_needed', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'style'=>'height: 78px; width: 566px;')); ?>
-                                </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group ">
+                            <label class="control-label" for="reference">Adjustment Needed</label>
+                            <div class="form-input-frame" >
+                                <?php echo $this->Form->control('adjustment_needed', array('type' => 'textarea', 'class' => 'form-control', 'label' => false, 'row' => '5', 'style' => 'height: 78px; width: 566px;')); ?>
                             </div>
                         </div>
+
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Notes</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('notes', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'style'=>'height: 78px; width: 566px;')); ?>
-                                </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Notes</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('notes', array('type' => 'textarea', 'class' => 'form-control', 'label' => false, 'row' => '5', 'style' => 'height: 78px; width: 566px;')); ?>
                             </div>
                         </div>
                     </div>

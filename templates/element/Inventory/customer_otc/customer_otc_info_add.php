@@ -5,7 +5,7 @@
     <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $inventorycustomers->id; ?>" />
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label" for="otcinfo_customer_name">Customer ID</label>
                 <div class="form-input-frame">
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+         <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label" for="reference">Terms</label>
                 <div class="form-input-frame">
@@ -127,7 +127,7 @@
             </div>
         </div>
             
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-6 col-xs-12 ">
             <!--div class="form-group">
                 <label class="control-label label-heading-left" for="reference">Username</label>
                 <?php
@@ -187,7 +187,7 @@
             
         </div>
 
-        <div class="col-md-3">
+      <div class="col-md-4 col-sm-6 col-xs-12 ">
             <!--div class="form-group">
                 <label class="control-label" for="reference">Password</label>
                 <div class="form-input-frame">
@@ -240,7 +240,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+       <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label" for="reference">Discount Price Level</label>
                 <div class="form-input-frame">

@@ -42,14 +42,14 @@
                 </div>
             </div>
             <div class="col-xs-12 pd0">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-12 ">
                     <div class="form-group">
                         <div class="form-input-frame">
                             <?php echo $this->Form->control('labor_discount_percentage', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'labor_discount_percentage')); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                         <div class="form-input-frame">
                             <?php echo $this->Form->control('parts_discount_percentage', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'parts_discount_percentage')); ?>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Notes</label>
                     <span class="label-chkbox-right">

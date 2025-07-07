@@ -39,7 +39,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             <div class="form-group ml-22 mr-22"> 
                 <label class="control-label " for="plane_id">PO Date&nbsp;<span class="required">*</span></label>
                 <div >
-                    <div class="input-group date datePicker">
+                    <div class="input-group date datePicker" style="width:100%">
                         <?php 
                         $po_date = !empty($inventorypurchaseorders->po_date) ? date('m-d-Y', strtotime($inventorypurchaseorders->po_date)) : date('m-d-Y');
                         echo $this->Form->Text('po_date', array('class' => 'form-control ', 'id' => 'po_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$po_date)); ?>
@@ -108,7 +108,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class="col-md-4 ">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="form-group ml-22 mr-22"> 
                 <label class="control-label " for="plane_id">Requestor</label>
                 <div >

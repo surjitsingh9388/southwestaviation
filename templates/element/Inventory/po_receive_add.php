@@ -7,14 +7,14 @@ for($i=0; $i<$quantity; $i++){
 
     <div class="row">
         <div class="col-md-12">
-            <div class="invaddPageHeading">General Information</div>
+            <div class="invaddPageHeading ml-22">General Information</div>
             <input type="hidden" name="inventory_po_id[]" value="<?php echo $invitem['inventory_po_id']; ?>">
             <input type="hidden" name="inventory_po_item_id[]" value="<?php echo $invitem['id']; ?>">
         </div>
     </div>
 
     <div class="row mt10">
-        <div class="col-md-6">
+     <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Part Number&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -25,10 +25,10 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+<div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Capital Equipment?<i class="fa fa-info-circle" data-toggle="tooltip" title="A capital item represents inventory in excess of a value to be determined by the operator."></i></label>
-                <div class="col-md-8 col-sm-8 col-xs-12" id="airCompsList">
+                <label class="control-label col-md-6 col-sm-6 col-xs-12 pt-0" for="plane_id">Capital Equipment?<i class="fa fa-info-circle" data-toggle="tooltip" title="A capital item represents inventory in excess of a value to be determined by the operator."></i></label>
+                <div class="col-md-6 col-sm-6 col-xs-12" id="airCompsList">
                     <div class="form-check form-check-inline">
                         <?php echo $this->Form->radio('capital_equipment[]',  [
                             ['value' => '1', 'text' => 'Yes', 'label' => ['class' => 'form-check-input capital_equipment'], 'id'=>"capital_equipment-".$invitem['id']."-".$start],
@@ -41,7 +41,7 @@ for($i=0; $i<$quantity; $i++){
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
                 <?php if($invitem['invitms']['is_this_item_serialized'] == 1){ ?>
                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Serial&nbsp;<span class="required">*</span></label>
@@ -58,7 +58,7 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Condition</label>
                 
@@ -72,7 +72,7 @@ for($i=0; $i<$quantity; $i++){
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Location&nbsp;<span class="required">*</span></label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -83,7 +83,7 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Warranty Expiration</label>
                 
@@ -101,7 +101,7 @@ for($i=0; $i<$quantity; $i++){
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Expiration</label>
                 
@@ -116,7 +116,7 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="airframe_component_id">Notes</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -126,7 +126,7 @@ for($i=0; $i<$quantity; $i++){
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Cost</label>
                 
@@ -137,12 +137,12 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">&nbsp;</div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Account Code</label>
                 <div class="col-md-8 col-sm-8 col-xs-12">
@@ -153,14 +153,14 @@ for($i=0; $i<$quantity; $i++){
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12 ">
             <div class="form-group">&nbsp;</div>
         </div>
     </div>
 
 
     <div class="row po-receive-other">
-        <div class="col-md-7 no-left-pad">
+        <div class="col-md-7 col-sm-7 col-xs-12 no-left-pad">
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -205,7 +205,7 @@ for($i=0; $i<$quantity; $i++){
             </table>
         </div>
 
-        <div class="no-right-pad col-md-5">
+        <div class="no-right-pad col-md-5 col-sm-5 col-xs-12 >
             <div class="g-0 bg-light position-relative">
                                 
                 <table class="table upload-area" id="uploadfile">
