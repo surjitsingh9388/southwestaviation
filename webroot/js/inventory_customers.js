@@ -2956,6 +2956,9 @@ $(document).on('click', '.removeosrpoitemsbtn', function(e){
 });
 
 $(document).on('click', '.work-order-prev-btn, .work-order-next-btn, .work-order-new-item-btn', function(e){
+    if($(this).hasClass('work-order-new-item-btn')){
+        isChanged = true;
+    }
     var clickbtn = $(this).attr('data-val');
     var current_item_position = $('#current_item_position').val();
     var click_item_index = parseInt($('#click_item_index').val());
