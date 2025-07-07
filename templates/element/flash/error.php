@@ -15,6 +15,6 @@ $(document).ready(function () {
             $('.outerWrapper').parent().addClass('left');
             $(this).remove();
         });
-    }, 100);
+    }, 1000);
 });
 </script>
