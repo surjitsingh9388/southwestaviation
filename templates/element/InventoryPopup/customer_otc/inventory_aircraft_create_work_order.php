@@ -67,7 +67,7 @@
                         <input type="hidden" name="aircraft_id" id="wo_aircraft_id" value="<?php echo @$aircraft_id; ?>" />
                         <input type="hidden" name="wo_customer_id" id="wo_customer_id" value="<?php echo @$inventorycustomers->id; ?>" />
 
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-sm-12 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference"><?php echo ($aircraftworkorders->order_type == '1') ? 'W' : 'R'; ?>/O No.</label>
                                 <div class="form-input-frame">

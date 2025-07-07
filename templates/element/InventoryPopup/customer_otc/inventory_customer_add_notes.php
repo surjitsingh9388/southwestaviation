@@ -9,7 +9,7 @@
                 <h4 class="modal-title">Notes</h4>
             </div>
             <div class="modal-body" style="height: 150px;">
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="airframe_component_id">Notes</label>
                         <div class="col-md-10 col-sm-10 col-xs-12">
