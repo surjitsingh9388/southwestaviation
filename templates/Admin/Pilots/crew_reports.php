@@ -21,14 +21,15 @@ $allPilots = $pilotComp->getPilots();
                         <div class="panel-heading">
                             <div class="selectWrap">
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-12 lft-Wrapper">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 btn-crew">
                                         <?php
                                         echo $this->Form->control('pilot_id', array(
                                             'options' => $allPilots,
                                             'class' => 'form-control selectpicker selDropDCls',
                                             'div' => false,
                                             'label' => 'Choose Crew Member',
-                                            'value' => $pilotId
+                                            'value' => $pilotId,
+                                           
                                         ));
                                         ?>
                                     </div>

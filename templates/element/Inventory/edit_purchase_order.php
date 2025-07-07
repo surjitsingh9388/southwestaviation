@@ -3,15 +3,15 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
 ?> 
 <div class="addPartBorder pt10">
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Type&nbsp;<span class="required">*</span>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label" for="plane_id">Type&nbsp;<span class="required">*</span>
                     <i class="fa fa-info-circle" data-toggle="tooltip" data-html="true" title="<div class=&quot;text-left purchase-order-form-tooltip&quot;>Standard - Standard Purchase Order <br><br>Exchange - Core Exchange Order <br> <br><strong>Note:</strong> Purchase order must be in Draft with all line items removed to change the type."></i>
                 </label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
+                <div >
                     <?php 
                     $invPurchaseOrderType = unserialize(INVENTORY_PURCHASE_TYPE);
-                    echo $this->Form->control('po_type', array('options' => $invPurchaseOrderType, 'empty' => 'Select type...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_type', 'required' => 'required', 'disabled'=>'disabled'));  ?>
+                    echo $this->Form->control('po_type', array('options' => $invPurchaseOrderType, 'empty' => 'Select type...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_type', 'required' => 'required', 'disabled'=>'disabled'));  ?>
                 </div>
             </div>
         </div>
@@ -26,23 +26,23 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Number&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('po_number', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'po_number')); ?>
+         <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Number&nbsp;<span class="required">*</span></label>
+                <div >
+                    <?php echo $this->Form->control('po_number', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'po_number')); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">PO Date&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
+         <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">PO Date&nbsp;<span class="required">*</span></label>
+                <div >
                     <div class="input-group date datePicker">
                         <?php 
                         $po_date = !empty($inventorypurchaseorders->po_date) ? date('m-d-Y', strtotime($inventorypurchaseorders->po_date)) : date('m-d-Y');
-                        echo $this->Form->Text('po_date', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'po_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$po_date)); ?>
+                        echo $this->Form->Text('po_date', array('class' => 'form-control ', 'id' => 'po_date', 'placeholder' => '', 'label' => false, 'required' => 'required', 'value'=>$po_date)); ?>
                         <span class="input-group-addon hide-block">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -51,14 +51,14 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Currency&nbsp;<span class="required">*</span></label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Currency&nbsp;<span class="required">*</span></label>
+                <div >
                     <?php 
                     $currencyarr = unserialize(CURRENCY);
                     $currency = !empty($inventorypurchaseorders->currency) ? $inventorypurchaseorders->currency : '1';
-                    echo $this->Form->control('currency', array('options' => $currencyarr, 'empty' => 'Enter a currency ...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_currency', 'required' => 'required', 'value'=>$currency)); 
+                    echo $this->Form->control('currency', array('options' => $currencyarr, 'empty' => 'Enter a currency ...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'po_currency', 'required' => 'required', 'value'=>$currency)); 
                     ?>
                 </div>
             </div>
@@ -66,13 +66,13 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
                 
-                <div class="col-md-7 col-sm-7 col-xs-12">
+                <div >
                     <?php
-                    echo $this->Form->control('bill_to_address', array('options' => $billingaddress, 'empty' => 'Select Address...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required', 'id' => 'bill_to_address')); 
+                    echo $this->Form->control('bill_to_address', array('options' => $billingaddress, 'empty' => 'Select Address...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required', 'id' => 'bill_to_address')); 
                     
                     if(!isset($isdetailpage)){
                     ?>
@@ -82,12 +82,12 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship To</label>
-                <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Ship To</label>
+                <div >
                     <?php
-                    echo $this->Form->control('ship_to_address', array('options' => $shippingaddress, 'empty' => 'Select Address...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'ship_to_address')); 
+                    echo $this->Form->control('ship_to_address', array('options' => $shippingaddress, 'empty' => 'Select Address...', 'class' => 'form-control co selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'ship_to_address')); 
                     
                     if(!isset($isdetailpage)){
                     ?>
@@ -97,32 +97,32 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Account Code</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Select account code...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code'));  ?>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Account Code</label>
+                <div >
+                    <?php echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Select account code...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code'));  ?>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Requestor</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-md-4 ">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Requestor</label>
+                <div >
                     <?php echo $this->Form->control('requestor', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'value'=>$userData['full_name'])); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Vendor</label>
-                <div class="col-md-7 col-sm-7 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Vendor</label>
+                <div >
                     <?php
-                    echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor')); 
+                    echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor')); 
                     
                     if(!isset($isdetailpage)){
                     ?>
@@ -132,49 +132,49 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Reference</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('reference', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label" for="plane_id">Reference</label>
+                <div >
+                    <?php echo $this->Form->control('reference', array('class'=>'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Sales Person</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <?php echo $this->Form->control('sales_person', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false)); ?>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Sales Person</label>
+                <div >
+                    <?php echo $this->Form->control('sales_person', array('class'=>'form-control co', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship Via</label>
-                <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label " for="plane_id">Ship Via</label>
+                <div >
                     <?php 
                     $shipviaarr = unserialize(SHIP_VIA);
 
-                    echo $this->Form->control('ship_via', array('options' => $shipviaarr, 'empty' => 'Select a shipment method...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'manufacturer')); ?>
+                    echo $this->Form->control('ship_via', array('options' => $shipviaarr, 'empty' => 'Select a shipment method...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'manufacturer')); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4 col-xs-12">
             
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group"> 
-                <label class="control-label col-md-2 col-sm-2 col-xs-12 special-instruction-label" for="plane_id">Special Instructions</label>
-                <div class="col-md-10 col-sm-10 col-xs-12">
-                    <?php echo $this->Form->control('special_instructions', array('type' => 'textarea', 'class'=>'form-control col-md-10 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
+         <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group ml-22 mr-22"> 
+                <label class="control-label  special-instruction-label" for="plane_id">Special Instructions</label>
+                <div >
+                    <?php echo $this->Form->control('special_instructions', array('type' => 'textarea', 'class'=>'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                 </div>
             </div>
         </div>
@@ -247,7 +247,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
                                 <td></td>
                                 <td colspan="4">
                                     <div class="col-md-6">
-                                        <div class="form-group"> 
+                                        <div class="form-group ml-22 mr-22"> 
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id" >Tax &nbsp;&nbsp;<input type="radio" name="po_tax" class="potaxcal" value="1" checked="checked"> %</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <?php echo $this->Form->control('po_tax_percentage', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'value'=>$po_tax_percentage)); ?>
@@ -256,7 +256,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
                                     </div>
 
                                     <div class="col-md-6 po-tax-block">
-                                        <div class="form-group"> 
+                                        <div class="form-group ml-22 mr-22"> 
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id" ><input type="radio" name="po_tax" class="potaxcal" value="0"> $</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 po-tax-block">
                                                 <?php echo $this->Form->control('po_tax_amount', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'disabled'=>'disabled', 'value'=>$po_tax_amount)); ?>

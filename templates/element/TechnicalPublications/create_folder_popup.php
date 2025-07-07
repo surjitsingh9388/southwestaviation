@@ -11,7 +11,7 @@
                 ?>
                 <input type="hidden" id="technical_publication_id" name="technical_publication_id" />
                 <div class="row">
-                    <div  class="col-md-12">
+                   <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Name</label>
                             <div class="form-input-frame">

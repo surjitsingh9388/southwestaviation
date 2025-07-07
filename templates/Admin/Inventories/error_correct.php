@@ -41,62 +41,63 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row mt10">
-                        <div class="col-sm-12">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="plane_id">Status&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-3 col-sm-5 col-xs-12">
+                     <div class="col-md-5 col-sm-12 col-xs-12">
+
+                            <div class="form-group ml-22 mr-22"> 
+                                <label class="control-label" for="plane_id">Status&nbsp;<span class="required">*</span></label>
+                                <div >
                                 <?php 
                                     $inventoryStatus = ['1'=>'Active', '3'=>'Consumed', '5'=>'Damaged', '4'=>'Discarded', '14'=>'Inactive', '13'=>'Needs Repair', '12'=>'Quarantine', '6'=>'Unavailable', '8'=>'Unrepairable'];
 
-                                    echo $this->Form->control('status', array('options' => $inventoryStatus, 'empty' => 'Enter Type ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker errorstatuschange', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'error_correct_status', 'value'=>'')); 
+                                    echo $this->Form->control('status', array('options' => $inventoryStatus, 'empty' => 'Enter Type ...', 'class' => 'form-control  selectpicker errorstatuschange', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'error_correct_status', 'value'=>'')); 
                                     ?>
                                 </div>
-                                <div class="col-md-7 col-sm-7 col-xs-12"></div>
+                                <!-- <div class="col-md-7 col-sm-7 col-xs-12"></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row hide-block" id="errorquantityblock">
-                        <div class="col-sm-12">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="qty">Quantity&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-2 col-sm-5 col-xs-12">
+                            <div class="col-md-5 col-sm-12 col-xs-12">
+                             <div class="form-group ml-22 mr-22"> 
+                                <label class="control-label " for="qty">Quantity&nbsp;<span class="required">*</span></label>
+                                <div >
                                     <?php 
                                     $qty = !empty($invenotries->qty) ? $invenotries->qty : '1';
-                                    echo $this->Form->control('qty', array('class'=>'form-control col-md-2 col-xs-12', 'placeholder' => '', 'label' => false, 'id'=>'error_correct_qty', 'disabled'=>'disabled', 'value'=>$qty)); ?>
+                                    echo $this->Form->control('qty', array('class'=>'form-control ', 'placeholder' => '', 'label' => false, 'id'=>'error_correct_qty', 'disabled'=>'disabled', 'value'=>$qty)); ?>
                                 </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12"></div>
+                                <!-- <div class="col-md-6 col-sm-6 col-xs-12"></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row hide-block" id="errorlocationblock">
-                        <div class="col-sm-12">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="plane_id">Location&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-3 col-sm-5 col-xs-12">
-                                    <?php echo $this->Form->control('location_id', array('options' => $location, 'empty' => 'Select a location...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'error_correct_location_id', 'value'=>''));  ?>
+                          <div class="col-md-5 col-sm-12 col-xs-12">
+                             <div class="form-group ml-22 mr-22"> 
+                                <label class="control-label " for="plane_id">Location&nbsp;<span class="required">*</span></label>
+                                <div >
+                                    <?php echo $this->Form->control('location_id', array('options' => $location, 'empty' => 'Select a location...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id'=>'error_correct_location_id', 'value'=>''));  ?>
                                     <!--div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn" onclick='$("#locationAddModel").modal("show");'><button class="btn btn-primary" style="height:34px;" type="button"><i class="fa fa-plus"></i></button></div-->
                                 </div>
-                                <div class="col-md-7 col-sm-7 col-xs-12"></div>
+                                <!-- <div class="col-md-7 col-sm-7 col-xs-12"></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-2 col-xs-12" for="discard_reason">Reason</label>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
+                         <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="form-group ml-22 mr-22"> 
+                                <label class="control-label " for="discard_reason">Reason</label>
+                                <div >
                                     <?php echo $this->Form->control('discard_reason', array('class' => 'form-control col-md-10 col-xs-12', 'label'=> false, 'rows'=>2)); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-2 col-sm-3 col-xs-12" for="account_code">Account Code</label>
-                                <div class="col-md-2 col-sm-5 col-xs-12">
+                       <div class="col-md-5 col-sm-12 col-xs-12">
+                            <div class="form-group mr-22 ml-22"> 
+                                <label class="control-label " for="account_code">Account Code</label>
+                                <div >
                                     <?php 
-                                        echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
+                                        echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
                                     ?>
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-xs-12"></div>

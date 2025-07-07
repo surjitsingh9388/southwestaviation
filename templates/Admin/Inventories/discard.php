@@ -33,7 +33,7 @@ use Cake\Routing\Router;
                 <div class="addPartBorder">
                     <div class="invaddPageHeading">Discard Information</div>
                     <div class="row mt10">
-                        <div class="col-md-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-2 col-sm-2 col-xs-12" for="qty">Units to Discard&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-1 col-sm-1 col-xs-12">
@@ -44,7 +44,7 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-2 col-sm-2 col-xs-12" for="discard_reason">Reason</label>
                                 <div class="col-md-10 col-sm-10 col-xs-12">
@@ -54,7 +54,7 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-2 col-sm-2 col-xs-12" for="account_code">Account Code</label>
                                 <div class="col-md-2 col-sm-2 col-xs-12">
@@ -68,19 +68,19 @@ use Cake\Routing\Router;
                     </div>
                     <div class="invaddPageHeading">Item Information</div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name">Item Name</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Item Name</label>
+                                <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo $invenotries['_matchingData']['InventoryItems']['name']; ?></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="status">Status</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status</label>
+                                 <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static">
                                         <?php 
                                         $inventorystatus = unserialize(INVENTORY_STATUS);
@@ -92,19 +92,19 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="uom">Unit of Measure</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="uom">Unit of Measure</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo $invenotries->uom == '1' ? 'Each' : ''; ?></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="quantities">Quantity</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="quantities">Quantity</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo $invenotries->qty; ?></p>
                                 </div>
                             </div>
@@ -112,19 +112,19 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="revision">Revision</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="revision">Revision</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo $invenotries->revision; ?></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="location_name">Location</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location_name">Location</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static">
                                     <?php echo isset($invenotries['_matchingData']['InventoryLocations']['location_name']) ? $invenotries['_matchingData']['InventoryLocations']['location_name'] : ''; ?>
                                     </p>
@@ -134,19 +134,19 @@ use Cake\Routing\Router;
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="expiration">Expiration</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="expiration">Expiration</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo !empty($invenotries->expiration) ? date('d-M-Y', strtotime($invenotries->expiration)) : ''; ?></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="serial_no">Lot/Serial</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="serial_no">Lot/Serial</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo $invenotries->serial_no; ?></p>
                                 </div>
                             </div>
@@ -154,10 +154,10 @@ use Cake\Routing\Router;
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="cost">Cost</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cost">Cost</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <?php 
                                     $currency = unserialize(CURRENCY);
                                     ?>
@@ -166,10 +166,10 @@ use Cake\Routing\Router;
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                       <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="received">Received</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received">Received</label>
+                               <div class="col-md-9 col-sm-9  col-xs-12">
                                     <p class="form-control-static"><?php echo !empty($invenotries->received) ? date('d-M-Y', strtotime($invenotries->received)) : ''; ?></p>
                                 </div>
                             </div>

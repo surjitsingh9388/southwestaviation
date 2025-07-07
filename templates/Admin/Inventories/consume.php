@@ -41,7 +41,7 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row mt10">
-                        <div class="col-sm-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-sm-2 col-xs-12" for="plane_id">Consume To</label>
                                 <div class="col-sm-6 col-xs-12 input-dropdown">
@@ -54,7 +54,7 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                       <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-sm-2 col-xs-12" for="qty">Quantity&nbsp;<span class="required">*</span></label>
                                 <div class="col-sm-2 col-xs-12">
@@ -70,7 +70,7 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-sm-2 col-xs-12" for="discard_reason">Reason</label>
                                 <div class="col-sm-7 col-xs-12">
@@ -81,10 +81,10 @@ use Cake\Routing\Router;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-sm-2 col-xs-12" for="account_code">Account Code</label>
-                                <div class="col-sm-6 col-xs-12">
+                                <div class="col-sm-7 col-xs-12">
                                     <?php 
                                         echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Enter an account code ...', 'class' => 'form-control col-md-3 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code')); 
                                     ?>

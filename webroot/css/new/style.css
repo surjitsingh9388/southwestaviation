@@ -2720,6 +2720,13 @@ table th {
 .mr-22 {
     margin-right: 22px !important;
 }
+.btn-crew .input .bootstrap-select button{
+
+    margin-bottom: 0 !important;
+}
+.btn-crew{
+    width: 50%;
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
@@ -2745,11 +2752,18 @@ table th {
         max-width: 100%;
 
     }
-
+.btn-crew{
+    width:42%;
+}
     .dashboard-news-feed-list tr td p span,
     .dashboard-news-feed-list tr td h1,
     .dashboard-news-feed-list tr td h2 {
         font-size: 18px !important;
+    }
+
+    .po-order-sortby {
+        font-size: 18px;
+
     }
 }
 
@@ -2769,6 +2783,9 @@ table th {
     .btn-upload {
         margin-right: 14px;
     }
+    .btn-crew{
+        width: 100%;
+    }
 }
 
 @media (max-width: 598px) {
@@ -2782,3 +2799,4 @@ table th {
         font-size: 13px !important;
     }
 }
+
