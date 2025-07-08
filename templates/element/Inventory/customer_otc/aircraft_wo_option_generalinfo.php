@@ -168,7 +168,7 @@
         <div class="col-md-12">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Deposits</legend>
-                <div class="col-md-12">
+                 <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="form-group"> 
                         <label class="control-label" for="reference">Notes</label>
                         <div class="form-input-frame">
