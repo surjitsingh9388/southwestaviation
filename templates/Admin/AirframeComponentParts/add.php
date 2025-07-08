@@ -65,9 +65,9 @@ use Cake\Routing\Router;
 
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="table-responsive aircraft_component_selected" style="display: none;">
-                                    <table class="table table-bordered">
+                            <div class="col-md-5 col-sm-5 col-xs-5 table-aircraft">
+                                <div class="table-responsive aircraft_component_selected"  style="display: none;">
+                                    <table class="table table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Aircraft</th>

@@ -32,25 +32,25 @@ use Cake\Routing\Router;
                 <div class="pt10 pl10">
                     <input type="hidden" name="request_status" id="request_status">
                     <div class="">
-                        <label class="col-lg-2" for="plane_id">Title</label>
-                        <div class="content-display col-lg-10 form-control-static"><?php echo $invenotryrequests->title; ?></div>
+                        <label class="col-lg-2 col-sm-2 col-md-2 col-xs-12" for="plane_id">Title</label>
+                        <div class="content-display col-lg-10 col-md-10 col-sm-10 col-xs-12 form-control-static"><?php echo $invenotryrequests->title; ?></div>
                     </div>
                     <div class="">
-                        <label class="col-lg-2" for="plane_id">Description</label>
-                        <div class="content-display col-lg-10 form-control-static"><?php echo $invenotryrequests->description; ?></div>
+                          <label class="col-lg-2 col-sm-2 col-md-2 col-xs-12"  for="plane_id">Description</label>
+                        <div class="content-display col-lg-10 col-md-10 col-sm-10 col-xs-12  form-control-static"><?php echo $invenotryrequests->description; ?></div>
                         
                     </div>
                     <div class="">
-                        <label class="col-lg-2" for="plane_id">Requested By</label>
-                        <div class="content-display col-lg-4 form-control-static"><?php echo $invenotryrequests->requested_by; ?></div>
+                        <label  class="col-lg-2 col-sm-2 col-md-2 col-xs-12" for="plane_id">Requested By</label>
+                        <div class="content-display col-lg-10 col-md-10 col-sm-10 col-xs-12 form-control-static"><?php echo $invenotryrequests->requested_by; ?></div>
                     
-                        <label class="col-lg-2" for="plane_id" >Need By</label>
-                        <div class="content-display col-lg-4 form-control-static"><?php echo date('d-M-Y',strtotime($invenotryrequests->need_by)); ?></div>
+                        <label class="ol-lg-2 col-sm-2 col-md-2 col-xs-12" for="plane_id" >Need By</label>
+                        <div class="content-display col-lg-10 col-md-10 col-sm-10 col-xs-12 form-control-static"><?php echo date('d-M-Y',strtotime($invenotryrequests->need_by)); ?></div>
                        
                     </div>
                     <div class="">
-                        <label class="col-lg-2">Urgency</label>
-                        <div class="content-display col-lg-4 form-control-static"><?php 
+                        <label class="ol-lg-2 col-sm-2 col-md-2 col-xs-12">Urgency</label>
+                        <div class="content-display col-lg-10 col-md-10 col-sm-10 col-xs-12 form-control-static"><?php 
                         $urgency = unserialize(URGENCY);
 
                         echo !empty($invenotryrequests->urgency) ? $urgency[$invenotryrequests->urgency] : ''; ?>
@@ -85,10 +85,10 @@ use Cake\Routing\Router;
                             </tbody>
                         </table>
                     </div>
-                    <div class="mt10">
+                    <div class="mt10 ">
                         <div class="form-group"> 
                             <label class="col-lg-2 pt10">Comments</label>
-                            <div class="col-md-10 col-sm-10 col-xs-12">
+                            <div class="col-md-10 col-sm-10 col-xs-12 mb-20">
                                 <?php echo $this->Form->input('comment', array('type' => 'textarea', 'class'=>'form-control col-md-10 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                             </div>
                         </div>

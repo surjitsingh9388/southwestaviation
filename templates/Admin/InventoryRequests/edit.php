@@ -30,7 +30,7 @@ use Cake\Routing\Router;
                 
                 <div class="addPartBorder pt10">
                     <div class="row">
-                           <div class="col-md-4 col-sm-6 col-xs-12">
+                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Request Number&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-9 col-sm-8 col-xs-12">
