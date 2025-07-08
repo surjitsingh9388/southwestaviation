@@ -113,14 +113,14 @@
                                         ?>
                                         <input type="hidden" name="aircraft_id" value="<?php echo $aircraft_id; ?>" />
                                         <input type="hidden" name="maintenance_note_id" id="maintenance_note_id" value="<?php echo @$aircraftmaintnotes->id; ?>" />
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group"> 
                                                 <div class="form-input-frame">
                                                     <?php echo $this->Form->control('maintenance_notes', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'id'=>'maintenance_notes')); ?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
                                             <button type="button" class="btn btn-primary float-right saveAircraftMaintNotesBtn">Save</button>
                                         </div>
                                         <?php echo $this->Form->end(); ?>

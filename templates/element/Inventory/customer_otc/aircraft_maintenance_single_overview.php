@@ -21,7 +21,7 @@
             <input type="hidden" name="logbook_value_overview_id" id="logbook_value_overview_id" value="<?php echo @$aircraftmaintoverview->id; ?>" />
         <?php } ?>
         
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Next Annual</label>
                 <div class="form-input-frame">
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+         <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Next ELT Date</label>
                 <div class="form-input-frame">
@@ -111,7 +111,7 @@
             </div>
         </div>
             
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Next Corrosion</label>
                 <div class="form-input-frame">
@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+           <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Next O/2 Bottle</label>
                 <div class="form-input-frame">
@@ -204,7 +204,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Next Far 91.411</label>
                 <div class="form-input-frame">
@@ -233,14 +233,14 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="reference">Gross Weight</label>
+                <label class="control-label " for="reference">Gross Weight</label>
                 <div class="form-input-frame">
                     <?php echo $this->Form->control('gross_weight', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'maint_gross_weight')); ?>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-2">
+         <div class="col-md-2 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Reg. Expires</label>
                 <div class="form-input-frame">
@@ -282,7 +282,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+     <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">General Specs and Info:</label>
                 <div class="form-input-frame">
@@ -292,7 +292,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <?php
             $btnclass = '';
             if($section == 'cust_otc_aircraft_maintenance'){

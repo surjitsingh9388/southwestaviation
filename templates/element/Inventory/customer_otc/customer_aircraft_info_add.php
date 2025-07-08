@@ -1,6 +1,6 @@
 <section class="top-form-section" id="aircraft_info_add_section">    
     <div class="row">
-        <div class="col-md-3 col-sm-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">List of Aircraft <span class="required">*</span>
                 </label>
@@ -19,10 +19,13 @@
                         $airfcraftregnumber = $aircraftreg['aircraft_registration_number'];
                     }
                 ?>
-                <div class="col-md-12 aircraftregbox <?php echo $aircraftregbox_active; ?>" data-val="<?php echo $aircraftreg['id']; ?>"><?php echo $aircraftreg['aircraft_registration_number']; ?></div>
+                <div class="col-md-12  col-sm-12 col-xs-12 aircraftregbox <?php echo $aircraftregbox_active; ?>" data-val="<?php echo $aircraftreg['id']; ?>"><?php echo $aircraftreg['aircraft_registration_number']; ?></div>
                 <?php } ?>
+
+                
             </div>
-            
+            <button type="button" class="btn btn-default addaircrafttolist fetchCustOTCPopup" data-val='add_new_aircraft_btn'>Add</button>
+            <button type="button" class="btn btn-default deleteAircraftInfoBtn" disabled>Remove</button>
         </div>
 
         <div class="col-md-9 col-sm-12">
@@ -295,10 +298,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <button type="button" class="btn btn-default addaircrafttolist fetchCustOTCPopup" data-val='add_new_aircraft_btn'>Add</button>
             <button type="button" class="btn btn-default deleteAircraftInfoBtn" disabled>Remove</button>
-        </div>
+        </div> -->
         <div class="col-md-2">
             <button type="button" class="btn btn-default customer_aircraft_maintenance">Maintenance</button>
         </div>

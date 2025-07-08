@@ -7,9 +7,9 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="contract-rate-tbl-scroll">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped ">
                                 <thead>
                                     <tr>
                                         <th scope="col">Department</th>
