@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt10">
+        <div class="col-md-12 col-sm-12 col-xs-12  mt10">
             <input type="file" name="files[]" id="inventory_tool_files" class="hide-block" multiple  accept=".xlsx, .xls, .doc, .docx,.ppt, .pptx, .pdf" style="display:none;" />
             <table class="table table-bordered aircraftwotable" style="table-layout: fixed;">
                 <thead>

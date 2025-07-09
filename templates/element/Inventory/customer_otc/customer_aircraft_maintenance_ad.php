@@ -30,7 +30,7 @@
             </fieldset>
         </div>
         
-        <div class="col-md-12" id="maintenance_ad_block">
+        <div class="col-md-12 col-sm-12 col-xs-12" id="maintenance_ad_block">
             <?php 
             $propFileName = '';
             if($engine_type == '1'){

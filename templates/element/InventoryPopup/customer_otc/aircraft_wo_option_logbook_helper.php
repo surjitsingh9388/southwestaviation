@@ -12,7 +12,7 @@
                     ?>
                     <input type="hidden" name="wo_item_labor_kit_id" id="wo_item_labor_kit_id" value="" />
                     <div class="row">
-                        <div class="col-md-12">
+                          <div class="col-md-12 col-xs-12 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">All Corrective Actions</label>
                                 <div class="form-input-frame">

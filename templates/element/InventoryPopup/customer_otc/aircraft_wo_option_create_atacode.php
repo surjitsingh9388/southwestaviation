@@ -12,7 +12,7 @@
                     ?>
                     <input type="hidden" name="wo_ata_code_id" id="wo_ata_code_id" value="<?php echo @$woitematacodes->id; ?>" />
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">ATA Code</label>
                                 <div class="form-input-frame">

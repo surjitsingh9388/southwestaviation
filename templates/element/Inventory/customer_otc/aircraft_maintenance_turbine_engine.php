@@ -23,11 +23,11 @@
             <input type="hidden" name="logbook_value_jet_engine_id" id="logbook_value_jet_engine_id" value="<?php echo @$aircraftmaintengine->id; ?>" />
         <?php } ?>
         
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <b>Engine #1</b>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.</label>
                     <div class="form-input-frame">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TT Vacum</label>
                     <div class="form-input-frame">
@@ -66,8 +66,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TT</label>
                     <div class="form-input-frame">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TSO</label>
                     <div class="form-input-frame">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TC</label>
                     <div class="form-input-frame">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TC 2</label>
                     <div class="form-input-frame">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TCSO</label>
                     <div class="form-input-frame">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">HSI/MPI</label>
                     <div class="form-input-frame">
@@ -117,11 +117,11 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
             <b>Engine #2</b>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.</label>
                     <div class="form-input-frame">
@@ -139,7 +139,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TT Vacum</label>
                     <div class="form-input-frame">
@@ -160,8 +160,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TT</label>
                     <div class="form-input-frame">
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TSO</label>
                     <div class="form-input-frame">
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TC</label>
                     <div class="form-input-frame">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TC 2</label>
                     <div class="form-input-frame">
@@ -193,7 +193,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TCSO</label>
                     <div class="form-input-frame">
@@ -201,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+           <div class="col-md-2 col-sm-4 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">HSI/MPI</label>
                     <div class="form-input-frame">
@@ -210,7 +210,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <?php 
             $btnclass = '';
             if($section == 'cust_otc_aircraft_maintenance'){ 
