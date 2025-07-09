@@ -114,8 +114,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-6">
+         <div class="col-md-6 mol-sm-12 col-xs-12">
+            <div class="col-md-6 mol-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label label-heading-left" for="reference">Invoice No.</label>
                     <span class="label-chkbox-right woosr-ro-list-sec" <?php if(empty(@$wooutstandingoutside->is_create_new_ro) || $wodetails->order_type== '2'){ ?> style="display:none;" <?php } ?>>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+           <div class="col-md-6 mol-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference"><span class="woosr-po-link">Purchase Order No.</span></label>
                     <div class="form-input-frame">
@@ -136,24 +136,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
-                    <div class="col-md-12">
                         <label class="control-label" for="reference">Description of Work</label>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 form-group">
+                    <div class="form-group">
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('osr_description_of_work', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5', 'style'=>'height: 275px; width: 421px;')); ?>
+                            <?php echo $this->Form->control('osr_description_of_work', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5')); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-        <div class="col-md-3">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Vendor Labor Charge</label>
                 <div class="form-input-frame">
@@ -167,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Vendor Parts Charge</label>
                 <div class="form-input-frame">
@@ -193,7 +191,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Inspector Code</label>
                 <div class="form-input-frame">
