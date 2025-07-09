@@ -28,12 +28,12 @@
 
                     echo $this->Form->create($aircraftwoitemdata, array('class' => 'form-horizontal form-label-left', 'id' => 'frmAircraftWOMarkItems'));
                     ?>
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="hidden" name="wo_item_ids" id="wo_item_ids" value="<?php echo implode(',', $woitemidarr); ?>" />
 
                         <fieldset class="scheduler-border mt10">
                             <legend class="scheduler-border wosignoffleg">Item # Info</legend>
-                            <div class="col-md-2">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label" for="reference">Item No.</label>
                                     <div class="form-input-frame">
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-10">
+                           <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label" for="reference">Discrepancy</label>
                                     <div class="form-input-frame">
@@ -51,7 +51,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <p>Owner Authorization</p>
                             
@@ -66,7 +66,7 @@
                     </div>
                     <?php echo $this->Form->end(); ?>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <fieldset class="scheduler-border mt10">
                             <legend class="scheduler-border wosignoffleg">List of Items</legend>
 

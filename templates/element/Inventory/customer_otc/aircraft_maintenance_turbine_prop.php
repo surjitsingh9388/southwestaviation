@@ -22,7 +22,7 @@
             <input type="hidden" name="logbook_value_prop_id" id="logbook_value_prop_id" value="<?php echo @$aircraftmaintprops->id; ?>" />
         <?php } ?>
         
-        <div class="col-md-2">
+        <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">TSPOH-#1</label>
                 <div class="form-input-frame">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+   <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">TSPOH-#2</label>
                 <div class="form-input-frame">
@@ -68,7 +68,7 @@
             </div>
         </div>
             
-        <div class="col-md-2">
+      <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">O/H Date-#1</label>
                 <div class="form-input-frame">
@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+     <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">O/H Date-#2</label>
                 <div class="form-input-frame">
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+       <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Serial No.-#1</label>
                 <div class="form-input-frame">
@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+       <div class="col-md-2 col-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">Serial No.-#2</label>
                 <div class="form-input-frame">
@@ -159,7 +159,7 @@
             <div class="form-group"></div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <?php
             $btnclass = '';
             if($section == 'cust_otc_aircraft_maintenance'){

@@ -7,7 +7,7 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
 <fieldset class="scheduler-border hide-block" id="editapplianceinfo">
     <legend class="scheduler-border">Edit Appliance Info</legend>
     
-    <div class="col-md-3">
+    <div class="col-md-3 col-xs-12 col-sm-12">
         <div class="form-group">
             <label class="control-label" for="reference">Appliance</label>
             <div class="form-input-frame">
@@ -42,7 +42,7 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
         </div>
     </div>
 
-    <div class="col-md-3">
+      <div class="col-md-3 col-xs-12 col-sm-12">
         <div class="form-group">
             <label class="control-label" for="reference">Manufacturer</label>
             <div class="form-input-frame">
@@ -77,28 +77,27 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group ml-11 mr-11">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
                         <?php echo $this->Form->control('a_model_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'appliance_model_no')); ?>
                     </div>
                 </div>
-            </div>
+            
 
-            <div class="col-md-6">
-                <div class="form-group">
+            
+                <div class="form-group  ml-11 mr-11">
                     <label class="control-label" for="reference">Part No.</label>
                     <div class="form-input-frame">
                         <?php echo $this->Form->control('a_part_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'appliance_part_no')); ?>
                     </div>
                 </div>
-            </div>
+           
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mol-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label" for="plane_id">Notes</label>
                     <div class="form-input-frame">

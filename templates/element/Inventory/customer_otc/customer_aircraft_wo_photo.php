@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt10">
+        <div class="col-md-12 col-xs-12 col-sm-12 mt10">
             <input type="file" name="files[]" id="aircraft_wo_photo" class="hide-block" multiple  accept=".png, .gif, .jpeg" style="display:none;" />
             <table class="table table-bordered aircraftwotable">
                 <thead>

@@ -37,7 +37,7 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
 
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">AD Name</label>
                     <div class="form-input-frame">
@@ -74,7 +74,7 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label label-heading-left" for="plane_id">Notes</label>
                     <span class="label-chkbox-right">
@@ -96,7 +96,7 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-12 col-xs-12">
         <fieldset class="scheduler-border sign-off-fldset">
             <legend class="scheduler-border">Sign-Offs</legend>
             <div class="form-group">

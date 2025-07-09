@@ -10,12 +10,12 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" name="wo_item_id" id="note_wo_item_id" value="<?php echo @$aircraftwoitems->id; ?>" />
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <?php echo $this->Form->control('item_notes', array('type'=>'textarea','class' => 'form-control col-md-10 col-xs-12', 'label'=> false, 'row mb-3s'=>2, 'id'=>'item_notes', 'required'=>'required')); ?>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <?php
                         $show_on_estimate_invoice_chk = '';

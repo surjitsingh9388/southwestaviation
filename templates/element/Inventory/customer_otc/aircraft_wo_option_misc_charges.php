@@ -8,11 +8,11 @@
     <?php $isdisabled = $aircraftwoitems->wo_item_status == '3' ? 'disabled' : '' ?>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">EPA Charge</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $epa_charge_chk = '';
                         if(@$wooptionmiscchargs->epa_charge == '1'){
@@ -21,8 +21,8 @@
                         ?>
                         <input type="checkbox" value="1" name="epa_charge" <?php echo $epa_charge_chk; ?> />&nbsp;EPA Charge
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <?php
                             $epa_charge_twin_chk = '';
                             if(@$wooptionmiscchargs->epa_charge_twin == '1'){
@@ -31,7 +31,7 @@
                             ?>
                             <input type="checkbox" value="1" name="epa_charge_twin" <?php echo $epa_charge_twin_chk; ?> />&nbsp;Twin
                         </div>
-                        <div class="col-md-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Amount (Single)</label>
                                 <div class="form-input-frame">
@@ -48,11 +48,11 @@
                     </div>
                     
                 </fieldset>
-            </div>
-            <div class="col-md-4">
+           
+         
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Oil Analysis</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $oil_analysis_chk = '';
                         if(@$wooptionmiscchargs->oil_analysis == '1'){
@@ -61,8 +61,8 @@
                         ?>
                         <input type="checkbox" value="1" name="oil_analysis" <?php echo $oil_analysis_chk; ?> />&nbsp;Oil Analysis
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <?php
                             $oil_analysis_twin_chk = '';
                             if(@$wooptionmiscchargs->oil_analysis_twin == '1'){
@@ -71,7 +71,7 @@
                             ?>
                             <input type="checkbox" value="1" name="oil_analysis_twin" <?php echo $oil_analysis_twin_chk; ?> />&nbsp;Twin
                         </div>
-                        <div class="col-md-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Amount (Single)</label>
                                 <div class="form-input-frame">
@@ -88,11 +88,11 @@
                     </div>
                     
                 </fieldset>
-            </div>
-            <div class="col-md-4">
+           
+          
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Tire Disposal</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $tire_disposal_chk = '';
                         if(@$wooptionmiscchargs->tire_disposal == '1'){
@@ -101,7 +101,7 @@
                         ?>
                         <input type="checkbox" value="1" name="tire_disposal" <?php echo $tire_disposal_chk; ?> />&nbsp;Tire Disposal
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference"># Tires</label>
@@ -124,15 +124,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">&nbsp;</div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
                 </fieldset>
-            </div>
+           
         </div>
-        <div class="col-md-12">
-            <div class="col-md-4">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Misc. Charges</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $mis_charge_chk = '';
                         if(@$wooptionmiscchargs->mis_charge == '1'){
@@ -141,8 +141,8 @@
                         ?>
                         <input type="checkbox" value="1" name="mis_charge" <?php echo $mis_charge_chk; ?> />&nbsp;Misc. Charges
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Amount</label>
                                 <div class="form-input-frame">
@@ -159,11 +159,11 @@
                     </div>
                     
                 </fieldset>
-            </div>
-            <div class="col-md-4">
+         
+           
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Pilot Services</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $pilot_services_chk = '';
                         if(@$wooptionmiscchargs->pilot_services == '1'){
@@ -172,8 +172,8 @@
                         ?>
                         <input type="checkbox" value="1" name="pilot_services" <?php echo $pilot_services_chk; ?> />&nbsp;Pilot Services
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Amount</label>
                                 <div class="form-input-frame">
@@ -190,11 +190,11 @@
                     </div>
                     
                 </fieldset>
-            </div>
-            <div class="col-md-4">
+           
+        
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Tax Credit</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $tax_credit_chk = '';
                         if(@$wooptionmiscchargs->tax_credit == '1'){
@@ -203,8 +203,8 @@
                         ?>
                         <input type="checkbox" value="1" name="tax_credit" <?php echo $tax_credit_chk; ?> />&nbsp;Tax Credit
                     </div>
-                    <div class="col-md-12">
-                        <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Amount</label>
                                 <div class="form-input-frame">
@@ -219,15 +219,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">&nbsp;</div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
                 </fieldset>
-            </div>
+           
         </div>
-        <div class="col-md-12">
-            <div class="col-md-6">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+            
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Shop Supplies</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $shop_supplies_chk = '';
                         if(@$wooptionmiscchargs->shop_supplies == '1'){
@@ -236,7 +236,7 @@
                         ?>
                         <input type="checkbox" value="1" name="shop_supplies" <?php echo $shop_supplies_chk; ?> />&nbsp;Shop Supplies
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Method</label>
                             <div class="form-input-frame">
@@ -247,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Amount</label>
                             <div class="form-input-frame">
@@ -261,7 +261,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Percentage of Labor</label>
                             <div class="form-input-frame">
@@ -276,7 +276,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference">Break-off Amount</label>
                             <div class="col-md-4">
@@ -284,7 +284,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference"><-Break-off %</label>
                             <div class="col-md-4">
@@ -292,7 +292,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference">Above Break-off %</label>
                             <div class="col-md-4">
@@ -302,11 +302,11 @@
                     </div>
                     
                 </fieldset>
-            </div>
-            <div class="col-md-6">
+          
+          
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Fuel</legend>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $charge_for_fuel_chk = '';
                         if(@$wooptionmiscchargs->charge_for_fuel == '1'){
@@ -315,7 +315,7 @@
                         ?>
                         <input type="checkbox" value="1" name="charge_for_fuel" <?php echo $charge_for_fuel_chk; ?> />&nbsp;Charge for Fuel
                     </div>
-                    <div class="col-md-12" style="padding:0px;">
+                    <div class="col-md-12 col-xs-12 col-sm-12" style="padding:0px;">
                         <div class="col-md-2" style="padding:0px;">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Gallons</label>
@@ -324,11 +324,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1 col-sm-1 col-xs-12">
                             <label class="control-label" for="reference">&nbsp;</label>
                             <div class="form-group">&times;</div>
                         </div>
-                        <div class="col-md-3" style="padding:0px;">
+                        <div class="col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Price/Gallon</label>
                                 <div class="form-input-frame">
@@ -336,11 +336,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                       <div class="col-md-1 col-sm-1 col-xs-12">
                             <label class="control-label" for="reference">&nbsp;</label>
                             <div class="form-group">=</div>
                         </div>
-                        <div class="col-md-3" style="padding:0px;">
+                        <div class="col-md-1 col-sm-1 col-xs-12" style="padding:0px;">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Total</label>
                                 <div class="form-input-frame">
@@ -361,7 +361,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -392,17 +392,17 @@
                     </div>
                 </fieldset>
                 
-                <div class="col-md-12 pd0">
-                    <div class="form-group"> 
+                <div class="col-md-12 col-sm-12 colxs-12 pd0">
+                    <div class="form-group ml-11 mr-11"> 
                         <label class="control-label" for="reference">Misc. Charges Description for Invoice</label>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->input('misc_charge_description_for_invoice', array('type' => 'textarea', 'class'=>'form-control', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'misc_charge_description_for_invoice', 'style'=>"width: 400px; height: 164px;")); ?>
+                            <?php echo $this->Form->input('misc_charge_description_for_invoice', array('type' => 'textarea', 'class'=>'form-control', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'misc_charge_description_for_invoice')); ?>
                         </div>
                     </div>
-                </div>
+               
             </div>
         </div>
-        <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12">
             <button type="button" class="btn btn-primary float-right saveWOOptionMiscCharges" <?php echo $isdisabled; ?>>Save</button>
         </div>
     </div>

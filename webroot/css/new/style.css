@@ -2740,7 +2740,12 @@ table th {
 .pt-0{
     padding-top: 0 !important;
 }
-
+.ml-11{
+    margin-left: 11px !important;
+}
+.mr-11{
+    margin-right: 11px !important;
+}
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
         width: 100% !important;

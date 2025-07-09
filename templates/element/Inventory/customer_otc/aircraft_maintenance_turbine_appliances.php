@@ -77,10 +77,10 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
             </div>
         </div>
     </div>
-
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-md-6">
+ <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+       
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
@@ -95,7 +95,7 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
                 </div>
             </div>
 
-            <div class="col-md-6">
+             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Part No.</label>
                     <div class="form-input-frame">
@@ -105,8 +105,8 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="form-group"> 
+       <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group ml-22 mr-22"> 
                     <label class="control-label" for="plane_id">Notes</label>
                     <div class="form-input-frame">
                         <?php echo $this->Form->control('a_notes', array('type'=>'textarea', 'class' => 'form-control appliance-notes', 'label'=> false, 'id'=>'appliance_notes')); ?>

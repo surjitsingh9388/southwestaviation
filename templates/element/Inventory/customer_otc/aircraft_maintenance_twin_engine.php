@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.-L</label>
                     <div class="form-input-frame">
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TSN-L</label>
                     <div class="form-input-frame">
@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12  col-xs-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">O/H Date-R</label>
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+               <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.-R</label>
                     <div class="form-input-frame">
@@ -138,7 +138,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+               <div class="col-md-12 col-sm-6 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TSN-R</label>
                     <div class="form-input-frame">
@@ -148,8 +148,8 @@
             </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12">
+        <div class="col-md-2 col-xs-12 col-sm-12">
+            <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.-L</label>
                     <div class="form-input-frame">
@@ -158,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+             <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">TBO</label>
                     <div class="form-input-frame">
@@ -167,7 +167,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Manufacturer</label>
                     <div class="form-input-frame">
@@ -177,23 +177,20 @@
             </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12">
+        <div class="col-md-2 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.-R</label>
                     <div class="form-input-frame">
                         <?php echo $this->Form->control('serial_no_r', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'readonly'=>'readonly', 'id'=>'maint_eng_serial_no_r')); ?>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 
-            </div>
+            </div> -->
 
-            <div class="col-md-12"></div>
+            <!-- <div class="col-md-12"></div> -->
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <?php 
             $btnclass = '';
             if($section == 'cust_otc_aircraft_maintenance'){ 
@@ -237,7 +234,7 @@
 
                     <label class="col-md-4"></label>
                 </div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-1 air-maint-engine-h" for="reference" style="width: 60px !important;">Engine</label>
                     
                     <div class="form-input-frame col-md-1">

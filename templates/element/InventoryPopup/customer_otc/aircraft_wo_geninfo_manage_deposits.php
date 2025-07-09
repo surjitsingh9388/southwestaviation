@@ -16,8 +16,8 @@
                             <input type="hidden" name="general_info_deposit_id" id="general_info_deposit_id" value="<?php echo @$optiongeninfodeposits->id; ?>" />
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">Add Deposit</legend>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
+                                     <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Amount to Add</label>
                                             <div class="form-input-frame">
@@ -28,7 +28,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                     <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Currency</label>
                                             <div class="form-input-frame">
@@ -39,7 +39,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Payment Method</label>
                                             <div class="form-input-frame">
@@ -51,8 +51,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Check Number</label>
                                             <div class="form-input-frame">
@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                   <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Credit Card Type</label>
                                             <div class="form-input-frame">
@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Name on Credit Card</label>
                                             <div class="form-input-frame">
@@ -80,8 +80,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-4">
+                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                     <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Credit Card(Last 4)</label>
                                             <div class="form-input-frame">
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                   <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">More Info</label>
                                             <div class="form-input-frame">
@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Expires</label>
                                             <div class="form-input-frame">
@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">CC Authoration Number</label>
                                             <div class="form-input-frame">
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="reference">Paid By</label>
                                             <div class="form-input-frame">
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
                                         <button type="button" class="btn btn-primary float-right saveWOOptionGenInfoDeposits">Add</button>
                                     </div>
                                 </div>

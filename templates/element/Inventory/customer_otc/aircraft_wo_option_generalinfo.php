@@ -8,9 +8,9 @@
         <input type="hidden" name="general_info_id" id="general_info_id" value="<?php echo @$wooptiongeninfoes->id; ?>" />
         <?php $isdisabled = $aircraftwoitems->wo_item_status == '3' ? 'disabled' : ''; ?>
 
-        <div class="col-md-12">
-            <div class="col-md-8">
-                <div class="col-md-6">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <!-- <div class="col-md-8 col-sm-8 col-xs-12"> -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Customer P/O #</label>
                         <div class="form-input-frame">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Service Quote #</label>
                         <div class="form-input-frame">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+               <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Terms</label>
                         <div class="form-input-frame">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Disclaimer for R/O</label>
                         <div class="form-input-frame">
@@ -51,10 +51,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4"> -->
+                 <div class="col-md-12 col-sm-12 col-xs-12">
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Date</legend>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group d-flex">
                             <label class="control-label" for="reference">Created</label>
                             <div class="form-input-frame">
@@ -64,7 +65,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!-- </div> -->
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="form-group d-flex">
                             <label class="control-label" for="reference">Completed</label>
                             <div class="form-input-frame">
@@ -74,9 +76,10 @@
                         </div>
                     </div>
                 </fieldset>
-            </div>
+                 </div>
+            <!-- </div> -->
         </div>
-        <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" for="reference">Min. Hours Worked Per Item</label>
@@ -123,8 +126,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-4">
+         <div class="col-md-12 col-sm-12 col-xs-12">
+          
                 <div class="form-group">
                     <label class="control-label" for="reference">Lead Technician</label>
                     <div class="form-input-frame">
@@ -142,18 +145,18 @@
                         ?>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
+           
+          
                 <div class="form-group"> 
                     <label class="control-label" for="reference">Status Notes</label>
                     <div class="form-input-frame">
                         <?php echo $this->Form->input('status_notes', array('type' => 'textarea', 'class'=>'form-control', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>
                     </div>
                 </div>
-            </div>
+         
         </div>
-        <div class="col-md-12">
-            <div class="col-md-8">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+           
                 <div class="form-group">
                     <label class="control-label" for="reference">Est/Invoice - Show A/C Times Profile</label>
                     <div class="form-input-frame">
@@ -161,11 +164,11 @@
                         echo $this->Form->control('est_invoice', array('options' => [], 'empty' => 'Select', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'est_invoice'));
                         ?>
                     </div>
-                </div>
+               
             </div>
             <div class="col-md-4"></div>
         </div>
-        <div class="col-md-12">
+      <div class="col-md-12 col-sm-12 col-xs-12">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Deposits</legend>
                  <div class="col-md-12 col-xs-12 col-sm-12">
@@ -176,7 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Total Deposit Amount</label>
                         <div class="form-input-frame">
@@ -187,21 +190,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+               <div class="col-md-6 col-sm-6 col-xs-12">
                     <button type="button" class="btn btn-default aircraft-wo-geninfo-manage-deposit" style="margin-top: 27px;">Add/Edit Deposits</button>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
+                <!-- <div class="col-md-3"></div>
+                <div class="col-md-3"></div> -->
             </fieldset>
         </div>
-        <div class="col-md-12">
-            <div class="col-md-3">
+       <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <button type="button" class="btn btn-default wo-option-log-book-values">Log Book Values</button>
             </div>
-            <div class="col-md-5" style="text-align:right;">
+            <div class="col-md-5 col-sm-5 col-xs-12" style="text-align:right;">
                 <label class="control-label" for="reference">Accouting Invoice#</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4 col-12">
                 <div class="form-group">
                     <div class="form-input-frame">
                         <?php echo $this->Form->control('accounting_invoice', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off')); ?>
@@ -209,7 +212,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+         <div class="col-md-12 col-sm-12 col-xs-12">
             <button type="button" class="btn btn-primary float-right saveWOOptionGenInfo" <?php echo $isdisabled; ?>>Save</button>
         </div>
     </div>

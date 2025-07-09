@@ -1,10 +1,10 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-6">
-            <div class="col-md-12"><h7 class="wosummaryh1">Item Tools</h7></div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12"><h7 class="wosummaryh1">Item Tools</h7></div>
         </div>
-        <div class="col col-md-6">
-            <div class="col-md-12"><h7 class="wosummaryh2">Item Adjustment</h7></div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12"><h7 class="wosummaryh2">Item Adjustment</h7></div>
         </div>
     </div>
     <div class="row">
@@ -13,7 +13,7 @@
 
         $isdisabled = $aircraftwoitems->wo_item_status == '3' ? 'disabled' : '';
         ?>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" for="reference">Estimated Hours</label>
@@ -48,14 +48,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <?php
                 $aircraftWOWayofBilling = unserialize(AIRCRAFT_WORKORDER_WAYOF_BILLING);
                 $way_of_billing = !empty($aircraftwoitemoverviews->way_of_billing) ? $aircraftWOWayofBilling[$aircraftwoitemoverviews->way_of_billing] : '';
                 ?>
                 <p>The item billing method is: <?php echo $way_of_billing; ?></p>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <p><b>All Items: Time Totals</b></p>
             </div>
             <div class="col-md-4">
@@ -93,12 +93,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
+     <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
                 <p>Each item can have a time adjustment for the invoice. This requires admin access.</p>
                 <p>If subtracting time, insert a negative number.</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Hour Adjustment</label>
                     <div class="form-input-frame">
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Adjust Rate / Hour</label>
                     <div class="form-input-frame">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4"></div>
+            <!-- <div class="col-md-4"></div> -->
         </div>
         <?php echo $this->Form->end(); ?>
     </div>

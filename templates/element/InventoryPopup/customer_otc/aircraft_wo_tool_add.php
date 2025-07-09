@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="row">
                     <input type="hidden" name="wo_item_id" id="tool_wo_item_id" value="<?php echo $wo_item_id; ?>" />
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Tool Name</label>
                             <div class="form-input-frame">

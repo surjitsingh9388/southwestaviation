@@ -6,12 +6,12 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
 
 <fieldset class="scheduler-border hide-block" id="editadinfo">
     <legend class="scheduler-border">Edit AD Info</legend>
-    
-    <div class="col-md-3">
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="form-group">
             <label class="control-label" for="reference">AD No.</label>
             <div class="form-input-frame">
-                <?php echo $this->Form->control('ad_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ad_no')); ?>
+                <?php echo $this->Form->control('ad_no', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'ad_no')); ?>
             </div>
         </div>
 
@@ -30,23 +30,23 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
         <div class="form-group">
             <label class="control-label" for="reference">Recurring Time</label>
             <div class="form-input-frame">
-                <?php echo $this->Form->control('ad_recurring_time', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ad_recurring_time')); ?>
+                <?php echo $this->Form->control('ad_recurring_time', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'ad_recurring_time')); ?>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
+        
+                <div class="form-group ml-11 mr-11">
                     <label class="control-label" for="reference">AD Name</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('ad_name', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ad_name')); ?>
+                        <?php echo $this->Form->control('ad_name', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'ad_name')); ?>
                     </div>
                 </div>
-            </div>
+        
 
-            <div class="col-md-6">
+              <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Revision Date</label>
                     <div class="form-input-frame">
@@ -60,35 +60,38 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group"> 
-                    <label class="control-label label-heading-left" for="plane_id">Notes</label>
-                    <span class="label-chkbox-right">
-                        <?php
-                        $ad_always_recurringchk = '';
-                        if(!empty($aircraftmaintads->ad_always_recurring)){
-                            $ad_always_recurringchk = 'checked';
-                        }
-                        ?>
-                        <input class="form-check-input" type="checkbox" value="1" id="ad_always_recurring" name="ad_always_recurring" <?php echo $ad_always_recurringchk; ?>>
-                        <span class="form-check-label" for="ad_always_recurring">Always Recurring</span>
-                    </span>
-                    
-                    <div class="form-input-frame">
-                        <?php echo $this->Form->control('ad_notes', array('type'=>'textarea', 'class' => 'form-control aircraft-ad-notes', 'label'=> false, 'row'=>'5', 'id'=>'ad_notes')); ?>
-                    </div>
+    </div>
+
+
+  
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="form-group  ">
+                <label class="control-label label-heading-left" for="plane_id">Notes</label>
+                <span class="label-chkbox-right">
+                    <?php
+                    $ad_always_recurringchk = '';
+                    if (!empty($aircraftmaintads->ad_always_recurring)) {
+                        $ad_always_recurringchk = 'checked';
+                    }
+                    ?>
+                    <input class="form-check-input" type="checkbox" value="1" id="ad_always_recurring" name="ad_always_recurring" <?php echo $ad_always_recurringchk; ?>>
+                    <span class="form-check-label" for="ad_always_recurring">Always Recurring</span>
+                </span>
+
+                <div class="form-input-frame">
+                    <?php echo $this->Form->control('ad_notes', array('type' => 'textarea', 'class' => 'form-control aircraft-ad-notes', 'label' => false, 'row' => '5', 'id' => 'ad_notes')); ?>
                 </div>
             </div>
         </div>
-    </div>
+  
 
-    <div class="col-md-3">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <fieldset class="scheduler-border sign-off-fldset">
             <legend class="scheduler-border">Sign-Offs</legend>
             <div class="form-group">
                 <div class="form-input-frame">
-                    <?php echo $this->Form->control('ad_signoff', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ad_signoff')); ?>
+                    <?php echo $this->Form->control('ad_signoff', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'ad_signoff')); ?>
                 </div>
             </div>
             <div class="sign-off-tbl-scroll">
@@ -100,7 +103,7 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
                         </tr>
                     </thead>
                     <tbody id="adsignoffblock">
-                        
+
                     </tbody>
                 </table>
             </div>
