@@ -7,8 +7,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">All Items</div>
-                    <div class="col-md-12 wosignoffallitm">
+                    <div class="col-md-12 col-xs-12 col-sm-12">All Items</div>
+                    <div class="col-md-12  col-xs-12 col-sm-12 wosignoffallitm">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12 wo-singoff-category-block">
+                    <div class="col-md-12 col-xs-12 col-sm-12 wo-singoff-category-block">
                         <?php echo $this->element('Inventory/customer_otc/aircraft_wo_signoff_category_block', array('wosignoffitems'=>$wosignoffitems)); ?>
                     </div>
                 </div>

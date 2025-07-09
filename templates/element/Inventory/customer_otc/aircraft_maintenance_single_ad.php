@@ -79,7 +79,7 @@ echo $this->Form->create($aircraftmaintads, array('class' => 'form-horizontal fo
                 </span>
 
                 <div class="form-input-frame">
-                    <?php echo $this->Form->control('ad_notes', array('type' => 'textarea', 'class' => 'form-control aircraft-ad-notes', 'label' => false, 'row' => '5', 'id' => 'ad_notes')); ?>
+                    <?php echo $this->Form->control('ad_notes', array('type' => 'textarea', 'class' => 'form-control ', 'label' => false, 'row' => '5', 'id' => 'ad_notes')); ?>
                 </div>
             </div>
         </div>
