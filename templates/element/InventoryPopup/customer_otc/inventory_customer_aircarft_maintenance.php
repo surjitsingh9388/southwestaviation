@@ -1,4 +1,4 @@
-<div id="aircarftMaintenanceModel" class="modal fade page-content" role="dialog" style="background: transparent;">
+    <div id="aircarftMaintenanceModel" class="modal fade page-content" role="dialog" style="background: transparent;">
     <div class="modal-dialog" style="width: 60%;">
         <?php
         //echo $this->Form->create(null, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryCustomersNotes'));

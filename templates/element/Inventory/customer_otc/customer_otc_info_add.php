@@ -240,7 +240,7 @@
     </div>
 
     <div class="row">
-       <div class="col-md-4 col-sm-6 col-xs-12 ">
+        <div class="col-md-4 col-sm-6 col-xs-12 ">
             <div class="form-group">
                 <label class="control-label" for="reference">Discount Price Level</label>
                 <div class="form-input-frame">
@@ -271,7 +271,7 @@
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="form-group">
                 <span style="font-weight: bold;">OTC Invoice Parts History</span>
                 <span style="float:right;">

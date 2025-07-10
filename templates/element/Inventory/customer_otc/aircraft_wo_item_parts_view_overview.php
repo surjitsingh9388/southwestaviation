@@ -1,8 +1,8 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="col-md-6 col-xs-6 col-sm-6">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="form-group">
                         <label class="control-label" for="reference">Description</label>
                         <div class="form-input-frame">
@@ -10,10 +10,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <p>This part exists in Master Parts</p>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <?php
                     $part_taxable_chk = '';
                     if(!empty(@$aircraftwoitemparts->part_taxable)){
@@ -22,7 +22,7 @@
                     ?>
                     <input type="checkbox" name="part_taxable" value="1" <?php echo $part_taxable_chk; ?> />&nbsp;Part is Taxable
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="reference">Old Serial Number</label>
                         <div class="form-input-frame">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="reference">New Serial Number</label>
                         <div class="form-input-frame">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6 col-sm-6">
                     <div class="form-group">
                         <label class="control-label" for="reference">Date Needed</label>
                         <div class="form-input-frame">
@@ -51,12 +51,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-xs-6 col-sm-6">
                     <input type="checkbox" name="is_loaner" value="1" />&nbsp;Is Loaner
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="col-md-4">
+            <div class="col-md-6 col-xs-6 col-sm-6">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Qty Needed</label>
                         <div class="form-input-frame">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Qty Used</label>
                         <div class="form-input-frame">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Qty On Hand</label>
                         <div class="form-input-frame">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Cost</label>
                         <div class="form-input-frame">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Retail Price</label>
                         <div class="form-input-frame">
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <?php
                         $give_discount_percentage_chk = '';
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Shipping In</label>
                         <div class="form-input-frame">
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Shipping Out</label>
                         <div class="form-input-frame">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Total Retail</label>
                         <div class="form-input-frame">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Condition</label>
                         <div class="form-input-frame">
@@ -171,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Core Charge</label>
                         <div class="form-input-frame">
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">General Retail</label>
                         <div class="form-input-frame">
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">General Location</label>
                         <div class="form-input-frame">
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <div class="form-group">
                         <label class="control-label" for="reference">Superseding No.</label>
                         <div class="form-input-frame">
@@ -213,13 +213,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-4 col-sm-4">
                     <button type="button" class="btn btn-default mt-25" disabled>Use Superseding</button>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12 col-sm-12">
                 <h5>Outstanding Purchase Order for Part</h5>
-                <div class="col-md-12 pd0">
+                <div class="col-md-12 col-xs-12 col-sm-12 pd0">
                     <table class="table table-bordered">
                         <thead>
                             <tr>

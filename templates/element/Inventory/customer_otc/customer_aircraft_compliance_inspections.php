@@ -272,7 +272,7 @@
                 <div class="form-group">
                     <label class="control-label" for="plane_id">Notes</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('notes', array('type' => 'textarea', 'class' => 'form-control aircraft-notes', 'label' => false, 'id' => 'insp_notes')); ?>
+                        <?php echo $this->Form->control('notes', array('type' => 'textarea', 'class' => 'form-control aircraft-notes', 'label' => false, 'id' => 'insp_notes', 'style'=>'width:100%;')); ?>
                     </div>
                 </div>
             </div>

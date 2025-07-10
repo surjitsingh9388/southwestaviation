@@ -5,9 +5,9 @@
     <input type="hidden" name="wo_item_id" id="osrinfo_item_id" value="<?php echo $wo_item_id; ?>" />
     <input type="hidden" name="work_order_id" id="osrinfo_wo_id" value="<?php echo $work_order_id; ?>" />
     <input type="hidden" name="wo_osrinfo_id" id="wo_osrinfo_id" value="<?php echo @$wooutstandingoutside->id; ?>" />
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <div class="col-md-12">
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="form-group">
                     <label class="control-label label-heading-left" for="reference">Repair Done By</label>
                     <span class="label-chkbox-right <?php if(!empty($woitemdata->wo_item_status) && $woitemdata->wo_item_status != '3'){ ?>wo-vendor-list-sec<?php } ?>">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="reference">Part Number</label>
                     <div class="form-input-frame">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6 col-sm-6">
                 <div class="form-group">
                     <label class="control-label" for="reference">Condition</label>
                     <div class="form-input-frame">
@@ -114,8 +114,8 @@
                 </div>
             </div>
         </div>
-         <div class="col-md-6 mol-sm-12 col-xs-12">
-            <div class="col-md-6 mol-sm-6 col-xs-12">
+         <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                     <label class="control-label label-heading-left" for="reference">Invoice No.</label>
                     <span class="label-chkbox-right woosr-ro-list-sec" <?php if(empty(@$wooutstandingoutside->is_create_new_ro) || $wodetails->order_type== '2'){ ?> style="display:none;" <?php } ?>>
@@ -127,7 +127,7 @@
                     </div>
                 </div>
             </div>
-           <div class="col-md-6 mol-sm-6 col-xs-12">
+           <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                     <label class="control-label" for="reference"><span class="woosr-po-link">Purchase Order No.</span></label>
                     <div class="form-input-frame">
@@ -151,7 +151,7 @@
         </div>
     </div>
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="form-group">
                 <label class="control-label" for="reference">Vendor Labor Charge</label>
                 <div class="form-input-frame">
@@ -165,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="form-group">
                 <label class="control-label" for="reference">Vendor Parts Charge</label>
                 <div class="form-input-frame">
@@ -178,7 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-xs-3 col-sm-3">
             <div class="form-group">
                 <label class="control-label" for="reference">Date Due</label>
                 <div class="form-input-frame">
@@ -191,7 +191,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-3">
             <div class="form-group">
                 <label class="control-label" for="reference">Inspector Code</label>
                 <div class="form-input-frame">

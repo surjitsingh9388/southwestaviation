@@ -48,7 +48,7 @@ echo $this->Form->create($aircraftwoitemparts, array('class' => 'form-horizontal
         </div>
     </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12 col-sm-12">
     <button type="button" class="btn btn-primary float-right wo-itempart-addpart-btn" data-val="view_part" <?php if($aircraftwoitemparts['wo_items']['wo_item_status'] == '3'){?>disabled<?php } ?>>Save</button>
 </div>
 

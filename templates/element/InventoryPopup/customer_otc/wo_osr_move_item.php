@@ -10,7 +10,7 @@
                     <?php
                     echo $this->Form->create(null, array('class' => 'form-horizontal form-label-left', 'id' => 'frmWOOSRMoveItem'));
                     ?> 
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Item Number</label>
                             <div class="form-input-frame">

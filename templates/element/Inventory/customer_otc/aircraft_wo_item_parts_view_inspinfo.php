@@ -1,8 +1,8 @@
 <section class="top-form-section">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Date Received</label>
                         <div class="form-input-frame">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Vendor</label>
                         <div class="form-input-frame">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Warranty Expires</label>
                         <div class="form-input-frame">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Invoice #</label>
                         <div class="form-input-frame">
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 col-xs-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="reference">Purchase Order</label>
                         <div class="form-input-frame">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Lot #</label>
                         <div class="form-input-frame">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-3 col-sm-3">
                     <div class="form-group">
                         <label class="control-label" for="reference">Shelf Life</label>
                         <div class="form-input-frame">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-xs-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="reference">Approved</label>
                         <div class="form-input-frame">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-xs-2 col-sm-2">
                     <div class="form-group">
                         <label class="control-label" for="reference">Initials</label>
                         <div class="form-input-frame">

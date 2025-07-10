@@ -15,8 +15,8 @@ $signoff_id = !empty(@$signoffinspectioninfo['id']) ? @$signoffinspectioninfo['i
 <input type="hidden" name="wo_item_id" id="signoff_wo_item_id" value="<?php echo $wo_item_id; ?>" />
 <input type="hidden" name="signoff_id" id="wo_item_signoff_id" value="<?php echo $signoff_id; ?>" />
 
-<div class="col-md-12"><h7 class="woinspinfo">Inspection Info</h7></div>
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12 col-sm-12"><h7 class="woinspinfo">Inspection Info</h7></div>
+<div class="col-md-12 col-xs-12 col-sm-12">
     <div class="form-group">
         <label class="control-label" for="reference">Sign-off Category</label>
         <div class="form-input-frame">
@@ -27,7 +27,7 @@ $signoff_id = !empty(@$signoffinspectioninfo['id']) ? @$signoffinspectioninfo['i
         </div>
     </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12 col-sm-12">
     <div class="form-group">
         <label class="control-label" for="reference">Sign-off Info</label>
         <div class="form-input-frame">
@@ -35,7 +35,7 @@ $signoff_id = !empty(@$signoffinspectioninfo['id']) ? @$signoffinspectioninfo['i
         </div>
     </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12 col-sm-12">
     <div class="form-group">
         <label class="control-label text-left" for="reference">Enter Inspection Code</label>
         <div class="form-input-frame">
@@ -44,7 +44,7 @@ $signoff_id = !empty(@$signoffinspectioninfo['id']) ? @$signoffinspectioninfo['i
     </div>
 </div>
 
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12 col-sm-12">
     <?php if((!empty($userMenuItems) && $userMenuItems['action_clear_signoff'] == 1) || $sessionUser['id'] == 1) { ?>
     <button type="button" class="btn btn-default float-right clearWOItemSignoffCategory" <?php if(empty($signoff_id)){ ?>style="display:none;"<?php } ?>>Clear</button>
     <?php 

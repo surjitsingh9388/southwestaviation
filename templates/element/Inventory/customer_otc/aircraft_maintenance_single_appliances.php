@@ -97,7 +97,7 @@ echo $this->Form->create($aircraftmaintappliances, array('class' => 'form-horizo
            
         </div>
         <div class="row">
-            <div class="col-md-12 mol-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group"> 
                     <label class="control-label" for="plane_id">Notes</label>
                     <div class="form-input-frame">

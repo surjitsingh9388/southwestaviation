@@ -1,12 +1,12 @@
 <section class="top-form-section">
-    <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 pd0">
         <?php
         echo $this->Form->create($woitemtools, array('class' => 'form-horizontal form-label-left', 'id' => 'frmWorkOrderItemEditTools'));
         ?> 
         <input type="hidden" name="wo_item_tool_id" id="wo_item_edit_tool_id" value="<?php echo $woitemtools->id; ?>" />
         <input type="hidden" name="wo_item_id" value="<?php echo $woitemtools->wo_item_id; ?>" />
-        <div class="col-md-6">
-            <div class="col-md-12">
+        <div class="col-md-6 col-sm-6 col-xs-6 pd0">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Tool Name</label>
                     <div class="form-input-frame">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Equipment Description</label>
                     <div class="form-input-frame">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Model No.</label>
                     <div class="form-input-frame">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Serial No.</label>
                     <div class="form-input-frame">
@@ -39,8 +39,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="col-md-12">
+        <div class="col-md-6 col-sm-6 col-xs-6 pd0">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Date Added</label>
                     <div class="form-input-frame">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Calibration Date</label>
                     <div class="form-input-frame">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Due Date</label>
                     <div class="form-input-frame">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Date Labeled</label>
                     <div class="form-input-frame">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Certification</label>
                     <div class="form-input-frame">

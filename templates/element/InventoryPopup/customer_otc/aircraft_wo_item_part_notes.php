@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <input type="hidden" name="wo_item_part_id" id="wo_item_part_id" value="<?php echo @$aircraftwoitemparts->id; ?>" />
                 <input type="hidden" name="wo_item_id" id="part_wo_item_id" value="<?php echo @$aircraftwoitemparts->wo_item_id; ?>" />
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="form-group">
                         <?php echo $this->Form->control('part_notes', array('type'=>'textarea','class' => 'form-control col-md-10 col-xs-12', 'label'=> false, 'row mb-3s'=>2, 'id'=>'wo_item_part_notes', 'required'=>'required')); ?>
                     </div>

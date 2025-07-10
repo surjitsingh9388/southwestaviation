@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default wo-item-tool-prev-btn" data-val="first"><<</button>
                             <button type="button" class="btn btn-default wo-item-tool-prev-btn" data-val="prev"><</button>

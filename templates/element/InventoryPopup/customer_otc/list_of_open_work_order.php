@@ -9,9 +9,9 @@
                 <h4 class="modal-title"><?php echo $search_by == 'open_work_order' ? 'List of Open Work Orders' : 'List of All Work Orders'; ?></h4>
             </div>
             <div class="modal-body larger-modal-body">
-                <div class="col-md-12 pd0">
-                    <div class="col-md-6"><?php echo $search_by == 'open_work_order' ? 'List of Open Work Orders' : 'List of All Work Orders'; ?></div>
-                    <div class="col-md-6">
+                <div class="col-md-12 col-sm-12 col-xs-12 pd0">
+                    <div class="col-md-6 col-sm-6 col-xs-6"><?php echo $search_by == 'open_work_order' ? 'List of Open Work Orders' : 'List of All Work Orders'; ?></div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <?php
                         if($search_by == 'open_work_order'){
                         ?>
@@ -26,7 +26,7 @@
                         <?php } ?>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <table class="table table-bordered">
                         <thead>
                             <tr>

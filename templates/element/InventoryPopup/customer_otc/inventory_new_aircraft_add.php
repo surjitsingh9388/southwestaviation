@@ -9,11 +9,11 @@
                 <h4 class="modal-title">Add Registration Number</h4>
             </div>
             <div class="modal-body" style="height: 150px;">
-                <div class="col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <label class="control-label col-md-6" for="airframe_component_id">Enter Registration Number</label>
-                        <div class="col-md-6">
-                        <?php echo $this->Form->control('aircraft_registration_number', array('class' => 'form-control col-md-6', 'label'=> false)); ?>
+                        <label class="control-label col-xs-4 col-sm-4 col-md-4" for="airframe_component_id">Enter Registration Number</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                        <?php echo $this->Form->control('aircraft_registration_number', array('class' => 'form-control col-xs-8 col-sm-8 col-md-8', 'label'=> false)); ?>
                         </div>
                     </div>
                 </div>

@@ -6,8 +6,8 @@
                 <h4 class="modal-title">Vendor List</h4>
             </div>
             <div class="modal-body">
-                <div class="col-md-12">Double click on the list to select the proper item.</div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-xs-12 col-sm-12">Double click on the list to select the proper item.</div>
+                <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="osrvendorinfolistblock">
                         <table class="table table-bordered">
                             <thead>
