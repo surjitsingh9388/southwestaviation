@@ -11,7 +11,7 @@
     echo $this->Form->create($aircraftmaintoverview, array('class' => 'form-horizontal form-label-left', 'id' => $formid, 'autocomplete' => 'off'));
 
     ?>
-    <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <?php if($section == 'cust_otc_aircraft_maintenance'){ ?>
             <input type="hidden" name="aircraft_id" value="<?php echo $aircraft_id; ?>" />
             <input type="hidden" name="maintenance_helicopter_overview_id" id="maintenance_helicopter_overview_id" value="<?php echo @$aircraftmaintoverview->id; ?>" />
@@ -21,10 +21,11 @@
             <input type="hidden" name="logbook_value_helicopter_overview_id" id="logbook_value_helicopter_overview_id" value="<?php echo @$aircraftmaintoverview->id; ?>" />
         <?php } ?>
 
-        <div class="col-md-2">
-            <div class="col-md-12 pd0">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
                 <b>General</b>
             </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">ACTT</label>
                 <div class="form-input-frame">
@@ -71,10 +72,12 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">&nbsp;</div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">ACTC</label>
                 <div class="form-input-frame">
@@ -111,12 +114,14 @@
                     <?php echo $this->Form->control('gross_weight', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'maint_gross_weight')); ?>
                 </div>
             </div>
+            </div>
         </div>
             
-        <div class="col-md-2">
-            <div class="col-md-12 pd0">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
                 <b>Engine #1</b>
             </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">TTSN</label>
                 <div class="form-input-frame">
@@ -179,10 +184,12 @@
                     <?php echo $this->Form->control('engine1_ng', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'maint_engine1_ng')); ?>
                 </div>
             </div>
+            </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">&nbsp;</div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">TCSN</label>
                 <div class="form-input-frame">
@@ -235,12 +242,14 @@
                     <?php echo $this->Form->control('engine1_np', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'maint_engine1_np')); ?>
                 </div>
             </div>
+            </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12 pd0">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
                 <b>Engine #2</b>
             </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">TTSN</label>
                 <div class="form-input-frame">
@@ -282,10 +291,12 @@
                     <?php echo $this->Form->control('engine2_turb_ttsn_oh', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'maint_engine2_turb_ttsn_oh')); ?>
                 </div>
             </div>
+            </div>
         </div>
 
-        <div class="col-md-2">
-            <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">&nbsp;</div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pd0">
             <div class="form-group">
                 <label class="control-label" for="reference">TCSN</label>
                 <div class="form-input-frame">
@@ -319,6 +330,7 @@
                 <div class="form-input-frame">
                     <?php echo $this->Form->control('engine2_turb_tcsn', array('type'=>'number', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'maint_engine2_turb_tcsn')); ?>
                 </div>
+            </div>
             </div>
         </div>
     </div>

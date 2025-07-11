@@ -17,16 +17,18 @@
                     <input type="hidden" name="setting_id" value="<?php echo @$settings->id; ?>" />
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label" for="reference">Logo</label>
-                                <div class="form-input-frame">
-                                    <input type="file" name="files[]" id="upload_site_logo" style="display:none" accept="image/png, image/gif, image/jpeg">
-                                    <button class="btn btn-primary" type="button" onclick="$('#upload_site_logo').trigger('click'); return false;">Select Logo</button>
+                                <label class="control-label col-md-1" for="reference">Logo</label>
+                                <div class="col-md-11">
+                                    <div class="form-input-frame">
+                                        <input type="file" name="files[]" id="upload_site_logo" style="display:none" accept="image/png, image/gif, image/jpeg">
+                                        <button class="btn btn-primary" type="button" onclick="$('#upload_site_logo').trigger('click'); return false;">Select Logo</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered dataTable" id="uploadfile" width="100%">
                                     <thead class="thead-dark">
@@ -45,7 +47,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Office Address</label>
                                 <div class="form-input-frame">
@@ -53,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label" for="reference">Status</label>
                                 <div class="form-input-frame">
@@ -63,9 +65,9 @@
                                     ?>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
-                        <div class="form-group row align-items-center">
+                        <!--div class="form-group row align-items-center">
                             <label class="control-label col-md-7 mb-0" for="status">Status</label>
                             <div class="col-md-5">
                                 <div class="form-input-frame">
@@ -83,7 +85,7 @@
                                     ?>
                                 </div>
                             </div>
-                        </div>
+                        </div-->
 
                     </div>
                     <?php echo $this->Form->end(); ?>

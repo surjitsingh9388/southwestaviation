@@ -445,7 +445,7 @@ class AircraftDiscrepanciesController extends AppController
             //Crew detail
             $discoveredBy = '';
             if(!empty($result['discovered_by'])) {
-                $discoveredBy = $this->Pilot->getPilotName($result['discovered_by']);
+                $discoveredBy = is_numeric($result['discovered_by']) ? $this->Pilot->getPilotName($result['discovered_by']) : $result['discovered_by'];
             }
 
             $deferredBy = '';

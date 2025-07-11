@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
                         <p>Below is a list of all parts that are not on a Purchase Order.</p>
                         <p>Click on an Item from the list to bring up individual item information.</p>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

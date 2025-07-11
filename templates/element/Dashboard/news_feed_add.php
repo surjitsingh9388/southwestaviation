@@ -13,7 +13,7 @@
                     <input type="hidden" name="news_feed_id" value="<?php echo @$newsfeeds->id; ?>" />
                     
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="control-label" for="reference">News Feed</label>
                                 <div class="form-input-frame">
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label" for="reference">Speed</label>
                                 <div class="form-input-frame">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group"> 
                                 <label class="control-label" for="reference">News Feed Status</label>
                                 <div class="form-input-frame">

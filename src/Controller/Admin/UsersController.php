@@ -592,7 +592,7 @@ class UsersController extends AppController
         $users = $this->Users->find('list', [
             'keyField' => 'id',
             'valueField' => 'full_name'
-        ])->where(array('Users.id !=' => $id, 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
+        ])->where(array('Users.id !=' => $authUserData['id'], 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
         //pr($user);die;
         $userdepartmentlist = $this->UserDepartments->find('all')->select($this->UserDepartments);
         $departmentlist = [];
@@ -814,7 +814,7 @@ class UsersController extends AppController
         $users = $this->Users->find('list', [
             'keyField' => 'id',
             'valueField' => 'full_name'
-        ])->where(array('Users.id !=' => $id, 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
+        ])->where(array('Users.id !=' => $authUserData['id'], 'Users.role_id !='=>'1', 'Users.suspended'=>'0'))->toArray();
 
         $userdepartmentlist = $this->UserDepartments->find('all')->select($this->UserDepartments);
         $departmentlist = [];
