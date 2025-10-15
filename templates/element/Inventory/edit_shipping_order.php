@@ -80,11 +80,23 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
             <div class="form-group"> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Ship From&nbsp;<span class="required">*</span></label>
                 
-                <div class="col-md-7 col-sm-7 col-xs-12">
-                    <?php
-                    echo $this->Form->control('from_address', array('options' => $from_address, 'empty' => 'Select Address...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'required' => 'required', 'id' => 'from_address'));
-                    ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary addnewinvaddresspopup" type="button" data-val="shipping"><i class="fa fa-plus"></i></button></div>
+                <div class="col-md-6 col-sm-6 col-xs-10" style="padding-right:0px;">
+                    <?= $this->Form->control('from_address', [
+                        'options' => $from_address,
+                        'empty' => 'Select Address...',
+                        'class' => 'form-control selectpicker',
+                        'data-show-subtext' => true,
+                        'data-live-search' => true,
+                        'label' => false,
+                        'required' => 'required',
+                        'id' => 'from_address'
+                    ]); ?>
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-2 plus-new-btn" style="margin-top:0px; padding-left: 0px;">
+                    <button type="button" class="btn btn-primary addnewinvaddresspopup" data-val="shipping">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -111,17 +123,23 @@ echo $this->Form->create($InventoryShippingOrders, array('class' => 'form-horizo
 
             <?php if($InventoryShippingOrders->destination != '2'){ ?>style="display:none;" <?php } ?>> 
                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
-                <div class="input-group">
-                    <?php
-                    echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Select Vendor...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor', 'required' => 'required')); 
-                    ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary vendorModelbtn" type="button"><i class="fa fa-plus"></i></button></div>
+                <div class="col-md-6 col-sm-6 col-xs-10" style="padding-right:0px;">
+                    <?= $this->Form->control('vendor', [
+                        'options' => $vendor,
+                        'empty' => 'Select Vendor...',
+                        'class' => 'form-control selectpicker',
+                        'data-show-subtext' => true,
+                        'data-live-search' => true,
+                        'label' => false,
+                        'id' => 'vendor',
+                        'required' => 'required'
+                    ]); ?>
+                </div>
 
-                     <span class="input-group-btn ">
-                        <button class="btn btn-primary vendorModelbtn" type="button"  >
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </span>
+                <div class="col-md-2 col-sm-2 col-xs-2 plus-new-btn" style="margin-top:0px; padding-left: 0px;">
+                    <button type="button" class="btn btn-primary vendorModelbtn">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
             <div class="form-group toaddressblock" <?php if($InventoryShippingOrders->destination != '1'){ ?>style="display:none;" <?php } ?>> 

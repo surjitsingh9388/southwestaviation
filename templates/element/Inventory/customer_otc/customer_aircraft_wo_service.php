@@ -1,6 +1,7 @@
 <?php $sessionUser = $this->request->getSession()->read('Auth');; ?>
 <section class="top-form-section">
     <?php
+    $aircraftwoitemservices = !empty($aircraftwoitemservices) ? $aircraftwoitemservices : null;
     echo $this->Form->create($aircraftwoitemservices, array('class' => 'form-horizontal form-label-left', 'id' => 'frmAircraftWorkOrderItemServices'));
     ?>
     <input type="hidden" name="wo_services_id" id="wo_services_id" value="<?php echo @$aircraftwoitemservices->id; ?>" />
@@ -72,8 +73,27 @@
                             <label class="control-label" for="reference">Rate an Hour</label>
                             <div class="form-input-frame">
                                 <?php 
-                                $service_rate_an_hour = !empty($aircraftwoitemservices->service_rate_an_hour) ? '$'.number_format($aircraftwoitemservices->service_rate_an_hour, 2) : '$0.00';
-                                echo $this->Form->control('service_rate_an_hour', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'readonly'=>'readonly', 'id'=>'service_rate_an_hour', 'value'=>$service_rate_an_hour)); ?>
+                                $rateanhourreadonly = true; // default readonly
+                                if (!empty($aircraftwoitemservices->technician_billing_style) && $aircraftwoitemservices->technician_billing_style == '2') {
+                                    $rateanhourreadonly = false; // make editable
+                                }
+
+                                $service_rate_an_hour = !empty($aircraftwoitemservices->service_rate_an_hour) 
+                                    ? '$' . number_format($aircraftwoitemservices->service_rate_an_hour, 2) 
+                                    : '$0.00';
+
+                                echo $this->Form->control('service_rate_an_hour', [
+                                    'type' => 'text',
+                                    'class' => 'form-control',
+                                    'label' => false,
+                                    'autocomplete' => 'off',
+                                    'placeholder' => '$0.00',
+                                    'readonly' => $rateanhourreadonly, // ✅ boolean, not string
+                                    'id' => 'service_rate_an_hour',
+                                    'value' => $service_rate_an_hour
+                                ]);
+                                ?>
+
                             </div>
                         </div>
                     </div>

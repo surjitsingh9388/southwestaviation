@@ -393,7 +393,7 @@ class AircraftHistoryComponent extends Component {
             $pilotCertificatesModel = $this->getController()->fetchTable('PilotCertificates');
             $pilotCertificates = $pilotCertificatesModel->find('all')->where(['pilot_id'=>$entity['pilot_id']])->order(['id'=>'DESC'])->first();
 
-            if(isset($entity['pilot_id']) && $entity['pilot_id'] != $pilotCertificates->pilot_id){
+            if(isset($entity['pilot_id']) && isset($pilotCertificates->pilot_id) && $entity['pilot_id'] != $pilotCertificates->pilot_id){
                 $description .= 'Pilot was changed from "'.$pilotCertificates->pilot_id.'" to "'.$entity['pilot_id'].'".<br/>';
             }
             if(isset($entity['medical_class']) && $entity['medical_class'] != $pilotCertificates->medical_class){
@@ -454,7 +454,7 @@ class AircraftHistoryComponent extends Component {
             $pilotTrainingsModel = $this->getController()->fetchTable('PilotTrainings');
             $pilotTrainings = $pilotTrainingsModel->find('all')->where(['pilot_id'=>$entity['pilot_id']])->order(['id'=>'DESC'])->first();
 
-            if(isset($entity['pilot_id']) && $entity['pilot_id'] != $pilotTrainings->pilot_id){
+            if(isset($entity['pilot_id']) && isset($pilotTrainings->pilot_id) && $entity['pilot_id'] != $pilotTrainings->pilot_id){
                 $description .= 'Pilot was changed from "'.$pilotTrainings->pilot_id.'" to "'.$entity['pilot_id'].'".<br/>';
             }
             if(isset($entity['AFT_check']) && $entity['AFT_check'] != $pilotTrainings->AFT_check){
@@ -714,7 +714,7 @@ class AircraftHistoryComponent extends Component {
             $pilotCheckingsModel = $this->getController()->fetchTable('PilotCheckings');
             $pilotCheckings = $pilotCheckingsModel->find('all')->where(['pilot_id'=>$entity['pilot_id']])->order(['id'=>'DESC'])->first();
 
-            if($entity['pilot_id'] != $pilotCheckings->pilot_id){
+            if(isset($entity['pilot_id']) && isset($pilotCheckings->pilot_id) && $entity['pilot_id'] != $pilotCheckings->pilot_id){
                 $description .= 'Pilot was changed from "'.$pilotCheckings->pilot_id.'" to "'.$entity['pilot_id'].'".<br/>';
             }
             if(isset($entity['AS_check']) && $entity['AS_check'] != $pilotCheckings->AS_check){

@@ -91,6 +91,7 @@ function loadTinymceEditor(){
         autosave_prefix: "{path}{query}-{id}-",
         autosave_restore_when_empty: false,
         autosave_retention: "2m",
+        toolbar_mode: 'sliding',
         image_advtab: true,
         link_list: [
         { title: 'My page 1', value: '' },
@@ -145,7 +146,7 @@ function loadTinymceEditor(){
 }
 
 $(document).on('click', '.saveDashboardEvent', function(e){
-    var event_name = $('#event-name').val();
+    var event_name = $.trim($('#event-name').val());
     
     if(event_name != '' && event_name != undefined){
         var event_start = $('#event_start').val();
@@ -171,6 +172,8 @@ $(document).on('click', '.saveDashboardEvent', function(e){
                 }
             });
         }
+    }else{
+        alert("Enter Event Name.");
     }
 });
 
@@ -217,7 +220,8 @@ $(document).on('click', '.delete_dashboard_event', function(e){
 
 $(document).on('click', '.saveDashboardNewsFeed', function(e){
     var news_feed = tinyMCE.activeEditor.getContent();
-    
+    var news_feed_speed = $('#news_feed_speed').val();
+
     if(news_feed != '' && news_feed != undefined){
         tinyMCE.triggerSave();
         $.ajax({
@@ -233,6 +237,8 @@ $(document).on('click', '.saveDashboardNewsFeed', function(e){
                     $('.dashboard-news-feed-list').html(obj.newsfeedhtml);
                     alert("News Feed Added Successfully.");
                     $('#dashboardNewsFeedAddModel').modal('hide');
+
+                    $('.news_feed marquee').attr('scrollamount', news_feed_speed).html(news_feed);  
                 }
             }
         });

@@ -34,7 +34,11 @@
                                 <div class="col-md-10">
                                     <p class="form-control-static">
                                         <?php
-                                        $wo_number = !empty($wooptionmessages['work_order_no']) ? $wooptionmessages['work_order_no'].'-'.$wooptionmessages['wo_item_position'] : '';
+                                        $wo_number = '';
+                                        if(!empty($wooptionmessages['message_wo_ro'])){
+                                            $wo_number = $wooptionmessages['msg_woro_no'];
+                                        }
+                                        
                                         echo $wo_number; 
                                         ?>
                                     </p>

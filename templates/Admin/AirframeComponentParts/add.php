@@ -52,59 +52,62 @@ use Cake\Routing\Router;
                                 </div>
                             </div>
                         </div> -->
-                        <div class="row">
-
-                            <div class="col-md-5" style="padding-left: 37px; padding-bottom: 12px;">
-                                <div class="form-inline">
-                                    <label style="margin-right: 23px;">Aircraft & Component</label>
-                                    <button type="button" class="btn btn-default selectaircraftcomponent">
-                                        Select
-                                    </button>
-                                </div>
-                                <div class="aircraft_component_list" style="display: none; margin-top: 10px;">
-
-                                </div>
+                        <div class="col-md-3" style="padding-left: 37px; padding-bottom: 12px;">
+                            <div class="form-inline">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12">Aircraft & Component</label>
+                                <button type="button" class="btn btn-default selectaircraftcomponent">
+                                    Select
+                                </button>
                             </div>
-                            <div class="col-md-5 col-sm-5 col-xs-5 table-aircraft">
-                                <div class="table-responsive aircraft_component_selected"  style="display: none;">
-                                    <table class="table table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Aircraft</th>
-                                                <th>Component</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="aircraftSelCompList">
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="aircraft_component_list" style="display: none; margin-top: 10px;">
+
                             </div>
                         </div>
-                        <!--div class="col-md-3">
-                            <div class="form-group"> 
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="plane_id">Aircraft&nbsp;<span class="required">*</span></label>
+                        <div class="col-md-3 table-aircraft">
+                            <div class="table-responsive aircraft_component_selected"  style="display: none;">
+                                <table class="table table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Aircraft</th>
+                                            <th>Component</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aircraftSelCompList">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_number">AD/SB Number</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                <?php echo $this->Form->control('plane_id', array('options' => $planes, 'empty' => 'Select Aircraft', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'required' => 'required', 'label' => false, 'id' => 'planeName')); ?>
+                                    <?php echo $this->Form->control('ad_sb_number', array('class'=>'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="airframe_component_id">Component&nbsp;<span class="required">*</span></label>
-                                <div class="col-md-7 col-sm-7 col-xs-12" id="airCompsList">
-                                <?php echo $this->Form->control('airframe_component_id', array('empty' => 'Select Aircraft Component', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'required' => 'required', 'label' => false, 'id' => 'airframe_component_id')); ?>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_number">Requirement Source</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php
+                                    $requirementsources = $airCPComp->getRequirementSources();
+                                    echo $this->Form->control('requirement_source_id', array('options' => $requirementsources, 'empty' => 'Enter a Requirement Source', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    ?>
                                 </div>
                             </div>
-                        </div-->
+                        </div>
+                    </div>
 
+                    <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label col-md-5 col-sm-5 col-xs-12" for="item_type">Item Type</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
                                     $itemTypes = $airCPComp->getItemTypes();
-                                    echo $this->Form->control('item_type', array('options' => $itemTypes, 'empty' => 'Enter a type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    echo $this->Form->control('item_type_id', array('options' => $itemTypes, 'empty' => 'Enter a type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
                                     ?>
                                 </div>
                             </div>
@@ -112,13 +115,36 @@ use Cake\Routing\Router;
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="disposition">Disposition
-                                </label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="requirement_type">Requirement Type</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('disposition', array('options' => $dispArr, 'empty' => 'Enter disposition', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
+                                    <?php
+                                    $reqTypes = $airCPComp->getRequirementTypes();
+                                    echo $this->Form->control('requirement_type_id', array('options' => $reqTypes, 'empty' => 'Enter requirement type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    ?>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="amendment">Amendment</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('amendment', array('class'=>'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="authority">Issuing Authority</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php
+                                    $authority = $airCPComp->getAuthority();
+                                    echo $this->Form->control('issuing_authority_id', array('options' => $authority, 'empty' => 'Enter Issuing Authority', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>   
                     </div>
 
                     <div class="row">
@@ -133,18 +159,10 @@ use Cake\Routing\Router;
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="mfg_code">Mfg Code</label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="disposition">Disposition
+                                </label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('mfg_code', array('class' => 'form-control col-md-7 col-xs-12', 'placeholder' => 'Mfg Code', 'label' => false)); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_number">AD/SB Number</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('ad_sb_number', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
+                                    <?php echo $this->Form->control('disposition', array('options' => $dispArr, 'empty' => 'Enter disposition', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
                                 </div>
                             </div>
                         </div>
@@ -154,8 +172,17 @@ use Cake\Routing\Router;
                                 <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_status">AD/SB Class</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
-                                    echo $this->Form->control('ad_sb_status', array('options' => $adsbArr, 'empty' => 'Enter class', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    echo $this->Form->control('ad_sb_status', array('options' => $adsbArr, 'empty' => 'Enter class', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'autocomplete'=>'off'));
                                     ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="avg_man_hrs">Man Hours</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label'=>false, 'autocomplete'=>'off')); ?>
                                 </div>
                             </div>
                         </div>
@@ -164,21 +191,19 @@ use Cake\Routing\Router;
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">Reference
-                                </label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">Reference</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('reference', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
+                                    <?php echo $this->Form->control('reference', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="requirement_type">Requirement Type</label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="position">Position</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
-                                    $reqTypes = $airCPComp->getRequirementTypes();
-                                    echo $this->Form->control('requirement_type', array('options' => $reqTypes, 'empty' => 'Enter requirement type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    echo $this->Form->control('position_id', array('options' => $positionArr, 'empty' => 'Enter Position', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
                                     ?>
                                 </div>
                             </div>
@@ -186,40 +211,25 @@ use Cake\Routing\Router;
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="amendment">Amendment</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('amendment', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="authority">Authority</label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">SOC</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
-                                    $authority = $airCPComp->getAuthority();
-                                    echo $this->Form->control('authority', array('options' => $authority, 'empty' => 'Enter authority', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    $mocs = $airCPComp->getMocs();
+                                    echo $this->Form->control('moc_id', array('options' => $mocs, 'empty' => 'Enter a SOC', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
                                     ?>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="mfg_code">Mfg Code</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('mfg_code', array('class'=>'form-control col-md-7 col-xs-12', 'placeholder' => 'Mfg Code', 'label' => false, 'autocomplete'=>'off')); ?>
+                                </div>
+                            </div>
+                        </div>                 
                     </div>
-
-                    <!--div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="description">Item Name</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('description', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'rows' => 2, 'style' => 'margin-left:25px;width:97%;')); ?>
-                                </div>
-                                <div class="col-md-3" style="padding:0px;">
-                                    <input type="file" name="files[]" id="component_part_attachment" style="display:none !important;" multiple>
-                                    <button class="btn btn-primary pull-right" type="button" onclick="$('#component_part_attachment').trigger('click'); return false;" id="component_part_upload">Upload Attachment</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div-->
 
                     <div class="row">
                         <div class="col-md-12 form-group">
@@ -228,14 +238,6 @@ use Cake\Routing\Router;
                                 <?php echo $this->Form->control('description', array('class' => 'form-control col-md-11 col-xs-12', 'label' => false, 'rows' => 2, 'style' => 'margin: 0 0 0 25px; width: 97%;')); ?>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label col-md-5 col-sm-4 col-xs-12" for="position">Position</label>
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <?php
-                                        echo $this->Form->control('position_id', array('options' => $positionArr, 'empty' => 'Enter Position', 'class' => 'form-control  selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
-                                        ?>
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <input type="file" name="files[]" id="component_part_attachment" style="display:none !important;" multiple>
                                     <button class="btn btn-primary pull-right btn-upload" type="button" onclick="$('#component_part_attachment').trigger('click'); return false;" id="component_part_upload">Upload Attachment</button>
@@ -247,9 +249,9 @@ use Cake\Routing\Router;
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="notes">Notes</label>
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="moc">MOC</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'rows' => 2, 'style' => 'margin-left:25px;width:97%;')); ?>
+                                    <?php echo $this->Form->control('moc', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'rows' => 2, 'style' => 'margin-left:25px;width:97%;')); ?>
                                 </div>
                                 <div class="col-md-3">
                                     <table class="table-responsive aircraft_component_file_selected" style="display:none; border:1px;">
@@ -267,18 +269,26 @@ use Cake\Routing\Router;
                     </div>
 
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="notes">Notes</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12">
+                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'rows' => 2, 'style' => 'margin-left:25px;width:97%;')); ?>
+                                </div>
+                                <div class="col-md-3">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-12 form-group">
                             <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12 mxl-0', 'label' => false, 'rows' => 2, 'style' => 'margin: 0 0 0 25px; width: 97%;')); ?>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label col-md-5 col-sm-4 col-xs-12" for="avg_man_hrs">Man Hours</label>
-                                    <div class="col-md-7 col-sm-8 col-xs-12">
-                                        <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false)); ?>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

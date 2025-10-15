@@ -1,0 +1,2820 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #5865a2;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+
+    #listOfOpenWorkOrdersModal .modal-dialog,
+    #aircarftCreateWOModel .modal-dialog {
+        width: 95% !important;
+    }
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.dflex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.p-0 {
+    padding: 0px !important;
+}
+
+.mt-35 {
+    margin-top: 12px;
+}
+
+.mb-15 {
+    margin-bottom: 15px !important;
+}
+
+.border-btm {
+    border-bottom: 1px solid #97a3d9;
+    padding-bottom: 8px;
+}
+
+.mb-10 {
+    margin-bottom: 10px
+}
+.pt-15{
+    padding-top: 15px !important;
+}
+.mb-20{
+    margin-bottom: 20px !important;
+}
+.ml-6 {
+    margin-left: 6px !important;
+}
+.table-aircraft{
+    padding-left:35px ;
+    padding-right:35px ;
+    padding-top:2px ;
+    padding-bottom:35px ;
+}
+.topHeader {
+    filter: drop-shadow(0px 2px 1.5px rgba(0, 0, 0, 0.13));
+    background-color: #39478b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 10px 4px 10px;
+    margin-right: -15px;
+    margin-left: -15px;
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+}
+
+.align-center-items {
+    display: flex;
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.topHeader .dropdown-menu>li>a {
+    padding: 3px 12px;
+}
+
+.dashboard-news-feed-list tr td p span,
+.dashboard-news-feed-list tr td h1,
+.dashboard-news-feed-list tr td h2 {
+    font-size: 21px !important;
+}
+
+.icon {
+    font-size: 26px;
+    margin-left: 12px;
+}
+
+.topHeader .dropdown .dropdown-toggle {
+    font-size: 16px;
+    color: #fffefe;
+    font-weight: 400;
+    text-decoration: none;
+    /*display: flex;*/
+    align-items: center;
+    margin: 0px;
+}
+
+.wrapper {
+    width: 100%;
+    /*display: flex;*/
+    min-height: calc(100vh - 60px);
+}
+
+.custWrapper {
+    position: relative;
+}
+
+/*.custWrapper .side-bar{position: absolute;top: 0px;bottom: 0px;}*/
+.side-bar {
+    position: fixed;
+    /*left: -310px;*/
+    background: #39478b;
+    min-height: 100%;
+    width: 310px;
+    color: #fff;
+    transition: margin-left 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 10px 9px #2b3358;
+    margin-bottom: 12px;
+    z-index: 9;
+    top: 53px;
+}
+
+#sidebar-menu .dropdown-backdrop {
+    display: none;
+}
+
+.side-bar ul {
+    padding-bottom: 60px;
+}
+
+.side-bar ul,
+.topHeader ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.side-bar ul li .dropdown-menu span {
+    margin-left: 10px;
+}
+
+/*.wrapper.active .side-bar ul .menu .dropdown-menu li span {
+    display: none;
+}
+
+.wrapper.active .side-bar ul .menu .dropdown-menu li i {
+    float: right;
+    width: 35px;
+    text-align: center;
+}*/
+
+.topHeader .toogleWrap {
+    width: 20%;
+    margin-bottom: 0px;
+}
+
+.topHeader {
+    width: 100%;
+}
+
+.side-bar ul li.menu-head {
+    padding: 20px;
+}
+
+.topHeader ul li.menu-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topHeader ul li.menu-head .txt {
+    display: inline-block;
+    vertical-align: sub;
+    /*vertical-align: -webkit-baseline-middle;*/
+}
+
+.push_menu:hover {
+    color: #fffefe !important;
+}
+
+.topHeader ul li.menu-head,
+a.push_menu {
+    font-size: 21px;
+    color: #fffefe;
+    font-family: "Roboto";
+    font-weight: 700;
+    padding-left: 12px;
+}
+
+.side-bar ul li.menu-head a {
+    color: #fff;
+    text-decoration: none;
+    height: 50px;
+}
+
+.side-bar ul .menu-head a {
+    color: #fff;
+    text-decoration: none;
+    height: 50px;
+}
+
+.side-bar ul .menu li a {
+    text-decoration: none;
+    display: inline-table;
+    width: 100%;
+    padding: 22px 20px;
+    font-size: 16px;
+    color: #fffefe;
+    font-weight: 400;
+    border-bottom: 1px solid #24306a;
+    border-left: 6px solid transparent;
+}
+
+.side-bar ul .menu li:hover {
+    border-left: 3px solid #ECECEA;
+    padding-left: 17px;
+}
+
+/*.side-bar ul .menu li a.active,*/
+.side-bar ul .menu li.active,
+.side-bar ul .menu li:hover {
+    padding-left: 17px;
+    background: #1f2a5e;
+    border-left: 6px solid #ffc107;
+}
+
+.content {
+    width: calc(100% - 310px);
+    padding: 15px;
+    transform: translateX(310px);
+    -ms-transform: translateX(310px);
+    -webkit-transform: translateX(310px);
+}
+
+.active>.side-bar {
+    margin-left: -255px;
+    transition: margin-left 0.5s;
+}
+
+.active>.content {
+    transition: padding-left 0.5s;
+}
+
+
+/******************/
+
+.side-bar ul .menu li.dropdown {
+    position: unset;
+}
+
+.side-bar ul .menu li.dropdown .dropdown-menu {
+    width: 100%;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: unset;
+}
+
+.wrapper .side-bar ul .menu li .icon-size,
+.icon-size {
+    display: inline-block;
+    width: 35px;
+    margin-right: 10px;
+}
+
+.wrapper .side-bar ul .menu li .icon-size img {
+    max-width: 30px;
+    height: 25px;
+    padding-right: 5px;
+}
+
+
+.wrapper.active .side-bar ul .menu li span {
+    float: right;
+    text-align: center;
+    margin-right: 0px;
+}
+
+.wrapper.active .side-bar ul .menu li a {
+    padding: 14px 5px;
+}
+
+.outerWrapper .heading {
+    font-size: 22px;
+    color: #fffefe;
+    font-weight: 400;
+}
+
+.outerWrapper h6 {
+    font-size: 18px;
+    color: #fffefe;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.outerWrapper .boxWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.outerWrapper .boxWrapper .box {
+    text-align: center;
+    margin: 0px 40px;
+    width: 364px;
+    height: 155px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fffefe;
+    cursor: pointer;
+}
+
+.box1 {
+    background: #bf392a !important;
+}
+
+.box2 {
+    background: #27ae60 !important;
+}
+
+.box3 {
+    background: #f39c12 !important;
+}
+
+.outerWrapper .boxWrapper .box .title {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.outerWrapper .boxWrapper .box .lbltxt {
+    font-size: 23px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.btn-due,
+.btn-status,
+.btn-notdue {
+    width: 80px;
+    height: 29px;
+    border-radius: 0px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+}
+
+.btnStatus {
+    width: 80px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    height: 29px;
+    border: none;
+    border-radius: 0px;
+}
+
+.btn-due {
+    background-color: #bf392a;
+}
+
+.btn-notdue {
+    background-color: #c0c0c0;
+}
+
+.action-bar {
+    background-color: #39478b;
+    padding: 6px 10px 6px 10px;
+    margin-bottom: 12px;
+}
+
+.action-bar .input-group {
+    width: 220px;
+    margin-right: 10px;
+    margin-bottom: 0px
+}
+
+.action-bar .input-group input {
+    width: 294px;
+    height: 40px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: #ffffff;
+    font-size: 16px;
+    color: #818384;
+    font-weight: 400;
+    border: none;
+}
+
+.action-bar .btn-group input {
+    width: 100% !important;
+}
+
+.action-bar .input-group .input-group-btn button {
+    height: 40px;
+    color: #818384;
+    border-radius: 0px 5px 5px 0px;
+    font-size: 20px;
+    border: transparent;
+}
+
+.action-bar .zoom-img {
+    max-width: 64px;
+}
+
+.sortWrap {
+    display: inline-flex;
+    align-items: center;
+}
+
+.sortWrap .sortTxt {
+    font-size: 18px;
+    color: #818ecd;
+    font-weight: 400;
+    margin-right: 12px;
+}
+
+.sortWrap .bootstrap-select {
+    width: auto !important;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    vertical-align: middle;
+}
+
+.innerTbl {
+    display: none;
+}
+
+.table {
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #434446;
+    font-weight: 500;
+    border-bottom: 1px solid #ddd;
+    /*table-layout: fixed;*/
+}
+
+.table .check {
+    width: 70px;
+    text-align: center;
+}
+
+.veiw-link,
+.view-link {
+    color: #6e8eb6;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.table>thead>tr>th {
+    background-color: #1f2a5e;
+    font-size: 15px;
+    color: #ecf0f1;
+    font-weight: 400;
+}
+
+.split-btn {
+    width: 110px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.split-btn .btn-dropdown {
+    padding: 0 12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    float: left;
+    position: relative;
+    height: 36px;
+    border: 1px solid #e5e5e5;
+    color: #6e8eb6;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.split-btn .icon-part {
+    padding: 6px 3px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin: 0;
+    color: #002e6d;
+    border: 1px solid #e5e5e5;
+    background: #FFFFFF;
+    border-left: none;
+    width: 25px;
+    float: left;
+    position: relative;
+    height: 36px;
+}
+
+.sortWrap .dropdown button {
+    width: 184px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #434446;
+    font-weight: 400;
+}
+
+.sortWrap .dropdown button .arrow-icon {
+    font-size: 26px;
+    color: #b0b0b0;
+}
+
+.split-btn .dropdown-menu a,
+.sortWrap .dropdown-menu a,
+.topHeader .dropdown-menu>li>a {
+    color: #434446;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.topHeader .dropdown-menu>li>a {
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.split-btn .dropdown-menu a:hover,
+.sortWrap .dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
+.btmIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px !important;
+    position: fixed;
+    bottom: 0;
+    width: 310px;
+    background: #39478b;
+}
+
+.wrapper.active .side-bar .btmIcon {
+    padding: 14px 0px !important;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.wrapper.active .side-bar .btmIcon li span {
+    margin-right: 4px;
+    margin-top: 15px;
+}
+
+
+/*******************************User.html*************************/
+
+.btnGroup .btn {
+    width: 95px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.btnGroup .btn-veiw {}
+
+.btnGroup .btn-edit {}
+
+.btnGroup .btn-delete {}
+
+.sliding {
+    transition: all 0.4s ease-in-out;
+}
+
+.left {
+    transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+}
+
+.side-bar.sliding.left {
+    transform: translateX(-310px);
+    -ms-transform: translateX(-310px);
+    -webkit-transform: translateX(-310px);
+}
+
+.content.sliding.left {
+    width: 100%;
+}
+
+/****************************New CSS By Arun *****************/
+div.due-status-overdue {
+    background-color: #c0392b;
+}
+
+div.not-due-status {
+    background-color: #036a03;
+}
+
+div.coming-due-status {
+    background-color: #f39c12;
+}
+
+div.tolerance-status {
+    background-color: #d35400;
+}
+
+#aircraftDetailsPopup {
+    top: 178px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 650px;
+}
+
+.partDetailsPopup {
+    top: 42px;
+    position: absolute;
+    z-index: 9;
+    background:
+        rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 900px;
+}
+
+#airCompDetailsPopup {
+    top: 178px;
+    position: absolute;
+    z-index: 9;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 1px solid;
+    width: 880px;
+    max-width: 100%;
+}
+
+#myCarousel .carousel-control {
+    top: 15px !important;
+    bottom: auto !important;
+    width: 5% !important;
+    color: navy;
+}
+
+#myCarousel .carousel-control.right {
+    right: 0;
+    left: 25px;
+}
+
+.air-detail-title {
+    background-color: #2e3238;
+    color: #e3e3e3;
+    font-weight: bold;
+    padding: 8px 0 8px 10px;
+}
+
+.airDetailPopupHeader {
+    height: 40px;
+    text-align: left;
+    padding-top: 6px;
+    font-size: 16px;
+    padding-left: 60px;
+}
+
+.partDetailHeader {
+    height: 40px;
+    text-align: left;
+    font-size: 25px;
+    padding-left: 80px;
+}
+
+.partDetailPopupHeader {
+    height: 45px;
+    text-align: left;
+    padding-top: 2px;
+    font-size: 18px;
+    padding-left: 65px;
+}
+
+.partDetailPopupHeader button {
+    float: right;
+}
+
+.airDetailPopupHeader button {
+    float: right;
+}
+
+#myCarousel table td {
+    font-size: 12px !important;
+}
+
+#aircraftTabs ul.nav-tabs li a {
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#aircraftTabs ul li {
+    padding: 5px 5px 0 5px;
+}
+
+#aircraftTabs ul {
+    background-color: #e5e5e5;
+}
+
+#aircraftTabs #itemInfo {
+    padding-top: 10px;
+}
+
+#aircraftTabs #subItems {
+    padding-top: 10px;
+}
+
+.parent-child-circle {
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    display: inline-block;
+    text-align: center;
+    line-height: 13px;
+    font-size: 10px;
+    padding: 0px 3px 0px;
+    text-transform: uppercase;
+    margin-left: 2px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+#customReport .lblColor {
+    color: #c0c0c0;
+}
+
+#customReportPopup .lblColor {
+    color: #c0c0c0;
+}
+
+.required {
+    color: red;
+}
+
+.itemInfoCls {
+    display: flex;
+    padding: 0 4px;
+}
+
+.itemInfoCls .itemCls {
+    width: calc(100% / 5);
+    margin: 0 3px;
+}
+
+.partInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.partInfoCls .itemCls {
+    width: calc(100% / 7);
+    margin: 5px 10px 5px 10px;
+}
+
+.addPartInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.addPartInfoCls .itemCls {
+    width: calc(100% / 9);
+    margin: 5px 10px 5px 10px;
+    text-align: left;
+}
+
+.editPartInfoCls {
+    display: flex;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.editPartInfoCls .itemCls {
+    width: calc(100% / 8);
+    margin: 5px 10px 5px 10px;
+    text-align: left;
+}
+
+.corrPageHeading {
+    display: flex;
+    padding: 8px 2px;
+    text-align: left;
+}
+
+.corrPageHeading .corrPH {
+    width: calc(100% / 5);
+    background: #99a1a6;
+    font-weight: bold;
+    padding: 2px 2px 2px 10px;
+    height: 24px;
+}
+
+.multi-step .btn {
+    margin: 0;
+}
+
+.multi-step .toggleTextCls {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 5px;
+}
+
+.multi-step .toggleTextCls span {
+    color: #3b8c29;
+    padding-left: 10px;
+}
+
+.multi-step .modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.multi-step .toggleAdjTextCls {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-top: 5px;
+}
+
+.multi-step .toggleAdjTextCls span {
+    color: #3b8c29;
+    padding-left: 10px;
+}
+
+/**** Progress Bar *****/
+.multi-step .m-progress-bar {
+    min-height: 1em;
+    background: #3b8c29;
+    width: 5%;
+}
+
+.multi-step ul {
+    padding-left: 0;
+    white-space: nowrap;
+}
+
+.multi-step ul li {
+    display: inline;
+    color: #092E6E;
+}
+
+.multi-step .multi-step-title {
+    padding-top: 15px;
+}
+
+.multi-step .x_panel {
+    padding: 10px 0 10px 0;
+}
+
+.multi-step .x_content {
+    padding: 0;
+}
+
+.multi-step .step12 {
+    padding-left: 25px;
+}
+
+.multi-step .step13 {
+    padding-left: 25px;
+}
+
+#compReportTimeModel .x_panel {
+    padding: 10px 0 10px 0;
+}
+
+#compReportTimeModel .x_content {
+    padding: 0;
+}
+
+/*** Edit page group section clsaa ***/
+.partsGpCls {
+    padding: 0 0 8px 0;
+}
+
+.partsGpCls div {
+    padding: 0;
+    font-size: 15px;
+}
+
+.addPageHeading {
+    background: #99a1a6;
+    font-weight: bold;
+    padding: 2px;
+    margin: 5px;
+    height: 24px;
+}
+
+#frmAirCompPart label {
+    text-align: left;
+    font-weight: normal;
+}
+
+.addPartBorder {
+    border: 1px solid #c0c0c0;
+}
+
+.addPartBorder .form-group .btn {
+    margin-bottom: 0;
+}
+
+.formBGCls {
+    background: #fff;
+}
+
+.pastDue {
+    color: red;
+}
+
+.btnWrapper {
+    border-bottom: 1px solid #97a3d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnWrapper .btn {
+    margin: 0px;
+    height: 36px;
+}
+
+.tableBg {
+    background: #fff;
+    padding: 10px 0px;
+}
+
+.tableScroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #fff;
+    min-height: 450px;
+}
+
+.tableScroll table {
+    width: 100% !important;
+    margin-top: 0px !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #818384;
+    font-weight: 400;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    padding: 10px 12px 6px;
+    font-size: 18px;
+    color: #434446;
+    font-weight: 400;
+}
+
+.dataTables_info,
+.dataTables_paginate {
+    display: inline-block;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.dataTables_paginate {
+    float: right;
+}
+
+/**********maintenance page******************/
+.btnWrapper .btnWrap .btn+.btn {
+    margin-left: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px !important;
+}
+
+.ml-5 {
+    margin-left: 5px !important;
+}
+
+.actionbar-lft {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.actionbar-lft .lftWrap {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.actionbar-lft .lftWrap>div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.actionbar-lft .lftWrap .inputWrap {
+    margin-right: 15px;
+}
+
+.actionbar-lft .lftWrap .inputWrap button {
+    height: 40px;
+    line-height: 1.7;
+}
+
+.actionbar-lft .split-btn,
+.btnWrapper .split-btn {
+    width: auto;
+}
+
+table.dataTable {
+    margin-top: 0px !important;
+}
+
+/*.table>thead>tr>th{min-width: 120px;}*/
+@media screen and (max-width: 1200px) {
+    .tableScroll table {
+        width: 1200px !important
+    }
+}
+
+.reportTimeCls {
+    color: #434446;
+}
+
+.mvleft {
+    float: left;
+}
+
+.mvright {
+    float: right;
+    margin-left: 26px;
+}
+
+.partInfoHeading {
+    margin-top: 2px;
+    padding-left: 70px;
+}
+
+/*********** Pilots Status ************/
+
+#pilotStatusCls .table-borderless td,
+#pilotStatusCls .table-borderless th {
+    border: 0;
+}
+
+#pilotStatusCls .table-borderless td {
+    font-weight: normal;
+}
+
+#pilotStatusCls .input-group {
+    margin-bottom: 0px;
+}
+
+#pilotStatusCls a.nextDTTip,
+#pilotStatusCls a.nextDTTip:hover,
+#pilotStatusCls a.nextDTTip:visited {
+    color: black;
+}
+
+#pilotStatusCls .ndyellow {
+    color: #f8ac59;
+}
+
+#pilotStatusCls .ndred {
+    color: red;
+}
+
+#pilotStatusCls .ndblue {
+    color: blue;
+}
+
+#pilotStatusCls .ndgreen {
+    color: green;
+}
+
+#pilotStatusCls .selectpicker {
+    text-transform: capitalize;
+}
+
+table#customReport td.sorting_1 {
+    background-color: white;
+    border: 1px lightgrey;
+}
+
+table#customReport td {
+    background-color: white;
+    border: 1px lightgrey;
+}
+
+table#customReport tr.odd td {
+    background-color: white;
+    border: 1px lightgrey;
+}
+
+table#customReport tr.even td {
+    background-color: #ced4f2;
+    border: 1px lightgrey;
+}
+
+/************************ calender Page************************/
+.calendarCls .verticle-char {
+    writing-mode: tb-rl;
+}
+
+.calendarCls th {
+    text-align: center;
+    height: 30px;
+}
+
+.calendarTime a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.daysTxt {
+    text-align: center;
+    background-color: #DDDDDD;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.rgt-Wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.dataTxt span:first-child {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+}
+
+.blackFill {
+    /*background-color: #000;*/
+    background-color: #008000;
+}
+
+.blueFill {
+    background-color: #0C82C0;
+}
+
+.yellowFill {
+    background-color: #F2F248;
+}
+
+.greyFill {
+    background-color: #A09F9F;
+}
+
+.redFill {
+    background-color: #DC8273;
+}
+
+.lineFill {
+    height: 25px;
+    z-index: 100;
+}
+
+.redLine,
+.blueline {
+    height: 25px;
+    z-index: 101;
+}
+
+.yellowLine {
+    height: 25px;
+    z-index: 101;
+}
+
+.blackLine {
+    height: 25px;
+    z-index: 100;
+}
+
+.calenderWrap {
+    padding: 15px;
+    background: #fff;
+}
+
+.calenderWrap table {
+    font: 8pt verdana;
+    width: 99%;
+    margin: 0 auto;
+}
+
+.headingTxt {
+    background-color: #EEEEEE;
+    font-weight: bold;
+    font-size: 8pt;
+    font-family: verdana, arial;
+}
+
+.calenderWrap table td {
+    text-align: center;
+    /*padding: 4px 0px !important;*/
+    border: 1px solid #000;
+    height: 30px;
+    min-width: 26px;
+}
+
+.calenderWrap table td.day {
+    text-align: unset;
+}
+
+.calenderWrap table td a {
+    text-decoration: underline;
+    color: #337ab7;
+}
+
+.b-TL-none {
+    border-top: none !important;
+    border-left: none;
+}
+
+.border-btm {
+    border-bottom: 2px solid #000;
+}
+
+.b-none {
+    border-top: none !important;
+    border: none;
+}
+
+.bt {
+    border-top: 2px solid #000000
+}
+
+.b-trl {
+    border-top: 2px solid #000 !important;
+    border-right: 2px solid #000 !important;
+    border-left: 2px solid #000 !important;
+}
+
+.b-lft {
+    border-left: 2px solid #000;
+}
+
+.b-rgt {
+    border-right: 2px solid #000;
+}
+
+.b-top {
+    border-top: 2px solid #000 !important;
+    width: 48px;
+}
+
+.selectWrap {
+    margin-bottom: 10px;
+    display: flex;
+    color: #676a6c;
+    font-size: 13px;
+    margin: 0px 6px 10px;
+}
+
+.dataTxt {
+    display: flex;
+    align-items: center;
+}
+
+.dataTxt:not(:last-child) {
+    margin-right: 15px;
+}
+
+.lft-Wrapper .form-control {
+    border-radius: 0px;
+}
+
+.lft-Wrapper {
+    display: flex;
+}
+
+.selPilotCls {
+    max-width: 200px;
+    margin: 0 107px 0 0;
+}
+
+.selMonthCls {
+    max-width: 125px;
+    margin: 0 60px;
+}
+
+.selYearCls {
+    max-width: 85px;
+}
+
+.border-none {
+    border: none !important;
+}
+
+@media screen and (max-width: 991px) {
+    .selectWrap {
+        flex-wrap: wrap;
+        margin: 0 0px 15px;
+        justify-content: center;
+    }
+
+    .lft-Wrapper {
+        /* display: flex;
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-bottom: 12px; */
+    }
+
+    .rgt-Wrapper {
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .rgt-Wrapper {
+        flex-wrap: wrap;
+    }
+
+    .dataTxt {
+        display: flex;
+        align-items: center;
+        max-width: 150px;
+        flex: 0 0 115px;
+        flex-wrap: wrap;
+        margin-right: 0px !important;
+    }
+}
+
+.timesResCls {
+    font-weight: normal;
+    font-size: 13px;
+    text-align: center;
+}
+
+.timesResCls thead {
+    background-color: #ffffff;
+    color: #727373;
+    font-size: 12px;
+}
+
+.dtUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.doUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.flUpClass {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dtDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.doDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.flDelClass {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+/*****************************/
+
+#totalTimeCls td {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+#detailedTimeCls td {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.docborder {
+    border-top: 2px solid #DCDCDC;
+}
+
+.docborder h5 {
+    width: 52%;
+    float: left;
+}
+
+.docbadge {
+    margin-top: 10px;
+    width: 18%;
+    background: #c0c0c0;
+    color: #000;
+    float: right;
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+    min-width: 90px;
+}
+
+.displayDoc {
+    padding: 5px 0px 35px 0px;
+}
+
+.displayDoc h5 {
+    width: 82%;
+    float: left;
+}
+
+.docAction {
+    margin-top: 10px;
+    width: 18%;
+    float: right;
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.documentsCls {
+    padding: 5px;
+}
+
+.drugCls {
+    padding: 5px;
+}
+
+.trainingCls {
+    padding: 5px;
+}
+
+.priaCls {
+    padding: 5px;
+}
+
+.checkingCls {
+    padding: 5px;
+}
+
+.actionCls {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.displayDoc .dateStyl {
+    font-size: 10px;
+    padding-left: 20px;
+    font-weight: normal;
+}
+
+/** Multiselect Dropdown **/
+.airSelCls button.multiselect {
+    padding: 3px;
+    margin: 0 !important;
+    min-width: 125px;
+}
+
+.airSelCls .checkbox input[type="checkbox"] {
+    margin-left: -24px;
+}
+
+.childRInp label {
+    font-size: 10px;
+}
+
+#logbookAddItem label {
+    text-align: left;
+    font-weight: normal;
+}
+
+.menu li.active>a {
+    background-color: #24306a;
+}
+
+.content {
+    padding-top: 70px;
+}
+
+/*#customReport thead {
+    position: fixed;
+}*/
+
+.dataTables_scrollHeadInner {
+    width: 100% !important;
+}
+
+.dataTable {
+    width: 100% !important;
+}
+
+#activeHistId {
+    margin: 0 0 6px 0;
+    padding: 0;
+}
+
+#activeHistId .dropdown-menu {
+    top: 35px;
+}
+
+
+/******* Flight Log Section CSS ******************/
+
+.flHeading {
+    display: flex;
+    padding: 8px 2px;
+    text-align: left;
+}
+
+.flHeading .flHElmCls {
+    width: calc(100% / 3);
+    font-weight: bold;
+    padding: 2px 2px 2px 10px;
+    height: 24px;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.flItemCls {
+    display: flex;
+    padding: 0 4px;
+}
+
+.flItemCls .flElmCls {
+    width: calc(100% / 3);
+    margin: 0 3px;
+}
+
+.flightInfoCls label {
+    padding-top: 15px;
+}
+
+#flightLogModel label {
+    padding-top: 8px;
+}
+
+#flsCrewModel label {
+    padding-top: 8px;
+}
+
+#flsCrewUpdModel label {
+    padding-top: 8px;
+}
+
+#flightLogUpdateModel label {
+    padding-top: 15px;
+}
+
+#frmFlightLogs h4 {
+    color: #5b6069;
+}
+
+#frmFlightLogs span.chgValCls {
+    padding-top: 15px;
+    float: right;
+    color: green;
+    font-weight: bold;
+}
+
+#frmFlightLogs span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+.frmFlightLogs h4 {
+    color: #5b6069;
+}
+
+.frmFlightLogs span.chgValCls {
+    padding-top: 15px;
+    float: right;
+    color: green;
+    font-weight: bold;
+}
+
+.frmFlightLogs span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+#flightLogModel span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+#flsCrewModel span.glyphicon {
+    display: block;
+    color: #999;
+}
+
+#flightLegFrm select.selectpicker {
+    display: block !important;
+}
+
+#flsCrewFrm select.selectpicker {
+    display: block !important;
+}
+
+#crewMemberList tr td {
+    padding-top: 7px;
+}
+
+#flightLogReportList .flRow {
+    line-height: 2.5;
+}
+
+input.disabledBG {
+    background-color: #ddd !important;
+}
+
+#tabs li.ui-tabs-active {
+    background-color: #1ab394;
+    border: 1px solid #1ab394;
+}
+
+.custom-input-chk {
+    font-size: 20px;
+}
+
+.custom-input-chk>input {
+    height: 25px;
+    width: 25px;
+}
+
+.custom-input-chk>input:checked {
+    border: 1px solid #26B99A;
+    background-color: #26B99A;
+}
+
+table.borderless td,
+table.borderless tbody {
+    border: none;
+}
+
+#flightLogs .trip-files {
+    font-size: 18px;
+    cursor: pointer;
+    color: #428bca;
+}
+
+#flightLogs .allBtnCls {
+    padding-left: 6px;
+}
+
+#itineraryId .row {
+    padding: 5px;
+}
+
+#itinSuccessId .itinEmailmsg {
+    margin: 0;
+    padding: 0;
+    border: 2px solid #26B99A;
+}
+
+#itinSuccessId .itinHeader {
+    height: 35px;
+    font-size: 16px;
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background-color: #26B99A;
+}
+
+#itinSuccessId .itinBody {
+    max-height: 250px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+#manifestModel label {
+    padding-top: 8px;
+}
+
+.airDiscrepancyCls h3 {
+    padding-top: 25px;
+    float: left;
+}
+
+/********************* Calendar popup ***************************************/
+#calendarModal .calendar-title {
+    font-size: 14px;
+}
+
+#calendarModal .text-info {
+    color: #23c6c8;
+    font-size: 13px;
+}
+
+#calendarModal .font12 {
+    font-size: 12px;
+}
+
+#calendarModal .font13 {
+    font-size: 13px;
+}
+
+#calendarModal .font14 {
+    font-size: 14px;
+}
+
+#calendarModal .font16 {
+    font-size: 16px;
+}
+
+#calendarModal .marginRight7 {
+    margin-right: 7px;
+}
+
+#calendarModal .calendarTime {
+    background-color: rgb(234, 248, 253);
+    padding: 6px;
+}
+
+#calendarModal .marginTop5 {
+    margin-top: 5px;
+}
+
+#calendarModal .marginTop20 {
+    margin-top: 20px;
+}
+
+#calendarModal .marginBottom20 {
+    margin-bottom: 20px;
+}
+
+#calendar button.fc-today-button {
+    margin: 0px 5px 0px 5px;
+}
+
+#flightClosed_paginate {
+    float: left;
+    padding-left: 0;
+}
+
+
+/*********************************************************
+	Style-19/12/2022
+***************************************/
+.page-content .action-bar.dflex {
+    justify-content: space-between;
+}
+
+.page-content .formBGCls .top-form-section,
+.page-content .formBGCls .bottom-form-section {
+    padding: 10px 20px;
+}
+
+.page-content .formBGCls .form-input-frame textarea {
+    height: 106px;
+}
+
+.page-content .formBGCls .btn-frame {
+    padding: 30px 10px 10px;
+    text-align: right;
+}
+
+
+/****************************************
+inventory section style
+****************************************/
+
+.invbox1 {
+    background: #c0392b !important;
+}
+
+.invbox2 {
+    background: #f1c40f !important;
+}
+
+.invbox3 {
+    background: #f39c12 !important;
+}
+
+.invbox4 {
+    background: #8e44ad !important;
+}
+
+.invbox5 {
+    background: #3498db !important;
+}
+
+.outerWrapper .boxWrapper .box .invlbltxt {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.outerWrapper .boxWrapper .invbox {
+    text-align: center;
+    margin: 5px 5px;
+    width: 23%;
+    height: 155px;
+    /* border-radius: 15px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fffefe;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.invtilebody {
+    font-size: 40px;
+}
+
+.document-management-icon {
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.upload-area {
+    width: 100%;
+    min-height: .01%;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: left;
+    overflow: auto;
+}
+
+#filetbody a {
+    color: #337ab7 !important;
+}
+
+.document-name {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.deleteattachment {
+    cursor: pointer;
+}
+
+.icon-generic {
+    background: url('../../images/icons/doc_man_generic.svg');
+}
+
+.icon-doc {
+    background: url('../../images/icons/doc_man_word.svg');
+}
+
+.icon-excel {
+    background: url('../../images/icons/doc_man_excel.svg');
+}
+
+.icon-pdf {
+    background: url('../../images/icons/doc_man_pdf.svg');
+}
+
+.icon-text {
+    background: url('../../images/icons/doc_man_text.svg');
+}
+
+.icon-image {
+    background: url('../../images/icons/icons_image.png?1234');
+}
+
+.icon-folder {
+    background: url('../../images/icons/icons_folder.png?1234');
+}
+
+.inventory_request_status {
+    display: inline-block;
+    padding: 0.4em 0.6em 0.4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    width: 100px;
+    background-color: #777777;
+}
+
+.inventory-requests-created {
+    background-color: #3498DB !important;
+}
+
+.inventory-requests-pending {
+    background-color: #F39C12 !important;
+}
+
+.inventory-requests-denied {
+    background-color: #E74C3C !important;
+}
+
+.inventory-requests-closed {
+    background-color: #2C3E50 !important;
+}
+
+.inventory-requests-approved {
+    background-color: #2ECC71;
+}
+
+.inventory-requests-canceled {
+    background-color: #E74C3C;
+}
+
+.inventory-requests-sent {
+    background-color: #16A085;
+}
+
+#datatableListingPage_paginate a {
+    color: #333 !important;
+}
+
+.link-order-text {
+    background: #dfeaf6;
+    padding: 15px;
+    color: #2977af;
+    font-size: 16px;
+}
+
+.linkordercountblock {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
+
+.so-partial {
+    background-color: #9B59B6;
+}
+
+.so-pending {
+    background-color: #6B00CC;
+}
+
+.so-shipped {
+    background-color: #3498DB;
+}
+
+.so-received {
+    background-color: #2ECC71;
+}
+
+.so-cancelled {
+    background-color: #E74C3C;
+}
+
+.top-holding-box {
+    background: #5D8518;
+    color: #fff;
+    margin: 0;
+    padding: 5px 15px;
+    border-radius: 2px;
+    margin-top: 6px;
+}
+
+.holding-box {
+    border: dashed 1px transparent;
+    border-radius: 10px;
+    text-align: center;
+    /* min-width: 80px; */
+    /*padding: 5px;
+    margin: 5px 15px 5px 5px;*/
+    -webkit-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    -moz-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    -o-transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+    transition: min-width 300ms ease-in-out, border 300ms ease-in-out, background 300ms ease-in-out;
+}
+
+.top-header-brand {
+    background-color: #222A35;
+    color: #fff;
+    padding-left: 11px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 80%);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: 0 0 8px rgb(0 0 0 / 80%);
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -ms-box-sizing: border-box !important;
+}
+
+.top-holding-box .badge {
+    background-color: #456311;
+    margin-left: 5px;
+}
+
+.holding-box span:hover {
+    color: white;
+}
+
+#holdingBoxDropZone a:hover {
+    color: white;
+}
+
+.inventorystatus.pi-status-active {
+    background-color: #0096D9;
+}
+
+.inventorystatus.pi-status-outforrepair {
+    background-color: #00D3B4;
+}
+
+.inventorystatus.pi-status-installed {
+    background-color: #27AE60;
+}
+
+.inventorystatus.pi-status-quarantined {
+    background-color: #F46323;
+}
+
+.inventorystatus.pi-status-allocated {
+    background-color: #FF0000;
+}
+
+.inventorystatus.pi-status-onorder {
+    background-color: #9B4EB5;
+}
+
+.inventorystatus.pi-status-shipped {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-damaged {
+    background-color: #E74C3C;
+}
+
+.inventorystatus.pi-status-discarded {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-unavailable {
+    background-color: #3498DB;
+}
+
+.inventorystatus.pi-status-needs-repair {
+    background-color: #E74C3C;
+}
+
+.inventorystatus.pi-status-consumed {
+    background-color: #2C3E50;
+}
+
+.inventorystatus.pi-status-unrepairable {
+    background-color: #E74C3C;
+}
+
+.inventorystatus {
+    display: inline-block;
+    padding: 0.4em 0.6em 0.4em;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    width: 120px;
+    background-color: #777777;
+}
+
+.po-inactive {
+    background-color: #CE0000;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.exchange-status-indicator .exchange-status-badge .fa-exchange {
+    font-size: 12px;
+    float: left;
+}
+
+.exchange-status-indicator .exchange-status-open {
+    background-color: #FABE58 !important;
+    border-color: #b78b40 !important;
+}
+
+.exchange-status-indicator .exchange-status-returned {
+    background-color: #87D37C !important;
+    border-color: #5f9657 !important;
+}
+
+.exchange-status-indicator .badge {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.exchange-status-indicator .exchange-status-badge {
+    border-radius: 1px;
+    min-width: 100px;
+    font-weight: 400;
+    border: 1px solid #AAA;
+    background-color: #FFF;
+    color: #343a40;
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+
+.form-control-static {
+    padding-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.form-control-static {
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.form-control-static {
+    min-height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.form-control-static a {
+    color: #23527c;
+    cursor: pointer;
+}
+
+.invaddPageHeading {
+    font-size: 11pt;
+    background-color: #1f2a5e;
+    color: #ecf0f1;
+    padding: 10px 15px;
+    margin-top: 0;
+    margin-left: 0px;
+    height: 40px;
+}
+
+.mt10 {
+    margin-top: 10px !important;
+}
+
+.mt5 {
+    margin-top: 5px !important;
+}
+
+.tab-pad {
+    padding: 15px 0 15px 0;
+}
+
+.hide-block {
+    display: none;
+}
+
+.show-block {
+    display: block;
+}
+
+.holding-box-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.pt5 {
+    padding-top: 5px !important;
+}
+
+.pt10 {
+    padding-top: 10px !important;
+    padding-top: 10px !important;
+}
+
+.pb10 {
+    padding-bottom: 10px !important;
+}
+
+.pb10 {
+    padding-bottom: 10px !important;
+}
+
+.pl10 {
+    padding-left: 10px !important;
+}
+
+.pr10 {
+    padding-right: 10px !important;
+}
+
+.plus-new-btn {
+    margin-top: -34px;
+    padding-left: 16px;
+    float: right;
+}
+
+.plusbtn {
+    margin-top: 0px;
+    padding-left: 0px;
+}
+
+.attachemtment-search-block {
+    width: 220px;
+    margin-right: 10px;
+    display: inline-block;
+    position: relative;
+}
+
+.attachemnt-search-icon {
+    display: inline;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    color: darkgray
+}
+
+.plus-btn-h {
+    height: 34px;
+}
+
+.label-width-auto {
+    width: auto !important;
+}
+
+#is-this-item-serialized-0,
+#accept-install-0 {
+    margin-left: 5px;
+}
+
+.valign-t {
+    vertical-align: top;
+}
+
+.brd-5 {
+    border-radius: 5px;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.table-width {
+    width: 100% !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+
+.mt-25 {
+    margin-top: 25px !important;
+}
+
+.ml-8 {
+    margin-left: 8px !important;
+}
+
+#inventoryattachment {
+    display: none !important;
+}
+
+.heading a {
+    color: white;
+}
+
+.inventory_request_status {
+    padding: 5px !important;
+    margin-left: 10px !important;
+}
+
+.addnewinvaddresspopup,
+.vendorModelbtn {
+    height: 34px;
+}
+
+.special-instruction-label {
+    width: 125px !important
+}
+
+.pr-0 {
+    padding-right: 0px !important;
+}
+
+.prorder-total {
+    margin-right: 42px;
+}
+
+.prorder-subtotal {
+    min-width: 200px;
+}
+
+.po-order-sortby {
+    color: white;
+    font-size: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.reference-white-space {
+    white-space: pre-wrap;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.po-shipping-input {
+    width: 83%;
+    display: inline-block;
+}
+
+.inventory-select-item {
+    color: blue !important;
+}
+
+.tblinvpo th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.toggleplusminus,
+.toggleplusminus_aircraft {
+    color: blue !important;
+    cursor: pointer;
+}
+
+.header-time-clock-link {
+    width: 42px;
+    height: 40px;
+    float: left;
+}
+
+.otcinvoice_ship_to_address {
+    float: right;
+    color: blue;
+    cursor: pointer;
+}
+
+.wo-option-message-active {
+    background-color: blue;
+    color: white;
+}
+
+.wo-option-message-tr {
+    cursor: pointer;
+}
+
+.mh .dropdown-menu {
+    height: 270px;
+    overflow-y: auto;
+}
+
+.message-counter {
+    position: absolute;
+    top: -5px;
+    left: 12px;
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font: 10px Verdana;
+    font-weight: bold;
+}
+
+.wo_new_message {
+    background-color: red !important;
+    color: white;
+    cursor: pointer;
+}
+
+.count_circle {
+
+    background-color: rgba(212, 19, 13, 1);
+    color: #fff;
+    border-radius: 10px;
+    padding: 1px 4px;
+    font: 10px Verdana;
+    font-weight: bold;
+    vertical-align: baseline;
+}
+
+.dashboard_heading_bar {
+    background-color: #39478b;
+    margin-bottom: 12px;
+    padding: 5px;
+}
+
+.dashboard_heading {
+    font-size: 18px;
+    color: #fffefe;
+    font-weight: 400;
+}
+
+.clock_log_table_scroll {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+#dropdownMenuButton~.dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.header-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.topheader_right_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-icon-container>div {
+    margin-right: 10px;
+}
+
+.header-icon-container>div img {
+    width: 30px;
+    height: auto;
+}
+
+.header-icon-container>div img.header-time-clock-link {
+    width: 30px !important;
+    height: auto;
+}
+
+#component_part_file_list a {
+    color: blue;
+}
+
+.delete_comp_part_attachment {
+    cursor: pointer;
+}
+
+#datatableQuantities_wrapper {
+    overflow: scroll;
+}
+
+/*.plus-new-btn{
+    width: auto;
+    position: relative;
+    margin-right: -15px;
+}*/
+.show-in-mob {
+    display: none;
+}
+
+.input-dropdown .dropdown-menu.open {
+    max-width: 100%;
+}
+
+.input-dropdown .bootstrap-select .dropdown-menu li a span.text {
+    word-break: break-all;
+    white-space: break-spaces;
+}
+
+.history-detail-block {
+    white-space: break-spaces;
+}
+
+.tags-bootstrap-tagsinput .bootstrap-tagsinput {
+    width: calc(100% - 18px);
+    width: calc(100% - 18px);
+}
+
+#airCompsList label:nth-child(3) {
+    margin-left: 10px;
+}
+
+.larger-modal-body {
+    min-height: 80vh;
+}
+
+.upload-area a {
+    color: #337ab7;
+}
+
+.actionOnSelected {
+    cursor: pointer;
+}
+
+.shipping_order_item_link,
+#linkedPurchaseOrderList a,
+#linkedRequestList a,
+#linkedShippingOrderList a,
+#linkedRepairOrderList a {
+    color: #337ab7;
+    cursor: pointer;
+}
+
+#workOrderPrintPreviewModal .modal {
+    overflow: visible;
+}
+
+#workOrderPrintPreviewModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewMaintModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewMaintModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewSignoffModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewSignoffModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewCategoryModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewCategoryModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewDepartmentModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewDepartmentModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewDateRangeModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewDateRangeModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewWarrantyModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewWarrantyModal .modal-body {
+    overflow-y: visible;
+}
+
+#woPrintPreviewMainByTaskModal .modal {
+    overflow: visible;
+}
+
+#woPrintPreviewMainByTaskModal .modal-body {
+    overflow-y: visible;
+}
+
+#customerAddressAddModel .modal {
+    overflow: visible;
+}
+
+#customerAddressAddModel .modal-body {
+    overflow-y: visible;
+}
+
+#createPTORequestsPopupModel .modal-dialog .modal-body,
+.mh .dropdown-menu {
+    min-height: 500px;
+    height: auto;
+}
+
+.ps-0 {
+    padding-left: 0px !important;
+}
+
+.datePicker .bootstrap-datetimepicker-widget.usetwentyfour:nth-of-type(2) {
+    display: none;
+}
+
+#user_departments_table td,
+th {
+    cursor: pointer;
+}
+
+.filter-heading {
+    color: white;
+    font-size: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.searchBox {
+    position: relative;
+}
+
+.searchList {
+    display: none;
+}
+
+.searchBox .searchList {
+    margin-top: 5px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.searchBox .searchList ul li {
+    background-color: #f6f6f6;
+}
+
+.searchBox .searchList>ul>li {
+    border-bottom: 1px solid #ddd !important;
+}
+
+.searchBox .searchList .sub-list-group {
+    padding-top: 7px;
+}
+
+.searchBox .searchList .sub-list-group li {
+    border: 0;
+}
+
+#header_search_list {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#header_search_list a {
+    color: #333;
+}
+
+div.searchBox .filter-option-inner-inner {
+    color: #999 !important;
+}
+
+.bootstrap-select .dropdown-menu .inner {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+table th {
+    white-space: nowrap;
+}
+
+#datatable tbody tr:last-child {
+    white-space: nowrap;
+}
+
+.overflow-visible {
+    overflow: visible !important;
+}
+
+.card-flight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.ml-22 {
+    margin-left: 22px !important;
+}
+
+.mr-22 {
+    margin-right: 22px !important;
+}
+.btn-crew .input .bootstrap-select button{
+
+    margin-bottom: 0 !important;
+}
+.btn-crew{
+    width: 50%;
+}
+.pt-0{
+    padding-top: 0 !important;
+}
+.ml-11{
+    margin-left: 11px !important;
+}
+.mr-11{
+    margin-right: 11px !important;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .tableScroll .table-Width {
+        width: 100% !important;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .table-Width tbody tr td:last-child {
+        white-space: nowrap;
+    }
+
+    .form-horizontal .text-space-left {
+        text-align: left;
+        margin-bottom: 12;
+    }
+
+}
+
+@media (max-width: 998px) {
+    #airCompDetailsPopup {
+        width: 720px;
+        max-width: 100%;
+
+    }
+.btn-crew{
+    width:42%;
+}
+    .dashboard-news-feed-list tr td p span,
+    .dashboard-news-feed-list tr td h1,
+    .dashboard-news-feed-list tr td h2 {
+        font-size: 18px !important;
+    }
+
+    .po-order-sortby {
+        font-size: 18px;
+
+    }
+}
+
+.btn-upload {
+    margin-right: 0;
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .btn-upload {
+        margin-right: 140px;
+    }
+}
+
+/* Mobile (less than 768px) */
+@media (max-width: 767px) {
+    .btn-upload {
+        margin-right: 14px;
+    }
+    .btn-crew{
+        width: 100%;
+    }
+}
+
+@media (max-width: 598px) {
+    .table>thead>tr>th {
+        font-size: 13px;
+    }
+
+    .dashboard-news-feed-list tr td p span,
+    .dashboard-news-feed-list tr td h1,
+    .dashboard-news-feed-list tr td h2 {
+        font-size: 13px !important;
+    }
+}
+

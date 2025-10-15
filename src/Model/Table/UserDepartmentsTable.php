@@ -42,6 +42,47 @@ class UserDepartmentsTable extends Table
     {
         $entity = $options->getData('entity');
 
+        if(!empty($entity->id)){
+            $userDepartmentsModel = FactoryLocator::get('Table')->get('UserDepartments');            
+            $userDepartments = $userDepartmentsModel->get($entity->id);
+
+            $userDepartmentHistoriesModel = FactoryLocator::get('Table')->get('UserDepartmentHistories');
+            
+            $userDepartmentHistory = $userDepartmentHistoriesModel->newEmptyEntity();
+            
+            $userDepartmentHistory->user_department_id = $entity->id;
+
+            $userDepartmentHistory->title = 'User Department '.$userDepartments->department_name.' was updated.';
+            
+            if(!empty($userDepartments->updated_at)){
+                $modified_from = str_replace('-', '/', $userDepartments->updated_at);
+                $modified_from = date("Y-m-d h:i A", strtotime($modified_from));
+            }else{
+                $modified_from = '';
+            }
+
+            if(!empty($entity->updated_at)){
+                $modified_to = str_replace('-', '/', $entity->updated_at);
+                $modified_to = date("Y-m-d h:i A", strtotime($modified_to));
+            }else{
+                $modified_to = '';
+            }
+
+            $description = '';
+            if($entity->department_name != $userDepartments->department_name){
+                $description .= 'Department Name was changed from "'.$userDepartments->department_name.'" to "'.$entity->department_name.'".<br/>';
+            }
+
+            if(!empty($description)){
+                $description .= 'Last updated was changed from "'.$modified_from.'" to "'.$modified_to.'".<br/>';
+            
+                $userDepartmentHistory->user_id = $entity->updated_by;
+                $userDepartmentHistory->description = $description;
+                $userDepartmentHistoriesModel->save($userDepartmentHistory);
+            }
+
+        }
+
         return true;
     }
     

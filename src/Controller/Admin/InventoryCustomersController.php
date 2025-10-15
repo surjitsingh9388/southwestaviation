@@ -301,9 +301,11 @@
                         
                     }else{
                         $this->Flash->error(__('Customer/OTC could not be saved. Please, try again.'));
+                        return $this->redirect(['action' => 'index']);
                     }
                 }else{
                     $this->Flash->error(__('Customer/OTC '.$postData['customer_name'].' already exists.'));
+                    return $this->redirect(['action' => 'index']);
                 }
             }
             $id = $inventorycustomers->id;
@@ -406,6 +408,21 @@
                 $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
             }
 
+            echo json_encode($result);die;
+        }
+
+        public function deleteCustomerOTC($id = null){
+            
+            $this->request->allowMethod(['post', 'delete']);
+            $this->autoRender = false;
+
+            $customer = $this->InventoryCustomers->get($id);
+
+            if ($this->InventoryCustomers->delete($customer)) {
+                $result = array('status'=>'success', 'message'=>"Customer deleted successfully.");
+            } else {
+                $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+            }
             echo json_encode($result);die;
         }
 
@@ -1407,6 +1424,10 @@
                     $technicianlist = $this->CustomerOTC->getUserDropdownList();
 
                     $this->set(compact('work_order_id', 'wo_item_id', 'wo_report_type', 'technicianlist'));
+                }else if($section == 'wo_photo_upload'){
+                    $fileName .= 'wo_photo_upload_popup';
+                }else if($section == 'wo_file_upload'){
+                    $fileName .= 'wo_file_upload_popup';
                 }
                 
                 $this->viewBuilder()->setLayout('ajax');
@@ -1528,22 +1549,26 @@
                         $aircraftWorkOrders = $this->CustomerAircraftWorkOrders->find('all')->where(['work_order_no'=>$postData['work_order_no']])->select(['aircraft_id', 'wo_customer_id'])->first();
                     }
                     
-                    $postData['customer_id'] = $aircraftWorkOrders->wo_customer_id;
-                    $postData['aircraft_id'] = $aircraftWorkOrders->aircraft_id;
+                    if(!empty($aircraftWorkOrders)){
+                        $postData['customer_id'] = $aircraftWorkOrders->wo_customer_id;
+                        $postData['aircraft_id'] = $aircraftWorkOrders->aircraft_id;
 
-                    $customer_id = isset($postData['customer_id']) ? $postData['customer_id'] : '';
-                    $aircraft_id = isset($postData['aircraft_id']) ? $postData['aircraft_id'] : '';
-                    $sessionUser = $this->request->getSession()->read('Auth');;
-                    
-                    $countries = $this->Address->getCountryList();
-                    $customerOTCPageInfo = $this->CustomerOTC->getCustomerOTCPageInfo($customer_id, $aircraft_id);
-                    extract($customerOTCPageInfo);
-                    
-                    $this->set(compact('inventorycustomers', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraft_id', 'aircraftregdetail', 'sessionUser', 'customer_id'));
+                        $customer_id = isset($postData['customer_id']) ? $postData['customer_id'] : '';
+                        $aircraft_id = isset($postData['aircraft_id']) ? $postData['aircraft_id'] : '';
+                        $sessionUser = $this->request->getSession()->read('Auth');;
+                        
+                        $countries = $this->Address->getCountryList();
+                        $customerOTCPageInfo = $this->CustomerOTC->getCustomerOTCPageInfo($customer_id, $aircraft_id);
+                        extract($customerOTCPageInfo);
+                        
+                        $this->set(compact('inventorycustomers', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraft_id', 'aircraftregdetail', 'sessionUser', 'customer_id'));
 
-                    $this->openAircraftWorkOrderPopup($customerOTCPageInfo, $postData);
+                        $this->openAircraftWorkOrderPopup($customerOTCPageInfo, $postData);
 
-                    $fileName .= 'inventory_aircraft_create_work_order';
+                        $fileName .= 'inventory_aircraft_create_work_order';
+                    }else{
+                        echo 'No work order found!';exit;
+                    }
                 }else if($search_by == 'open_work_order' || $search_by == 'all_work_order'){
                     $filter = [];
                     if($search_by == 'open_work_order'){
@@ -3662,10 +3687,10 @@
             $postData['department'] = !empty($postData['department']) ? $postData['department'] : '1';
             $postData['wo_category'] = !empty($postData['wo_category']) ? $postData['wo_category'] : '7';
 
-            $postData['special_rate_hr'] = !empty($postData['special_rate_hr']) ? str_replace('$','',$postData['special_rate_hr']) : '0.00';
-            $postData['estimated_rate'] = !empty($postData['estimated_rate']) ? str_replace('$','',$postData['estimated_rate']) : '0.00';
-            $postData['flat_rate'] = !empty($postData['flat_rate']) ? str_replace('$','',$postData['flat_rate']) : '0.00';
-            $postData['shipping_in'] = !empty($postData['shipping_in']) ? str_replace('$','',$postData['shipping_in']) : '0.00';
+            $postData['special_rate_hr'] = preg_replace('/[^0-9.]/', '', $postData['special_rate_hr']);
+            $postData['estimated_rate']  = preg_replace('/[^0-9.]/', '', $postData['estimated_rate']);
+            $postData['flat_rate']       = preg_replace('/[^0-9.]/', '', $postData['flat_rate']);
+            $postData['shipping_in']     = preg_replace('/[^0-9.]/', '', $postData['shipping_in']);
             
             $woitemoverviews = $this->CustomerAircraftWOItemOverviews->patchEntity($woitemoverviews, $postData);
             $this->CustomerAircraftWOItemOverviews->save($woitemoverviews);
@@ -3724,7 +3749,7 @@
                     $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
                 }else if(isset($postData['is_timer_start']) && $postData['is_timer_start'] == '2'){
                     $woitemservicelogs = $this->AircraftWOItemServiceLogs->find('all')->where(['wo_services_id'=>$postData['wo_services_id'], 'logout_time is'=>NULL])->select($this->AircraftWOItemServiceLogs)->first();
-                    
+
                     $postData['logout_time'] = $currentdatetime;
 
                     $milliseconds = strtotime($postData['logout_time']) - strtotime($woitemservicelogs->login_time);
@@ -3735,6 +3760,10 @@
                     $postData['total_hrs_for_tech'] = $postData['total_hrs_for_tech']+$calulatedtime;
                     $postData['total_hrs_for_item'] = $postData['total_hrs_for_item']+$calulatedtime;
                     $postData['hours_worked'] = $calulatedtime;
+
+                    if(!empty($postData['currently_on_overtime'])){
+                        $postData['service_overtime_hrs'] += $calulatedtime;
+                    }
                 }
                 
                 $postData['total_hrs_for_tech'] = $postData['service_override_hrs']+$postData['hrs_worked'];
@@ -3777,8 +3806,8 @@
 
                 $postData['total_hrs_for_item'] = !empty($aircraftwoitemservicesdata) ? $aircraftwoitemservicesdata->total_hrs_for_item : '0';
                 $postData['added_by'] = $authUserData['id'];
-                $postData['service_rate_an_hour'] = ESTIMATEDRATE;
-                $postData['technician_billing_style'] = '1';
+                $postData['service_rate_an_hour'] = !empty($postData['service_rate_an_hour']) && $postData['service_rate_an_hour'] != '0.00' ? $postData['service_rate_an_hour'] : ESTIMATEDRATE;
+                $postData['technician_billing_style'] = !empty($postData['technician_billing_style']) ? $postData['technician_billing_style'] : '1';
                 $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
             }
 
@@ -3992,13 +4021,29 @@
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['wo_services_id'])){
-                        $woitemservices = $this->CustomerAircraftWOItemServices->get($postData['wo_services_id']);
+                        $woitemservices = $this->CustomerAircraftWOItemServices->find('all')->where(['CustomerAircraftWOItemServices.id'=>$postData['wo_services_id']])->first();
                         if(!empty($woitemservices)){
                             $result = $this->CustomerAircraftWOItemServices->delete($woitemservices);
                         }
                         $itemserverices = $this->AircraftWOItemServiceLogs->find('all')->where(['wo_services_id'=>$postData['wo_services_id']])->first();
                         if(!empty($itemserverices)){
-                            $result = $this->AircraftWOItemServiceLogs->delete($itemserverices);
+                            $wo_item_id = $itemserverices['wo_item_id'];
+                            $result = $this->AircraftWOItemServiceLogs->deleteAll([
+                                                'wo_services_id' => $postData['wo_services_id']
+                                            ]);
+
+                            $total_hours = $this->AircraftWOItemServiceLogs->find()
+                                                ->where(['wo_item_id' => $wo_item_id])
+                                                ->select([
+                                                    'total_hours' => $this->AircraftWOItemServiceLogs->find()->func()->sum('hours_worked')
+                                                ])
+                                                ->first()
+                                                ->total_hours ?? 0.00;
+
+                            $this->CustomerAircraftWOItemServices->updateAll(
+                                ['total_hrs_for_item' => $total_hours],
+                                ['wo_item_id' => $wo_item_id]
+                            );
                         }
                         $this->fetchWorkOrderServicesHtml();
                     }else{
@@ -5957,7 +6002,7 @@
                     ->join([
                         'inv' => [
                             'table' => 'inventories',
-                            'type' => 'INNER',
+                            'type' => 'LEFT',
                             'conditions' => 'inv.inventory_item_id = InventoryItems.id',
                         ]
                     ]);
@@ -7521,7 +7566,7 @@ Send: '.$messagedata['created_at'].'
                 $this->autoRender = false;
                 $this->viewBuilder()->setLayout('ajax');
                 $postData= $this->request->getData();
-
+                $current_wo_item_id = $postData['wo_item_id'];
                 $woitems = $this->CustomerAircraftWOItems->find('all')->where(['work_order_id'=>$postData['work_order_id'], 'wo_item_position'=>$postData['osr_item_number']])->select(['id'])->first();
                 if(!empty($woitems)){
                     $woitemosrinfo = $this->CustomerAircraftWOOSRInfoes->get($postData['osr_info_id']);
@@ -7533,7 +7578,7 @@ Send: '.$messagedata['created_at'].'
                     $woitemosrinfo = $this->CustomerAircraftWOOSRInfoes->patchEntity($woitemosrinfo, $postData);
 
                     if($this->CustomerAircraftWOOSRInfoes->save($woitemosrinfo)){
-                        $wo_item_id = $postData['wo_item_id'];
+                        $wo_item_id = $current_wo_item_id;
                         $osrlist = $this->getWOItemOSRListHTML($wo_item_id);
 
                         $response = ['status'=>'success', 'message'=>'', 'osrlist'=>$osrlist];

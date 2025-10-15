@@ -74,7 +74,7 @@ use Cake\Routing\Router;
         <div class="page-content mt-35">
             <div class="formBGCls">
                 <?php
-                 echo $this->Form->create($invenotries, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryDet'));
+                 echo $this->Form->create($invenotries, array('class' => '', 'id' => 'frmInventoryDet'));
                 ?>
                 <?php echo $this->element('Inventory/inventory_detail', array('isdetailpage'=>true)); ?>
                 <div style="clear: both;"></div>

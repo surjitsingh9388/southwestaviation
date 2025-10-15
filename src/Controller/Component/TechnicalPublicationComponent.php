@@ -15,7 +15,7 @@ use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 class TechnicalPublicationComponent extends Component {
-    public array $components = ['Timezone', 'Authentication.Authentication'];
+    public array $components = ['Timezone', 'Authentication.Authentication', 'UserManagementHistory'];
 
     protected \App\Model\Table\TechnicalPublicationsTable $TechnicalPublications;
     protected \App\Model\Table\UsersTable $Users;
@@ -75,6 +75,8 @@ class TechnicalPublicationComponent extends Component {
             $technicalPublications->created_at          = new \Cake\I18n\FrozenTime('now');
 
             if($this->TechnicalPublications->save($technicalPublications)){
+                $this->UserManagementHistory->saveTechnicalPublicationHistory($technicalPublications);
+
                 $redirecturl = !empty($postData['technical_publication_id']) ? $action.'/'.$paramsstring : $action.'/'.$folderpath;
             }else{
                 $redirecturl = '';
@@ -97,41 +99,69 @@ class TechnicalPublicationComponent extends Component {
         $whereArr = ['main_page_id'=>$main_page_id, 'subpage_id'=>$subpage_id];
         
         $parentidarr = [];
-        if($authUserData['role_id'] != '1' && !empty($user_id)){
+        if($authUserData['id'] != '1' && !empty($user_id)){
             $parentidarr = $this->getFolderDetailForUser($main_page_id, $user_id, $parent_folder_name);
         }
         
-        if($authUserData['role_id'] == '1'){
-            if(!empty($parent_folder_name)){
-                $parentdet = $this->TechnicalPublications->find('all')->where(['folder_file_name'=>$parent_folder_name])->select(['id'])->first();
-                $parent_id = $parentdet->id;
-            }else{
+        if ($authUserData['id'] == 1) {
+            // Admin user → no restrictions except parent
+            if (!empty($parent_folder_name)) {
+                $parentdet = $this->TechnicalPublications->find()
+                    ->where(['TechnicalPublications.main_page_id'=>$main_page_id, 'TechnicalPublications.subpage_id'=>$subpage_id, 'TechnicalPublications.folder_file_name' => $parent_folder_name])
+                    ->select(['id'])
+                    ->first();
+                $parent_id = $parentdet ? $parentdet->id : 0;
+            } else {
                 $parent_id = 0;
             }
-            $whereArr['parent_id'] = $parent_id;
-        }else{
-            if(!empty($parentidarr)){
-                $whereArr['TechnicalPublications.id IN'] = $parentidarr;
-            }else{
-                $parentdet = $this->TechnicalPublications->find('all')->where(['folder_file_name'=>$parent_folder_name])->select(['id'])->first();
-                $parent_id = $parentdet->id;
 
-                $whereArr = ['main_page_id'=>$main_page_id, 'subpage_id'=>$subpage_id, 'OR'=>[['TechnicalPublications.added_by' => $user_id], ['FIND_IN_SET('.$user_id.', TechnicalPublications.permission_user_ids)']]];
-                $whereArr['parent_id'] = $parent_id;
+            $whereArr['TechnicalPublications.parent_id'] = $parent_id;
+
+        } else {
+            // Non-admin users
+            if (!empty($parentidarr)) {
+                $whereArr['TechnicalPublications.id IN'] = $parentidarr;
+            } else {
+                $parentdet = $this->TechnicalPublications->find()
+                    ->where(['TechnicalPublications.folder_file_name' => $parent_folder_name])
+                    ->select(['id'])
+                    ->first();
+                $parent_id = $parentdet ? $parentdet->id : 0;
+
+                $whereArr = [
+                    'TechnicalPublications.main_page_id' => $main_page_id,
+                    'TechnicalPublications.subpage_id'   => $subpage_id,
+                    'TechnicalPublications.parent_id'    => $parent_id,
+                    'OR' => [
+                        ['TechnicalPublications.added_by' => $user_id],
+                        ['TechnicalPublicationPermissions.user_id' => $user_id]
+                    ]
+                ];
             }
         }
-        
-        $technicalPublicationdata = $this->TechnicalPublications->find('all')
-                                                    ->where($whereArr)
-                                                    ->select($this->TechnicalPublications)
-                                                    ->select(['users.full_name'])
-                                                    ->join([
-                                                        'users'=>[
-                                                            'table'=>'users',
-                                                            'type'=>'INNER',
-                                                            'conditions'=>'TechnicalPublications.added_by = users.id'
-                                                        ]
-                                                    ]);
+        //pr($whereArr);exit;
+        // Final query with join
+        $technicalPublicationdata = $this->TechnicalPublications->find()
+                    ->where($whereArr)
+                    ->select($this->TechnicalPublications)
+                    ->select(['users.full_name', 'TechnicalPublicationPermissions.action_add', 'TechnicalPublicationPermissions.action_edit', 'TechnicalPublicationPermissions.action_view', 'TechnicalPublicationPermissions.action_delete'])
+                    ->join([
+                        'users' => [
+                            'table' => 'users',
+                            'type' => 'INNER',
+                            'conditions' => 'TechnicalPublications.added_by = users.id'
+                        ],
+                        'TechnicalPublicationPermissions' => [
+                            'table' => 'technical_publication_permissions',
+                            'type' => 'LEFT',
+                            'conditions' => [
+                                'TechnicalPublicationPermissions.technical_publication_id = TechnicalPublications.id',
+                                'TechnicalPublicationPermissions.user_id' => $user_id
+                            ]
+                        ]
+                    ])
+                    ->group(['TechnicalPublications.id']);
+
         $technicalPublications = [];
         if(!empty($technicalPublicationdata)){
             foreach($technicalPublicationdata as $key=>$row){
@@ -155,22 +185,22 @@ class TechnicalPublicationComponent extends Component {
     public function getFolderDetailForUser($main_page_id, $userId, $parent_folder_name){
         // Step 1: Get all rows where the user has access
         
-        $whereCond = [
-                        'TechnicalPublications.main_page_id' => $main_page_id,
-                        'OR' => [
-                            'TechnicalPublications.added_by' => $userId,
-                            "FIND_IN_SET(:userId, TechnicalPublications.permission_user_ids) >" => 0
-                        ]
-                    ];
-        if(!empty($parent_folder_name)){
-            //$whereCond['folder_file_name'] = $parent_folder_name;
-        }
-
         $initialRows = $this->TechnicalPublications->find()
-                                                ->where($whereCond)
-                                                ->bind(':userId', $userId, 'integer')
-                                                ->limit(1000) // Optional but recommended to avoid huge memory use
-                                                ->all();
+                                                    ->leftJoinWith('TechnicalPublicationPermissions', function ($q) use ($userId) {
+                                                        return $q->where([
+                                                            'TechnicalPublicationPermissions.user_id' => $userId
+                                                        ]);
+                                                    })
+                                                    ->where([
+                                                        'TechnicalPublications.main_page_id' => $main_page_id,
+                                                        'OR' => [
+                                                            'TechnicalPublications.added_by' => $userId,
+                                                            function ($exp) {
+                                                                return $exp->isNotNull('TechnicalPublicationPermissions.id');
+                                                            }
+                                                        ]
+                                                    ])
+                                                    ->all();
 
         // Step 2: Collect all folders including their parents
         $allFolders = [];
@@ -253,7 +283,7 @@ class TechnicalPublicationComponent extends Component {
                 }
             }
         }
-        
+        //pr($finaldata);exit;
         return $finaldata;
     }
 
@@ -387,7 +417,7 @@ class TechnicalPublicationComponent extends Component {
 
     public function getUserDropdownList(){
         $this->Users = $this->getController()->fetchTable('Users');
-        $userdet = $this->Users->find('all')->where(['suspended'=>'0', 'role_id !='=>'1'])->select(['Users.id', 'Users.full_name']);
+        $userdet = $this->Users->find('all')->where(['suspended'=>'0'])->select(['Users.id', 'Users.full_name']);
         
         $userlist = [];
         foreach($userdet as $users){
@@ -452,6 +482,93 @@ class TechnicalPublicationComponent extends Component {
             exit();
         }
     }
+
+    public function getTechnicalPublicationData(){
+        $this->TechnicalPublications = $this->getController()->fetchTable('TechnicalPublications');
+        $this->Users = $this->getController()->fetchTable('Users');
+
+        $authUserData = $this->Authentication->getResult()->getData();
+        $user_id = $authUserData['id'];
+
+        $technicalPublicationdata = $this->TechnicalPublications->find('all')
+                                                    //->where($whereArr)
+                                                    ->select($this->TechnicalPublications)
+                                                    ->select(['users.full_name'])
+                                                    ->join([
+                                                        'users'=>[
+                                                            'table'=>'users',
+                                                            'type'=>'INNER',
+                                                            'conditions'=>'TechnicalPublications.added_by = users.id'
+                                                        ]
+                                                    ])
+                                                    ->orderAsc('is_folder') // show folders first
+                                                    ->orderAsc('main_page_id')
+                                                    ->orderAsc('folder_file_name')
+                                                    ->toArray();
+        
+        
+        $technicalPublications = $this->buildTree($technicalPublicationdata);
+        //pr($technicalPublicationdata);exit;
+        /*$technicalPublications = [];
+        if(!empty($technicalPublicationdata)){
+            foreach($technicalPublicationdata as $key=>$row){
+                $usernamearr = [];
+                $technicalPublications[] = $row;
+
+                if(!empty($row['permission_user_ids'])){
+                    $useridarr = explode(',', $row['permission_user_ids']);
+                    $userarr = $this->Users->find('all')->where(['id IN'=> $useridarr])->select('full_name');
+                    
+                    foreach($userarr as $users){
+                        $usernamearr[] = $users['full_name'];
+                    }
+                }
+                $technicalPublications[$key]['permission_users'] = $usernamearr;
+            }
+        }*/
+        return $technicalPublications;
+    }
+
+    public function buildTree(array $elements, $parentId = null)
+    {
+        $branch = [];
+
+        foreach ($elements as $element) {
+            if ($element->parent_id == $parentId) {
+
+                // Get permission users for this element
+                $usernamearr = [];
+                if (!empty($element->permission_user_ids)) {
+                    $userIdArr = explode(',', $element->permission_user_ids);
+
+                    // Only query users if IDs are valid
+                    $users = $this->Users
+                        ->find()
+                        ->where(['id IN' => $userIdArr])
+                        ->select(['full_name'])
+                        ->toArray();
+
+                    foreach ($users as $user) {
+                        $usernamearr[] = $user->full_name;
+                    }
+                }
+
+                // Attach permission users to element
+                $element->permission_users = $usernamearr;
+
+                // Recursively find children
+                $children = $this->buildTree($elements, $element->id);
+                if (!empty($children)) {
+                    $element->children = $children;
+                }
+
+                $branch[] = $element;
+            }
+        }
+
+        return $branch;
+    }
+
 }
 
 ?>

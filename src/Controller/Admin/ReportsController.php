@@ -14,6 +14,8 @@ use Dompdf\Dompdf;
 use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\I18n\FrozenTime;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * Users Controller
@@ -56,6 +58,8 @@ class ReportsController extends AppController
         $this->loadComponent('AtaCode');
         $this->loadComponent('Disposition');
         $this->loadComponent('AdsbStatus');
+        $this->loadComponent('AirframeRequirementSource');
+        $this->loadComponent('AirframeMoc');
         $this->loadComponent('Report');
 
         $this->planeObj          = $this->fetchTable('Planes');
@@ -849,6 +853,473 @@ class ReportsController extends AppController
             $result = array('status'=>'failure', 'data'=>'');
             echo json_encode($result);die;
         }
+    }
+
+    /**
+     * Generate Excel for multiple aircraft
+     */
+    public function generateMultiAircraftExcel()
+    {
+        ini_set('memory_limit', '1024M');
+        $this->autoRender = false;
+        $this->response = $this->response->withType('json');
+        try {
+            ini_set('memory_limit', '1024M');
+            ini_set('max_execution_time', '600');
+            ini_set("pcre.backtrack_limit", "50000000");
+            $req = $this->request->getData();
+            //Aircraft Ids
+            $pids = explode(',', $req['pids']);
+
+            //Sorting condition
+            $sortOrder = $this->sortOrderResults($pids, $req);
+            
+            //Condition if parts selected
+            $cond = '';
+            $partids = '';
+            if(!empty($req['partids'])) {
+                if(is_array($req['partids'])) {
+                    $partids = $req['partids'];
+                } else {
+                    $partids = explode(',', $req['partids']);
+                }
+                $cond = ['AirframeComponentParts.id IN'=>$partids];
+            }
+
+            //PDF Type
+            $pdfType = 'Maintenance Due List';
+            if(!empty($req['type']) && $req['type'] == 'maintenanceItems') {
+                $pdfType = 'Maintenance Items';
+                if(!empty($req['reporttype']) && $req['reporttype'] == 'projected') {
+                    $pdfType = 'Projected Report';
+                }
+
+            } elseif(!empty($req['type']) && $req['type'] == 'adsbstatus') {
+                $pdfType = 'Airworthiness Directives & Service Bulletins';
+
+            } elseif(!empty($req['type']) && $req['type'] == 'past_due') {
+                $pdfType = 'Maintenance Overdue List';
+
+            } elseif(!empty($req['type']) && $req['type'] == 'tolerance') {
+                $pdfType = 'Maintenance Current Due List';
+
+            } elseif(!empty($req['type']) && $req['type'] == 'alert_due') {
+                $pdfType = 'Maintenance Projected Due List';
+
+            } elseif(!empty($req['type']) && $req['type'] == 'quickRef') {
+                if(!empty($cond)) {
+                    $cond = ['AirframeComponentParts.id IN'=>$partids, 'AirframeComponentParts.quick_ref'=>'yes'];
+                } else {
+                    $cond = ['AirframeComponentParts.quick_ref'=>'yes'];
+                }
+            }
+
+            /*********************************************/
+            if(!empty($req['searchby'])) {
+                if(!empty($req['searchval']) && !empty($cond)) {
+                    $cond = [
+                                'AND'=>[
+                                    $cond,
+                                    'OR'=>[
+                                        'AirframeComponentParts.reference LIKE' => '%'.trim($req['searchval']).'%',
+                                        'AirframeComponentParts.item_type LIKE' => '%'.trim($req['searchval']).'%',
+                                        'AirframeComponentParts.requirement_type LIKE' => '%'.trim($req['searchval']).'%',
+                                        'AirframeComponentParts.ad_sb_status LIKE' => '%'.trim($req['searchval']).'%',
+                                        'AirframeComponentParts.description LIKE' => '%'.trim($req['searchval']).'%',
+                                        'AirframeComponents.log_book LIKE' => '%'.trim($req['searchval']).'%'
+                                    ]
+                                ]
+                            ];
+                } elseif (!empty($req['searchval'])) {
+                    $cond = [
+                                'OR'=>[
+                                    'AirframeComponentParts.reference LIKE' => '%'.trim($req['searchval']).'%',
+                                    'AirframeComponentParts.item_type LIKE' => '%'.trim($req['searchval']).'%',
+                                    'AirframeComponentParts.requirement_type LIKE' => '%'.trim($req['searchval']).'%',
+                                    'AirframeComponentParts.ad_sb_status LIKE' => '%'.trim($req['searchval']).'%',
+                                    'AirframeComponentParts.description LIKE' => '%'.trim($req['searchval']).'%',
+                                    'AirframeComponents.log_book LIKE' => '%'.trim($req['searchval']).'%'
+                                ]
+                            ];
+                }
+            }
+
+            //Components associate tables
+            $compAssociates = $this->Report->associateQuery();
+            $partsQuery = function ($q) use ($partids, $cond, $sortOrder, $compAssociates) { 
+                            return $q->where($cond)
+                            ->order($sortOrder)
+                            ->contain([
+                                'AirframeComponents'=>$compAssociates,
+                                'AirframeComponentLastCw'=>[
+                                    'sort' => ['AirframeComponentLastCw.id' => 'DESC'],
+                                ],
+                                'PartInstalledTimes'=>[
+                                    'sort'=>['PartInstalledTimes.id'=>'DESC']
+                                ],
+                                'AirframeCategories'=>[
+                                    'fields'=>[
+                                        'AirframeCategories.id',
+                                        'AirframeCategories.category_name'
+                                    ]
+                                ]
+                            ]);
+                        };
+            $reports = $this->planeObj->find()
+                        ->where(['Planes.id IN'=>$pids])
+                        ->contain([ 
+                            'AirframeComponents'=>$compAssociates,
+                            'AirframeComponentParts'=>$partsQuery,
+                        ])
+                        ->select(['Planes.id', 'Planes.plane_name', 'Planes.plane_type', 'Planes.plane_code', 'Planes.plane_serial_number', 'Planes.federal_aviation_regulation', 'Planes.airworthiness_date', 'Planes.hours', 'Planes.cycles'])
+                        ->enableHydration(false)
+                        ->toArray();
+            
+            // Create Excel file
+            $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setTitle("Aircraft Data");
+
+            // Headers
+            $headers = [
+                'ID', 'Aircraft', 'Component', 'AD/SB Number', 'Requirement Source', 'Item Type',
+                'Requirement Type', 'Amendment', 'Authority', 'ATA Code', 'Disposition',
+                'AD/SB Status', 'Avg Man Hrs', 'Reference', 'Position', 'SOC',
+                'Mfg Code', 'Item Name', 'MOC', 'Notes', 'Work Description', 'Tags',
+
+                // Last Complied With
+                'Last Complied With Date', 'Last Complied With Hours', 'Last Complied With Cycles',
+
+                // Next Due
+                'Override Next Due', 'EoM Adj', 'Next Due Date', 'Next Due Hours', 'Next Due Cycles',
+
+                // Remaining
+                'Remaining Months', 'Remaining Days', 'Remaining Hours', 'Remaining Cycles',
+
+                // Tolerance
+                'Tolerance Months', 'Tolerance Days', 'Tolerance Hours', 'Tolerance Cycles',
+
+                // Alert
+                'Alert Days', 'Alert Hours', 'Alert Cycles',
+
+                // Recurring
+                'Recurring', 'Recurring Months', 'Recurring Days', 'Recurring Hours', 'Recurring Cycles',
+
+                // Threshold
+                'Threshold', 'Threshold Months', 'Threshold Days', 'Threshold Hours', 'Threshold Cycles',
+
+                // Interval
+                'Interval Months', 'Interval Days', 'Interval Hours', 'Interval Cycles',
+
+                // Adjustment
+                'Adjustment Months', 'Adjustment Days', 'Adjustment Hours', 'Adjustment Cycles',
+
+                // Part Information
+                'Part Number', 'Serial Number',
+
+                // Times Since (at Installed) New
+                'Times Since (at Installed) New Months', 'Times Since (at Installed) New Hours', 'Times Since (at Installed) New Landings',
+
+                // Times Since (at Installed) Overhaul
+                'Times Since (at Installed) Overhaul Months', 'Times Since (at Installed) Overhaul Hours', 'Times Since (at Installed) Overhaul Landings',
+
+                // Times Since (at Installed) Repair
+                'Times Since (at Installed) Repair Months', 'Times Since (at Installed) Hours', 'Times Since (at Installed) Landings',
+
+                // Additional Information
+                'Work Card', 'Position', 'Version', 'Last Revised By',
+
+                // Admin Notes
+                'Admin Notes'
+            ];
+            $col = 'A';
+            foreach ($headers as $header) {
+                $sheet->setCellValue($col . '1', $header);
+                $col++;
+            }
+
+            //Seperate aircraft details
+            $multiReports = array();
+            $aircraftCode = '';
+            $mResults = '';
+            $tmp = '';
+            $headerHTML = '';
+            $footerHTML = '';
+            $reportDate = date('m/d/Y');
+
+            $row = 2;
+
+            foreach ($reports as $key => $value) {
+                $finalArr = [];
+                $activeArr = [];
+                $historicalArr = [];
+
+                foreach ($value['airframe_component_parts'] as $partRow) {
+                    if (!empty($req['type']) && $req['type'] === 'maintenanceItems') {
+                        if (
+                            !empty($partRow['ata_code']) &&
+                            !empty($partRow['disposition']) &&
+                            !in_array($partRow['ata_code'], $this->ataCodeArr) &&
+                            in_array($partRow['disposition'], $this->disListArr)
+                        ) {
+                            $historicalArr[] = $partRow;
+                        } elseif (!in_array($partRow['ata_code'], $this->ataCodeArr)) {
+                            $activeArr[] = $partRow;
+                        }
+                    } elseif (!empty($req['type']) && $req['type'] === 'adsbstatus') {
+                        if (
+                            !empty($partRow['ata_code']) &&
+                            !empty($partRow['disposition']) &&
+                            in_array($partRow['ata_code'], $this->ataCodeArr) &&
+                            in_array($partRow['disposition'], $this->adSbDispArr)
+                        ) {
+                            $historicalArr[] = $partRow;
+                        } elseif (
+                            !empty($partRow['ata_code']) &&
+                            in_array($partRow['ata_code'], $this->ataCodeArr) &&
+                            !in_array($partRow['ad_sb_status'], $this->adSbStatus)
+                        ) {
+                            $activeArr[] = $partRow;
+                        }
+                    }
+                }
+
+                if (!empty($req['action']) && $req['action'] === 'historical') {
+                    $finalArr = $historicalArr;
+                } elseif (!empty($req['action']) && $req['action'] === 'active') {
+                    $finalArr = $activeArr;
+                } else {
+                    $finalArr = $value['airframe_component_parts'];
+                }
+
+                // pass $row by reference so it keeps increasing
+                $this->displayGroupDataForExcel($finalArr, $req, $sheet, $row);
+            }
+
+            $fileName = date('YmdHis') . ".xlsx";
+            $filePath = WWW_ROOT . PDF_DIR . $fileName;
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+            $writer->setPreCalculateFormulas(false);
+            $writer->save($filePath);
+
+            if (file_exists($filePath)) {
+                $result = ['status' => 'success', 'data' => ROOT_DIR . PDF_DIR . $fileName];
+            } else {
+                $result = ['status' => 'failure', 'data' => ''];
+            }
+        } catch (\Throwable $e) {
+            $result = [
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ];
+        }
+
+        echo json_encode($result);die;
+        //return $this->response;
+    }
+
+    //Conditions to display data in groups for excel generate
+    public function displayGroupDataForExcel($airPartsData, $req, $sheet)
+    {
+        if(!empty($airPartsData) && !empty($req)) {
+            $row = 2;
+            foreach ($airPartsData as $key => $airCompParts) {
+                $readonly = true;
+                if(!empty($airCompParts['airframe_component_last_cw'][0]['override'])) {
+                    $readonly = false;
+                }
+
+                $isResThres = !empty($airCompParts['airframe_component_last_cw'][0]['is_recThres']) ? $airCompParts['airframe_component_last_cw'][0]['is_recThres'] : '';
+
+                //Change alert box value
+                if(!empty($isResThres) && $isResThres == 'recurring') {
+                    $airCompParts['airframe_component_last_cw'][0]['alert_days'] = ($airCompParts['airframe_component_last_cw'][0]['recurring_mos'] > 24) ? 60 : 30;
+                    $airCompParts['airframe_component_last_cw'][0]['alert_hrs'] = ($airCompParts['airframe_component_last_cw'][0]['recurring_hrs'] > 999) ? 200 : 50;
+                    $airCompParts['airframe_component_last_cw'][0]['alert_afl'] = ($airCompParts['airframe_component_last_cw'][0]['recurring_afl'] > 999) ? 200 : 25;
+                } elseif(!empty($isResThres) && $isResThres == 'threshold') {
+                    $airCompParts['airframe_component_last_cw'][0]['alert_days'] = ($airCompParts['airframe_component_last_cw'][0]['threshold_mos'] > 24) ? 60 : 30;
+                    $airCompParts['airframe_component_last_cw'][0]['alert_hrs'] = ($airCompParts['airframe_component_last_cw'][0]['threshold_hrs'] > 999) ? 200 : 50;
+                    $airCompParts['airframe_component_last_cw'][0]['alert_afl'] = ($airCompParts['airframe_component_last_cw'][0]['threshold_afl'] > 999) ? 200 : 25;
+                }
+
+                //Get data correction and nextdue calculation
+                $mos = $hrs = $afl = $msc = '';
+                if(!empty($airCompParts['airframe_component_last_cw'][0])) {
+                    $getRes = $this->AirframeComponentPart->postDataProcess($airCompParts['airframe_component_last_cw'][0]);
+                    $mos = $getRes['mos'];
+                    $hrs = $getRes['hrs'];
+                    $afl = $getRes['afl'];
+                    $msc = $getRes['msc'];
+                }
+
+                //Start Remaining    
+                $remMonths = '';
+                $remDays = '';
+                if(!empty($mos)) {
+                    $mos = $this->AirframeComponentPart->changeFormat($mos);
+                    $date1 = new \DateTime($mos);
+                    //Do not change date format
+                    $date2 = new \DateTime(date('d-m-Y'));
+                    $interval = date_diff($date1, $date2);
+                    $year = $interval->format('%y');
+                    $remMonths = $interval->format('%m') + $year * 12;
+                    $remDays = $interval->format('%d');
+                    
+                    if($date1 < $date2) {
+                        $remMonths = !empty($remMonths) ? -$remMonths : 0;
+                        $remDays = !empty($remDays) ? -$remDays : 0;
+                    }
+                }
+
+                //Component Times
+                $compHours  = !empty($airCompParts['airframe_component']['airframe_component_times'][0]['hours']) ? $airCompParts['airframe_component']['airframe_component_times'][0]['hours'] : 0;
+                $compCycles = !empty($airCompParts['airframe_component']['airframe_component_times'][0]['cycles']) ? $airCompParts['airframe_component']['airframe_component_times'][0]['cycles'] : 0;
+
+                $remHours  = !empty($hrs) ? $hrs - $compHours : '';
+                $remCycles = !empty($afl) ? $afl - $compCycles : '';
+                //End Remaining
+
+                $override = !empty($airCompParts['airframe_component_last_cw'][0]['override']) ? $airCompParts['airframe_component_last_cw'][0]['override'] : '';
+                $eom = !empty($airCompParts['airframe_component_last_cw'][0]['eom']) ? $airCompParts['airframe_component_last_cw'][0]['eom'] : '';
+                
+                $lastCwDate = !empty($airCompParts['airframe_component_last_cw'][0]['last_cw_date']) ? date('m-d-Y', strtotime($airCompParts['airframe_component_last_cw'][0]['last_cw_date'])) : '';
+                $lastCwHour = !empty($airCompParts['airframe_component_last_cw'][0]['last_cw_hrs']) ? $airCompParts['airframe_component_last_cw'][0]['last_cw_hrs'] : '';
+                $lastCwCycle = !empty($airCompParts['airframe_component_last_cw'][0]['last_cw_afl']) ? $airCompParts['airframe_component_last_cw'][0]['last_cw_afl'] : '';
+
+                $style = '';
+                if ((!empty($mos) && strtotime($mos) <= strtotime(date('m-d-Y'))) || (empty($mos) && !empty($remHours) && $remHours < 0)) {
+                    $style = 'pastDue';
+                }
+
+                //Change next due date format
+                $mos = !empty($mos) ? $this->AirframeComponentPart->dateFormat($mos) : '';
+
+                $aiframecomponent = '';
+                if($airCompParts['airframe_component']['log_book'] == 'Airframe') {
+                    $aiframecomponent = $airCompParts['airframe_component']['log_book'];
+                } else {
+                    $aiframecomponent = $airCompParts['airframe_component']['log_book'].$airCompParts['airframe_component']['position'];
+                }
+
+                $sheet->setCellValue('A' . $row, $airCompParts['id']);
+                $sheet->setCellValue('B' . $row, $this->Plane->getPlaneName($airCompParts['plane_id']));
+                $sheet->setCellValue('C' . $row, $aiframecomponent);
+                $sheet->setCellValue('D' . $row, $airCompParts['ad_sb_number']);
+                $sheet->setCellValue('E' . $row, $this->AirframeRequirementSource->getRequirementSourceTitle($airCompParts['requirement_source_id']));
+                $sheet->setCellValue('F' . $row, $airCompParts['item_type']);
+                $sheet->setCellValue('G' . $row, $airCompParts['requirement_type']);
+                $sheet->setCellValue('H' . $row, $airCompParts['amendment']);
+                $sheet->setCellValue('I' . $row, $airCompParts['authority']);
+                $sheet->setCellValue('J' . $row, $this->AtaCode->ataTitle($airCompParts['ata_code']));
+                $sheet->setCellValue('K' . $row, $this->Disposition->dispTitle($airCompParts['disposition']));
+                $sheet->setCellValue('L' . $row, $this->AdsbStatus->adsbTitle($airCompParts['ad_sb_status']));
+                $sheet->setCellValue('M' . $row, $airCompParts['avg_man_hrs']);
+                $sheet->setCellValue('N' . $row, $airCompParts['reference']);
+                $sheet->setCellValue('O' . $row, $this->Position->positionTitle($airCompParts['position_id']));
+                $sheet->setCellValue('P' . $row, $this->AirframeMoc->mocTitle($airCompParts['moc_id']));
+                $sheet->setCellValue('Q' . $row, $airCompParts['mfg_code']);
+                $sheet->setCellValue('R' . $row, $airCompParts['description']);
+                $sheet->setCellValue('S' . $row, $airCompParts['moc']);
+                $sheet->setCellValue('T' . $row, $airCompParts['notes']);
+                $sheet->setCellValue('U' . $row, $airCompParts['work_description']);
+                $sheet->setCellValue('V' . $row, $airCompParts['tags']);
+
+                // Last Complied With
+                $sheet->setCellValue('W' . $row, $lastCwDate);
+                $sheet->setCellValue('X' . $row, $lastCwHour);
+                $sheet->setCellValue('Y' . $row, $lastCwCycle);
+
+                // Next Due
+                $sheet->setCellValue('Z'  . $row, $airCompParts['airframe_component_last_cw'][0]['override'] ?? '');
+                $sheet->setCellValue('AA' . $row, $airCompParts['airframe_component_last_cw'][0]['eom'] ?? '');
+                $sheet->setCellValue('AB' . $row, $mos);
+                $sheet->setCellValue('AC' . $row, $hrs);
+                $sheet->setCellValue('AD' . $row, $afl);
+
+                // Remaining
+                $sheet->setCellValue('AE' . $row, $remMonths);
+                $sheet->setCellValue('AF' . $row, $remDays);
+                $sheet->setCellValue('AG' . $row, $remHours);
+                $sheet->setCellValue('AH' . $row, $remCycles);
+
+                // Tolerance
+                $sheet->setCellValue('AI' . $row, $airCompParts['airframe_component_last_cw'][0]['tolerance_mos'] ?? '');
+                $sheet->setCellValue('AJ' . $row, $airCompParts['airframe_component_last_cw'][0]['tolerance_days'] ?? '');
+                $sheet->setCellValue('AK' . $row, $airCompParts['airframe_component_last_cw'][0]['tolerance_hrs'] ?? '');
+                $sheet->setCellValue('AL' . $row, $airCompParts['airframe_component_last_cw'][0]['tolerance_afl'] ?? '');
+
+                // Alert
+                $sheet->setCellValue('AM' . $row, $airCompParts['airframe_component_last_cw'][0]['alert_days'] ?? '');
+                $sheet->setCellValue('AN' . $row, $airCompParts['airframe_component_last_cw'][0]['alert_hrs'] ?? '');
+                $sheet->setCellValue('AO' . $row, $airCompParts['airframe_component_last_cw'][0]['alert_afl'] ?? '');
+
+                // Recurring
+                $sheet->setCellValue('AP' . $row, ($airCompParts['airframe_component_last_cw'][0]['is_recThres'] == 'recurring' ? $airCompParts['airframe_component_last_cw'][0]['is_recThres'] : ''));
+                $sheet->setCellValue('AQ' . $row, $airCompParts['airframe_component_last_cw'][0]['recurring_mos'] ?? '');
+                $sheet->setCellValue('AR' . $row, $airCompParts['airframe_component_last_cw'][0]['recurring_days'] ?? '');
+                $sheet->setCellValue('AS' . $row, $airCompParts['airframe_component_last_cw'][0]['recurring_hrs'] ?? '');
+                $sheet->setCellValue('AT' . $row, $airCompParts['airframe_component_last_cw'][0]['recurring_afl'] ?? '');
+
+                // Threshold
+                $sheet->setCellValue('AU' . $row, ($airCompParts['airframe_component_last_cw'][0]['is_recThres'] == 'threshold' ? $airCompParts['airframe_component_last_cw'][0]['is_recThres'] : ''));
+                $sheet->setCellValue('AV' . $row, $airCompParts['airframe_component_last_cw'][0]['threshold_mos'] ?? '');
+                $sheet->setCellValue('AW' . $row, $airCompParts['airframe_component_last_cw'][0]['threshold_days'] ?? '');
+                $sheet->setCellValue('AX' . $row, $airCompParts['airframe_component_last_cw'][0]['threshold_hrs'] ?? '');
+                $sheet->setCellValue('AY' . $row, $airCompParts['airframe_component_last_cw'][0]['threshold_afl'] ?? '');
+
+                // Interval
+                $sheet->setCellValue('AZ' . $row, $airCompParts['airframe_component_last_cw'][0]['required_frequency_mos'] ?? '');
+                $sheet->setCellValue('BA' . $row, $airCompParts['airframe_component_last_cw'][0]['required_frequency_days'] ?? '');
+                $sheet->setCellValue('BB' . $row, $airCompParts['airframe_component_last_cw'][0]['required_frequency_hrs'] ?? '');
+                $sheet->setCellValue('BC' . $row, $airCompParts['airframe_component_last_cw'][0]['required_frequency_afl'] ?? '');
+
+                // Adjustment
+                $sheet->setCellValue('BD' . $row, $airCompParts['airframe_component_last_cw'][0]['adjustment_mos'] ?? '');
+                $sheet->setCellValue('BE' . $row, $airCompParts['airframe_component_last_cw'][0]['adjustment_days'] ?? '');
+                $sheet->setCellValue('BF' . $row, $airCompParts['airframe_component_last_cw'][0]['adjustment_hrs'] ?? '');
+                $sheet->setCellValue('BG' . $row, $airCompParts['airframe_component_last_cw'][0]['adjustment_afl'] ?? '');
+
+                // Part Information
+                $sheet->setCellValue('BH' . $row, $airCompParts['part_number'] ?? '');
+                $sheet->setCellValue('BI' . $row, $airCompParts['serial_number'] ?? '');
+
+                // Times Since (New)
+                $sheet->setCellValue('BJ' . $row, $airCompParts['part_installed_times'][0]['new_months'] ?? '');
+                $sheet->setCellValue('BK' . $row, $airCompParts['part_installed_times'][0]['new_hours'] ?? '');
+                $sheet->setCellValue('BL' . $row, $airCompParts['part_installed_times'][0]['new_landings'] ?? '');
+
+                // Times Since (Overhaul)
+                $sheet->setCellValue('BM' . $row, $airCompParts['part_installed_times'][0]['overhaul_months'] ?? '');
+                $sheet->setCellValue('BN' . $row, $airCompParts['part_installed_times'][0]['overhaul_hours'] ?? '');
+                $sheet->setCellValue('BO' . $row, $airCompParts['part_installed_times'][0]['overhaul_landings'] ?? '');
+
+                // Times Since (Repair)
+                $sheet->setCellValue('BP' . $row, $airCompParts['part_installed_times'][0]['repair_months'] ?? '');
+                $sheet->setCellValue('BQ' . $row, $airCompParts['part_installed_times'][0]['repair_hours'] ?? '');
+                $sheet->setCellValue('BR' . $row, $airCompParts['part_installed_times'][0]['repair_landings'] ?? '');
+
+                // Additional Information
+                $sheet->setCellValue('BS' . $row, $airCompParts['work_card'] ?? '');
+                $sheet->setCellValue('BT' . $row, $airCompParts['position'] ?? '');
+                $sheet->setCellValue('BU' . $row, $airCompParts['revision'] ?? '');
+
+                // Last Revised By
+                if (!empty($airCompParts['airframe_component_last_cw'][0]['last_revised_by']) && is_numeric($airCompParts['airframe_component_last_cw'][0]['last_revised_by'])) {
+                    $lastRevisedBy = $this->User->getUserName($airCompParts['airframe_component_last_cw'][0]['last_revised_by']);
+                } else {
+                    $lastRevisedBy = trim($airCompParts['airframe_component_last_cw'][0]['last_revised_by'] ?? '');
+                }
+                $sheet->setCellValue('BV' . $row, $lastRevisedBy);
+
+                // Admin Notes
+                $sheet->setCellValue('BW' . $row, $airCompParts['admin_notes'] ?? '');
+                
+                $row++;
+			}
+        }
+        return $sheet;
     }
 
     //Conditions to display data in groups for pdf generate

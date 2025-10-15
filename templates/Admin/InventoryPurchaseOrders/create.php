@@ -68,7 +68,7 @@ echo $this->Html->css('inventory_purchase_order');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary vendorsavebtn" disabled>Save</button>
+                <button type="button" class="btn btn-primary vendorsavebtn">Save</button>
             </div>
         </div>
     </div>

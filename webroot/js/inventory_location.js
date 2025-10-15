@@ -114,13 +114,13 @@ function disableEnableLocationSaveBtn(){
     var errors = 0;
     if($('label.active').text() == 'Top-Level Location'){
         $("form#frmInvenotryLocations #location-name, #location-status").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
     }else{
         $("form#frmInvenotryLocations #location-name, #parent-location-id, #location-status").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });

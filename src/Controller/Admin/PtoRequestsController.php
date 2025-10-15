@@ -31,6 +31,7 @@
             $this->Users = $this->fetchTable('Users');
 
             $this->loadComponent('PTORequests');
+            $this->loadComponent('UserManagementHistory');
         }
 
         public function beforeRender(\Cake\Event\EventInterface $event) {
@@ -167,14 +168,16 @@
                     $approvedenybtn .= '<a href="javascript:void(0);" class="btn btn-primary btn-xs pto-request-approve-deny-btn" pto-request-id="'.$row['id'].'" data-val="3" source=\'pto\'> Deny</a>';
                 }
 
-                if(((!empty($actionItems) && $actionItems['action']['action_view']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
+                if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $authUserData['role_id'] == 1){
                     $view = '<a href="javascript:void(0);" class="btn btn-primary btn-xs view_pto_request_det" pto-request-id="'.$row['id'].'"><i class="fa fa-folder"></i> View</a>';
                 }
-                if(((!empty($actionItems) && $actionItems['action']['action_edit']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
+                if((!empty($actionItems) && $actionItems['action']['action_edit']==1) || $authUserData['role_id'] == 1){
                     $edit = ' <a href="javascript:void(0);" data-val="'.$row['id'].'" class="btn btn-info btn-xs pto_request_create_btn"><i class="fa fa-pencil"></i> Edit</a>';
                 }
-                if(((!empty($actionItems) && $actionItems['action']['action_delete']==1)/* && $row['user_id'] == $authUserData['id']*/) || $authUserData['role_id'] == 1){
-                    $delete = '<a href="javascript:void(0);" data-val="'.$row['id'].'" data-url="pto_requests/delete" class="btn btn-danger btn-xs pto_request_delete_btn"><i class="fa fa-trash-o"></i> Delete</a>';
+                if((!empty($actionItems) && $actionItems['action']['action_delete']==1) || $authUserData['role_id'] == 1){
+                    if($authUserData['role_id'] == 1 || ($authUserData['id'] == $row['user_id'] && $row['pto_requests_status'] == '1')){
+                        $delete = '<a href="javascript:void(0);" data-val="'.$row['id'].'" data-url="pto_requests/delete" class="btn btn-danger btn-xs pto_request_delete_btn"><i class="fa fa-trash-o"></i> Delete</a>';
+                    }
                 }
                 $nestedData[] = $approvedenybtn.$view.$edit.$delete;
                 $data[] = $nestedData;
@@ -273,6 +276,7 @@
             if($userptorequests->save($ptorequests)){
                 $pto_request_id = $ptorequests->id;
 
+                $ptorequestlogsarr = [];
                 $totaltime = 0;
                 $totalptouse = 0;
                 
@@ -296,7 +300,14 @@
                         $ptorequestlogs->created_at = $currentdatetime;
 
                         $userptorequestlogs->save($ptorequestlogs);
+
+                        $ptorequestlogsarr[] = $ptorequestlogs;
                     }
+                }
+
+                if(empty($postData['pto_request_id'])){
+                    $ptorequests->pto_request_logs = $ptorequestlogsarr;
+                    $this->UserManagementHistory->saveUserPTORequestHistory($ptorequests);
                 }
 
                 $ptorequests = $userptorequests->get($pto_request_id);
@@ -312,7 +323,7 @@
                         $new_balance = $previous_balance-$totalptouse;
                         //$new_balance += $totaltime;
                     }else{
-                        $new_balance = $totalptouse;
+                        $new_balance = $previous_balance-$totalptouse;
                     }
                 }
                 
@@ -329,11 +340,11 @@
                     $this->updatePTORequestDetail($user_id);
                 }
 
-                $ismanager = false;
+                /*$ismanager = false;
                 if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
                     $manageridarr = explode(',', $authUserData['team_member_id']);
                     $ismanager = !empty($manageridarr) && in_array($row['user_id'], $manageridarr) ? true : false;
-                }
+                }*/
 
                 $managerdet = [];
                 if($authUserData['role_id'] != 1 && empty($authUserData['is_manager']) && empty($postData['pto_request_id'])){

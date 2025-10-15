@@ -103,7 +103,7 @@ use Cake\Routing\Router;
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Shipping Cost</label>
                                 <div class="col-lg-8">
-                                    <p class="form-control-static reference-white-space"><?php echo $InventoryShippingOrders->reference; ?></p>
+                                    <p class="form-control-static reference-white-space"><?php echo $InventoryShippingOrders->shipping_order_cost_total; ?></p>
                                 </div>
                             </div>
 

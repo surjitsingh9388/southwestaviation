@@ -4,7 +4,7 @@
     ?>
     <div class="row">
         <input type="hidden" name="wo_overviews_id" id="wo_overviews_id" value="<?php echo @$aircraftwoitemoverviews->id; ?>" />
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="control-label" for="reference">Category</label>
                 <div class="form-input-frame">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <!--div class="col-md-3">
             <div class="form-group">
                 <label class="control-label" for="reference">Grouping</label>
                 <div class="form-input-frame">
@@ -38,7 +38,7 @@
                     <?php echo $this->Form->control('labor_kit_name', array('type'=>'hidden', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'overview_labor_kit_name')); ?>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="col-md-3">
             <div class="form-group">
                 <label class="control-label" for="reference"><span class="text-red">Owner Authorization</span></label>
@@ -51,6 +51,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3"></div>
         <div class="col-md-3" style="clear: left;">
              <div class="form-group">
                 <label class="control-label" for="reference">Warranty</label>
@@ -175,7 +176,10 @@
                                 <label class="control-label" for="reference">Shipping In</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $shipping_in = !empty($aircraftwoitemoverviews->shipping_in) ? '$'.number_format($aircraftwoitemoverviews->shipping_in, 2) : '$0.00';
+                                    $shipping_in = (!empty($aircraftwoitemoverviews->shipping_in) && (float)$aircraftwoitemoverviews->shipping_in > 0)
+                                    ? '$' . number_format((float)$aircraftwoitemoverviews->shipping_in, 2)
+                                    : '';
+
                                     echo $this->Form->control('shipping_in', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'disabled'=>$isdisabled, 'id'=>'overview_shipping_in', 'value'=>$shipping_in)); 
                                     ?>
                                 </div>
@@ -190,7 +194,8 @@
                                 <label class="control-label" for="reference">Special Rate / Hr</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $special_rate_hr = !empty($aircraftwoitemoverviews->special_rate_hr) ? '$'.number_format($aircraftwoitemoverviews->special_rate_hr, 2) : '$0.00';
+                                    $special_rate_hr = (!empty($aircraftwoitemoverviews->special_rate_hr) && (float)$aircraftwoitemoverviews->special_rate_hr > 0) ? '$' . number_format((float)$aircraftwoitemoverviews->special_rate_hr, 2) : '';
+
                                     echo $this->Form->control('special_rate_hr', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'disabled'=>$isdisabled, 'id'=>"overview_special_rate_hr", 'value'=>$special_rate_hr)); ?>
                                 </div>
                             </div>
@@ -200,7 +205,9 @@
                                 <label class="control-label" for="reference">Estimated Hrs</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $estimated_hour = !empty($aircraftwoitemoverviews->estimated_hour) ? number_format($aircraftwoitemoverviews->estimated_hour, 2) : '0.00';
+                                    $estimated_hour = (!empty($aircraftwoitemoverviews->estimated_hour) && (float)$aircraftwoitemoverviews->estimated_hour > 0)
+                                    ? number_format((float)$aircraftwoitemoverviews->estimated_hour, 2)
+                                    : '';
 
                                     echo $this->Form->control('estimated_hour', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'disabled'=>$isdisabled, 'value'=>$estimated_hour)); ?>
                                 </div>
@@ -211,7 +218,12 @@
                                 <label class="control-label" for="reference">Estimated Rate</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $estimated_rate = !empty(@$aircraftwoitemoverviews->estimated_rate) ? '$'.number_format(@$aircraftwoitemoverviews->estimated_rate, 2) : '$'.number_format(ESTIMATEDRATE, 2);
+                                    $estimated_rate_value = $aircraftwoitemoverviews->estimated_rate ?? null;
+
+                                    $estimated_rate = (!empty($estimated_rate_value) && (float)$estimated_rate_value > 0)
+                                        ? '$' . number_format((float)$estimated_rate_value, 2)
+                                        : '$' . number_format((float)ESTIMATEDRATE, 2);
+
                                     echo $this->Form->control('estimated_rate', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'value'=>$estimated_rate, 'disabled'=>$isdisabled, 'id'=>'overview_estimated_rate')); ?>
                                 </div>
                             </div>
@@ -221,7 +233,10 @@
                                 <label class="control-label" for="reference">Flat Rate</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $flat_rate = !empty($aircraftwoitemoverviews->flat_rate) ? '$'.number_format($aircraftwoitemoverviews->flat_rate, 2) : '$0.00';
+                                    $flat_rate = (!empty($aircraftwoitemoverviews->flat_rate) && (float)$aircraftwoitemoverviews->flat_rate > 0)
+                                        ? '$' . number_format((float)$aircraftwoitemoverviews->flat_rate, 2)
+                                        : '';
+
                                     echo $this->Form->control('flat_rate', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'disabled'=>$isdisabled, 'id'=>'overview_flat_rate', 'value'=>$flat_rate)); ?>
                                 </div>
                             </div>
@@ -230,7 +245,12 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Flat Rate Qty</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('flat_rate_qty', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'disabled'=>$isdisabled)); ?>
+                                    <?php 
+                                    $flat_rate_qty = (!empty($aircraftwoitemoverviews->flat_rate_qty) && (float)$aircraftwoitemoverviews->flat_rate_qty > 0)
+                                    ? number_format((float)$aircraftwoitemoverviews->flat_rate_qty, 2)
+                                    : '';
+
+                                    echo $this->Form->control('flat_rate_qty', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'value'=>$flat_rate_qty, 'disabled'=>$isdisabled)); ?>
                                 </div>
                             </div>
                         </div>

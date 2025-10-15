@@ -23,7 +23,7 @@ $sessionArray = $this->request->getSession()->read('Auth');
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_code">Registration Code <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <?php echo $this->Form->control('plane_code', array('class' => 'form-control col-md-7 col-xs-12', 'requred' => 'required', 'placeholder' => 'Registration Code', 'label' => false)); ?>
+                                <?php echo $this->Form->control('plane_code', array('class' => 'form-control col-md-7 col-xs-12', 'requred' => 'required', 'placeholder' => 'Registration Code', 'label' => false, 'id'=>'plane_code')); ?>
                             </div>
                         </div>
 
@@ -124,7 +124,7 @@ $sessionArray = $this->request->getSession()->read('Auth');
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <?php
                                 if((!empty($actionItems) && $actionItems['action']['action_edit'] == 1) || $sessionUser['id'] == 1) {
-                                    echo $this->Form->button('Submit', ['type' => 'submit', 'class' => 'btn btn-success']);
+                                    echo $this->Form->button('Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'id'=>'submitPlaneButton']);
                                 }
                                     echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset', 'id' => 'reset']);
                                 ?>
@@ -153,7 +153,11 @@ $(document).ready(function() {
     $("#frmPlane").validate({
         rules: {
             'plane_code': {
-                required: true
+                required: true,
+                maxlength: 40,
+                normalizer: function(value) {
+                    return value.replace(/^\s+/, '');
+                }
             }
         },
         messages: {
@@ -168,6 +172,29 @@ $(document).ready(function() {
     $('#reset').click(function() {
        var validator = $("#frmPlane").validate();
        validator.resetForm();
+    });
+
+    $('#submitPlaneButton').on('click', function(e) {
+        e.preventDefault(); // prevent default form submission temporarily
+        var btn = $(this);
+        var planeCode = $.trim($('#plane_code').val());
+
+        // Only proceed if plane_code is not blank
+        if (planeCode === '') {
+            alert("Please enter plane code."); // optional message
+            return;
+        }
+
+        // If already disabled, prevent multiple clicks
+        if (btn.prop('disabled')) {
+            return false;
+        }
+
+        // Disable button immediately
+        btn.prop('disabled', true).text('Submitting...');
+
+        // Submit the form manually
+        btn.closest('form')[0].submit();
     });
 });    
 </script>

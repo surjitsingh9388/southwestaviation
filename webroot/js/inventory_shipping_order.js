@@ -45,32 +45,32 @@ $(document).on("keyup change", "form#frmInventoryShippingOrders #shipping_order_
 function disableEnableSaveInvSOBtn(){
     var errors = 0;
     $("form#frmInventoryShippingOrders #shipping_order_number, #destination, #shipper, #ship-via, #requestor, #po_currency, #from_address, #shipping_order_date, #attention").map(function(){
-        if( !$(this).val() ) {
+        if( !$.trim($(this).val()) ) {
             errors++;
         } 
     });
     if($('#destination').val() == '1'){
         $("form#frmInventoryShippingOrders #to_address").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
     }else if($('#destination').val() == '2'){
         $("form#frmInventoryShippingOrders #vendor").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
     }else if($('#destination').val() == '3'){
         if($('#thirdpartyaddresscountry').val() == '231'){
             $("form#frmInventoryShippingOrders #thirdpartydescription, #thirdpartyaddressstreet1, #thirdpartyaddresscity, #thirdpartyaddressstate, #thirdpartyaddresspostal, #thirdpartyaddresscountry").map(function(){
-                if( !$(this).val() ) {
+                if( !$.trim($(this).val()) ) {
                     errors++;
                 }
             });
         }else if($('#thirdpartyaddresscountry').val() != '231' && $('#thirdpartyaddresscountry').val() != ''){
             $("form#frmInventoryShippingOrders #thirdpartydescription, #thirdpartyaddressstreet1, #thirdpartyaddresscity, #thirdpartyaddressprovince, #thirdpartyaddresspostal, #thirdpartyaddresscountry").map(function(){
-                if( !$(this).val() ) {
+                if( !$.trim($(this).val()) ) {
                     errors++;
                 }
             });
@@ -97,7 +97,7 @@ $(document).on("click", "#shipping-order-receive-button", function(){
 });
 
 $(document).on('keyup', '.received', function(e){
-    if($(this).val() > '0'){
+    if($.trim($(this).val()) > '0'){
         $(this).closest("tr").find(".location_id").removeAttr('disabled');
         $(this).closest("tr").find(".account_code").removeAttr('disabled');
         $(this).closest("tr").next('tr').find(".notes").removeAttr('disabled');

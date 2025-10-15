@@ -304,7 +304,7 @@
             if ($this->request->is('post')) {
                 $postData = $this->request->getData();
                 foreach($postData as $key=>$val){
-                    $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    $postData[$key] = preg_replace('/[,$%]/', '', $val);
                 }
                 
                 if(!empty($postData['serial_no'])){
@@ -372,7 +372,7 @@
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $postData = $this->request->getData();
                 foreach($postData as $key=>$val){
-                    $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    $postData[$key] = preg_replace('/[,$%]/', '', $val);
                 }
 
                 $postData['updated_by'] = $authUserData['id'];
@@ -1335,6 +1335,10 @@
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $inventoriesdet = $this->Inventories->get($id);
                 $postData = $this->request->getData();
+                if(empty($postData['qty']) || $postData['qty'] <= 0){
+                    $this->Flash->error(__('Enter valid quantity'));
+                    return $this->redirect($this->referer());
+                }
                 $postData['updated_by'] = $authUserData['id'];
                 $postData['conditions'] = '3';
 

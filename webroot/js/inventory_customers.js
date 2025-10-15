@@ -30,12 +30,16 @@ $(document).on("click", ".toggleplusminus_aircraft", function(e){
 
 $(document).on('change', '#invoice_part_number', function(e){
     if($(this).val() != ''){
+        $('.loader').show();
+
         $.ajax({
             url:getInventoryItemByIdURL,
             data:{'inventory_item_id':$(this).val()},
             dataType: "text",
             type:'post',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {console.log(obj.conditions);
                     $('#invoice_part_description').val(obj.inventoryitems.description);
@@ -101,6 +105,8 @@ $(document).on('change keyup', '#otc_invoice_give_discount, #otc_invoice_part_pr
 
 $(document).on('change', '#invoice_part_conditions', function(e){
     if($(this).val() != ''){
+        $('.loader').show();
+
         var inventory_item_id = $('#invoice_part_number').val();
         $.ajax({
             url:getInventoryDetByConditionURL,
@@ -108,6 +114,8 @@ $(document).on('change', '#invoice_part_conditions', function(e){
             dataType: "text",
             type:'post',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     var serialoption = '<option value="">Select Serial Number</option>';
@@ -142,10 +150,12 @@ $(document).on('click', '#maint_use_hobbs_chkbox', function(e){
 });
 
 $(document).on('click', '.saveCustomerInfoBtn', function(e){
-    if($("#customer_name").val() != ''){
+    $('#customer_name_error').css('display', 'none');
+    if($.trim($("#customer_name").val()) != ''){
         $('#frmAddNewCustomer')[0].submit();
     }else{
-        alert("Customer name cann't be blank.");
+        $('#customer_name').focus();
+        $('#customer_name_error').css('display', 'block');
     }
 });
 
@@ -158,12 +168,14 @@ $(document).on('click', '.saveCustomerInfoNotesbtn', function(e){
     var customer_id = window.location.pathname.split('/').pop();
     var notes = $('#customer_info_notes').val();
     if(notes != ''){
+        $('.loader').show();
         $.ajax({
             url: saveCustomerInfoNotesURL, 
             type: 'post',
             data: {'notes':notes, 'customer_id':customer_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 if(response.status == 'failure'){
                     alert(response.message);
                 }else{
@@ -175,12 +187,14 @@ $(document).on('click', '.saveCustomerInfoNotesbtn', function(e){
 });
 
 $(document).on('click', '.saveCustomerInfoMedia', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveCustomerInfoMediaURL, 
         type: 'post',
         data: $('#frmInventoryCustomersMedia').serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             if(response.status == 'failure'){
                 alert(response.message);
             }
@@ -190,12 +204,15 @@ $(document).on('click', '.saveCustomerInfoMedia', function(e){
 });
 
 $(document).on('click', '.saveAircraftInfoMedia', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveAircraftInfoMediaURL, 
         type: 'post',
         data: $('#frmAircraftUploadMedia').serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             if(response.status == 'failure'){
                 alert(response.message);
             }
@@ -207,6 +224,8 @@ $(document).on('click', '.saveAircraftInfoMedia', function(e){
 $(document).on('click', '.deleteAircraftAttachment', function (e) {
     
     if($(this).attr('data-val') != undefined){
+        $('.loader').show();
+
         $(this).parent().parent().remove();
         $.ajax({
             url: deleteAircraftMediaAttURL, 
@@ -214,6 +233,8 @@ $(document).on('click', '.deleteAircraftAttachment', function (e) {
             data: {'id':$(this).attr('data-val')},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status != 'success') {
                     alert(obj.message);
@@ -228,7 +249,9 @@ $(document).on('click', '.deleteAircraftAttachment', function (e) {
 
 $(document).on('click', '.saveAircraftRegNumber', function(e){
     var aircraft_registration_number = $('#aircraft-registration-number').val();
-    if(aircraft_registration_number != ''){
+    if($.trim(aircraft_registration_number) != ''){
+        $('.loader').show();
+
         var customer_id = window.location.pathname.split('/').pop();
 
         $.ajax({
@@ -237,6 +260,8 @@ $(document).on('click', '.saveAircraftRegNumber', function(e){
             data: {'aircraft_registration_number':aircraft_registration_number, 'customer_id':customer_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Something went wrong, please try again' || response == 'Aircraft registration number already exist.'){
                     alert(response);
                 }else{
@@ -248,10 +273,14 @@ $(document).on('click', '.saveAircraftRegNumber', function(e){
                 }
             }
         });
+    }else{
+        $('#aircraft-registration-number').focus();
+        alert("Please fill Registration Number");
     }
 });
 
 $(document).on('click', '.updateAircraftInfoBtn', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveCustomerOTCAircraftURL, 
         type: 'post',
@@ -259,6 +288,7 @@ $(document).on('click', '.updateAircraftInfoBtn', function(e){
         dataType: 'text',
         async: true,
         success: function (response) {
+            $('.loader').hide();
             if(response == 'Something went wrong, please try again' || response == 'Aircraft registration number already exist.'){
                 alert(response);
             }else{
@@ -276,6 +306,7 @@ $(document).on('click', '.updateAircraftInfoBtn', function(e){
 });
 
 $(document).on('click', '.saveAircraftInfoMore', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveCustomerOTCAircraftURL, 
         type: 'post',
@@ -283,6 +314,7 @@ $(document).on('click', '.saveAircraftInfoMore', function(e){
         dataType: 'text',
         async: true,
         success: function (response) {
+            $('.loader').hide();
             if(response == 'Something went wrong, please try again' || response == 'Aircraft registration number already exist.'){
                 alert(response);
             }else{
@@ -302,27 +334,31 @@ $(document).on('click', '.deleteAircraftInfoBtn', function(e){
     var aircraft_id = $('.aircraftregbox-active').attr('data-val');
     var customer_id = window.location.pathname.split('/').pop();
     if(aircraft_id != '' && aircraft_id != undefined && customer_id != '' && customer_id != undefined){
-        $.ajax({
-            url: deleteCustomerOTCAircraftURL, 
-            type: 'post',
-            data: {'id':aircraft_id, 'customer_id':customer_id},
-            async: true,
-            success: function (response) {
-                if(response == 'Something went wrong, please try again'){
-                    alert(response);
-                }else{
-                    alert("Aircraft deleted successfully");
-    
-                    $('#customerotcaircraftblock').html(response);
-                    $("#aircraft_info_add_section :input").prop("disabled", false);
-                    $(".selectpicker").selectpicker("refresh");
-                    //$('.contractpricesbtn').prop('disabled', true);
-                    $('.fueldiscoutbtn').prop('disabled', true);
+        if (confirm('Are you sure you want to delete this aircraft?')) {
+            $('.loader').show();
+            $.ajax({
+                url: deleteCustomerOTCAircraftURL, 
+                type: 'post',
+                data: {'id':aircraft_id, 'customer_id':customer_id},
+                async: true,
+                success: function (response) {
+                    $('.loader').hide();
+                    if(response == 'Something went wrong, please try again'){
+                        alert(response);
+                    }else{
+                        alert("Aircraft deleted successfully");
+        
+                        $('#customerotcaircraftblock').html(response);
+                        $("#aircraft_info_add_section :input").prop("disabled", false);
+                        $(".selectpicker").selectpicker("refresh");
+                        //$('.contractpricesbtn').prop('disabled', true);
+                        $('.fueldiscoutbtn').prop('disabled', true);
+                    }
                 }
-            }
-        });
+            });
+        }
     }else{
-        alert('Please select shipping address.');
+        alert('Please select aircraft.');
     }
 });
 
@@ -350,11 +386,14 @@ $(document).on('click', '.complianceinspectionadd', function(e){
 function getNewAircraftComplainceItemBlock(){
     var section = $('#comp_tab_click').val();
     section = section.toLowerCase();
+    $('.loader').show();
+
     $.ajax({
         url: getAircraftComplianceDetailURL, 
         type: 'post',
         data: {'section':section, 'id':'', 'aircraft_id':$('#aircraft_id').val()},
         success: function (response) {
+            $('.loader').hide();
             if(response == 'Something went wrong, please try again'){
                 alert(response);
             }else{
@@ -412,18 +451,37 @@ $(document).on('click', '#airframe_use_cycles', function(e){
     }
 });
 
-$(document).on("change", "#aircraft_wo_files", function(){
-    // Read selected files
-    var fldid = 'aircraft_wo_files';
-    var tableid = 'wofileattachlist';
-    uploadFileToServer(fldid, tableid, uploadWOItemFilesURL);
+$(document).on("click", "#uploadWOFileBtn", function(e){
+    var files = $("#aircraft_wo_files")[0].files;
+
+    if (files.length === 0) {
+        e.preventDefault(); // stop form submit or action
+        $("#importFileErrorMsg").text("Please select at least one file.");
+        return false;
+    } else {
+        $("#importFileErrorMsg").text(""); // clear error
+        
+        // Read selected files
+        var fldid = 'aircraft_wo_files';
+        var tableid = 'wofileattachlist';
+        uploadFileToServer(fldid, tableid, uploadWOItemFilesURL);
+    }
 });
 
-$(document).on("change", "#aircraft_wo_photo", function(){
-    // Read selected files
-    var fldid = 'aircraft_wo_photo';
-    var tableid = 'wophotosattachlist';
-    uploadFileToServer(fldid, tableid, uploadWOItemPhotosURL);
+$(document).on("click", "#uploadWOPhotoBtn", function(e){
+    var files = $("#aircraft_wo_photo")[0].files;
+
+    if (files.length === 0) {
+        e.preventDefault(); // stop form submit or action
+        $("#importPhotoErrorMsg").text("Please select at least one photo.");
+        return false;
+    } else {
+        $("#importPhotoErrorMsg").text(""); // clear error
+        // Read selected files
+        var fldid = 'aircraft_wo_photo';
+        var tableid = 'wophotosattachlist';
+        uploadFileToServer(fldid, tableid, uploadWOItemPhotosURL);
+    }
 });
 
 $(document).on("change", "#aircraft_upload_media", function(){
@@ -456,7 +514,7 @@ function uploadFileToServer(fldid, tableid, url){
             var wo_item_id = $('#wo_item_id').val();
             form_data.append("wo_item_id", wo_item_id);
         }
-
+        $('.loader').show();
         $.ajax({
             url: url, 
             type: 'post',
@@ -464,14 +522,21 @@ function uploadFileToServer(fldid, tableid, url){
             contentType: false,
             processData: false,
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $("#"+tableid).append(obj.tblrow);
                     if(fldid == 'aircraft_wo_photo'){
+                        $("#importPhotoErrorMsg").text("");
+                        $("#importedPhotoName").text("");
+                        $('#aircraft_wo_photo').val('');
                         var photocount = parseInt($('.count_wo_item_photo').html())+1;
                         $('.count_wo_item_photo').html(photocount);
                     }
                     if(fldid == 'aircraft_wo_files'){
+                        $("#importFileErrorMsg").text("");
+                        $("#importedFileName").text("");
+                        $('#aircraft_wo_files').val('');
                         var filecount = parseInt($('.count_wo_item_file').html())+1;
                         $('.count_wo_item_file').html(filecount);
                     }
@@ -506,12 +571,16 @@ $(document).on('click', '.fetchCustOTCPopup', function(e){
         if(aircraft_id == '' || aircraft_id == undefined){
             aircraft_id = $('#wo_aircraft_id').val();
         }
+
+        $('.loader').show();
+
         $.ajax({
             url: fetchCustomerOTCPopupURL, 
             type: 'post',
             data: {section:section, customer_id:customer_id, aircraft_id:aircraft_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 appendCustomerOTCPopupData(section, response);
             }
         });
@@ -519,6 +588,7 @@ $(document).on('click', '.fetchCustOTCPopup', function(e){
 });
 
 function appendCustomerOTCPopupData(section, response){
+    
     var sectionId = '';
                 
     if(section == 'upload_new_cust_media'){
@@ -556,6 +626,10 @@ function appendCustomerOTCPopupData(section, response){
         sectionId = 'aircraftWOTechnicianAddModal';
     }else if(section == 'aircarft_wo_add_outside_repair'){
         sectionId = 'woOutstandingRepairEditModal';
+    }else if(section == 'wo_photo_upload'){
+        sectionId = 'aircraftWOPhotoUploadModal';
+    }else if(section == 'wo_file_upload'){
+        sectionId = 'aircraftWOFileUploadModal';
     }else if(section == 'aircraft_wo_part_add_btn'){
         sectionId = 'aircraftWOAddPartModel';
         $('#customerOTCInvoiceAddPartModel').remove();
@@ -802,12 +876,14 @@ function exportWORODataToExcelBlockDate(){
 $(document).on('change', '#aircraft_make_id', function(e){
     var aircraft_make_id = $(this).val();
     if(aircraft_make_id != ''){
+        $('.loader').show();
         $.ajax({
             url: fetchAircraftModelURL, 
             type: 'post',
             data: {aircraft_make_id:aircraft_make_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 $('#aircraft_model_id').html(response);
                 $('.selectpicker').selectpicker('refresh');
             }
@@ -825,6 +901,7 @@ $(document).on('click', '.aircraftregbox', function(e){
 
 function getAircraftDetById(aircraft_id){
     if(aircraft_id != '' && aircraft_id !=undefined){
+        $('.loader').show();
         var customer_id = window.location.pathname.split('/').pop();
         $.ajax({
             url: fetchAircraftInfoHtmlURL, 
@@ -832,6 +909,7 @@ function getAircraftDetById(aircraft_id){
             data: {'aircraft_id':aircraft_id, 'customer_id':customer_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 $('#customerotcaircraftblock').html(response);
                 $("#aircraft_info_add_section :input").prop("disabled", false);
                 $(".selectpicker").selectpicker("refresh");
@@ -847,13 +925,14 @@ $(document).on('click', '.saveAircraftContractRate', function(e){
     var aircraft_id = $('#aircraft_id').val();
     var contract_rate_id = $('#contract_rate_id').val();
     if(contract_rate_department != '' && contract_rate_hour != '' && aircraft_id != ''){
-        
+        $('.loader').show();
         $.ajax({
             url: saveAircraftContractRatesURL, 
             type: 'post',
             data: {'contract_rate_department':contract_rate_department, 'rate_an_hour':contract_rate_hour, 'aircraft_id': aircraft_id, 'contract_rate_id':contract_rate_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     var aircraftContractRates = obj.aircraftContractRates;
@@ -876,12 +955,14 @@ $(document).on('dblclick', '#contractratetbl tr', function(e){
     var customer_id = window.location.pathname.split('/').pop();
     var aircraft_id = $('#aircraft_id').val();
     if(contract_rate_id != ''){
+        $('.loader').show();
         $.ajax({
             url: fetchCustomerOTCPopupURL, 
             type: 'post',
             data: {'contract_rate_id':contract_rate_id, 'section':section, customer_id:customer_id, aircraft_id:aircraft_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 appendCustomerOTCPopupData(section, response);
             }
         });
@@ -900,12 +981,14 @@ $(document).on('click', '.contractpriceratedelete', function(e){
     var contract_rate_id = contractratedata[0];
     var aircraft_id = contractratedata[1];
     if(contract_rate_id != '' && contract_rate_id != undefined && aircraft_id != '' && aircraft_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: deleteAircraftContractRatesURL, 
             type: 'post',
             data: {'id':contract_rate_id, 'aircraft_id':aircraft_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     alert("Contract rate deleted successfully.");
@@ -932,12 +1015,16 @@ $(document).on('click', '.saveAddlShippingAddrBtn', function(e){
     var additional_shipping_full_address = $('#additional-shipping-full-address').val();
     var additional_shipping_address_id = $('#additional_shipping_address_id').val();
     if(customer_id != '' && additional_shipping_address_description != '' && additional_shipping_full_address != ''){
+        $('.loader').show();
+
         $.ajax({
             url: saveAddlShippingAddressURL, 
             type: 'post',
             data: {'customer_id':customer_id, 'additional_shipping_address_description':additional_shipping_address_description, 'additional_shipping_full_address': additional_shipping_full_address, 'additional_shipping_address_id':additional_shipping_address_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     var customerAddlShipAddrList = obj.customerAddlShipAddrList;
@@ -977,6 +1064,7 @@ $(document).on('dblclick', '.addlshipaddrbox', function(e){
 
 function getAddlShippingAddress(additional_shipping_address_id){
     if(additional_shipping_address_id != '' && additional_shipping_address_id !=undefined){
+        $('.loader').show();
         var customer_id = window.location.pathname.split('/').pop();
         $.ajax({
             url: getAdditionalShippingAddressURL, 
@@ -984,6 +1072,8 @@ function getAddlShippingAddress(additional_shipping_address_id){
             data: {'additional_shipping_address_id':additional_shipping_address_id, 'customer_id':customer_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     var customerAddlShipAddrList = obj.customerAddlShipAddrList;
@@ -1011,12 +1101,14 @@ $(document).on('click', '.deleteAdditionalShipAddr', function(e){
     var additional_shipping_id = $('.addlshipaddrbox-active').attr('data-val');
     var customer_id = window.location.pathname.split('/').pop();
     if(additional_shipping_id != '' && additional_shipping_id != undefined && customer_id != ''){
+        $('.loader').show();
         $.ajax({
             url: deleteAddlShippingAddressURL, 
             type: 'post',
             data: {'id':additional_shipping_id, 'customer_id':customer_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     alert("Selected shipping address deleted successfully.");
@@ -1038,12 +1130,14 @@ $(document).on('click', '.deleteAdditionalShipAddr', function(e){
 
 $(document).on('click', '.saveCompInspBtn', function(e){
     if($('#inspection_name').val() != '' && $('#inspection_name').val() !=undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftComplInspectionsURL, 
             type: 'post',
             data: $("#frmAircraftComplInspections").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     getNewAircraftComplainceItemBlock();
@@ -1059,12 +1153,15 @@ $(document).on('click', '.saveCompInspBtn', function(e){
 
 $(document).on('click', '.saveCompInspHistoryBtn', function(e){
     if($('#inspection_code').val() != '' && $('#inspection_code').val() !=undefined && $('#compliance_inspections_id').val() != ''){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftComplInspHistoryURL, 
             type: 'post',
             data: {'aircraft_inspection_id':$('#compliance_inspections_id').val(), 'inspection_code':$('#inspection_code').val(), 'insp_current_ac_tach':$('#insp_current_ac_tach').val(), 'date_override':$('#inspections_date_override').val()},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#complinsphistory').html(obj.tblrow);
@@ -1085,12 +1182,14 @@ $(document).on('click', '.complnavtab', function(e){
 
 $(document).on('click', '.saveCompAirframeBtn', function(e){
     if($('#airframe_name').val() != '' && $('#airframe_name').val() !=undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftComplAirframeURL, 
             type: 'post',
             data: $("#frmAircraftComplAirframe").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     getNewAircraftComplainceItemBlock();
@@ -1106,12 +1205,14 @@ $(document).on('click', '.saveCompAirframeBtn', function(e){
 
 $(document).on('click', '.saveCompEngineBtn', function(e){
     if($('#engine_name').val() != '' && $('#engine_name').val() !=undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftComplEnginesURL, 
             type: 'post',
             data: $("#frmAircraftComplEngines").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     getNewAircraftComplainceItemBlock();
@@ -1130,11 +1231,14 @@ $(document).on('dblclick', '.compliancelistdata', function(e){
     compllistval = compllistval.split('-');
     if(compllistval.length>1){
         var section = compllistval[0];
+        $('.loader').show();
+
         $.ajax({
             url: getAircraftComplianceDetailURL, 
             type: 'post',
             data: {'section':section, 'id':compllistval[1]},
             success: function (response) {
+                $('.loader').hide();
                 if(response == 'Something went wrong, please try again'){
                     alert(response);
                 }else{
@@ -1166,11 +1270,13 @@ $(document).on('click', '.complianceinspectionremove', function(e){
         id = $('#compliance_engine_id').val();
     }
     if(id != '' && id != undefined){
+        $('.loader').show();
         $.ajax({
             url: removeAircraftComplianceDetailURL, 
             type: 'post',
             data: {'section':section, 'id':id, 'aircraft_id':$('#aircraft_id').val()},
             success: function (response) {
+                $('.loader').hide();
                 if(response == 'Something went wrong, please try again'){
                     alert(response);
                 }else{
@@ -1226,12 +1332,14 @@ $(document).on('click', '.input-group-addon', function(e){
 });
 
 $(document).on('click', '.saveAircraftMaintOverviewBtn', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveAircraftMaintOverviewURL,
         type: 'post',
         data: $("#frmAircraftMaintOverview").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#maintenance_overview_id').val(obj.id);
@@ -1245,12 +1353,14 @@ $(document).on('click', '.saveAircraftMaintOverviewBtn', function(e){
 });
 
 $(document).on('click', '.saveAircraftMainEngine', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveAircraftMaintEngineURL,
         type: 'post',
         data: $("#frmAircraftMaintEngine").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#maintenance_engine_id').val(obj.id);
@@ -1266,6 +1376,7 @@ $(document).on('click', '.saveAircraftMainEngine', function(e){
 $(document).on('click', '.aircraftMaintEngCylSave', function(e){
     $('#aircraft_maint_eng_cyl_date').val($('#maint_eng_cyl_date').val());
     $('#aircarftMaintEngCylDateModel').modal('hide');
+    $('.loader').show();
 
     $.ajax({
         url: saveAircraftMaintEngHistoryURL,
@@ -1273,6 +1384,8 @@ $(document).on('click', '.aircraftMaintEngCylSave', function(e){
         data: $("#frmAircraftMaintEngineCylHistory").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 var tblrow = obj.tblrow;
@@ -1288,12 +1401,14 @@ $(document).on('click', '.aircraftMaintEngCylSave', function(e){
 });
 
 $(document).on('click', '.saveAircraftMaintProp', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveAircraftMaintPropURL,
         type: 'post',
         data: $("#frmAircraftMaintProp").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#maintenance_prop_id').val(obj.id);
@@ -1308,12 +1423,14 @@ $(document).on('click', '.saveAircraftMaintProp', function(e){
 
 $(document).on('click', '.saveAircraftMaintApplInfo', function(e){
     if($('#a_appliance').val() != '' && $('#a_appliance').val() != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftMaintApplianceInfoURL,
             type: 'post',
             data: $("#frmAircraftMaintAppliance").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#maintenance_appliance_id').val(obj.id);
@@ -1336,6 +1453,7 @@ $(document).on('click', '.airmaintapplrow', function(e){
     if($(this).attr('data-val') != ''){
         $('.airmaintapplrow').removeClass('airmaintapplrow_active');
         $(this).addClass('airmaintapplrow_active');
+        $('.loader').show();
 
         $.ajax({
             url: fetchAircraftMaintApplianceInfoURL,
@@ -1343,6 +1461,7 @@ $(document).on('click', '.airmaintapplrow', function(e){
             data: {'maintenance_appliance_id': $(this).attr('data-val')},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 if(response != 'failure') {
                     $('#maintenance_appliances_block').html(response);
                     $('#editapplianceinfo').css('display', 'block');
@@ -1366,11 +1485,13 @@ $(document).on('click', '.removeMaintApplianceBtn', function(e){
     var id = $('#maintenance_appliance_id').val();
     
     if(id != '' && id != undefined){
+        $('.loader').show();
         $.ajax({
             url: removeAircraftMaintApplianceDetailURL, 
             type: 'post',
             data: {'id':id},
             success: function (response) {
+                $('.loader').hide();
                 if(response.status == 'failure'){
                     alert(response);
                 }else{
@@ -1390,12 +1511,14 @@ $(document).on('click', '.removeMaintApplianceBtn', function(e){
 
 $(document).on('click', '.saveAircraftMaintAdsInfo', function(e){
     if($('#ad_no').val() != '' && $('#ad_no').val() != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftMaintAdsInfoURL,
             type: 'post',
             data: $("#frmAircraftMaintAds").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#maintenance_ad_id').val(obj.id);
@@ -1416,6 +1539,7 @@ $(document).on('click', '.saveAircraftMaintAdsInfo', function(e){
 
 $(document).on('click', '.airmaintadsrow', function(e){
     if($(this).attr('data-val') != ''){
+        $('.loader').show();
         $('.airmaintadsrow').removeClass('airmaintadsrow_active');
         $(this).addClass('airmaintadsrow_active');
 
@@ -1425,6 +1549,7 @@ $(document).on('click', '.airmaintadsrow', function(e){
             data: {'maintenance_ad_id': $(this).attr('data-val')},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 if(response != 'failure') {
                     $('#maintenance_ad_block').html(response);
 
@@ -1449,11 +1574,13 @@ $(document).on('click', '.removeMaintAdsBtn', function(e){
     var id = $('#maintenance_ad_id').val();
     
     if(id != '' && id != undefined){
+        $('.loader').show();
         $.ajax({
             url: removeAircraftMaintAdsDetailURL, 
             type: 'post',
             data: {'id':id},
             success: function (response) {
+                $('.loader').hide();
                 if(response.status == 'failure'){
                     alert(response);
                 }else{
@@ -1475,11 +1602,13 @@ $(document).on('click', '.saveAircraftMaintNotesBtn', function(e){
     var maintenance_notes = $('#maintenance_notes').val();
     
     if(maintenance_notes != '' && maintenance_notes != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftMaintNotesURL, 
             type: 'post',
             data: $("#frmAircraftMaintNotes").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -1514,12 +1643,14 @@ $(document).on('click', '.updatemaintoverviewtimebtn', function(e){
 function checkWOLogBookValue(){
     var aircraft_id = $('#aircraft_id').val();
     var engine_type = $('#aircraft_engine_type').val();
+    $('.loader').show();
 
     $.ajax({
         url: checkWorkOrderLogBookValueURL, 
         type: 'post',
         data: {aircraft_id:aircraft_id, engine_type:engine_type},
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'failure'){
                 alert(obj.message);
@@ -1717,11 +1848,13 @@ $(document).on('click', '.saveOTCInfoBtn', function(e){
     var otcinfo_customer_name = $('#otcinfo_customer_name').val();
     
     if(otcinfo_customer_name != '' && otcinfo_customer_name != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveCustomerOTCInfoURL, 
             type: 'post',
             data: $("#frmCustomerOTCInfo").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -1791,11 +1924,13 @@ $(document).on('click', '.saveCustomerOTCInvoiceBtn', function(e){
     var otc_invoice_no = $('#otc_invoice_no').val();
     
     if(otc_invoice_no != '' && otc_invoice_no != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveCustomerOTCInfoInvoiceURL, 
             type: 'post',
             data: $("#frmCustomerOTCInfoInvoice").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -1814,11 +1949,13 @@ $(document).on('click', '.otc-invoice-addpart-btn', function(e){
     var addbtnevent = $(this).attr('data-val');
 
     if(invoice_part_number != '' && invoice_part_number != undefined && otc_invoice_id != ''){
+        $('.loader').show();
         $.ajax({
             url: saveCustomerOTCInfoInvoicePartURL, 
             type: 'post',
             data: $("#frmCustomerOTCInfoInvoicePart").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -1847,11 +1984,13 @@ $(document).on('click', '.otcinvoicetblrow', function(e){
 $(document).on('click', '.remove_item_otcinvoice', function(e){
     var otc_invoice_part_id = $('.otcinvoicetblrow_active').attr('data-val');
     if(otc_invoice_part_id != '' && otc_invoice_part_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: removeCustomerOTCInfoInvoicePartURL, 
             type: 'post',
             data: {otc_invoice_part_id:otc_invoice_part_id},
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -1874,6 +2013,40 @@ $(document).on('click', '.customerinfotab', function(e){
     }else{
         $('.customerinfodelbtn').prop('disabled', false);
     }
+});
+
+$(document).on('click', '.customerinfodelbtn', function(e){
+    if (!confirm('Are you sure you want to delete this customer?')) {
+        return false;
+    }
+
+    let customerId = window.location.pathname.match(/customerinfo\/(\d+)/)[1];
+    if(customerId != '' && customerId != undefined){
+        $('.loader').show();
+        $.ajax({
+            url: deleteCustomerOTCURL+'/'+customerId, 
+            type: 'post',
+            beforeSend: function() {
+                $('.loader').show();
+            },
+            success: function(response) {
+                $('.loader').hide();
+                var res = JSON.parse(response);
+
+                if (res.status === 'success') {
+                    alert('Customer deleted successfully.');
+                    window.location.href = '/admin/inventory_customers';
+                } else {
+                    alert('Something went wrong, please try again.');
+                }
+            },
+            error: function() {
+                $('.loader').hide();
+                alert('Request failed. Please try again.');
+            }
+        });
+    }
+    
 });
 
 $(document).on('dblclick', '.otcinfotblrow', function(e){
@@ -1965,12 +2138,14 @@ $(document).on('dblclick', '.wo-technican-list div', function(e){
     var repair_technician = $(this).attr('data-val');
     if(repair_technician != '' && repair_technician != undefined){
         var wo_item_id = $('#wo_item_id').val();
+        $('.loader').show();
         $.ajax({
             url: saveAircraftWOServicesTechnicianURL, 
             type: 'post',
             data: {'repair_technician':repair_technician, 'wo_item_id':wo_item_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 if(response == 'Failure'){
                     alert('Something went wrong, please try again.');
                 }else{
@@ -1987,11 +2162,13 @@ function submitWOFormData(btnclickattr, dataval, seltabid){
     var wo_customer_info = $('#wo-customer-info').val();
     
     if(wo_customer_info != '' && wo_customer_info != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftWorkOrderDetURL, 
             type: 'post',
             data: $("#frmAircraftWorkOrder, #frmAircraftWorkOrderItems, #frmAircraftWorkOrderItemOverviews, #frmAircraftWorkOrderItemServices").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 isChanged = false;
 
                 var obj = JSON.parse(response);
@@ -2019,12 +2196,15 @@ $(document).on('click', '.wo_status_continue_btn', function(e){
         var wo_status = $('#aircraft_work_order_status').val();
         var old_wo_status = $('#old_work_order_status').val();
 
+        $('.loader').show();
+
         $.ajax({
             url: validateWOStatusComplPasswordURL, 
             type: 'post',
             data: {'completionpassword':completionpassword, 'work_order_id':work_order_id, wo_status:wo_status},
             async : true,
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     $('#aircraft_work_order_status').val(old_wo_status);
@@ -2052,6 +2232,7 @@ $(document).on('click', '.wo-service-technician-list', function(e){
 
     $('.wo-service-technician-list').removeClass('wo-service-technician-list-active');
     $(this).addClass('wo-service-technician-list-active');
+    $('.loader').show();
 
     $.ajax({
         url: fetchWorkOrderServicesHtmlURL, 
@@ -2059,6 +2240,7 @@ $(document).on('click', '.wo-service-technician-list', function(e){
         data: {'repair_technician':repair_technician, 'wo_item_id':wo_item_id, 'wo_services_id':wo_services_id},
         async : true,
         success: function (response) {
+            $('.loader').hide();
             $('.workorderservicesblock').html(response);
             $('.selectpicker').selectpicker('refresh');
         }
@@ -2072,12 +2254,14 @@ $(document).on('keypress', '#service-add-time', function (e) {
 });
 
 function saveAircraftWOServicesTechnician(){
+    $('.loader').show();
     $.ajax({
         url: saveAircraftWOServicesTechnicianURL, 
         type: 'post',
         data: $('#frmAircraftWorkOrderItemServices').serialize(),
         async : true,
         success: function (response) {
+            $('.loader').hide();
             if(response == 'Failure'){
                 alert('Something went wrong, please try again.');
             }else{
@@ -2106,11 +2290,13 @@ $(document).on('click', '.saveWOServicesNotesbtn', function(e){
     var service_notes = $('#service_notes').val();
     var wo_services_id = $('#wo_services_id').val();
     if(service_notes != '' && service_notes != undefined && wo_services_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftWOServicesNoteURL, 
             type: 'post',
             data: {wo_services_id:wo_services_id, service_notes:service_notes},
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -2138,21 +2324,46 @@ $(document).on('click', '.services_add_technician_btn', function(e){
     }
 });
 
+$(document).on('change', '#technician_billing_style', function(e){
+    $('#service_rate_an_hour').attr('readonly', true);
+    if($(this).val() == '2'){
+        $('#service_rate_an_hour').attr('readonly', false);
+    }else{
+        $('#service_rate_an_hour').val('$135.00');
+    }
+});
+
+$(document).on('click', '.woaddphotofilebtn', function(e){
+    var wo_item_id = $('#wo_item_id').val();
+    if(wo_item_id != undefined){
+        var section = $(this).attr("data-val");
+        if(section != '' && section != undefined){
+            var customer_id = $('#wo_customer_id').val();
+            var aircraft_id = $('#wo_aircraft_id').val();
+            var dataval = {section:section, customer_id:customer_id, wo_item_id:wo_item_id, aircraft_id:aircraft_id};
+
+            fetchOTCCustomPopupDataFromServer(section, dataval);
+        }
+    }
+});
+
 $(document).on('click', '.deleteWOServicesBtn', function(e){
     var repair_technician = '';
     var wo_item_id = $('#wo_item_id').val();
     var wo_services_id = $('#wo_services_id').val();
 
     if(wo_item_id != '' && wo_item_id != undefined && wo_services_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: deleteAircraftWOServicesURL, 
             type: 'post',
             data: {wo_services_id:wo_services_id, wo_item_id:wo_item_id, repair_technician:repair_technician},
             success: function (response) {
+                $('.loader').hide();
                 if(response == 'failure'){
                     alert('Something went wrong, please try again.');
                 }else{
-                    alert("Work Order service deleted successfully.");
+                    alert("Technician deleted successfully.");
                     $('.workorderservicesblock').html(response);
                     $('.selectpicker').selectpicker('refresh');
                 }
@@ -2165,11 +2376,13 @@ $(document).on('click', '.saveAircraftWOOSRBtn', function(e){
     var osr_repair_done_by = $('#osr_repair_done_by').val();
     
     if(osr_repair_done_by != '' && osr_repair_done_by != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftWOItemOSRInfoURL, 
             type: 'post',
             data: $("#frmAircraftWOOSR").serialize(),
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -2226,12 +2439,16 @@ $(document).on('click', '.addoutsiderepair', function(e){
 $(document).on('click', '.newwosorrecordbtn', function(e){
     var wo_item_id = $('#osrinfo_item_id').val();
     var work_order_id = $('#osrinfo_wo_id').val();
+    $('.loader').show();
+
     $.ajax({
         url: fetchWOOSRCreateHtmlURL, 
         type: 'post',
         data: {'wo_item_id':wo_item_id, 'work_order_id':work_order_id},
         async : true,
         success: function (response) {
+            $('.loader').hide();
+
             $('#newwoosrhtmlblock').html(response);
             $('.selectpicker').selectpicker('refresh');
             overrideWorkOrderOSRBlockDate();
@@ -2277,11 +2494,14 @@ $(document).on('click', '.woosraddtoporobtn', function(e){
                 alert('Please select repair done by.');
                 return false;
             }else{
+                $('.loader').show();
+
                 $.ajax({
                     url: getExistingPONumByVendorIdURL, 
                     type: 'post',
                     data: {vendor_id:vendor_id, vendor_name:vendor_name},
                     success: function (response) {
+                        $('.loader').hide();
                         if($.trim(response) == 'Not Exist'){
                             setOSRPOROData('1');
                         }else if(response == 'Failed'){
@@ -2314,12 +2534,14 @@ function setOSRPOROData(addtoporo){
             alert('Please enter a part number.');
             return false;
         }
-        
+        $('.loader').show();
+
         $.ajax({
             url: setOSRPORODataURL, 
             type: 'post',
             data: {'addtoporo':addtoporo, 'osr_invoice_no':osr_invoice_no, 'osr_purchase_order_no':osr_purchase_order_no},
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -2380,12 +2602,14 @@ $(document).on('click', '.saveWOOSRVendorInfoBtn', function(e){
 });
 
 function saveWOOSRVendorDetail(dataval, source){
+    $('.loader').show();
     $.ajax({
         url: saveWOOSRVendorDetailURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
             if(response == 'failure'){
                 alert('Something went wrong, please try again');
             }else if(response == 'duplicate'){
@@ -2414,12 +2638,15 @@ $(document).on('dblclick', '.woosrvendorlsttr', function(e){
     var vendor_id = $(this).attr('data-val');
     var vendor_name = $(this).closest("tr").children("td:first").text();
     if(vendor_id != '' && vendor_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: fetchWOOSRCreateVendorHtmlURL, 
             type: 'post',
             data: {vendor_id:vendor_id},
             async : true,
             success: function (response) {  
+                $('.loader').hide();
+
                 $('#aircraftWOOSRVendorListModal').modal('hide');
                 $('#osrvendorcontactinfo').html(response);
                 $('#vendor-name').val(vendor_name);
@@ -2453,12 +2680,14 @@ $(document).on('click', '.woOSRVendorMediaPopup', function(e){
 });
 
 $(document).on('click', '.saveOSRVendorInfoMedia', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveWOOSRVendorMediaURL, 
         type: 'post',
         data: $('#frmWOOSRVendorMedia').serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             if(response.status == 'failure'){
                 alert(response.message);
             }
@@ -2469,6 +2698,7 @@ $(document).on('click', '.saveOSRVendorInfoMedia', function(e){
 
 $(document).on('click', '.deleteWOOSRVendorMedia', function (e) {
     if($(this).attr('data-val') != undefined){
+        $('.loader').show();
         $(this).parent().parent().remove();
         $.ajax({
             url: deleteWOOSRVendorMediaURL, 
@@ -2476,6 +2706,7 @@ $(document).on('click', '.deleteWOOSRVendorMedia', function (e) {
             data: {'id':$(this).attr('data-val')},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status != 'success') {
                     alert(obj.message);
@@ -2491,11 +2722,14 @@ $(document).on('click', '.deleteWOOSRVendorMedia', function (e) {
 $(document).on('click', '.deleteWOOSRVendor', function (e) {
     var osr_vendor_id = $('#osr_vendor_id').val();
     if(osr_vendor_id != '' && osr_vendor_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: deleteWOOSRVendorURL, 
             type: 'POST',
             data: {'osr_vendor_id':osr_vendor_id},
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 alert(obj.message);
                 if(obj.status == 'success') {
@@ -2532,12 +2766,15 @@ $(document).on('click', '.woosr-po-link', function(e){
 $(document).on('change', '#osr_po_vendor_id', function(e){
     var vendor_id = $(this).val();
     if(vendor_id != ''){
+        $('.loader').show();
         $.ajax({
             url: fetchWOOSRVendorPhonesURL, 
             type: 'post',
             data: {vendor_id:vendor_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success'){
                     var phoneoptions = '';
@@ -2580,11 +2817,14 @@ $(document).on('click', '.saveWOOSRPOItemsBtn', function(e){
 });
 
 function saveOSRPOItemsDetail(dataval, sectionName){
+    $('.loader').show();
     $.ajax({
         url: saveWOOSRPOItemsURL, 
         type: 'post',
         data: dataval,
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             
             $('#otcosrpoitemstbl').html(obj.serviceitem_po_tr);
@@ -2612,11 +2852,15 @@ $(document).on('click', '.saveWOOSRServicePONotesbtn', function(e){
 });
 
 function saveWOSRServicePOData(dataval){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOOSRServicePOURL, 
         type: 'post',
         data: dataval,
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status != 'success') {
                 alert(obj.message);
@@ -2681,12 +2925,14 @@ $(document).on('click', '.osr-more-tracking-number', function(e){
 });
 
 function fetchOTCCustomPopupDataFromServer(section, dataval){
+    $('.loader').show();
     $.ajax({
         url: fetchCustomerOTCPopupURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
             appendCustomerOTCPopupData(section, response);
         }
     });
@@ -2739,12 +2985,14 @@ $(document).on('click', '.wo-osr-po-media-btn', function(e){
 });
 
 $(document).on('click', '.saveOSRPurchaseOrderMedia', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveWOOSRPurchaseOrderMediaURL, 
         type: 'post',
         data: $('#frmWOOSRServicePOMedia').serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             if(response.status == 'failure'){
                 alert(response.message);
             }else{
@@ -2757,6 +3005,7 @@ $(document).on('click', '.saveOSRPurchaseOrderMedia', function(e){
 
 $(document).on('click', '.deleteWOOSRPurchaseOrderMedia', function (e) {
     if($(this).attr('data-val') != undefined){
+        $('.loader').show();
         $(this).parent().parent().remove();
         $.ajax({
             url: deleteWOOSRPurchaseOrderMediaURL, 
@@ -2764,6 +3013,7 @@ $(document).on('click', '.deleteWOOSRPurchaseOrderMedia', function (e) {
             data: {'id':$(this).attr('data-val')},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status != 'success') {
                     alert(obj.message);
@@ -2793,11 +3043,14 @@ $(document).on('click', '.wo-osr-po-reminder-btn', function(e){
 $(document).on('click', '.saveWOOSRPOReminder', function(e){
     var wo_osr_po_id = $('#wo_osr_po_id').val();
     if(wo_osr_po_id != ''){
+        $('.loader').show();
         $.ajax({
             url: saveWOOSRPurchaseOrderReminderURL, 
             type: 'post',
             data: $('#frmWOSRPOReminder').serialize(),
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -2821,12 +3074,16 @@ $(document).on('click', '.parts_not_checked_in', function(e){
     $('.parts_not_checked_in').removeClass('parts_not_checked_in_active');
     $(this).addClass('parts_not_checked_in_active');
     if(osr_po_item_id != '' && osr_po_item_id != undefined){
+        $('.loader').show();
+
         $.ajax({
             url: fetchWOOSRCheckInLaborHTMLURL, 
             type: 'post',
             data: {osr_po_item_id:osr_po_item_id},
             async : true,
             success: function (response) {  
+                $('.loader').hide();
+
                 $('#po-checkin-labor-info').html(response);
                 $('.selectpicker').selectpicker('refresh');
             }
@@ -2914,11 +3171,15 @@ $(document).on('click', '.removewoosrbtn', function(e){
     
     if(wo_osrinfo_id != '' && wo_osrinfo_id != undefined){
         if(confirm('Remove outside labor record for `'+repair_done_by+'`')){
+            $('.loader').show();
+
             $.ajax({
                 url: deleteWOOSRRecordURL, 
                 type: 'post',
                 data: {wo_osrinfo_id:wo_osrinfo_id},
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -2937,12 +3198,16 @@ $(document).on('click', '.removeosrpoitemsbtn', function(e){
     
     if(wo_osr_po_item_id != '' && wo_osr_po_item_id != undefined){
         if(confirm('Are you sure you want this service item with part number `'+wo_osr_part_number+'` from this P/O?')){
+            $('.loader').show();
+
             $.ajax({
                 url: deleteWOOSRPOItemsRecordURL, 
                 type: 'post',
                 data: {wo_osr_po_item_id:wo_osr_po_item_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -3026,12 +3291,14 @@ $(document).on('click', '.work-order-prev-btn, .work-order-next-btn, .work-order
 });
 
 function getWorkOrderItemDetails(dataval, seltabid){
+    $('.loader').show();
     $.ajax({
         url: getWorkOrderItemDetailsURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
             if(response == 'failure'){
                 alert(obj.message);
             }else{
@@ -3078,11 +3345,14 @@ $(document).on('click', '.work-order-item-notes-btn', function(e){
 $(document).on('click', '.saveWorkOrderItemNotebtn', function(e){
     var wo_item_id = $('#note_wo_item_id').val();
     if(wo_item_id != ''){
+        $('.loader').show();
         $.ajax({
             url: saveWorkOrderItemNoteURL, 
             type: 'post',
             data: $('#frmAircraftWorkOrderNote').serialize(),
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -3113,12 +3383,16 @@ $(document).on('click', '.work-order-item-delete', function(e){
 });
 
 function saveAndGetAircraftWODet(dataval, seltabid){
+    $('.loader').show();
+
     $.ajax({
         url: saveAndGetAircraftWODetURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
+
             if(response == 'failure'){
                 alert(obj.message);
             }else{
@@ -3265,11 +3539,15 @@ $(document).on('click', '.saveAircraftWOATACodebtn', function(e){
 });
 
 function saveAircraftWOATACode(dataval){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOATACodeURL, 
         type: 'post',
         data: dataval,
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure'){
                 alert(obj.message);
@@ -3296,11 +3574,15 @@ $(document).on('click', '.saveAircraftWOLaborKitbtn', function(e){
 });
 
 function saveAircraftWOLaborKit(dataval){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLaborKitURL, 
         type: 'post',
         data: dataval,
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure'){
                 alert(obj.message);
@@ -3439,12 +3721,16 @@ $(document).on('click', '.wo-option-billing-clear-integ-log', function(e){
 });
 
 $(document).on('click', '.saveAircraftWOLogBookValOverviewBtn', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLogBookValOverviewURL,
         type: 'post',
         data: $("#frmAircraftWOLogBookValOverview").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('logbook_value_overview_id').val(obj.id);
@@ -3458,12 +3744,16 @@ $(document).on('click', '.saveAircraftWOLogBookValOverviewBtn', function(e){
 });
 
 $(document).on('click', '.saveAircraftWOLogBookValEngine', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLogBookValEngineURL,
         type: 'post',
         data: $("#frmAircraftWOLogBookValEngine").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#logbook_value_engine_id').val(obj.id);
@@ -3477,12 +3767,16 @@ $(document).on('click', '.saveAircraftWOLogBookValEngine', function(e){
 });
 
 $(document).on('click', '.saveAircraftWOLogBookValProp', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLogBookValPropURL,
         type: 'post',
         data: $("#frmAircraftWOLogBookValProp").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#logbook_value_prop_id').val(obj.id);
@@ -3500,6 +3794,8 @@ $(document).on('click', '.refresh-val-with-maintenance', function(e){
     if(aircraft_id != '' && aircraft_id != undefined){
         var work_order_id = $('#work_order_id').val();
         var wo_item_id = $('#wo_item_id').val();
+
+        $('.loader').show();
         
         $.ajax({
             url: refreshWOLogBookValWithMaintURL, 
@@ -3507,6 +3803,8 @@ $(document).on('click', '.refresh-val-with-maintenance', function(e){
             data: {aircraft_id:aircraft_id, work_order_id:work_order_id, wo_item_id:wo_item_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'failure'){
                     alert(obj.message);
                 }else{
@@ -3520,12 +3818,16 @@ $(document).on('click', '.refresh-val-with-maintenance', function(e){
 });
 
 $(document).on('click', '.saveWOOptionGenInfo', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOViewOptionGenInfoURL,
         type: 'post',
         data: $("#frmAircraftWOOptionGenInfo").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#general_info_id').val(obj.general_info_id);
@@ -3539,12 +3841,16 @@ $(document).on('click', '.saveWOOptionGenInfo', function(e){
 });
 
 $(document).on('click', '.saveWOOptionGenInfoDeposits', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOViewOptionGenInfoDepositURL,
         type: 'post',
         data: $("#frmAircraftWOOptionGenInfoDeposit").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 //$('#general_info_deposit_id').val(obj.gen_info_deposit_id);
@@ -3573,12 +3879,16 @@ $(document).on('click', '.remove-wo-gen-info-deposit', function(e){
     
     if(general_info_deposit_id != '' && general_info_deposit_id != undefined){
         if(confirm('Are you sure you want to remove this deposit ($'+deposit_amount+')?')){
+            $('.loader').show();
+
             $.ajax({
                 url: deleteWOViewOptionGenInfoDepositURL, 
                 type: 'post',
                 data: {general_info_deposit_id:general_info_deposit_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -3593,12 +3903,16 @@ $(document).on('click', '.remove-wo-gen-info-deposit', function(e){
 });
 
 $(document).on('click', '.saveWOOptionMiscCharges', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOViewOptionMiscChargesURL,
         type: 'post',
         data: $("#frmAircraftWOOptMiscCharges").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#misc_charges_id').val(obj.misc_charges_id);
@@ -3625,13 +3939,15 @@ $(document).on('click', '.saveWOOptionMiscFuelCharges', function(e){
         alert("Please fill price");
         return false;
     }
-
+    $('.loader').show();
     $.ajax({
         url: saveWOViewOptionMiscFuelChargesURL,
         type: 'post',
         data: $("#frmAircraftWOOptMiscCharges").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('.wo-misc-fuel-charges-list').html(obj.fuelchargestr);
@@ -3656,12 +3972,15 @@ $(document).on('click', '.remove-wo-misc-fuel-charges', function(e){
     
     if(misc_fuel_charges_id != '' && misc_fuel_charges_id != undefined){
         if(confirm('Are you sure you want to remove this fuel charges')){
+            $('.loader').show();
             $.ajax({
                 url: deleteWOViewOptionMiscFuelChargesURL, 
                 type: 'post',
                 data: {misc_fuel_charges_id:misc_fuel_charges_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -3698,6 +4017,7 @@ $(document).on('click', '.woremovephotobtn', function(e){
     
     if(wo_item_photo_id != '' && wo_item_photo_id != undefined){
         if(confirm('Are you sure you want to remove this photo?')){
+            $('.loader').show();
             var wo_item_id = $('#wo_item_id').val();
             $.ajax({
                 url: deleteWOItemPhotoURL, 
@@ -3705,6 +4025,8 @@ $(document).on('click', '.woremovephotobtn', function(e){
                 data: {wo_item_photo_id:wo_item_photo_id, wo_item_id:wo_item_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -3723,6 +4045,7 @@ $(document).on('click', '.woremovefilebtn', function(e){
     
     if(wo_item_file_id != '' && wo_item_file_id != undefined){
         if(confirm('Are you sure you want to remove this file?')){
+            $('.loader').show();
             var wo_item_id = $('#wo_item_id').val();
             $.ajax({
                 url: deleteWOItemFileURL, 
@@ -3730,6 +4053,8 @@ $(document).on('click', '.woremovefilebtn', function(e){
                 data: {wo_item_file_id:wo_item_file_id, wo_item_id:wo_item_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -3754,12 +4079,16 @@ $(document).on('click', '.aircraft-wo-item-file', function(e){
 });
 
 $(document).on('click', '.saveWOOptionPricingInfo', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOViewOptionPricingInfoURL,
         type: 'post',
         data: $("#frmAircraftWOOptPricingInfo").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#pricing_info_id').val(obj.pricing_info_id);
@@ -3773,12 +4102,15 @@ $(document).on('click', '.saveWOOptionPricingInfo', function(e){
 });
 
 $(document).on('click', '.saveWOOptionWarrantyInfo', function(e){
+    $('.loader').show();
     $.ajax({
         url: saveWOViewOptionWarrantyInfoURL,
         type: 'post',
         data: $("#frmAircraftWOOptWarrantyInfo").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 alert('Warranty Info detail saved successfully.');
@@ -3792,12 +4124,15 @@ $(document).on('click', '.saveWOOptionWarrantyInfo', function(e){
 $(document).on('click', '.saveWOOptionTaxInfo', function(e){
     var work_order_id = $('#tax_info_work_order_id').val();
     if(work_order_id!= '' && work_order_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveWOViewOptionTaxInfoURL,
             type: 'post',
             data: $("#frmAircraftWOOptTaxInfo").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#option_tax_info_id').val(obj.option_tax_info_id);
@@ -3832,12 +4167,14 @@ $(document).on('click', '.saveWOOptionExtraTaxes', function(e){
 });
 
 function saveWOViewOptionExtraTaxes(formdata, btnclickevent){
+    $('.loader').show();
     $.ajax({
         url: saveWOViewOptionExtraTaxesURL,
         type: 'post',
         data: formdata,
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 if(btnclickevent == 'new'){
@@ -3863,12 +4200,15 @@ $(document).on('click', '.wo-option-extra-taxes-list', function(e){
     $(this).addClass('wo-option-extra-taxes-list-active');
 
     if(extra_taxes_id != '' && extra_taxes_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: getWOViewOptionExtraTaxesDataURL,
             type: 'post',
             data: {extra_taxes_id:extra_taxes_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed') {
                     alert('Something went wrong, please try again');
                 }else{
@@ -3887,12 +4227,15 @@ $(document).on('click', '.wo-option-delete-extra-taxes', function(e){
     
     if(extra_taxes_id != '' && extra_taxes_id != undefined){
         if(confirm('Are you sure you want to remove this message?')){
+            $('.loader').show();
             $.ajax({
                 url: deleteWOViewOptionExtraTaxesURL, 
                 type: 'post',
                 data: {extra_taxes_id:extra_taxes_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     if(response == 'Failed') {
                         alert('Something went wrong, please try again');
                     }else{
@@ -3923,12 +4266,15 @@ $(document).on('change', '#option_billing_rate_method', function(e){
 $(document).on('click', '.saveWOOptionBillingInfo', function(e){
     var work_order_id = $('#billing_info_work_order_id').val();
     if(work_order_id!= '' && work_order_id != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveWOViewOptionBillingInfoURL,
             type: 'post',
             data: $("#frmAircraftWOOptBillingInfo").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#option_billing_info_id').val(obj.option_billing_info_id);
@@ -3959,12 +4305,16 @@ $(document).on('click', '.wo_item_reorganize_number', function(e){
     var work_order_id = $('#work_order_id').val();
     if(work_order_id != '' && work_order_id != undefined){
         if(confirm('This will reorganize the item numbers, removing any blanks between item numbers. Continue?')){
+            $('.loader').show();
+
             $.ajax({
                 url: reorganizeWorkOrderItemURL, 
                 type: 'post',
                 data: {work_order_id:work_order_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'success') {
                         alert('The item numbers has been reorganized successfully.');
@@ -4032,13 +4382,19 @@ $(document).on('dblclick', '.loadaircraftworkordertr', function(e){
 });
 
 function loadAircraftWOPopupDataFromServer(section, dataval){
+    $('.loader').show();
     $.ajax({
         url: loadAircraftWorkOrderPopupURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
-            appendCustomerOTCPopupData(section, response);
+            $('.loader').hide();
+            if(response == 'No work order found!'){
+                alert(response);
+            }else{
+                appendCustomerOTCPopupData(section, response);
+            }
         }
     });
 }
@@ -4065,12 +4421,16 @@ $(document).on('change', '#load_wo_limit_to_department', function(e){
     var wo_category = $(this).val();
 
     if(wo_category != '' && wo_category != undefined){
+        $('.loader').show();
+
         $.ajax({
             url: filterOpenWODepartsURL,
             type: 'post',
             data: {wo_category:wo_category},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#list-of-open-work-order-block').html(obj.openwohtml);
@@ -4269,12 +4629,16 @@ $(document).on('click', '.wo-item-add-part-btn', function(e){
 
 $(document).on('change', '#wo_item_part_number', function(e){
     if($(this).val() != ''){
+        $('.loader').show();
+
         $.ajax({
             url:getInventoryItemByIdURL,
             data:{'inventory_item_id':$(this).val()},
             dataType: "text",
             type:'post',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {//console.log(obj.conditions);
                     $('#wo_item_part_name').val(obj.inventoryitems.name);
@@ -4331,6 +4695,7 @@ $(document).on('change', '#wo_item_part_number', function(e){
 
 function resetWOItemPartForm(){
     $("#frmAircraftWOItemParts")[0].reset();
+    $('#wo_item_part_number').val('').trigger('change');
     var condoption = '';
     
     $('#wo_item_part_conditions').html(condoption);
@@ -4366,11 +4731,14 @@ $(document).on('click', '.wo-itempart-addpart-btn, .wo-itempart-addpartclose-btn
     }
 
     if(wo_item_part_number != '' && wo_item_part_number != undefined && part_wo_item_id != ''){
+        $('.loader').show();
         $.ajax({
             url: saveAircraftWOItemPartsURL, 
             type: 'post',
             data: dataval,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -4410,12 +4778,16 @@ $(document).on('click', '.wo-item-part-listall-btn', function(e){
 $(document).on('click', '#refresh-work-order-part-lists', function(e){
     var work_order_id = $('#work_order_id').val();
     if(work_order_id != '' && work_order_id != undefined){
+        $('.loader').show();
+
         $.ajax({
             url: refreshAircraftWOAllPartsListURL, 
             type: 'post',
             data: {work_order_id:work_order_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -4448,6 +4820,7 @@ $(document).on('click', '.wopartsrequisiterow', function(e){
     $(this).addClass('wopartsrequisiterow_active');
     if(wo_item_part_id != '' && wo_item_part_id != undefined){
         var wo_item_id = $('#wo_item_id').val();
+        $('.loader').show();
 
         $.ajax({
             url: getWOItemPartsRequisitionURL, 
@@ -4455,6 +4828,8 @@ $(document).on('click', '.wopartsrequisiterow', function(e){
             data: {wo_item_part_id:wo_item_part_id, wo_item_id:wo_item_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else{
@@ -4522,12 +4897,16 @@ $(document).on('click', '.wo-item-make-all-parts-taxable', function(e){
     var wo_item_id = $('#wo_item_id').val();
     if(wo_item_id != '' && wo_item_id != undefined){
         if(confirm('Do you want to mark all parts in this Work Order taxable?')){
+            $('.loader').show();
+
             $.ajax({
                 url: woItemMarkAllPartsTaxableURL, 
                 type: 'post',
                 data: {wo_item_id:wo_item_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -4561,12 +4940,16 @@ $(document).on('click', '.wo-item-part-prev-btn, .wo-item-part-next-btn', functi
     var wo_item_id = $('#wo_item_id').val();
 
     if(wo_item_part_id != '' && wo_item_part_id != undefined){
+        $('.loader').show();
+
         $.ajax({
             url: getAircraftWOItemNextPrevPartURL, 
             type: 'post',
             data: {clickbtn:clickbtn, wo_item_part_id:wo_item_part_id, work_order_id:work_order_id, wo_item_id:wo_item_id},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else if(response != 'Empty'){
@@ -4598,12 +4981,16 @@ $(document).on('click', '.wo-mark-all-item-yes', function(e){
     var wo_item_ids = $('#wo_item_ids').val();
     if(wo_item_ids != '' && wo_item_ids != undefined){
         if(confirm('Do you want to Mark All Items "Yes"?')){
+            $('.loader').show();
+
             $.ajax({
                 url: woMarkAllItemsYesURL, 
                 type: 'post',
                 data: {wo_item_ids:wo_item_ids},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -4665,12 +5052,16 @@ $(document).on('change', '#wo_item_status', function(e){
         var wo_item_id = $('#wo_item_id').val();
         var signoff_category = '1';
 
+        $('.loader').show();
+
         $.ajax({
             url: checkWOItemSignoffComplURL, 
             type: 'post',
             data: {wo_item_id:wo_item_id, signoff_category:signoff_category},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -4695,12 +5086,16 @@ $(document).on('click', '.signoff-categories-tr', function(e){
     var wo_item_id = $(this).attr('wo-item-id');
     var signoff_category = $(this).attr('signoff-category');
     if(wo_item_id != '' && wo_item_id != undefined && signoff_category != '' && signoff_category != undefined){
+        $('.loader').show();
+
         $.ajax({
             url: getWOItemSignoffCategoryDetURL, 
             type: 'post',
             data: {wo_item_id:wo_item_id, signoff_category:signoff_category},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else if(response != 'Empty'){
@@ -4719,12 +5114,16 @@ $(document).on('click', '.wo-signoff-tr', function(e){
         $('.wo-signoff-tr').removeClass('wo-signoff-tr-active');
         $(this).addClass('wo-signoff-tr-active');
 
+        $('.loader').show();
+
         $.ajax({
             url: getWOItemSignoffCategoryListURL, 
             type: 'post',
             data: {wo_item_id:wo_item_id},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else if(response != 'Empty'){
@@ -4742,12 +5141,15 @@ $(document).on('click', '.saveWOItemSignoffCategory', function(e){
     var signoff_wo_item_id = $('#signoff_wo_item_id').val();
 
     if(inspection_code != '' && inspection_code != undefined){
+        $('.loader').show();
         $.ajax({
             url: saveWOItemSignoffCategoryURL, 
             type: 'post',
             data: $('#frmWOItemSignoffCategory').serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
@@ -4785,12 +5187,15 @@ $(document).on('click', '.clearWOItemSignoffCategory', function(e){
     if(confirm('Are you sure want to clear this Signoff Category?')){
         var inspection_code = $.trim($('#wo_item_signoff_inspection_code').val());
         if(inspection_code != '' && inspection_code != undefined){
+            $('.loader').show();
             $.ajax({
                 url: clearWOItemSignoffCategoryURL, 
                 type: 'post',
                 data: $('#frmWOItemSignoffCategory').serialize(),
                 dataType: 'text',
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -4851,12 +5256,16 @@ $(document).on('click', '.saveWorkOrderItemEditTools', function(e){
 });
 
 function saveWOItemToolDetails(dataval, clkbtn){
+    $('.loader').show();
+
     $.ajax({
         url: saveWorkOrderItemToolURL, 
         type: 'post',
         data: dataval,
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure'){
                 alert(obj.message);
@@ -4900,12 +5309,16 @@ $(document).on('click', '.wo-item-tool-prev-btn, .wo-item-tool-next-btn', functi
 
     if(wo_item_tool_id != '' && wo_item_tool_id != undefined){
         var wo_item_id = $('#wo_item_id').val();
+        $('.loader').show();
+
         $.ajax({
             url: getWOItemToolNextPrevURL, 
             type: 'post',
             data: {clickbtn:clickbtn, wo_item_tool_id:wo_item_tool_id, wo_item_id:wo_item_id},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else if(response != 'Empty'){
@@ -4922,6 +5335,8 @@ $(document).on('click', '.inventory-tool-delete-btn', function(e){
     var wo_item_tool_id = $('#wo_item_edit_tool_id').val();
     if(wo_item_tool_id != '' && wo_item_tool_id != undefined){
         if(confirm('Are you sure want to delete this tool?')){
+            $('.loader').show();
+
             var wo_item_id = $('#wo_item_id').val();
             $.ajax({
                 url: deleteWOItemToolURL, 
@@ -4929,6 +5344,8 @@ $(document).on('click', '.inventory-tool-delete-btn', function(e){
                 data: {wo_item_tool_id:wo_item_tool_id, wo_item_id:wo_item_id},
                 dataType: 'text',
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure'){
                         alert(obj.message);
@@ -4944,53 +5361,12 @@ $(document).on('click', '.inventory-tool-delete-btn', function(e){
 });
 
 $(document).on('click', '.woitem-start-timer-btn', function(e){
-    //var current_logged_in_time = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     if($(this).hasClass('woitem-start-service-timer')){
-        /*var woitem_end_time = new Date();
-        var woitem_start_time = $('#woitem-timerstarttime').val();
-
-        var milliseconds = woitem_end_time.getTime() - new Date(woitem_start_time).getTime();
-        var diff_time = milliseconds / (60 * 60 * 1000);
-
-        var technician_hrs_worked = $('#woitem_technician_hrs_worked').val();
-
-        technician_hrs_worked = parseFloat(diff_time)+parseFloat(technician_hrs_worked);
-        var total_hrs_for_tech = parseFloat($('#woitem_total_hrs_for_tech').val());
-        var total_hrs_for_item = parseFloat($('#woitem_total_hrs_for_item').val());
-
-        technician_hrs_worked = parseFloat(technician_hrs_worked).toFixed(4);
-        total_hrs_for_tech = parseFloat(total_hrs_for_tech)+parseFloat(technician_hrs_worked);
-        total_hrs_for_item = parseFloat(total_hrs_for_item)+parseFloat(technician_hrs_worked);
-
-        total_hrs_for_item = parseFloat(total_hrs_for_item).toFixed(2);
-        total_hrs_for_tech = parseFloat(total_hrs_for_tech).toFixed(2);
-
-        $('#woitem_technician_hrs_worked').val(technician_hrs_worked);
-        $('#woitem_total_hrs_for_tech').val(total_hrs_for_tech);
-        $('#woitem_total_hrs_for_item').val(total_hrs_for_item);
-
-        $('.starttimestatus').html('NOT ACTIVE');
-        $('.starttimestatus').removeClass('starttimer-status-active');
-        $(this).text('Start Timer');
-        $(this).removeClass('woitem-start-service-timer');*/
-
-        //current_logged_in_time = '';
         $('#is_timer_start').val('2');
     }else{
-        /*var current_logged_in_time = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-        //var woitem_start_time = new Date();
-
-        //$('#woitem-timerstarttime').val(woitem_start_time);
-        //current_logged_in_time = 'Logged in at '+current_logged_in_time;
-        $('.starttimestatus').html('ACTIVE');
-        $('.starttimestatus').addClass('starttimer-status-active');
-        $(this).addClass('woitem-start-service-timer');
-        $(this).text('Stop Timer');*/
-
         $('#is_timer_start').val('1');
     }
-    //$('#woitem-loggedin-msg').html(current_logged_in_time);
-
+    
     saveAircraftWOServicesTechnician();
 });
 
@@ -5012,11 +5388,15 @@ $(document).on('click', ".otcinvoice_report", function (e) {
 });
 
 function downloadPDFAjax(url, params){
+    $('.loader').show();
+
     $.ajax({
         type: "POST",
         url: url,
         data: params,
         success:function(response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 window.open(obj.data);
@@ -5086,11 +5466,15 @@ $(document).on('click', '.customerAddlAddressSaveBtn', function(e){
     }
     
     if(flag == '1'){
+        $('.loader').show();
+
         $.ajax({
             url: saveCustomerAddlAddressURL, 
             type: 'post',
             data: $('#frmCustomerAddAddress').serialize(),
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success'){
                     var customeraddressarr = obj.customeraddressarr;
@@ -5115,12 +5499,17 @@ $(document).on('change', '#customer_addr_country', function (e) {
     if (countryId == '231') {
         $(".customer_addr_provinceblock").css('display', 'none');
         $(".customer_addr_stateblock").css('display', '');
+
+        $('.loader').show();
+
         $.ajax({
             type: "POST",
             url: getStatesList,
             data: {countryId:countryId},
             async : true,
             success: function(response) {
+                $('.loader').hide();
+
                 if (response != '') {
                     $('#customer_addr_state').append(response);
                 }
@@ -5138,12 +5527,16 @@ $(document).on('change', '#customer_addr_country', function (e) {
 $(document).on('change', '#customer_shipping_address_id', function(e){
     var shipping_address_id = $(this).val();
     if(shipping_address_id != '' && shipping_address_id != undefined){
+        $('.loader').show();
+
         $.ajax({
             type: "POST",
             url: getCustomerShippingAddressURL,
             data: {shipping_address_id:shipping_address_id},
             async : true,
             success: function(response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'success'){
                     var addressarr = obj.customeraddressarr;
@@ -5188,12 +5581,16 @@ $(document).on('click', '.customer_aircraft_maintenance', function(e){
 });
 
 $(document).on('click', '.saveMaintHelicopterOverviewBtn', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftMaintHelicopterOverviewURL,
         type: 'post',
         data: $("#frmAircraftMaintHelicopterOverview").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#maintenance_helicopter_overview_id').val(obj.id);
@@ -5207,12 +5604,16 @@ $(document).on('click', '.saveMaintHelicopterOverviewBtn', function(e){
 });
 
 $(document).on('click', '.saveAircraftWOLogBookValHelicopterOverviewBtn', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLogBookValHelicopterOverviewURL,
         type: 'post',
         data: $("#frmAircraftWOLogBookValHelicopterOverview").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#logbook_value_helicopter_overview_id').val(obj.id);
@@ -5226,12 +5627,16 @@ $(document).on('click', '.saveAircraftWOLogBookValHelicopterOverviewBtn', functi
 });
 
 $(document).on('click', '.saveAircraftMainJetEngine', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftMaintJetEngineURL,
         type: 'post',
         data: $("#frmAircraftMaintJetEngine").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#maintenance_jet_engine_id').val(obj.id);
@@ -5245,12 +5650,16 @@ $(document).on('click', '.saveAircraftMainJetEngine', function(e){
 });
 
 $(document).on('click', '.saveAircraftWOLogBookValJetEngine', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveAircraftWOLogBookValJetEngineURL,
         type: 'post',
         data: $("#frmAircraftWOLogBookValJetEngine").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('#logbook_value_jet_engine_id').val(obj.id);
@@ -5391,12 +5800,16 @@ $(document).on('click', '.updatemainthelicoptertimebtn', function(e){
 $(document).on('click', '.update_wo_logbook_value', function(e){
     if($('#frmUpdateWOLogBookValue input[type=checkbox]:checked').length) {
         if(confirm("Update the selected work orders with the current maintenance information?")){
+            $('.loader').show();
+
             $.ajax({
                 url: updateWOLogBookValueFromMaintURL,
                 type: 'post',
                 data: $("#frmUpdateWOLogBookValue").serialize(),
                 dataType: 'text',
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'failure') {
                         alert(obj.message);
@@ -5419,13 +5832,16 @@ $(document).on('click', '.aircraft_create_new_wo_btn', function(e){
             var aircraft_id = $('#aircraft_id').val();
             
             var dataval = {section:section, customer_id:customer_id, aircraft_id:aircraft_id};
-            
+            $('.loader').show();
+
             $.ajax({
                 url: fetchCustomerOTCPopupURL, 
                 type: 'post',
                 data: dataval,
                 async : true,
                 success: function (response) {
+                    $('.loader').hide();
+
                     if(response == 'no-data'){
                         section = 'aircraft_create_wo_btn';
                         dataval = {section:section, customer_id:customer_id, aircraft_id:aircraft_id};
@@ -5467,12 +5883,16 @@ $(document).on('click', '.saveWOItemDiscrepancybtn', function(e){
 });
 
 function saveWOItemDiscrepancyData(){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOItemDiscrepancyURL,
         type: 'post',
         data: $("#frmWOItemDiscrepancy").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure') {
                 alert(obj.message);
@@ -5548,12 +5968,16 @@ $(document).on('click', '.saveWOItemCorrectiveActionbtn', function(e){
 });
 
 function saveWOItemCorrectiveActionData(){
+    $('.loader').show();
+
     $.ajax({
         url: saveWOItemCorrectiveActionURL,
         type: 'post',
         data: $("#frmWOItemCorrectiveAction").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure') {
                 alert(obj.message);
@@ -5612,12 +6036,16 @@ $(document).on('change', '#owner_authentication', function(e){
             if(corrective_action.indexOf(authentication_no_txt) != -1){
                 
             }else{
+                $('.loader').show();
+
                 $.ajax({
                     url: validateWOItemCorrectiveActionURL,
                     type: 'post',
                     data: {wo_item_id:wo_item_id, authentication_no_txt:authentication_no_txt},
                     dataType: 'text',
                     success: function (response) {
+                        $('.loader').hide();
+
                         var obj = JSON.parse(response);
                         if(obj.status == 'failure') {
                             alert(obj.message);
@@ -5647,12 +6075,16 @@ $(document).on('change', '#owner_authentication', function(e){
 });
 
 $(document).on('click', '.saveCustRepairOrderRates', function(e){
+    $('.loader').show();
+
     $.ajax({
         url: saveCustomerRepairOrderRatesURL,
         type: 'post',
         data: $("#frmCustRepairOrderRates").serialize(),
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'failure') {
                 alert(obj.message);
@@ -5868,12 +6300,16 @@ $(document).on('click', '.continueWOPrintBtn', function(e){
 
 function validateWOACTT(){
     var work_order_id = $('#work_order_id').val();
+    $('.loader').show();
+
     $.ajax({
         url: validateWorkOrderACTTURL,
         type: 'post',
         data: {work_order_id:work_order_id},
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 if(obj.is_actt_blank == '0'){
@@ -5894,13 +6330,16 @@ function validateWOACTT(){
 
 function checkWOItemOverviewWarranty(){
     var work_order_id = $('#work_order_id').val();
-    
+    $('.loader').show();
+
     $.ajax({
         url: woItemOverviewWarrantyURL,
         type: 'post',
         data: {work_order_id:work_order_id},
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 if(obj.warranty_count > '1'){
@@ -5985,11 +6424,16 @@ $(document).on('click', '.continueWOPrintWarrantyBtn', function(e){
 });
 
 $(document).on('change', '#overview_special_rate_hr, #overview_estimated_rate, #overview_flat_rate, #overview_shipping_in', function(e){
-    var currval = $(this).val();
-    currval = currval.replace(/\$/g, '');
-    currval ='$'+parseFloat(currval).toFixed(2);
+    var currval = $(this).val().replace(/\$/g, '').trim();
 
-    $(this).val(currval);
+    // Check if it's a valid number before formatting
+    if (currval === '' || isNaN(currval)) {
+        $(this).val('$0.00'); // fallback value
+    } else {
+        currval = '$' + parseFloat(currval).toFixed(2);
+        $(this).val(currval);
+    }
+
 });
 
 $(document).on('click', '.wo_option_warranty_info_row', function(e){
@@ -5999,12 +6443,17 @@ $(document).on('click', '.wo_option_warranty_info_row', function(e){
         $(this).addClass('option_warranty_info_row_active');
         var work_order_id = $('#work_order_id').val();
         var wo_item_id = $('#wo_item_id').val();
+
+        $('.loader').show();
+
         $.ajax({
             url: getWarrantyInfoPaymentOptionsURL, 
             type: 'post',
             data: {warranty_id:warranty_id, work_order_id:work_order_id, wo_item_id:wo_item_id},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 if($.trim(response) == 'Failed'){
                     alert('Something went wrong, please try again');
                 }else{
@@ -6070,12 +6519,16 @@ $(document).on('click', '.contLogbooklblprintopt', function(e){
         var log_book_category_name = $('#log_book_category_name').val();
 
         var flag = '0';
+        $('.loader').show();
+
         $.ajax({
             url: validateLogbookCatFinalInspectionURL, 
             type: 'post',
             data: {labels_technician:labels_technician, log_book_category:log_book_category, wo_item_id:wo_item_id, work_order_id:work_order_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.wosignoffitemscount != '0') {
                     woLabelsPrintOpt();
@@ -6183,6 +6636,8 @@ $(document).on('click', '.previewstatement', function(e){
         var statement_name = $('#statement_name option:selected').text();
         
         var dataval = {section:section, customer_id:customer_id, aircraft_id:aircraft_id, wo_item_id:wo_item_id, work_order_id:work_order_id, wo_report_type:wo_report_type, statement_name:statement_name};
+
+        $('.loader').show();
         
         $.ajax({
             url: fetchCustomerOTCPopupURL, 
@@ -6190,6 +6645,8 @@ $(document).on('click', '.previewstatement', function(e){
             data: dataval,
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 appendCustomerOTCPopupData(section, response);
             }
         });
@@ -6273,12 +6730,16 @@ $(document).on('click', '.womovefilebtn', function(e){
 
 $(document).on('click', '.saveWOMoveItembtn', function(e){
     if(confirm('Move this OSR item(vendor: '+$('.wo-osr-list-active').children("td:first").text()+') to item #'+$('#osr-item-number').val())){
+        $('.loader').show();
+
         $.ajax({
             url: saveWOOSRMoveItemURL, 
             type: 'post',
             data: $('#frmWOOSRMoveItem').serialize(),
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status = 'success') {
                     $('.wo-osr-list').html(obj.osrlist);
@@ -6293,12 +6754,16 @@ $(document).on('click', '.saveWOMoveItembtn', function(e){
 
 $(document).on('click', '.saveWOMoveItemFilebtn', function(e){
     if(confirm('Move this File('+$('.wo-item-file-active').find('td:first').text().trim()+') to item #'+$('#wo_file_item_number').val())){
+        $('.loader').show();
+
         $.ajax({
             url: saveWOMoveItemFileURL, 
             type: 'post',
             data: $('#frmWOMoveItemFile').serialize(),
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status = 'success') {
                     $('.count_wo_item_file').html(obj.woitemfilecount);
@@ -6314,12 +6779,16 @@ $(document).on('click', '.saveWOMoveItemFilebtn', function(e){
 
 $(document).on('click', '.saveWOMoveItemPhotobtn', function(e){
     if(confirm('Move this Picture('+$('.wo-item-file-active').find('td:first').text().trim()+') to item #'+$('#wo_photo_item_number').val())){
+        $('.loader').show();
+
         $.ajax({
             url: saveWOMoveItemPhotoURL, 
             type: 'post',
             data: $('#frmWOMoveItemPhoto').serialize(),
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status = 'success') {
                     $('.count_wo_item_photo').html(obj.woitemphotocount);
@@ -6341,12 +6810,16 @@ $(document).on('click', '.wo-item-osr-prev-btn, .wo-item-osr-next-btn', function
     if(wo_osrinfo_id != '' && wo_osrinfo_id != undefined){
         var wo_item_id = $('#wo_item_id').val();
         var work_order_id = $('#work_order_id').val();
+        $('.loader').show();
+
         $.ajax({
             url: getWOItemOSRNextPrevURL, 
             type: 'post',
             data: {clickbtn:clickbtn, wo_osrinfo_id:wo_osrinfo_id, wo_item_id:wo_item_id, work_order_id:work_order_id},
             dataType: "text",
             success: function (response) {
+                $('.loader').hide();
+
                 if(response == 'Failed'){
                     alert('Something went wrong, please try again.');
                 }else if(response != 'Empty'){
@@ -6368,12 +6841,16 @@ $(document).on('click', '.add-maint-engine-cylinder', function(e){
             customer_id = !isNaN(customer_id) ? customer_id : '';
         }
         var aircraft_id = $('#maint_engine_aircraft_id').val();
+        $('.loader').show();
+
         $.ajax({
             url: fetchCustomerOTCPopupURL, 
             type: 'post',
             data: {section:section, customer_id:customer_id, aircraft_id:aircraft_id},
             async : true,
             success: function (response) {
+                $('.loader').hide();
+
                 appendCustomerOTCPopupData(section, response);
             }
         });
@@ -6408,6 +6885,7 @@ $(document).on('click', '.wo-item-remove-part-btn', function(e){
 
 function removeWOItemParts(work_order_id, wo_item_id, wo_item_part_id){
     var dataval = {wo_item_part_id:wo_item_part_id, wo_item_id:wo_item_id, work_order_id:work_order_id};
+    $('.loader').show();
 
     $.ajax({
         url: removeWOItemPartsURL, 
@@ -6415,6 +6893,8 @@ function removeWOItemParts(work_order_id, wo_item_id, wo_item_part_id){
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
+
             var obj = JSON.parse(response);
             if(obj.status == 'success'){
                 alert("Part deleted successfully.");
@@ -6425,3 +6905,14 @@ function removeWOItemParts(work_order_id, wo_item_id, wo_item_part_id){
         }
     });
 }
+
+$(document).on('keypress', '.no-special-char', function(e) {
+    var regex = new RegExp("^[a-zA-Z0-9 ]+$"); // allows letters, numbers, space
+    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (!regex.test(key)) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+

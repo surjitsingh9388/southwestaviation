@@ -234,7 +234,7 @@ class FlightlogComponent extends Component {
                         <div class="flHElmCls">ToGo</div>
                     </div>
                     <div class="flItemCls">
-                        <div class="flElmCls">
+h                        <div class="flElmCls">
                             <div class="form-group">
                                 <div style="width: 300px;">
                                     <select name="plane_id" class="form-control selectpicker airListCls" data-show-subtext="true" data-live-search="false" required="required" style="display:block !important;">';

@@ -225,11 +225,20 @@ class InventoryItemsTable extends Table
             if(!empty($from_description) || !empty($to_description)){
                 $inventoriesarr = $InventoriesModel->find('all')->where(['inventory_item_id'=>$entity->id])->select($InventoriesModel);
                 if($inventoriesarr->count() > 0){
+                    $transactionactionlist = unserialize(TRANSACTION_ACTION_LIST);
+
                     foreach($inventoriesarr as $inventoriesval){
                         $inventoryTransactionHistory = $InventoryTransactionHistoriesModel->newEmptyEntity();
                         if(empty($itemtype_from)){
                             $itemtype_from = $entity->item_type;
                             $itemtype_to = $entity->item_type;
+                        }
+
+                        if(!empty($transaction_type)){
+                            $nameToFind = $transaction_type;
+
+                            $key = array_search($nameToFind, array_column($transactionactionlist, 'name'));
+                            $transaction_type = ($key !== false) ? $transactionactionlist[$key]['id'] : null;
                         }
 
                         $inventoryTransactionHistory->from_description = $from_description;

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="btn-group">
-                <button type="button" class="btn btn-default" onclick="$('#aircraft_wo_photo').trigger('click'); return false;" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Add Photo</button>
+                <button type="button" class="btn btn-default woaddphotofilebtn" data-val="wo_photo_upload" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Add Photo</button>
                 <button type="button" class="btn btn-default woremovephotobtn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Remove Photo</button>
                 <button type="button" class="btn btn-default womovepicturebtn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Move Picture</button>
             </div>
@@ -10,7 +10,6 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-xs-12 col-sm-12 mt10">
-            <input type="file" name="files[]" id="aircraft_wo_photo" class="hide-block" multiple  accept=".png, .gif, .jpeg" style="display:none;" />
             <table class="table table-bordered aircraftwotable">
                 <thead>
                     <tr>
@@ -44,7 +43,7 @@
                     <tr class="aircraft-wo-item-photo <?php echo $wo_item_photo_active; ?>" data-val="<?php echo $photes['id']; ?>">
                         <td class="document-name"><span class="document-management-icon <?php echo $iconcss; ?>"></span>
                         <?php
-                        echo $this->Html->link($photes['file_name'], '/inventorycustomers/' . $photes['file_name'],['download'=>$photes['file_name']]);
+                        echo $this->Html->link($photes['file_name'], '/inventorycustomers/' . $photes['file_name'],['download'=>$photes['file_name'], 'target' => '_blank']);
                         ?></td>
                         <td><?php echo $photes['caption']; ?></td>
                     </tr>

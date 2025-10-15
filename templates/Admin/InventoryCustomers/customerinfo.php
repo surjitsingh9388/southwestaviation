@@ -99,6 +99,12 @@ use Cake\Routing\Router;
 <?php echo $this->element('InventoryPopup/customer_otc/inventory_customer_upload_media'); ?>
 
 
+<!-- Add Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Add Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <div id="customerotcpopup"></div>
 
 <script>
@@ -113,6 +119,7 @@ var deleteInventoriesAttURL = "<?php echo $this->Url->build(['controller'=>'Inve
 var customerInfoURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'customerinfo']); ?>";
 var deleteAddlShippingAddressURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'deleteAddlShippingAddress']); ?>";
 var getCustomerShippingAddressURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'getCustomerShippingAddress']); ?>";
+var deleteCustomerOTCURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'deleteCustomerOTC']); ?>";
 
 var ajaxListPageSearchURL = '';
 var pagelimit = '';

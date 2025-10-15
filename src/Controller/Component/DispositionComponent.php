@@ -47,5 +47,18 @@ class DispositionComponent extends Component {
         }
         return $res;
     }
+
+    public function getDispId($title)
+    {
+        $dispModel = $this->getController()->fetchTable('Dispositions');
+        $res = '';
+        if(!empty($title)) {
+            $result = $dispModel->find()->where(['LOWER(Dispositions.title)'=>strtolower($title)])->select(['Dispositions.id'])->enableHydration(false)->first();
+            if(!empty($result['id'])) {
+                $res = $result['id'];
+            }         
+        }
+        return $res;
+    }
     
 }

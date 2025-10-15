@@ -47,5 +47,18 @@ class PositionComponent extends Component {
         }
         return $res;
     }
+
+    public function getPositionId($title)
+    {
+        $positionModel = $this->getController()->fetchTable('Positions');
+        $res = '';
+        if(!empty($title)) {
+            $result = $positionModel->find()->where(['LOWER(Positions.title)'=>strtolower($title)])->select(['Positions.id'])->enableHydration(false)->first();
+            if(!empty($result['id'])) {
+                $res = $result['id'];
+            }         
+        }
+        return $res;
+    }
     
 }

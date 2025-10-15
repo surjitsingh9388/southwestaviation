@@ -14,10 +14,11 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
         <div class="menu">
             <?php
             if($sessionUser['role_id'] != '15'){ ?>
-            <li class="current-page">
+            <li class="current-page menuItem">
                 <a href="<?php echo $this->Url->build(['controller'=>'Dashboard']); ?>">
                     <span class="icon-size">
-                    <?php echo $this->Html->image('/images/icons/Dashboard.png'); ?>
+                    <!-- <?php echo $this->Html->image('/images/icons/Dashboard.png'); ?> -->
+                     <i class="fa fa-home" aria-hidden="true"></i>
                     </span> 
                     Dashboard
                 </a>
@@ -34,14 +35,22 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 <?php 
                 } else { 
                 ?>
-                <li class="dropdown user_management_block">
+                <li class="dropdown user_management_block menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size">
-                        <?php echo $this->Html->image('/images/icons/user.png'); ?>
-                        </span> User Management</a>
+                        <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                            <!-- <?php echo $this->Html->image('/images/icons/user.png'); ?>  -->
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            </span> 
+                            User Management
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
 
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $userStyle; ?>>
                         <?php 
@@ -68,7 +77,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             <li>
                             <?php } ?>
                             <?php
-                                echo $this->Html->link("<i class='fa fa-user'></i> Permissions", 
+                                echo $this->Html->link("<i class='fa fa-lock'></i> Permissions", 
                                         array('controller' => 'Users' ,'action' => 'assignMenus'), 
                                         array('escape' => false));
                                     
@@ -167,14 +176,23 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 if (in_array($controller, $technicalPublicationsSection)) {
                     $techpublSubStyle = 'style="display: block;"';
                 ?>
-                <li class="current-page active dropdown">
+                <li class="current-page active dropdown menuItem">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size"><i class="fa fa-newspaper-o"></i></span>Technical Publications
+                         <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                            <!-- <?php echo $this->Html->image('/images/icons/user.png'); ?>  -->
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            </span> 
+                            Technical Publications
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
                     </a>
 
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $techpublSubStyle; ?>>
@@ -185,65 +203,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                                 <?php
                                 echo $this->Html->link("<i class='fa fa-tasks'></i> <span>SWAS</span>", array('controller' => 'TechnicalPublicationSwas' ,'action' => 'index'), array('escape' => false));
                                 ?>
-                                <!--ul style="padding-left: 30px;display:none;">
-                                    <?php 
-                                    if(in_array('SWAS HR', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationSwas') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>HR</span>", array('controller' => 'TechnicalPublicationSwas' ,'action' => 'hr'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-
-                                    if(in_array('SWAS Maintenance', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationSwas') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Maintenance</span>", array('controller' => 'TechnicalPublicationSwas' ,'action' => 'maintenance'), array('escape' => false));    
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-									
-									if(in_array('SWAS Information Technology', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationSwas') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Information Technology</span>", array('controller' => 'TechnicalPublicationSwas' ,'action' => 'information_technology'), array('escape' => false)); 
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-									
-									if(in_array('SWAS Inventory', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationSwas') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Inventory</span>", array('controller' => 'TechnicalPublicationSwas' ,'action' => 'inventory'), array('escape' => false)); 
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    ?>
-                                </ul-->
+                                
                             </li>
                         <?php
                         }
@@ -254,65 +214,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                                 <?php
                                 echo $this->Html->link("<i class='fa fa-tasks'></i> <span>BVAC</span>", array('controller' => 'TechnicalPublicationBvacs' ,'action' => 'index'), array('escape' => false));
                                 ?>
-                                <!--ul style="padding-left: 30px; display:none;">
-                                    <?php 
-                                    if(in_array('BVAC HR', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationBvacs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>HR</span>", array('controller' => 'TechnicalPublicationBvacs' ,'action' => 'hr'), array('escape' => false));   
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-
-                                    if(in_array('BVAC Flight Operations', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationBvacs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Flight Operations</span>", array('controller' => 'TechnicalPublicationBvacs' ,'action' => 'flight_operations'), array('escape' => false));
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    
-                                    if(in_array('BVAC Information Technology', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationBvacs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Information Technology</span>", array('controller' => 'TechnicalPublicationBvacs' ,'action' => 'information_technology'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    
-                                    if(in_array('BVAC Inventory', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationBvacs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Inventory</span>", array('controller' => 'TechnicalPublicationBvacs' ,'action' => 'inventory'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    ?>
-                                </ul-->
+                                
                             </li>
                         <?php
                         }
@@ -323,65 +225,16 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                                 <?php
                                 echo $this->Html->link("<i class='fa fa-tasks'></i> <span>RJC</span>", array('controller' => 'TechnicalPublicationRjcs' ,'action' => 'index'), array('escape' => false));
                                 ?>
-                                <!--ul style="padding-left: 30px; display:none;">
-                                    <?php 
-                                    if(in_array('RJC HR', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationRjcs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>HR</span>", array('controller' => 'TechnicalPublicationRjcs' ,'action' => 'hr'), array('escape' => false));   
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
+                            </li>
+                        <?php
+                        }
 
-                                    if(in_array('RJC Fuel System', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationRjcs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Fuel System</span>", array('controller' => 'TechnicalPublicationRjcs' ,'action' => 'fuel_system'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    
-                                    if(in_array('RJC Information Technology', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationRjcs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Information Technology</span>", array('controller' => 'TechnicalPublicationRjcs' ,'action' => 'information_technology'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    
-                                    if(in_array('RJC Inventory', $userMenu)) {
-                                        if ($controller == 'TechnicalPublicationRjcs') { 
-                                        ?>
-                                        <li class="current-page">
-                                        <?php } else { ?>
-                                        <li>
-                                        <?php 
-                                        } 
-                                        echo $this->Html->link("<i class='fa fa-arrow-right'></i> <span>Inventory</span>", array('controller' => 'TechnicalPublicationRjcs' ,'action' => 'inventory'), array('escape' => false));  
-                                        ?>
-                                        </li>
-                                    <?php
-                                    }
-                                    ?>
-                                </ul-->
+                        if(in_array('Permissions', $userMenu)) {
+                        ?>  
+                            <li>
+                                <?php
+                                echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Permissions</span>", array('controller' => 'TechnicalPublicationPermissions' ,'action' => 'index'), array('escape' => false));
+                                ?>
                             </li>
                         <?php
                         }
@@ -400,14 +253,22 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                 <li class="current-page active dropdown">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size">
-                        <?php echo $this->Html->image('/images/icons/army.png'); ?>
-                        </span>Aircraft Management</a>
+                        <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                            <!-- <?php echo $this->Html->image('/images/icons/army.png'); ?> -->
+                            <i class="fa fa-plane"></i>
+                            </span> 
+                            Aircraft Management
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
 
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $flightSubStyle; ?>>
                         <?php 
@@ -578,6 +439,86 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         <?php
                         }
 
+                        if(in_array('Item Type', $userMenu)) {
+                            if ($controller == 'AirframeItemTypes') { 
+                            ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Item Type</span>", 
+                                array('controller' => 'AirframeItemTypes' ,'action' => 'index'), 
+                                array('escape' => false));
+                                ?>
+                            </li>
+                        <?php
+                        }
+
+                        if(in_array('Requirement Type', $userMenu)) {
+                            if ($controller == 'AirframeRequirementTypes') { 
+                            ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Requirement Type</span>", 
+                                array('controller' => 'AirframeRequirementTypes' ,'action' => 'index'), 
+                                array('escape' => false));
+                                ?>
+                            </li>
+                        <?php
+                        }
+
+                        if(in_array('SOC', $userMenu)) {
+                            if ($controller == 'AirframeSocs') { 
+                            ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>SOC</span>", 
+                                array('controller' => 'AirframeSocs' ,'action' => 'index'), 
+                                array('escape' => false));
+                                ?>
+                            </li>
+                        <?php
+                        }
+
+                        if(in_array('Requirement Source', $userMenu)) {
+                            if ($controller == 'AirframeRequirementSources') { 
+                            ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Requirement Source</span>", 
+                                array('controller' => 'AirframeRequirementSources' ,'action' => 'index'), 
+                                array('escape' => false));
+                                ?>
+                            </li>
+                        <?php
+                        }
+
+                        if(in_array('Issuing Authority', $userMenu)) {
+                            if ($controller == 'AirframeIssuingAuthorities') { 
+                            ?>
+                            <li class="current-page">
+                            <?php } else { ?>
+                            <li>
+                            <?php 
+                            } 
+                            echo $this->Html->link("<i class='fa fa-tasks'></i> <span>Issuing Authority</span>", 
+                                array('controller' => 'AirframeIssuingAuthorities' ,'action' => 'index'), 
+                                array('escape' => false));
+                                ?>
+                            </li>
+                        <?php
+                        }
+
                         if(in_array('Clone Records', $userMenu)) {
                             if ($controller == 'CloneRecords') { 
                             ?>
@@ -621,14 +562,22 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                     <li class="current-page active dropdown">
                 <?php } else { ?>
-                    <li class="dropdown">
+                    <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                    <span class="icon-size">
-                    <?php echo $this->Html->image('/images/icons/repair.png'); ?>
-                    </span>Maintenance</a>
+                        <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                             <!-- <?php echo $this->Html->image('/images/icons/repair.png'); ?> -->
+                            <i class="fa fa-wrench"></i>
+                            </span> 
+                            Maintenance
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
 
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $flightSubStyle; ?>>
                         <?php 
@@ -645,7 +594,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         <?php
                         }
 
-                        if(in_array('Aircraft/Equipment', $userMenu)) {
+                        /*if(in_array('Aircraft/Equipment', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'Equipment') { 
                             ?>
                             <li class="current-page">
@@ -657,7 +606,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             ?>
                             </li>
                         <?php
-                        }
+                        }*/
                         
                         if(in_array('Due List', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'maintenance' && $type == 'maintenance') {
@@ -696,7 +645,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         <?php
                         }
 
-                        if(in_array('Non-Routine', $userMenu)) {
+                        /*if(in_array('Non-Routine', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'Non-Routine') { 
                             ?>
                             <li class="current-page">
@@ -710,7 +659,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             ?>
                             </li>
                         <?php
-                        }
+                        }*/
 
                         if(in_array('Work Orders', $userMenu)) {
                             if ($controller == 'InventoryCustomers' && $action == 'Work Orders') { 
@@ -728,7 +677,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         <?php
                         }
 
-                        if(in_array('Work Completed', $userMenu)) {
+                        /*if(in_array('Work Completed', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'Work Completed') { 
                             ?>
                             <li class="current-page">
@@ -742,7 +691,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             ?>
                             </li>
                         <?php
-                        }
+                        }*/
 
                         if(in_array('Logbooks', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'index') { 
@@ -760,7 +709,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                         <?php
                         }
 
-                        if(in_array('Checklists', $userMenu)) {
+                        /*if(in_array('Checklists', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'Checklists') { 
                             ?>
                             <li class="current-page">
@@ -774,9 +723,9 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             ?>
                             </li>
                         <?php
-                        }
+                        }*/
 
-                        if(in_array('Reliability Reports', $userMenu)) {
+                        /*if(in_array('Reliability Reports', $userMenu)) {
                             if ($controller == 'Reports' && $action == 'Reliability') { 
                             ?>
                             <li class="current-page">
@@ -788,7 +737,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             ?>
                             </li>
                         <?php
-                        }
+                        }*/
 
                         if(in_array('Settings', $userMenu)) {
                             if ($controller == 'Settings') { 
@@ -818,15 +767,21 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                 <li class="current-page active dropdown">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size">
-                        <?php echo $this->Html->image('/images/icons/army.png'); ?>
-                        </span>Aircraft Discrepancies</a>
-
+                        <div class="navHeader">
+                            <div>
+                                <span class="icon-size">
+                                 <?php echo $this->Html->image('/images/icons/army.png'); ?>
+                                </span> 
+                           Aircraft Discrepancies
+                            </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                       </a>
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $flightSubStyle; ?>>
                         <?php 
                         if(in_array('Aircraft Discrepancy', $userMenu)) {
@@ -858,12 +813,21 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                 <li class="current-page active dropdown">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size"><i class="fa fa-group"></i></span>Crew</a>
+                        <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                                <i class="fa fa-group"></i>
+                            </span> 
+                            Crew
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
 
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $flightSubStyle; ?>>
                         <?php 
@@ -969,12 +933,21 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                 <li class="current-page active dropdown">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size"><i class="fa fa-plane"></i></span>Flights</a>
+                        <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                                <i class="fa fa-plane"></i>
+                            </span> 
+                            Flights
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
                     <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $flightSubStyle; ?>>
                         <?php 
                         if(in_array('Dashboard', $userMenu)) {
@@ -1055,13 +1028,22 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                 ?>
                 <li class="current-page active dropdown">
                 <?php } else { ?>
-                <li class="dropdown">
+                <li class="dropdown menuItem">
                 <?php 
                 }
                 ?>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon-size"><i class="fa fa-gears"></i></span>Inventory</a>
-                    <ul class="nav dropdown-menu dropdown-usermenu" <?php echo $partsSubStyle; ?>>
+                         <div class="navHeader">
+                           <div>
+                             <span class="icon-size">
+                                <i class="fa fa-gears"></i>
+                            </span> 
+                            Inventory
+                           </div>
+                            <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <ul class="nav dropdown-menu dropdown-usermenu" style="padding-bottom:60px" <?php echo $partsSubStyle; ?>>
                         <?php 
                         if(in_array('Information Center', $userMenu)) {
                             if($controller == 'Inventories' && (in_array($action, array('index')))) { 
@@ -1313,22 +1295,41 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
         </div>
     </ul>
 </div>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
+
+<!-- <script>
+function adjustSidebar() {
     const sidebar = document.querySelector('.side-bar');
-    const content = document.querySelector('.content'); 
+    const content = document.querySelector('.content');
+    const isDesktop = window.matchMedia("(min-width: 1367px)").matches;
 
-    if (sidebar) {
-      sidebar.classList.remove('active');
-      sidebar.classList.add('left');
+    if (isDesktop) {
+        if (sidebar) {
+            sidebar.classList.remove('left');
+        }
+        if (content) {
+            content.classList.remove('left');
+        }
+    } else {
+        if (sidebar) {
+            // sidebar.classList.remove('active');
+            sidebar.classList.add('left');
+        }
+        if (content) {
+            content.classList.add('left');
+        }
     }
+}
 
-    if (content) {
-      content.classList.add('sliding','left');
-    }
-  });
 
-</script>
+// Run on load
+window.addEventListener('DOMContentLoaded', adjustSidebar);
+
+// Run on resize
+window.addEventListener('resize', adjustSidebar);
+
+</script> -->
+
+
 
 
 

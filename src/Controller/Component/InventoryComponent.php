@@ -895,13 +895,13 @@ class InventoryComponent extends Component {
         if(!empty($otherparameter['from_location_id']) && !is_numeric($otherparameter['from_location_id'])){
             $locationarr = $inventoryLocationModel->find('all')->where(['status'=>'1', 'location_name'=>$otherparameter['from_location_id']])->first();
 
-            $otherparameter['from_location_id'] = $locationarr->id;
+            $otherparameter['from_location_id'] = !empty($locationarr) ? $locationarr->id : '';
         }
 
         if(!empty($otherparameter['to_location_id']) && !is_numeric($otherparameter['to_location_id'])){
             $locationarr = $inventoryLocationModel->find('all')->where(['status'=>'1', 'location_name'=>$otherparameter['to_location_id']])->first();
 
-            $otherparameter['to_location_id'] = $locationarr->id;
+            $otherparameter['to_location_id'] = !empty($locationarr) ? $locationarr->id : '';
         }
                         
         $itemtypelist = unserialize(INVENTORY_ITEM_TYPE);

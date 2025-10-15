@@ -226,14 +226,14 @@ $companyUserRoles = array(ROLE_ADMIN);
                                 </div>
                             </div>
                         </div>
-                        <?php if($user['role_id'] == '1'){ ?>
+                        <?php //if($user['role_id'] == '1'){ ?>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reference"></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <button type="button" class="btn btn-default" id="user_add_pto_popup_btn">Add/Subtract PTO</button>
                             </div>
                         </div>
-                        <?php } ?>
+                        <?php //} ?>
                         
                         <?php if(!isset($action)){ ?>
                         <div class="form-group">

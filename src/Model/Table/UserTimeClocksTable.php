@@ -58,6 +58,65 @@ class UserTimeClocksTable extends Table
             $entity->out_time = $service->dateFormatBeforeSave($entity->out_time);
         }
 
+        if(!empty($entity->id)){
+            $userTimeClocksModel = FactoryLocator::get('Table')->get('UserTimeClocks');            
+            $userTimeClocks = $userTimeClocksModel->get($entity->id);
+
+            $usersModel = FactoryLocator::get('Table')->get('Users');            
+            $users = $usersModel->get($entity->user_id);
+
+            if(!empty($userTimeClocks->in_time)) {
+                $userTimeClocks->in_time = $service->dateFormatBeforeSave($userTimeClocks->in_time);
+            }
+
+            if(!empty($userTimeClocks->out_time)) {
+                $userTimeClocks->out_time = $service->dateFormatBeforeSave($userTimeClocks->out_time);
+            }
+
+            $userTimeClockHistoriesModel = FactoryLocator::get('Table')->get('UserTimeClockHistories');
+            
+            $userTimeClockHistory = $userTimeClockHistoriesModel->newEmptyEntity();
+            
+            $userTimeClockHistory->user_time_clock_id = $entity->id;
+
+            $userTimeClockHistory->title = 'User Time Clock for '.$users->full_name.' was updated.';
+            
+            if(!empty($userTimeClocks->updated_at)){
+                $modified_from = str_replace('-', '/', $userTimeClocks->updated_at);
+                $modified_from = date("Y-m-d h:i A", strtotime($modified_from));
+            }else{
+                $modified_from = '';
+            }
+
+            if(!empty($entity->updated_at)){
+                $modified_to = str_replace('-', '/', $entity->updated_at);
+                $modified_to = date("Y-m-d h:i A", strtotime($modified_to));
+            }else{
+                $modified_to = '';
+            }
+
+            $description = '';
+            if($entity->in_time != $userTimeClocks->in_time){
+                $description .= 'In Time was changed from "'.$userTimeClocks->in_time.'" to "'.$entity->in_time.'".<br/>';
+            }
+            if($entity->out_time != $userTimeClocks->out_time){
+                $description .= 'Out Time was changed from "'.$userTimeClocks->out_time.'" to "'.$entity->out_time.'".<br/>';
+            }
+            if($entity->status != $userTimeClocks->status){
+                $description .= 'Status was changed from "'.$userTimeClocks->status.'" to "'.$entity->status.'".<br/>';
+            }
+
+            if(!empty($description)){
+                $description .= 'Last updated was changed from "'.$modified_from.'" to "'.$modified_to.'".<br/>';
+            
+                $userTimeClockHistory->user_id = $entity->updated_by;
+                $userTimeClockHistory->description = $description;
+
+                $userTimeClockHistoriesModel->save($userTimeClockHistory);
+            }
+
+        }
+
         return true;
     }
     

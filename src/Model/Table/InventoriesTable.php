@@ -205,7 +205,7 @@ class InventoriesTable extends Table
             if($entity->ata_chapter != $inventories->ata_chapter){
                 $description .= 'ATA Chapter was changed from "'.$inventories->ata_chapter.'" to "'.$entity->ata_chapter.'".<br/>';
             }
-            if(strtotime($entity->expiration) != strtotime($inventories->expiration)){
+            if (strtotime($entity->expiration ?? '') !== strtotime($inventories->expiration ?? '')) {
                 if(!empty($inventories->expiration)){
                     $expiration_date_from = str_replace('-', '/', $inventories->expiration);
                     $expiration_date_from = date("l, F d, Y", strtotime($expiration_date_from));
@@ -222,7 +222,7 @@ class InventoriesTable extends Table
 
                 $description .= 'Expiration was changed from "'.$expiration_date_from.'" to "'.$expiration_date_to.'".<br/>';
             }
-            if(strtotime($entity->received) != strtotime($inventories->received)){
+            if (strtotime($entity->received ?? '') !== strtotime($inventories->received ?? '')) {
                 if(!empty($inventories->received)){
                     $received_from = str_replace('-', '/', $inventories->received);
                     $received_from = date("l, F d, Y", strtotime($received_from));
@@ -241,7 +241,7 @@ class InventoriesTable extends Table
             if($entity->tags != $inventories->tags){
                 $description .= 'Tags was changed from "'.$inventories->tags.'" to "'.$entity->tags.'".<br/>';
             }
-            if(strtotime($entity->warranty_expire) != strtotime($inventories->warranty_expire)){
+            if (strtotime($entity->warranty_expire ?? '') !== strtotime($inventories->warranty_expire ?? '')) {
                 if(!empty($inventories->warranty_expire)){
                     $warranty_expire_from = str_replace('-', '/', $inventories->warranty_expire);
                     $warranty_expire_from = date("l, F d, Y", strtotime($warranty_expire_from));
@@ -318,6 +318,14 @@ class InventoriesTable extends Table
 
             //transaction history data save
             if(!empty($from_description) || !empty($to_description)){
+                if(!empty($inventoryTransactionHistory->type)){
+                    $transactionactionlist = unserialize(TRANSACTION_ACTION_LIST);
+                    $nameToFind = $inventoryTransactionHistory->type;
+
+                    $key = array_search($nameToFind, array_column($transactionactionlist, 'name'));
+                    $inventoryTransactionHistory->type = ($key !== false) ? $transactionactionlist[$key]['id'] : null;
+                }
+
                 $inventoryTransactionHistory->from_description = $from_description;
                 $inventoryTransactionHistory->to_description = $to_description;
                 $inventoryTransactionHistory->from_item_type = $inventoryitems->item_type;
@@ -327,16 +335,16 @@ class InventoriesTable extends Table
                 $inventoryTransactionHistory->to_status = $entity->status;
                 $inventoryTransactionHistory->qty = $entity->qty;
                 $inventoryTransactionHistory->uom = $entity->uom;
-                $inventoryTransactionHistory->from_cost = $from_cost;
-                $inventoryTransactionHistory->to_cost = $to_cost;
-                $inventoryTransactionHistory->unit_cost = $entity->cost;
+                $inventoryTransactionHistory->from_cost = (float) str_replace(',', '', $from_cost);
+                $inventoryTransactionHistory->to_cost = (float) str_replace(',', '', $to_cost);
+                $inventoryTransactionHistory->unit_cost = (float) str_replace(',', '', $entity->cost);
                 $inventoryTransactionHistory->reason = $entity->reason;
                 $inventoryTransactionHistory->tags = $entity->tags;
                 $inventoryTransactionHistory->vendor_id = $entity->vendor_id;
                 $inventoryTransactionHistory->account_code = $entity->account_code;
                 $inventoryTransactionHistory->ata_chapter = $entity->ata_chapter;
                 $inventoryTransactionHistory->added_by = $entity->updated_by;
-
+                
                 $InventoryTransactionHistoriesModel->save($inventoryTransactionHistory);
             }
         }

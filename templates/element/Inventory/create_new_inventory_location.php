@@ -9,24 +9,33 @@
             </label>
         </div>
 
-        <?php if(!empty($location_id)) : ?>
+        <?php 
+        if(!empty($parentlocation)){ ?>
         <div class="form-group row">
             <label class="col-md-2 col-sm-2 col-xs-12 col-form-label required">Parent Location</label>
             <div class="col-md-10 col-sm-10 col-xs-12">
                 <?php
                 echo $this->Form->control('parent_location_id', [
-                    'options' => $parentlocation,
-                    'empty' => 'Select parent location ...',
-                    'class' => 'form-control selectpicker',
-                    'data-show-subtext' => true,
-                    'data-live-search' => true,
+                    'type'=>'hidden',
+                    'class' => 'form-control',
+                    'placeholder' => '',
                     'label' => false,
-                    'disabled' => true
+                    'required' => true,
+                    'readonly' => true
                 ]);
+                
+                echo $this->Form->control('parent_location_name', [
+                    'class' => 'form-control',
+                    'placeholder' => '',
+                    'label' => false,
+                    'required' => true,
+                    'readonly' => true,
+                    'value' => $parentlocation['location_name']
+                ]); 
                 ?>
             </div>
         </div>
-        <?php endif; ?>
+        <?php } ?>
 
         <div class="form-group row">
             <label class="col-md-2 col-sm-2 col-xs-12 col-form-label">Name <span class="required">*</span></label>
@@ -52,8 +61,7 @@
                     'data-show-subtext' => true,
                     'data-live-search' => true,
                     'label' => false,
-                    'required' => true,
-                    'value' => '1'
+                    'required' => true
                 ]);
                 ?>
             </div>

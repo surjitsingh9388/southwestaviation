@@ -41,7 +41,7 @@
                     <label class="control-label" for="reference">City:</label>
                     </span>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('city', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                        <?php echo $this->Form->control('city', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <label class="control-label" for="reference">State:</label>
                         </span>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('state', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                            <?php echo $this->Form->control('state', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <label class="control-label" for="reference">Zip:</label>
                         </span>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('zip', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                            <?php echo $this->Form->control('zip', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label class="control-label" for="reference">Account Number:</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('account_number', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                        <?php echo $this->Form->control('account_number', array('type'=>'text', 'class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <label class="control-label" for="reference">Ship to City:</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('ship_to_city', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_city')); ?>
+                        <?php echo $this->Form->control('ship_to_city', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_city')); ?>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                         <label class="control-label" for="reference">Ship to State:</label>
                         </span>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('ship_to_state', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_state')); ?>
+                            <?php echo $this->Form->control('ship_to_state', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_state')); ?>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                         <label class="control-label" for="reference">Ship to Zip:</label>
                         </span>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('ship_to_zip', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_zip')); ?>
+                            <?php echo $this->Form->control('ship_to_zip', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'customer_ship_to_zip')); ?>
                         </div>
                     </div>
                 </div>
@@ -150,16 +150,31 @@
                 <div class="form-group d-flex">
                     <label class="control-label" for="reference">Phone Number:</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('cellular_phone', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                        <?php echo $this->Form->control('cellular_phone', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                     </div>
                 </div>
             </div>
+
+            <!--div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label class="control-label" for="reference">Phone Number:</label>
+                    <div class="form-input-frame">
+                        <div class="col-md-11 col-sm-11 col-xs-11 pd0">
+                            <?php echo $this->Form->control('cellular_phone', array('options' => $customerphonedropdown, 'empty' => 'Select a ship to address...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'cellular_phone_id'));  ?>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 pd0">
+                            <button class="btn btn-primary add_customer_phone_number plus-btn-h" type="button"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div-->
 
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group d-flex">
                     <label class="control-label" for="reference">Fax:</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('fax', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                        <?php echo $this->Form->control('fax', array('class' => 'form-control no-special-char', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ echo $this->Html->css('inventory_item');
 ?>
 
 <div class="content sliding">
-    <div class="outerWrapper">
+    <div class="outerWrapper inventoryItemSection">
          
         <div class="btnWrapper">
             <h2 class="heading">
@@ -39,7 +39,7 @@ echo $this->Html->css('inventory_item');
                             <li><a class="dropdown-item" href="<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'create', "?" => ["invitemid" => $invenotryitems->id, 'po_type'=>2]]); ?>">Exchange Item</a></li>
                             <li><a class="dropdown-item printBarCode" href="javascript:void(0);">Print Barcode</a></li>
                         <?php 
-                        } if($invenotryitems->status == '1' && (!empty($actionItems) && $actionItems['action']['action_delete'] == 1) || $sessionUser['id'] == 1) {
+                        } if((!empty($actionItems) && $actionItems['action']['action_delete'] == 1) || $sessionUser['id'] == 1) {
                         if($invenotryitems->status == '0'){ ?>
                             <li><a class="dropdown-item changeinvitmstatus" status-val="1" href="javascript:void(0);">Activate</a></li>
                         <?php }else{ ?>
@@ -53,7 +53,7 @@ echo $this->Html->css('inventory_item');
         <div class="page-content mt-35">
             <div class="formBGCls">
                 <?php
-                 echo $this->Form->create($invenotryitems, array('class' => 'form-horizontal form-label-left', 'id' => 'frmItemCatalogDet'));
+                 echo $this->Form->create($invenotryitems, array('class' => '', 'id' => 'frmItemCatalogDet'));
                 ?>
                 <?php echo $this->element('Inventory/inventory_item_details'); ?>
                 
@@ -147,7 +147,7 @@ echo $this->Html->css('inventory_item');
                                         </div>
                                     </div>
                                     <?php
-                                        echo $this->Form->create(null, array('class' => 'form-horizontal form-label-left', 'id' => 'frmItemInventoryDet'));
+                                        echo $this->Form->create(null, array('class' => '', 'id' => 'frmItemInventoryDet'));
                                     ?>
                                     <div class="action-bar">
                                         <div class="col-sm-12">
@@ -302,6 +302,7 @@ echo $this->Html->css('inventory_item');
                                                 <th class="col-sm-1">Size</th>
                                                 <th class="col-sm-2">Uploaded</th>
                                                 <th class="col-sm-2">Uploaded By</th>
+                                                <th class="col-sm-2">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="filetbody">

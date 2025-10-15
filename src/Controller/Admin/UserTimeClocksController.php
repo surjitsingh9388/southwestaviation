@@ -17,6 +17,7 @@
     {
         public function initialize():void {
             $this->loadComponent('UserTimeClock');
+            $this->loadComponent('UserManagementHistory');
 
             parent::initialize();
         }
@@ -130,6 +131,8 @@
                         $sessionUser = $this->request->getSession()->read('Auth');
                         $userTimeClocks = $this->fetchTable('UserTimeClocks');
 
+                        $is_add = 0;
+
                         if(!empty($usertimeclocks) && empty($usertimeclocks['out_time'])){
                             $timeclockdata['out_time'] = new \Cake\I18n\FrozenTime('now');
                             $timeclockdata['updated_by'] = $sessionUser['id'];
@@ -146,11 +149,34 @@
                             $usertimeclocks->created_at = new \Cake\I18n\FrozenTime('now');
 
                             $message = 'You are now logged IN, '.$sessionUser['first_name'];
+
+                            $is_add = 1;
                         }
                         
                         //print_r($usertimeclocks);exit;
                         if ($userTimeClocks->save($usertimeclocks)){
-                            $responsearr = ['status'=>'success', 'message'=>$message];
+                            if(!empty($is_add)){
+                                //save history data
+                                $this->UserManagementHistory->saveUserTimeClockHistory($usertimeclocks);
+                            }
+
+                            $date_to = date("Y-m-d");
+                            $date_from = date('Y-m-d', strtotime('-7 days'));
+                            $user_id = $sessionUser['id'];
+
+                            //$aircraftoptiondata = $this->CustomerOTC->getAircraftOptionDataWO();
+                            $usertimeclocklist = $this->UserTimeClock->getTimeClockDetailByUser($date_from, $date_to, $user_id);
+
+                            $view = new View();
+                            $view->set(compact('usertimeclocklist'));
+                            $elementContent = $view->element('UserTimeClock/time_clock_data');
+
+                            // Build response array
+                            $responsearr = [
+                                'status' => 'success',
+                                'message' => $message,
+                                'time_clock_data' => $elementContent
+                            ];
                         }else{
                             $responsearr = ['status'=>'failed', 'message'=>'Something went wrong, please try again'];
                         }
@@ -198,6 +224,8 @@
                     $authUserData = $this->Authentication->getResult()->getData();
                     $userTimeClocks = $this->fetchTable('UserTimeClocks');
 
+                    $is_add = 0;
+
                     if(!empty($postData['time_clock_id'])){
                         $usertimeclocks = $userTimeClocks->get($postData['time_clock_id']);
                         $postData['updated_by'] = $authUserData['id'];
@@ -216,11 +244,18 @@
                         $timeclocks->created_at = new \Cake\I18n\FrozenTime('now');
 
                         $message = 'Time clock detail saved successfully.';
+
+                        $is_add = 1;
                     }
                     
                     
                     //print_r($usertimeclocks);exit;
                     if ($userTimeClocks->save($timeclocks)){
+                        if(!empty($is_add)){
+                              //save history data
+                              $this->UserManagementHistory->saveUserTimeClockHistory($usertimeclocks);
+                          }
+
                         $responsearr = ['status'=>'success', 'message'=>$message];
                     }else{
                         $responsearr = ['status'=>'failed', 'message'=>'Something went wrong, please try again'];

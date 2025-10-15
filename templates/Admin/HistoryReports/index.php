@@ -45,7 +45,7 @@ use Cake\Routing\Router;
                                     'data-live-search' => true,
                                     'label' => false,
                                     'id' => 'FilterBySection',
-                                    'value' => 'inventory_item_histories'
+                                    'value' => 'user_histories'
                                 ]);
                                 ?>
                             </div>

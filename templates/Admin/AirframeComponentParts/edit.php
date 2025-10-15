@@ -171,48 +171,6 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="item_type">Item Type</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php
-                                    $itemTypes = $airCPComp->getItemTypes();
-                                    echo $this->Form->control('item_type', array('options' => $itemTypes, 'empty' => 'Enter a type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="disposition">Disposition
-                                </label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('disposition', array('options' => $dispArr, 'empty' => 'Enter disposition', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ata_code">ATA</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('ata_code', array('options' => $ataCode, 'empty' => 'Select ATA', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="mfg_code">Mfg Code</label>
-                                <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('mfg_code', array('class'=>'form-control col-md-7 col-xs-12', 'placeholder' => 'Mfg Code', 'label' => false, 'autocomplete'=>'off')); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_number">AD/SB Number</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php echo $this->Form->control('ad_sb_number', array('class'=>'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
@@ -222,10 +180,11 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_status">AD/SB Class</label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_number">Requirement Source</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
-                                    echo $this->Form->control('ad_sb_status', array('options' => $adsbArr, 'empty' => 'Enter class', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'autocomplete'=>'off'));
+                                    $requirementsources = $airCPComp->getRequirementSources();
+                                    echo $this->Form->control('requirement_source_id', array('options' => $requirementsources, 'empty' => 'Enter a Requirement Source', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
                                     ?>
                                 </div>
                             </div>
@@ -235,10 +194,16 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">Reference
-                                </label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="item_type">Item Type</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
-                                    <?php echo $this->Form->control('reference', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
+                                    <?php
+                                    $itemTypes = $airCPComp->getItemTypes();
+                                    $itemtypeid = '';
+                                    if(!empty($airCompParts->item_type)){
+                                        $itemtypeid = $this->AirframeComponent->getItemTypeId($airCompParts->item_type);
+                                    }
+                                    echo $this->Form->control('item_type_id', array('options' => $itemTypes, 'empty' => 'Enter a type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'value'=>$itemtypeid));
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +214,11 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
                                     $reqTypes = $airCPComp->getRequirementTypes();
-                                    echo $this->Form->control('requirement_type', array('options' => $reqTypes, 'empty' => 'Enter requirement type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    $requirementtypeid = '';
+                                    if(!empty($airCompParts->requirement_type)){
+                                        $requirementtypeid = $this->AirframeComponent->getRequirementTypeId($airCompParts->requirement_type);
+                                    }
+                                    echo $this->Form->control('requirement_type_id', array('options' => $reqTypes, 'empty' => 'Enter requirement type', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'value'=>$requirementtypeid));
                                     ?>
                                 </div>
                             </div>
@@ -266,32 +235,125 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="authority">Authority</label>
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="authority">Issuing Authority</label>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <?php
                                     $authority = $airCPComp->getAuthority();
-                                    echo $this->Form->control('authority', array('options' => $authority, 'empty' => 'Enter authority', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    $issueingauthorityid = '';
+                                    if(!empty($airCompParts->authority)){
+                                        $issueingauthorityid = $this->AirframeComponent->getIssuingAuthoritiesId($airCompParts->authority);
+                                    }
+                                    echo $this->Form->control('issuing_authority_id', array('options' => $authority, 'empty' => 'Enter Issuing Authority', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'value'=>$issueingauthorityid));
                                     ?>
                                 </div>
                             </div>
-                        </div>                            
+                        </div>   
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ata_code">ATA</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('ata_code', array('options' => $ataCode, 'empty' => 'Select ATA', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="disposition">Disposition
+                                </label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('disposition', array('options' => $dispArr, 'empty' => 'Enter disposition', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false)); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="ad_sb_status">AD/SB Class</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php
+                                    echo $this->Form->control('ad_sb_status', array('options' => $adsbArr, 'empty' => 'Enter class', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'autocomplete'=>'off'));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="avg_man_hrs">Man Hours</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label'=>false, 'autocomplete'=>'off')); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">Reference</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('reference', array('class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'autocomplete'=>'off')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="position">Position</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php
+                                    echo $this->Form->control('position_id', array('options' => $positionArr, 'empty' => 'Enter Position', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="reference">SOC</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php
+                                    $mocs = $airCPComp->getMocs();
+                                    echo $this->Form->control('moc_id', array('options' => $mocs, 'empty' => 'Enter a SOC', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="mfg_code">Mfg Code</label>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <?php echo $this->Form->control('mfg_code', array('class'=>'form-control col-md-7 col-xs-12', 'placeholder' => 'Mfg Code', 'label' => false, 'autocomplete'=>'off')); ?>
+                                </div>
+                            </div>
+                        </div>                 
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12" for="description">Item Name</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12" style="padding: 0 3px;">
+                                <div class="col-md-11 col-sm-8 col-xs-12">
                                     <?php echo $this->Form->control('description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:95.3%;')); ?>
                                 </div>
-                                <div class="col-md-3" style="padding:0px;">
-                                    <label class="control-label col-md-5 col-sm-5 col-xs-12" for="position" style="padding-left: 27px;">Position</label>
-                                    <div class="col-md-7 col-sm-7 col-xs-12">
-                                        <?php
-                                        echo $this->Form->control('position_id', array('options' => $positionArr, 'empty' => 'Enter Position', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false));
-                                        ?>
-                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="moc">MOC</label>
+                                <div class="col-md-11 col-sm-8 col-xs-12">
+                                    <?php echo $this->Form->control('moc', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:95.3%;')); ?>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -300,43 +362,45 @@ if(!empty($airCompParts->plane_id) && !empty($subResults)) {
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label col-md-1 col-sm-1 col-xs-12" for="notes">Notes</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:18px;width:97%;')); ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-9 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-1 col-sm-2 col-xs-12">Work Description</label>
                                 <div class="col-md-11 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin: 0 0 0 43px; width: 95%;')); ?>
+                                    <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:95.3%;')); ?>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-3 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-5 col-sm-5 col-xs-12" for="avg_man_hrs">Man Hours</label>
-                                <div class="col-md-7 col-sm-8 col-xs-12">
-                                    <?php echo $this->Form->control('avg_man_hrs', array('class' => 'form-control col-md-7 col-xs-12', 'label'=>false, 'autocomplete'=>'off')); ?>
-                                </div>
-                            </div>
-                        </div>  
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="tags">Tags</label>
-                                <div class="col-md-8 col-sm-8 col-xs-12" style='margin-left: 18px; width: 65%;'>
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12">Work Description</label>
+                                <div class="col-md-11 col-sm-8 col-xs-12">
+                                    <?php echo $this->Form->control('work_description', array('class' => 'form-control col-md-7 col-xs-12', 'label'=> false, 'rows'=>2, 'style'=>'margin-left:25px;width:95.3%;')); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12 " for="tags">Tags</label>
+                                <div class="col-md-8 col-sm-8 col-xs-12 tags-bootstrap-tagsinput" style='margin-left: 25px;'>
                                     <input type="text" name="tags" value="<?php echo $airCompParts['tags']; ?>" data-role="tagsinput" class="form-control" placeholder="Enter a tag"></input>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!--div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-1 col-sm-1 col-xs-12" for="tags">Tags</label>
+                                <div class="col-md-11 col-sm-8 col-xs-12">
+                                    <input type="text" name="tags" value="<?php echo $airCompParts['tags']; ?>" data-role="tagsinput" class="form-control col-md-7 col-xs-12" placeholder="Enter a tag", style='margin-left:25px;width:95.3%;'></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
                 </div>
 
                 <div style="clear: both;"></div>

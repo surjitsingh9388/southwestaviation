@@ -422,15 +422,45 @@ $(document).on('click', ".exportListingDataExcel", function (e) {
     window.open(exportListingDataExcelURL+formdata+'&applyfilter='+localStorage.getItem('applyfilter'));
 });
 
-$(document).on('click', '.vendorModelbtn', function(e){
-    $("#vendorAddModel").modal('show');
+$(document).on('click', '.vendorModelbtn', function(e) {
+    e.preventDefault();
+    
+    // Reset all form fields inside the modal
+    $('#frmAddVendor')[0].reset();
+
+    // Optionally clear select2 fields or custom input fields (if any)
+    $('#frmAddVendor select').val('').trigger('change');
+    $('#frmAddVendor input[type="hidden"]').val('');
+
+    // Show the modal
+    $('#vendorAddModel').modal('show');
 });
 
 $(document).on('click', '.manufacturerbtn', function (e) {
+    e.preventDefault();
+    
+    // Reset all form fields inside the modal
+    $('#frmManufacturer')[0].reset();
+
+    // Optionally clear select2 fields or custom input fields (if any)
+    $('#frmManufacturer select').val('').trigger('change');
+    $('#frmManufacturer input[type="hidden"]').val('');
+
+    // Show the modal
     $("#manufacturerModel").modal('show');
 });
 
 $(document).on('click', ".addnewinvitempopup", function (e) {
+    e.preventDefault();
+    
+    // Reset all form fields inside the modal
+    $('#frmItemCatalog')[0].reset();
+
+    // Optionally clear select2 fields or custom input fields (if any)
+    $('#frmItemCatalog select').val('').trigger('change');
+    $('#frmItemCatalog input[type="hidden"]').val('');
+
+    // Show the modal
     $("#inventoryItemModel").modal('show');
 });
 
@@ -444,6 +474,15 @@ $(document).on("click", ".remove_inventory_item", function() {
 });
 
 $(document).on('click', ".addnewinvaddresspopup", function (e) {
+    e.preventDefault();
+    
+    // Reset all form fields inside the modal
+    $('#frmAddAddress')[0].reset();
+
+    // Optionally clear select2 fields or custom input fields (if any)
+    $('#frmAddAddress select').val('').trigger('change');
+    $('#frmAddAddress input[type="hidden"]').val('');
+
     var clkbtn = $(this).attr('data-val');
     $("#is_billing_address").prop('checked', true);
     $("#is_shipping_address").prop('checked', true);
@@ -464,7 +503,7 @@ $(document).on('click', ".addnewinvaddresspopup", function (e) {
 function disableEnableManufacturerSaveBtn(){
     var errors = 0;
     $("form#frmManufacturer #name").map(function(){
-        if( !$(this).val() ) {
+        if( !$.trim($(this).val()) ) {
             errors++;
         } 
     });
@@ -476,42 +515,42 @@ function disableEnableManufacturerSaveBtn(){
     }
 }
 
-function disableEnableVendorSaveBtn(){
-    var errors = 0;
-    
-    if($('#country').val() == '231'){
-        $("form#frmAddVendor #name, #street1, #city, #postal, #country, #state").map(function(){
-            if( !$(this).val() ) {
-                errors++;
-            } 
-        });
-    }else{
-        $("form#frmAddVendor #name, #street1, #city, #postal, #country, #province").map(function(){
-            if( !$(this).val() ) {
-                errors++;
-            } 
-        });
-    }
-    
-    if(errors > 0){
-        $(".vendorsavebtn").attr("disabled", "disabled");
-    }else{
-        $(".vendorsavebtn").removeAttr("disabled");
+function disableEnableVendorSaveBtn() {
+    let errors = 0;
+    const country = $('#country').val();
+    const requiredFields = (country === '231')
+        ? ['#name', '#street1', '#city', '#postal', '#country', '#state']
+        : ['#name', '#street1', '#city', '#postal', '#country', '#province'];
+
+    // Loop through required fields
+    requiredFields.forEach(function(selector) {
+        if (!$.trim($(selector).val())) {
+            errors++;
+            console.log(selector);
+        }
+    });
+
+    // Enable or disable save button
+    if (errors > 0) {
+        $(".vendorsavebtn").prop("disabled", true);
+    } else {
+        $(".vendorsavebtn").prop("disabled", false);
     }
 }
+
 
 function disableEnableSaveInvAddressBtn(){
     var errors = 0;
     
     if($('#addresscountry').val() == '231'){
         $("form#frmAddAddress #addressname, #addressstreet1, #addresscity, #addresspostal, #addresscountry, #addressstate").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
     }else{
         $("form#frmAddAddress #addressname, #addressstreet1, #addresscity, #addresspostal, #addresscountry, #addressprovince").map(function(){
-            if( !$(this).val() ) {
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
@@ -527,7 +566,7 @@ function disableEnableSaveInvAddressBtn(){
 function disableEnableInvItemSaveBtn(){
     var errors = 0;
     $("form#frmItemCatalog #name, #part-number, #safety-stock-threshold, #default_uom, #currency").map(function(){
-        if( !$(this).val() ) {
+        if( !$.trim($(this).val()) ) {
             errors++;
         } 
     });
@@ -909,7 +948,7 @@ $(document).on('click', '#unlinkOrder', function(e){
 
 $(document).on('blur', '#unit-cost, #exchange-cost, #exchange-price, #company-purchase-price, #retail-price, #overhauled-cost, #inventory_cost, #exchange_cost, #exchange_price, #retail_price, #company_purchase_price', function(e){
     let value = $(this).val().replace(/\$/g, '');
-    if(value != ''){
+    if($.trim(value) != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val('$'+value);
     }
@@ -917,7 +956,7 @@ $(document).on('blur', '#unit-cost, #exchange-cost, #exchange-price, #company-pu
 
 $(document).on('blur', '#safety-stock-threshold, #weight, #inventory_qty', function(e){
     let value = $(this).val().replace(/\$/g, '');
-    if(value != ''){
+    if($.trim(value) != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val(value);
     }
@@ -925,7 +964,7 @@ $(document).on('blur', '#safety-stock-threshold, #weight, #inventory_qty', funct
 
 $(document).on('blur', '#give_discount_percentage', function(e){
     let value = $(this).val().replace(/\%/g, '');
-    if(value != ''){
+    if($.trim(value) != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val(value+'%');
     }

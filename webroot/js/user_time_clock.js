@@ -111,13 +111,19 @@ function overrideTimeClockDate(){
     });
 }
 
-function overrideTimeClockDateTime(){
+function overrideTimeClockDateTime() {
     $('#login_time_clock_date, #logout_time_clock_date').datetimepicker({
-        format: 'MM/DD/YYYY hh:mm:ss A',
+        format: 'MM/DD/YYYY hh:mm:ss A', // full datetime with AM/PM
         useCurrent: false,
+        sideBySide: true,                // shows calendar and time together
+        showTodayButton: true,
+        stepping: 1                       // step for minutes/seconds
     }).on('dp.change', function(e) {
         calculateTimeClockRecordHour();
-        $(this).datetimepicker('hide');
+        // optional: hide after selection
+        // $(this).datetimepicker('hide');
+    }).on('focus', function() {
+        $(this).data("DateTimePicker").show(); // automatically show picker on focus
     });
 }
 
@@ -178,6 +184,8 @@ $(document).on('click', '.markUserTimeClockBtn', function(e){
                 alert(obj.message);
                 if(obj.status == 'success'){
                     $('#userTimeClockPopup').modal('hide');
+
+                    $('#inventoryToolsList').html(obj.time_clock_data);
                 }
             }
         });
@@ -664,7 +672,7 @@ $(document).on('click', '.pto-request-approve-deny-btn', function(e){
                             $('#aircraftWOOptionViewMsgModel').hide();
                             $('#aircraftWOOptionViewMsgModel').remove();
                         }else{
-                            window.location.reload();
+                            window.location.replace(window.location.href);
                         }
                     }else{
                         alert(obj.message);

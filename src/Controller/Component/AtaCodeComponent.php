@@ -64,5 +64,18 @@ class AtaCodeComponent extends Component {
         }
         return $res;
     }
+
+    public function getATAId($ata_code)
+    {
+        $res = '';
+        if(!empty($ata_code)) {
+            $ataCodeModel = $this->getController()->fetchTable('AtaCodes');
+            $result = $ataCodeModel->find()->where(['LOWER(AtaCodes.ata_code)'=>strtolower($ata_code)])->select(['AtaCodes.id'])->enableHydration(false)->first();            
+            if(!empty($result)) {
+                $res = $result['id'];
+            }            
+        }
+        return $res;
+    }
     
 }

@@ -92,10 +92,8 @@ $(document).on('click', '.pto_request_savebtn', function(e){
             if(obj.status == 'success'){
                 alert(obj.message);
                 $('#createPTORequestsPopupModel').modal('hide');
-                if(pto_request_id != ''){
-                    window.location.reload();
-                }
                 
+                window.location.replace(window.location.href);
             }else{
                 alert(obj.message);
             }

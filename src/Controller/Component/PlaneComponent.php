@@ -135,5 +135,16 @@ class PlaneComponent extends Component {
 
         return $planes;
     }
+
+    public function getPlaneId($plane_code) {
+        $planeId = null;
+        if(!empty($plane_code)){
+            $planeModel = $this->getController()->fetchTable('Planes');
+            $plane = $planeModel->find()->where(['LOWER(plane_code)'=>strtolower($plane_code)])->select('id')->first();
+            $planeId = $plane ? $plane->id : null;
+        }
+        
+        return $planeId;
+    }
     
 }

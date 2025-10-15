@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="btn-group">
-                <button type="button" class="btn btn-default" onclick="$('#aircraft_wo_files').trigger('click'); return false;" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Add File</button>
+                <button type="button" class="btn btn-default woaddphotofilebtn" data-val="wo_file_upload" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Add File</button>
                 <button type="button" class="btn btn-default woremovefilebtn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Remove File</button>
                 <button type="button" class="btn btn-default womovefilebtn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>>Move File</button>
             </div>
@@ -45,7 +45,7 @@
                     <tr class="aircraft-wo-item-file <?php echo $wo_item_file_active; ?>" data-val="<?php echo $files['id']; ?>">
                         <td class="document-name"><span class="document-management-icon <?php echo $iconcss; ?>"></span>
                         <?php
-                        echo $this->Html->link($files['file_name'], '/inventorycustomers/' . $files['file_name'],['download'=>$files['file_name']]);
+                        echo $this->Html->link($files['file_name'], '/inventorycustomers/' . $files['file_name'],['download'=>$files['file_name'], 'target' => '_blank']);
                         ?></td>
                         <td><?php echo $files['caption']; ?></td>
                     </tr>

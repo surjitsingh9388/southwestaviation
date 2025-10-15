@@ -18,13 +18,14 @@
                             <div class="form-input-frame">
                                 <?php echo $this->Form->control('customer_name', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'required' => 'required', 'id' => 'customer_name')); ?>
                             </div>
+                            <span id="customer_name_error" style="color:red; display:none;">Please enter customer name.</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary saveCustomerInfoBtn" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-primary saveCustomerInfoBtn">Save</button>
             </div>
         </div>
         <?php

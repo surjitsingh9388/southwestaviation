@@ -987,7 +987,10 @@ Remove the Purchase Order Number information on this screen and try again.';
         if(!empty($wooptiongeninfoes)){
             $wooptiongeninfodeposit = $this->CustomerAircraftWOOptionGenInfoDeposits->find('all')->where(['general_info_id'=>$wooptiongeninfoes->id]);
             $wooptiongeninfodeposit = $wooptiongeninfodeposit->select(['totalamounttoadd' => $wooptiongeninfodeposit->func()->sum('amount_to_add') ])->first();
-            $wooptiongeninfoes->total_deposit_amount = number_format($wooptiongeninfodeposit->totalamounttoadd, 2);
+            $wooptiongeninfoes->total_deposit_amount = (!empty($wooptiongeninfodeposit->totalamounttoadd) && (float)$wooptiongeninfodeposit->totalamounttoadd > 0)
+                ? number_format((float)$wooptiongeninfodeposit->totalamounttoadd, 2)
+                : '';
+
         }
 
         $wooptionmiscchargs = $this->CustomerAircraftWOOptionMiscCharges->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionMiscCharges)->first();
@@ -1061,11 +1064,28 @@ Remove the Purchase Order Number information on this screen and try again.';
         $wherecond .= " order by msg.id desc";
         
         $receivedmsglist = $connection->execute(
-            "SELECT msg.*, user_to.full_name as sent_to, user.full_name as sent_from, wo_items.wo_item_position, work_order.work_order_no from customer_aircraft_wo_messages msg left join customer_aircraft_work_orders work_order on msg.work_order_id = work_order.id left join customer_aircraft_wo_items wo_items on wo_items.id = msg.message_wo_ro join users user_to on user_to.id = msg.message_to join users user on user.id = msg.added_by where $wherecond",
+            "SELECT msg.*, user_to.full_name as sent_to, user.full_name as sent_from, wo_items.wo_item_position, work_order.work_order_no from customer_aircraft_wo_messages msg left join customer_aircraft_work_orders work_order on msg.work_order_id = work_order.id left join customer_aircraft_wo_items wo_items on wo_items.id = msg.wo_item_id join users user_to on user_to.id = msg.message_to join users user on user.id = msg.added_by where $wherecond",
             $whereArr)->fetchAll('assoc');
 
         if(!empty($message_id)){
             $receivedmsglist = $receivedmsglist[0];
+            if(!empty($receivedmsglist['message_wo_ro'])){
+                $this->CustomerAircraftWOItems = $this->getController()->fetchTable('CustomerAircraftWOItems');
+
+                $aircraftwoitems = $this->CustomerAircraftWOItems->find('all')
+                                            ->where(['CustomerAircraftWOItems.id'=>$receivedmsglist['message_wo_ro']])
+                                            ->select(['CustomerAircraftWOItems.id', 'CustomerAircraftWOItems.wo_item_position', 'work_order.work_order_no'])
+                                            ->join([
+                                                'work_order' => [
+                                                    'table' => 'customer_aircraft_work_orders',
+                                                    'type' => 'INNER',
+                                                    'conditions' => 'work_order.id = CustomerAircraftWOItems.work_order_id',
+                                                ]
+                                            ])
+                                            ->first();
+                                                    
+                $receivedmsglist['msg_woro_no'] = $aircraftwoitems['work_order']['work_order_no'].'-'.$aircraftwoitems['wo_item_position'];
+            }
         }
         return $receivedmsglist;
     }

@@ -190,6 +190,137 @@ class UsersTable extends Table
         if(!empty($entity->first_paycheck_date)) {
             $entity->first_paycheck_date = $service->dateFormatBeforeSave($entity->first_paycheck_date);
         }
+        
+        if(!empty($entity->id)){
+            $usersModel = FactoryLocator::get('Table')->get('Users');
+            $addressesModel = FactoryLocator::get('Table')->get('Addresses');
+
+            $users = $usersModel->get($entity->id);
+            $addresses = $addressesModel->find()->where(['user_id'=>$entity->id])->select($this->Addresses)->first();
+
+            $userHistoriesModel = FactoryLocator::get('Table')->get('UserHistories');
+            
+            $userHistory = $userHistoriesModel->newEmptyEntity();
+            
+            if(!empty($users->employment_date)) {
+                $users->employment_date = $service->dateFormatBeforeSave($users->employment_date);
+            }
+
+            if(!empty($users->first_paycheck_date)) {
+                $users->first_paycheck_date = $service->dateFormatBeforeSave($users->first_paycheck_date);
+            }
+
+            $userHistory->user_tbl_id = $entity->id;
+
+            $userHistory->title = 'User '.$users->full_name.' was updated.';
+            
+            if(!empty($users->modified)){
+                $modified_from = str_replace('-', '/', $users->modified);
+                $modified_from = date("Y-m-d h:i A", strtotime($modified_from));
+            }else{
+                $modified_from = '';
+            }
+
+            if(!empty($entity->modified)){
+                $modified_to = str_replace('-', '/', $entity->modified);
+                $modified_to = date("Y-m-d h:i A", strtotime($modified_to));
+            }else{
+                $modified_to = '';
+            }
+
+            $description = '';
+            if($entity->title != $users->title){
+                $description .= 'Title was changed from "'.$users->title.'" to "'.$entity->title.'".<br/>';
+            }
+            if($entity->first_name != $users->first_name){
+                $description .= 'First Name was changed from "'.$users->first_name.'" to "'.$entity->first_name.'".<br/>';
+            }
+            if($entity->middle_name != $users->middle_name){
+                $description .= 'Middle Name was changed from  "'.$users->middle_name.'" to "'.$entity->middle_name.'".<br/>';;
+            }
+            if($entity->last_name != $users->last_name){
+                $description .= 'Last Name was changed from  "'.$users->last_name.'" to "'.$entity->last_name.'".<br/>';;
+            }
+            if($entity->suffix != $users->suffix){
+                $description .= 'Suffix was changed from "'.$users->suffix.'" to "'.$entity->suffix.'".<br/>';
+            }
+            if($entity->email != $users->email){
+                $description .= 'Email was changed from "'.$users->email.'" to "'.$entity->email.'".<br/>';
+            }
+            if($entity->phone_ext != $users->phone_ext){
+                $description .= 'Phone Ext was changed from "'.$users->phone_ext.'" to "'.$entity->phone_ext.'".<br/>';
+            }
+            if($entity->phone != $users->phone){
+                $description .= 'Mobile Number was changed from "'.$users->phone.'" to "'.$entity->phone.'".<br/>';
+            }
+            if($entity->home_phone != $users->home_phone){
+                $description .= 'Office/Home Phone Number was changed from "'.$users->home_phone.'" to "'.$entity->home_phone.'".<br/>';
+            }
+            if($entity->role_id != $users->role_id){
+                $description .= 'Role was changed from "'.$users->role_id.'" to "'.$entity->role_id.'".<br/>';
+            }
+            if($entity->is_manager != $users->is_manager){
+                $description .= 'Is Manager was changed from "'.$users->is_manager.'" to "'.$entity->is_manager.'".<br/>';
+            }
+            if($entity->team_member_id != $users->team_member_id){
+                $description .= 'Select your team members was changed from "'.$users->team_member_id.'" to "'.$entity->team_member_id.'".<br/>';
+            }
+            if($entity->direct_manager_id != $users->direct_manager_id){
+                $description .= 'Direct Manager was changed from "'.$users->direct_manager_id.'" to "'.$entity->direct_manager_id.'".<br/>';
+            }
+            if($entity->employment_date != $users->employment_date){
+                $description .= 'Employment Date was changed from "'.$users->employment_date.'" to "'.$entity->employment_date.'".<br/>';
+            }
+            if($entity->salary != $users->salary){
+                $description .= 'Salary was changed from "'.$users->salary.'" to "'.$entity->salary.'".<br/>';
+            }
+            if($entity->department_id != $users->department_id){
+                $description .= 'Department/Job Title was changed from "'.$users->department_id.'" to "'.$entity->department_id.'".<br/>';
+            }
+            if($entity->pto_accrual_rate != $users->pto_accrual_rate){
+                $description .= 'PTO Accrual Rate was changed from "'.$users->pto_accrual_rate.'" to "'.$entity->pto_accrual_rate.'".<br/>';
+            }
+            if($entity->first_paycheck_date != $users->first_paycheck_date){
+                $description .= 'First Paycheck Date was changed from "'.$users->first_paycheck_date.'" to "'.$entity->first_paycheck_date.'".<br/>';
+            }
+            if($entity->suspended != $users->suspended){
+                $description .= 'Suspend Account was changed from "'.$users->suspended.'" to "'.$entity->suspended.'".<br/>';
+            }
+            if($entity->welcome_email != $users->welcome_email){
+                $description .= 'Send Welcome Email was changed from "'.$users->welcome_email.'" to "'.$entity->welcome_email.'".<br/>';
+            }
+
+            if (!empty($entity->addresses) && isset($entity->addresses[0])) {
+                $addressarr = $entity->addresses[0];
+
+                if($addressarr->address_line1 != $addresses->address_line1){
+                    $description .= 'Address1 was changed from "'.$addresses->address_line1.'" to "'.$addressarr->address_line1.'".<br/>';
+                }
+                if($addressarr->address_line2 != $addresses->address_line2){
+                    $description .= 'Address2 was changed from "'.$addresses->address_line2.'" to "'.$addressarr->address_line2.'".<br/>';
+                }
+                if($addressarr->country_id != $addresses->country_id){
+                    $description .= 'Country was changed from "'.$addresses->country_id.'" to "'.$addressarr->country_id.'".<br/>';
+                }
+                if($addressarr->state_id != $addresses->state_id){
+                    $description .= 'State was changed from "'.$addresses->state_id.'" to "'.$addressarr->state_id.'".<br/>';
+                }
+                if($addressarr->city_id != $addresses->city_id){
+                    $description .= 'City was changed from "'.$addresses->city_id.'" to "'.$addressarr->city_id.'".<br/>';
+                }
+                if($addressarr->zip_code != $addresses->zip_code){
+                    $description .= 'Zip code was changed from "'.$addresses->zip_code.'" to "'.$addressarr->zip_code.'".<br/>';
+                }
+            }
+
+            if(!empty($description)){
+                $description .= 'Last updated was changed from "'.$modified_from.'" to "'.$modified_to.'".<br/>';
+            
+                $userHistory->user_id = $entity->updated_by;
+                $userHistory->description = $description;
+                $userHistoriesModel->save($userHistory);
+            }
+        }
 
         return true;
     }

@@ -1,5 +1,5 @@
-<div class="content sliding">
-    <div class="outerWrapper">
+<div class="content sliding test">
+    <div class="outerWrapper dashboardSection">
         <div class="btnWrapper">
             <h2 class="heading">Dashboard</h2>
         </div>
@@ -16,11 +16,13 @@
         ?>
         <div class="page-content">
             <div class="col-xs-12 pd0">
-                <h6>News Feed
+                <div class="align-center-items justify-content-between newHeader">
+                    <h6>News Feed</h6>
                     <?php if(!empty($newsfeedmenu) || $user_id == '1'){ ?>    
-                        <button type="button" class="btn btn-default float-right fetchDashboardPopup" data-val="news_feed_list">News Feed List</button>
+                    <button type="button" class="btn btn-default fetchDashboardPopup" data-val="news_feed_list" style="margin:0px !important">News Feed List</button>
                     <?php } ?>
-                </h6>
+                </div>
+               
                 <div class="bg-white news_feed_dashboard">
                     <p class="news_feed"><marquee behavior="scroll" direction="left" scrollamount="<?php echo $dashboardnewsfeed->news_feed_speed; ?>"><?php echo !empty($dashboardnewsfeed) ? $dashboardnewsfeed->news_feed : ''; ?></marquee></p>
                 </div>
@@ -31,13 +33,9 @@
                 <div class="dashboard_heading_bar">
                     <span class="dashboard_heading">PTO Dashboard</span>
                 </div>
-                <div class="btnWrapper" style="display:flow-root !important;">
-                    <div class="float-left">
-                        <button type="button" class="btn btn-default pto_request_history_btn">PTO History</button>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" class="btn btn-default pto_request_create_btn">Create</button>
-                    </div>
+                <div class="btnWrapper p-12">
+                    <button type="button" class="btn btn-default pto_request_history_btn">PTO History</button>
+                    <button type="button" class="btn btn-default pto_request_create_btn">Create</button>
                 </div>
                 <div class="page-content mt-35">
                     <div class="table-responsive clock_log_table_scroll">
@@ -70,13 +68,9 @@
             </div>
             <div class="col-md-6 col-xs-12 pd0">
                 <div class="dashboard_heading_bar"><span class="dashboard_heading">Time Clock</span></div>
-                <div class="btnWrapper" style="display:flow-root !important;">
-                    <div class="float-left">
-                        <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock">Clock In/Out</button>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock_log">Time Clocks Log</button>
-                    </div>
+                <div class="btnWrapper p-12">
+                    <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock">Clock In/Out</button>
+                    <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock_log">Time Clocks Log</button>
                 </div>
     
                 <div class="page-content mt-35">
@@ -91,16 +85,7 @@
                                 </tr>
                             </thead>
                             <tbody id="inventoryToolsList">
-                                <?php
-                                foreach($usertimeclocklist as $timeclock){
-                                ?>
-                                <tr>
-                                    <td><?php echo date('m/d/Y', strtotime($timeclock['in_time'])); ?></td>
-                                    <td><?php echo date('h:i A', strtotime($timeclock['in_time'])); ?></td>
-                                    <td><?php echo !empty($timeclock['out_time']) ? date('h:i A', strtotime($timeclock['out_time'])) : ''; ?></td>
-                                    <td><?php echo $timeclock['totaltime']; ?></td>
-                                </tr>
-                                <?php } ?>
+                                <?php echo $this->element('UserTimeClock/time_clock_data'); ?>
                             </tbody>
                         </table>
                     </div>

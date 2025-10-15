@@ -61,7 +61,7 @@ echo $this->Html->css('inventory_item');
                                                 <th class="col-sm-1">Size</th>
                                                 <th class="col-sm-2">Uploaded</th>
                                                 <th class="col-sm-2">Uploaded By</th>
-                                                <th class="col-sm-1"></th>
+                                                <th class="col-sm-1">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="filetbody">

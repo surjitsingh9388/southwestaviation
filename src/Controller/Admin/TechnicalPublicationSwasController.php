@@ -31,7 +31,8 @@
                 }
             }
             $heading = 'SWAS';
-            $this->set(compact('actionItems', 'heading'));
+            $usersArr = $this->TechnicalPublication->getUserDropdownList();
+            $this->set(compact('actionItems', 'heading', 'usersArr'));
             $subpage_id = '1';
             $this->createNewFolder($subpage_id, 'index');
         }
@@ -207,12 +208,16 @@
                     $technical_publication_id = $postData['technical_publication_id'];
                     $permission_user_ids = $postData['permission_user_ids'];
                     if(!empty($technical_publication_id) && !empty($permission_user_ids)){
+                        $technicalPublications = $this->TechnicalPublications->get($technical_publication_id);
                         $permission_userids = implode(',', $permission_user_ids);
-                        $res = $this->TechnicalPublications->updateAll(
-                            array('permission_user_ids'=>$permission_userids, 'updated_by'=>$authUserData['id'], 'updated_at'=>new \Cake\I18n\FrozenTime('now')),
-                            array('id' => $technical_publication_id)
-                        );
-                        if($res){
+
+                        $postData['permission_user_ids'] = $permission_userids;
+                        $postData['updated_by'] = $authUserData['id'];
+                        $postData['updated_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        $technicalPublications = $this->TechnicalPublications->patchEntity($technicalPublications, $postData);
+                        
+                        if ($this->TechnicalPublications->save($technicalPublications)) {
                             $result = array('status'=>'success', 'message'=>"Permission Saved successfully.");
                         }else{
                             $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
@@ -245,6 +250,44 @@
                 $zip_folder = $this->TechnicalPublication->downloadFolder($is_folder, $folderpath);
             }
         }
+
+        public function editFolderFile()
+        {
+            $this->request->allowMethod(['post']);
+            //pr($this->request->getData());exit;
+            $authUserData = $this->Authentication->getResult()->getData();
+
+            $id = $this->request->getData('technical_publication_id');
+            $newName = $this->request->getData('folder_file_name');
+            $folderFilePath = $this->request->getData('folder_file_path');
+
+            $techPubl = $this->TechnicalPublications->get($id);
+            $oldName = $techPubl->folder_file_name;
+            if(!empty($this->request->getData('added_by'))){
+                $techPubl->added_by = $this->request->getData('added_by');
+            }
+            // Update database
+            $techPubl->folder_file_name = $newName;
+            $techPubl->updated_by = $authUserData['id'];
+            $techPubl->updated_at = new \Cake\I18n\FrozenTime('now');
+
+            if ($this->TechnicalPublications->save($techPubl)) {
+                // Also rename file/folder physically if exists
+                $oldPath = WWW_ROOT . $folderFilePath. DS . $oldName;
+                $newPath = WWW_ROOT . $folderFilePath. DS . $newName;
+
+                if (file_exists($oldPath)) {
+                    rename($oldPath, $newPath);
+                }
+
+                $result = array('status'=>'success', 'message'=>"Folder/File Name updated successfully.");
+            } else {
+                $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+            }
+
+            echo json_encode($result);exit;
+        }
+
     }
 
 ?>

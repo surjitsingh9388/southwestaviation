@@ -514,7 +514,32 @@ define('BARCODEAPIURL', $barcodeApiURL);
 $techPublMenuList = ['HR', 'Maintenance', 'Information Technology', 'Inventory', 'Flight Operations', 'Fuel System'];
 define('TECHNICALPUBLICATIONMENU', serialize($techPublMenuList));
 
-$historyReports = ['inventory_item_histories'=>'Inventory Catalog', 'inventory_histories'=>'Inventory', 'inventory_location_histories'=>'Inventory Location', 'inventory_request_histories'=>'Inventory Requests', 'inventory_purchase_order_histories'=>'Inventory Purchase Orders', 'inventory_repair_order_histories'=>'Inventory Repair Orders', 'inventory_shipping_order_histories'=>'Inventory Shipping Orders', 'plane_histories'=>'Aircraft', 'airframe_component_histories'=>'Airframe Components', 'sub_component_histories'=>'Sub Components', 'airframe_component_time_histories'=>'Airframe Component Times', 'airframe_component_part_histories'=>'Airframe Component Parts', 'ata_code_histories'=>'ATA Codes', 'disposition_histories'=>'Disposition', 'adsb_status_histories'=>'AD/SB Class', 'aircraft_discrepancy_histories'=>'Aircraft Discrepancies', 'pilot_histories'=>'Pilot', 'flightlog_histories'=>'Flight Schedule'];
+$historyReports = [
+                'user_histories'=>'User', 
+                'role_histories'=>'Role', 
+                'user_time_clock_histories'=>'User Time Clock', 
+                'user_pto_request_histories'=>'PTO Request',
+                'user_department_histories'=>'Department/Job Title',
+                'technical_publication_histories'=>'Technical Publication',
+                'plane_histories'=>'Aircraft', 
+                'airframe_component_histories'=>'Airframe Components', 
+                'sub_component_histories'=>'Sub Components', 
+                'airframe_component_time_histories'=>'Airframe Component Times', 
+                'airframe_component_part_histories'=>'Airframe Component Parts', 
+                'ata_code_histories'=>'ATA Codes', 
+                'disposition_histories'=>'Disposition', 
+                'adsb_status_histories'=>'AD/SB Class', 
+                'aircraft_discrepancy_histories'=>'Aircraft Discrepancies', 
+                'pilot_histories'=>'Pilot', 
+                'flightlog_histories'=>'Flight Schedule',
+                'inventory_item_histories'=>'Inventory Catalog', 
+                'inventory_histories'=>'Inventory', 
+                'inventory_location_histories'=>'Inventory Location', 
+                'inventory_request_histories'=>'Inventory Requests', 
+                'inventory_purchase_order_histories'=>'Inventory Purchase Orders', 
+                'inventory_repair_order_histories'=>'Inventory Repair Orders', 
+                'inventory_shipping_order_histories'=>'Inventory Shipping Orders'
+            ];
 define('HISTORYREPORTS', serialize($historyReports));
 
 $searchDropDown = ['all'=>'ALL', 'plane'=>'Aircraft', 'airframe_component'=>'Airframe Components', 'sub_component'=>'Sub Components', 'airframe_component_time'=>'Airframe Component Times', 'airframe_component_part'=>'Airframe Component Parts', 'ata_code'=>'ATA Codes', 'disposition'=>'Disposition', 'adsb_status'=>'AD/SB Class', 'pilot'=>'Pilot', 'inventory_item'=>'Inventory Catalog', 'inventory'=>'Inventory', 'inventory_location'=>'Inventory Location', 'inventory_request'=>'Inventory Requests', 'inventory_purchase_order'=>'Inventory Purchase Orders', 'inventory_repair_order'=>'Inventory Repair Orders', 'inventory_shipping_order'=>'Inventory Shipping Orders', 'customer_otc'=>'Customer/OTC', 'inventory_vendor'=>'Inventory Vendor', 'inventory_manufacturer'=>'Inventory Manufacturers', 'work_order'=>'Work Order'];

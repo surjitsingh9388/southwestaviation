@@ -72,9 +72,10 @@ class UserTimeClockComponent extends Component {
         $wherecond = ['Users.suspended' => '0'];
 
         $authUserData = $this->Authentication->getResult()->getData();
-        $teamIdsArray = array_map('trim', explode(',', $authUserData['team_member_id'])); // [24, 33, 40]
-
+        
         if(!empty($authUserData['is_manager']) && !empty($authUserData['team_member_id'])){
+            $teamIdsArray = array_map('trim', explode(',', $authUserData['team_member_id']));
+            
             $wherecond['OR'] = [
                                     'Users.id IN' => $teamIdsArray,
                                     'Users.id' => $authUserData['id']

@@ -26,6 +26,7 @@
         protected \App\Model\Table\InventoryShippingOrderHistoriesTable $InventoryShippingOrderHistories;
         protected \App\Model\Table\InventoryPurchaseOrderLinksTable $InventoryPurchaseOrderLinks;
         protected \App\Model\Table\InventoryPurchaseOrdersTable $InventoryPurchaseOrders;
+        protected \App\Model\Table\InventoryPartManufacturersTable $InventoryPartManufacturers;
         
         public function initialize():void {
             parent::initialize();
@@ -40,6 +41,7 @@
             $this->InventoryShippingOrderHistories = $this->fetchTable('InventoryShippingOrderHistories');
             $this->InventoryPurchaseOrderLinks = $this->fetchTable('InventoryPurchaseOrderLinks');
             $this->InventoryPurchaseOrders = $this->fetchTable('InventoryPurchaseOrders');
+            $this->InventoryPartManufacturers = $this->fetchTable('InventoryPartManufacturers');
 
             $this->loadComponent('Address');
             $this->loadComponent('InventoryFilter');
@@ -312,8 +314,12 @@
             $inventoryitems = $this->Inventory->getAllInventoriesDetails();
 
             $so_number = $this->Inventory->getShippingOrderNumber();
+
+            $manufacturer = $this->Inventory->getManufacturerList();
             
-            $this->set(compact('InventoryShippingOrders', 'actionItems', 'countries', 'states', 'inventoryvendors', 'inventoryaddresses', 'from_address', 'to_address', 'vendor', 'InventoryShippingOrderItems', 'invid', 'inventoryitems', 'invtype', 'po_id', 'so_number'));
+            $inventorymanufacturers = $this->InventoryPartManufacturers->newEmptyEntity();
+            
+            $this->set(compact('InventoryShippingOrders', 'actionItems', 'countries', 'states', 'inventoryvendors', 'inventoryaddresses', 'from_address', 'to_address', 'vendor', 'InventoryShippingOrderItems', 'invid', 'inventoryitems', 'invtype', 'po_id', 'so_number', 'manufacturer', 'inventorymanufacturers'));
         }
 
         public function edit($id = null)
@@ -456,8 +462,12 @@
             $invitmreceived = $inventorypoitemsrec['invitmreceived'];
 
             $inventorysohistories = $this->Inventory->getShippingOrderHistoryList($id);
+
+            $manufacturer = $this->Inventory->getManufacturerList();
             
-            $this->set(compact('InventoryShippingOrders', 'actionItems', 'countries', 'states', 'inventoryvendors', 'inventoryaddresses', 'to_address', 'from_address', 'vendor', 'InventoryShippingOrderItems', 'inventoryitems', 'location', 'attachments', 'invitmreceived', 'inventorysohistories'));
+            $inventorymanufacturers = $this->InventoryPartManufacturers->newEmptyEntity();
+            
+            $this->set(compact('InventoryShippingOrders', 'actionItems', 'countries', 'states', 'inventoryvendors', 'inventoryaddresses', 'to_address', 'from_address', 'vendor', 'InventoryShippingOrderItems', 'inventoryitems', 'location', 'attachments', 'invitmreceived', 'inventorysohistories', 'manufacturer', 'inventorymanufacturers'));
         }
 
         public function detail($id = null)

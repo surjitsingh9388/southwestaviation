@@ -251,19 +251,44 @@ $(function() {
     </div>
     <div class="row mt5">
         <div class="col-xs-6">
-            <div class="form-group"> 
-                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Manufacturer:</label>
-                <div class="col-md-7 col-sm-7 col-xs-12">
-                    <?php
-                    echo $this->Form->control('manufacturer_id', array('options' => $manufacturer, 'empty' => 'Enter a manufacturer...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'manufacturer')); 
-                    
-                    if(!isset($isdetailpage) && !isset($isinvrequestpage)){
-                    ?>
-                    <div class="col-md-1 col-sm-1 col-xs-12 plus-new-btn"><button class="btn btn-primary manufacturerbtn plus-btn-h" type="button"><i class="fa fa-plus"></i></button></div>
-                    <?php } ?>
-                </div>
+    <div class="form-group">
+        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="manufacturer">
+            Manufacturer:
+        </label>
+
+        <?php if (!isset($isdetailpage) && !isset($isinvrequestpage)): ?>
+            <div class="col-md-6 col-sm-6 col-xs-10" style="padding-right:0px;">
+                <?= $this->Form->control('manufacturer_id', [
+                    'options' => $manufacturer,
+                    'empty' => 'Enter a manufacturer...',
+                    'class' => 'form-control selectpicker',
+                    'data-show-subtext' => true,
+                    'data-live-search' => true,
+                    'label' => false,
+                    'id' => 'manufacturer'
+                ]); ?>
             </div>
-        </div>
+            <div class="col-md-2 col-sm-2 col-xs-2 plus-new-btn" style="margin-top:0px; padding-left: 0px;">
+                <button type="button" class="btn btn-primary manufacturerbtn plus-btn-h">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        <?php else: ?>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <?= $this->Form->control('manufacturer_id', [
+                    'options' => $manufacturer,
+                    'empty' => 'Enter a manufacturer...',
+                    'class' => 'form-control selectpicker',
+                    'data-show-subtext' => true,
+                    'data-live-search' => true,
+                    'label' => false,
+                    'id' => 'manufacturer'
+                ]); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
 
         <div class="col-xs-6">
             <div class="form-group"> 

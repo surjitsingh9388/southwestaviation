@@ -116,4 +116,22 @@ class AirframeComponentComponent extends Component {
         }
         return $results;
     }    
-}
+
+    public function getAirframeComponentId($plane_id, $log_book) {
+        $airCompModel = $this->getController()->fetchTable('AirframeComponents');
+     
+        $whereCond = ['plane_id'=>$plane_id];
+        if($log_book == 'Airframe') {
+            $whereCond['LOWER(log_book)'] = $log_book;
+        } else {
+            $log_book = str_replace(' ', '', $log_book);
+            preg_match('/([a-zA-Z]+)([0-9]+)/', $log_book, $matches);
+            $whereCond['LOWER(log_book)'] = strtolower($matches[1]) ?? '';
+            $whereCond['position'] = $matches[2] ?? '';
+        }
+        
+        $airComp = $airCompModel->find('all')->where($whereCond)->select('id')->enableHydration(false)->first();
+        
+        return $airComp['id'] ?? '';
+    }
+}   

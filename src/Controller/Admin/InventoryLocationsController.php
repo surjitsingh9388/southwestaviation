@@ -147,10 +147,7 @@
 
             $parentlocation = [];
             if(!empty($id)){
-                $parentlocarr = $this->InventoryLocations->find('all')->where(['id'=>$id, 'status'=>'1'])->select(['id', 'location_name'])->first();
-                if(!empty($parentlocarr)){
-                    $parentlocation[$parentlocarr->id] = $parentlocarr->location_name;
-                }
+                $parentlocation = $this->InventoryLocations->find('all')->where(['id'=>$id, 'status'=>'1'])->select(['id', 'location_name'])->first();
             }
             $invenotrylocations = $this->InventoryLocations->newEmptyEntity();
             if ($this->request->is('post')) {
@@ -187,14 +184,18 @@
             $authUserData = $this->Authentication->getResult()->getData();
             if($authUserData['id'] != 1){
                 $actionStatus = $this->checkAction();
-                if(array_key_exists('InventoryItems', $actionStatus))
+                if(array_key_exists('Locations', $actionStatus))
                 {
-                    $actionItems = $actionStatus['InventoryItems'];
+                    $actionItems = $actionStatus['Locations'];
                 }
             }
-            $parentlocation = $this->Inventory->getAllParentLocations();
-            
+
             $invenotrylocations = $this->InventoryLocations->get($id);
+
+            $parentlocation = [];
+            if(!empty($invenotrylocations['parent_location_id'])){
+                $parentlocation = $this->InventoryLocations->find('all')->where(['id'=>$invenotrylocations['parent_location_id'], 'status'=>'1'])->select(['id', 'location_name'])->first();
+            }
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $postData = $this->request->getData();
                 $postData['updated_by'] = $authUserData['id'];
@@ -252,9 +253,9 @@
             $authUserData = $this->Authentication->getResult()->getData();
             if($authUserData['id'] != 1) {
                 $actionStatus = $this->checkAction();
-                if(array_key_exists('InventoryItems', $actionStatus))
+                if(array_key_exists('Locations', $actionStatus))
                 {
-                    $actionItems = $actionStatus['InventoryItems'];
+                    $actionItems = $actionStatus['Locations'];
                 }
             }
             $this->autoRender = false;
@@ -408,9 +409,9 @@
             $authUserData = $this->Authentication->getResult()->getData();
             if($authUserData['id'] != 1) {
                 $actionStatus = $this->checkAction();
-                if(array_key_exists('InventoryItems', $actionStatus))
+                if(array_key_exists('Locations', $actionStatus))
                 {
-                    $actionItems = $actionStatus['InventoryItems'];
+                    $actionItems = $actionStatus['Locations'];
                 }
             }
             if ($this->request->is('post')) {

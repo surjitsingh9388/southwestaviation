@@ -4,31 +4,44 @@
         <?php
             $todaydays = !empty($requestlog['day_of_week']) ? $requestlog['day_of_week'] : date('N');
             $dayoftheweeks = unserialize(DAYOFWEEKS);
-            echo $this->Form->control('day_of_week[]', array('options' => $dayoftheweeks, 'empty' => 'Select day of the week', 'class' => 'form-control col-md-8 col-xs-12 selectpicker day_of_week', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'day_of_week_'.$counter, 'value'=>$todaydays)); 
+            echo $this->Form->control('day_of_week[]', array('options' => $dayoftheweeks, 'empty' => 'Select day of the week', 'class' => 'form-control col-md-8 col-xs-12 selectpicker day_of_week', 'data-show-subtext' => true, 'label' => false, 'id' => 'day_of_week_'.$counter, 'value'=>$todaydays)); 
         ?>
     </td>
     <td>
         <div class="input-group date datePicker">
-            <?php 
-            $date_of_day = !empty($requestlog['date_of_day']) ? date('m-d-Y', strtotime($requestlog['date_of_day'])) : date('m-d-Y');
-            echo $this->Form->Text('date_of_day[]', array('class' => 'form-control col-md-8 pto_date_of_day', 'id' => 'pto_date_of_day_'.$counter, 'placeholder' => 'Date', 'label' => false, 'value'=>$date_of_day)); ?>
+            <?php
+            $date_of_day = !empty($requestlog['date_of_day'])
+                ? date('m-d-Y', strtotime($requestlog['date_of_day']))
+                : date('m-d-Y');
+
+            echo $this->Form->text('date_of_day[]', [
+                'class'       => 'form-control col-md-8 pto_date_of_day',
+                'id'          => 'pto_date_of_day_' . $counter,
+                'placeholder' => 'Date',
+                'label'       => false,
+                'value'       => $date_of_day,
+                'inputmode'   => 'none',
+                'autocomplete'=> 'off'
+            ]);
+            ?>
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
     </td>
+
     <td>
         <div class="input-group date datePicker">
             <?php 
             $time_from = !empty($requestlog['time_from']) ? date('H:i', strtotime($requestlog['time_from'])) : '08:00';
-            echo $this->Form->Text('time_from[]', array('class' => 'form-control col-md-8 pto_time_from', 'id' => 'pto_time_from_'.$counter, 'placeholder' => 'Time From', 'label' => false, 'value'=>$time_from)); ?>
+            echo $this->Form->Text('time_from[]', array('class' => 'form-control col-md-8 pto_time_from', 'id' => 'pto_time_from_'.$counter, 'placeholder' => 'Time From', 'label' => false, 'value'=>$time_from, 'inputmode'   => 'none', 'autocomplete'=> 'off')); ?>
         </div>
     </td>
     <td>
         <div class="input-group date datePicker">
             <?php 
             $time_to = !empty($requestlog['time_to']) ? date('H:i', strtotime($requestlog['time_to'])) : '17:00';
-            echo $this->Form->Text('time_to[]', array('class' => 'form-control col-md-8 pto_time_to', 'id' => 'pto_time_to_'.$counter, 'placeholder' => 'Time To', 'label' => false, 'value'=>$time_to)); ?>
+            echo $this->Form->Text('time_to[]', array('class' => 'form-control col-md-8 pto_time_to', 'id' => 'pto_time_to_'.$counter, 'placeholder' => 'Time To', 'label' => false, 'value'=>$time_to, 'inputmode'   => 'none', 'autocomplete'=> 'off')); ?>
         </div>
     </td>
     <td>

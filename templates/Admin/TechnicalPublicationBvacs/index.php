@@ -20,4 +20,5 @@ use Cake\Routing\Router;
 </div>
 <?php 
 echo $this->element('TechnicalPublications/popup_file_list');
+echo $this->element('TechnicalPublications/edit_folder_file_name_popup');
 ?>

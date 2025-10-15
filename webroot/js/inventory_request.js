@@ -160,7 +160,7 @@ function updateRequestItemStatus(request_item_id, request_item_status){
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     alert(obj.message);
-                    window.location.reload();
+                    window.location.replace(window.location.href);
                 }else{
                     alert(obj.message);
                 }

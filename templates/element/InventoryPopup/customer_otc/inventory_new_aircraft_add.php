@@ -13,14 +13,14 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4 col-sm-4 col-md-4" for="airframe_component_id">Enter Registration Number</label>
                         <div class="col-xs-8 col-sm-8 col-md-8">
-                        <?php echo $this->Form->control('aircraft_registration_number', array('class' => 'form-control col-xs-8 col-sm-8 col-md-8', 'label'=> false)); ?>
+                        <?php echo $this->Form->control('aircraft_registration_number', array('class' => 'form-control col-xs-8 col-sm-8 col-md-8', 'label'=> false, 'maxlength' => 30)); ?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary saveAircraftRegNumber" data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-primary saveAircraftRegNumber">Add</button>
             </div>
         </div>
         <?php 

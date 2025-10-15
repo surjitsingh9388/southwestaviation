@@ -54,7 +54,7 @@ $(document).ready(function() {
             });     
         });
 
-    $("form#frmInvenotry #location_id, #serial_no, #uom, #qty").on("keyup change", function(){
+    $("form#frmInvenotry #location_id, #serial_no, #inventory_qty").on("keyup change", function(){
         disableEnableInventorySaveBtn();
     });
 
@@ -66,14 +66,14 @@ function disableEnableInventorySaveBtn(){
     var errors = 0;
     
     if(is_this_item_serialized == '1'){
-        $("form#frmInvenotry #location_id, #serial_no, #uom").map(function(){
-            if( !$(this).val() ) {
+        $("form#frmInvenotry #location_id, #serial_no, #inventory_qty").map(function(){
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
     }else{
-        $("form#frmInvenotry #location_id, #uom, #qty").map(function(){
-            if( !$(this).val() ) {
+        $("form#frmInvenotry #location_id, #inventory_qty").map(function(){
+            if( !$.trim($(this).val()) ) {
                 errors++;
             } 
         });
@@ -111,7 +111,14 @@ $(document).on('click', ".vendorsavebtn", function (e) {
 
 //error discard
 $(document).on('click', '.inventoriesconfirmdiscard', function (e) {
-    $('form#frmInventoriesDiscard').submit();
+    var qty = $.trim($('#qty').val());
+
+    if (qty === '' || isNaN(qty) || parseFloat(qty) <= 0) {
+        alert("Enter a valid quantity greater than zero.");
+    } else {
+        $('form#frmInventoriesDiscard').submit();
+    }
+
 });
 
 //error correct
@@ -195,7 +202,7 @@ $(document).on("keyup change", "form#frmInventoriesTransfer #transfer_qty, #tran
 function disableEnableSaveTransferBtn(){
     var errors = 0;
     $("form#frmInventoriesTransfer #transfer_qty, #transfer_location").map(function(){
-        if( !$(this).val() ) {
+        if( !$.trim($(this).val()) ) {
             errors++;
         }
     });
@@ -349,7 +356,7 @@ $(document).on('click', '.addInvHoldingToBox', function(e){
                 if(obj.status =='failure'){
                     alert(obj.message);
                 }else{
-                    window.location.reload();
+                    window.location.replace(window.location.href);
                 }
             }
         });

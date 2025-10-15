@@ -32,7 +32,8 @@
                 }
             }
             $heading = 'RJC';
-            $this->set(compact('actionItems', 'heading'));
+            $usersArr = $this->TechnicalPublication->getUserDropdownList();
+            $this->set(compact('actionItems', 'heading', 'usersArr'));
             $subpage_id = '1';
             $this->createNewFolder($subpage_id, 'index');
         }

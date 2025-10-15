@@ -45,6 +45,7 @@ class UsersController extends AppController
         $this->loadComponent('User');
         $this->loadComponent('Pilot');
         $this->loadComponent('Plane');
+        $this->loadComponent('UserManagementHistory');
 
         $this->Users = $this->fetchTable('Users');
         $this->ResetPasswords = $this->fetchTable('ResetPasswords');
@@ -506,7 +507,9 @@ class UsersController extends AppController
             //echo "<pre>";print_r($user);exit; 
                
             if ($this->Users->save($user)) {
-
+                //save user detail in history
+                $this->UserManagementHistory->saveUsersHistory($user);
+                
                 //Insert in pilots table if pilot roles selected
                 $pilotRoles = explode(',', PILOT_ROLE_ID);
                 if(in_array($postData['role_id'], $pilotRoles)) {
@@ -563,7 +566,18 @@ class UsersController extends AppController
                 }
                 return $this->redirect(['action' => 'index']);
             }else{
-                pr($user->getErrors());exit;
+                $error = $user->getErrors();
+
+                if (!empty($error)) {
+                    // Convert the error array into a readable string
+                    $errorMessages = [];
+                    foreach ($error as $field => $messages) {
+                        $errorMessages[] = ucfirst($field) . ': ' . implode(', ', $messages);
+                    }
+
+                    $this->Flash->error(__('Enter a valid quantity. ') . implode(' | ', $errorMessages));
+                }
+
             }
             $this->Flash->success('The user could not be saved. Please, try again.');
         }
@@ -1049,7 +1063,7 @@ class UsersController extends AppController
             } else {
                 $this->Flash->error('Please enter required details.');
             }
-            return $this->redirect(['controller' => 'Users', 'action' => 'login', 'prefix' => $prefix]);
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         } else {
             $this->Flash->error('Invalid request. Please try again.');
         }
@@ -1064,8 +1078,7 @@ class UsersController extends AppController
      */    
     public function sendPasswordDetails($emailData = array()) {
         if (!empty($emailData)) {
-            $authUserData = $this->Authentication->getResult()->getData();
-
+            
             //pr($emailData['login_type']);
             if(!empty($emailData['login_type'])){
                 $prefix = lcfirst($emailData['login_type']);
@@ -1085,7 +1098,7 @@ class UsersController extends AppController
             }
             $optCode = '0';
             $passwordToken = '';
-            if($emailData['isphone'] != 0){
+            if(!empty($emailData['isphone'])){
                 $n = 6;
                 $optCode = $this->generateNumericOTP($n);
             }else{
@@ -1152,12 +1165,7 @@ class UsersController extends AppController
             $emailArr[] = $emailData['email'];
             $data['emailUsersList'] = $emailArr;
             //pr($data);
-            $userId = $authUserData['id'];
-            if(isset($userId)){
-                $userId = $userId;
-            }else{
-                $userId = $userData['id'];
-            }
+            $userId = $userData['id'];
             //pr($userId);exit;
             $emailQueueArr['email_type'] = 'Forgot_Password';
             $emailQueueArr['email_data'] = json_encode($data);
@@ -1391,6 +1399,7 @@ class UsersController extends AppController
                                             'valueField' => 'full_name'
                                         ))
                                     ->where(['Users.role_id IN ('.$roles.')', 'Users.id !=' => 1, 'Users.suspended' => 0])
+                                    ->orderByAsc('Users.full_name')
                                     ->toArray();
         
         $this->set(compact('userMenuItems', 'menuItems', 'allAdmins'));

@@ -10,11 +10,15 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 
 <script>
 $(document).ready(function () {
-    setTimeout(function () {
-        $('.flash-message').fadeOut('slow', function () {
-            $('.outerWrapper').parent().addClass('left');
-        });
-    }, 1000);
+    const isDesktop = window.matchMedia("(min-width: 769px)").matches;
+
+    if (!isDesktop) {
+        setTimeout(function () {
+            $('.flash-message').fadeOut('slow', function () {
+                $('.outerWrapper').parent().addClass('left');
+            });
+        }, 1000);
+    }
 });
 
 </script>

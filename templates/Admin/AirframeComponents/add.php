@@ -68,7 +68,7 @@ $sessionArray = $this->request->getSession()->read('Auth');
                             <div class="col-md-6 col-sm-6 col-xs-12 col-sm-offset-3">
                                 <?php
                                 if((!empty($actionItems) && $actionItems['action']['action_add'] == 1) || $sessionUser['id'] == 1){
-                                    echo $this->Form->button('Submit', ['type' => 'submit', 'class' => 'btn btn-success']);
+                                    echo $this->Form->button('Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'id'=>'submitAircraftCompButton']);
                                 }
                                     echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset', 'id' => 'reset']);
                                 ?>
@@ -137,6 +137,22 @@ $(document).ready(function() {
     $('#reset').click(function() {
        var validator = $("#frmAirComp").validate();
        validator.resetForm();
+    });
+
+    $('#submitAircraftCompButton').on('click', function(e) {
+        e.preventDefault(); // prevent default form submission temporarily
+        var btn = $(this);
+        
+        // If already disabled, prevent multiple clicks
+        if (btn.prop('disabled')) {
+            return false;
+        }
+
+        // Disable button immediately
+        btn.prop('disabled', true).text('Submitting...');
+
+        // Submit the form manually
+        btn.closest('form')[0].submit();
     });
 });    
 </script>

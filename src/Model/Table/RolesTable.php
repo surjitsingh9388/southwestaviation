@@ -88,4 +88,50 @@ class RolesTable extends Table
 
         return $rules;
     }
+
+    public function beforeSave($options = array())
+    {
+        $entity = $options->getData('entity');
+        
+        if(!empty($entity->id)){
+            $rolesModel = FactoryLocator::get('Table')->get('Roles');            
+            $roles = $rolesModel->get($entity->id);
+
+            $roleHistoriesModel = FactoryLocator::get('Table')->get('RoleHistories');
+            
+            $roleHistory = $roleHistoriesModel->newEmptyEntity();
+            
+            $roleHistory->role_id = $entity->id;
+
+            $roleHistory->title = 'Role '.$roles->role_name.' was updated.';
+            
+            if(!empty($roles->modified)){
+                $modified_from = str_replace('-', '/', $roles->modified);
+                $modified_from = date("Y-m-d h:i A", strtotime($modified_from));
+            }else{
+                $modified_from = '';
+            }
+
+            if(!empty($entity->modified)){
+                $modified_to = str_replace('-', '/', $entity->modified);
+                $modified_to = date("Y-m-d h:i A", strtotime($modified_to));
+            }else{
+                $modified_to = '';
+            }
+
+            $description = '';
+            if($entity->role_name != $roles->role_name){
+                $description .= 'Role Name was changed from "'.$roles->role_name.'" to "'.$entity->role_name.'".<br/>';
+            }
+
+            if(!empty($description)){
+                $description .= 'Last updated was changed from "'.$modified_from.'" to "'.$modified_to.'".<br/>';
+            
+                $roleHistory->user_id = $entity->updated_by;
+                $roleHistory->description = $description;
+                $roleHistoriesModel->save($roleHistory);
+            }
+
+        }
+    }
 }

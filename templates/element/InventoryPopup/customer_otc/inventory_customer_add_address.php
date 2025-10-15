@@ -15,7 +15,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Name&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php 
-                                echo $this->Form->control('name', array('class'=>'form-control col-md-8 col-xs-12 mf_name', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_name'));
+                                echo $this->Form->control('name', array('class'=>'form-control col-md-8 col-xs-12 mf_name no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_name'));
                                 ?>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Address&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php 
-                                echo $this->Form->control('address', array('class'=>'form-control col-md-8 col-xs-12 mf_name', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_address'));
+                                echo $this->Form->control('address', array('class'=>'form-control col-md-8 col-xs-12 mf_name no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_address'));
                                 ?>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Address 2</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php 
-                                echo $this->Form->control('address2', array('class'=>'form-control col-md-8 col-xs-12 mf_name', 'placeholder' => '', 'label' => false, 'id'=>'customer_addr_address2'));
+                                echo $this->Form->control('address2', array('class'=>'form-control col-md-8 col-xs-12 mf_name no-special-char', 'placeholder' => '', 'label' => false, 'id'=>'customer_addr_address2'));
                                 ?>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">City&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php 
-                                    echo $this->Form->control('city', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_city'));
+                                    echo $this->Form->control('city', array('class'=>'form-control col-md-8 col-xs-12 no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_city'));
                                     ?>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Country&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php 
-                                    echo $this->Form->control('country', array('options' => $countries, 'empty' => 'Select a country...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'customer_addr_country', 'required' => 'required')); 
+                                    echo $this->Form->control('country', array('options' => $countries, 'empty' => 'Select a country...', 'class' => 'form-control col-md-8 col-xs-12 selectpicker no-special-char', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'customer_addr_country', 'required' => 'required')); 
                                     ?>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Province&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php 
-                                    echo $this->Form->control('province', array('class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_province'));
+                                    echo $this->Form->control('province', array('class'=>'form-control col-md-8 col-xs-12 no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_province'));
                                     ?>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Zip&nbsp;<span class="required">*</span></label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php 
-                                    echo $this->Form->input('zip', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_zip'));
+                                    echo $this->Form->input('zip', array('type'=>'text', 'class'=>'form-control col-md-8 col-xs-12 no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_zip'));
                                     ?>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="plane_id">Phone Number</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <?php 
-                                    echo $this->Form->input('phone_number', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_phone_number'));
+                                    echo $this->Form->input('phone_number', array('type'=>'text', 'class'=>'form-control col-md-8 col-xs-12 no-special-char', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'customer_addr_phone_number'));
                                     ?>
                                 </div>
                             </div>

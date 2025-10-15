@@ -44,15 +44,15 @@ class HistoryReportsController extends AppController
             parse_str($requestData['columns'][1]['search']['value'], $requestData);
         }
         if(!empty($requestData['filterBySection'])){
-            $query['count'] = "SELECT count(itemhistory.id) AS count  FROM ".$requestData['filterBySection']." as itemhistory WHERE 1=1 ";
+            $query['count'] = "SELECT count(userhistory.id) AS count  FROM ".$requestData['filterBySection']." as userhistory WHERE 1=1 ";
 
-            $query['detail'] = "SELECT itemhistory.id, itemhistory.title, itemhistory.created, itemhistory.description, u.full_name FROM `".$requestData['filterBySection']."` as itemhistory join users as u on itemhistory.user_id = u.id WHERE 1=1 ";
+            $query['detail'] = "SELECT userhistory.id, userhistory.title, userhistory.created, userhistory.description, u.full_name FROM `".$requestData['filterBySection']."` as userhistory join users as u on userhistory.user_id = u.id WHERE 1=1 ";
         }else{
-            $query['count'] = "SELECT count(itemhistory.id) AS count  FROM inventory_item_histories as itemhistory WHERE 1=1 ";
+            $query['count'] = "SELECT count(userhistory.id) AS count  FROM inventory_item_histories as userhistory WHERE 1=1 ";
 
-            $query['detail'] = "SELECT itemhistory.id, itemhistory.title, itemhistory.created, itemhistory.description, u.full_name FROM `inventory_item_histories` itemhistory join users u on itemhistory.user_id = u.id WHERE 1=1 ";
+            $query['detail'] = "SELECT userhistory.id, userhistory.title, userhistory.created, userhistory.description, u.full_name FROM `user_histories` userhistory join users u on userhistory.user_id = u.id WHERE 1=1 ";
         }
-
+        
         if(!empty($requestData['date_from']) && !empty($requestData['date_to'])){
             $date_from = str_replace('-', '/', $requestData['date_from']);
             $date_from = date("Y-m-d", strtotime($date_from));
@@ -60,7 +60,7 @@ class HistoryReportsController extends AppController
             $date_to = str_replace('-', '/', $requestData['date_to']);
             $date_to = date("Y-m-d", strtotime($date_to));
             
-            $querystr = ' and DATE(itemhistory.created) >="'.$date_from.'" and DATE(itemhistory.created) <="'.$date_to.'"';
+            $querystr = ' and DATE(userhistory.created) >="'.$date_from.'" and DATE(userhistory.created) <="'.$date_to.'"';
             $query['count'] .= $querystr;
             $query['detail'] .= $querystr;
         }
@@ -69,11 +69,11 @@ class HistoryReportsController extends AppController
         //print_r($requestData);exit;
         //echo $cond;exit;
         $columns = array(
-            0 => 'itemhistory.id',
-            1 => 'itemhistory.title',
+            0 => 'userhistory.id',
+            1 => 'userhistory.title',
             2 => 'u.full_name',
-            3 => 'itemhistory.created',
-            4 => 'itemhistory.description'
+            3 => 'userhistory.created',
+            4 => 'userhistory.description'
         );
 
         $cond = '';
@@ -81,9 +81,9 @@ class HistoryReportsController extends AppController
             $teamIdsArray = array_map('intval', explode(',', $authUserData['team_member_id'])); // Ensure values are integers
             $teamIdsSql = '(' . implode(',', $teamIdsArray) . ')';
             
-            $cond .= " AND (itemhistory.user_id IN $teamIdsSql OR itemhistory.user_id = " . (int)$authUserData['id'] . ")";
+            $cond .= " AND (userhistory.user_id IN $teamIdsSql OR userhistory.user_id = " . (int)$authUserData['id'] . ")";
         }else if($authUserData['role_id'] != 1){
-            $cond .= " AND itemhistory.user_id = ".$authUserData['id'];
+            $cond .= " AND userhistory.user_id = ".$authUserData['id'];
         }
 
         $count = $query['count'].$cond;

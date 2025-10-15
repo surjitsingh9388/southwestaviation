@@ -1,21 +1,57 @@
-
-/*function myFunction() {
-    document.getElementById("create_btn_dropdown").classList.toggle("create_btn_dropdown_show");
-}
-  
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.technical_publication_create_box')) {
-      var dropdowns = document.getElementsByClassName("create_btn_dropdown");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('create_btn_dropdown_show')) {
-          openDropdown.classList.remove('create_btn_dropdown_show');
+$(document).ready(function() {
+    $('#technical_publication_datatable').DataTable({
+        paging: true,          // enable pagination
+        pageLength: 10,        // show 10 rows per page
+        lengthChange: false,   // hide "show 10/25/50 entries"
+        searching: false,      // disable search (set true if you want search box)
+        ordering: true,        // enable column sorting
+        info: true,            // "Showing 1 to 10 of X entries"
+        language: {
+            paginate: {
+                previous: "&laquo;",
+                next: "&raquo;"
+            }
         }
-      }
+    });
+});
+
+$(document).on("click", ".rename_tech_publ_btn", function () {
+    $("#renameId").val($(this).data("id"));
+    $("#folder_file_name").val($(this).attr("folder-file-name"));
+    $("#folder_file_path").val($(this).attr("folder-path"));
+    $("#added_by").val($(this).attr("data-added-by"));
+    $('.selectpicker').selectpicker('refresh');
+
+    $("#editFileFolderPopupModel").modal("show");
+});
+
+$(document).on("click", "#save_technical_publication_btn", function (e) {
+    e.preventDefault(); // stop default form submission if inside a form
+
+    if ($.trim($('#folder_file_name').val()) === '') {
+        alert("Please fill folder/file name");
+        return false;
     }
-}*/
+
+    $.ajax({
+        url: editTechPublicationURL,
+        method: "POST",
+        data: $("#frmRenameTechnicalPublications").serialize(), // serialize the form data
+        success: function (response) {
+            var obj = JSON.parse(response);
+            if (obj.status == 'success') {
+                alert(obj.message);
+                location.reload();
+            } else {
+                alert("Error: " + obj.message);
+            }
+        },
+        error: function () {
+            alert("Something went wrong while saving.");
+        }
+    });
+});
+
 
 $(document).on('click', '.create_btn_dropdown a, .technical_publication_folder_box', function(e){
     var clickoptionval = $(this).attr('data-val');
@@ -134,7 +170,7 @@ function uploadData(form_data){
         success: function (response) {
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
-                window.location.reload();
+                window.location.replace(window.location.href);
             } else {
                 alert(obj.message);
             }
@@ -170,7 +206,7 @@ $(document).on('click', '#saveTechPublPermission', function(e){
                 var obj = JSON.parse(response);
                 alert(obj.message);
                 $('#technicalPublicationPopupModel').modal('hide');
-                window.location.reload();
+                window.location.replace(window.location.href);
             },
             error : function() {
                 alert('Some error occured. Please try again!');

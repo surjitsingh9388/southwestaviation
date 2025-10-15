@@ -81,7 +81,7 @@
                 <div class="col-md-8 col-sm-8 col-xs-12">
                     <?php 
                     if(!isset($reqtype)){
-                        echo $this->Form->input('postal', array('type'=>'number', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required'));
+                        echo $this->Form->control('postal', array('type'=>'text', 'class'=>'form-control col-md-8 col-xs-12', 'placeholder' => '', 'label' => false, 'required' => 'required'));
                     }else{
                         echo '<p class="form-control-static">'.$inventoryvendors->postal.'</p>';
                     }

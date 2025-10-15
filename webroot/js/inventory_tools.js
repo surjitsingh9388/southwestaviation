@@ -60,7 +60,7 @@ $(document).on('click', '.add-new-tool-popup', function(e){
 });
 
 $(document).on('click', '.saveAddNewTool', function(e){
-    var tool_name = $('#inventory_tool_name').val();
+    var tool_name = $.trim($('#inventory_tool_name').val());
     if(tool_name != '' && tool_name != undefined){
         $.ajax({
             url: saveInventoryToolURL, 
@@ -78,6 +78,8 @@ $(document).on('click', '.saveAddNewTool', function(e){
                 }
             }
         });
+    }else{
+        alert("Enter tool name");
     }
 });
 

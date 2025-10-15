@@ -8,7 +8,7 @@ use Cake\Routing\Router;
 <div class="content sliding">
     <div class="outerWrapper">
         <?php
-        echo $this->Form->create($invenotries, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInvenotry', 'autocomplete'=>'off'));
+        echo $this->Form->create($invenotries, array('class' => '', 'id' => 'frmInvenotry', 'autocomplete'=>'off'));
         ?>  
         <div class="btnWrapper">
             <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['controller'=>'InventoryItems', 'action' => 'index']).' / '.$this->Html->link($invenotryitems->name. ' (PN: '.$invenotryitems->part_number.')', ['action' => 'detail', $invenotries->id]).' / Edit'; ?></h2>

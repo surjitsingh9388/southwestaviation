@@ -20,11 +20,32 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                 </div> -->
 
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">User <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php echo $this->Form->control('user_id', array('options' => $allAdmins, 'empty' => 'Select User', 'class' => 'form-control col-md-7 col-xs-12 selectpicker', 'label' => false, 'data-show-subtext' => true, 'data-live-search' => true)); ?>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">User <span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <?php echo $this->Form->control('user_id', array('options' => $allAdmins, 'empty' => 'Select User', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'label' => false, 'data-show-subtext' => true, 'data-live-search' => true)); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                                    <?php
+                                    echo $this->Form->button('Submit', ['type' => 'submit', 'id' => 'frmClicked', 'class' => 'btn btn-success clickedd']);
+                                    ?>
+                                    <button class="btn btn-success buttonload" style="display: none;">
+                                        <i class="fa fa-spinner fa-spin"></i> <?php echo ucfirst(strtolower(SUBMITING)); ?>
+                                    </button>
+                                    <?php
+                                    echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset']);
+                                    echo $this->Form->control('updated_by', array('type' => 'hidden', 'value' => $sessionUser['id']));
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -223,21 +244,8 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                     </div>
                 </div>
 
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <?php
-                        echo $this->Form->button('Submit', ['type' => 'submit', 'id' => 'frmClicked', 'class' => 'btn btn-success clickedd']);
-                        ?>
-                        <button class="btn btn-success buttonload" style="display: none;">
-                            <i class="fa fa-spinner fa-spin"></i> <?php echo ucfirst(strtolower(SUBMITING)); ?>
-                        </button>
-                        <?php
-                        echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset']);
-                        echo $this->Form->control('updated_by', array('type' => 'hidden', 'value' => $sessionUser['id']));
-                        ?>
-                    </div>
-                </div>
+                <!--div class="ln_solid"></div-->
+                
             </div>
             <?php echo $this->Form->end(); ?>
         </div>

@@ -57,8 +57,8 @@ Calendar Styling */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 4rem;
   margin-bottom: 1px;
+  color: #39478b;
 }
 
 .calendar .days li .event.span-2 {

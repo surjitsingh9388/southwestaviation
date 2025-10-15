@@ -315,10 +315,16 @@ class AirframeComponentPartsTable extends Table
                 $description .= 'Amendment was changed from "'.$airframeComponentParts->amendment.'" to "'.$entity->amendment.'".<br/>';
             }
             if($entity->authority != $airframeComponentParts->authority){
-                $description .= 'Authority No was changed from "'.$airframeComponentParts->authority.'" to "'.$entity->authority.'".<br/>';
+                $description .= 'Issuing Authority was changed from "'.$airframeComponentParts->authority.'" to "'.$entity->authority.'".<br/>';
             }
             if($entity->position_id != $airframeComponentParts->position_id){
                 $description .= 'Position was changed from "'.$airframeComponentParts->position_id.'" to "'.$entity->position_id.'".<br/>';
+            }
+            if($entity->requirement_source_id != $airframeComponentParts->requirement_source_id){
+                $description .= 'Requirement Source was changed from "'.$airframeComponentParts->requirement_source_id.'" to "'.$entity->requirement_source_id.'".<br/>';
+            }
+            if($entity->moc_id != $airframeComponentParts->moc_id){
+                $description .= 'MOC was changed from "'.$airframeComponentParts->moc_id.'" to "'.$entity->moc_id.'".<br/>';
             }
             if($entity->description != $airframeComponentParts->description){
                 $description .= 'Item Name was changed from "'.$airframeComponentParts->description.'" to "'.$entity->description.'".<br/>';

@@ -10,7 +10,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
             <!-- <div class="col-md-8 col-sm-8 col-xs-12"> -->
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Customer P/O #</label>
                     <div class="form-input-frame">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Service Quote #</label>
                     <div class="form-input-frame">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Terms</label>
                     <div class="form-input-frame">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Disclaimer for R/O</label>
                     <div class="form-input-frame">
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-4">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Min. Hours Worked Per Item</label>
                     <div class="form-input-frame">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Overtime Hrs.</label>
                     <div class="form-input-frame">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
                     <label class="control-label" for="reference">Add Hrs. Inspection</label>
                     <div class="form-input-frame">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group d-flex">
                     <label class="control-label" for="reference">Date Due</label>
                     <div class="input-group date datePicker">

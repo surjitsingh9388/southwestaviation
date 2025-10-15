@@ -56,6 +56,7 @@ if (!empty($params['action'])) {
                 <?php
                 if ((!empty($reportAction) && $reportAction['action']['action_add'] == 1) || $sessionUser['id'] == 1) {
                 ?>
+                    <a class="btn btn-default importExcelAircraftCompPart" href="javascript:void(0);">Import Excel</a>
                     <a class="btn btn-default projectedTimeCls" href="javascript:void(0);" data-pid="<?= h($aircraftIds); ?>" data-action="<?= h($action); ?>" id="projectedPdfId" <?php echo $pdfCheck; ?>>Projected Report</a>
 
                     <a class="btn btn-default" href="javascript:void(0);" data-pids="<?= h($aircraftIds); ?>" data-action="<?= h($action); ?>" id="downloadPdfId" <?php echo $pdfCheck; ?>>Generate Report</a>
@@ -389,8 +390,149 @@ if (!empty($params['action'])) {
 <?php echo $this->element('report_time_popup'); ?>
 <!-- Report time popup -->
 
+<!-- Generate Report popup -->
+<?php echo $this->element('generate_report_popup'); ?>
+<!-- Generate Report popup -->
+
+<!-- Import Excel popup -->
+<?php echo $this->element('bulk_airfract_component_part_update'); ?>
+<!-- Import Excel popup -->
+
 <script>
+    
+    $(document).on('click', '.importExcelAircraftCompPart', function(e){
+        $('#importExlErrorMsg').html('');
+        $('#undoImportBtn').hide();
+        $("#importedFileName").text("");
+        $('#aircraft_component_part_edit_file').val('');
+
+        $('#aircraftCompPartImportModel').modal('show');
+    });
+
+    $(document).on('click', '#uploadExcelFileBtn', function(e){
+        $('#importExlErrorMsg').html('');
+
+        var fileInput = $('#aircraft_component_part_edit_file')[0];
+        if (fileInput.files.length === 0) {
+            // Show error message if no file selected
+            $('#importExlErrorMsg').html('Please select a file to upload.');
+            return false; // Stop AJAX
+        }
+        
+        var formData = new FormData($('#importForm')[0]);
+        $('.loader').show();
+        $.ajax({
+            url: '<?= $this->Url->build(["controller" => "AirframeComponentParts", "action" => "importAircraftCompPartExcel"]) ?>',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                $('.loader').show();
+            },
+            success: function(response) {
+                if (response.status == 'success') {
+                    $('.loader').hide();
+                    
+                    $('#undoImportBtn').data('batch-id', response.batch_id).show();
+
+                    alert(response.message);
+                } else if (response.status == 'failure') {
+                    $('.loader').hide();
+                    alert(response.message);
+                } else {
+                    $('.loader').hide();
+                }
+            },
+            error: function() {
+                $('.loader').hide();
+                alert(response.message);
+            },
+            complete: function() {
+                $('.loader').hide();
+            }
+        });
+    });
+
+    $(document).on('click', '#undoImportBtn', function(e) {
+        var batchId = $(this).data('batch-id');
+        $('#importExlErrorMsg').html('');
+
+        if (!batchId) {
+            $('#importExlErrorMsg').html('Invalid request: missing batch ID.');
+            return false;
+        }
+        $('.loader').show();
+        $.ajax({
+            url: '<?= $this->Url->build(["controller" => "AirframeComponentParts", "action" => "undoCompPartImportExcel"]) ?>/' + batchId,
+            type: 'POST',
+            success: function(response) {
+                $('.loader').hide();
+                
+                alert(response.message);
+
+                $('#aircraft_component_part_edit_file').val('');
+                $('#importExlErrorMsg').html('');
+                $('#undoImportBtn').hide();
+                $("#importedFileName").text("");
+            }
+        });
+    });
+
     $(document).ready(function() {
+        //import excel code
+        var fileInput = $("#aircraft_component_part_edit_file");
+
+        // open file dialog when button clicked
+        $("#uploadBtn").click(function () {
+            fileInput.click();
+        });
+
+        // function to validate Excel file
+        function validateExcelFile(file) {
+            var allowedExtensions = /(\.xls|\.xlsx)$/i;
+            if (!allowedExtensions.exec(file.name)) {
+                $("#importExlErrorMsg").text("Only Excel files (.xls, .xlsx) are allowed.");
+                $("#importedFileName").text("");
+                fileInput.val(""); // reset file input
+                return false;
+            }
+            $("#importExlErrorMsg").text(""); // clear error
+            $("#importedFileName").text("Selected file: " + file.name);
+            return true;
+        }
+
+        // validate when file selected
+        fileInput.on("change", function () {
+            var file = this.files[0];
+            if (file) {
+                validateExcelFile(file);
+            }
+        });
+
+        // drag & drop support
+        $("#upload-area").on("dragover", function (e) {
+            e.preventDefault();
+            $(this).addClass("dragover");
+        });
+
+        $("#upload-area").on("dragleave", function (e) {
+            e.preventDefault();
+            $(this).removeClass("dragover");
+        });
+
+        $("#upload-area").on("drop", function (e) {
+            e.preventDefault();
+            $(this).removeClass("dragover");
+
+            var file = e.originalEvent.dataTransfer.files[0];
+            if (file) {
+                fileInput[0].files = e.originalEvent.dataTransfer.files; // link dropped file to input
+                validateExcelFile(file);
+            }
+        });
+
+
         //Active/Historical dropdown
         $(document).on("change", "#display-action", function() {
             var pids = $("#downloadPdfId").data('pids') || [];
@@ -608,20 +750,31 @@ if (!empty($params['action'])) {
 
         //Download pdf
         $('#downloadPdfId').on('click', function(e) {
+            $('#generateReportTypeModel').modal('show');
+        });
+
+        $('#generateReportBtn').on('click', function(e) {
             e.stopPropagation();
             e.preventDefault();
-            var pids = $(this).data('pids') || [];
-            var partids = $(this).data('partids');
+            var pids = $('#downloadPdfId').data('pids') || [];
+            var partids = $('#downloadPdfId').data('partids');
             var type = $("#statusType").val();
-            var searchval = $(this).data('searchval');
-            var searchby = $(this).data('searchby');
-            var titlen = $(this).data('titlen');
-            var datasort = $(this).data('datasort');
-            var action = $(this).data('action');
+            var searchval = $('#downloadPdfId').data('searchval');
+            var searchby = $('#downloadPdfId').data('searchby');
+            var titlen = $('#downloadPdfId').data('titlen');
+            var datasort = $('#downloadPdfId').data('datasort');
+            var action = $('#downloadPdfId').data('action');
+            
+            var reporturl = '';
+            if($('#generate_report_type').val() == 'pdf'){
+                reporturl = "<?php echo $this->Url->build(['controller' => 'Reports', 'action' => 'generateMultiAircraftPdf']); ?>";
+            }else{
+                reporturl = "<?php echo $this->Url->build(['controller' => 'Reports', 'action' => 'generateMultiAircraftExcel']); ?>";
+            }
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo $this->Url->build(['controller' => 'Reports', 'action' => 'generateMultiAircraftPdf']); ?>",
+                url: reporturl,
                 data: {
                     pids: pids,
                     partids: partids,

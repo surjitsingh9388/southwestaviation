@@ -1088,6 +1088,52 @@
 
             return $this->redirect(['action' => 'index']);
         }
+
+        public function searchPartCatalogDropdown()
+        {
+            $this->request->allowMethod(['get']);
+            $search = trim((string)$this->request->getQuery('q', ''));
+
+            $this->autoRender = false;
+
+            $search = trim((string)$this->request->getQuery('q', ''));
+
+            $inventoryitems = $this->InventoryItems
+                                    ->find()
+                                    ->select([
+                                        'InventoryItems.id',
+                                        'InventoryItems.part_number',
+                                        'InventoryItems.name',
+                                        'inv.serial_no'
+                                    ])
+                                    ->join([
+                                        'inv' => [
+                                            'table' => 'inventories',
+                                            'alias' => 'inv',
+                                            'type' => 'LEFT',
+                                            'conditions' => $this->InventoryItems->find()->newExpr('inv.inventory_item_id = InventoryItems.id')
+                                        ]
+                                    ])
+                                    ->where(function ($exp, $q) use ($search) {
+                                        // Group OR conditions for search fields
+                                        return $exp->or([
+                                            $q->newExpr()->like('inv.serial_no', '%' . $search . '%'),
+                                            $q->newExpr()->like('InventoryItems.part_number', '%' . $search . '%'),
+                                            $q->newExpr()->like('InventoryItems.name', '%' . $search . '%')
+                                        ]);
+                                    })
+                                    ->andWhere(['InventoryItems.status' => 1])
+                                    ->group(['InventoryItems.id'])
+                                    ->limit(20)
+                                    ->enableHydration(false)
+                                    ->toArray();
+
+
+            $this->response = $this->response->withType('application/json')
+                ->withStringBody(json_encode($inventoryitems));
+
+            return $this->response;
+        }
     }
 
 ?>

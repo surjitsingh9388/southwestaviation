@@ -72,7 +72,7 @@
                             <div class="form-group ml-22">
                                 <label class="control-label" for="reference">Qty Needed</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_needed', array('type' => 'number', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'value' => '1')); ?>
+                                    <?php echo $this->Form->control('qty_needed', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'value' => '1')); ?>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Qty Used</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_used', array('type' => 'number', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_qty_used', 'placeholder' => '0')); ?>
+                                    <?php echo $this->Form->control('qty_used', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_qty_used', 'placeholder' => '0')); ?>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Qty Cust.</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_cust_owned', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0')); ?>
+                                    <?php echo $this->Form->control('qty_cust_owned', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0')); ?>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,12 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Price Each</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('price_each', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'price_each')); ?>
+                                    <?php 
+                                    $price_each = (!empty($aircraftwoitemparts->price_each) && (float)$aircraftwoitemparts->price_each > 0)
+                                    ? '$' . number_format((float)$aircraftwoitemparts->price_each, 2)
+                                    : '';
+
+                                    echo $this->Form->control('price_each', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'price_each', 'value'=>$price_each)); ?>
                                 </div>
                             </div>
                         </div>
@@ -393,27 +398,44 @@
         const $partSelect = $('#wo_item_part_number');
         const $partName = $('#wo_item_part_name');
 
-        // Initialize select2
         $partSelect.select2({
             tags: true,
             placeholder: 'Select or enter a part number',
             allowClear: true,
             width: '100%',
+            ajax: {
+                url: '<?= $this->Url->build(["controller" => "InventoryItems", "action" => "searchPartCatalogDropdown"]); ?>',
+                type: 'GET',
+                dataType: 'json',
+                delay: 250, // wait 250ms after typing
+                data: function (params) {
+                    return { q: params.term }; // send search text to server
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                id: item.part_number,
+                                text: item.part_number + ' - ' + item.name + (item.serial_no ? ' (' + item.serial_no + ')' : '')
+                            };
+                        })
+                    };
+                },
+                cache: true
+            },
             createTag: function(params) {
                 let term = $.trim(params.term).toLowerCase();
-                let exists = false;
+                if (term === '') return null;
 
-                // Check if already in the options
-                $('#wo_item_part_number option').each(function() {
+                let exists = false;
+                $partSelect.find('option').each(function() {
                     if ($(this).text().toLowerCase() === term) {
                         exists = true;
-                        return false; // break loop
+                        return false;
                     }
                 });
 
-                if (exists || term === '') {
-                    return null;
-                }
+                if (exists) return null;
 
                 return {
                     id: params.term,
@@ -423,12 +445,10 @@
             }
         });
 
-        // Detect change/selection
         $partSelect.on('select2:select', function(e) {
             const selectedText = e.params.data.text.toLowerCase();
             let found = false;
 
-            // Check if selected text exists in original options
             $partSelect.find('option').each(function() {
                 if ($(this).text().toLowerCase() === selectedText && !$(this).is('[data-select2-tag="true"]')) {
                     found = true;
@@ -436,16 +456,12 @@
                 }
             });
 
-            if (found) {
-                $partName.prop('readonly', true);
-            } else {
-                $partName.prop('readonly', false);
-            }
+            $partName.prop('readonly', found);
         });
 
-        // Optional: clear input resets readonly
         $partSelect.on('select2:clear', function() {
             $partName.prop('readonly', true);
         });
     });
+
 </script>

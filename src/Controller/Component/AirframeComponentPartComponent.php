@@ -42,7 +42,7 @@ class AirframeComponentPartComponent extends Component {
     //Item Type
     public function getItemTypes()
     {
-        $itemTypes = [
+        /*$itemTypes = [
                     'AD'=>'Airworthiness Directive',
                     'INSPECTION'=>'INSPECTION',
                     'PART'=>'PART',
@@ -54,7 +54,18 @@ class AirframeComponentPartComponent extends Component {
                     'Retire'=>'Retire',
                     'Service Letter'=>'Service Letter',
                     'Misc'=>'Misc.'
-                ];
+                ];*/
+
+		$airframeItemTypesTable = TableRegistry::getTableLocator()->get('AirframeItemTypes');
+
+		$itemTypes = $airframeItemTypesTable->find('list', [
+												'keyField' => 'id',
+												'valueField' => 'title'
+											])
+											->where(['status' => 'active'])
+											->orderAsc('title')
+											->toArray();
+
         return $itemTypes;
     }
 
@@ -76,7 +87,7 @@ class AirframeComponentPartComponent extends Component {
     //Authority
     public function getAuthority()
     {
-        $resAuthority = [
+        /*$resAuthority = [
                     'ANAC'=>'ANAC',
                     'CASA'=>'CASA',
                     'DGAC-IND'=>'DGAC-IND',
@@ -84,20 +95,74 @@ class AirframeComponentPartComponent extends Component {
                     'FAA'=>'FAA',
                     'Other'=>'Other',
                     'TRANSPORT CANADA'=>'TRANSPORT CANADA'
-                ];
+                ];*/
+
+		$airframeIssuingAuthoritiesTable = TableRegistry::getTableLocator()->get('AirframeIssuingAuthorities');
+
+		$resAuthority = $airframeIssuingAuthoritiesTable->find('list', [
+														'keyField' => 'id',
+														'valueField' => 'title'
+													])
+													->where(['status' => 'active'])
+													->orderAsc('title')
+													->toArray();
+		
         return $resAuthority;
     }
 
     //Requirement Type
     public function getRequirementTypes()
     {
-        $reqTypes = [
+        /*$reqTypes = [
                     'Expiration'=>'Expiration',
                     'Life Limited'=>'Life Limited',
                     'None'=>'None',
                     'Overhaul'=>'Overhaul',
-                ];
+                ];*/
+
+		$airframeRequirementTypesTable = TableRegistry::getTableLocator()->get('AirframeRequirementTypes');
+
+		$reqTypes = $airframeRequirementTypesTable->find('list', [
+														'keyField' => 'id',
+														'valueField' => 'title'
+													])
+													->where(['status' => 'active'])
+													->orderAsc('title')
+													->toArray();
+
         return $reqTypes;
+    }
+
+	//Requirement Source
+    public function getRequirementSources()
+    {
+		$airframeRequirementSourcesTable = TableRegistry::getTableLocator()->get('AirframeRequirementSources');
+
+		$reqSources = $airframeRequirementSourcesTable->find('list', [
+														'keyField' => 'id',
+														'valueField' => 'title'
+													])
+													->where(['status' => 'active'])
+													->orderAsc('title')
+													->toArray();
+
+        return $reqSources;
+    }
+
+	//MOC
+    public function getMocs()
+    {
+		$airframeMocsTable = TableRegistry::getTableLocator()->get('AirframeMocs');
+
+		$mocs = $airframeMocsTable->find('list', [
+										'keyField' => 'id',
+										'valueField' => 'title'
+									])
+									->where(['status' => 'active'])
+									->orderAsc('title')
+									->toArray();
+
+        return $mocs;
     }
 
     public function getInstallStatus()
@@ -435,7 +500,7 @@ class AirframeComponentPartComponent extends Component {
 			    $mos = $this->getMos($postData, $date);
 
 			    //If End of adjustment is selected
-			    if(!empty($mos) && $postData['eom'] == 1) {
+			    if(!empty($mos) && @$postData['eom'] == 1) {
 				  	$mos = strtoupper(date('Y-m-t', strtotime($mos)));
 			    }
 			}
@@ -804,5 +869,52 @@ class AirframeComponentPartComponent extends Component {
         $resp = $connection->delete('airframe_component_part_files', ['id' => $id]);
 
         return $resp;
+    }
+
+	public function getItemTypesById($itemTypeId)
+    {
+		$airframeItemTypesTable = TableRegistry::getTableLocator()->get('AirframeItemTypes');
+
+		$itemTypes = $airframeItemTypesTable->get($itemTypeId);
+
+        return $itemTypes;
+    }
+
+	public function getItemTypeDetByTitle($title)
+    {
+		$airframeItemTypesTable = TableRegistry::getTableLocator()->get('AirframeItemTypes');
+		$itemTypes = [];
+		if(!empty($title)){
+			$itemTypes = $airframeItemTypesTable->find()
+												->where([
+													'OR' => [
+														'LOWER(AirframeItemTypes.title) =' => strtolower($title),
+														'LOWER(AirframeItemTypes.sort_title) =' => strtolower($title)
+													]
+												])
+												->select(['AirframeItemTypes.id', 'AirframeItemTypes.sort_title'])
+												->first();
+
+		}
+
+        return $itemTypes;
+    }
+
+	public function getRequirementTypesById($requirementTypeId)
+    {
+		$airframeRequirementTypesTable = TableRegistry::getTableLocator()->get('AirframeRequirementTypes');
+
+		$reqTypes = $airframeRequirementTypesTable->get($requirementTypeId);
+
+        return $reqTypes;
+    }
+
+	public function getIssuingAuthorityById($authorityId)
+    {
+		$airframeIssuingAuthoritiesTable = TableRegistry::getTableLocator()->get('AirframeIssuingAuthorities');
+
+		$resAuthority = $airframeIssuingAuthoritiesTable->get($authorityId);
+		
+        return $resAuthority;
     }
 }

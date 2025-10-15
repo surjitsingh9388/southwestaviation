@@ -48,5 +48,19 @@ class AdsbStatusComponent extends Component {
         }
         return $res;
     }
+
+    //Get AD/SB title
+    public function adsbId($title)
+    {
+        $this->AdsbStatuses = $this->getController()->fetchTable('AdsbStatuses');
+        $res = '';
+        if(!empty($title)) {
+            $result = $this->AdsbStatuses->find()->where(['LOWER(AdsbStatuses.title)'=>strtolower($title)])->select('AdsbStatuses.id')->first();
+            if(!empty($result['id'])) {
+                $res = $result['id'];
+            }         
+        }
+        return $res;
+    }
     
 }

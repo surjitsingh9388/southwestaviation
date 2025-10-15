@@ -18,6 +18,7 @@ class UserDepartmentsController extends AppController
 
     public function initialize():void {
         $this->UserDepartments = $this->fetchTable('UserDepartments');
+        $this->loadComponent('UserManagementHistory');
         
         parent::initialize();
     }
@@ -53,12 +54,22 @@ class UserDepartmentsController extends AppController
                     $userdepartments = $this->UserDepartments->newEmptyEntity();    
                     if(!empty($postData['user_department_id'])){
                         $userdepartments = $this->UserDepartments->get($postData['user_department_id']);
+
+                        $postData['updated_by'] = $authUserData['id'];
+                        $postData['updated_at'] = new \Cake\I18n\FrozenTime('now');
+                    }else{
+                        $postData['added_by'] = $authUserData['id'];
+                        $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
                     }
-                    $postData['added_by'] = $authUserData['id'];
-                    $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
+                    
 
                     $userdepartments = $this->UserDepartments->patchEntity($userdepartments, $postData);
                     if ($this->UserDepartments->save($userdepartments)) {
+                        if(empty($postData['user_department_id'])){
+                            //save department history
+                            $this->UserManagementHistory->saveUserDepartmentHistory($userdepartments);
+                        }
+
                         $tblhtml = $this->getUserDepartmentsHTML();
 
                         $response = ['status'=>'success', 'message'=>'Department/Title saved successfully', 'tblhtml'=>$tblhtml];

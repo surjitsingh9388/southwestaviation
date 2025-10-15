@@ -14,9 +14,26 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                 <a href="javascript:void(0);" data-val="document"><i class="fa fa-file-o" aria-hidden="true"></i> Document</a>
             </div>
         </div-->
-        <?php if((!empty($actionItems) && $actionItems['action']['action_add']==1) || $sessionUser['id'] == 1){ ?>
+        <?php 
+        $params = $this->request->getParam('pass');
+        $folder_file = count($params) > 0 ? $params[count($params)-1] : '';
+
+        $has_folder_create_permission = 0;
+        $has_subfolder_permission = 0;
+        if(empty($folder_file)){
+            $has_folder_create_permission = (!empty($actionItems) && $actionItems['action']['action_add']==1) ? 1 : 0;
+            $has_subfolder_permission = 1;
+        }else if(!empty($folder_file)){
+            $technicalPublData = $this->TechnicalPublication->getFolderFilePermission($main_page_id, $subpage_id, $folder_file, $sessionUser['id']);
+
+            $has_subfolder_permission = $technicalPublData['has_subfolder_permission'];
+
+            $has_folder_create_permission = (!empty($technicalPublData['technical_publication_permissions']) && !empty($technicalPublData['technical_publication_permissions']['action_add'])) ? '1' : '0';
+        }
+
+        if(!empty($has_folder_create_permission) || $sessionUser['role_id'] == '1'){ ?>
             <div class="tech-btn">
-        <div >
+        <div>
             <div class="technical_publication_folder_box" data-val="folder">
                 <i class="fa fa-folder-o" aria-hidden="true"></i>
                 <div>Create folder</div>
@@ -63,12 +80,12 @@ $sessionUser = $this->request->getSession()->read('Auth');;
         ?>
     </h5>
     <div class="table-responsive" >
-        <table class="table mb-0 table-striped table-bordered " width="100%">
+        <table class="table mb-0 table-striped table-bordered" id="technical_publication_datatable" width="100%">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Who can access</th>
-                    <th>Created By</th>
+                    <!--th>Who can access</th-->
+                    <th>Owner</th>
                     <th>Modified</th>
                     <th>Action</th>
                 </tr>
@@ -76,6 +93,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
             <tbody class="tbl_tech_publication">
                 <?php
                 foreach($technicalPublications as $techpubl){
+
                     $url = $this->Url->build(array('controller' => $controllerName, 'action' => $folderpath.DS.$techpubl['folder_file_name']));
 
                     $filelocation = $mainfolder.DS.$folderpath.DS.$techpubl['folder_file_name'];
@@ -85,7 +103,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                         <?php if(!empty($techpubl['is_folder'])){ ?>
                             <span class="document-management-icon icon-folder"></span>&nbsp;
                             <?php 
-                            if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $sessionUser['id'] == 1){
+                            if(!empty($has_subfolder_permission) || $techpubl['added_by'] == $sessionUser['id'] || $techpubl['TechnicalPublicationPermissions']['action_view'] == '1' || $sessionUser['id'] == 1){
                                 echo $this->Html->link($techpubl['folder_file_name'], array('controller' => $controllerName, 'action' => $folderpath.DS.$techpubl['folder_file_name'])); 
                             }else{
                                 echo $techpubl['folder_file_name'];
@@ -115,7 +133,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                             $filelocation = DS.$mainfolder.DS.$folderpath.DS.$techpubl['folder_file_name'];
                             
                             echo '<span class="document-management-icon '.$iconcss.'"></span>'."&nbsp;&nbsp;";
-                            if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $sessionUser['id'] == 1){
+                            if($techpubl['added_by'] == $sessionUser['id'] || $techpubl['TechnicalPublicationPermissions']['action_view'] == '1' || $sessionUser['id'] == 1){
                                 echo $this->Html->link($techpubl['folder_file_name'], $filelocation, ['target'=>'_blank']);
                             }else{
                                 echo $techpubl['folder_file_name'];
@@ -123,7 +141,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                         }    
                         ?>
                     </td>
-                    <td>
+                    <!--td>
                         <?php 
                         $permission_user_count = count($techpubl['permission_users']);
                         $permission_user_count = !empty($permission_user_count) ? $permission_user_count.' members' : '0 member'; 
@@ -133,7 +151,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                         <span data-toggle="tooltip" data-placement="top" data-html="true" title="<?php echo $permission_users; ?>">
                         <?php echo $permission_user_count; ?>
                         </span>
-                    </td>
+                    </td-->
                     <td><?php echo $techpubl['users']['full_name']; ?></td>
                     <td><?php echo $techpubl['created_at']; ?></td>
                     <td>
@@ -144,7 +162,15 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                             </button>                               
                             <ul class="dropdown-content dropdown-menu">
                                 <?php 
-                                if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $sessionUser['id'] == 1){  
+                                if($techpubl['added_by'] == $sessionUser['id'] || $techpubl['TechnicalPublicationPermissions']['action_edit'] == '1' || $sessionUser['id'] == 1){
+                                ?>
+                                <li>
+                                    <a href="javascript:void(0);" folder-path="<?php echo $mainfolder.DS.$folderpath; ?>" folder-file-name = "<?=$techpubl['folder_file_name']?>" data-id="<?= $techpubl['id']; ?>" data-added-by="<?=$techpubl['added_by']?>" class="rename_tech_publ_btn"><i class="fa fa-pencil"></i> Edit</a>
+                                </li>
+                                <?php
+                                }
+
+                                if($techpubl['added_by'] == $sessionUser['id'] || $techpubl['TechnicalPublicationPermissions']['action_view'] == '1' || $sessionUser['id'] == 1){  
                                 if(!empty($techpubl['is_folder'])){
                                 ?>
                                 <li>
@@ -166,19 +192,13 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                                 ?>
                                 </li>
                                 <?php
-                                if((!empty($actionItems) && $actionItems['action']['action_delete']==1) || $sessionUser['id'] == 1){
+                                if($techpubl['added_by'] == $sessionUser['id'] || $techpubl['TechnicalPublicationPermissions']['action_delete'] == '1' || $sessionUser['id'] == 1){
                                 ?>
                                 <li>
                                     <a href="javascript:void(0);" data-val="<?php echo $techpubl['id']; ?>" folder-path="<?php echo $folderpath; ?>" class="tech_publ_delete_btn"><i class="fa fa-trash-o"></i> Delete</a>
                                 </li>
                                 <?php } ?>
-                                <?php
-                                if($sessionUser['role_id'] == '1'){
-                                ?>
-                                <li>
-                                    <a href="javascript:void(0);" class="tech_publ_permission" data-val="<?php echo $techpubl['id']; ?>"><i class="fa fa-lock" aria-hidden="true"></i> Access</a>
-                                </li>
-                                <?php } ?>
+                                
                             </ul>
                         </div>
                        
@@ -187,6 +207,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                 <?php } ?>
             </tbody>
         </table>
+        <div id="pagination" class="pagination-container"></div>
     </div>
 </div>
 
@@ -200,8 +221,22 @@ $sessionUser = $this->request->getSession()->read('Auth');;
     var techPublPermissionPopupURL = "<?php echo $this->Url->build(['controller'=>'TechnicalPublicationSwas', 'action'=>'techPublPermissionPopup']); ?>";
     var saveTechPublPermissionURL = "<?php echo $this->Url->build(['controller'=>'TechnicalPublicationSwas', 'action'=>'saveTechPublPermission']); ?>";
     var downloadFolderURL = "<?php echo BASE_URL.$this->Url->build(['controller'=>'TechnicalPublicationSwas', 'action'=>'downloadFolder']); ?>";
+    var editTechPublicationURL = "<?php echo $this->Url->build(['controller'=>'TechnicalPublicationSwas', 'action'=>'editFolderFile']); ?>";
 </script>
 <?php 
 echo $this->Html->css('technical_publications');
 echo $this->Html->script('technical_publications'); 
 ?>
+
+<style>
+/* Make the table wrapper let dropdowns escape */
+.table-responsive,
+.table-wrapper,
+.dataTables_wrapper {
+    overflow: visible !important;
+}
+.table-responsive {
+    overflow: visible !important;
+}
+
+</style>

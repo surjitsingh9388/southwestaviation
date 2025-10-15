@@ -9,6 +9,9 @@ use Cake\Http\Response;
 use Cake\Datasource\FactoryLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\I18n\FrozenTime;
+use Cake\Http\Exception\BadRequestException;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Cake\Utility\Text;
 
 /**
  * AirframeComponentParts Controller
@@ -31,6 +34,8 @@ class AirframeComponentPartsController extends AppController
     protected \App\Model\Table\PartInstalledTimesTable $partInstTimeObj;
     protected \App\Model\Table\AirframeComponentLastCwTable $airCompLastCwObj;
     protected \App\Model\Table\ParentChildRelationsTable $parentChildRelObj;
+    protected \App\Model\Table\ImportAirframeComponentPartHistoriesTable $ImportAirframeComponentPartHistories;
+    protected \App\Model\Table\AirframeComponentsTable $AirframeComponents;
 
     public array $paginate = array(
         'limit' => PAGINATION_LIMIT
@@ -46,7 +51,11 @@ class AirframeComponentPartsController extends AppController
         $this->loadComponent('AirframeComponentPart');
         $this->loadComponent('Report'); 
         $this->loadComponent('AircraftHistory');  
-        $this->loadComponent('Position');    
+        $this->loadComponent('Position'); 
+        $this->loadComponent('AirframeMoc');
+        $this->loadComponent('AirframeRequirementType');
+        $this->loadComponent('AirframeRequirementSource');
+        $this->loadComponent('AirframeIssuingAuthority');   
 
         $this->planeObj = $this->fetchTable('Planes');
         $this->groupObj = $this->fetchTable('Groups');
@@ -54,6 +63,8 @@ class AirframeComponentPartsController extends AppController
         $this->partInstTimeObj = $this->fetchTable('PartInstalledTimes');
         $this->airCompLastCwObj = $this->fetchTable('AirframeComponentLastCw');
         $this->parentChildRelObj = $this->fetchTable('ParentChildRelations');
+        $this->ImportAirframeComponentPartHistories = $this->fetchTable('ImportAirframeComponentPartHistories');
+        $this->AirframeComponents = $this->fetchTable('AirframeComponents');
     }
     
     /**
@@ -278,6 +289,27 @@ class AirframeComponentPartsController extends AppController
                 $partdata['plane_id'] = $plane_id;
                 $partdata['airframe_component_id'] = $postData['airframe_component_id'][$key];
 
+                if(!empty($partdata['item_type_id'])){
+                    $itemtypearr = $this->AirframeComponentPart->getItemTypesById($partdata['item_type_id']);
+                    $partdata['item_type'] = $itemtypearr['sort_title'];
+                }else{
+                    $partdata['item_type'] = '';
+                }
+
+                if(!empty($partdata['requirement_type_id'])){
+                    $requirementtypearr = $this->AirframeComponentPart->getRequirementTypesById($partdata['requirement_type_id']);
+                    $partdata['requirement_type'] = $requirementtypearr['title'];
+                }else{
+                    $partdata['requirement_type'] = '';
+                }
+
+                if(!empty($partdata['issuing_authority_id'])){
+                    $authorityarr = $this->AirframeComponentPart->getIssuingAuthorityById($partdata['issuing_authority_id']);
+                    $partdata['authority'] = $authorityarr['title'];
+                }else{
+                    $partdata['authority'] = '';
+                }
+
                 $airCompParts = $this->AirframeComponentParts->patchEntity($airCompParts, $partdata);
                 if($this->AirframeComponentParts->save($airCompParts)){
                     //save attachment
@@ -486,6 +518,27 @@ class AirframeComponentPartsController extends AppController
             /*if(empty($postData['parent_id'])) {
                 $postData['parent_id'] = 0;
             }*/
+
+            if(!empty($postData['item_type_id'])){
+                $itemtypearr = $this->AirframeComponentPart->getItemTypesById($postData['item_type_id']);
+                $postData['item_type'] = $itemtypearr['sort_title'];
+            }else{
+                $postData['item_type'] = '';
+            }
+
+            if(!empty($postData['requirement_type_id'])){
+                $requirementtypearr = $this->AirframeComponentPart->getRequirementTypesById($postData['requirement_type_id']);
+                $postData['requirement_type'] = $requirementtypearr['title'];
+            }else{
+                $postData['requirement_type'] = '';
+            }
+
+            if(!empty($postData['issuing_authority_id'])){
+                $authorityarr = $this->AirframeComponentPart->getIssuingAuthorityById($postData['issuing_authority_id']);
+                $postData['authority'] = $authorityarr['title'];
+            }else{
+                $postData['authority'] = '';
+            }
 
             $airCompParts = $this->AirframeComponentParts->patchEntity($airCompParts, $postData);
             if ($this->AirframeComponentParts->save($airCompParts)) {
@@ -1489,6 +1542,232 @@ class AirframeComponentPartsController extends AppController
 
         $this->set(compact('planes', 'aircraftId', 'componentId', 'components', 'counter'));
         $this->render('/element/aircraft_component_add_row');
+    }
+
+    public function importAircraftCompPartExcel()
+    {
+        $this->request->allowMethod(['post']);
+
+        $uploadedFile = $this->request->getData('aircraft_component_part_edit_file');
+        if (!$uploadedFile || $uploadedFile->getError()) {
+            throw new BadRequestException('No file uploaded or upload failed.');
+        }
+
+        // Get the temporary file path directly (no moving needed)
+        $tmpFilePath = $uploadedFile->getStream()->getMetadata('uri');
+
+        // Load the Excel file
+        $spreadsheet = IOFactory::load($tmpFilePath);
+        $sheet = $spreadsheet->getActiveSheet();
+        $excelrows = $sheet->toArray();
+
+        $authUserData = $this->Authentication->getResult()->getData();
+
+        // Begin database transaction
+        $batchId = Text::uuid();
+        $connection = ConnectionManager::get('default');
+        $connection->begin();
+
+        try {
+            foreach ($excelrows as $index => $row) {
+                if ($index === 0) continue;
+                //pr($row);exit;
+                
+                $row = array_map(function ($value) {
+                                    return is_string($value) ? trim($value) : $value;
+                                }, $row);
+
+                $airCompParts = $this->AirframeComponentParts->find()
+                    ->where(['id' => $row['0']])
+                    ->first();
+                
+                if (!empty($airCompParts)) {
+                    // Save old data for undo
+                    $historyData = [
+                        'table_name' => 'airframe_component_parts',
+                        'row_id'     => $airCompParts->id,
+                        'old_data'   => json_encode($airCompParts->toArray(), JSON_UNESCAPED_UNICODE),
+                        'batch_id'   => $batchId
+                    ];
+
+                    $history = $this->ImportAirframeComponentPartHistories->newEmptyEntity();
+                    $history = $this->ImportAirframeComponentPartHistories->patchEntity($history, $historyData);
+
+                    if (!$this->ImportAirframeComponentPartHistories->save($history)) {
+                        throw new \Exception("Failed to save history: " . json_encode($history->getErrors()));
+                    }
+                    
+                    $postData = [];
+
+                    $postData['part_id'] = $row['0'];
+                    $postData['plane_id'] = $this->Plane->getPlaneId($row['1']);
+                    $postData['airframe_component_id'] = $this->AirframeComponent->getAirframeComponentId($postData['plane_id'], $row['2']);
+                    $postData['ad_sb_number'] = $row['3'];
+                    $postData['requirement_source_id'] = $this->AirframeRequirementSource->getRequirementSourceId($row['4']);
+                    $itemtypearr = $this->AirframeComponentPart->getItemTypeDetByTitle($row['5']);
+                    $postData['item_type_id'] = $itemtypearr['id'] ?? '';
+                    $postData['item_type'] = $itemtypearr['sort_title'] ?? '';
+                    $postData['requirement_type_id'] = $this->AirframeRequirementType->getRequirementTypeId($row['6']);
+                    $postData['requirement_type'] = $row['6'];
+                    $postData['amendment'] = $row['7'];
+                    $postData['issuing_authority_id'] = $this->AirframeIssuingAuthority->getIssuingAuthorityId($row['8']);
+                    $postData['authority'] = $row['8'];
+                    $postData['ata_code'] = $this->AtaCode->getATAId($row['9']);
+                    $postData['disposition'] = $this->Disposition->getDispId($row['10']);
+                    $postData['ad_sb_status'] = $this->AdsbStatus->adsbId($row['11']);
+                    $postData['avg_man_hrs'] = $row['12'];
+                    $postData['reference'] = $row['13'];
+                    $postData['position_id'] = $this->Position->getPositionId($row['14']);
+                    $postData['moc_id'] = $this->AirframeMoc->getMocsId($row['15']);
+                    $postData['mfg_code'] = $row['16'];
+                    $postData['description'] = $row['17'];
+                    $postData['moc'] = $row['18'];
+                    $postData['notes'] = $row['19'];
+                    $postData['work_description'] = $row['20'];
+                    $postData['tags'] = $row['21'];
+                    $postData['last_cw_date'] = $row['22'];
+                    $postData['last_cw_hrs'] = $row['23'];
+                    $postData['last_cw_afl'] = $row['24'];
+                    $postData['override'] = $row['25'];
+                    $postData['eom'] = $row['26'];
+                    $postData['next_due_date'] = $row['27'];
+                    $postData['next_due_hrs'] = $row['28'];
+                    $postData['next_due_afl'] = $row['29'];
+                    /*$postData[''] = $row['30'];
+                    $postData[''] = $row['31'];
+                    $postData[''] = $row['32'];
+                    $postData[''] = $row['33'];*/
+                    $postData['tolerance_mos'] = $row['34'];
+                    $postData['tolerance_days'] = $row['35'];
+                    $postData['tolerance_hrs'] = $row['36'];
+                    $postData['tolerance_afl'] = $row['37'];
+                    $postData['alert_days'] = $row['38'];
+                    $postData['alert_hrs'] = $row['39'];
+                    $postData['alert_afl'] = $row['40'];
+                    $postData['is_recThres'] = $row['41'];
+                    $postData['recurring_mos'] = $row['42'];
+                    $postData['recurring_days'] = $row['43'];
+                    $postData['recurring_hrs'] = $row['44'];
+                    $postData['recurring_afl'] = $row['45'];
+                    $postData['is_recThres'] = empty($row['41']) ? $row['46'] : $row['41'];
+                    $postData['threshold_mos'] = $row['47'];
+                    $postData['threshold_days'] = $row['48'];
+                    $postData['threshold_hrs'] = $row['49'];
+                    $postData['threshold_afl'] = $row['50'];
+                    $postData['required_frequency_mos'] = $row['51'];
+                    $postData['required_frequency_days'] = $row['52'];
+                    $postData['required_frequency_hrs'] = $row['53'];
+                    $postData['required_frequency_afl'] = $row['54'];
+                    $postData['adjustment_mos'] = $row['55'];
+                    $postData['adjustment_days'] = $row['56'];
+                    $postData['adjustment_hrs'] = $row['57'];
+                    $postData['adjustment_afl'] = $row['58'];
+                    $postData['part_number'] = $row['59'];
+                    $postData['serial_number'] = $row['60'];
+                    $postData['new_months'] = $row['61'];
+                    $postData['new_hours'] = $row['62'];
+                    $postData['new_landings'] = $row['63'];
+                    $postData['overhaul_months'] = $row['64'];
+                    $postData['overhaul_hours'] = $row['65'];
+                    $postData['overhaul_landings'] = $row['66'];
+                    $postData['repair_months'] = $row['67'];
+                    $postData['repair_hours'] = $row['68'];
+                    $postData['repair_landings'] = $row['69'];
+                    $postData['work_card'] = $row['70'];
+                    $postData['position'] = $row['71'];
+                    $postData['version'] = $row['72'];
+                    //$postData['last_revised_by'] = $row['73'];
+                    $postData['admin_notes'] = $row['74'];
+                    //pr($postData);exit;
+                    $airCompParts = $this->AirframeComponentParts->patchEntity($airCompParts, $postData);
+                    if ($this->AirframeComponentParts->save($airCompParts)) {
+                        
+                        //Post data process and calculate nextdue
+                        $postData = $this->AirframeComponentPart->postDataProcess($postData);
+                        
+                        //Save related data in airframe_component_last_cw table
+                        $postData['airframe_component_part_id'] = $airCompParts->id;
+                        $postData['last_revised_by'] = $authUserData['id'];
+                        $partsDetails = $this->airCompLastCwObj->newEmptyEntity();
+                        
+                        $partsDetails = $this->airCompLastCwObj->patchEntity($partsDetails, $postData);
+                        $this->airCompLastCwObj->save($partsDetails);
+
+                        //Save history for undo
+                        $history = $this->ImportAirframeComponentPartHistories->newEntity([
+                            'table_name' => 'airframe_component_last_cw',
+                            'row_id'     => $partsDetails->id,
+                            'old_data'   => json_encode([]), // empty means this was a NEW row
+                            'batch_id'   => $batchId
+                        ]);
+                        $this->ImportAirframeComponentPartHistories->saveOrFail($history);
+                    }else{
+                        throw new \Exception("Failed to save row {$index}: " . json_encode($airCompParts->getErrors()));
+                    }
+                }
+            }
+
+            // If loop finishes without errors → commit everything
+            $connection->commit();
+            $response = ['status' => 'success', 'message' => 'Excel imported successfully', 'batch_id' => $batchId];
+
+        } catch (\Exception $e) {
+            // Any failure here undoes ALL inserts
+            $connection->rollback();
+            $response = ['status' => 'error', 'message' => 'Import failed: ' . $e->getMessage()];
+        }
+
+        return $this->response
+                    ->withType('application/json')
+                    ->withStringBody(json_encode($response));
+    }
+
+    public function undoCompPartImportExcel($batchId)
+    {
+        $this->request->allowMethod(['post']);
+
+        $history = $this->ImportAirframeComponentPartHistories->find()
+            ->where(['batch_id' => $batchId])
+            ->all();
+
+        $connection = ConnectionManager::get('default');
+        $connection->begin();
+
+        try {
+            foreach ($history as $record) {
+                $oldData = json_decode($record->old_data, true);
+
+                if ($record->table_name === 'airframe_component_parts') {
+                    $entity = $this->AirframeComponentParts->get($record->row_id);
+                    $entity = $this->AirframeComponentParts->patchEntity($entity, $oldData);
+                    $this->AirframeComponentParts->save($entity);
+                }
+
+                if ($record->table_name === 'airframe_component_last_cw') {
+                    if (empty($oldData)) {
+                        // Means this row was newly created → delete it on undo
+                        $this->airCompLastCwObj->deleteOrFail(
+                            $this->airCompLastCwObj->get($record->row_id)
+                        );
+                    } else {
+                        // If it was updated instead of new (future-proofing)
+                        $entity = $this->airCompLastCwObj->get($record->row_id);
+                        $entity = $this->airCompLastCwObj->patchEntity($entity, $oldData);
+                        $this->airCompLastCwObj->saveOrFail($entity);
+                    }
+                }
+            }
+
+            $connection->commit();
+            $response = ['status' => 'success', 'message' => 'All imported Excel data has been undone successfully.'];
+        } catch (\Exception $e) {
+            $connection->rollback();
+            $response = ['status' => 'error', 'message' => 'Undo failed: ' . $e->getMessage()];
+        }
+
+        return $this->response
+            ->withType('application/json')
+            ->withStringBody(json_encode($response));
     }
 
 }

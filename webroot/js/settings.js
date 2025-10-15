@@ -82,7 +82,7 @@ $(document).on('click', '.saveSettings', function(e){
                     alert(obj.message);
                 }else{
                     alert("Setting Saved Successfully.");
-                    window.location.reload();
+                    window.location.replace(window.location.href);
                 }
             }
         });
@@ -122,7 +122,7 @@ $(document).on('click', '.deletesettings', function(e){
                         alert(obj.message);
                     }else{
                         alert("Setting Deleted Successfully.");
-                        window.location.reload();
+                        window.location.replace(window.location.href);
                     }
                 }
             });
@@ -212,7 +212,7 @@ $(document).on('click', '.saveStatements', function(e){
                     alert(obj.message);
                 }else{
                     alert("Statement Saved Successfully.");
-                    window.location.reload();
+                    window.location.replace(window.location.href);
                 }
             }
         });
@@ -235,7 +235,7 @@ $(document).on('click', '.statement_delete_btn', function(e){
                         alert(obj.message);
                     }else{
                         alert("Statement Deleted Successfully.");
-                        window.location.reload();
+                        window.location.replace(window.location.href);
                     }
                 }
             });

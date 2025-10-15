@@ -29,6 +29,8 @@ class RolesController extends AppController
         $this->UserMenuItems = $this->fetchTable('UserMenuItems');
         $this->MenuItems = $this->fetchTable('MenuItems');
         $this->Roles = $this->fetchTable('Roles');
+
+        $this->loadComponent('UserManagementHistory');
     }
     
     public function beforeFilter(\Cake\Event\EventInterface $event) {
@@ -209,9 +211,18 @@ class RolesController extends AppController
         }
         $role = $this->Roles->newEmptyEntity();
         if ($this->request->is('post')) {
+            $roleName = trim((string)$this->request->getData('role_name'));
+
+            if ($roleName === '') {
+                $this->set(compact('role', 'actionItems'));
+                return $this->Flash->error('The role can\'t be empty.');
+            }
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             $role->updated_by = $authUserData['id'];
             if ($this->Roles->save($role)) {
+                //save role history data
+                $this->UserManagementHistory->saveRoleHistory($role);
+
                 $this->Flash->success('The role has been saved.');
 
                 return $this->redirect(['action' => 'index']);
@@ -317,6 +328,12 @@ class RolesController extends AppController
         }
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $roleName = trim((string)$this->request->getData('role_name'));
+
+            if ($roleName === '') {
+                $this->set(compact('role', 'actionItems'));
+                return $this->Flash->error('The role can\'t be empty.');
+            }
             $insertData = array();
             $postData = $this->request->getData();
             //pr($postData);exit;

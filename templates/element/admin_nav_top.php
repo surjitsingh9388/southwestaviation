@@ -66,7 +66,7 @@ $sessionUser = $this->request->getSession()->read('Auth');
 
             <div class="row">
                 <!-- Filter Dropdown -->
-                <div class="col-md-4 col-xs-4">
+                <div class="col-md-5 col-xs-4">
                     <?php
                     $searchDropDown = unserialize(SEARCHDROPDOWN);
                     echo $this->Form->control('header_filter', [
@@ -82,12 +82,12 @@ $sessionUser = $this->request->getSession()->read('Auth');
                     ?>
                 </div>
                 <!-- Search Input + Button  -->
-                <div class="col-md-8 col-xs-8">
+                <div class="col-md-7 col-xs-8 p-0">
                     <div class="input-group">
                         <input type="text" id="search_txt" class="form-control" placeholder="Search..." aria-label="Search">
                         <span class="input-group-btn">
                             <button class="btn btn-info" type="button" id="header_search_btn">
-                                <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+                                <i class="glyphicon glyphicon-search" aria-hidden="true"></i>
                             </button>
                         </span>
                     </div>
