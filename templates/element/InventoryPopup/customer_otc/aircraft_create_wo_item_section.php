@@ -13,7 +13,7 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
     <input type="hidden" id="click_item_index" value="<?php echo $wo_item_position_index; ?>" />
     <input type="hidden" name="last_item_position" id="last_item_position" value="<?php echo $totalitemcount; ?>" />
     
-    <div class="col-sm-2">
+    <div class="col-md-2 col-sm-4">
         <div class="form-group work-order-item-box">
             <p style="margin-bottom:5px !important;">Item No</label>
             <div class="form-input-frame">
@@ -24,7 +24,7 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
             <button type="button" class="btn btn-default aircraft-wo-move-item">Move Items</button>
         </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <div class="col-xs-12 pd0">
             <a href="javascript:void(0);" class="woheadingblue wo_item_discrepancy">Discrepancy</a>
 
@@ -38,7 +38,7 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <div class="col-xs-12 pd0">
             <a href="javascript:void(0);" class="woheadingblue wo_item_corrective_action">Corrective Action</a>
 
@@ -63,7 +63,7 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
             ?>
         </div>
     </div>
-     <div class="col-md-5 col-sm-4 form-group"> 
+    <div class="col-md-4 col-sm-4 form-group"> 
         <label class="control-label" for="plane_id">Item Status</label>
         <div>
             <?php
@@ -79,13 +79,11 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
             echo $this->Form->control('wo_item_status', array('options' => $itemstatus, 'empty' => '', 'class' => 'form-control col-md-6 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_status', 'disabled'=>$is_item_status_disabled, 'value'=>$aircraftwoitems->wo_item_status)); 
             ?>
         </div>
+       
     </div>
-     <div class="col-md-5 col-sm-4 form-group">
-        <label class="control-label">&nbsp;</label>
-        <div>
-               <button type="button" class="btn btn-default aircraft-wo-item-signoff" data-val='aircraft_wo_sign_offs'>Sign-offs</button>
-        </div>
-     
+    <div class="col-md-6 col-sm-4">
+         <label class="control-label">&nbsp;</label>
+        <button type="button" class="btn btn-default aircraft-wo-item-signoff" data-val='aircraft_wo_sign_offs'>Sign-offs</button>
     </div>
 </div>
 <?php echo $this->Form->end(); ?>
@@ -107,7 +105,7 @@ $wo_item_position = isset($aircraftwoitems->wo_item_position) && !empty($aircraf
                 <li><a data-toggle="tab" href="#aircraftWOSummarySection">Summary</a></li>
                 <li><a data-toggle="tab" href="#aircraftWOHistorySection">History</a></li>
             </ul>
-            <div class="tab-content fgfg">
+            <div class="tab-content">
                 <div id="aircraftWOOverviewSection" class="tab-pane fade in active">
                     <div class="page-content mt-35">
                         <div class="formBGCls">

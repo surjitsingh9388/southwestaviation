@@ -1,9 +1,11 @@
 <?php
-echo $this->Form->create($userptorequests, array('class' => 'form-horizontal form-label-left', 'id' => 'frmPTORequests', 'autocomplete'=>'off'));
+echo $this->Form->create($userptorequests, array('class' => '', 'id' => 'frmPTORequests', 'autocomplete'=>'off'));
 ?>
-<div class="col-md-12 col-xs-12">
+<div class="row" style="margin:0px;display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;">
     <input type="hidden" name="pto_request_id" id="user_pto_request_id" value="<?php echo @$userptorequests->id; ?>" />
-    <div class="col-md-6" style="padding:1px;">
+    <div class="col-sm-5 col-xs-12">
         <div class="form-group">
             <label class="control-label" for="reference">Employee Name</label>
             <div class="form-input-frame">
@@ -11,13 +13,16 @@ echo $this->Form->create($userptorequests, array('class' => 'form-horizontal for
             </div>
         </div>
     </div>
-    <div class="col-md-6" style="padding:1px;">
+    <div class="col-sm-5 col-xs-12">
         <div class="form-group">
             <label class="control-label" for="reference">Department/Title</label>
             <div class="form-input-frame">
                 <?php echo $this->Form->control('pto_department', array('class' => 'form-control', 'label'=> false, 'readonly'=>'readonly', 'value'=>$sessionUser['role'])); ?>
             </div>
         </div>
+    </div>
+    <div class="col-sm-2 form-group">
+        <button type="button" class="btn btn-default ptoaddmorebtn" style="margin:0px;">Add More</button>
     </div>
 </div>
 <div class="col-md-12 col-xs-12">
@@ -54,9 +59,7 @@ echo $this->Form->create($userptorequests, array('class' => 'form-horizontal for
     </div>
 </div>
 
-<div class="col-md-12 col-xs-12">
-    <button type="button" class="btn btn-default ptoaddmorebtn">Add More</button>
-</div>
+
 <?php 
 echo $this->Form->end(); 
 ?>

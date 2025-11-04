@@ -103,7 +103,7 @@ echo $this->Html->script('inventory_common');
             </div>
 
             <div class="tableScroll">
-                <table id="datatableListingPage" class="table dataTable table2excel <?php if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $sessionUser['id'] == 1) { ?>invitemtable <?php } ?>" width="100%">
+                <table id="datatableListingPage" class="table dataTable table-striped table-bordered table-responsive table2excel <?php if((!empty($actionItems) && $actionItems['action']['action_view']==1) || $sessionUser['id'] == 1) { ?>invitemtable <?php } ?>" width="100%">
                     <thead>
                         <tr>
                             <th class="check noExl"><input type="checkbox" name="air_check" id="ckbCheckAll"></th>

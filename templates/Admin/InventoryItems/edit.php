@@ -9,7 +9,7 @@ echo $this->Html->css('inventory_item');
 <div class="content sliding">
     <div class="outerWrapper">
         <?php
-        echo $this->Form->create($invenotryitems, array('class' => 'form-horizontal form-label-left', 'id' => 'frmItemCatalog'));
+        echo $this->Form->create($invenotryitems, array('class' => '', 'id' => 'frmItemCatalog'));
         ?>  
         <div class="btnWrapper flex-column-mob">
             <h2 class="heading"><?php echo $this->Html->link('Item Catalog', ['action' => 'index']).' / '.$this->Html->link($invenotryitems->name. '(PN: '.$invenotryitems->part_number.')', ['action' => 'detail', $invenotryitems->id]); ?> / Edit</h2>

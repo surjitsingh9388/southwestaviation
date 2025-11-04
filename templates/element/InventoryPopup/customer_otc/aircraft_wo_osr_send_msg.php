@@ -1,5 +1,5 @@
 <div id="woOSRSendMsgModal" class="modal fade page-content" role="dialog" style="background: transparent;">
-    <div class="modal-dialog" style="width: 20%;">
+    <div class="modal-dialog">
         <?php
         echo $this->Form->create(null, array('class' => 'form-horizontal form-label-left', 'id' => 'frmSendWOViewMessage'));
 

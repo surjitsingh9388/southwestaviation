@@ -326,12 +326,12 @@ if (!empty($params['action'])) {
                     ?>
                 </div>
 
-                <div class="maintenanceTbl">
+                <div class="table-responsive maintenanceTbl">
                     <table id="customReport" class="table mb-0">
                         <thead>
                             <tr>
                                 <th width="4%" class="check text-nowrap"><input type="checkbox" name="air_check" id="ckbCheckAll"></th>
-                                <th width="2%" class="text-nowrap">Attachment</th>
+                                <th width="2%" class=" text-nowrap"></th>
                                 <th width="2%" class="text-nowrap">Aircraft</th>
                                 <th width="4%" class="text-nowrap">ATA</th>
                                 <th width="14%" class="order text-nowrap" data-datasort="1" data-titlen="mfg_code">Reference & Component & Item Type</th>
@@ -397,6 +397,28 @@ if (!empty($params['action'])) {
 <!-- Import Excel popup -->
 <?php echo $this->element('bulk_airfract_component_part_update'); ?>
 <!-- Import Excel popup -->
+
+<style>
+    /* Make sure scrollbars show smoothly */
+.dataTables_scrollBody {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+}
+
+/* Make header and body align perfectly */
+.dataTables_scrollHeadInner, 
+.dataTables_scrollHeadInner table, 
+.dataTables_scrollBody table {
+    width: 100% !important;
+}
+
+/* Prevent cell wrapping issues */
+#customReport th, 
+#customReport td {
+    white-space: nowrap;
+}
+
+</style>
 
 <script>
     
@@ -634,19 +656,15 @@ if (!empty($params['action'])) {
         //Checkbox script to count past due, tolerance and coming due
 
         //Change sorting dynamically
-//         $('.dataTables_scrollBody').on('scroll', function() {
-//   $('#customReport').DataTable().columns.adjust();
-// });
-
         var oTable = $('#customReport').DataTable({
-            "scrollY": $(window).height() / 1.70,
-            "scrollX": true,
-            "scrollCollapse": true,
-            "searching": false,
-            "paging": false,
-            "info": false,
-            "responsive": false,
-            "autoWidth": false, 
+            scrollY: ($(window).height() / 1.7) + 'px', // set vertical height
+            scrollX: true,                              // enable horizontal scroll
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            info: false,
+            responsive: false,
+            autoWidth: false,
             "columnDefs": [{
                     "orderable": false,
                     "targets": 0
@@ -671,7 +689,16 @@ if (!empty($params['action'])) {
             "order": []
         });
 
-        new $.fn.dataTable.FixedHeader(oTable);
+        //new $.fn.dataTable.FixedHeader(oTable);
+
+        setTimeout(function() {
+        oTable.columns.adjust();
+    }, 300);
+
+    // ✅ Adjust again when window resizes
+    $(window).on('resize', function() {
+        oTable.columns.adjust();
+    });
 
         $("select#sortById").change(function() {
             var val = $(this).prop('selectedIndex') + 1;

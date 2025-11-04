@@ -748,6 +748,8 @@ function appendCustomerOTCPopupData(section, response){
         sectionId = 'aircraftWOItemToolEditModel';
     }else if(section == 'inventory_customer_add_address'){
         sectionId = 'customerAddressAddModel';
+    }else if(section == 'inventory_customer_add_phone'){
+        sectionId = 'customerPhoneAddModel';
     }else if(section == 'update_logbook_value_open_wo'){
         sectionId = 'updateLogBookValOpenWOModel';
     }else if(section == 'confirm_create_new_work_order'){
@@ -4695,7 +4697,8 @@ $(document).on('change', '#wo_item_part_number', function(e){
 
 function resetWOItemPartForm(){
     $("#frmAircraftWOItemParts")[0].reset();
-    $('#wo_item_part_number').val('').trigger('change');
+    //$('#wo_item_part_number').val('').trigger('change');
+    $('#wo_item_part_number').val('').trigger('change.select2');
     var condoption = '';
     
     $('#wo_item_part_conditions').html(condoption);
@@ -4743,7 +4746,7 @@ $(document).on('click', '.wo-itempart-addpart-btn, .wo-itempart-addpartclose-btn
                 if(obj.status == 'failure'){
                     alert(obj.message);
                 }else{
-                    if(addbtnevent != 'view_part' && addbtnevent != 'part_notes'){
+                    if(addbtnevent != 'view_part' && addbtnevent != 'part_notes' && addbtnevent != 'part-add-close'){
                         resetWOItemPartForm();
                     }
                     
@@ -5435,6 +5438,18 @@ $(document).on('click', '.add_customer_shipto_address', function(e){
     }
 });
 
+$(document).on('click', '.add_customer_phone_number', function(e){
+    var customer_id = window.location.pathname.split('/').pop();
+    if(customer_id != '' && customer_id != undefined){
+        var section = 'inventory_customer_add_phone';
+        if(section != '' && section != undefined){
+            var dataval = {section:section, customer_id:customer_id};
+
+            fetchOTCCustomPopupDataFromServer(section, dataval);
+        }
+    }
+});
+
 $(document).on('click', '.customerAddlAddressSaveBtn', function(e){
     var name = $.trim($('#customer_addr_name').val());
     var address = $.trim($('#customer_addr_address').val());
@@ -5482,6 +5497,38 @@ $(document).on('click', '.customerAddlAddressSaveBtn', function(e){
                     $('#customer_shipping_address_id').html(obj.customeraddrdropdown);
                     $('#customerAddressAddModel').modal('hide');
                     fillCustomerInfoShipAddress(customeraddressarr);
+
+                    $('.selectpicker').selectpicker('refresh');
+                }
+                alert(obj.message);
+            }
+        });
+    }
+});
+
+$(document).on('click', '.customerPhoneSaveBtn', function(e){
+    var phone_number = $.trim($('#customer_phone_number').val());
+
+    var flag = 1;
+    if(phone_number == '' || phone_number == undefined){
+        flag = 0;
+        alert("Please fill phone number");
+    }
+    
+    if(flag == '1'){
+        $('.loader').show();
+
+        $.ajax({
+            url: saveCustomerPhoneNumberURL, 
+            type: 'post',
+            data: $('#frmCustomerAddPhone').serialize(),
+            success: function (response) {
+                $('.loader').hide();
+
+                var obj = JSON.parse(response);
+                if(obj.status == 'success'){
+                    $('#cellular_phone_id').html(obj.customerphonedropdown);
+                    $('#customerPhoneAddModel').modal('hide');
 
                     $('.selectpicker').selectpicker('refresh');
                 }

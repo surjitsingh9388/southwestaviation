@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #e5e5e5;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4>Send Message</h4>
+                <h4 class="modal-title">Send Message</h4>
             </div>
             <div class="modal-body">
                 <div class="page-content">
@@ -19,8 +19,8 @@
                     <div class="row">
                         <!-- To Field -->
                         <div class="form-group row mb-15 ">
-                            <label class="col-md-2 col-sm-12 col-xs-12 col-form-label" for="message_to">To</label>
-                            <div class="col-md-10 col-sm-12 col-xs-12">
+                            <label class="col-sm-3 col-xs-12 col-form-label" for="message_to">To</label>
+                            <div class="col-sm-9 col-xs-12">
                                 <?php
                                 echo $this->Form->control('message_to', [
                                     'options' => $userlist,
@@ -36,8 +36,8 @@
 
                         <!-- Subject Field -->
                         <div class="form-group row mb-15 ">
-                            <label class="col-md-2  col-sm-12 col-xs-12 col-form-label" for="message_subject">Subject</label>
-                            <div class="col-md-10 col-sm-12 col-xs-12">
+                            <label class="col-sm-3 col-xs-12 col-form-label" for="message_subject">Subject</label>
+                            <div class="col-sm-9 col-xs-12">
                                 <?php
                                 echo $this->Form->control('message_subject', [
                                     'class' => 'form-control',
@@ -51,8 +51,8 @@
 
                         <!-- W/O or R/O Field -->
                         <div class="form-group row mb-15  ">
-                            <label class="col-md-2 col-sm-12 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O (Optional)</label>
-                            <div class="col-md-10 col-sm-12 col-xs-12 mb-15">
+                            <label class="col-sm-3 col-xs-12 col-form-label " for="message_wo_ro">W/O or R/O (Optional)</label>
+                            <div class="col-sm-9 col-xs-12 mb-15">
                                 <?php
                                 echo $this->Form->control('message_wo_ro', [
                                     'options' => $worodata,
@@ -73,7 +73,7 @@
 
                         <!-- Message Body -->
                         <div class="form-group row  mb-15  ">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-sm-12 col-xs-12">
                                 <?php
                                 echo $this->Form->control('message', [
                                     'type' => 'textarea',

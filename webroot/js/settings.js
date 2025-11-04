@@ -161,7 +161,7 @@ function uploadData(form_data){
 }
 
 $(document).on('click', '.deleteattachment', function (e) {
-    if('Are you sure want to delete this attachment'){
+    if(confirm('Are you sure want to delete this attachment')){
         $(this).parent().parent().remove();
     }
 });

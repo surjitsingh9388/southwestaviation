@@ -20,32 +20,26 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                 </div> -->
 
                 <div class="panel-body">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role">User <span class="required">*</span>
+                    <div class="row permissionWrap">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="inputWrapper">
+                                <label class="control-label" for="role">User <span class="required">*</span>
                                 </label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <?php echo $this->Form->control('user_id', array('options' => $allAdmins, 'empty' => 'Select User', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'label' => false, 'data-show-subtext' => true, 'data-live-search' => true)); ?>
-                                </div>
+                                <?php echo $this->Form->control('user_id', array('options' => $allAdmins, 'empty' => 'Select User', 'class' => 'form-control col-md-9 col-xs-12 selectpicker', 'label' => false, 'data-show-subtext' => true, 'data-live-search' => true)); ?>
                             </div>
                         </div>
 
-                        <div class="col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
-                            <div class="form-group">
-                                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-                                    <?php
-                                    echo $this->Form->button('Submit', ['type' => 'submit', 'id' => 'frmClicked', 'class' => 'btn btn-success clickedd']);
-                                    ?>
-                                    <button class="btn btn-success buttonload" style="display: none;">
-                                        <i class="fa fa-spinner fa-spin"></i> <?php echo ucfirst(strtolower(SUBMITING)); ?>
-                                    </button>
-                                    <?php
-                                    echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset']);
-                                    echo $this->Form->control('updated_by', array('type' => 'hidden', 'value' => $sessionUser['id']));
-                                    ?>
-                                </div>
-                            </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 btnGroup">
+                            <?php
+                            echo $this->Form->button('Submit', ['type' => 'submit', 'id' => 'frmClicked', 'class' => 'btn btn-success clickedd']);
+                            ?>
+                            <button class="btn btn-success buttonload" style="display: none;">
+                                <i class="fa fa-spinner fa-spin"></i> <?php echo ucfirst(strtolower(SUBMITING)); ?>
+                            </button>
+                            <?php
+                            echo $this->Form->button('Reset', ['type' => 'reset', 'class' => 'btn btn-primary', 'id' => 'reset']);
+                            echo $this->Form->control('updated_by', array('type' => 'hidden', 'value' => $sessionUser['id']));
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -60,7 +54,7 @@ $sessionUser = $this->request->getSession()->read('Auth');;
                             <tr style="background-color: #f0f0f0;">
                                 <th style="vertical-align: bottom; text-align: center;">Allow</th>
                                 <th style="vertical-align: bottom; text-align: center;" rowspan="3" colspan="3">Menu Items</th>
-                                <th style="text-align: center;" colspan="7">Actions</th>
+                                <th style="text-align: center;" colspan="8">Actions</th>
                             </tr>
                             <tr style="background-color: #f0f0f0;">
                                 <td style="vertical-align: middle; text-align: center;" rowspan="2"><?php echo $this->Form->control('allCheckUncheck', ['type' => 'checkbox', 'div' => false, 'class' => 'allCheckUncheck', 'label' => false, 'title' => 'Check All']); ?></td>

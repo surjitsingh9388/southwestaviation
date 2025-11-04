@@ -15,21 +15,19 @@
         }
         ?>
         <div class="page-content">
-            <div class="col-xs-12 pd0">
-                <div class="align-center-items justify-content-between newHeader">
-                    <h6>News Feed</h6>
-                    <?php if(!empty($newsfeedmenu) || $user_id == '1'){ ?>    
-                    <button type="button" class="btn btn-default fetchDashboardPopup" data-val="news_feed_list" style="margin:0px !important">News Feed List</button>
-                    <?php } ?>
-                </div>
-               
-                <div class="bg-white news_feed_dashboard">
-                    <p class="news_feed"><marquee behavior="scroll" direction="left" scrollamount="<?php echo $dashboardnewsfeed->news_feed_speed; ?>"><?php echo !empty($dashboardnewsfeed) ? $dashboardnewsfeed->news_feed : ''; ?></marquee></p>
-                </div>
-            </div>            
+            <div class="align-center-items justify-content-between newHeader">
+                <h6>News Feed</h6>
+                <?php if(!empty($newsfeedmenu) || $user_id == '1'){ ?>    
+                <button type="button" class="btn btn-default fetchDashboardPopup" data-val="news_feed_list" style="margin:0px !important">News Feed List</button>
+                <?php } ?>
+            </div>
+            
+            <div class="bg-white news_feed_dashboard">
+                <p class="news_feed"><marquee behavior="scroll" direction="left" scrollamount="<?php echo $dashboardnewsfeed->news_feed_speed; ?>"><?php echo !empty($dashboardnewsfeed) ? $dashboardnewsfeed->news_feed : ''; ?></marquee></p>
+            </div>
         </div>
-        <div class="col-xs-12 pd0" style="background-color:#fff;">
-            <div class="col-md-6 col-xs-12 pd0" style="padding-right:5px !important;">
+        <div class="m-0 row">
+            <div class="col-lg-6 col-md-12 col-xs-12 pd0 mb-10 tableBg">
                 <div class="dashboard_heading_bar">
                     <span class="dashboard_heading">PTO Dashboard</span>
                 </div>
@@ -39,7 +37,7 @@
                 </div>
                 <div class="page-content mt-35">
                     <div class="table-responsive clock_log_table_scroll">
-                        <table class="table mb-0">
+                        <table class="table table-bordered table-hover mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap" id="toolName">Date <i class="fa fa-fw fa-sort"></i></th>
@@ -66,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-xs-12 pd0">
+            <div class="col-lg-6 col-md-12 col-xs-12 pd0 mb-10 tableBg">
                 <div class="dashboard_heading_bar"><span class="dashboard_heading">Time Clock</span></div>
                 <div class="btnWrapper p-12">
                     <button type="button" class="btn btn-default fetchUserTimeClockPopup" data-val="time_clock">Clock In/Out</button>
@@ -75,7 +73,7 @@
     
                 <div class="page-content mt-35">
                     <div class="table-responsive clock_log_table_scroll">
-                        <table class="table mb-0">
+                        <table class="table table-bordered table-hover mb-0">
                             <thead>
                                 <tr>
                                     <th id="toolName">Date <i class="fa fa-fw fa-sort"></i></th>
@@ -92,6 +90,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-xs-12 pd0">
             <div class="align-center-items justify-content-between">
                 <h6>Event </h6>

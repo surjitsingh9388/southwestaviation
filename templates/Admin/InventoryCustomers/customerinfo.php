@@ -13,7 +13,7 @@ use Cake\Routing\Router;
         <div class="page-content mt-35">
             <div class="formBGCls">
                 <div class="row ml0">
-                    <div class="col-md-8 mt10">
+                    <div class="col-sm-12 mt10 navHeaderWrap">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default"><<</button>
                             <button type="button" class="btn btn-default"><</button>
@@ -25,12 +25,10 @@ use Cake\Routing\Router;
                             <button type="button" class="btn btn-default">Preview</button>
                             <button type="button" class="btn btn-default">Print</button>
                         </div>
-                    </div>
                     
-                    <div class="col-md-4 mt10">
-                        <div class="form-group">
+                        <div class="goToBlock">
                             <label class="control-label col-md-4" for="reference">Go To</label>
-                            <div class="col-md-8">
+                            <div>
                                 <?php
                                 echo $this->Form->control('go_to', array('options' => [], 'empty' => '', 'class' => 'form-control col-md-8 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'go_to'));
                                 ?>

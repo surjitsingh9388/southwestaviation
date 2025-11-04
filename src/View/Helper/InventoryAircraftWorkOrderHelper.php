@@ -342,7 +342,21 @@ class InventoryAircraftWorkOrderHelper extends Helper
         return $tblrow;
     }
 
-    public function getWOMessageListHTML($receivedmsglist){
+    public function getWOSentMessageListHTML($sentmsglist){
+        $tblrow = '';
+        foreach($sentmsglist as $msg){            
+            $tblrow .= '<tr class="sent-message-tr" data-val="'.$msg['id'].'" is-read="'.$msg['is_mark_read'].'" msg-source="sent">';
+            $tblrow .= '<td>'.$msg['sent_to'].'</td>';
+            $tblrow .= '<td>'.$msg['message_subject'].'</td>';
+            $tblrow .= '<td>'.$msg['created_at'].'</td>';
+            
+            $tblrow .= '</tr>';
+        }
+        
+        return $tblrow;
+    }
+
+    public function getWOReceivedMessageListHTML($receivedmsglist){
         $tblrow = '';
         foreach($receivedmsglist as $msg){
             $unread_msg_class = '';
@@ -350,11 +364,11 @@ class InventoryAircraftWorkOrderHelper extends Helper
                 $unread_msg_class = 'wo_new_message';
             }
             
-            $tblrow .= '<tr class="wo-option-message-tr '.$unread_msg_class.'" data-val="'.$msg['id'].'" is-read="'.$msg['is_mark_read'].'">';
+            $tblrow .= '<tr class="received-message-tr '.$unread_msg_class.'" data-val="'.$msg['id'].'" is-read="'.$msg['is_mark_read'].'" msg-source="received">';
             $tblrow .= '<td>'.$msg['sent_from'].'</td>';
             $tblrow .= '<td>'.$msg['message_subject'].'</td>';
             $tblrow .= '<td>'.$msg['created_at'].'</td>';
-            $tblrow .= '<td>
+            $tblrow .= '<td style="width: 50px; text-align: center;">
                             <input type="checkbox" name="messageid[]" class="check_messages" value="'.$msg['id'].'" />
                         </td>';
             $tblrow .= '</tr>';

@@ -13,46 +13,64 @@
                 <input type="hidden" name="wo_item_part_id" id="wo_item_part_id" value="<?php echo @$aircraftwoitemparts->id; ?>" />
 
                 <div class="row">
-                    <div class="col-md-4 col-sm-3 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label" for="reference">Part No.</label>
-                            <div class="form-input-frame">
-                                <?= $this->Form->control('part_number', [
-                                    'options' => $invpartnumbers,
-                                    'label' => false,
-                                    'class' => 'form-control',  // This ensures it works with Select2
-                                    'id' => 'wo_item_part_number',  // Ensure the ID is set correctly
-                                    'empty' => 'Select Part No.'
-                                ]) ?>
+                    <div  class="col-sm-9" style="display:flex; flex-wrap: wrap;">
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label" for="reference">Part No.</label>
+                                <div class="form-input-frame">
+                                    <?= $this->Form->control('part_number', [
+                                        'options' => $invpartnumbers,
+                                        'label' => false,
+                                        'class' => 'form-control',  // This ensures it works with Select2
+                                        'id' => 'wo_item_part_number',  // Ensure the ID is set correctly
+                                        'empty' => 'Select Part No.'
+                                    ]) ?>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-sm-6 col-xs-12">
+                             <div class="form-group">
+                                <label class="control-label" for="reference">Superseding Part Number</label>
+                                <!-- <div class="form-input-frame">
+                                    <?php echo $this->Form->control('superseding_part_number', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'style' => 'width:65%; float:left;', 'readonly' => 'readonly')); ?>
 
-                        <div class="form-group">
-                            <label class="control-label" for="reference">Superseding Part Number</label>
-                            <div class="form-input-frame">
-                                <?php echo $this->Form->control('superseding_part_number', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'style' => 'width:65%; float:left;', 'readonly' => 'readonly')); ?>
+                                    <button type="button" class="btn btn-default" style="margin-left:8px;" disabled>Go to S/S</button>
+                                </div> -->
+                                <div class="form-input-frame row m-0">
+                                    <div class="col-xs-8 p-0">
+                                        <?php echo $this->Form->control('superseding_part_number', array(
+                                            'class' => 'form-control', 
+                                            'label' => false, 
+                                            'autocomplete' => 'off', 
+                                            'placeholder' => '', 
+                                            'readonly' => 'readonly'
+                                        )); ?>
+                                    </div>
+                                    <div class="col-xs-4 p-0">
+                                        <button type="button" class="btn btn-default" style="margin:0px;margin-left: 5px !important;" disabled>Go to S/S</button>
+                                    </div>
+                                </div>
 
-                                <button type="button" class="btn btn-default" style="margin-left:8px;" disabled>Go to S/S</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label" for="reference">Part Name</label>
+                                <div class="form-input-frame">
+                                    <?php echo $this->Form->control('wo_item_part_name', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => "wo_item_part_name", 'readonly' => 'readonly')); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label" for="reference">Part Description</label>
+                                <div class="form-input-frame">
+                                    <?php echo $this->Form->control('part_description', array('type' => 'textarea', 'class' => 'form-control', 'label' => false, 'style' => 'height: 103px;', 'id' => 'wo_item_part_description')); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label" for="reference">Part Name</label>
-                            <div class="form-input-frame">
-                                <?php echo $this->Form->control('wo_item_part_name', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => "wo_item_part_name", 'readonly' => 'readonly')); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label" for="reference">Part Description</label>
-                            <div class="form-input-frame">
-                                <?php echo $this->Form->control('part_description', array('type' => 'textarea', 'class' => 'form-control', 'label' => false, 'style' => 'height: 103px;', 'id' => 'wo_item_part_description')); ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-3 col-xs-12">
+                    <div class="col-sm-3">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <button type="button" class="btn btn-default wo-itempart-addpart-btn" data-val="part-add" style="width:100%;">Add Part</button>
                         </div>
@@ -65,92 +83,83 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <!-- <div class="col-md-3" style="padding-right:0px;"> -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 pd0">
-                        <div class="col-md-6 col-sm-6 col-xs-12  pd0">
-                            <div class="form-group ml-22">
-                                <label class="control-label" for="reference">Qty Needed</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_needed', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'value' => '1')); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Qty Used</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_used', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_qty_used', 'placeholder' => '0')); ?>
-                                </div>
+                <div class="row m-0">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Qty Needed</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('qty_needed', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'value' => '1')); ?>
                             </div>
                         </div>
                     </div>
-                    <!-- </div> -->
-                    <!-- <div class="col-md-3"> -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 pd0">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Qty Stk</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_stock', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'wo_item_part_qty_stock', 'placeholder' => '0')); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12 pd0">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Qty Cust.</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('qty_cust_owned', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0')); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- </div> -->
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Price Each</label>
-                                <div class="form-input-frame">
-                                    <?php 
-                                    $price_each = (!empty($aircraftwoitemparts->price_each) && (float)$aircraftwoitemparts->price_each > 0)
-                                    ? '$' . number_format((float)$aircraftwoitemparts->price_each, 2)
-                                    : '';
-
-                                    echo $this->Form->control('price_each', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'price_each', 'value'=>$price_each)); ?>
-                                </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Qty Used</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('qty_used', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_qty_used', 'placeholder' => '0')); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12 pd0">
-                        <div class="col-md-6 col-sm-6 col-xs-12  pd0">
-                            <div class="form-group ml-22 mr-22 ">
-                                <label class="control-label" for="reference">
-                                    <?php
-                                    $give_discountchk = '';
-                                    if (!empty($aircraftwoitemparts->give_discount_percentage)) {
-                                        $give_discountchk = 'checked';
-                                    }
-                                    ?>
-                                    <input class="form-check-input" type="checkbox" value="1" id="give_discount" name="give_discount" <?php echo $give_discountchk; ?>>
-                                    <span class="form-check-label" for="give_discount">Give Discount</span>
-                                </label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('give_discount_percentage', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0.00%', 'id' => 'give_discount_percentage')); ?>
-                                </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Qty Stk</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('qty_stock', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'readonly' => 'readonly', 'id' => 'wo_item_part_qty_stock', 'placeholder' => '0')); ?>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12  pd0">
-                            <div class="form-group mr-22 ml-11">
-                                <label class="control-label" for="reference">Total</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('part_total_prices', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'part_total_prices', 'readonly' => 'readonly')); ?>
-                                </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Qty Cust.</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('qty_cust_owned', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0')); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Price Each</label>
+                            <div class="form-input-frame">
+                                <?php 
+                                $price_each = (!empty($aircraftwoitemparts->price_each) && (float)$aircraftwoitemparts->price_each > 0)
+                                ? '$' . number_format((float)$aircraftwoitemparts->price_each, 2)
+                                : '';
+
+                                echo $this->Form->control('price_each', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'price_each', 'value'=>$price_each)); ?>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">
+                                <?php
+                                $give_discountchk = '';
+                                if (!empty($aircraftwoitemparts->give_discount_percentage)) {
+                                    $give_discountchk = 'checked';
+                                }
+                                ?>
+                                <input class="form-check-input" type="checkbox" value="1" id="give_discount" name="give_discount" <?php echo $give_discountchk; ?>>
+                                <span class="form-check-label" for="give_discount">Give Discount</span>
+                            </label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('give_discount_percentage', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '0.00%', 'id' => 'give_discount_percentage')); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Total</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('part_total_prices', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'part_total_prices', 'readonly' => 'readonly')); ?>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2">
+                <div class="row m-0">
+                    <div class="col-sm-4">
                         <div class="form-check">
                             <?php
                             $part_taxablechk = '';
@@ -162,7 +171,7 @@
                             <span class="form-check-label" for="flexCheckDefault">Taxable</span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4">
                         <div class="form-check">
                             <?php
                             $not_deduct_from_stockchk = '';
@@ -174,7 +183,7 @@
                             <span class="form-check-label" for="flexCheckDefault">Do not deduct from stock</span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4">
                         <div class="form-check">
                             <?php
                             $is_loanerchk = '';
@@ -186,56 +195,51 @@
                             <span class="form-check-label" for="flexCheckDefault">Is Loaner</span>
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 pd0">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Condition</label>
-                                <div class="form-input-frame">
-                                    <?php
-                                    echo $this->Form->control('part_conditions', array('options' => $conditions, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_part_conditions'));
-                                    ?>
-                                </div>
+                <div class="row m-0">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Condition</label>
+                            <div class="form-input-frame">
+                                <?php
+                                echo $this->Form->control('part_conditions', array('options' => $conditions, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_part_conditions'));
+                                ?>
                             </div>
                         </div>
-                       <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Serial Number</label>
-                                <div class="form-input-frame">
-                                    <?php
-                                    echo $this->Form->control('serial_number', array('options' => $serialno, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_serial_number'));
-                                    ?>
-                                </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Serial Number</label>
+                            <div class="form-input-frame">
+                                <?php
+                                echo $this->Form->control('serial_number', array('options' => $serialno, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_serial_number'));
+                                ?>
                             </div>
                         </div>
-                       <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Date Needed</label>
-                                <div class="form-input-frame">
-                                    <div class="input-group date datePicker">
-                                        <?php
-                                        $date_needed = '';
-                                        if (!empty($aircraftwoitemparts->date_needed)) {
-                                            $date_needed = date('m-d-Y', strtotime($aircraftwoitemparts->date_needed));
-                                        } else {
-                                            $date_needed = date('m-d-Y');
-                                        }
-                                        echo $this->Form->Text('date_needed', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'wo_item_part_date_needed', 'placeholder' => '', 'label' => false, 'value' => $date_needed));
-                                        ?>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Date Needed</label>
+                            <div class="form-input-frame">
+                                <div class="input-group date datePicker">
+                                    <?php
+                                    $date_needed = '';
+                                    if (!empty($aircraftwoitemparts->date_needed)) {
+                                        $date_needed = date('m-d-Y', strtotime($aircraftwoitemparts->date_needed));
+                                    } else {
+                                        $date_needed = date('m-d-Y');
+                                    }
+                                    echo $this->Form->Text('date_needed', array('class' => 'form-control col-md-3 col-xs-12', 'id' => 'wo_item_part_date_needed', 'placeholder' => '', 'label' => false, 'value' => $date_needed));
+                                    ?>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                     <div class="col-md-12 col-sm-12 col-xs-12 pd0">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-sm-4 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Ship In</label>
                             <div class="form-input-frame">
@@ -243,7 +247,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-md-6 col-sm-6 col-xs-12">
+                     <div class="col-sm-4 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="reference">Ship Out</label>
                             <div class="form-input-frame">
@@ -251,17 +255,16 @@
                             </div>
                         </div>
                     </div>
-                     </div>
                 </div>
 
-                <div class="headings">
+                <div class="headings col-sm-12">
                     <h5 class="title">Parts Information for MParts</h5>
                     <span class="hr"></span>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right:0px;">
-                        <div class="form-group ml-11 mr-22">
+                <div class="row m-0">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
                             <label class="control-label" for="reference">General Location</label>
                             <div class="form-input-frame">
                                 <?php
@@ -269,68 +272,69 @@
                                 ?>
                             </div>
                         </div>
-
-                        <div class="form-group ml-11 mr-22">
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
                             <label class="control-label" for="reference">Qty On Other OTC Quotes</label>
                             <div class="form-input-frame">
                                 <?php echo $this->Form->control('qty_on_other_otc_quotes', array('type' => 'number', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                             </div>
                         </div>
-
-                        <div class="form-group mr-22">
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Cost In MParts</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('cost_in_mparts', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_cost')); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Supplier</label>
+                            <div class="form-input-frame">
+                                <?php
+                                echo $this->Form->control('supplier', array('options' => $vendorlist, 'empty' => 'Select', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_part_vendor'));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Retail Price in MParts</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('general_retail', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_general_retail')); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Discount Code</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('discount_code', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="reference">Notes</label>
+                            <div class="form-input-frame">
+                                <?php echo $this->Form->control('notes', array('type' => 'textarea', 'class' => 'form-control', 'label' => false,)); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="form-group">
                             <label class="control-label " for="reference">Hazardous Notes</label>
                             <div class="form-input-frame ">
                                 <?php echo $this->Form->control('hazardous_notes', array('type' => 'textarea', 'class' => 'form-control', 'label' => false,)); ?>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                   <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Cost In MParts</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('cost_in_mparts', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_cost')); ?>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Supplier</label>
-                                <div class="form-input-frame">
-                                    <?php
-                                    echo $this->Form->control('supplier', array('options' => $vendorlist, 'empty' => 'Select', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'wo_item_part_vendor'));
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Retail Price in MParts</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('general_retail', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_general_retail')); ?>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Discount Code</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('discount_code', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 col-xs-12 col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label" for="reference">Notes</label>
-                                <div class="form-input-frame">
-                                    <?php echo $this->Form->control('notes', array('type' => 'textarea', 'class' => 'form-control', 'label' => false, 'style' => 'height: 103px;')); ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-9 col-sm-9 col-xs-12 ml-11">
+                <div class="row m-0">
+                    <div class="col-sm-9 col-xs-9">
                         <div class="form-group">
                             <label class="control-label" for="reference">Dealer Price</label>
                             <div class="form-input-frame">
@@ -360,7 +364,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-sm-3 col-xs-3">
                         <div class="form-group">
                             <button type="button" class="btn btn-default" style="width:131px;margin-top: 10px;">Update Descrip</button>
                         </div>
@@ -384,6 +388,7 @@
                         </div>
                     </div>
                 </div>
+                </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -391,6 +396,12 @@
 </div>
 
 
+
+<!-- Add Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Add Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- Initialize Select2 -->
 <script>

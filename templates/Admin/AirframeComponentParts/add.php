@@ -35,7 +35,7 @@ use Cake\Routing\Router;
                             </div>
                             <div class="col-md-5" style="padding-left: 34px;padding-right: 10px;width: 220px;">
                                 <button type="button" class="btn btn-default selectaircraftcomponent">Select Aircraft & Component</button>
-                                <div class="aircraft_component_list" style="display:none;"></div>
+                                
                             </div>
                             <div class="col-md-5">
                                 <div class="table-responsive aircraft_component_selected" style="display:none;">
@@ -52,15 +52,15 @@ use Cake\Routing\Router;
                                 </div>
                             </div>
                         </div> -->
-                        <div class="col-md-3" style="padding-left: 37px; padding-bottom: 12px;">
+                        <div class="col-md-3">
                             <div class="form-inline">
                                 <label class="control-label col-md-5 col-sm-5 col-xs-12">Aircraft & Component</label>
-                                <button type="button" class="btn btn-default selectaircraftcomponent">
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <div class="aircraft_component_list" style="display:none;"></div>
+                                    <button type="button" class="btn btn-default selectaircraftcomponent">
                                     Select
-                                </button>
-                            </div>
-                            <div class="aircraft_component_list" style="display: none; margin-top: 10px;">
-
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3 table-aircraft">
@@ -668,15 +668,18 @@ use Cake\Routing\Router;
                             </div>
 
                             <div class="itemCls">
-                                New <input type="radio" class="newTypeId" name="part_type" value="new" checked>
+                                <label>New</label>
+                                <input type="radio" class="newTypeId" name="part_type" value="new" checked>
                             </div>
 
                             <div class="itemCls">
-                                Overhaul <input type="radio" class="overhaulTypeId" name="part_type" value="overhaul">
+                                <label>Overhaul</label>
+                                <input type="radio" class="overhaulTypeId" name="part_type" value="overhaul">
                             </div>
 
                             <div class="itemCls">
-                                Repair <input type="radio" class="repairTypeId" name="part_type" value="repair">
+                                <label>Repair</label>
+                                <input type="radio" class="repairTypeId" name="part_type" value="repair">
                             </div>
 
                             <div class="itemCls">

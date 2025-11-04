@@ -195,7 +195,7 @@ echo $this->Form->create($inventorypurchaseorders, array('class' => 'form-horizo
         </ul>
         <div class="tab-content">
             <div id="itemGeneral" class="tab-pane fade in active"><!-- general-tab-section start -->
-                <div class="g-0 bg-light position-relative">
+                <div class="g-0 bg-light position-relative table-responsive">
                     
                     <table class="table opinvitemtable">
                         <thead class="thead-dark">

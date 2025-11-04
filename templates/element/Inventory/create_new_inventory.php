@@ -63,7 +63,7 @@
 
                         echo $this->Form->control('cost', array('type'=>'text', 'class'=>'form-control col-md-7', 'placeholder' => '$0.00', 'label' => false, 'value'=>$cost, 'id'=>'inventory_cost')); ?>
                     </div>
-                    <div class="col-md-2 col-sm-3">
+                    <div class="col-md-2 col-sm-3" style="padding-right:0px;">
                         <div class="form-group clearfix"> 
                             <?php 
                             $currency = unserialize(CURRENCY);
@@ -76,9 +76,9 @@
             </div>
 
 
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
                 <?php if(!isset($action)){ ?>
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group clearfix"> 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Exchange Cost:</label>
                             
@@ -92,11 +92,11 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4" style="padding-left:0px; padding-right:0px;">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group clearfix"> 
-                            <label class="control-label col-md-4 label-cost" for="plane_id">UOM:&nbsp;<span class="required">*</span></label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">UOM:&nbsp;<span class="required">*</span></label>
                             
-                            <div class="col-md-7" id="airCompsList">
+                            <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
                                 <?php 
                                     $defaultUOM = unserialize(DEFAULT_UOM);
                                     $default_uom = !empty($invenotries->default_uom) ? $invenotries->default_uom : $invenotryitems->default_uom;
@@ -106,20 +106,21 @@
                             </div>
                         </div>
                     </div>
+                    
                 <?php if($invenotryitems->is_this_item_serialized == 0){ ?>
-                    <div class="col-md-4" style="padding-left:0px;">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group clearfix"> 
-                            <label class="control-label col-md-4 label-cost" for="plane_id">Quantity:<span class="required">*</span></label>
-                            <div class="col-md-7" id="airCompsList" style="padding-left: 20px; padding-right: 0px;">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Quantity:<span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
                                 <?php echo $this->Form->control('qty', array('class'=>'form-control col-md-7', 'placeholder' => '0.00', 'label' => false, 'id'=>'inventory_qty')); ?>
                             </div>
                         </div>
                     </div>
                 <?php }else{ ?>
-                    <div class="col-md-4" style="padding-left:0px;">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group clearfix"> 
-                            <label class="control-label col-md-4 label-cost" for="plane_id">Quantity:&nbsp;<span class="required">*</span></label>
-                            <div class="col-md-7" id="airCompsList" style="padding-left: 20px; padding-right: 0px;">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Quantity:&nbsp;<span class="required">*</span></label>
+                            <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
                                 <?php echo $this->Form->control('qty', array('class'=>'form-control col-md-7', 'placeholder' => '0.00', 'label' => false, 'id'=>'inventory_qty')); ?>
                             </div>
                         </div>
@@ -137,7 +138,7 @@
                    
 
                 <?php } ?>
-            </div>
+            <!-- </div> -->
       
          
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -173,13 +174,18 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group clearfix"> 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Supplier:</label>
-                    
-                    <div class="col-md-8 col-sm-7 p-0" id="airCompsList">
-                        <?php 
+                    <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
+                        <div class="input-group inputWrap" style="margin-bottom:0px;">
+                           <?php 
                             echo $this->Form->control('vendor', array('options' => $vendor, 'empty' => 'Enter a vendor ...', 'class' => 'form-control col-md-6 selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'vendor')); 
-                        ?>
+                             ?>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary vendorModelbtn" type="button" style="margin:0px;">
+                                <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                    <div class="col-md-1 col-sm-2 plus-new-btn vendor-add-btn" style="margin: 0px;padding:0px;"><button class="btn btn-primary vendorModelbtn" style="margin:0px 0px 0px 10px" type="button"><i class="fa fa-plus"></i></button></div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -312,7 +318,7 @@
     
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group clearfix"> 
-                    <label class="control-label col-md-3" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i>:</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plane_id">Tag <i class="fa fa-info-circle" data-toggle="tooltip" title="This field can only be edited from the inventory item level"></i>:</label>
                     
                     <div class="col-md-9 col-sm-9 col-xs-12 p-0">
                         <?php echo $this->Form->control('tags', array('class'=>'form-control col-md-10 label-width-auto', 'placeholder' => '', 'label' => false, 'style'=>'width:71% !important;')); ?>
@@ -340,7 +346,7 @@
      
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group clearfix">
-                    <label class="control-label col-md-3" for="airframe_component_id">Notes:</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airframe_component_id">Notes:</label>
                     <div class="col-md-9 col-sm-9 col-xs-12 p-0">
                     <?php echo $this->Form->control('notes', array('class' => 'form-control col-md-10', 'label'=> false, 'rows'=>2)); ?>
                     </div>

@@ -71,7 +71,7 @@
                         <span class="form-check-label" for="flexCheckDefault">Parts Discount Is % Over Cost</span>
                     </span>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('notes', array('type'=>'textarea', 'class' => 'form-control aircraft-notes', 'label'=> false, 'style'=>'width: 100%; height: 246px; max-width: 100%;', 'id'=>'repair_order_info_notes')); ?>
+                        <?php echo $this->Form->control('notes', array('type'=>'textarea', 'class' => 'form-control aircraft-notes', 'label'=> false, 'style'=>'width: 100%;  max-width: 100%;', 'id'=>'repair_order_info_notes')); ?>
                     </div>
                 </div>
             </div>

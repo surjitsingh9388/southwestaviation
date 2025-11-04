@@ -173,3 +173,26 @@ $(document).on("click", "#ro-receive-next-button, #ro-receive-right-arrow-button
         $("#ro-receive-right-arrow-button").removeAttr('disabled');
     }
 });
+
+$(document).on('click', ".vendorsavebtn", function (e) {
+    var data = $('form#frmAddVendor').serialize();
+    $.ajax({
+        url: saveInventoryVendorURL, 
+        type: 'post',
+        data: data,
+        dataType: 'text',
+        success: function (response) {
+            var obj = JSON.parse(response);
+            if(obj.status == 'success') {
+                var invvendor = obj.invvendor;
+                $('#vendor').append('<option value="'+invvendor.id+'" selected>'+invvendor.name+'</option>');
+                $('.selectpicker').selectpicker('refresh');
+                
+                $("#vendorAddModel").modal('hide');
+                $('#frmAddVendor')[0].reset();
+            }else{
+                alert(obj.message);
+            }
+        }
+    });
+});

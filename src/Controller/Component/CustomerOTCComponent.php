@@ -78,6 +78,7 @@ class CustomerOTCComponent extends Component {
     protected \App\Model\Table\UserMenuItemsTable $UserMenuItems;
     protected \App\Model\Table\CustomerAircraftWOOptionMiscFuelChargesTable $CustomerAircraftWOOptionMiscFuelCharges;
     protected \App\Model\Table\SettingsTable $Settings;
+    protected \App\Model\Table\InventoryCustomerPhonesTable $InventoryCustomerPhones;
 
     public function initialize(array $config): void
     {
@@ -1038,6 +1039,128 @@ Remove the Purchase Order Number information on this screen and try again.';
         return $wooptiongeninfodeposits;
     }
 
+    public function getSentMessages($work_order_id = '', $message_id = '')
+    {
+        $connection = ConnectionManager::get('default');
+        $authUserData = $this->Authentication->getResult()->getData();
+        $user_id = $authUserData['id'];
+
+        $currentdate = date('Y-m-d');
+        $lastmonthdate = date('Y-m-d', strtotime('-1 month'));
+
+        $wherecond = ["DATE(msg.created_at) BETWEEN :lastmonthdate AND :currentdate"];
+        $whereArr = [
+            'lastmonthdate' => $lastmonthdate,
+            'currentdate' => $currentdate
+        ];
+
+        if (!empty($work_order_id)) {
+            $wherecond[] = "msg.work_order_id = :work_order_id";
+            $whereArr['work_order_id'] = $work_order_id;
+        }
+
+        if ($user_id != '1') {
+            $wherecond[] = "msg.added_by = :added_by";
+            $whereArr['added_by'] = $user_id;
+        }
+
+        if (!empty($message_id)) {
+            $wherecond[] = "msg.id = :message_id";
+            $whereArr['message_id'] = $message_id;
+        }
+
+        $whereClause = implode(' AND ', $wherecond);
+
+        $sql = "
+            SELECT 
+                msg.id,
+                user.full_name AS sent_from,
+                user_to.full_name AS sent_to,
+                msg.message_subject,
+                msg.message,
+                msg.created_at,
+                msg.is_mark_read,
+                msg.message_wo_ro,
+                work_order.work_order_no,
+                wo_items.wo_item_position
+            FROM customer_aircraft_wo_messages msg
+            LEFT JOIN customer_aircraft_work_orders work_order 
+                ON msg.work_order_id = work_order.id
+            LEFT JOIN customer_aircraft_wo_items wo_items 
+                ON wo_items.id = msg.wo_item_id
+            JOIN users user_to 
+                ON user_to.id = msg.message_to
+            JOIN users user 
+                ON user.id = msg.added_by
+            WHERE $whereClause
+            ORDER BY msg.id DESC
+        ";
+
+        $sentmsglist = $connection->execute($sql, $whereArr)->fetchAll('assoc');
+        return $sentmsglist;
+    }
+
+    public function getReceivedMessages($work_order_id = '', $message_id = '')
+    {
+        $connection = ConnectionManager::get('default');
+        $authUserData = $this->Authentication->getResult()->getData();
+        $user_id = $authUserData['id'];
+
+        $currentdate = date('Y-m-d');
+        $lastmonthdate = date('Y-m-d', strtotime('-1 month'));
+
+        $wherecond = ["DATE(msg.created_at) BETWEEN :lastmonthdate AND :currentdate"];
+        $whereArr = [
+            'lastmonthdate' => $lastmonthdate,
+            'currentdate' => $currentdate
+        ];
+
+        if (!empty($work_order_id)) {
+            $wherecond[] = "msg.work_order_id = :work_order_id";
+            $whereArr['work_order_id'] = $work_order_id;
+        }
+
+        if ($user_id != '1') {
+            $wherecond[] = "msg.message_to = :message_to";
+            $whereArr['message_to'] = $user_id;
+        }
+
+        if (!empty($message_id)) {
+            $wherecond[] = "msg.id = :message_id";
+            $whereArr['message_id'] = $message_id;
+        }
+
+        $whereClause = implode(' AND ', $wherecond);
+
+        $sql = "
+            SELECT 
+                msg.id,
+                user.full_name AS sent_from,
+                user_to.full_name AS sent_to,
+                msg.message_subject,
+                msg.message,
+                msg.created_at,
+                msg.is_mark_read,
+                msg.message_wo_ro,
+                work_order.work_order_no,
+                wo_items.wo_item_position
+            FROM customer_aircraft_wo_messages msg
+            LEFT JOIN customer_aircraft_work_orders work_order 
+                ON msg.work_order_id = work_order.id
+            LEFT JOIN customer_aircraft_wo_items wo_items 
+                ON wo_items.id = msg.wo_item_id
+            JOIN users user_to 
+                ON user_to.id = msg.message_to
+            JOIN users user 
+                ON user.id = msg.added_by
+            WHERE $whereClause
+            ORDER BY msg.id DESC
+        ";
+
+        $receivedmsglist = $connection->execute($sql, $whereArr)->fetchAll('assoc');
+        return $receivedmsglist;
+    }
+
     public function getAircraftWOMsgList($work_order_id='', $message_id=''){
         $connection = ConnectionManager::get('default');
         $authUserData = $this->Authentication->getResult()->getData();
@@ -1046,17 +1169,16 @@ Remove the Purchase Order Number information on this screen and try again.';
         $currentdate = date('Y-m-d');
         $lastsevendate = date('Y-m-d', strtotime('-7 days'));
 
-        $wherecond = "DATE(msg.created_at) >= :lastsevendate and DATE(msg.created_at) <= :currentdate";
-        $whereArr = ['lastsevendate'=>$lastsevendate, 'currentdate'=>$currentdate];
+        /*$wherecond = "DATE(msg.created_at) >= :lastsevendate and DATE(msg.created_at) <= :currentdate";
+        $whereArr = ['lastsevendate'=>$lastsevendate, 'currentdate'=>$currentdate];*/
+
+        $wherecond = " 1=1";
+        $whereArr = [];
         if(!empty($work_order_id)){
             $wherecond .= " and msg.work_order_id = :work_order_id";
             $whereArr['work_order_id'] = $work_order_id;
         }
         
-        if($user_id != '1'){
-            $wherecond .= " and msg.message_to = :message_to";
-            $whereArr['message_to'] = $user_id;
-        }
         if(!empty($message_id)){
             $wherecond .= " and msg.id = :message_id";
             $whereArr['message_id'] = $message_id;
@@ -1089,7 +1211,7 @@ Remove the Purchase Order Number information on this screen and try again.';
         }
         return $receivedmsglist;
     }
-    
+
     public function getListOfWorkOrders($filter=[]){
         $whereArr = ['CustomerAircraftWorkOrders.wo_status != '=> '0'];
         if(isset($filter['wo_status'])){
@@ -2144,6 +2266,18 @@ Remove the Purchase Order Number information on this screen and try again.';
         return $customeraddrdropdown;
     }
 
+    public function getCustomerPhoneNumberDropdown($customer_id){
+        $this->InventoryCustomerPhones = $this->getController()->fetchTable('InventoryCustomerPhones');
+        $customerphonearr = $this->InventoryCustomerPhones->find('all', ['order'=>'id DESC'])->where(['customer_id'=>$customer_id])->select(['id', 'phone_number']);
+        
+        $customerphonedropdown = [];
+        foreach($customerphonearr as $phone){
+            $customerphonedropdown[$phone['phone_number']] = $phone['phone_number'];
+        }
+        
+        return $customerphonedropdown;
+    }
+
     public function getStateNameById($stateId) {
         $states = array();
         $stateModel = $this->getController()->fetchTable('States');
@@ -2386,24 +2520,36 @@ Remove the Purchase Order Number information on this screen and try again.';
                                                     ]);
 
         $aircraftoptiondata = [];
-        foreach($customerAircrafts as $aircraft){
-            //$aircraftoptiondata[$aircraft['id']] = "<table><tr><td>".$aircraft['aircraft_registration_number']."</td><td>".$aircraft['aircraft_make']['make']."</td><td>".$aircraft['aircraft_model']['model']."</td><td>".$aircraft['aircraft_year']."</td><td>".$aircraft['aircraft_serial']."</td></tr></table>";
 
-            $aircraftoptiondata[$aircraft['id']] = $aircraft['aircraft_registration_number'];
-            if(!empty($aircraft['aircraft_make']['aircraft_make'])){
-                $aircraftoptiondata[$aircraft['id']] = $aircraftoptiondata[$aircraft['id']].'|'.$aircraft['aircraft_make']['aircraft_make'];
+        foreach ($customerAircrafts as $aircraft) {
+            $details = [];
+
+            // Always include registration number first
+            if (!empty($aircraft['aircraft_registration_number'])) {
+                $details[] = $aircraft['aircraft_registration_number'];
             }
-            if(!empty($aircraft['aircraft_model']['model'])){
-                $aircraftoptiondata[$aircraft['id']] = $aircraftoptiondata[$aircraft['id']].'|'.$aircraft['aircraft_model']['model'];
+
+            // Add optional details if available
+            if (!empty($aircraft['aircraft_make']['aircraft_make'])) {
+                $details[] = $aircraft['aircraft_make']['aircraft_make'];
             }
-            if(!empty($aircraft['aircraft_year'])){
-                $aircraftoptiondata[$aircraft['id']] = $aircraftoptiondata[$aircraft['id']].'|'.$aircraft['aircraft_year'];
+
+            if (!empty($aircraft['aircraft_model']['model'])) {
+                $details[] = $aircraft['aircraft_model']['model'];
             }
-            if(!empty($aircraft['aircraft_serial'])){
-                $aircraftoptiondata[$aircraft['id']] = $aircraftoptiondata[$aircraft['id']].'|'.$aircraft['aircraft_serial'];
+
+            if (!empty($aircraft['aircraft_year'])) {
+                $details[] = $aircraft['aircraft_year'];
             }
+
+            if (!empty($aircraft['aircraft_serial'])) {
+                $details[] = $aircraft['aircraft_serial'];
+            }
+
+            // Combine all available details with a separator
+            $aircraftoptiondata[$aircraft['id']] = implode(' | ', $details);
         }
-
+        
         return $aircraftoptiondata;
     }
 

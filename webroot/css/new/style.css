@@ -3,6 +3,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #5865a2;
+    margin:0px;
+    padding: 0px;
 }
 
 html,
@@ -23,6 +25,7 @@ body {
 * {
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
 
 img {
@@ -127,7 +130,8 @@ img {
 .wrapper {
     width: 100%;
     /*display: flex;*/
-    min-height: calc(100vh - 60px);
+    /* min-height: calc(100vh - 60px); */
+    min-height: 100vh;
 }
 
 .custWrapper {
@@ -135,9 +139,8 @@ img {
 }
 
 /*.custWrapper .side-bar{position: absolute;top: 0px;bottom: 0px;}*/
-.side-bar {
+/* .side-bar {
     position: fixed;
-    /*left: -310px;*/
     background: #39478b;
     min-height: 100%;
     width: 310px;
@@ -150,7 +153,25 @@ img {
     margin-bottom: 12px;
     z-index: 9;
     top: 65px;
+} */
+/* Sidebar height fix for iPad and mobile Safari */
+.side-bar {
+  position: fixed;
+  background: #39478b;
+  color: #fff;
+   width: 310px;
+   transition: margin-left 0.5s;
+  top: 65px;
+  left: 0;
+  bottom: 0; /* anchor to bottom instead of using min-height */
+  height: calc(100vh - 65px);
+  min-height: auto;
+  overflow-y: auto; /* allow internal scroll if content is long */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; /* prevent scroll bounce */
+   z-index: 9;
 }
+
 
 #sidebar-menu .dropdown-backdrop {
     display: none;
@@ -520,7 +541,6 @@ li.menuItem .icon-size i{
     color: #434446;
     font-weight: 500;
     border-bottom: 1px solid #ddd;
-    /*table-layout: fixed;*/
 }
 
 .table .check {
@@ -781,6 +801,7 @@ div.tolerance-status {
     color: #555;
     font-size: 14px;
     font-weight: bold;
+    padding: 6px 8px;
 }
 
 #aircraftTabs ul li {
@@ -858,7 +879,17 @@ div.tolerance-status {
     margin: 5px 10px 5px 10px;
     text-align: left;
 }
-
+.addPartInfoCls .itemCls {
+    display: flex;
+    align-items: center;
+}
+.addPartInfoCls .itemCls label {
+    margin: 0px;
+    margin-right: 8px;
+}
+.addPartInfoCls .itemCls input[type=radio] {
+    margin: 0px;
+}
 .editPartInfoCls {
     display: flex;
     padding: 0 4px;
@@ -1008,6 +1039,9 @@ div.tolerance-status {
     justify-content: space-between;
     align-items: center;
 }
+.btnWrapper.flex-column-mob, .outerWrapper .btnWrapper{
+    flex-wrap: wrap;
+}
 
 .btnWrapper .btn {
     margin: 0px;
@@ -1109,11 +1143,11 @@ table.dataTable {
 }
 
 /*.table>thead>tr>th{min-width: 120px;}*/
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
     .tableScroll table {
         width: 1200px !important
     }
-}
+} */
 
 .reportTimeCls {
     color: #434446;
@@ -1387,6 +1421,17 @@ table#customReport tr.even td {
 }
 
 @media screen and (max-width: 991px) {
+    .btnWrapper.maintenanceHeader{
+        flex-wrap: wrap;
+    }
+    .btnWrapper.maintenanceHeader .btnWrap{
+        flex:0 0 100%;
+        padding-bottom: 10px;
+    }
+    .outerWrapper .heading{
+        font-size: 20px;
+    }
+   
     .selectWrap {
         flex-wrap: wrap;
         margin: 0 0px 15px;
@@ -1583,9 +1628,9 @@ table#customReport tr.even td {
     width: 100% !important;
 }
 
-.dataTable {
+/* .dataTable {
     width: 100% !important;
-}
+} */
 
 #activeHistId {
     margin: 0 0 6px 0;
@@ -2160,7 +2205,8 @@ inventory section style
     text-align: center;
     white-space: nowrap;
     vertical-align: text-bottom;
-    width: 120px;
+    /* width: 120px; */
+    padding: 6px 10px;
     background-color: #777777;
 }
 
@@ -2648,8 +2694,11 @@ inventory section style
 
 #workOrderPrintPreviewModal .modal-body {
     overflow-y: visible;
+    min-height: 350px;
 }
-
+#frmWorkOrderItemTools .bootstrap-select .dropdown-menu .inner {
+    min-height: 100px;
+}
 #woPrintPreviewMaintModal .modal {
     overflow: visible;
 }
@@ -2833,7 +2882,7 @@ table th {
 .mr-11{
     margin-right: 11px !important;
 }
-.inventorySection .row.customRow{
+.inventorySection .row.customRow, .row.customRow{
     display: flex;
     margin:0px;
     flex-wrap: wrap;
@@ -2858,8 +2907,110 @@ table th {
     padding: 10px 15px;
     top: 65px;
 }
+.row.permissionWrap{
+    margin:0px -10px;
+}
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputWrapper .control-label {
+    flex: 0 0 100px;
+    text-align: left;
+    padding: 0px;
+}
+.inputWrapper .input .btn {
+    margin: 0px;
+}
+.inputWrapper .input{
+    flex: 1;
+}
+.btnGroup .btn{
+    margin: 0px;
+}
+.m-0 {
+    margin: 0px;
+}
+.news_feed_dashboard .news_feed{
+    margin-bottom: 0px;
+}
+.tableBg{
+    background-color: #fff;
+}
+.tableBg + .tableBg {
+    border-left: 3px solid #e5e5e5;
+}
+ .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    margin: 0;
+}
+.modal-dialog .modal-content{
+    overflow: hidden;
+}
+.modal-body {
+    max-height: calc(100vh - 260px);
+    overflow-y: auto;
+}
+#woOutstandingRepairEditModal .modal-body{
+       max-height: calc(100vh - 350px);
+}
+#dashboardNewsFeedListModel .btn{
+margin-right: 0px;
+}
+.titleBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.titleBlock  p{
+    font-size: 16px;
+    margin: 0px;
+}
+.titleBlock .titleBtn .btn{
+    margin:0px;
+}
+.modal-footer .titleBlock .btn {
+    margin: 0px;
+}
+.modal-body .titleBlock {
+    margin-bottom: 10px;
+}
+.form-input-frame.boxWrap {
+    display: flex;
+    justify-content: space-between;
+}
+.form-input-frame.boxWrap .input.select {
+    flex: 0 0 79%;
+    max-width: 79%;
+}
 
-
+.form-input-frame.boxWrap .btn,.input.select .btn {
+    margin: 0px;
+} 
+.table-info-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.table-info-header h5 {
+    margin: 0px;
+    font-size: 16px;
+}
+.flex-end{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex:1;
+}
+.flex-end .input.select {
+    flex: 0 0 200px;
+    margin-left: 8px;
+}
 @media (min-width: 768px) and (max-width: 1024px) {
     .tableScroll .table-Width {
         width: 100% !important;
@@ -2878,6 +3029,11 @@ table th {
 
 }
 
+@media (max-width:1024px){
+    .tableBg + .tableBg {
+    border-left: 0px solid #e5e5e5;
+    }
+}
 @media (max-width: 998px) {
     #airCompDetailsPopup {
         width: 720px;
@@ -2968,4 +3124,134 @@ table th {
     /* .flash-message.content.sliding.left{
         display: unset;
     } */
+}
+
+.table-responsive{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative; 
+  will-change: scroll-position; 
+  scroll-behavior: smooth;
+}
+ .dataTables_wrapper{
+    background-color: transparent;
+    background: transparent;
+ }
+.table.dataTable{
+    background: #fff;
+}
+
+
+.input-group.inputWrap .form-control:last-child {
+    border-radius: 3px 0px 0px 3px;
+}
+.input-group.inputWrap .input-group-btn .btn {
+    height: 100%;
+    width:100%;
+    margin:0px;
+    padding: 0px;
+}
+.input-group.inputWrap{
+    display: flex;
+    margin-bottom: 0px;
+}
+.input-group.inputWrap .input.select {
+    flex: 1;
+}
+.input-group.inputWrap .input-group-btn{
+    flex: 0 0 35px;
+    width: 35px;
+}
+.input-group.inputWrap .filter-option-inner {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.modalSubHeading{
+    background: #e5e5e5;
+    padding: 10px;
+    margin: 0px;
+}
+/* .btn-group.topBtnWrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.btn-group.topBtnWrap .btn, .split-btn {
+    margin: 4px 0px;
+}
+.btn-group.topBtnWrap .split-btn .btn {
+    margin: 0px;
+} */
+.btn-toolbar.topBtnWrap .dropdown-menu>li>a {
+    color: #434446;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: normal;
+}
+.btn-toolbar.topBtnWrap .btn-group {
+    margin: 0px 5px 5px 0px;
+}
+.btn-toolbar.topBtnWrap .btn {
+    padding: 6px 8px;
+}
+.selectpickerWrap .bootstrap-select .dropdown-menu .inner {
+    min-height: 200px;
+}
+/* Prevent iPad bounce and thead-tbody gap */
+.maintenanceTbl {
+  position: relative;
+  overflow: hidden; /* Prevent dual scroll conflict */
+}
+
+.maintenanceTbl table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.maintenanceTbl .dataTables_scrollHeadInner {
+    background: #1f2a5e;
+    padding-right: 0px !important;
+}
+.maintenanceTbl .table>thead>tr>th{
+    border-bottom: none;
+}
+.maintenanceTbl .table.dataTable{
+    border-bottom: 0px;
+}
+
+
+.maintenanceTbl .dataTables_scrollBody{
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: none !important; /* Prevent bounce gap */
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.maintenanceTbl table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #1f2a5e; /* match your header color */
+}
+
+
+.navHeaderWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.goToBlock {
+    display: flex;
+    align-items: center;
+}
+.navHeaderWrap .btn-group .btn {
+    padding: 6px 8px;
 }

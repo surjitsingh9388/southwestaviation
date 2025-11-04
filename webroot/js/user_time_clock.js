@@ -30,12 +30,15 @@ $(document).on('click', '.wo-list-all-message', function(e){
 });
 
 function fetchCustomOTCPopupDataFromServer(url, dataval, section){
+    $('.loader').show();
     $.ajax({
         url: url, 
         type: 'post',
         data: dataval,
         success: function (response) {
+            $('.loader').hide();
             appendUserTimeClockPopupData(section, response);
+            
         }
     });
 }
@@ -87,6 +90,8 @@ function appendUserTimeClockPopupData(section, response){
         sectionId = 'aircraftWOSendNewMsgModel';
     }else if(section == 'aircraft_wo_option_view_message'){
         sectionId = 'aircraftWOOptionViewMsgModel';
+
+        $('.wo-option-refresh-message').click();
     }
 
     $('#'+sectionId).remove();
@@ -156,12 +161,14 @@ $(document).on('click', '.input-group-addon', function(e){
 $(document).on('click', '.checkUserTimeClockStatus', function(e){
     var user_time_clock_code = $.trim($('#user_time_clock_status_code').val());
     if(user_time_clock_code != '' && user_time_clock_code != undefined){
+        $('.loader').show();
         $.ajax({
             url: checkUserTimeClockStatusURL,
             type: 'post',
             data: {user_time_clock_code:user_time_clock_code},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 $('#checkTimeClockStatusPopup').modal('hide');
                 alert(obj.message);
@@ -173,12 +180,14 @@ $(document).on('click', '.checkUserTimeClockStatus', function(e){
 $(document).on('click', '.markUserTimeClockBtn', function(e){
     var user_time_clock_code = $.trim($('#user_time_clock_code').val());
     if(user_time_clock_code != '' && user_time_clock_code != undefined){
+        $('.loader').show();
         $.ajax({
             url: markUserTimeClockURL,
             type: 'post',
             data: {user_time_clock_code:user_time_clock_code},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 $('#user_time_clock_code').val('');
                 alert(obj.message);
@@ -199,12 +208,14 @@ $(document).on('click', '.load_time_clock_record', function(e){
     var time_clock_date = $.trim($('#time_clock_adjustment_date').val());
 
     if(user_id != '' && user_id != undefined && time_clock_date != '' && time_clock_date!= undefined){
+        $('.loader').show();
         $.ajax({
             url: loadTimeClockForDateURL,
             type: 'post',
             data: {user_id:user_id, time_clock_date:time_clock_date},
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success'){
                     $('#time_clock_adjustment_tbody').html(obj.timeclockhtml);
@@ -224,12 +235,14 @@ $(document).on('click', '.saveAddNewTimeClockRecord', function(e){
     var logoutdate = $.trim($('#logout_time_clock_date').val());
     //console.log(user_id+'--'+logindate+'--'+logoutdate);
     if(user_id != '' && logindate != '' && logoutdate != ''){
+        $('.loader').show();
         $.ajax({
             url: saveUserTimeClockURL,
             type: 'post',
             data: $('#frmAddNewTimeClockRecord').serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 alert(obj.message);
                 if(obj.status == 'success'){
@@ -311,12 +324,14 @@ $(document).on('dblclick', '.time_clock_adjustment_tr', function(e){
 });
 
 function fetchUserTimeClockPopup(section, dataval){
+    $('.loader').show();
     $.ajax({
         url: fetchUserTimeClockPopupURL, 
         type: 'post',
         data: dataval,
         async : true,
         success: function (response) {
+            $('.loader').hide();
             appendUserTimeClockPopupData(section, response);
         }
     });
@@ -332,12 +347,14 @@ $(document).on('click', '.saveUpdateTimeClock', function(e){
     var logoutdate = $.trim($('#logout_time_clock_date').val());
     
     if(logindate != '' && logoutdate != ''){
+        $('.loader').show();
         $.ajax({
             url: saveUserTimeClockURL,
             type: 'post',
             data: $('#frmUpdateTimeClockRecord').serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 alert(obj.message);
             }
@@ -381,11 +398,13 @@ $(document).on('click', ".previewTimeClockReports", function (e) {
 });
 
 function downloadPDFAjax(url, params){
+    $('.loader').show();
     $.ajax({
         type: "POST",
         url: url,
         data: params,
         success:function(response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 window.open(obj.data);
@@ -405,16 +424,20 @@ $(document).on('click', '.sendWOViewMessage', function(e){
     var message = $('#message').val();
 
     if(message_to != '' && message_subject != '' && message != ''){
+        $('.loader').show();
         $.ajax({
             url: sendWOViewMessageURL,
             type: 'post',
             data: $("#frmSendWOViewMessage").serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
                 var obj = JSON.parse(response);
                 if(obj.status == 'success') {
                     $('#aircraftWOSendNewMsgModel').modal('hide');
-                    $('.wo-option-message-list').html(obj.msgtr);
+                    $('.sent-message-list').html(obj.sentmsgtr);
+                    $('.received-message-list').html(obj.receivedmsgtr);
+
                     alert('Message sent successfully.');
                 }else{
                     alert(obj.message);
@@ -426,26 +449,32 @@ $(document).on('click', '.sendWOViewMessage', function(e){
     }
 });
 
-$(document).on('click', '.wo-option-message-tr', function(e){
+$(document).on('click', '.sent-message-tr', function(e){
+    $('.sent-message-tr').removeClass('wo-option-message-active');
+    $(this).addClass('wo-option-message-active');
+});
+
+$(document).on('click', '.received-message-tr', function(e){
     var message_id = $(this).attr('data-val');
-    $('.wo-option-message-tr').removeClass('wo_new_message');
-    $('.wo-option-message-tr').each(function(index,item){
+    $('.received-message-tr').removeClass('wo_new_message');
+    $('.received-message-tr').each(function(index,item){
         if($(this).attr('is-read') == '0' && message_id != $(this).attr('data-val')){
             $(this).addClass('wo_new_message');
         }
     });
     
-    $('.wo-option-message-tr').removeClass('wo-option-message-active');
+    $('.received-message-tr').removeClass('wo-option-message-active');
     $(this).addClass('wo-option-message-active');
 });
 
-$(document).on('dblclick', '.wo-option-message-tr', function(e){
+$(document).on('dblclick', '.received-message-tr, .sent-message-tr', function(e){
     var message_id = $(this).attr('data-val');
     
     if(message_id != '' && message_id != undefined){
         var section = 'aircraft_wo_option_view_message';
         if(section != '' && section != undefined){
-            var dataval = {section:section, message_id:message_id};
+            var msg_source = $(this).attr('msg-source');
+            var dataval = {section:section, message_id:message_id, msg_source:msg_source};
             var url = fetchMessageViewPopupURL;
             fetchCustomOTCPopupDataFromServer(url, dataval, section);
         }
@@ -454,16 +483,18 @@ $(document).on('dblclick', '.wo-option-message-tr', function(e){
 
 $(document).on('click', '.wo-option-refresh-message', function(e){
     var work_order_id = $('#work_order_id').val();
-    
+    $('.loader').show();
     $.ajax({
         url: refreshWOViewMessageListURL,
         type: 'post',
         data: {work_order_id:work_order_id},
         dataType: 'text',
         success: function (response) {
+            $('.loader').hide();
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
-                $('.wo-option-message-list').html(obj.msgtr);
+                $('.sent-message-list').html(obj.sentmsgtr);
+                $('.received-message-list').html(obj.receivedmsgtr);
             }else{
                 alert(obj.message);
             }
@@ -477,15 +508,18 @@ $(document).on('click', '.wo-option-delete-message', function(e){
     
     if(message_id != '' && message_id != undefined){
         if(confirm('Are you sure you want to remove this message?')){
+            $('.loader').show();
             $.ajax({
                 url: deleteWOViewMessageURL, 
                 type: 'post',
                 data: {message_id:message_id},
                 dataType: "text",
                 success: function (response) {
+                    $('.loader').hide();
                     var obj = JSON.parse(response);
                     if(obj.status == 'success') {
-                        $('.wo-option-message-list').html(obj.msgtr);
+                        $('.sent-message-list').html(obj.sentmsgtr);
+                        $('.received-message-list').html(obj.receivedmsgtr);
                     }else{
                         alert(obj.message);
                     }
@@ -493,6 +527,15 @@ $(document).on('click', '.wo-option-delete-message', function(e){
             });
         }
     }
+});
+
+// When Sent tab is clicked
+$(document).on('click', 'a[href="#sentMessageInfo"]', function () {
+    // Uncheck all checkboxes
+    $('#checkall_messages, .received-message-list input[type="checkbox"]').prop('checked', false);
+
+    // Hide the "Mark as Read" button
+    $('.mark_msg_read_unread').hide();
 });
 
 setInterval(function() {
@@ -602,17 +645,23 @@ $(document).on('click', '.message_action_dropdown', function(e){
 $(document).on('click', '.mark_msg_read_unread', function(e){
     var msgsel = $(".check_messages:checked").length;
     if(msgsel > '0'){
+        $('.loader').show();
+
         $.ajax({
             url: markMessageReadUnreadURL,
             type: 'post',
             data: $('#frmMarkMessageReadUnread').serialize(),
             dataType: 'text',
             success: function (response) {
+                $('.loader').hide();
+
                 var obj = JSON.parse(response);
                 if(obj.status == 'failure'){
                     alert(obj.message);
                 }else{
-                    $('.wo-option-message-list').html(obj.msgtr);
+                    $('.sent-message-list').html(obj.sentmsgtr);
+                    $('.received-message-list').html(obj.receivedmsgtr);
+
                     $("#checkall_messages").prop('checked', false);
                     $('.mark_msg_read_unread').html('Mark as read');
                     $('#wo_is_mark_read').val('1');
@@ -633,12 +682,16 @@ $(document).on('click', '#delete-user-time-clock-btn', function(e){
 
     if(user_id != '' && user_id != undefined && time_clock_date != '' && time_clock_date!= undefined && time_clock_id != '' && time_clock_id!= undefined){
         if(confirm('Are you sure you want to remove this time clock?')){
+            $('.loader').show();
+
             $.ajax({
                 url: deleteUserTimeClockURL,
                 type: 'post',
                 data: {user_id:user_id, time_clock_date:time_clock_date, time_clock_id:time_clock_id},
                 dataType: 'text',
                 success: function (response) {
+                    $('.loader').hide();
+
                     var obj = JSON.parse(response);
                     if(obj.status == 'success'){
                         $('#time_clock_adjustment_tbody').html(obj.timeclockhtml);
@@ -659,12 +712,14 @@ $(document).on('click', '.pto-request-approve-deny-btn', function(e){
     var msg = pto_requests_status == '2' ? 'Approve' : 'Deny';
     if(pto_request_id != '' && pto_request_id != undefined && pto_requests_status != '' && pto_requests_status != undefined){
         if(confirm('Are you sure you want to '+msg+' this PTO Request?')){
+            $('.loader').show();
             $.ajax({
                 url: approveDenyPTORequestsURL,
                 type: 'post',
                 data: {pto_request_id:pto_request_id, pto_requests_status:pto_requests_status},
                 dataType: 'text',
                 success: function (response) {
+                    $('.loader').hide();
                     var obj = JSON.parse(response);
                     if(obj.status == 'success'){
                         if(source == '' || source == undefined){

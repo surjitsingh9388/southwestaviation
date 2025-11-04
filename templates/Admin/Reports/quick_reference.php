@@ -179,7 +179,7 @@ $(document).ready(function(){
         "searching": false,
         "paging": false,
         "info": false,
-        "responsive": true, 
+        "responsive": false, 
         "columnDefs": [
             { "orderable": false, "targets": 0 },
             { "orderData": [ 12 ], "targets": [ 11 ] },

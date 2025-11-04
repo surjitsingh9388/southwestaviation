@@ -8,7 +8,7 @@
                 <div class="col-md-8 col-sm-8 col-xs-12">
                     <?php 
                     if(!isset($reqtype)){
-                        echo $this->Form->control('name', array('class'=>'form-control col-md-8 col-xs-12 mf_name', 'placeholder' => '', 'label' => false, 'required' => 'required'));
+                        echo $this->Form->control('name', array('class'=>'form-control col-md-8 col-xs-12 mf_name', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id'=>'vendor_name'));
                     }else{
                         echo '<p class="form-control-static">'.$inventoryvendors->name.'</p>';
                     }

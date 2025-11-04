@@ -27,10 +27,10 @@
     display:none !important;
 }*/
 
-.modal-body {
+/* .modal-body {
     max-height: calc(100vh - 143px);
     overflow-y: auto; 
-}
+} */
 
 .mt10{
     margin-top:10px;
@@ -365,7 +365,7 @@ h7{
 }
 
 .repair-order-info-tbl-scroll{
-    height:440px; 
+    max-height:440px; 
     overflow:scroll;
 }
 

@@ -1,12 +1,12 @@
 <?php
-echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizontal form-label-left', 'id' => 'frmInventoryRepairOrders', 'autocomplete' => 'off'));
+echo $this->Form->create($InventoryRepairOrders, array('class' => '', 'id' => 'frmInventoryRepairOrders', 'autocomplete' => 'off'));
 ?>
-<div class="addPartBorder pt10">
+<div class="addPartBorder" style="padding:15px;border: none;">
     <div class="row">
         <!-- <div class="col-md-4 col-sm-6 col-xs-12"></div> -->
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Vendor&nbsp;<span class="required">*</span></label>
                 <div class="input-group">
                     <?php
@@ -18,7 +18,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">RO Date&nbsp;<span class="required">*</span></label>
                 <div>
                     <div class="input-group date datePicker" style="width: 100%;">
@@ -37,7 +37,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
 
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Number&nbsp;<span class="required">*</span></label>
                 <div>
                     <?php echo $this->Form->control('ro_number', array('class' => 'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required', 'id' => 'ro_number', 'value' => $ro_number)); ?>
@@ -46,7 +46,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group  mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Contact</label>
                 <div>
                     <?php echo $this->Form->control('contact', array('class' => 'form-control ', 'placeholder' => '', 'label' => false)); ?>
@@ -55,7 +55,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Ship Via&nbsp;<span class="required">*</span></label>
                 <div>
                     <?php
@@ -65,11 +65,9 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Requestor&nbsp;<span class="required">*</span></label>
                 <div>
                     <?php echo $this->Form->control('requestor', array('class' => 'form-control ', 'placeholder' => '', 'label' => false, 'value' => $userData['full_name'], 'required' => 'required')); ?>
@@ -78,7 +76,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Account Code</label>
                 <div>
                     <?php echo $this->Form->control('account_code', array('options' => '', 'empty' => 'Select account code...', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'account_code'));  ?>
@@ -87,18 +85,16 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22 ">
+            <div class="form-group clearfix ">
                 <label class="control-label " for="plane_id">Reference</label>
                 <div>
                     <?php echo $this->Form->control('reference', array('class' => 'form-control ', 'placeholder' => '', 'label' => false)); ?>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Currency&nbsp;<span class="required">*</span></label>
                 <div>
                     <?php
@@ -111,7 +107,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group mr-22 ml-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Bill To&nbsp;<span class="required">*</span></label>
 
                 <div class="input-group">
@@ -127,7 +123,7 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group ml-22 mr-22">
+            <div class="form-group clearfix">
                 <label class="control-label " for="plane_id">Ship To&nbsp;<span class="required">*</span></label>
                 <div class="input-group">
                     <?php
@@ -137,12 +133,9 @@ echo $this->Form->create($InventoryRepairOrders, array('class' => 'form-horizont
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
           <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="form-group ml-22 mr-22">
-
+            <div class="form-group clearfix">
                 <label class="control-label  special-instruction-label" for="plane_id">Special Instructions</label>
                 <div >
                     <?php echo $this->Form->input('special_instructions', array('type' => 'textarea', 'class' => 'form-control ', 'placeholder' => '', 'label' => false, 'required' => 'required')); ?>

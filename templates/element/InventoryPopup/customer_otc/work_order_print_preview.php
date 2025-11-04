@@ -1,5 +1,5 @@
 <div id="workOrderPrintPreviewModal" class="modal fade page-content" role="dialog" style="background: transparent;">
-    <div class="modal-dialog" style="width: 30%;">
+    <div class="modal-dialog">
         <?php
         echo $this->Form->create(null, array('class' => 'form-horizontal form-label-left', 'id' => 'frmWOPrintPreview'));
         ?> 
@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12">
-                        <div class="form-group">
+                        <div class="form-group selectpickerWrap">
                             <label class="control-label">Select Report</label>
                             <div class="form-input-frame">
                                 <?php

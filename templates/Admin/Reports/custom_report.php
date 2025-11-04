@@ -51,16 +51,16 @@ use Cake\Routing\Router;
                     <table id="customReport" class="table mb-0 ">
                         <thead>
                             <tr>
-                                <th width="5%" class="check text-nowrap"><input type="checkbox" name="air_check" id="ckbCheckAll" checked="checked"></th>
-                                <th width="3%" class="hidden-xs"  class="text-nowrap"></th>
+                                <th class="check text-nowrap"><input type="checkbox" name="air_check" id="ckbCheckAll" checked="checked"></th>
+                                <th class="hidden-xs"  class="text-nowrap"></th>
                                 <th style="min-width:180px" id="aircraftId" class="text-nowrap">Aircraft <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%" id="reportedDateId"  class="text-nowrap">Reported Date <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%" id="reportedHrsId"  class="text-nowrap">Reported Hours <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="12%" id="reportedAflId"  class="text-nowrap">Reported Landings <i class="fa fa-fw fa-sort"></i></th>
-                                <th width="13%"  class="text-nowrap">Next Item Due</th>
-                                <th width="10%"  class="text-nowrap">Availability</th>
-                                <th width="8%"  class="text-nowrap">Action</th>
-                                <th width="8%" id="statusId"  class="text-nowrap">Status <i class="fa fa-fw fa-sort"></i></th>
+                                <th id="reportedDateId"  class="text-nowrap">Reported Date <i class="fa fa-fw fa-sort"></i></th>
+                                <th id="reportedHrsId"  class="text-nowrap">Reported Hours <i class="fa fa-fw fa-sort"></i></th>
+                                <th id="reportedAflId"  class="text-nowrap">Reported Landings <i class="fa fa-fw fa-sort"></i></th>
+                                <th class="text-nowrap">Next Item Due</th>
+                                <th class="text-nowrap">Availability</th>
+                                <th class="text-nowrap">Action</th>
+                                <th id="statusId"  class="text-nowrap">Status <i class="fa fa-fw fa-sort"></i></th>
                             </tr>
                         </thead>
                         <tbody id="aircraftList">
@@ -70,7 +70,7 @@ use Cake\Routing\Router;
                                 $evenOdd = (!empty($key) && ($key % 2) == 0) ? 'even' : 'odd';              
                             ?>
                                 <tr class="mainTR activeTble <?php echo $evenOdd; ?>">
-                                    <td class="check"><input type="checkbox" class="chkBoxCls" name="childcheckbox" value="<?php echo $row['plane']['plane_id']; ?>" checked="checked"></td>
+                                    <td class="check ccc"><input type="checkbox" class="chkBoxCls" name="childcheckbox" value="<?php echo $row['plane']['plane_id']; ?>" checked="checked"></td>
                                     <td class="collapse-tr"><div class="expand-tr"></div></td>
                                     <td class="collapse-tr"><?= h($row['plane']['plane_code']) ?></td>
                                     <td class="collapse-tr"><?= !empty($row['plane']['reported_date']) ? h(strtoupper(date('m/d/Y', strtotime($row['plane']['reported_date'])))) : ''; ?></td>

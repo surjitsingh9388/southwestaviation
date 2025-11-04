@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #e5e5e5;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4>PTO Request History</h4>
+                <h4 class="modal-title">PTO Request History</h4>
             </div>
             <div class="modal-body">
                 <div class="page-content">
                     <div class="table-responsive">
-                        <table class="table mb-0">
+                        <table class="table table-bordered table-hover mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap">Employee Name</th>

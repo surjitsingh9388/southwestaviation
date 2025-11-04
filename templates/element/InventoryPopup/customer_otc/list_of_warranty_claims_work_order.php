@@ -6,13 +6,15 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #e5e5e5;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo $search_by == 'open_warranty_claim_work_order' ? 'List of Open Warranty Claims for Work Orders' : 'List of All Warranty Claims for Work Orders'; ?></h4>
+                <h4 class="modal-title"><?php echo $search_by == 'open_warranty_claim_work_order' ? 'Open Warranty Claims' : 'All Warranty Claims'; ?></h4>
             </div>
             <div class="modal-body">
-                <div class="col-md-12">
+                <div class="table-info-header">
+                    <h5>
                     <?php echo $search_by == 'open_warranty_claim_work_order' ? 'List of Open Warranty Claims for Work Orders' : 'List of All Warranty Claims for Work Orders'; ?>
+                    </h5>
                 </div>
-                <div class="col-md-12">
+                 <div class="table-responsive table-container ">
                     <table class="table table-bordered">
                         <thead>
                             <tr>

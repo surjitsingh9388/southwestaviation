@@ -10,7 +10,7 @@ $action = $this->request->getParam('action');
 $type = !empty($_GET['type']) ? $_GET['type'] : '';
 ?>
 <div id="sidebar-menu" class="side-bar sliding">
-    <ul style="max-height: calc(100vh - 57px); overflow-y: auto;">
+    <ul class="clearfix" style="margin-bottom:100px;">
         <div class="menu">
             <?php
             if($sessionUser['role_id'] != '15'){ ?>
@@ -1043,7 +1043,7 @@ $type = !empty($_GET['type']) ? $_GET['type'] : '';
                             <i class="fa fa-angle-down arrow-icon" aria-hidden="true"></i>
                         </div>
                     </a>
-                    <ul class="nav dropdown-menu dropdown-usermenu" style="padding-bottom:60px" <?php echo $partsSubStyle; ?>>
+                    <ul class="nav dropdown-menu dropdown-usermenu"  <?php echo $partsSubStyle; ?>>
                         <?php 
                         if(in_array('Information Center', $userMenu)) {
                             if($controller == 'Inventories' && (in_array($action, array('index')))) { 

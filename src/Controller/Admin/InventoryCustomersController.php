@@ -77,6 +77,7 @@
         protected \App\Model\Table\AircraftWOItemServiceLogsTable $AircraftWOItemServiceLogs;
         protected \App\Model\Table\UserPTORequestsTable $UserPTORequests;
         protected \App\Model\Table\StatementsTable $Statements;
+        protected \App\Model\Table\InventoryCustomerPhonesTable $InventoryCustomerPhones;
 
         public function initialize():void {
             $this->Users                                            = $this->fetchTable('Users'); 
@@ -140,6 +141,7 @@
             $this->AircraftWOItemServiceLogs                        = $this->fetchTable('AircraftWOItemServiceLogs');
             $this->UserPTORequests                                  = $this->fetchTable('UserPTORequests');
             $this->Statements                                       = $this->fetchTable('Statements');
+            $this->InventoryCustomerPhones                          = $this->fetchTable('InventoryCustomerPhones');
 
 
             $this->loadComponent('Address');
@@ -469,8 +471,9 @@
             $customeraddrdropdown = $this->CustomerOTC->getCustomerShippingAddrDropdown($id);
 
             $customerInfoMedia = $this->CustomerOTC->getCustomerInfoAttachment($id);
+            $customerphonedropdown = $this->CustomerOTC->getCustomerPhoneNumberDropdown($id);
 
-            $this->set(compact('inventorycustomers', 'actionItems', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraftmakes', 'aircraftregdet', 'customerotcaircrafts', 'aircraftmodels', 'customerotcinfoes', 'invoiceparthisttblrow', 'repairorderhistory', 'aircraftworkorderdata', 'customeraddrdropdown', 'repairorderrates', 'customerInfoMedia'));
+            $this->set(compact('inventorycustomers', 'actionItems', 'countries', 'userlist', 'created_by', 'clientphone', 'aircraftmakes', 'aircraftregdet', 'customerotcaircrafts', 'aircraftmodels', 'customerotcinfoes', 'invoiceparthisttblrow', 'repairorderhistory', 'aircraftworkorderdata', 'customeraddrdropdown', 'repairorderrates', 'customerInfoMedia', 'customerphonedropdown'));
         }
 
         public function getInvItemsWithInventoriesList(){
@@ -1289,6 +1292,12 @@
                     $inventorycustomeraddresses = $this->InventoryCustomerAddresses->newEmptyEntity();
                     $states = '';
                     $this->set(compact('inventorycustomeraddresses', 'states'));
+                }else if($section == 'inventory_customer_add_phone'){
+                    $fileName .= 'inventory_customer_add_phone';
+
+                    $inventorycustomerphones = $this->InventoryCustomerPhones->newEmptyEntity();
+                    
+                    $this->set(compact('inventorycustomerphones'));
                 }else if($section == 'update_logbook_value_open_wo'){
                     $fileName .= 'update_logbook_value_open_wo';
 
@@ -3687,10 +3696,10 @@
             $postData['department'] = !empty($postData['department']) ? $postData['department'] : '1';
             $postData['wo_category'] = !empty($postData['wo_category']) ? $postData['wo_category'] : '7';
 
-            $postData['special_rate_hr'] = preg_replace('/[^0-9.]/', '', $postData['special_rate_hr']);
-            $postData['estimated_rate']  = preg_replace('/[^0-9.]/', '', $postData['estimated_rate']);
-            $postData['flat_rate']       = preg_replace('/[^0-9.]/', '', $postData['flat_rate']);
-            $postData['shipping_in']     = preg_replace('/[^0-9.]/', '', $postData['shipping_in']);
+            $postData['special_rate_hr'] = !empty($postData['special_rate_hr']) ? preg_replace('/[^0-9.]/', '', $postData['special_rate_hr']) : '';
+            $postData['estimated_rate']  = !empty($postData['estimated_rate']) ? preg_replace('/[^0-9.]/', '', $postData['estimated_rate']) : '';
+            $postData['flat_rate']       = !empty($postData['flat_rate']) ? preg_replace('/[^0-9.]/', '', $postData['flat_rate']) : '';
+            $postData['shipping_in']     = !empty($postData['shipping_in']) ? preg_replace('/[^0-9.]/', '', $postData['shipping_in']) : '';
             
             $woitemoverviews = $this->CustomerAircraftWOItemOverviews->patchEntity($woitemoverviews, $postData);
             $this->CustomerAircraftWOItemOverviews->save($woitemoverviews);
@@ -5465,11 +5474,13 @@
                     if ($this->CustomerAircraftWOMessages->save($wooptionsendmsg)) {
                         $work_order_id = !empty($postData['work_order_id']) ? $postData['work_order_id'] : '';
                         
-                        $receivedmsglist = $this->CustomerOTC->getAircraftWOMsgList($work_order_id);
+                        $sentmsglist = $this->CustomerOTC->getSentMessages($work_order_id);
+                        $receivedmsglist = $this->CustomerOTC->getReceivedMessages($work_order_id);
                         $InventoryAircraftWorkOrderHelper = new InventoryAircraftWorkOrderHelper(new \Cake\View\View());
-                        $msgtr = $InventoryAircraftWorkOrderHelper->getWOMessageListHTML($receivedmsglist);
-                        
-                        $response = ['status'=>'success', 'message'=>'', 'msgtr'=>$msgtr];
+                        $sentmsgtr = $InventoryAircraftWorkOrderHelper->getWOSentMessageListHTML($sentmsglist);
+                        $receivedmsgtr = $InventoryAircraftWorkOrderHelper->getWOReceivedMessageListHTML($receivedmsglist);
+
+                        $response = ['status'=>'success', 'message'=>'', 'sentmsgtr'=>$sentmsgtr, 'receivedmsgtr'=>$receivedmsgtr];
                         echo json_encode($response);die;
                     }else{
                         //var_dump($wooptionsendmsg->errors()); die();
@@ -5491,11 +5502,13 @@
                     $postData = $this->request->getData();
                     //echo "<pre>";print_r($postData);exit;
                     $work_order_id = !empty($postData['work_order_id']) ? $postData['work_order_id'] : '';
-                    $receivedmsglist = $this->CustomerOTC->getAircraftWOMsgList($work_order_id);
+                    $sentmsglist = $this->CustomerOTC->getSentMessages($work_order_id);
+                    $receivedmsglist = $this->CustomerOTC->getReceivedMessages($work_order_id);
                     $InventoryAircraftWorkOrderHelper = new InventoryAircraftWorkOrderHelper(new \Cake\View\View());
-                    $msgtr = $InventoryAircraftWorkOrderHelper->getWOMessageListHTML($receivedmsglist);
+                    $sentmsgtr = $InventoryAircraftWorkOrderHelper->getWOSentMessageListHTML($sentmsglist);
+                    $receivedmsgtr = $InventoryAircraftWorkOrderHelper->getWOReceivedMessageListHTML($receivedmsglist);
 
-                    $response = ['status'=>'success', 'message'=>'', 'msgtr'=>$msgtr];
+                    $response = ['status'=>'success', 'message'=>'', 'sentmsgtr'=>$sentmsgtr, 'receivedmsgtr'=>$receivedmsgtr];
                     echo json_encode($response);die;
                 }else{
                     $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
@@ -5518,11 +5531,13 @@
 
                         $result = $this->CustomerAircraftWOMessages->delete($womessagelist);
                         
-                        $receivedmsglist = $this->CustomerOTC->getAircraftWOMsgList($work_order_id);
+                        $sentmsglist = $this->CustomerOTC->getSentMessages($work_order_id);
+                        $receivedmsglist = $this->CustomerOTC->getReceivedMessages($work_order_id);
                         $InventoryAircraftWorkOrderHelper = new InventoryAircraftWorkOrderHelper(new \Cake\View\View());
-                        $msgtr = $InventoryAircraftWorkOrderHelper->getWOMessageListHTML($receivedmsglist);
+                        $sentmsgtr = $InventoryAircraftWorkOrderHelper->getWOSentMessageListHTML($sentmsglist);
+                        $receivedmsgtr = $InventoryAircraftWorkOrderHelper->getWOReceivedMessageListHTML($receivedmsglist);
 
-                        $response = ['status'=>'success', 'message'=>'', 'msgtr'=>$msgtr];
+                        $response = ['status'=>'success', 'message'=>'', 'sentmsgtr'=>$sentmsgtr, 'receivedmsgtr'=>$receivedmsgtr];
                         echo json_encode($response);die;
                     }else{
                         $message = 'Something went wrong, please try again';
@@ -6754,6 +6769,46 @@
             }
         }
 
+        public function saveCustomerPhoneNumber(){
+            if (!$this->request->is('ajax')) {
+                return $this->redirect(['action' => 'index']);
+            }else{
+                $this->viewBuilder()->setLayout('ajax');
+                $authUserData = $this->Authentication->getResult()->getData();
+
+                $customerphones = $this->InventoryCustomerPhones->newEmptyEntity();
+
+                $postData = $this->request->getData();//print_r($postData);exit;
+                $postData['added_by'] = $authUserData['id'];
+                $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
+               
+                $customer_id = $postData['customer_id'];
+
+                $customerphones = $this->InventoryCustomerPhones->patchEntity($customerphones, $postData);
+                
+                if ($this->InventoryCustomerPhones->save($customerphones)) {
+                    $id = $customerphones->id;
+
+                    $customerphonedropdown = '';
+                    $customerphonedet = $this->InventoryCustomerPhones->find('all', ['order'=>'id ASC'])->where(['customer_id'=>$customer_id])->select($this->InventoryCustomerPhones);
+                    
+                    foreach($customerphonedet as $phone){
+                        $selected = '';
+                        if($phone['id'] == $id){
+                            $selected = 'selected';
+                        }
+                        $customerphonedropdown .= '<option value="'.$phone['phone_number'].'" '.$selected.'>'.$phone['phone_number'].'</option>';
+                    }
+                    
+                    $result = array('status'=>'success', 'message'=>"Phone Number Saved successfully.", 'customerphonedropdown'=>$customerphonedropdown);
+                } else {
+                    $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                }
+                
+                echo json_encode($result);die;
+            }
+        }
+
         public function getCustomerShippingAddress(){
             if (!$this->request->is('ajax')) {
                 return $this->redirect(['action' => 'index']);
@@ -7079,9 +7134,10 @@
                 $wo_item_id = !empty($postData['wo_item_id']) ? $postData['wo_item_id'] : '';
                 $section_clk = $postData['section_clk'];
 
-                $receivedmsglist = $this->CustomerOTC->getAircraftWOMsgList($work_order_id);
+                $sentmsglist = $this->CustomerOTC->getSentMessages($work_order_id);
+                $receivedmsglist = $this->CustomerOTC->getReceivedMessages($work_order_id);
                 
-                $this->set(compact('work_order_no', 'section_clk', 'wo_item_id', 'receivedmsglist'));
+                $this->set(compact('work_order_no', 'section_clk', 'wo_item_id', 'sentmsglist', 'receivedmsglist'));
                 
                 $this->viewBuilder()->setLayout('ajax');
                 $this->render('/element/InventoryPopup/customer_otc/aircraft_wo_msgs_forall_users');
@@ -7151,6 +7207,7 @@ Send: '.$messagedata['created_at'].'
                 $work_order_id = !empty($postData['work_order_id']) ? $postData['work_order_id'] : '';
                 $message_id = $postData['message_id'];
                 $work_order_no = !empty($postData['work_order_no']) ? $postData['work_order_no'] : '';
+                $msg_source = $postData['msg_source'];
 
                 $wooptionmessages = $this->CustomerOTC->getAircraftWOMsgList($work_order_id, $message_id);
                 $messageobj = $this->CustomerAircraftWOMessages->get($message_id);
@@ -7167,7 +7224,7 @@ Send: '.$messagedata['created_at'].'
                     $userptorequests = $this->UserPTORequests->get($wooptionmessages['pto_request_id']);
                 }
 
-                $this->set(compact('wooptionmessages', 'work_order_no', 'sessionUser', 'messageobj', 'userptorequests'));
+                $this->set(compact('wooptionmessages', 'work_order_no', 'sessionUser', 'messageobj', 'userptorequests', 'msg_source'));
                 $this->viewBuilder()->setLayout('ajax');
                 $this->render('/element/InventoryPopup/customer_otc/aircraft_wo_option_view_message');
             }
@@ -7202,11 +7259,13 @@ Send: '.$messagedata['created_at'].'
                         );
                         
                         if ($res) {
-                            $receivedmsglist = $this->CustomerOTC->getAircraftWOMsgList();
+                            $sentmsglist = $this->CustomerOTC->getSentMessages();
+                            $receivedmsglist = $this->CustomerOTC->getReceivedMessages();
                             $InventoryAircraftWorkOrderHelper = new InventoryAircraftWorkOrderHelper(new \Cake\View\View());
-                            $msgtr = $InventoryAircraftWorkOrderHelper->getWOMessageListHTML($receivedmsglist);
+                            $sentmsgtr = $InventoryAircraftWorkOrderHelper->getWOSentMessageListHTML($sentmsglist);
+                            $receivedmsgtr = $InventoryAircraftWorkOrderHelper->getWOReceivedMessageListHTML($receivedmsglist);
 
-                            $response = ['status'=>'success', 'message'=>'', 'msgtr'=>$msgtr];
+                            $response = ['status'=>'success', 'message'=>'', 'sentmsgtr'=>$sentmsgtr, 'receivedmsgtr'=>$receivedmsgtr];
                             echo json_encode($response);die;
                         }else{
                             $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];

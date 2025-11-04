@@ -2,9 +2,9 @@
     <?php
     echo $this->Form->create($aircraftwoitemoverviews, array('class' => 'form-horizontal form-label-left', 'id' => 'frmAircraftWorkOrderItemOverviews'));
     ?>
-    <div class="row">
+    <div class="row" style="display: flex;flex-wrap: wrap;">
         <input type="hidden" name="wo_overviews_id" id="wo_overviews_id" value="<?php echo @$aircraftwoitemoverviews->id; ?>" />
-        <div class="col-md-6">
+        <div class="col-md-3 col-sm-4">
             <div class="form-group">
                 <label class="control-label" for="reference">Category</label>
                 <div class="form-input-frame">
@@ -39,72 +39,8 @@
                 </div>
             </div>
         </div-->
-        <div class="col-md-3">
-            <div class="form-group">
-                <label class="control-label" for="reference"><span class="text-red">Owner Authorization</span></label>
-                <div class="form-input-frame">
-                    <input type="hidden" id="owner_authentication_old" value="<?php echo @$aircraftwoitemoverviews->owner_authentication; ?>" />
-                    <?php
-                    $authrization = ['1'=>'Open', '2'=>'Yes', '3'=>'No'];
-                    echo $this->Form->control('owner_authentication', array('options' => $authrization, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'owner_authentication'));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3" style="clear: left;">
-             <div class="form-group">
-                <label class="control-label" for="reference">Warranty</label>
-                <div class="form-input-frame">
-                    <?php
-                    $warrantywoarr = unserialize(WOITEMOVERVIEWWARRANTY);
-                    echo $this->Form->control('warranty', array('options' => $warrantywoarr, 'empty' => 'Select Warranty', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'warranty'));
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <?php
-                $item_is_warrantychk = '';
-                if(isset($aircraftwoitemoverviews->item_is_warranty) && !empty($aircraftwoitemoverviews->item_is_warranty)){
-                    $item_is_warrantychk = 'checked';
-                }
-                ?>
-                <input type="checkbox" name="item_is_warranty" value="1" <?php echo $item_is_warrantychk; ?>>&nbsp;Item is Warranty
-            </div>
-        </div>
-        <div class="col-md-3">
-           
-            <div class="form-group">
-                <label class="control-label" for="reference">Warranty Claim No.</label>
-                <div class="form-input-frame">
-                    <?php echo $this->Form->control('warranty_claim_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            
-            <div class="form-group">
-                <label class="control-label" for="reference">Log Book Category</label>
-                <div class="form-input-frame">
-                    <?php
-                    $aircraftWOLogBookCategory = unserialize(AIRCRAFT_WORKORDER_LOGBOOK_CATEGORY);
-                    echo $this->Form->control('log_book_category', array('options' => $aircraftWOLogBookCategory, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'log_book_category'));
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <?php
-                $donot_use_inlogbookchk = '';
-                if(!empty($aircraftwoitemoverviews->donot_use_inlogbook)){
-                    $donot_use_inlogbookchk = 'checked';
-                }
-                ?>
-                <input type="checkbox" name="donot_use_inlogbook" value="1" <?php echo $donot_use_inlogbookchk; ?> />&nbsp;Do not use in Log Book
-            </div>
-        </div>
-        <div class="col-md-3">
-            
-            <div class="form-group">
+          <div class="col-md-3 col-sm-4">
+            <div>
                 <label class="control-label" for="reference">ATA Code</label>
                 <div class="form-input-frame">
                     <?php 
@@ -124,6 +60,66 @@
                 <input type="checkbox" name="requires_rii" value="1" <?php echo $requires_riichk; ?>>&nbsp;Requires II
             </div>
         </div>
+        <div class="col-md-3 col-sm-4">
+            <div class="form-group">
+                <label class="control-label" for="reference"><span class="text-red">Owner Authorization</span></label>
+                <div class="form-input-frame">
+                    <input type="hidden" id="owner_authentication_old" value="<?php echo @$aircraftwoitemoverviews->owner_authentication; ?>" />
+                    <?php
+                    $authrization = ['1'=>'Open', '2'=>'Yes', '3'=>'No'];
+                    echo $this->Form->control('owner_authentication', array('options' => $authrization, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'owner_authentication'));
+                    ?>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-3 col-sm-4">
+            <div>
+                <label class="control-label" for="reference">Log Book Category</label>
+                <div class="form-input-frame">
+                    <?php
+                    $aircraftWOLogBookCategory = unserialize(AIRCRAFT_WORKORDER_LOGBOOK_CATEGORY);
+                    echo $this->Form->control('log_book_category', array('options' => $aircraftWOLogBookCategory, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'log_book_category'));
+                    ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <?php
+                $donot_use_inlogbookchk = '';
+                if(!empty($aircraftwoitemoverviews->donot_use_inlogbook)){
+                    $donot_use_inlogbookchk = 'checked';
+                }
+                ?>
+                <input type="checkbox" name="donot_use_inlogbook" value="1" <?php echo $donot_use_inlogbookchk; ?> />&nbsp;Do not use in Log Book
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4" style="clear: left;">
+             <div>
+                <label class="control-label" for="reference">Warranty</label>
+                <div class="form-input-frame">
+                    <?php
+                    $warrantywoarr = unserialize(WOITEMOVERVIEWWARRANTY);
+                    echo $this->Form->control('warranty', array('options' => $warrantywoarr, 'empty' => 'Select Warranty', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'warranty'));
+                    ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <?php
+                $item_is_warrantychk = '';
+                if(isset($aircraftwoitemoverviews->item_is_warranty) && !empty($aircraftwoitemoverviews->item_is_warranty)){
+                    $item_is_warrantychk = 'checked';
+                }
+                ?>
+                <input type="checkbox" name="item_is_warranty" value="1" <?php echo $item_is_warrantychk; ?>>&nbsp;Item is Warranty
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4">
+            <div class="form-group">
+                <label class="control-label" for="reference">Warranty Claim No.</label>
+                <div class="form-input-frame">
+                    <?php echo $this->Form->control('warranty_claim_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -135,7 +131,7 @@
                     $isdisabled = $aircraftwoitems->wo_item_status == '3' ? 'disabled' : '';
                     ?>
                     <div class="col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Way of Billing</label>
                                 <div class="form-input-frame">
@@ -148,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Department</label>
                                 <div class="form-input-frame">
@@ -159,7 +155,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Bill-To Customer</label>
                                 <div class="form-input-frame">
@@ -171,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Shipping In</label>
                                 <div class="form-input-frame">
@@ -185,11 +181,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Special Rate / Hr</label>
                                 <div class="form-input-frame">
@@ -200,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Estimated Hrs</label>
                                 <div class="form-input-frame">
@@ -213,7 +205,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Estimated Rate</label>
                                 <div class="form-input-frame">
@@ -228,7 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Flat Rate</label>
                                 <div class="form-input-frame">
@@ -241,7 +233,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3 col-sm-4">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Flat Rate Qty</label>
                                 <div class="form-input-frame">
@@ -255,10 +247,11 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-sm-12">
                             <div class="form-group">
                                 <?php
                                 $special_hourly_rate_for_itemchk = '';
@@ -269,7 +262,7 @@
                                 <input type="checkbox" name="special_hourly_rate_for_item" value="1" <?php echo $special_hourly_rate_for_itemchk.' '.$isdisabled; ?> >&nbsp;Use Special Hour Rate for Item
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-sm-12">
                             <div class="form-group">
                                 <?php
                                 $labor_is_taxablechk = '';

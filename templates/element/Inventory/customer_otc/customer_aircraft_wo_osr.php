@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt10">
+        <div class="col-sm-12 mt10">
             <table class="table table-bordered">
                 <thead>
                     <tr>

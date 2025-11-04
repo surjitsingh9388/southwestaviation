@@ -1,8 +1,24 @@
 $(document).ready(function() {
+    var currentUrl = window.location.href;
+
+    // Define URLs where you want to hide the first column
+    var hideColumnUrls = [
+        'inventory_requests',
+        'inventory_repair_orders',
+        'inventory_purchase_orders',
+        'inventory_shipping_orders'
+    ];
+
+    // Check if current URL matches any of those
+    var shouldHideColumn = hideColumnUrls.some(function(url) {
+        return currentUrl.includes(url);
+    });
+
     var dataTable = $('#datatableListingPage').DataTable({
         'order': [$("#FilterBy").val(), 'asc'],
         columnDefs: [{
             "targets": [0],
+            visible: !shouldHideColumn,
             orderable: false,
             className: "check noExl"
         }],
@@ -125,7 +141,7 @@ $(document).ready(function() {
         }
     });
 
-    $("form#frmAddVendor #name, #street1, #city, #postal, #country, #province, #state").on("keyup change", function(){
+    $("form#frmAddVendor #vendor_name, #street1, #city, #postal, #country, #province, #state").on("keyup change", function(){
         disableEnableVendorSaveBtn();
     });
 
@@ -290,7 +306,7 @@ $(document).on('change', '#country', function (e) {
 });
 
 $(document).on('click', '.deleteattachment', function (e) {
-    if('Are you sure want to delete this attachment'){
+    if(confirm('Are you sure want to delete this attachment')){
         if($(this).attr('data-val') != undefined){
             $(this).parent().parent().remove();
             $.ajax({
@@ -519,8 +535,8 @@ function disableEnableVendorSaveBtn() {
     let errors = 0;
     const country = $('#country').val();
     const requiredFields = (country === '231')
-        ? ['#name', '#street1', '#city', '#postal', '#country', '#state']
-        : ['#name', '#street1', '#city', '#postal', '#country', '#province'];
+        ? ['#vendor_name', '#street1', '#city', '#postal', '#country', '#state']
+        : ['#vendor_name', '#street1', '#city', '#postal', '#country', '#province'];
 
     // Loop through required fields
     requiredFields.forEach(function(selector) {

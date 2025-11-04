@@ -1,6 +1,6 @@
 <section class="top-form-section" id="aircraft_info_add_section">    
     <div class="row">
-        <div class="col-md-3 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label class="control-label" for="reference">List of Aircraft <span class="required">*</span>
                 </label>
@@ -28,7 +28,7 @@
             <button type="button" class="btn btn-default deleteAircraftInfoBtn" disabled>Remove</button>
         </div>
 
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-9 col-sm-9">
             <?php echo $this->Form->create($customerotcaircrafts, ['class' => 'form-horizontal form-label-left', 'id' => 'frmUpdateCustomerOTCAircrafts', 'autocomplete'=>'off']); ?>
             <input type="hidden" name="aircraft_id" id="aircraft_id" value="<?php echo $aircraft_id; ?>" />
             <div class="row">

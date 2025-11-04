@@ -9,10 +9,10 @@
 
 /* ================
 Calendar Styling */
-.calendar {
-  /*border-radius: 10px;*/
+/* .calendar {
+  border-radius: 10px;
   padding: 10px;
-}
+} */
 
 .eventcalmonth {
   font-size: 2rem;
@@ -32,18 +32,20 @@ Calendar Styling */
 .calendar .day-names {
   border-bottom: 1px solid #eee;
   font-weight:bold;
+  margin-bottom: 0px;
 }
 
 .calendar .day-names li {
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  padding: 10px;
+  /* margin-bottom: 0.5rem; */
 }
 
 .calendar .days li {
   border-bottom: 1px solid #eee;
   height: 9rem;
   font-weight:bold;
-  padding:1px;
+  padding:10px;
 }
 
 .calendar .days li .date {
@@ -140,7 +142,6 @@ Calendar Styling */
 }
 .clearboth{
   clear:both;
-  padding-top: 10px;
 }
 .previous{
   color:#fff;

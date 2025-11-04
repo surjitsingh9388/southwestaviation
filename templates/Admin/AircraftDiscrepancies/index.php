@@ -81,7 +81,7 @@ if (!empty($planeId)) {
                             foreach ($discrepResult as $key => $value) {
                                 if (!empty($value["discrepancy_mel"])) {
                                     $dispMel = "yes";
-                                    $melRepairBy = date('m/d/Y', strtotime($value["mel_repair_by"]));
+                                    $melRepairBy = !empty($value["mel_repair_by"]) ? date('m/d/Y', strtotime($value["mel_repair_by"])) : '';
                                 } else {
                                     $dispMel = "no";
                                     $melRepairBy = '';

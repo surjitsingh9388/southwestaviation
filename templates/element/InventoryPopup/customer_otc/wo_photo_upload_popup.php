@@ -8,7 +8,7 @@
             <?= $this->Form->create(null, ['type' => 'file', 'id' => 'importForm']) ?>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="form-group">
                             <div id="upload-area" class="form-input-frame upload-area">
                                 <p>Drag & Drop your file here or</p>

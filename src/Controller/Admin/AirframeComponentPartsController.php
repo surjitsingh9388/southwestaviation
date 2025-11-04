@@ -429,12 +429,23 @@ class AirframeComponentPartsController extends AppController
                                 ]
                             ]
                         ]);
-        if(!empty($airCompParts['airframe_component_last_cw'][0]['last_revised_by'] && is_numeric($airCompParts['airframe_component_last_cw'][0]['last_revised_by']))){
-            $airCompParts['airframe_component_last_cw'][0]['last_revised_by'] = $this->User->getUserName($airCompParts['airframe_component_last_cw'][0]['last_revised_by']);
+        
+        if (!empty($airCompParts['airframe_component_last_cw']) && isset($airCompParts['airframe_component_last_cw'][0])) {
+
+            // Check and replace last_revised_by
+            if (!empty($airCompParts['airframe_component_last_cw'][0]['last_revised_by']) &&
+                is_numeric($airCompParts['airframe_component_last_cw'][0]['last_revised_by'])) {
+                $airCompParts['airframe_component_last_cw'][0]['last_revised_by'] = 
+                    $this->User->getUserName($airCompParts['airframe_component_last_cw'][0]['last_revised_by']);
+            }
+
+            // Check and replace last_reported_by
+            if (!empty($airCompParts['airframe_component_last_cw'][0]['last_reported_by']) && is_numeric($airCompParts['airframe_component_last_cw'][0]['last_reported_by'])) {
+                $airCompParts['airframe_component_last_cw'][0]['last_reported_by'] = 
+                    $this->User->getUserName($airCompParts['airframe_component_last_cw'][0]['last_reported_by']);
+            }
         }
-        if(!empty($airCompParts['airframe_component_last_cw'][0]['last_reported_by']) && is_numeric($airCompParts['airframe_component_last_cw'][0]['last_reported_by'])){
-            $airCompParts['airframe_component_last_cw'][0]['last_reported_by'] = $this->User->getUserName($airCompParts['airframe_component_last_cw'][0]['last_reported_by']);
-        }
+
 
         //Get all childs
         $partIds = [''];

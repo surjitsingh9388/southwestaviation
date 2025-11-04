@@ -5,8 +5,8 @@
     <input type="hidden" name="wo_item_id" id="osrinfo_item_id" value="<?php echo $wo_item_id; ?>" />
     <input type="hidden" name="work_order_id" id="osrinfo_wo_id" value="<?php echo $work_order_id; ?>" />
     <input type="hidden" name="wo_osrinfo_id" id="wo_osrinfo_id" value="<?php echo @$wooutstandingoutside->id; ?>" />
-    <div class="col-md-12 col-xs-12 col-sm-12">
-        <div class="col-md-6 col-xs-6 col-sm-6">
+    <div class="row m-0">
+        <div class="col-lg-6 col-sm-12 col-xs-12">
             <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="form-group">
                     <label class="control-label label-heading-left" for="reference">Repair Done By</label>
@@ -114,7 +114,7 @@
                 </div>
             </div>
         </div>
-         <div class="col-md-6 col-sm-6 col-xs-6">
+         <div class="col-lg-6 col-sm-12 col-xs-12">
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                     <label class="control-label label-heading-left" for="reference">Invoice No.</label>
@@ -137,65 +137,64 @@
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
-                        <label class="control-label" for="reference">Description of Work</label>
+                <label class="control-label" for="reference">Description of Work</label>
+                <div class="form-group">
+                    <div class="form-input-frame">
+                        <?php echo $this->Form->control('osr_description_of_work', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5')); ?>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="form-input-frame">
-                            <?php echo $this->Form->control('osr_description_of_work', array('type'=>'textarea', 'class' => 'form-control', 'label'=> false, 'row'=>'5')); ?>
+               
+            </div>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-sm-12">
+            <div class="col-md-3 col-xs-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="reference">Vendor Labor Charge</label>
+                    <div class="form-input-frame">
+                        <?php 
+                        $osr_vendor_labor_charges = '$0.00';
+                        if(!empty($wooutstandingoutside->osr_vendor_labor_charges)){
+                            $osr_vendor_labor_charges = '$'.number_format($wooutstandingoutside->osr_vendor_labor_charges, 2);
+                        }
+                        
+                        echo $this->Form->control('osr_vendor_labor_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_labor_charges', 'value'=>$osr_vendor_labor_charges)); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="reference">Vendor Parts Charge</label>
+                    <div class="form-input-frame">
+                        <?php 
+                        $osr_vendor_part_charges = '$0.00';
+                        if(!empty($wooutstandingoutside->osr_vendor_part_charges)){
+                            $osr_vendor_part_charges = '$'.number_format($wooutstandingoutside->osr_vendor_part_charges, 2);
+                        }
+                        echo $this->Form->control('osr_vendor_part_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_part_charges', 'value'=>$osr_vendor_part_charges)); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="reference">Date Due</label>
+                    <div class="form-input-frame">
+                        <div class="input-group date datePicker">
+                            <?php echo $this->Form->Text('osr_date_due', array('class' => 'form-control', 'id' => 'outside_date_due', 'placeholder' => '', 'label' => false)); ?>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="col-md-3 col-sm-3 col-xs-3">
-            <div class="form-group">
-                <label class="control-label" for="reference">Vendor Labor Charge</label>
-                <div class="form-input-frame">
-                    <?php 
-                    $osr_vendor_labor_charges = '$0.00';
-                    if(!empty($wooutstandingoutside->osr_vendor_labor_charges)){
-                        $osr_vendor_labor_charges = '$'.number_format($wooutstandingoutside->osr_vendor_labor_charges, 2);
-                    }
-                    
-                    echo $this->Form->control('osr_vendor_labor_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_labor_charges', 'value'=>$osr_vendor_labor_charges)); ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
-            <div class="form-group">
-                <label class="control-label" for="reference">Vendor Parts Charge</label>
-                <div class="form-input-frame">
-                    <?php 
-                    $osr_vendor_part_charges = '$0.00';
-                    if(!empty($wooutstandingoutside->osr_vendor_part_charges)){
-                        $osr_vendor_part_charges = '$'.number_format($wooutstandingoutside->osr_vendor_part_charges, 2);
-                    }
-                    echo $this->Form->control('osr_vendor_part_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_part_charges', 'value'=>$osr_vendor_part_charges)); ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-xs-3 col-sm-3">
-            <div class="form-group">
-                <label class="control-label" for="reference">Date Due</label>
-                <div class="form-input-frame">
-                    <div class="input-group date datePicker">
-                        <?php echo $this->Form->Text('osr_date_due', array('class' => 'form-control', 'id' => 'outside_date_due', 'placeholder' => '', 'label' => false)); ?>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+            <div class="col-md-3 col-xs-6 col-sm-6">
+                <div class="form-group">
+                    <label class="control-label" for="reference">Inspector Code</label>
+                    <div class="form-input-frame">
+                        <?php echo $this->Form->control('osr_inspector_code', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0')); ?>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3">
-            <div class="form-group">
-                <label class="control-label" for="reference">Inspector Code</label>
-                <div class="form-input-frame">
-                    <?php echo $this->Form->control('osr_inspector_code', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0')); ?>
                 </div>
             </div>
         </div>
