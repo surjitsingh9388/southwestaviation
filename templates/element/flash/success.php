@@ -18,6 +18,10 @@ $(document).ready(function () {
                 $('.outerWrapper').parent().addClass('left');
             });
         }, 1000);
+    }else{
+        setTimeout(function() {
+            $('.alert.content.sliding').fadeOut('slow');
+        }, 1500);
     }
 });
 

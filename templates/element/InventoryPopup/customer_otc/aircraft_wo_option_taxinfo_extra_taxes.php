@@ -15,9 +15,9 @@
 
                             <div class="form-group list-of-extra-taxes">
                                 <?php
-                                foreach($wooptionextrataxlist as $taxdet){
+                                foreach($wooptionextrataxlist as $key=>$taxdet){
                                 ?>
-                                    <div class="wo-option-extra-taxes-list" data-val="<?php echo $taxdet['id']; ?>"><?php echo $taxdet['extra_tax_name']; ?></div>
+                                    <div class="wo-option-extra-taxes-list <?php if($key == 0){ echo 'wo-option-extra-taxes-list-active'; } ?>" data-val="<?php echo $taxdet['id']; ?>"><?php echo $taxdet['extra_tax_name']; ?></div>
                                 <?php
                                 }
                                 ?>

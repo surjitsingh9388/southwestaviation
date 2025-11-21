@@ -66,7 +66,8 @@ class User extends Entity
         'department_id'=>true,
         'pto_accrual_rate'=>true,
         'first_paycheck_date'=>true,
-        'user_initials'=>true
+        'user_initials'=>true,
+        'remote_access'=>true,
     ];
 
     /**

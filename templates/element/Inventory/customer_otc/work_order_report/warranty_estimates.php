@@ -205,8 +205,8 @@
                                 if($report_type != '6'){
                             ?>
                             <p>
-                                <span style="padding: 5px 10px 0 0">Labour: <?php echo '$'.number_format($labor_charge, 2); ?>,</span>
-                                <span style="padding: 5px 10px 0 0">Parts: <?php echo '$'.number_format($parts_charge, 2); ?></span>
+                                <span style="padding: 5px 10px 0 0">Labour: <?php echo '$'.number_format((float)$labor_charge, 2); ?>,</span>
+                                <span style="padding: 5px 10px 0 0">Parts: <?php echo '$'.number_format((float)$parts_charge, 2); ?></span>
                                 <?php if($report_type != '8'){ ?>
                                 <span style="padding: 5px 10px 0 0">, Parts No: <?php echo $osrinfo['osr_part_number']; ?></span>
                                 <?php } ?>
@@ -228,7 +228,7 @@
                                             <strong>
                                                 <?php 
                                                 if($row['wo_item_overview']['way_of_billing'] == '1'){
-                                                    echo !empty($row['wo_item_overview']['estimated_hour']) ? number_format($row['wo_item_overview']['estimated_hour'], 2) : '0.00';
+                                                    echo !empty($row['wo_item_overview']['estimated_hour']) ? number_format((float)$row['wo_item_overview']['estimated_hour'], 2) : '0.00';
                                                 }else if($row['wo_item_overview']['way_of_billing'] == '2'){
                                                     echo 'Flat';
                                                 }else{
@@ -241,7 +241,7 @@
                                     </td>
                                     <td width="150px">
                                         <p><strong>Subtotal</strong></p>
-                                        <p><strong><?php echo '$'.number_format($subtotal, 2); ?></strong></p>
+                                        <p><strong><?php echo '$'.number_format((float)$subtotal, 2); ?></strong></p>
                                     </td>
                                 </tr>
                             </table>
@@ -257,10 +257,10 @@
                 <strong>Labour: <?php echo '$'.number_format(($total_labor_charges+$subtotal), 2); ?></strong>
             </td>
             <td width="25%">
-                <strong>Parts: <?php echo '$'.number_format($total_part_charges, 2); ?></strong>
+                <strong>Parts: <?php echo '$'.number_format((float)$total_part_charges, 2); ?></strong>
             </td>
             <td width="25%">
-                <strong>Shipping: <?php echo '$'.number_format($total_shipping_charges, 2); ?></strong>
+                <strong>Shipping: <?php echo '$'.number_format((float)$total_shipping_charges, 2); ?></strong>
             </td>
             <td width="25%">
                 <strong>Item Subtotal: <?php echo '$'.number_format(($total_labor_charges+$subtotal+$total_shipping_charges+$total_part_charges), 2); ?></strong>
@@ -290,7 +290,7 @@
                 <table class="cust-estimates-table">
                     <tr>
                         <td width="60%" style="padding-left: 0">
-                            <strong>It will take an estimated <?php echo number_format($total_hour, 2); ?> hours to complete the necessary work.</strong>
+                            <strong>It will take an estimated <?php echo number_format((float)$total_hour, 2); ?> hours to complete the necessary work.</strong>
                         </td>
                         <td width="40%" style="padding-right: 0">
                             <table class="cust-estimates-table">
@@ -299,7 +299,7 @@
                                         <strong>Total Labor:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <strong><?php echo '$'.number_format($final_labor_charges, 2); ?></strong>
+                                        <strong><?php echo '$'.number_format((float)$final_labor_charges, 2); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -307,7 +307,7 @@
                                         <strong>Total Parts:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <strong><?php echo '$'.number_format($final_parts_charges, 2); ?></strong>
+                                        <strong><?php echo '$'.number_format((float)$final_parts_charges, 2); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -315,7 +315,7 @@
                                         <strong>Total Shipping:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <strong><?php echo '$'.number_format($final_shipping_charges, 2); ?></strong>
+                                        <strong><?php echo '$'.number_format((float)$final_shipping_charges, 2); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -323,7 +323,7 @@
                                         <strong>Additional Charges:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <strong><?php echo '$'.number_format($addl_charges_sub_total, 2); ?></strong>
+                                        <strong><?php echo '$'.number_format((float)$addl_charges_sub_total, 2); ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
@@ -343,7 +343,7 @@
                                             <?php 
                                             $total_estimated_before_deposit = $final_labor_charges+$addl_charges_sub_total+$final_parts_charges+$final_shipping_charges;
 
-                                            echo '$'.number_format($total_estimated_before_deposit, 2); 
+                                            echo '$'.number_format((float)$total_estimated_before_deposit, 2); 
                                             ?>
                                         </strong>
                                     </td>
@@ -361,7 +361,7 @@
                                         <strong>Deposit(s) and Credit(s):</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <strong><?php echo '$'.number_format($total_deposits, 2); ?></strong>
+                                        <strong><?php echo '$'.number_format((float)$total_deposits, 2); ?></strong>
                                     </td>
                                 </tr>
                                 <tr class="td-border">

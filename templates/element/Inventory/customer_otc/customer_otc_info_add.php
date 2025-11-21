@@ -267,7 +267,7 @@
             <div class="form-group mt10">
                 <button type="button" class="btn btn-primary saveOTCInfoBtn">Save</button>
 
-                <button type="button" class="btn btn-default createotcinvoicebtn fetchCustOTCPopup" data-val='create_otc_invoice_btn' <?php if(empty($customerotcinfoes->id)){ ?> disabled <?php } ?> title="Save OTC Info and then create invoice">Create OTC Invoice</button>
+                <button type="button" class="btn btn-default createotcinvoicebtn fetchCustOTCPopup" data-val='create_otc_invoice_btn' title="Save OTC Info and then create invoice">Create OTC Invoice</button>
             </div>
         </div>
 

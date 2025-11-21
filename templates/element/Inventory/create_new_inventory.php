@@ -59,7 +59,7 @@
                     <div class="col-md-7 col-sm-6 p-0" id="airCompsList">
                         <?php 
                         $cost = !empty($invenotries->cost) ? $invenotries->cost : $invenotryitems->unit_cost;
-                        $cost = (!empty($cost) && (float)$cost > 0) ? '$' . number_format((float)$cost, 2) : '';
+                        $cost = (!empty($cost) && $cost > 0) ? '$' . number_format($cost, 2) : '';
 
                         echo $this->Form->control('cost', array('type'=>'text', 'class'=>'form-control col-md-7', 'placeholder' => '$0.00', 'label' => false, 'value'=>$cost, 'id'=>'inventory_cost')); ?>
                     </div>
@@ -85,7 +85,7 @@
                             <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
                                 <?php 
                                 $exchange_cost = !empty($invenotries->exchange_cost) ? $invenotries->exchange_cost : $invenotryitems->exchange_cost;
-                                $exchange_cost = (!empty($exchange_cost) && (float)$exchange_cost > 0) ? '$' . number_format((float)$exchange_cost, 2) : '';
+                                $exchange_cost = (!empty($exchange_cost) && $exchange_cost > 0) ? '$' . number_format($exchange_cost, 2) : '';
 
                                 echo $this->Form->control('exchange_cost', array('type'=>'text', 'class'=>'form-control col-md-6', 'placeholder' => '$0.00', 'label' => false, 'value'=>$exchange_cost, 'id'=>'exchange_cost')); ?>
                             </div>
@@ -131,7 +131,7 @@
                             <div class="col-md-9 col-sm-9 col-xs-12 p-0" id="airCompsList">
                                 <?php 
                                 $exchange_cost = !empty($invenotries->exchange_cost) ? $invenotries->exchange_cost : $invenotryitems->exchange_cost;
-                                $exchange_cost = (!empty($exchange_cost) && (float)$exchange_cost > 0) ? '$' . number_format((float)$exchange_cost, 2) : '';
+                                $exchange_cost = (!empty($exchange_cost) && $exchange_cost > 0) ? '$' . number_format($exchange_cost, 2) : '';
                                 echo $this->Form->control('exchange_cost', array('type'=>'text', 'class'=>'form-control col-md-7', 'placeholder' => '$0.00', 'label' => false, 'value'=>$exchange_cost, 'id'=>'exchange_cost')); ?>
                             </div>
                         </div>

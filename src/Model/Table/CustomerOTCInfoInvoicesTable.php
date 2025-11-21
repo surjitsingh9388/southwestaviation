@@ -27,6 +27,10 @@ class CustomerOTCInfoInvoicesTable extends Table
         $this->setPrimaryKey('id');
         
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'added_by',
+        ]);
         //$this->Planes = FactoryLocator::get('Table')->get('Planes');
     }
     

@@ -398,7 +398,7 @@ define('DEFAULTPAYMENTMETHOD', serialize($defaultPaymentMethod));
 $customerOTCClass = array('1'=>'Charter', '2'=>'Maintenance');
 define('CUSTOMEROTCCLASS', serialize($customerOTCClass));
 
-$typeOfOTCCreditCard = array('1'=>'American Express', '2'=>'Discover', '3'=>'Master Card', '4'=>'Visa');
+$typeOfOTCCreditCard = array('1'=>'American Express', '2'=>'Discover', '3'=>'Master Card', '4'=>'Visa', '5'=>'Wire', '6'=>'Cheque');
 define('TYPEOFOTCCREDITCARD', serialize($typeOfOTCCreditCard));
 
 $defaultOTCShippingMethod = array('1'=>'FedEx 2-Day', '2'=>'FedEx Freight', '3'=>'FedEx Ground', '4'=>'FedEx Overnight P1', '5'=>'Local Delivery', '6'=>'Pick Up', '7'=>'UPS 3-day Select', '8'=>'UPS Blue', '9'=>'UPS Ground', '10'=>'UPS Red', '11'=>'UPS Server', '12'=>'USPS', '13'=>'USPS Express', '14'=>'USPS First Class', '15'=>'USPS Priority');

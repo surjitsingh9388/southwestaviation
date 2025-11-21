@@ -179,19 +179,28 @@
             $inventorymanufacturers = $this->InventoryPartManufacturers->newEmptyEntity();
             if ($this->request->is('post')) {
                 $postData = $this->request->getData();
-                $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
-                $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
-                $postData['added_by'] = $authUserData['id'];
-                
-                $inventorymanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorymanufacturers, $postData);
-                if ($this->InventoryPartManufacturers->save($inventorymanufacturers)) {
-                    $id = $inventorymanufacturers->id;
-                    
-                    $this->Flash->success(__('The manufacturer has been saved.'));
-                    return $this->redirect(['action' => 'detail', $id]);
-                }
 
-                $this->Flash->error(__('The manufacturer could not be saved. Please, try again.'));
+                $exists = $this->InventoryPartManufacturers->exists([
+                    'LOWER(name)' => strtolower($postData['name'])
+                ]);
+
+                if (!$exists) {
+                    $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
+                    $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
+                    $postData['added_by'] = $authUserData['id'];
+                    
+                    $inventorymanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorymanufacturers, $postData);
+                    if ($this->InventoryPartManufacturers->save($inventorymanufacturers)) {
+                        $id = $inventorymanufacturers->id;
+                        
+                        $this->Flash->success(__('The manufacturer has been saved.'));
+                        return $this->redirect(['action' => 'detail', $id]);
+                    }
+
+                    $this->Flash->error(__('The manufacturer could not be saved. Please, try again.'));
+                }else{
+                    $this->Flash->error(__('Manufacturer already exists.'));
+                }
             }
             
             $countries = $this->Address->getCountryList();
@@ -216,22 +225,30 @@
             if ($this->request->is(['patch', 'post', 'put'])) {
                 
                 $postData = $this->request->getData();
+                $exists = $this->InventoryPartManufacturers->exists([
+                    'LOWER(name)' => strtolower($postData['name']),
+                    'id !=' => $id
+                ]);
 
-                $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
-                $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
+                if (!$exists) {
+                    $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
+                    $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
 
-                $postData['updated_by'] = $authUserData['id'];
-                $inventorymanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorymanufacturers, $postData);//print_r($part);exit;
-                if ($this->InventoryPartManufacturers->save($inventorymanufacturers)) {
-                    $this->Flash->success(__('The manufacturer has been saved.'));
-                    return $this->redirect(['action' => 'detail', $id]);
+                    $postData['updated_by'] = $authUserData['id'];
+                    $inventorymanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorymanufacturers, $postData);//print_r($part);exit;
+                    if ($this->InventoryPartManufacturers->save($inventorymanufacturers)) {
+                        $this->Flash->success(__('The manufacturer has been saved.'));
+                        return $this->redirect(['action' => 'detail', $id]);
+                    }
+
+                    $this->Flash->error(__('The manufacturer could not be saved. Please, try again.'));
+                }else{
+                    $this->Flash->error(__('Manufacturer already exists.'));
                 }
-
-                $this->Flash->error(__('The manufacturer could not be saved. Please, try again.'));
             }
             
             $countries = $this->Address->getCountryList();
-            $states = $this->Address->getStateListByCountryId($inventorymanufacturers->country);
+            $states = !empty($inventorymanufacturers->country) ? $this->Address->getStateListByCountryId($inventorymanufacturers->country) : '';
             $this->set(compact('inventorymanufacturers', 'actionItems', 'countries', 'states'));
         }
 
@@ -250,7 +267,7 @@
             $inventorymanufacturers = $this->InventoryPartManufacturers->get($id);
             
             $countries = $this->Address->getCountryList();
-            $states = $this->Address->getStateListByCountryId($inventorymanufacturers->country);
+            $states = !empty($inventorymanufacturers->country) ? $this->Address->getStateListByCountryId($inventorymanufacturers->country) : '';
             $this->set(compact('inventorymanufacturers', 'actionItems', 'countries', 'states'));
         }
 
@@ -263,15 +280,24 @@
                 $authUserData = $this->Authentication->getResult()->getData();
                 $postData = $this->request->getData();
                 $postData['added_by'] = $authUserData['id'];
-                $inventorypartmanufacturers = $this->InventoryPartManufacturers->newEmptyEntity();
-                $inventorypartmanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorypartmanufacturers, $postData);
-                if ($this->InventoryPartManufacturers->save($inventorypartmanufacturers)) {
-                    $id = $inventorypartmanufacturers->id;
 
-                    $invmanufacturers = array('id'=>$id, 'name'=>$postData['name']);
-                    $result = array('status'=>'success', 'message'=>"Manufacturer saved successfully.", 'invmanufacturers'=>$invmanufacturers);
-                } else {
-                    $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                $exists = $this->InventoryPartManufacturers->exists([
+                    'LOWER(name)' => strtolower($postData['name'])
+                ]);
+
+                if (!$exists) {
+                    $inventorypartmanufacturers = $this->InventoryPartManufacturers->newEmptyEntity();
+                    $inventorypartmanufacturers = $this->InventoryPartManufacturers->patchEntity($inventorypartmanufacturers, $postData);
+                    if ($this->InventoryPartManufacturers->save($inventorypartmanufacturers)) {
+                        $id = $inventorypartmanufacturers->id;
+
+                        $invmanufacturers = array('id'=>$id, 'name'=>$postData['name']);
+                        $result = array('status'=>'success', 'message'=>"Manufacturer saved successfully.", 'invmanufacturers'=>$invmanufacturers);
+                    } else {
+                        $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                    }
+                }else{
+                    $result = array('status'=>'failure', 'message'=>'Manufacturer already exists.');
                 }
 
                 echo json_encode($result);die;

@@ -76,7 +76,7 @@ $(document).on('change', '#invoice_part_number', function(e){
 
 $(document).on('change keyup', '#otc_invoice_give_discount, #otc_invoice_part_price_each, #otc_invoice_give_discount_percentage', function(e){
     var price_each = $('#otc_invoice_part_price_each').val();
-    price_each = price_each.replace(/\$/g, '');
+    price_each = price_each.replace(/[^a-zA-Z0-9.]/g, '');
     if(price_each != ''){
         price_each = parseFloat(price_each).toFixed(2);
     }
@@ -265,6 +265,8 @@ $(document).on('click', '.saveAircraftRegNumber', function(e){
                 if(response == 'Something went wrong, please try again' || response == 'Aircraft registration number already exist.'){
                     alert(response);
                 }else{
+                    $('#addAircraftModal').modal('hide');
+
                     $('#customerotcaircraftblock').html(response);
                     $("#aircraft_info_add_section :input").prop("disabled", false);
                     $(".selectpicker").selectpicker("refresh");
@@ -644,6 +646,7 @@ function appendCustomerOTCPopupData(section, response){
     }else if(section == 'aircraft_wo_tool_add_btn'){
         sectionId = 'aircraftWOAddToolModel';
     }else if(section == 'create_otc_invoice_btn'){
+        saveOTCInfoSave();
         sectionId = 'confirmCreateOTCInvoiceModel';
     }else if(section == 'aircraft_upload_media_btn'){
         sectionId = 'aircraftMediaUploadModel';
@@ -819,8 +822,10 @@ function appendCustomerOTCPopupData(section, response){
     }
 
     if(section == 'aircraft_wo_option_taxinfo_extra_taxes'){
-        $('#frmAircraftWOOptExtraTaxes :input').prop("disabled", true);
-        $('.wo-option-new-extra-taxes').prop("disabled", false);
+        if ($('.list-of-extra-taxes').length == 0) {
+            $('#frmAircraftWOOptExtraTaxes :input').prop("disabled", true);
+            $('.wo-option-new-extra-taxes').prop("disabled", false);
+        }
     }
 
     if(section == 'export_work_order_to_file'){
@@ -1847,6 +1852,10 @@ $(document).on('dblclick', '.customerlsttr', function(e){
 });
 
 $(document).on('click', '.saveOTCInfoBtn', function(e){
+    saveOTCInfoSave('savebtn');
+});
+
+function saveOTCInfoSave(clicksource){
     var otcinfo_customer_name = $('#otcinfo_customer_name').val();
     
     if(otcinfo_customer_name != '' && otcinfo_customer_name != undefined){
@@ -1858,19 +1867,21 @@ $(document).on('click', '.saveOTCInfoBtn', function(e){
             success: function (response) {
                 $('.loader').hide();
                 var obj = JSON.parse(response);
-                if(obj.status == 'failure'){
-                    alert(obj.message);
-                }else{
-                    $('.createotcinvoicebtn').prop('disabled', false);
-                    alert("OTC Info saved successfully.");
+                if(clicksource == 'savebtn'){
+                    if(obj.status == 'failure'){
+                        alert(obj.message);
+                    }else{
+                        $('.createotcinvoicebtn').prop('disabled', false);
+                        alert("OTC Info saved successfully.");
+                    }
                 }
             }
         });
     }
-});
+}
 
 $(document).on('blur', '#wo_item_part_cost, #wo_item_part_part_ship_in, #wo_item_part_part_ship_out, #core-charges, #wo_item_part_general_retail, #price_each, #dealer_price, #osr_labor_charge, #osr_shipping_out, #osr_parts_charge, #osr_shipping_in, #osr_vendor_labor_charges, #osr_vendor_part_charges, #labor_cost, #part_cost, #ship_out, #ship_in, #labor_charge, #parts_charge, #mparts_cost, #mparts_retail, #epa_charges, #amount_to_add, #epa_charge_amount, #oil_analysis_amount, #amount_per_tire, #mis_charge_amount, #pilot_services_amount, #tax_credit_amount, #shop_supplies_amount, #fuel_price, #minimum_amount_to_charge, #maximum_amount_to_charge, #tax_rate, #flat_discount_amount, #parts_flat_discount_amount, #use_special_rate_amount, #tax_rate1, #tax_rate2, #tax_rate3, #specified_labor_rate, #max_outstanding_amount, #total_amount_spent, #outstanding_amount_due, #additional_ship_out_cost, #additional_ship_in_cost, #aoc_charge, #otc_invoice_part_price_each, #otc_invoice_part_total_prices, #part_ship_in, #drop_ship_charges, #invoice_ship_out, #invoice_misc_charges, #hazardous_fee', function(e){
-    let value = $(this).val().replace(/\$/g, '');
+    let value = $(this).val().replace(/[^a-zA-Z0-9.]/g, '');
     if(value != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val('$'+value);
@@ -1878,7 +1889,7 @@ $(document).on('blur', '#wo_item_part_cost, #wo_item_part_part_ship_in, #wo_item
 });
 
 $(document).on('blur', '#add-hrs-inspection, #min-hour-worked-per-item, #overtime-hrs, #min-hour-rate, #break-off-amount, #break-off-percentage, #above-break-off-percentage, #fuel-gallons, #flat-rate-qty', function(e){
-    let value = $(this).val().replace(/\$/g, '');
+    let value = $(this).val().replace(/[^a-zA-Z0-9.]/g, '');
     if(value != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val(value);
@@ -1895,7 +1906,7 @@ $(document).on('blur', '#give_discount_percentage, #owner, #tax_percentage, #lab
 
 $(document).on('click change keyup', '#give_discount, #price_each, #give_discount_percentage, #qty-needed', function(e){
     var price_each = $('#price_each').val();
-    price_each = price_each.replace(/\$/g, '');
+    price_each = price_each.replace(/[^a-zA-Z0-9.]/g, '');
     if(price_each != ''){
         price_each = parseFloat(price_each).toFixed(2);
     }
@@ -1949,6 +1960,7 @@ $(document).on('click', '.otc-invoice-addpart-btn', function(e){
     var invoice_part_number = $('#invoice_part_number').val();
     var otc_invoice_id = $('#otc_invoice_id').val();
     var addbtnevent = $(this).attr('data-val');
+    var otc_invoice_part_id = $('#otc_invoice_part_id').val();
 
     if(invoice_part_number != '' && invoice_part_number != undefined && otc_invoice_id != ''){
         $('.loader').show();
@@ -1962,7 +1974,10 @@ $(document).on('click', '.otc-invoice-addpart-btn', function(e){
                 if(obj.status == 'failure'){
                     alert(obj.message);
                 }else{
-                    $("#frmCustomerOTCInfoInvoicePart")[0].reset()
+                    if(otc_invoice_part_id == ''){
+                        $("#frmCustomerOTCInfoInvoicePart")[0].reset();
+                        $('.selectpicker').selectpicker('refresh');
+                    }
                     
                     $('#otcinfoinvoicetbl').html(obj.otcinfotblrow);
                     $('#otcinfoinvoicehisttbl').html(obj.invoiceparthisttblrow);
@@ -2125,8 +2140,13 @@ $(document).on('click', '.closeWorkOrderDetBtn', function(e){
         var btnclickattr = $(this).attr('data-val');
         
         submitWOFormData(btnclickattr, '', '');
-        $('.modal-backdrop').remove();
+        //$('.modal-backdrop').remove();
+        
     }
+
+    $('#aircarftCreateWOModel').removeClass('show').hide();
+    $('.modal-backdrop').remove();
+    $('body').removeClass('modal-open');
 });
 
 $(document).on('click', '.saveAircraftWODetBTN', function(e){
@@ -2162,6 +2182,12 @@ $(document).on('dblclick', '.wo-technican-list div', function(e){
 
 function submitWOFormData(btnclickattr, dataval, seltabid){
     var wo_customer_info = $('#wo-customer-info').val();
+
+    var work_order_id = $('#work_order_id').val();
+    var current_item_position = $(this).attr('data-val');
+    var customer_id = $('#wo_customer_id').val();
+
+    var datavalnew = {work_order_id:work_order_id, current_item_position:current_item_position, customer_id:customer_id};
     
     if(wo_customer_info != '' && wo_customer_info != undefined){
         $('.loader').show();
@@ -2182,6 +2208,7 @@ function submitWOFormData(btnclickattr, dataval, seltabid){
                     $('#wo_services_id').val(obj.wo_services_id);
                     if(btnclickattr == 'wo_save_btn'){
                         alert("Work Order detail saved successfully.");
+                        getWorkOrderItemDetails(datavalnew, '#aircraftWOOverviewSection');
                     }else{
                         saveAndGetAircraftWODet(dataval, seltabid);
                     }
@@ -2439,8 +2466,8 @@ $(document).on('click', '.addoutsiderepair', function(e){
 });
 
 $(document).on('click', '.newwosorrecordbtn', function(e){
-    var wo_item_id = $('#osrinfo_item_id').val();
-    var work_order_id = $('#osrinfo_wo_id').val();
+    var wo_item_id = $('#wo_item_id').val();
+    var work_order_id = $('#work_order_id').val();
     $('.loader').show();
 
     $.ajax({
@@ -2450,6 +2477,8 @@ $(document).on('click', '.newwosorrecordbtn', function(e){
         async : true,
         success: function (response) {
             $('.loader').hide();
+
+            $('.woosraddtoporobtn').attr('disabled', false);
 
             $('#newwoosrhtmlblock').html(response);
             $('.selectpicker').selectpicker('refresh');
@@ -2466,6 +2495,8 @@ $(document).on('click', '.osrPOCurrentYesBtn', function(e){
     $('#woOSRAddToCurrentPOModal').modal('hide');
     $('#woOSRAddToCurrentPOModal').remove();
     
+    $('.woosraddtoporobtn').attr('disabled', true);
+
     $('.saveAircraftWOOSRBtn').click();
 });
 
@@ -2551,6 +2582,8 @@ function setOSRPOROData(addtoporo){
                     if(addtoporo == '1'){
                         $('#is_add_to_po').val('1');
                         $('#osr_purchase_order_no').val(obj.osr_purchase_order_no);
+
+                        $('.woosraddtoporobtn').attr('disabled', true);
                     }else{
                         $('.woosr-ro-list-sec').css('display', 'block');
                         $('#is_create_new_ro').val('1');
@@ -2756,8 +2789,9 @@ $(document).on('click', '.woosr-po-link', function(e){
     if(osr_purchase_order_no != ''){
         var section = 'aircraft_wo_osr_service_po';
         if(section != '' && section != undefined){
+            var wo_osrinfo_id = $('#wo_osrinfo_id').val();
             var customer_id = $('#wo_customer_id').val();
-            var dataval = {section:section, customer_id:customer_id, osr_purchase_order_no:osr_purchase_order_no, 'aircraft_id':''};
+            var dataval = {section:section, customer_id:customer_id, osr_purchase_order_no:osr_purchase_order_no, 'aircraft_id':'', wo_osrinfo_id:wo_osrinfo_id};
 
             fetchOTCCustomPopupDataFromServer(section, dataval);
             
@@ -3075,13 +3109,14 @@ $(document).on('click', '.parts_not_checked_in', function(e){
     var osr_po_item_id = $(this).attr('data-val');
     $('.parts_not_checked_in').removeClass('parts_not_checked_in_active');
     $(this).addClass('parts_not_checked_in_active');
+    var part_no = $('tr.parts_not_checked_in_active').find('td:first').text();
     if(osr_po_item_id != '' && osr_po_item_id != undefined){
         $('.loader').show();
 
         $.ajax({
             url: fetchWOOSRCheckInLaborHTMLURL, 
             type: 'post',
-            data: {osr_po_item_id:osr_po_item_id},
+            data: {osr_po_item_id:osr_po_item_id, part_no:part_no},
             async : true,
             success: function (response) {  
                 $('.loader').hide();
@@ -3101,6 +3136,7 @@ $(document).on('dblclick click', '.editwoosrpoitem', function(e){
         return false;
     }
     var osr_po_item_id = $(this).attr('data-val');
+    var wo_osr_po_id = $(this).attr('osr-po-id');
     
     if(osr_po_item_id != '' && osr_po_item_id != undefined){
         $('.editwoosrpoitem').removeClass('osr-po_item-active');
@@ -3110,7 +3146,9 @@ $(document).on('dblclick click', '.editwoosrpoitem', function(e){
         if(section != '' && section != undefined){
             var customer_id = $('#wo_customer_id').val();
             var aircraft_id = $('#wo_aircraft_id').val();
-            var dataval = {section:section, customer_id:customer_id, osr_po_item_id:osr_po_item_id, aircraft_id:aircraft_id};
+            var work_order_id = $('#work_order_id').val();
+
+            var dataval = {section:section, customer_id:customer_id, osr_po_item_id:osr_po_item_id, aircraft_id:aircraft_id, wo_osr_po_id:wo_osr_po_id, work_order_id:work_order_id};
 
             fetchOTCCustomPopupDataFromServer(section, dataval);
         }
@@ -3125,7 +3163,8 @@ $(document).on('click', '.wo-osr-po-items', function(e){
         if(section != '' && section != undefined){
             var customer_id = $('#wo_customer_id').val();
             var aircraft_id = $('#wo_aircraft_id').val();
-            var dataval = {section:section, customer_id:customer_id, wo_osr_po_id:wo_osr_po_id, aircraft_id:aircraft_id};
+            var work_order_id = $('#work_order_id').val();
+            var dataval = {section:section, customer_id:customer_id, wo_osr_po_id:wo_osr_po_id, aircraft_id:aircraft_id, work_order_id:work_order_id};
 
             fetchOTCCustomPopupDataFromServer(section, dataval);
         }
@@ -3199,7 +3238,7 @@ $(document).on('click', '.removeosrpoitemsbtn', function(e){
     var wo_osr_po_item_id = $('.osr-po_item-active').attr('data-val');
     
     if(wo_osr_po_item_id != '' && wo_osr_po_item_id != undefined){
-        if(confirm('Are you sure you want this service item with part number `'+wo_osr_part_number+'` from this P/O?')){
+        if(confirm('Are you sure you want to delete this service item with part number `'+wo_osr_part_number+'` from this P/O?')){
             $('.loader').show();
 
             $.ajax({
@@ -3857,10 +3896,10 @@ $(document).on('click', '.saveWOOptionGenInfoDeposits', function(e){
             if(obj.status == 'success') {
                 //$('#general_info_deposit_id').val(obj.gen_info_deposit_id);
                 $('.wo-gen-info-deposit-list').html(obj.deposittr);
-                $('#deposit_total_amount').val(obj.total_amount);
+                $('#deposit_total_amount').val('$'+obj.total_amount);
                 $("#frmAircraftWOOptionGenInfoDeposit")[0].reset();
                 $('.selectpicker').selectpicker('refresh');
-                $('#total-deposit-amount').val(obj.total_amount);
+                $('#total-deposit-amount').val('$'+obj.total_amount);
 
                 alert('Deposits detail saved successfully.');
             }else{
@@ -3930,7 +3969,11 @@ $(document).on('click', '.saveWOOptionMiscCharges', function(e){
 $(document).on('click', '.saveWOOptionMiscFuelCharges', function(e){
     var fuel_gallons = $('#fuel-gallons').val();
     var fuel_price = $('#fuel_price').val();
-    fuel_price = fuel_price.replace(/\$/g, '');
+    var misc_charges_id = $('#misc_charges_id').val();
+    var wo_item_id = $('#wo_item_id').val();
+    var work_order_id = $('#work_order_id').val();
+
+    fuel_price = fuel_price.replace(/[^a-zA-Z0-9.]/g, '');
 
     if(fuel_gallons == '' || fuel_gallons == '0' || fuel_gallons == '0.00'){
         alert("Please fill gallons");
@@ -3945,7 +3988,7 @@ $(document).on('click', '.saveWOOptionMiscFuelCharges', function(e){
     $.ajax({
         url: saveWOViewOptionMiscFuelChargesURL,
         type: 'post',
-        data: $("#frmAircraftWOOptMiscCharges").serialize(),
+        data: {'fuel_gallons':fuel_gallons, 'fuel_price':fuel_price, 'misc_charges_id':misc_charges_id, 'wo_item_id':wo_item_id, 'work_order_id':work_order_id},
         dataType: 'text',
         success: function (response) {
             $('.loader').hide();
@@ -3953,7 +3996,9 @@ $(document).on('click', '.saveWOOptionMiscFuelCharges', function(e){
             var obj = JSON.parse(response);
             if(obj.status == 'success') {
                 $('.wo-misc-fuel-charges-list').html(obj.fuelchargestr);
-                $("#frmAircraftWOOptMiscCharges")[0].reset();
+                $('#fuel-gallons').val('');
+                $('#fuel_price').val('');
+                $('#fuel_total_charges').val('');
 
                 alert('Fuel charges detail saved successfully.');
             }else{
@@ -4153,7 +4198,8 @@ $(document).on('click', '.saveWOOptionNewExtraTaxes', function(e){
     var formdata = $("#frmAircraftWOOptNewExtraTaxes").serialize();
     
     if(option_tax_info_id!= '' && option_tax_info_id != undefined){
-        saveWOViewOptionExtraTaxes(formdata, btnclickevent)
+        var extra_tax_name = $('#new_extra_tax_name').val();
+        saveWOViewOptionExtraTaxes(formdata, btnclickevent, extra_tax_name);
     }
 });
 
@@ -4164,11 +4210,11 @@ $(document).on('click', '.saveWOOptionExtraTaxes', function(e){
     var extra_tax_name = $('#extra-tax-name').val();
     
     if(option_tax_info_id!= '' && option_tax_info_id != undefined && extra_tax_name != '' && extra_tax_name != undefined){
-        saveWOViewOptionExtraTaxes(formdata, btnclickevent)
+        saveWOViewOptionExtraTaxes(formdata, btnclickevent, extra_tax_name)
     }
 });
 
-function saveWOViewOptionExtraTaxes(formdata, btnclickevent){
+function saveWOViewOptionExtraTaxes(formdata, btnclickevent, extra_tax_name){
     $('.loader').show();
     $.ajax({
         url: saveWOViewOptionExtraTaxesURL,
@@ -4186,6 +4232,8 @@ function saveWOViewOptionExtraTaxes(formdata, btnclickevent){
 
                     $('.wo-option-extra-taxes-list').removeClass('wo-option-extra-taxes-list-active');
                     $('.list-of-extra-taxes').prepend(obj.newaddedtax);
+
+                    $('.extra-taxes-setup-block').html(obj.html);
                 }
                 $('#extra_taxes_id').val(obj.extra_taxes_id);
                 alert('Extra Tax detail saved successfully.');
@@ -4255,7 +4303,7 @@ $(document).on('click', '.wo-option-delete-extra-taxes', function(e){
 });
 
 $(document).on('change', '#option_billing_rate_method', function(e){
-    var billing_rate_method = $(this).val();alert(billing_rate_method);
+    var billing_rate_method = $(this).val();
     if(billing_rate_method == '1'){
         $('.technician_rate_block').css('display', '');
         $('.aircraft_rate_block').css('display', 'none');
@@ -5143,6 +5191,12 @@ $(document).on('click', '.saveWOItemSignoffCategory', function(e){
     var signoff_category = $('#wo_item_signoff_category').val();
     var signoff_wo_item_id = $('#signoff_wo_item_id').val();
 
+    var work_order_id = $('#work_order_id').val();
+    var current_item_position = $(this).attr('data-val');
+    var customer_id = $('#wo_customer_id').val();
+
+    var datavalnew = {work_order_id:work_order_id, current_item_position:current_item_position, customer_id:customer_id};
+
     if(inspection_code != '' && inspection_code != undefined){
         $('.loader').show();
         $.ajax({
@@ -5176,6 +5230,8 @@ $(document).on('click', '.saveWOItemSignoffCategory', function(e){
                                 active_class.addClass('wosignoff-color-box1');
                             }
                         });
+
+                        getWorkOrderItemDetails(datavalnew, '#aircraftWOOverviewSection');
                     }
                 }
             }
@@ -6149,8 +6205,8 @@ $(document).on('click', '.repair_order_rates_notification', function(e){
 });
 
 $(document).on('keyup', '#fuel-gallons, #fuel_price', function () {
-    let fuelGallons = ($('#fuel-gallons').val() || '0').replace(/\$/g, '');
-    let fuelPrice = ($('#fuel_price').val() || '0').replace(/\$/g, '');
+    let fuelGallons = ($('#fuel-gallons').val() || '0').replace(/[^a-zA-Z0-9.]/g, '');
+    let fuelPrice = ($('#fuel_price').val() || '0').replace(/[^a-zA-Z0-9.]/g, '');
 
     let total = (parseFloat(fuelGallons) * parseFloat(fuelPrice)) || 0;
     $('#fuel_total_charges').val(`$${total.toFixed(2)}`);
@@ -6471,7 +6527,7 @@ $(document).on('click', '.continueWOPrintWarrantyBtn', function(e){
 });
 
 $(document).on('change', '#overview_special_rate_hr, #overview_estimated_rate, #overview_flat_rate, #overview_shipping_in', function(e){
-    var currval = $(this).val().replace(/\$/g, '').trim();
+    var currval = $(this).val().replace(/[^a-zA-Z0-9.]/g, '').trim();
 
     // Check if it's a valid number before formatting
     if (currval === '' || isNaN(currval)) {
@@ -6962,4 +7018,33 @@ $(document).on('keypress', '.no-special-char', function(e) {
     }
 });
 
+$(document).on('change', '#wo_item_status', function(e){
+    if($(this).val() == '1' && $('#wo_item_current_status').val() == '3'){
+        $('.saveAircraftWODetBTN').attr('disabled', false);
+    }else if($('#wo_item_current_status').val() == '3'){
+        $('.saveAircraftWODetBTN').attr('disabled', true);
+    }
+});
 
+$(document).on('change', '#osr_po_item_destination_id', function(e){
+    var dataval = {order_type:$(this).val()};
+    $('.loader').show();
+
+    $.ajax({
+        url: getWOROListURL, 
+        type: 'post',
+        data: dataval,
+        async : true,
+        success: function (response) {
+            $('.loader').hide();
+
+            var obj = JSON.parse(response);
+            if(obj.status == 'success'){
+                $('#osr_po_item_destination').html(obj.options);
+                $('.selectpicker').selectpicker('refresh');
+            }else{
+                alert(obj.message);
+            }
+        }
+    });
+});

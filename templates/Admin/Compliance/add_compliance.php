@@ -295,7 +295,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                 <div class="item-info addPartBorder">
                                     <div class="addPageHeading">Primary Information</div>
                                     <div class="row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Registration Number</label>
                                             </div>
@@ -304,7 +304,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Item Type</label>
                                             </div>
@@ -313,7 +313,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-4 col-sm-4 col-xs-12">
                                                 <label>ATA</label>
                                             </div>
@@ -322,7 +322,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Mfg Code</label>
                                             </div>
@@ -333,7 +333,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Component</label>
                                             </div>
@@ -342,7 +342,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Disposition</label>
                                             </div>
@@ -351,7 +351,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-4 col-sm-4 col-xs-12">
                                                 <label>Reference</label>
                                             </div>
@@ -360,7 +360,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-3">
+                                        <div class="form-group col-md-3 col-sm-4">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <label>Requirement Type</label>
                                             </div>
@@ -368,10 +368,7 @@ $tHtml .= '</div></div><span class="getselectedobj"></span>';
                                                 <?php echo $airCompParts['requirement_type']; ?>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-12 col-sm-12">
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <label>Item Name</label>
                                             </div>

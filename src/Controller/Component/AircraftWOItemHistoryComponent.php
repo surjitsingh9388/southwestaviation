@@ -43,6 +43,7 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
 
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = $title;
@@ -52,12 +53,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemTabDeletedDataToHistory($entity, $title, $description){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
 
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = $title;
@@ -66,6 +69,7 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemTabAttachmentDataToHistory($entity, $title){
@@ -99,7 +103,7 @@ class AircraftWOItemHistoryComponent extends Component {
     public function saveWOItemSignOffHistory($wo_item_id, $title, $description){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
-        
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $wo_item_id;
 
         $AircraftWOItemHistories->title = $title;
@@ -107,11 +111,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->user_id = $authUserData['id'];
         $AircraftWOItemHistories->description = $description;
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionGenInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item General Info was created.';
@@ -121,11 +128,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionGenInfoDepositHistory($entity, $wo_item_id){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item General Info Deposit was created.';
@@ -135,11 +145,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionMiscChargesHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Misc. Charges was created.';
@@ -149,11 +162,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionMiscFuelChargesHistory($wo_item_id, $entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Misc. Fuel Charges was created.';
@@ -163,11 +179,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionTaxInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Tax Info was created.';
@@ -177,25 +196,30 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionExtraTaxInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
-        $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
-        
-        $AircraftWOItemHistories->title = 'Item Extra Tax Info was created.';
-        $description = serialize($entity);
+        if(!empty($entity->wo_item_id)){
+            $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
+            
+            $AircraftWOItemHistories->title = 'Item Extra Tax Info was created.';
+            $description = serialize($entity);
 
-        $AircraftWOItemHistories->user_id = $entity->added_by;
-        $AircraftWOItemHistories->description = $description;
+            $AircraftWOItemHistories->user_id = $entity->added_by;
+            $AircraftWOItemHistories->description = $description;
 
-        $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+            $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionPricingInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Pricing Info was created.';
@@ -205,11 +229,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionBillingInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Billing Info was created.';
@@ -219,11 +246,14 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
     public function saveWOItemOptionWarrantyInfoHistory($entity){
         $AircraftWOItemHistoriesModel = $this->getController()->fetchTable('AircraftWOItemHistories');
         $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
+
+        if(!empty($entity->wo_item_id)){
         $AircraftWOItemHistories->wo_item_id = $entity->wo_item_id;
         
         $AircraftWOItemHistories->title = 'Item Warranty Info was created.';
@@ -233,6 +263,7 @@ class AircraftWOItemHistoryComponent extends Component {
         $AircraftWOItemHistories->description = $description;
 
         $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+        }
     }
 
 }

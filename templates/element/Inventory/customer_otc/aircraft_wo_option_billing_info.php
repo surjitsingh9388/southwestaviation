@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label" for="reference">< Min. Hours Rate</label>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('min_hour_rate', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                            <?php echo $this->Form->control('min_hour_rate', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label class="control-label" for="reference">Rate/Hour</label>
                         <div class="form-input-frame">
-                            <?php echo $this->Form->control('aircraft_rate_hour', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                            <?php echo $this->Form->control('aircraft_rate_hour', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     $use_special_rate_amount = '$0.00';
                     if(!empty($wooptionbillinginfoes->use_special_rate_hrs)){
                         $use_special_rate_hrs_chk = 'checked';
-                        $use_special_rate_amount = '$'.number_format($wooptionbillinginfoes->use_special_rate_hrs, 2);
+                        $use_special_rate_amount = '$' . number_format((float)$wooptionbillinginfoes->use_special_rate_amount, 2);
                     }
 
                     ?>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-input-frame">&nbsp;</div>
-                    <p style="color:red;">"Contract Raets" are being used for this aircraft</p>
+                    <p style="color:red;">"Contract Rates" are being used for this aircraft</p>
                 </div>
                 
             </fieldset>

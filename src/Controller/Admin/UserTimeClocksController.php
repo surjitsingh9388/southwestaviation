@@ -15,7 +15,10 @@
 
     class UserTimeClocksController extends AppController
     {
+
+      protected \App\Model\Table\UsersTable $Users;
         public function initialize():void {
+          $this->Users = $this->fetchTable('Users'); 
             $this->loadComponent('UserTimeClock');
             $this->loadComponent('UserManagementHistory');
 
@@ -115,80 +118,124 @@
             }
         }
 
-        public function markUserTimeClock(){
+        public function markUserTimeClock()
+        {
             if (!$this->request->is('ajax')) {
                 return $this->redirect(['action' => 'index']);
-            }else{
-                if ($this->request->is('post') || $this->request->is('put')) {
-                    $postData = $this->request->getData();
-                    
-                    $is_valid_time_clock_code = $this->UserTimeClock->validateUserAccessCode($postData['user_time_clock_code']);
-                    if(!empty($is_valid_time_clock_code)){
-                        $usertimeclocks = $this->UserTimeClock->getUserTimeClockDetail();
-                        
-                        $timeclockdata = [];
-                        $message = '';
-                        $sessionUser = $this->request->getSession()->read('Auth');
-                        $userTimeClocks = $this->fetchTable('UserTimeClocks');
+            }
 
-                        $is_add = 0;
+            if (!($this->request->is('post') || $this->request->is('put'))) {
+                return $this->response->withType('application/json')
+                    ->withStringBody(json_encode(['status' => 'failed', 'message' => 'Invalid request.']));
+            }
 
-                        if(!empty($usertimeclocks) && empty($usertimeclocks['out_time'])){
-                            $timeclockdata['out_time'] = new \Cake\I18n\FrozenTime('now');
-                            $timeclockdata['updated_by'] = $sessionUser['id'];
-                            $timeclockdata['updated_at'] = new \Cake\I18n\FrozenTime('now');
+            $postData = $this->request->getData();
+            $sessionUser = $this->request->getSession()->read('Auth');
 
-                            $usertimeclocks = $userTimeClocks->patchEntity($usertimeclocks, $timeclockdata);
-                            $message = 'You are now logged OUT, '.$sessionUser['first_name'];
-                        }else{
-                            $usertimeclocks = $userTimeClocks->newEmptyEntity();
+            //Step 1: Geo-fence center and allowed radius (in meters)
+            $centerLat = 36.0484; // 8720 Jack Bates Ave, Tulsa, OK 74132
+            $centerLng = -95.9919;
+            $allowedRadius = 1500; // meters
 
-                            $usertimeclocks->user_id = $sessionUser['id'];
-                            $usertimeclocks->in_time = new \Cake\I18n\FrozenTime('now');
-                            $usertimeclocks->added_by = $sessionUser['id'];
-                            $usertimeclocks->created_at = new \Cake\I18n\FrozenTime('now');
+            //Step 2: Get user's location (sent from frontend)
+            $userLat = !empty($postData['latitude']) ? (float)$postData['latitude'] : null;
+            $userLng = !empty($postData['longitude']) ? (float)$postData['longitude'] : null;
+            
+            //Step 3: Check if user is within radius (Haversine formula)
+            $isWithinFence = false;
+            if (!empty($userLat) && !empty($userLng)) {
+                $earthRadius = 6371000; // meters
+                $dLat = deg2rad($userLat - $centerLat);
+                $dLng = deg2rad($userLng - $centerLng);
 
-                            $message = 'You are now logged IN, '.$sessionUser['first_name'];
+                $a = sin($dLat / 2) * sin($dLat / 2) +
+                    cos(deg2rad($centerLat)) * cos(deg2rad($userLat)) *
+                    sin($dLng / 2) * sin($dLng / 2);
+                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                $distance = $earthRadius * $c;
 
-                            $is_add = 1;
-                        }
-                        
-                        //print_r($usertimeclocks);exit;
-                        if ($userTimeClocks->save($usertimeclocks)){
-                            if(!empty($is_add)){
-                                //save history data
-                                $this->UserManagementHistory->saveUserTimeClockHistory($usertimeclocks);
-                            }
+                $isWithinFence = ($distance <= $allowedRadius);
+            }
 
-                            $date_to = date("Y-m-d");
-                            $date_from = date('Y-m-d', strtotime('-7 days'));
-                            $user_id = $sessionUser['id'];
+            //Step 4: Check user permission for remote access
+            $user = $this->Users->find()
+                ->select(['id', 'remote_access'])
+                ->where(['id' => $sessionUser['id']])
+                ->first();
 
-                            //$aircraftoptiondata = $this->CustomerOTC->getAircraftOptionDataWO();
-                            $usertimeclocklist = $this->UserTimeClock->getTimeClockDetailByUser($date_from, $date_to, $user_id);
+            $hasRemoteAccess = !empty($user) && $user->remote_access;
 
-                            $view = new View();
-                            $view->set(compact('usertimeclocklist'));
-                            $elementContent = $view->element('UserTimeClock/time_clock_data');
+            //Step 5: If outside geo-fence & no remote access → deny
+            if (!$isWithinFence && !$hasRemoteAccess) {
+                return $this->response->withType('application/json')
+                    ->withStringBody(json_encode([
+                        'status' => 'failed',
+                        'message' => 'You are outside the allowed location and do not have remote access permission.'
+                    ]));
+            }
 
-                            // Build response array
-                            $responsearr = [
-                                'status' => 'success',
-                                'message' => $message,
-                                'time_clock_data' => $elementContent
-                            ];
-                        }else{
-                            $responsearr = ['status'=>'failed', 'message'=>'Something went wrong, please try again'];
-                        }
-                    }else{
-                        $responsearr = ['status'=>'failed', 'message'=>'Please enter a valid code and try again.'];
-                    }
-                }else{
-                    $responsearr = ['status'=>'failed', 'message'=>'Something went wrong, please try again'];
+            //Step 6: Validate user time clock code
+            $is_valid_time_clock_code = $this->UserTimeClock->validateUserAccessCode($postData['user_time_clock_code']);
+            if (empty($is_valid_time_clock_code)) {
+                return $this->response->withType('application/json')
+                    ->withStringBody(json_encode([
+                        'status' => 'failed',
+                        'message' => 'Please enter a valid code and try again.'
+                    ]));
+            }
+
+            //Step 7: Handle Clock In / Clock Out logic
+            $usertimeclocks = $this->UserTimeClock->getUserTimeClockDetail();
+            $userTimeClocks = $this->fetchTable('UserTimeClocks');
+            $timeclockdata = [];
+            $message = '';
+            $is_add = 0;
+
+            if (!empty($usertimeclocks) && empty($usertimeclocks['out_time'])) {
+                // Clock OUT
+                $timeclockdata['out_time'] = new \Cake\I18n\FrozenTime('now');
+                $timeclockdata['updated_by'] = $sessionUser['id'];
+                $timeclockdata['updated_at'] = new \Cake\I18n\FrozenTime('now');
+
+                $usertimeclocks = $userTimeClocks->patchEntity($usertimeclocks, $timeclockdata);
+                $message = 'You are now logged OUT, ' . $sessionUser['first_name'];
+            } else {
+                // Clock IN
+                $usertimeclocks = $userTimeClocks->newEmptyEntity();
+                $usertimeclocks->user_id = $sessionUser['id'];
+                $usertimeclocks->in_time = new \Cake\I18n\FrozenTime('now');
+                $usertimeclocks->added_by = $sessionUser['id'];
+                $usertimeclocks->created_at = new \Cake\I18n\FrozenTime('now');
+                $message = 'You are now logged IN, ' . $sessionUser['first_name'];
+                $is_add = 1;
+            }
+
+            // ✅ Step 8: Save Clock Entry
+            if ($userTimeClocks->save($usertimeclocks)) {
+                if (!empty($is_add)) {
+                    $this->UserManagementHistory->saveUserTimeClockHistory($usertimeclocks);
                 }
 
-                echo json_encode($responsearr);die;
+                $date_to = date("Y-m-d");
+                $date_from = date('Y-m-d', strtotime('-7 days'));
+                $user_id = $sessionUser['id'];
+                $usertimeclocklist = $this->UserTimeClock->getTimeClockDetailByUser($date_from, $date_to, $user_id);
+
+                $view = new View();
+                $view->set(compact('usertimeclocklist'));
+                $elementContent = $view->element('UserTimeClock/time_clock_data');
+
+                $responsearr = [
+                    'status' => 'success',
+                    'message' => $message,
+                    'time_clock_data' => $elementContent
+                ];
+            } else {
+                $responsearr = ['status' => 'failed', 'message' => 'Something went wrong, please try again.'];
             }
+
+            return $this->response->withType('application/json')
+                ->withStringBody(json_encode($responsearr));
         }
 
         public function loadTimeClockForDate(){

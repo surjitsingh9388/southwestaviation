@@ -183,8 +183,8 @@
                                 $total_shipping_charges += ($osrinfo['osr_shipping_out']+$osrinfo['osr_shipping_in']);
                             ?>
                             <p>
-                                <span style="padding: 5px 10px 0 0">Labour: <?php echo '$'.number_format($labor_charge, 2); ?>,</span>
-                                <span style="padding: 5px 10px 0 0">Parts: <?php echo '$'.number_format($parts_charge, 2); ?>,</span>
+                                <span style="padding: 5px 10px 0 0">Labour: <?php echo '$'.number_format((float)$labor_charge, 2); ?>,</span>
+                                <span style="padding: 5px 10px 0 0">Parts: <?php echo '$'.number_format((float)$parts_charge, 2); ?>,</span>
                                 <span style="padding: 5px 10px 0 0">Parts No: <?php echo $osrinfo['osr_part_number']; ?></span>
                             </p>
                             <?php 
@@ -233,7 +233,7 @@
                 <strong>Parts: <?php echo '$0.00'; ?></strong>
             </td>
             <td width="20%">
-                <strong>Shipping: <?php if(!empty($reportdata['warranty_infoes']['pay_shipping'])){echo '$'.number_format($total_shipping_charges, 2);} ?></strong>
+                <strong>Shipping: <?php if(!empty($reportdata['warranty_infoes']['pay_shipping'])){echo '$'.number_format((float)$total_shipping_charges, 2);} ?></strong>
             </td>
             <td width="20%">
                 <strong>Outside Repair: <?php echo '$'.number_format(($total_labor_charges+$total_part_charges), 2); ?></strong>
@@ -269,7 +269,7 @@
                                     </td>
                                     <td>
                                         <p>
-                                            Outside Repair: <?php echo '$'.number_format($total_outside_repair_charges, 2); ?>
+                                            Outside Repair: <?php echo '$'.number_format((float)$total_outside_repair_charges, 2); ?>
                                         </p>
                                     </td>
                                 </tr>
@@ -298,7 +298,7 @@
                                         <strong>Total Shipping:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php echo '$'.number_format($final_shipping_charges, 2); ?>
+                                        <?php echo '$'.number_format((float)$final_shipping_charges, 2); ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -306,7 +306,7 @@
                                         <strong>Total Outside Repair:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php echo '$'.number_format($final_outside_repair_charges, 2); ?>
+                                        <?php echo '$'.number_format((float)$final_outside_repair_charges, 2); ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -328,7 +328,7 @@
                                         <strong>Amount Due:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php echo '$'.number_format($totalbalancedue, 2); ?>
+                                        <?php echo '$'.number_format((float)$totalbalancedue, 2); ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -344,7 +344,7 @@
                                         <strong>Balance Due:</strong>
                                     </td>
                                     <td class="text-end pe-1">
-                                        <?php echo '$'.number_format($totalbalancedue, 2); ?>
+                                        <?php echo '$'.number_format((float)$totalbalancedue, 2); ?>
                                     </td>
                                 </tr>
                             </table>

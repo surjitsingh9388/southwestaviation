@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <input type="checkbox" name="taxable" value="1" />&nbsp;Taxable
+            <input type="checkbox" name="taxable" value="1" <?php if(!empty($wooptiontaxinfoes->taxable)){ echo 'checked'; } ?> />&nbsp;Taxable
         </div>
         <div class="col-md-12">
             <div class="col-md-7">
@@ -33,7 +33,7 @@
                                 <?php 
                                 $tax_rate = '$0.00';
                                 if(!empty($wooptiontaxinfoes->tax_rate)){
-                                    $tax_rate = '$'.number_format($wooptiontaxinfoes->tax_rate, 2);
+                                    $tax_rate = '$'.number_format((float)$wooptiontaxinfoes->tax_rate, 2);
                                 }
 
                                 echo $this->Form->control('tax_rate', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'id'=>'tax_rate', 'value'=>$tax_rate)); ?>

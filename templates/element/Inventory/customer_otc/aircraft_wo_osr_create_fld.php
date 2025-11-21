@@ -39,7 +39,7 @@
                         <?php 
                         $osr_labor_charge = '$0.00';
                         if(!empty($wooutstandingoutside->osr_labor_charge)){
-                            $osr_labor_charge = '$'.number_format($wooutstandingoutside->osr_labor_charge, 2);
+                            $osr_labor_charge = '$'.number_format((float)$wooutstandingoutside->osr_labor_charge, 2);
                         }
                         echo $this->Form->control('osr_labor_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_labor_charge', 'value'=>$osr_labor_charge)); ?>
                     </div>
@@ -59,7 +59,7 @@
                         <?php 
                         $osr_shipping_out = '$0.00';
                         if(!empty($wooutstandingoutside->osr_shipping_out)){
-                            $osr_shipping_out = '$'.number_format($wooutstandingoutside->osr_shipping_out, 2);
+                            $osr_shipping_out = '$'.number_format((float)$wooutstandingoutside->osr_shipping_out, 2);
                         }
                         echo $this->Form->control('osr_shipping_out', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_shipping_out', 'value'=>$osr_shipping_out)); ?>
                     </div>
@@ -87,7 +87,7 @@
                         <?php 
                         $osr_parts_charge = '$0.00';
                         if(!empty($wooutstandingoutside->osr_parts_charge)){
-                            $osr_parts_charge = '$'.number_format($wooutstandingoutside->osr_parts_charge, 2);
+                            $osr_parts_charge = '$'.number_format((float)$wooutstandingoutside->osr_parts_charge, 2);
                         }
                         echo $this->Form->control('osr_parts_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_parts_charge', 'value'=>$osr_parts_charge)); ?>
                     </div>
@@ -107,7 +107,7 @@
                         <?php 
                         $osr_shipping_in = '$0.00';
                         if(!empty($wooutstandingoutside->osr_shipping_in)){
-                            $osr_shipping_in = '$'.number_format($wooutstandingoutside->osr_shipping_in, 2);
+                            $osr_shipping_in = '$'.number_format((float)$wooutstandingoutside->osr_shipping_in, 2);
                         }
                         echo $this->Form->control('osr_shipping_in', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_shipping_in', 'value'=>$osr_shipping_in)); ?>
                     </div>
@@ -156,7 +156,7 @@
                         <?php 
                         $osr_vendor_labor_charges = '$0.00';
                         if(!empty($wooutstandingoutside->osr_vendor_labor_charges)){
-                            $osr_vendor_labor_charges = '$'.number_format($wooutstandingoutside->osr_vendor_labor_charges, 2);
+                            $osr_vendor_labor_charges = '$'.number_format((float)$wooutstandingoutside->osr_vendor_labor_charges, 2);
                         }
                         
                         echo $this->Form->control('osr_vendor_labor_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_labor_charges', 'value'=>$osr_vendor_labor_charges)); ?>
@@ -170,7 +170,7 @@
                         <?php 
                         $osr_vendor_part_charges = '$0.00';
                         if(!empty($wooutstandingoutside->osr_vendor_part_charges)){
-                            $osr_vendor_part_charges = '$'.number_format($wooutstandingoutside->osr_vendor_part_charges, 2);
+                            $osr_vendor_part_charges = '$'.number_format((float)$wooutstandingoutside->osr_vendor_part_charges, 2);
                         }
                         echo $this->Form->control('osr_vendor_part_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'osr_vendor_part_charges', 'value'=>$osr_vendor_part_charges)); ?>
                     </div>

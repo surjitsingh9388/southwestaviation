@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="control-label text-left" for="reference">Old Serial Number</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('old_serial_number', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_old_serial_number')); ?>
+                        <?php echo $this->Form->control('old_serial_number', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_old_serial_number')); ?>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label class="control-label text-left" for="reference">New Serial Number</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('serial_number', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_serial_number')); ?>
+                        <?php echo $this->Form->control('serial_number', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_serial_number')); ?>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="control-label text-left" for="reference">Qty Needed</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('qty_needed', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'qty-needed')); ?>
+                        <?php echo $this->Form->control('qty_needed', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'qty-needed')); ?>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label class="control-label text-left" for="reference">Qty Used</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('qty_used', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_qty_used')); ?>
+                        <?php echo $this->Form->control('qty_used', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_qty_used')); ?>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <div class="form-group">
                     <label class="control-label text-left" for="reference">Qty On Hand</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('qty_stock', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_qty_stock')); ?>
+                        <?php echo $this->Form->control('qty_stock', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_qty_stock')); ?>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                         <?php
                         $cost_in_mparts = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->cost_in_mparts)){
-                            $cost_in_mparts = '$'.number_format($aircraftwoitemparts->cost_in_mparts, 2);
+                            $cost_in_mparts = '$'.number_format((float)$aircraftwoitemparts->cost_in_mparts, 2);
                         }
                         echo $this->Form->control('cost_in_mparts', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_cost', 'value'=>$cost_in_mparts)); ?>
                     </div>
@@ -99,7 +99,7 @@
                         <?php 
                         $price_each = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->price_each)){
-                            $price_each = '$'.number_format($aircraftwoitemparts->price_each, 2);
+                            $price_each = '$'.number_format((float)$aircraftwoitemparts->price_each, 2);
                         }
                         echo $this->Form->control('price_each', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'price_each', 'value'=>$price_each)); ?>
                     </div>
@@ -114,7 +114,7 @@
                     }
                     $give_discount_percentage = '0.0%';
                     if(!empty(@$aircraftwoitemparts->give_discount_percentage)){
-                        $give_discount_percentage = number_format($aircraftwoitemparts->give_discount_percentage, 2).'%';
+                        $give_discount_percentage = number_format((float)$aircraftwoitemparts->give_discount_percentage, 2).'%';
                     }
                     ?>
                     <label class="control-label text-left" for="reference"><input type="checkbox" name="give_discount" id="give_discount" value="1" <?php echo $give_discount_percentage_chk; ?> />&nbsp;Give Discount</label>
@@ -130,7 +130,7 @@
                         <?php 
                         $part_ship_in = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->part_ship_in)){
-                            $part_ship_in = '$'.number_format($aircraftwoitemparts->part_ship_in, 2);
+                            $part_ship_in = '$'.number_format((float)$aircraftwoitemparts->part_ship_in, 2);
                         }
                         echo $this->Form->control('part_ship_in', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_part_ship_in', 'value'=>$part_ship_in)); ?>
                     </div>
@@ -143,7 +143,7 @@
                         <?php 
                         $part_ship_out = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->part_ship_out)){
-                            $part_ship_out = '$'.number_format($aircraftwoitemparts->part_ship_out, 2);
+                            $part_ship_out = '$'.number_format((float)$aircraftwoitemparts->part_ship_out, 2);
                         }
                         echo $this->Form->control('part_ship_out', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_part_ship_out', 'value'=>$part_ship_out)); ?>
                     </div>
@@ -156,7 +156,7 @@
                         <?php 
                         $part_total_prices = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->part_total_prices)){
-                            $part_total_prices = '$'.number_format($aircraftwoitemparts->part_total_prices, 2);
+                            $part_total_prices = '$'.number_format((float)$aircraftwoitemparts->part_total_prices, 2);
                         }
                         echo $this->Form->control('part_total_prices', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'part_total_prices', 'value'=>$part_total_prices)); ?>
                     </div>
@@ -177,7 +177,7 @@
                         <?php 
                         $core_charges = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->core_charges)){
-                            $core_charges = '$'.number_format($aircraftwoitemparts->core_charges, 2);
+                            $core_charges = '$'.number_format((float)$aircraftwoitemparts->core_charges, 2);
                         }
                         echo $this->Form->control('core_charges', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$core_charges)); ?>
                     </div>
@@ -190,7 +190,7 @@
                         <?php 
                         $general_retail = '$0.00'; 
                         if(!empty(@$aircraftwoitemparts->general_retail)){
-                            $general_retail = '$'.number_format($aircraftwoitemparts->general_retail, 2);
+                            $general_retail = '$'.number_format((float)$aircraftwoitemparts->general_retail, 2);
                         }
                         echo $this->Form->control('general_retail', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'wo_item_part_general_retail', 'value'=>$general_retail)); ?>
                     </div>

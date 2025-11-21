@@ -212,6 +212,18 @@ $companyUserRoles = array(ROLE_ADMIN);
                                 <?php echo $this->Form->checkbox('welcome_email', ['label' => '', 'hiddenField' => false]); ?>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="remote_access">
+                                Allow Remote Access
+                                <i class="fa fa-question-circle" 
+                                title="If checked, this user can clock in/out from outside the geo-fenced area."
+                                data-toggle="tooltip"></i>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php echo $this->Form->checkbox('remote_access', ['label' => '', 'id' => 'allow_remote_access', 'hiddenField' => false]); ?>
+                            </div>
+                        </div>
                     </div>
                     <!--End User Personal detail Section-->
                                           
@@ -291,6 +303,7 @@ $companyUserRoles = array(ROLE_ADMIN);
                                 <?php echo $this->Form->control('user_initials', array('type'=>'text', 'class' => 'form-control col-md-7 col-xs-12', 'label' => false, 'placeholder'=>'Enter user initials')); ?>
                             </div>
                         </div>
+
                     </div>
                     <!--End Add Access Code Section-->
 
@@ -325,6 +338,10 @@ $companyUserRoles = array(ROLE_ADMIN);
 var getCitiesListURL = "<?php echo $this->Url->build(['controller'=>'addresses', 'action'=>'getCitiesList']); ?>";
 var getStatesListURL = "<?php echo $this->Url->build(['controller' => 'addresses', 'action' => 'getStatesList']); ?>";
 var savePTOReqeustAutoApproveURl = "<?php echo $this->Url->build(['controller' => 'PtoRequests', 'action' => 'savePTOReqeustAutoApprove']); ?>";
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 $(document).ready(function() {
     $.validator.addMethod("teamRequiredIfManager", function(value, element) {

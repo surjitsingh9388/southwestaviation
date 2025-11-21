@@ -233,7 +233,7 @@
                                 foreach($allserviceitemspo as $key=>$serviceitems){
                                     $total = ($serviceitems['labor_cost']+$serviceitems['part_cost']+$serviceitems['ship_out']+$serviceitems['ship_in']);
                                 ?>
-                                <tr class="editwoosrpoitem <?php if($key == '0'){ ?>osr-po_item-active<?php } ?>" data-val="<?php echo $serviceitems['id']; ?>">
+                                <tr class="editwoosrpoitem <?php if($key == '0'){ ?>osr-po_item-active<?php } ?>" data-val="<?php echo $serviceitems['id']; ?>" osr-po-id="<?php echo $serviceitems['osr_po_id']; ?>">
                                     <td><?php echo $serviceitems['work_order']['order_type'] == '1' ? 'Work Order' : 'Repair Order'; ?></td>
                                     <td><?php echo $serviceitems['work_order']['work_order_no']; ?></td>
                                     <td><?php echo $serviceitems['wo_item']['wo_item_position']; ?></td>

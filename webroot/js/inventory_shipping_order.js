@@ -1,6 +1,8 @@
 $(document).ready(function() {
-
-    disableEnableSaveInvSOBtn();
+    
+    setInterval(function() {
+        disableEnableSaveInvSOBtn();
+    }, 1000);
     
     $(".changeinvshippingorders").click(function(e){
         

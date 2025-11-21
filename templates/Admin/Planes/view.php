@@ -17,96 +17,96 @@
         <div class="page-content mt-35">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div><h5><ul>Aircraft Information</ul></h5></div>
+                    <h4>Aircraft Information</h4>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Registration Code:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Registration Code:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->plane_code); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Make & Model:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Make & Model:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->plane_type); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Serial Number:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Serial Number:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->plane_serial_number); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Airworthiness Date:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Airworthiness Date:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo !empty($plane->airworthiness_date) ? (date('d-M-Y', strtotime($plane->airworthiness_date))) : ''; ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Schedule Revision Level:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Schedule Revision Level:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->federal_aviation_regulation); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Hours:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Hours:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->hours); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Cycles:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Cycles:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->cycles); ?>
                         </div>
                     </div>
 
-                    <div><h5><ul>Operator Information</ul></h5></div>
+                    <h4>Operator Information</h4>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Aircraft Name:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Aircraft Name:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->plane_name); ?>
                         </div>
                     </div>
                     
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Manufactured By:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Manufactured By:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo h($plane->manufacturered_by); ?>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label pull-right">Manufactured On:</label>
+                    <div class="row m-0">
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <label class="control-label">Manufactured On:</label>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-6 col-sm-8 col-xs-12">
                             <?php echo !empty($plane->manufacturered_on) ? (date('d-M-Y', strtotime($plane->manufacturered_on))) : ''; ?>
                         </div>
                     </div>

@@ -288,7 +288,7 @@ $class   = $pilotComp->getClassList();
                         <h3 class="panel-title">Pilot Certificates</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive" style=" overflow: visible !important;">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-condensed table-hover">
                                 <tr>
                                     <th width="20%">Certificate Type</th>

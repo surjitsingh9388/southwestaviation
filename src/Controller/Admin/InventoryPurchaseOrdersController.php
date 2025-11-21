@@ -275,6 +275,7 @@
                         $invrequestpost['inventory_item_id'] = isset($postData['inventory_item_id'][$i]) ? $postData['inventory_item_id'][$i] : '';
                         $invrequestpost['noninventory_item'] = isset($postData['noninventory_item'][$i]) && !empty($postData['noninventory_item'][$i]) ? $postData['noninventory_item'][$i] : '';
                         $invrequestpost['qty'] = $postData['qty'][$i];
+                        $invrequestpost['eta'] = $postData['eta'][$i];
                         $invrequestpost['uom'] = !empty($postData['uom'][$i]) ? $postData['uom'][$i] : '1';
                         
                         $invrequestpost['cost'] = $postData['cost'][$i];
@@ -440,6 +441,7 @@
                         $invrequestpost['inventory_item_id'] = isset($postData['inventory_item_id'][$i]) ? $postData['inventory_item_id'][$i] : '';
                         $invrequestpost['noninventory_item'] = isset($postData['noninventory_item'][$i]) && !empty($postData['noninventory_item'][$i]) ? $postData['noninventory_item'][$i] : '';
                         $invrequestpost['qty'] = $postData['qty'][$i];
+                        $invrequestpost['eta'] = $postData['eta'][$i];
                         $invrequestpost['uom'] = !empty($postData['uom'][$i]) ? $postData['uom'][$i] : '1';
                         
                         $invrequestpost['cost'] = $postData['cost'][$i];
@@ -869,7 +871,7 @@
                                         <td style="font-size: 10px; font-weight: normal; text-align:center; margin-top:15px;">
                                             <table style="width:100%">
                                                 <tr>
-                                                    <td><b>Order Numbe</b></td>
+                                                    <td><b>Order Number</b></td>
                                                     <td><b>Date</b></td>
                                                     <td><b>Status</b></td>
                                                 </tr>
@@ -1281,7 +1283,7 @@
                     $inventorydata['serial_no']         = $postData['serial_no'][$i];
                     $inventorydata['conditions']        = $postData['conditions'][$i];
                     $inventorydata['location_id']       = $postData['location_id'][$i];
-                    $inventorydata['received']          = date("Y-m-d");
+                    $inventorydata['received']          = new \Cake\I18n\FrozenTime('now');
                     $inventorydata['notes']             = $postData['notes'][$i];
                     $inventorydata['uom']               = $inventoryitems['default_uom'];
                     $inventorydata['currency']          = $inventoryitems['currency'];

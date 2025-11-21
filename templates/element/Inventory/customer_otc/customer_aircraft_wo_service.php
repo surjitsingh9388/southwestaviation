@@ -79,7 +79,7 @@
                                 }
 
                                 $service_rate_an_hour = !empty($aircraftwoitemservices->service_rate_an_hour) 
-                                    ? '$' . number_format($aircraftwoitemservices->service_rate_an_hour, 2) 
+                                    ? '$' . number_format((float)$aircraftwoitemservices->service_rate_an_hour, 2) 
                                     : '$0.00';
 
                                 echo $this->Form->control('service_rate_an_hour', [
@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Add Time</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('service_add_time', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', $disabledchkbox, 'value'=>'')); ?>
+                                <?php echo $this->Form->control('service_add_time', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', $disabledchkbox, 'value'=>'')); ?>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             if(!empty($aircraftwoitemservices->login_time)){ ?>
                                 <button type="button" class="btn btn-success woitem-start-timer-btn woitem-start-service-timer" <?php echo $starttimerdisable; ?>>Stop Timer</button>
                             <?php }else{ ?>
-                                <button type="button" class="btn btn-success woitem-start-timer-btn" <?php if($aircraftwoitems->wo_item_status == '3'){ ?> disabled<?php } ?>  <?php echo $starttimerdisable; ?>>Start Timer</button>
+                                <button type="button" class="btn btn-success woitem-start-timer-btn" <?php if($aircraftwoitems->wo_item_status == '3' || empty($technicianData)){ ?> disabled<?php } ?>  <?php echo $starttimerdisable; ?>>Start Timer</button>
                             <?php } ?>
                         </div>
                     </div>
@@ -189,9 +189,9 @@
                                     <?php 
                                     $service_override_hrs = '0.00';
                                     if(!empty($aircraftwoitemservices->service_override_hrs)){
-                                        $service_override_hrs = number_format($aircraftwoitemservices->service_override_hrs, 2);
+                                        $service_override_hrs = number_format((float)$aircraftwoitemservices->service_override_hrs, 2);
                                     }
-                                    echo $this->Form->control('service_override_hrs', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'value'=>$service_override_hrs)); ?>
+                                    echo $this->Form->control('service_override_hrs', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'value'=>$service_override_hrs)); ?>
                                 </div>
                             </div>
                         </div>
@@ -202,9 +202,9 @@
                                     <?php 
                                     $hrs_worked = '0.00';
                                     if(!empty($aircraftwoitemservices->hrs_worked)){
-                                        $hrs_worked = number_format($aircraftwoitemservices->hrs_worked, 2);
+                                        $hrs_worked = number_format((float)$aircraftwoitemservices->hrs_worked, 2);
                                     }
-                                    echo $this->Form->control('hrs_worked', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_technician_hrs_worked', 'value'=>$hrs_worked)); ?>
+                                    echo $this->Form->control('hrs_worked', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_technician_hrs_worked', 'value'=>$hrs_worked)); ?>
                                 </div>
                             </div>
                         </div>
@@ -215,9 +215,9 @@
                                     <?php 
                                     $service_overtime_hrs = '0.00';
                                     if(!empty($aircraftwoitemservices->service_overtime_hrs)){
-                                        $service_overtime_hrs = number_format($aircraftwoitemservices->service_overtime_hrs, 2);
+                                        $service_overtime_hrs = number_format((float)$aircraftwoitemservices->service_overtime_hrs, 2);
                                     }
-                                    echo $this->Form->control('service_overtime_hrs', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_service_overtime_hrs', 'value'=>$service_overtime_hrs)); ?>
+                                    echo $this->Form->control('service_overtime_hrs', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_service_overtime_hrs', 'value'=>$service_overtime_hrs)); ?>
                                 </div>
                             </div>
                         </div>
@@ -227,9 +227,9 @@
                                 <label class="control-label" for="reference">Estimated Hrs. for Item</label>
                                 <div class="form-input-frame">
                                     <?php 
-                                    $estimated_hrs_for_item = !empty($aircraftwoitemservices->estimated_hrs_for_item) ? number_format($aircraftwoitemservices->estimated_hrs_for_item, 2) : '0.00';
+                                    $estimated_hrs_for_item = !empty($aircraftwoitemservices->estimated_hrs_for_item) ? number_format((float)$aircraftwoitemservices->estimated_hrs_for_item, 2) : '0.00';
 
-                                    echo $this->Form->control('estimated_hrs_for_item', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_estimated_hrs_for_item', 'value'=>$estimated_hrs_for_item)); ?>
+                                    echo $this->Form->control('estimated_hrs_for_item', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_estimated_hrs_for_item', 'value'=>$estimated_hrs_for_item)); ?>
                                 </div>
                             </div>
                         </div>
@@ -240,9 +240,9 @@
                                     <?php 
                                     $total_hrs_for_tech = '0.00';
                                     if(!empty($aircraftwoitemservices->total_hrs_for_tech)){
-                                        $total_hrs_for_tech = number_format($aircraftwoitemservices->total_hrs_for_tech, 2);
+                                        $total_hrs_for_tech = number_format((float)$aircraftwoitemservices->total_hrs_for_tech, 2);
                                     }
-                                    echo $this->Form->control('total_hrs_for_tech', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_total_hrs_for_tech', 'value'=>$total_hrs_for_tech)); ?>
+                                    echo $this->Form->control('total_hrs_for_tech', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_total_hrs_for_tech', 'value'=>$total_hrs_for_tech)); ?>
                                 </div>
                             </div>
                         </div>
@@ -253,9 +253,9 @@
                                     <?php 
                                     $total_hrs_for_item = '0.00';
                                     if(!empty($aircraftwoitemservices->total_hrs_for_item)){
-                                        $total_hrs_for_item = number_format($aircraftwoitemservices->total_hrs_for_item, 2);
+                                        $total_hrs_for_item = number_format((float)$aircraftwoitemservices->total_hrs_for_item, 2);
                                     }
-                                    echo $this->Form->control('total_hrs_for_item', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_total_hrs_for_item', 'value'=>$total_hrs_for_item)); ?>
+                                    echo $this->Form->control('total_hrs_for_item', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly', 'id'=>'woitem_total_hrs_for_item', 'value'=>$total_hrs_for_item)); ?>
                                 </div>
                             </div>
                         </div>

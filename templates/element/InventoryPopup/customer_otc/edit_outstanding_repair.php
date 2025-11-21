@@ -11,9 +11,9 @@
                     <button type="button" class="btn btn-default wo-item-osr-next-btn" data-val="next">></button>
                     <button type="button" class="btn btn-default newwosorrecordbtn" <?php if($woitemdata->wo_item_status == '3'){ ?> disabled<?php } ?>>New OSR Record</button>
                     <button type="button" class="btn btn-default removewoosrbtn" <?php if($woitemdata->wo_item_status == '3'){ ?> disabled<?php } ?> >Delete OSR</button>
-                    <button type="button" class="btn btn-default woosraddtoporobtn" <?php if($woitemdata->wo_item_status == '3'){ ?> disabled<?php } ?>  data-val="1">Add to P/O</button>
+                    <button type="button" class="btn btn-default woosraddtoporobtn" <?php if($woitemdata->wo_item_status == '3' || !empty(@$wooutstandingoutside->osr_purchase_order_no)){ ?> disabled<?php } ?>  data-val="1">Add to P/O</button>
                     <?php if($wodetails->order_type== '1'){ ?>
-                    <button type="button" class="btn btn-default woosraddtoporobtn" <?php if($woitemdata->wo_item_status == '3'){ ?> disabled<?php } ?>  data-val="2">Create New R/O</button>
+                    <button type="button" class="btn btn-default woosraddtoporobtn" <?php if($woitemdata->wo_item_status == '3' || !empty(@$wooutstandingoutside->osr_purchase_order_no)){ ?> disabled<?php } ?>  data-val="2">Create New R/O</button>
                     <?php } ?>
                 </div>
                 <div id="newwoosrhtmlblock">

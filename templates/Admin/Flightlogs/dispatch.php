@@ -52,7 +52,7 @@ if(!empty($tripId)) {
                     <div style="clear: both;padding-top: 15px;"></div>
 
                     <!-- Tabs -->
-                    <div id='tabs'>
+                    <div id='tabs' style="padding:0px;">
                         <ul id="tabUI">
                             <?php
                             if(!empty($fls)) {
@@ -92,7 +92,7 @@ if(!empty($tripId)) {
                                         <input type="hidden" name="form_type" class="formTypeCls" value="fllog">
                                         <input type="hidden" name="tabnum" class="tabnum" value="<?php echo $i; ?>">
                                         <div class="gettab row" style="padding-top: 10px;">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-md-6">
                                                         <h4>Aircraft</h4>
@@ -115,7 +115,7 @@ if(!empty($tripId)) {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-sm-12">
                                                 <!-- Crew information -->
                                                 <div class="form-group">
                                                     <div class="col-md-6">
@@ -181,17 +181,17 @@ if(!empty($tripId)) {
                                         <div class="flightInfoCls">
                                             <h4>Leg Flight Information</h4>
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Flying From</label>
                                                     <input type="text" name="flight_from" class="form-control flyFromCls" maxlength="4" style="text-transform:uppercase" value="<?php echo $value['flight_from']; ?>">
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Flying To</label>
                                                     <input type="text" name="flight_to" class="form-control flyToCls" maxlength="4" style="text-transform:uppercase" value="<?php echo $value['flight_to']; ?>">
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Leg Type</label>
                                                     <?php
                                                     $legType = ['135'=>'Part 135', '91'=>'Part 91'];
@@ -199,36 +199,32 @@ if(!empty($tripId)) {
                                                     ?>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label># Passengers</label>
                                                     <?php echo $this->Form->control('passengers', array('class'=>'form-control', 'label'=>false, 'value'=>$value['passengers'])); ?>
                                                 </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-3">
+                                         
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Leg Start Date</label>
                                                     <?php echo $this->Form->Text('leg_date', array('class'=>'form-control datePicker', 'label'=>false, 'value'=>$legDate)); ?>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Leg Start Time</label>
                                                     <?php echo $this->Form->Text('leg_start', array('class'=>'form-control legStartCls timePicker keypress', 'label'=>false, 'value'=>$legStartTime, 'placeholder'=>'00:00')); ?>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Leg Length</label>
                                                     <?php echo $this->Form->Text('leg_length', array('class'=>'form-control legLengthCls timePicker keypress', 'label'=>false, 'value'=>$legLength, 'placeholder'=>'00:00')); ?>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-3 col-sm-6">
                                                     <label>Leg Stop Time</label>
                                                     <input type="text" name="leg_stop" class="form-control legStopCls disabledBG" placeholder="00:00" disabled value="<?php echo $legStopTime; ?>">
                                                 </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12">
+                                          
+                                                <div class="col-md-6 col-sm-12">
                                                     <label>Leg Notes</label>
                                                     <?php echo $this->Form->control('notes', array('class'=>'form-control col-md-6 col-xs-12', 'label'=>false, 'rows'=>3, 'cols'=>50, 'placeholder'=>'Notes', 'value'=>$value['notes'])); ?>
                                                 </div>

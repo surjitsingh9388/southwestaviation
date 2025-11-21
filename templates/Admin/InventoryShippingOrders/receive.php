@@ -58,7 +58,7 @@ use Cake\Routing\Router;
                                         <p>
                                             <?php
                                             $address = $inventorybillingaddress->city.', ';
-                                            if(!empty($inventorybillingaddress->state)){
+                                            if(!empty($inventorybillingaddress->state) && isset($states[$inventorybillingaddress->state])){
                                                 $address .= $states[$inventorybillingaddress->state];
                                             }else{
                                                 $address .= $inventorybillingaddress->province;
@@ -90,7 +90,7 @@ use Cake\Routing\Router;
                                         <p>
                                             <?php
                                             $address = $InventoryShippingOrders->city.', ';
-                                            if(!empty($InventoryShippingOrders->state)){
+                                            if(!empty($InventoryShippingOrders->state) && !empty($states[$InventoryShippingOrders->state])){
                                                 $address .= $states[$InventoryShippingOrders->state];
                                             }else{
                                                 $address .= $InventoryShippingOrders->province;

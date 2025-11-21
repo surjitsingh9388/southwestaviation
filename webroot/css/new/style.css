@@ -730,7 +730,8 @@ div.tolerance-status {
     background:
         rgb(255, 255, 255) none repeat scroll 0% 0%;
     border: 1px solid;
-    width: 900px;
+    max-width: 900px;
+    
 }
 
 #airCompDetailsPopup {
@@ -783,6 +784,9 @@ div.tolerance-status {
     padding-top: 2px;
     font-size: 18px;
     padding-left: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .partDetailPopupHeader button {

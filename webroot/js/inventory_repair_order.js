@@ -2,8 +2,10 @@ $(document).ready(function() {
     $("form#frmInventoryRepairOrders #vendor, #ro_number, #ro_date, #ship-via, #requestor, #po_currency, #bill_to_address, #ship_to_address").on("keyup change", function(){
         disableEnableSaveInvROBtn();
     });
-
-    disableEnableSaveInvROBtn();
+    
+    setInterval(function() {
+        disableEnableSaveInvROBtn();
+    }, 1000);
 
     disableEnableSaveInvRORecBtn();
 

@@ -56,6 +56,7 @@
         protected \App\Model\Table\CustomerAircraftWOOptionMiscFuelChargesTable $CustomerAircraftWOOptionMiscFuelCharges;
         protected \App\Model\Table\CustomerAircraftWOOptionPricingInfoesTable $CustomerAircraftWOOptionPricingInfoes;
         protected \App\Model\Table\CustomerAircraftWOOptionWarrantyInfoesTable $CustomerAircraftWOOptionWarrantyInfoes;
+        protected \App\Model\Table\WOOptionWarrantyInfoPaymentsTable $WOOptionWarrantyInfoPayments;
         protected \App\Model\Table\CustomerAircraftWOMessagesTable $CustomerAircraftWOMessages;
         protected \App\Model\Table\CustomerAircraftWOOptionExtraTaxesTable $CustomerAircraftWOOptionExtraTaxes;
         protected \App\Model\Table\CustomerAircraftWOOptionTaxInfoesTable $CustomerAircraftWOOptionTaxInfoes;
@@ -120,6 +121,7 @@
             $this->CustomerAircraftWOOptionMiscFuelCharges          = $this->fetchTable('CustomerAircraftWOOptionMiscFuelCharges');
             $this->CustomerAircraftWOOptionPricingInfoes            = $this->fetchTable('CustomerAircraftWOOptionPricingInfoes');
             $this->CustomerAircraftWOOptionWarrantyInfoes           = $this->fetchTable('CustomerAircraftWOOptionWarrantyInfoes');
+            $this->WOOptionWarrantyInfoPayments                     = $this->fetchTable('WOOptionWarrantyInfoPayments');
             $this->CustomerAircraftWOMessages                       = $this->fetchTable('CustomerAircraftWOMessages');
             $this->CustomerAircraftWOOptionExtraTaxes               = $this->fetchTable('CustomerAircraftWOOptionExtraTaxes');
             $this->CustomerAircraftWOOptionTaxInfoes                = $this->fetchTable('CustomerAircraftWOOptionTaxInfoes');
@@ -950,7 +952,7 @@
                         $otcinfotblrow = $otfinfodata['tblrow'];
                         $totalpartsubtotal = $otfinfodata['totalpartsubtotal'];
 
-                        $otcinfoinvoices = $this->CustomerOTCInfoInvoices->get($postData['otc_invoice_id']);
+                        $otc_invoice_id = $postData['otc_invoice_id'];
                     }else{
                         $invoice_number = $this->CustomerOTC->getOTCInvoiceNumber();
                         $otcinfoinvoices = $this->CustomerOTCInfoInvoices->newEmptyEntity();
@@ -966,7 +968,17 @@
                         $otcinfoinvoices = $this->CustomerOTCInfoInvoices->patchEntity($otcinfoinvoices, $postData);
                         
                         $this->CustomerOTCInfoInvoices->save($otcinfoinvoices);
+                        $otc_invoice_id = $otcinfoinvoices->id;
                     }
+
+                    $otcinfoinvoices = $this->CustomerOTCInfoInvoices
+                                            ->find()
+                                            ->contain(['Users'])
+                                            ->where([
+                                                'CustomerOTCInfoInvoices.id' => $otc_invoice_id
+                                            ])
+                                            ->first();
+                    $otcinfoinvoices['added_by'] = $otcinfoinvoices->user->full_name;
                     
                     $this->set(compact('otcinfoinvoices', 'otcinfotblrow', 'totalpartsubtotal'));
                 }else if($section == 'create_otc_invoice_ad_part_btn'){
@@ -984,7 +996,7 @@
                     if(!empty($postData['otc_invoice_part_id'])){
                         $otcinfoinvoiceparts = $this->CustomerOTCInfoInvoiceParts->get($postData['otc_invoice_part_id']);
                         $conditions = $this->Inventory->getAllInventoriesConditions($otcinfoinvoiceparts['part_number']);
-                        $serialno = $this->Inventory->getAllInventoriesSerialNoByCondId($postData['otc_invoice_part_id'], $otcinfoinvoiceparts['part_conditions']);
+                        $serialno = $this->Inventory->getAllInventoriesSerialNoByCondId($otcinfoinvoiceparts['part_number'], $otcinfoinvoiceparts['part_conditions']);
                     }
 
                     $this->set(compact('otcinfoinvoiceparts', 'inventoryitemdropdowndata', 'conditions', 'serialno'));
@@ -1020,11 +1032,20 @@
                     $woosrinfopo = [];
                     $allserviceitemspo = [];
 
-                    if(!empty($postData['osr_purchase_order_no'])){
-                        $woosrinfopo = $this->CustomerAircraftWOOSRInfoPOes->find('all')->where(['po_no'=>$postData['osr_purchase_order_no']])->select($this->CustomerAircraftWOOSRInfoPOes)->first();
+                    if(!empty($postData['wo_osrinfo_id'])){
+                        $woosrinfopo = $this->CustomerAircraftWOOSRInfoPOes
+                                            ->find()
+                                            ->where(['po_no' => $postData['osr_purchase_order_no']])
+                                            ->first();
 
-                        $allserviceitemspo = $this->CustomerOTC->getAllServiceItemOnPO($woosrinfopo['id']);
+                        if ($woosrinfopo) {
+                            $allserviceitemspo = $this->CustomerOTC->getAllServiceItemOnPO($woosrinfopo->id);
+                        } else {
+                            $woosrinfopo = $this->CustomerAircraftWOOSRInfoPOes->newEmptyEntity();
+                            $allserviceitemspo = [];
+                        }
                     }
+                    
                     $woosrvendorlist = $this->CustomerOTC->getWOOSRVendorDataAndPhones();
                     extract($woosrvendorlist);
                     $po_created_by = $authUserData['id'];
@@ -1071,10 +1092,19 @@
                         $osr_po_item_id = $postData['osr_po_item_id'];
                         $woosrpoitems = $this->CustomerAircraftWOOSRPOItems->get($osr_po_item_id);
                     }
-                    $wodropdown = $this->CustomerOTC->getAircraftWODropDown();
+
+                    $work_order_type = '';
+                    $work_order_id = '';
+                    if(!empty($postData['work_order_id'])){
+                        $work_order_id = $postData['work_order_id'];
+                        $workorderdet = $this->CustomerOTC->getAircraftWorkOrder($work_order_id);
+                        $work_order_type = $workorderdet->order_type;
+                    }
+                    
+                    $wodropdown = $this->CustomerOTC->getAircraftWODropDown($work_order_type);
                     $wo_osr_po_id = $postData['wo_osr_po_id'];
 
-                    $this->set(compact('woosrpoitems', 'wodropdown', 'wo_osr_po_id'));
+                    $this->set(compact('woosrpoitems', 'wodropdown', 'wo_osr_po_id', 'work_order_type', 'work_order_id'));
                 }else if($section == 'aircraft_wo_all_osr_list'){
                     $fileName .= 'aircraft_wo_all_osr_list';
 
@@ -1117,9 +1147,9 @@
                         $this->CustomerAircraftWOOptionGeneralInfoes->save($wooptiongeninfoes);
                     }
 
-                    $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionMiscCharges)->first();
-                    if(empty($wooptionmisccharges)){
-                        $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->newEmptyEntity();
+                    $wooptionmiscchargs = $this->CustomerAircraftWOOptionMiscCharges->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionMiscCharges)->first();
+                    if(empty($wooptionmiscchargs)){
+                        $wooptionmiscchargs = $this->CustomerAircraftWOOptionMiscCharges->newEmptyEntity();
                         $misFueldChargesData = [];
 
                         $misFueldChargesData['work_order_id'] = $work_order_id;
@@ -1128,9 +1158,73 @@
                         $misFueldChargesData['added_by'] = $authUserData['id'];
                         $misFueldChargesData['created_at'] = new \Cake\I18n\FrozenTime('now');
 
-                        $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->patchEntity($wooptionmisccharges, $misFueldChargesData);
+                        $wooptionmiscchargs = $this->CustomerAircraftWOOptionMiscCharges->patchEntity($wooptionmiscchargs, $misFueldChargesData);
                     
-                        $this->CustomerAircraftWOOptionMiscCharges->save($wooptionmisccharges);
+                        $this->CustomerAircraftWOOptionMiscCharges->save($wooptionmiscchargs);
+                    }
+
+                    $wooptionmiscwooptiontaxinfoeschargs = $this->CustomerAircraftWOOptionTaxInfoes->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionTaxInfoes)->first();
+                    if(empty($wooptiontaxinfoes)){
+                        $wooptiontaxinfoes = $this->CustomerAircraftWOOptionTaxInfoes->newEmptyEntity();
+                        $taxInfoData = [];
+
+                        $taxInfoData['work_order_id'] = $work_order_id;
+                        $taxInfoData['wo_item_id'] = $wo_item_id;
+                        $taxInfoData['tax_method'] = '1';
+                        $taxInfoData['tax_item_status'] = '1';
+                        $taxInfoData['added_by'] = $authUserData['id'];
+                        $taxInfoData['created_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        $wooptiontaxinfoes = $this->CustomerAircraftWOOptionTaxInfoes->patchEntity($wooptiontaxinfoes, $taxInfoData);
+                    
+                        $this->CustomerAircraftWOOptionTaxInfoes->save($wooptiontaxinfoes);
+                    }
+
+                    $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionPricingInfoes)->first();
+                    if(empty($wooptionpricinginfoes)){
+                        $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->newEmptyEntity();
+                        $pricingInfoData = [];
+
+                        $pricingInfoData['work_order_id'] = $work_order_id;
+                        $pricingInfoData['wo_item_id'] = $wo_item_id;
+                        $pricingInfoData['pricing_info_status'] = '1';
+                        $pricingInfoData['added_by'] = $authUserData['id'];
+                        $pricingInfoData['created_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->patchEntity($wooptionpricinginfoes, $pricingInfoData);
+                    
+                        $this->CustomerAircraftWOOptionPricingInfoes->save($wooptionpricinginfoes);
+                    }
+
+                    $wooptionbillinginfoes = $this->CustomerAircraftWOOptionBillingInfoes->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionBillingInfoes)->first();
+                    if(empty($wooptionbillinginfoes)){
+                        $wooptionbillinginfoes = $this->CustomerAircraftWOOptionBillingInfoes->newEmptyEntity();
+                        $billingInfoData = [];
+
+                        $billingInfoData['work_order_id'] = $work_order_id;
+                        $billingInfoData['wo_item_id'] = $wo_item_id;
+                        $billingInfoData['billing_rate_method'] = '1';
+                        $billingInfoData['added_by'] = $authUserData['id'];
+                        $billingInfoData['created_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        $wooptionbillinginfoes = $this->CustomerAircraftWOOptionBillingInfoes->patchEntity($wooptionbillinginfoes, $billingInfoData);
+                    
+                        $this->CustomerAircraftWOOptionBillingInfoes->save($wooptionbillinginfoes);
+                    }
+
+                    $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->first();
+                    if(empty($wooptionwarrantyinfoes)){
+                        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->newEmptyEntity();
+                        $warrantyInfoData = [];
+
+                        $warrantyInfoData['work_order_id'] = $work_order_id;
+                        $warrantyInfoData['wo_item_id'] = $wo_item_id;
+                        $warrantyInfoData['added_by'] = $authUserData['id'];
+                        $warrantyInfoData['created_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->patchEntity($wooptionwarrantyinfoes, $warrantyInfoData);
+                    
+                        $this->CustomerAircraftWOOptionWarrantyInfoes->save($wooptionwarrantyinfoes);
                     }
                     
                     $workorderoptiondata = $this->CustomerOTC->getAircraftWOViewOptionData($postData);
@@ -1138,7 +1232,21 @@
                     
                     $aircraftwoitems = $this->CustomerAircraftWOItems->get($wo_item_id);
                     $warrantylist = $this->CustomerOTC->getWorkOrderWarrantyList($work_order_id);
-                    $this->set(compact('work_order_id', 'wo_item_id', 'aircraftworkorders', 'wooptiongeninfoes', 'wooptionmiscchargs', 'wooptionpricinginfoes', 'wooptionwarrantyinfoes', 'wooptiontaxinfoes', 'wooptionbillinginfoes', 'aircraftwoitems', 'warrantylist', 'wooptionmiscfuelchargs'));
+
+                    $wooptionwarrantyinfopayments = $this->WOOptionWarrantyInfoPayments->newEmptyEntity();
+                    if(count($warrantylist) > 0){
+                        $warranty = $warrantylist->first();
+                        $wooptionwarrantyinfopayments = $this->WOOptionWarrantyInfoPayments->find()
+                                                                ->where([
+                                                                    'warranty_info_id' => $wooptionwarrantyinfoes->id,
+                                                                    'company_id' => $warranty['wo_item_overviews']['warranty']
+                                                                ])
+                                                                ->first();
+                    }else{
+                        $wooptionwarrantyinfopayments = null;
+                    }
+                    
+                    $this->set(compact('work_order_id', 'wo_item_id', 'aircraftworkorders', 'wooptiongeninfoes', 'wooptionmiscchargs', 'wooptionpricinginfoes', 'wooptionwarrantyinfoes', 'wooptiontaxinfoes', 'wooptionbillinginfoes', 'aircraftwoitems', 'warrantylist', 'wooptionmiscfuelchargs', 'wooptionwarrantyinfopayments'));
                 }else if($section == 'aircraft_option_email_work_order'){
                     $fileName .= 'aircraft_option_email_work_order';
                 }else if($section == 'aircraft_wo_option_create_atacode'){
@@ -1200,12 +1308,23 @@
                 }else if($section == 'aircraft_wo_option_taxinfo_extra_taxes'){
                     $fileName .= 'aircraft_wo_option_taxinfo_extra_taxes';
 
+                    $tax_id = $postData['option_tax_info_id'] ?? null;
+
                     $wooptionextrataxes = $this->CustomerAircraftWOOptionExtraTaxes->newEmptyEntity();
 
-                    $tax_id = $postData['option_tax_info_id'];
-                    
-                    $wooptionextrataxlist = $this->CustomerAircraftWOOptionExtraTaxes->find('all', array(
-                        'order' => 'id DESC'))->where(['tax_id'=>$tax_id])->select(['id', 'extra_tax_name']);
+                    if (!empty($tax_id)) {
+                        $wooptionextrataxlist = $this->CustomerAircraftWOOptionExtraTaxes
+                            ->find()
+                            ->where(['tax_id' => $tax_id])
+                            ->select(['id', 'extra_tax_name'])
+                            ->order(['id' => 'DESC'])
+                            ->all();
+
+                        if ($wooptionextrataxlist->count() > 0) {
+                            $wooptionextrataxfirst = $wooptionextrataxlist->first();
+                            $wooptionextrataxes = $this->CustomerAircraftWOOptionExtraTaxes->get($wooptionextrataxfirst->id);
+                        }
+                    }
 
                     $this->set(compact('wooptionextrataxes', 'tax_id', 'wooptionextrataxlist'));
                 }else if($section == 'aircraft_wo_option_new_extra_tax'){
@@ -1950,9 +2069,17 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
                     $customerotcaircraftsdata = '';
                     if(empty($postData['aircraft_id'])){
@@ -2038,6 +2165,14 @@
                 if ($this->request->is('post')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $customercontractrates = $this->CustomerAircraftContractRates->newEmptyEntity();
                     if(!empty($postData['contract_rate_id'])){
                         $customercontractrates = $this->CustomerAircraftContractRates->get($postData['contract_rate_id']);
@@ -2336,6 +2471,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     $aircraftcomplinspectionsdata = '';
                     if(empty($postData['compliance_inspections_id'])){
@@ -2378,6 +2521,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     $aircraftcomplinspectionsdata = '';
                     
@@ -2415,6 +2566,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     $aircraftcomplairframesdata = '';
                     if(empty($postData['compliance_airframe_id'])){
@@ -2457,6 +2616,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     $aircraftcomplenginesdata = '';
                     if(empty($postData['compliance_engine_id'])){
@@ -2600,6 +2767,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_overview_id'])){
@@ -2642,6 +2817,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_helicopter_overview_id'])){
@@ -2684,6 +2867,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['logbook_value_helicopter_overview_id'])){
@@ -2726,6 +2917,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_engine_id'])){
@@ -2765,6 +2964,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_jet_engine_id'])){
@@ -2803,6 +3010,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['logbook_value_jet_engine_id'])){
@@ -2841,6 +3056,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     /*if(!empty($postData['maintenance_eng_history_id'])){
@@ -2900,6 +3123,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_prop_id'])){
@@ -2939,6 +3170,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_appliance_id'])){
@@ -3041,6 +3280,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['maintenance_ad_id'])){
@@ -3179,9 +3426,17 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
                     
                     $customerotcinfoes = $this->CustomerOTCInfoes->find('all')->where(['customer_id'=>$postData['customer_id']])->select($this->CustomerOTCInfoes)->first();
@@ -3218,13 +3473,22 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
                     
                     if(!empty($postData['customer_otc_invoice_id'])){
                         $customerotcinfoinvoices = $this->CustomerOTCInfoInvoices->get($postData['customer_otc_invoice_id']);
+                        unset($postData['added_by']);
                         $postData['updated_by'] = $authUserData['id'];
                         $postData['updated_at'] = new \Cake\I18n\FrozenTime('now');
                     }else{
@@ -3257,9 +3521,17 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
                     
                     $customerotcinfoinvoices = $this->CustomerOTCInfoInvoiceParts->newEmptyEntity();
@@ -3334,9 +3606,17 @@
                 return $this->redirect(['action' => 'index']);
             }else{
                 $postData = $this->request->getData();
-                foreach($postData as $key=>$val){
-                    $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                foreach ($postData as $key => $val) {
+                    // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                    if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                        // Remove $ and , only
+                        $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                    } else {
+                        // Leave as is (no aggressive cleaning)
+                        $postData[$key] = $val;
+                    }
                 }
+
                 //echo "<pre>";print_r($postData);exit;
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
@@ -3368,7 +3648,7 @@
 
                         if(!empty($postData['wo_item_id'])){
                             $customeraircraftwoitems = $this->CustomerAircraftWOItems->get($postData['wo_item_id']);
-                            if($customeraircraftwoitems->wo_item_status == '3'){
+                            if($customeraircraftwoitems->wo_item_status == '3' && !empty($postData['wo_item_status']) && $postData['wo_item_status'] == '3'){
                                 $wo_item_id = $postData['wo_item_id'];
                                 $wo_overviews_id = '';
                                 $wo_services_id = '';
@@ -3378,7 +3658,7 @@
                                 echo json_encode($response);die;
                             }
                         }
-
+                        
                         //save work order items
                         $wo_item_id = $this->saveAircraftWOItems($postData);
                         $postData['wo_item_id'] = $wo_item_id;
@@ -3458,9 +3738,17 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
 
                     if (!empty($postData['work_order_id'])) {
@@ -3590,6 +3878,15 @@
 
         public function saveAircraftWOItems($postData){
             $customeraircraftwoitems = $this->CustomerAircraftWOItems->newEmptyEntity();
+
+            foreach($postData as $key=>$val){
+                if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                    // Remove all $, , and both ASCII & Unicode percent signs
+                    $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                } else {
+                    $postData[$key] = $val;
+                }
+            }
             
             $discrepancy = '';
             $corrective_action = '';
@@ -3679,6 +3976,15 @@
             $woitemoverviews = $this->CustomerAircraftWOItemOverviews->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->select($this->CustomerAircraftWOItemOverviews)->first();
             $authUserData = $this->Authentication->getResult()->getData();
 
+            foreach($postData as $key=>$val){
+                if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                    // Remove all $, , and both ASCII & Unicode percent signs
+                    $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                } else {
+                    $postData[$key] = $val;
+                }
+            }
+
             $isnew = 0;
             if(!empty($woitemoverviews)){
                 $isnew = 1;
@@ -3713,125 +4019,208 @@
             return $wo_overviews_id;
         }
 
-        public function saveAircraftWOItemServices($postData, $source = ''){
+        public function saveAircraftWOItemServices(array $postData, string $source = '')
+        {
             $aircraftwoitemservices = $this->CustomerAircraftWOItemServices->newEmptyEntity();
             $woitemservicelogs = $this->AircraftWOItemServiceLogs->newEmptyEntity();
             $authUserData = $this->Authentication->getResult()->getData();
 
-            $postData['service_rate_an_hour'] = !empty($postData['service_rate_an_hour']) ? str_replace('$','',$postData['service_rate_an_hour']) : '0.00';
+            // normalize numeric and currency inputs
+            $postData['service_rate_an_hour'] = !empty($postData['service_rate_an_hour'])
+                ? str_replace('$', '', $postData['service_rate_an_hour'])
+                : '0.00';
 
-            $postData['wo_item_id'] = !empty($postData['wo_item_id']) ? $postData['wo_item_id'] : $postData['service_wo_item_id'];
-            
-            $currentdatetime =  new \Cake\I18n\FrozenTime('now');
-            
+            // sanitize text inputs (allow letters, numbers, dot and space)
+            foreach($postData as $key=>$val){
+                if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                    // Remove all $, , and both ASCII & Unicode percent signs
+                    $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                } else {
+                    $postData[$key] = $val;
+                }
+            }
+
+            // choose wo_item_id from provided fields
+            $postData['wo_item_id'] = !empty($postData['wo_item_id'])
+                ? $postData['wo_item_id']
+                : (!empty($postData['service_wo_item_id']) ? $postData['service_wo_item_id'] : null);
+
+            $currentdatetime = new \Cake\I18n\FrozenTime('now');
+
             $postData['is_lead_tech_on_item'] = !empty($postData['is_lead_tech_on_item']) ? $postData['is_lead_tech_on_item'] : '0';
             $postData['currently_on_overtime'] = !empty($postData['currently_on_overtime']) ? $postData['currently_on_overtime'] : '0';
 
-            if(!empty($postData['wo_services_id'])){
+            // If existing service, load it
+            if (!empty($postData['wo_services_id'])) {
                 $aircraftwoitemservices = $this->CustomerAircraftWOItemServices->get($postData['wo_services_id']);
             }
 
-            if(!empty($postData['wo_services_id']) && empty($source)){
+            // Ensure numeric fields exist and are floats
+            $numericFields = [
+                'service_add_time', 'service_overtime_hrs', 'service_override_hrs',
+                'hrs_worked', 'total_hrs_for_tech', 'total_hrs_for_item'
+            ];
+            foreach ($numericFields as $nf) {
+                if (!isset($postData[$nf]) || $postData[$nf] === '') {
+                    $postData[$nf] = 0.0;
+                } else {
+                    $postData[$nf] = (float)$postData[$nf];
+                }
+            }
 
+            if (!empty($postData['wo_services_id']) && empty($source)) {
+                // Updating an existing service
                 $postData['updated_by'] = $authUserData['id'];
                 $postData['updated_at'] = $currentdatetime;
-                
-                $postData['service_add_time'] = !empty($postData['service_add_time']) ? $postData['service_add_time'] : 0;
 
-                $calulatedtime = 0;
-                if(!empty($postData['service_add_time'])){
-                    if(!empty($postData['currently_on_overtime'])){
-                        $postData['service_overtime_hrs'] += $postData['service_add_time'];
+                // handle manual added time
+                if (!empty($postData['service_add_time'])) {
+                    $added = (float)$postData['service_add_time'];
+
+                    if (!empty($postData['currently_on_overtime'])) {
+                        $postData['service_overtime_hrs'] = (float)$postData['service_overtime_hrs'] + $added;
                     }
-                    $postData['service_override_hrs'] += $postData['service_add_time'];
+                    $postData['service_override_hrs'] = (float)$postData['service_override_hrs'] + $added;
 
                     $postData['login_time'] = $currentdatetime;
                     $postData['logout_time'] = $currentdatetime;
 
-                    $postData['hours_worked'] = $postData['service_add_time'];
+                    $postData['hours_worked'] = $added;
                     $postData['added_by'] = $authUserData['id'];
                     $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
-                }else if(isset($postData['is_timer_start']) && $postData['is_timer_start'] == '1'){
+                } elseif (isset($postData['is_timer_start']) && $postData['is_timer_start'] === '1') {
+                    // start timer
                     $postData['login_time'] = $currentdatetime;
-                    $postData['hours_worked'] = '0.00';
+                    $postData['hours_worked'] = 0.00;
                     $postData['added_by'] = $authUserData['id'];
                     $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
-                }else if(isset($postData['is_timer_start']) && $postData['is_timer_start'] == '2'){
-                    $woitemservicelogs = $this->AircraftWOItemServiceLogs->find('all')->where(['wo_services_id'=>$postData['wo_services_id'], 'logout_time is'=>NULL])->select($this->AircraftWOItemServiceLogs)->first();
+                } elseif (isset($postData['is_timer_start']) && $postData['is_timer_start'] === '2') {
+                    // stop timer: find open log
+                    $woitemservicelogs = $this->AircraftWOItemServiceLogs
+                        ->find()
+                        ->where(['wo_services_id' => $postData['wo_services_id'], 'logout_time IS' => null])
+                        ->first();
 
                     $postData['logout_time'] = $currentdatetime;
 
-                    $milliseconds = strtotime($postData['logout_time']) - strtotime($woitemservicelogs->login_time);
-                    $calulatedtime = $milliseconds / 3600;
-                    $calulatedtime = round($calulatedtime, 2);
+                    if (!empty($woitemservicelogs) && !empty($woitemservicelogs->login_time)) {
+                        // use timestamps to compute hours
+                        $loginTs = ($woitemservicelogs->login_time instanceof \DateTimeInterface)
+                            ? $woitemservicelogs->login_time->getTimestamp()
+                            : strtotime($woitemservicelogs->login_time);
 
-                    $postData['hrs_worked'] += $calulatedtime;
-                    $postData['total_hrs_for_tech'] = $postData['total_hrs_for_tech']+$calulatedtime;
-                    $postData['total_hrs_for_item'] = $postData['total_hrs_for_item']+$calulatedtime;
-                    $postData['hours_worked'] = $calulatedtime;
+                        $logoutTs = $postData['logout_time']->getTimestamp();
 
-                    if(!empty($postData['currently_on_overtime'])){
-                        $postData['service_overtime_hrs'] += $calulatedtime;
+                        $milliseconds = $logoutTs - $loginTs;
+                        $calculatedTime = $milliseconds / 3600;
+                        $calculatedTime = round($calculatedTime, 2);
+
+                        $postData['hrs_worked'] = (float)$postData['hrs_worked'] + $calculatedTime;
+                        $postData['total_hrs_for_tech'] = (float)$postData['total_hrs_for_tech'] + $calculatedTime;
+                        $postData['total_hrs_for_item'] = (float)$postData['total_hrs_for_item'] + $calculatedTime;
+                        $postData['hours_worked'] = $calculatedTime;
+
+                        if (!empty($postData['currently_on_overtime'])) {
+                            $postData['service_overtime_hrs'] = (float)$postData['service_overtime_hrs'] + $calculatedTime;
+                        }
                     }
                 }
-                
-                $postData['total_hrs_for_tech'] = $postData['service_override_hrs']+$postData['hrs_worked'];
-                $totalitemhour = $this->CustomerOTC->getWOItemServicesTotalTechHrs($postData['wo_item_id'], $postData['wo_services_id']);
 
-                $totalitemhour = !empty($totalitemhour) ? $totalitemhour : 0;
-                $totalitemhour += $postData['total_hrs_for_tech'];
-                $postData['total_hrs_for_item'] = $totalitemhour;
-
-                $this->CustomerAircraftWOItemServices->updateAll(
-                    array('total_hrs_for_item'=>$postData['total_hrs_for_item']),
-                    array('wo_item_id' => $postData['wo_item_id'])
-                );
-                
-                if(!empty($postData['service_add_time']) || !empty($postData['is_timer_start'])){
+                // If any log-worthy action happened, save a log
+                if (!empty($postData['service_add_time']) || !empty($postData['is_timer_start'])) {
                     $woitemservicelogs = $this->AircraftWOItemServiceLogs->patchEntity($woitemservicelogs, $postData);
                     $this->AircraftWOItemServiceLogs->save($woitemservicelogs);
                 }
-                unset($postData['added_by']);
-                unset($postData['created_at']);
 
-                $AircraftWOItemHistoriesModel =  $this->fetchTable('AircraftWOItemHistories');
+                // Recalculate totals using helper methods
+                $postData['total_hrs_for_tech'] = $this->CustomerOTC->getWOItemServicesTotalTechHrs($postData['wo_item_id'], $postData['wo_services_id']);
+                $postData['total_hrs_for_item'] = $this->CustomerOTC->getWOItemServicesTotalItemHrs($postData['wo_item_id']);
+
+                // update total hours for the entire item (all services)
+                $this->CustomerAircraftWOItemServices->updateAll(
+                    ['total_hrs_for_item' => (float)$postData['total_hrs_for_item']],
+                    ['wo_item_id' => (int)$postData['wo_item_id']]
+                );
+
+                $this->CustomerAircraftWOItemServices->updateAll(
+                    ['total_hrs_for_tech' => (float)$postData['total_hrs_for_tech']],
+                    ['id' => (int)$postData['wo_services_id']]
+                );
+
+
+                // cleanup fields not stored on main table for this update
+                unset($postData['added_by'], $postData['created_at']);
+                
+                // history entry for updates
+                $AircraftWOItemHistoriesModel = $this->fetchTable('AircraftWOItemHistories');
                 $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
                 $AircraftWOItemHistories->wo_item_id = $postData['wo_item_id'];
-
                 $AircraftWOItemHistories->title = 'Service was updated.';
                 $description = '';
-                if(!empty($postData['logout_time'])){
-                    $description .= 'Logout time was changed from "" to "'.$postData['logout_time'].'".<br/>';
-                }else{
-                    $description .= 'Login time was changed from "" to "'.$postData['login_time'].'".<br/>';
+                if (!empty($postData['logout_time'])) {
+                    $description .= 'Logout time was changed from "" to "' . $postData['logout_time']->format('Y-m-d H:i:s') . '".<br/>';
+                } else {
+                    if (!empty($postData['login_time'])) {
+                        $description .= 'Login time was changed from "" to "' . $postData['login_time']->format('Y-m-d H:i:s') . '".<br/>';
+                    }
                 }
-                if(!empty($description)){
+                if (!empty($description)) {
                     $AircraftWOItemHistories->user_id = $authUserData['id'];
                     $AircraftWOItemHistories->description = $description;
                     $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
                 }
-            }else{
-                $aircraftwoitemservicesdata = $this->CustomerAircraftWOItemServices->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->first();
+            } else {
+                // Creating a new service
+                $existing = $this->CustomerAircraftWOItemServices
+                    ->find()
+                    ->where(['wo_item_id' => $postData['wo_item_id']])
+                    ->first();
 
-                $postData['total_hrs_for_item'] = !empty($aircraftwoitemservicesdata) ? $aircraftwoitemservicesdata->total_hrs_for_item : '0';
+                $postData['total_hrs_for_item'] = !empty($existing) ? $existing->total_hrs_for_item : 0.0;
                 $postData['added_by'] = $authUserData['id'];
-                $postData['service_rate_an_hour'] = !empty($postData['service_rate_an_hour']) && $postData['service_rate_an_hour'] != '0.00' ? $postData['service_rate_an_hour'] : ESTIMATEDRATE;
+                $postData['service_rate_an_hour'] = (!empty($postData['service_rate_an_hour']) && $postData['service_rate_an_hour'] !== '0.00')
+                    ? $postData['service_rate_an_hour']
+                    : ESTIMATEDRATE;
                 $postData['technician_billing_style'] = !empty($postData['technician_billing_style']) ? $postData['technician_billing_style'] : '1';
                 $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
             }
 
+            // Patch and save the main entity
             $aircraftwoitemservices = $this->CustomerAircraftWOItemServices->patchEntity($aircraftwoitemservices, $postData);
-            $this->CustomerAircraftWOItemServices->save($aircraftwoitemservices);
-            
-            $wo_services_id = $aircraftwoitemservices->id;
+            $saved = $this->CustomerAircraftWOItemServices->save($aircraftwoitemservices);
 
-            if(empty($postData['wo_services_id'])){
+            if (!$saved) {
+                // optional: throw or return false depending on your pattern
+                return null;
+            }
+
+            $wo_services_id = $saved->id;
+
+            // Recalculate totals using helper methods
+            if(!empty($wo_services_id)){
+                $postData['total_hrs_for_tech'] = $this->CustomerOTC->getWOItemServicesTotalTechHrs($postData['wo_item_id'], $wo_services_id);
+                $this->CustomerAircraftWOItemServices->updateAll(
+                    ['total_hrs_for_tech' => (float)$postData['total_hrs_for_tech']],
+                    ['id' => (int)$wo_services_id]
+                );
+            }
+
+            $postData['total_hrs_for_item'] = $this->CustomerOTC->getWOItemServicesTotalItemHrs($postData['wo_item_id']);
+
+            // update total hours for the entire item (all services)
+            $this->CustomerAircraftWOItemServices->updateAll(
+                ['total_hrs_for_item' => (float)$postData['total_hrs_for_item']],
+                ['wo_item_id' => (int)$postData['wo_item_id']]
+            );
+            
+            if (empty($postData['wo_services_id'])) {
                 $history_title = 'Item Services was created.';
-                $this->AircraftWOItemHistory->saveWOItemTabCreateDataToHistory($aircraftwoitemservices, $history_title);
+                $this->AircraftWOItemHistory->saveWOItemTabCreateDataToHistory($saved, $history_title);
             }
 
             return $wo_services_id;
         }
+
 
         public function saveAircraftWOItemOSRInfo(){
             if (!$this->request->is('ajax')) {
@@ -3841,8 +4230,15 @@
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
 
                     $customeraircraftwoitemosrinfo = $this->CustomerAircraftWOOSRInfoes->newEmptyEntity();
@@ -3863,6 +4259,7 @@
                             $woitemosrinfopo = $this->CustomerAircraftWOOSRInfoPOes->newEmptyEntity();
                         }
                         $osrinfopodata = [];
+                        $osrinfopodata['wo_osrinfo_id'] = $postData['wo_osrinfo_id'];
                         $osrinfopodata['po_no'] = $postData['osr_purchase_order_no'];
                         $osrinfopodata['vendor_id'] = $postData['osr_repair_done_by'];
                         $osrinfopodata['date_order_placed'] = new \Cake\I18n\FrozenTime('now');
@@ -3870,6 +4267,8 @@
                         $osrinfopodata['created_by'] = $authUserData['id'];
                         $osrinfopodata['added_by'] = $authUserData['id'];
                         $osrinfopodata['created_at'] = new \Cake\I18n\FrozenTime('now');
+
+                        //$osrinfopodata['wo_item_id'] = $postData['wo_item_id'];
                         
                         $woitemosrinfopo = $this->CustomerAircraftWOOSRInfoPOes->patchEntity($woitemosrinfopo, $osrinfopodata);
                         $this->CustomerAircraftWOOSRInfoPOes->save($woitemosrinfopo);
@@ -3889,9 +4288,11 @@
                         $osrpoitemdata['added_by'] = $authUserData['id'];
                         $osrpoitemdata['created_at'] = new \Cake\I18n\FrozenTime('now');
 
+                        //$osrpoitemdata['wo_item_id'] = $postData['wo_item_id'];
+
                         $woitemosrpoitems = $this->CustomerAircraftWOOSRPOItems->patchEntity($woitemosrpoitems, $osrpoitemdata);
                         $this->CustomerAircraftWOOSRPOItems->save($woitemosrpoitems);
-
+                        $osr_po_item_id = $woitemosrpoitems->id;
                         //$history_title = 'Outside Repair Service P/O Item was created.';
                         //$this->AircraftWOItemHistory->saveWOItemTabCreateDataToHistory($woitemosrpoitems, $history_title);
                     }
@@ -3959,6 +4360,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     
                     $wo_services_id = $this->saveAircraftWOItemServices($postData);
                     if(!empty($wo_services_id)){
@@ -3982,6 +4391,23 @@
                 extract($aircraftwoitemserviceslist);
                 $repair_technician_id = $postData['repair_technician'];
                 $aircraftwoitems = $this->CustomerAircraftWOItems->get($wo_item_id);
+
+                // Recalculate totals using helper methods
+                if(!empty($postData['wo_services_id'])){
+                    $postData['total_hrs_for_tech'] = $this->CustomerOTC->getWOItemServicesTotalTechHrs($wo_item_id, $postData['wo_services_id']);
+
+                    $this->CustomerAircraftWOItemServices->updateAll(
+                        ['total_hrs_for_tech' => (float)$postData['total_hrs_for_tech']],
+                        ['id' => (int)$postData['wo_services_id']]
+                    );
+                }
+                $postData['total_hrs_for_item'] = $this->CustomerOTC->getWOItemServicesTotalItemHrs($wo_item_id);
+
+                // update total hours for the entire item (all services)
+                $this->CustomerAircraftWOItemServices->updateAll(
+                    ['total_hrs_for_item' => (float)$postData['total_hrs_for_item']],
+                    ['wo_item_id' => (int)$wo_item_id]
+                );
 
                 $this->set(compact('aircraftwoitemservices', 'technicianData', 'repair_technician_id', 'wo_item_id', 'aircraftwoitems'));
                 
@@ -4314,8 +4740,15 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
                     
                     if(!empty($postData['po_no']) || !empty($postData['osr_infopoes_id'])){
@@ -4429,6 +4862,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
                     
                     if(!empty($postData['wo_osr_po_id'])){
@@ -4472,7 +4913,7 @@
             
             $woosrpoitems = $this->CustomerAircraftWOOSRPOItems->get($postData['osr_po_item_id']);
             $woosrinfopo = $this->CustomerAircraftWOOSRInfoPOes->get($woosrpoitems['osr_po_id']);
-            $woosrinfo = $this->CustomerAircraftWOOSRInfoes->find('all')->where(['osr_purchase_order_no'=>$woosrinfopo->po_no])->select($this->CustomerAircraftWOOSRInfoes)->first();
+            $woosrinfo = $this->CustomerAircraftWOOSRInfoes->find('all')->where(['osr_purchase_order_no'=>$woosrinfopo->po_no, 'osr_part_number'=>$postData['part_no']])->select($this->CustomerAircraftWOOSRInfoes)->first();
             
             $woosrvendordata = $this->CustomerOTC->getWOOSRVendorList();
             $allserviceitemspo = $this->CustomerOTC->getAllServiceItemOnPO($woosrpoitems['osr_po_id']);
@@ -4515,8 +4956,15 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
                     
                     $woosrpoitems = $this->CustomerAircraftWOOSRPOItems->newEmptyEntity();
@@ -4545,7 +4993,7 @@
                             if($key == '0'){
                                 $osr_po_item_active = 'osr-po_item-active';
                             }
-                            $serviceitem_po_tr .='<tr class="editwoosrpoitem '.$osr_po_item_active.'" data-val="'.$serviceitems['id'].'">';
+                            $serviceitem_po_tr .='<tr class="editwoosrpoitem '.$osr_po_item_active.'" data-val="'.$serviceitems['id'].'" osr-po-id="'.$serviceitems['osr_po_id'].'">';
                             $serviceitem_po_tr .='<td>'.($serviceitems['work_order']['order_type'] == '1' ? 'Work Order' : 'Repair Order').'</td>';
                             $serviceitem_po_tr .='<td>'.$serviceitems['work_order']['work_order_no'].'</td>';
                             $serviceitem_po_tr .='<td>'.$serviceitems['wo_item']['wo_item_position'].'</td>';
@@ -4650,7 +5098,7 @@
                         foreach($allserviceitemspo as $key=>$serviceitems){
                             $firstelem = $key==0 ? 'osr-po_item-active' : '';
                             $order_type = $serviceitems['work_order']['order_type'] == '1' ? 'Work Order' : 'Repair Order';
-                            $poitemlist .= '<tr class="editwoosrpoitem '.$firstelem.'" data-val="'.$serviceitems['id'].'">';
+                            $poitemlist .= '<tr class="editwoosrpoitem '.$firstelem.'" data-val="'.$serviceitems['id'].'" osr-po-id="'.$serviceitems['osr_po_id'].'">';
                             $poitemlist .= '<td>'.$order_type.'</td>';
                             $poitemlist .= '<td>'.$serviceitems['work_order']['work_order_no']. '</td>';
                             $poitemlist .= '<td>1</td>';
@@ -4681,6 +5129,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
                     
                     $woitematacodescount = $this->CustomerAircraftWOATACodes->find('all')->where(['ata_code'=>$postData['ata_code']])->select($this->CustomerAircraftWOATACodes)->count();
@@ -4721,6 +5177,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
 
                     $woitemlaborkitscount = $this->CustomerAircraftWOLaborKits->find('all')->where(['labor_kit'=>$postData['labor_kit']])->select($this->CustomerAircraftWOLaborKits)->count();
@@ -4759,6 +5223,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
 
                     //echo "<pre>";print_r($postData);exit;
@@ -4800,6 +5272,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
                     //echo "<pre>";print_r($postData);exit;
                     
@@ -4838,6 +5318,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
 
                     //echo "<pre>";print_r($postData);exit;
@@ -4940,13 +5428,21 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     //echo "<pre>";print_r($postData);exit;
                     $is_add = 0;
-                    $wooptiongeninfoes = $this->CustomerAircraftWOOptionGeneralInfoes->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->select($this->CustomerAircraftWOOptionGeneralInfoes)->first();
+                    $wooptiongeninfoes = $this->CustomerAircraftWOOptionGeneralInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionGeneralInfoes)->first();
                     if(empty($wooptiongeninfoes)){
                         $wooptiongeninfoes = $this->CustomerAircraftWOOptionGeneralInfoes->newEmptyEntity();
                         $postData['added_by'] = $authUserData['id'];
@@ -4988,9 +5484,17 @@
                     $authUserData = $this->Authentication->getResult()->getData();
                     //echo "<pre>";print_r($postData);exit;
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     $geninfoes = $this->CustomerAircraftWOOptionGeneralInfoes->get($postData['general_info_id']);
                     $postData['wo_item_id'] = $geninfoes->wo_item_id;
@@ -5040,7 +5544,7 @@
                 $deposittr .= '<tr class="wo-gen-info-deposit" data-val="'.$deposits['id'].'">';
                 $deposittr .= '<td>'.$deposits['deposit_date'].'</td>';
                 $deposittr .= '<td>'.$deposits['customers']['customer_name'].'</td>';
-                $deposittr .= '<td>'.number_format($deposits['amount_to_add'], 2).'</td>';
+                $deposittr .= '<td>'.number_format((float)$deposits['amount_to_add'], 2).'</td>';
                 $deposittr .= '<td>'.$deposits['check_number'].'</td>';
                 $deposittr .= '<td>'.$woPaymentMethod[$deposits['payment_method']].'</td>';
                 $deposittr .= '</tr>';
@@ -5048,7 +5552,7 @@
                 $total_amount += $deposits['amount_to_add'];
             }
 
-            $returnArr = ['deposittr'=>$deposittr, 'total_amount'=>number_format($total_amount,2)];
+            $returnArr = ['deposittr'=>$deposittr, 'total_amount'=>number_format((float)$total_amount,2)];
 
             return $returnArr;
         }
@@ -5090,13 +5594,21 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     //echo "<pre>";print_r($postData);exit;
                     $is_add = 0;
-                    $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->select($this->CustomerAircraftWOOptionMiscCharges)->first();
+                    $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionMiscCharges)->first();
                     if(empty($wooptionmisccharges)){
                         $wooptionmisccharges = $this->CustomerAircraftWOOptionMiscCharges->newEmptyEntity();
                         $postData['added_by'] = $authUserData['id'];
@@ -5139,9 +5651,17 @@
                     $authUserData = $this->Authentication->getResult()->getData();
                     //echo "<pre>";print_r($postData);exit;
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     $wooptionmiscfuelcharges = $this->CustomerAircraftWOOptionMiscFuelCharges->newEmptyEntity();
                     
@@ -5192,9 +5712,9 @@
 
             foreach($optionfuelcharges as $fuelcharges){
                 $fuelchargestr .= '<tr class="wo-mis-fuel-charges" data-val="'.$fuelcharges['id'].'">';
-                $fuelchargestr .= '<td>'.number_format($fuelcharges['gallon'], 2).'</td>';
-                $fuelchargestr .= '<td>'.number_format($fuelcharges['price'], 2).'</td>';
-                $fuelchargestr .= '<td>'.number_format(($fuelcharges['gallon']*$fuelcharges['price']), 2).'</td>';
+                $fuelchargestr .= '<td>'.number_format((float)$fuelcharges['gallon'], 2).'</td>';
+                $fuelchargestr .= '<td>$'.number_format((float)$fuelcharges['price'], 2).'</td>';
+                $fuelchargestr .= '<td>$'.number_format(($fuelcharges['gallon']*$fuelcharges['price']), 2).'</td>';
                 $fuelchargestr .= '<td><i class="fa fa-times remove-wo-misc-fuel-charges" title="Delete fuel charges" data-val="'.$fuelcharges['id'].'" style="cursor:pointer;"></i></td>';
                 $fuelchargestr .= '</tr>';
             }
@@ -5362,13 +5882,21 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     //echo "<pre>";print_r($postData);exit;
                     $is_add = 0;
-                    $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->select($this->CustomerAircraftWOOptionPricingInfoes)->first();
+                    $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionPricingInfoes)->first();
                     if(empty($wooptionpricinginfoes)){
                         $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->newEmptyEntity();
                         $postData['added_by'] = $authUserData['id'];
@@ -5408,13 +5936,21 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     $authUserData = $this->Authentication->getResult()->getData();
 
                     //echo "<pre>";print_r($postData);exit;
-                    $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id'], 'company_id'=>$postData['company_id']])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->first();
+                    $wooptionwarrantyinfoes = $this->WOOptionWarrantyInfoPayments->find('all')->where(['warranty_info_id'=>$postData['warranty_info_id'], 'company_id'=>$postData['company_id']])->select($this->WOOptionWarrantyInfoPayments)->first();
                     $is_add = 0;
                     if(empty($wooptionwarrantyinfoes)){
-                        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->newEmptyEntity();
+                        $wooptionwarrantyinfoes = $this->WOOptionWarrantyInfoPayments->newEmptyEntity();
                         $postData['added_by'] = $authUserData['id'];
                         $postData['created_at'] = new \Cake\I18n\FrozenTime('now');
 
@@ -5430,11 +5966,11 @@
                     $postData['customer_pays_warranty_tax'] = !empty($postData['customer_pays_warranty_tax']) ? $postData['customer_pays_warranty_tax'] : '0';
                     $postData['use_labor_rate'] = !empty($postData['use_labor_rate']) ? $postData['use_labor_rate'] : '0';
 
-                    $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->patchEntity($wooptionwarrantyinfoes, $postData);
+                    $wooptionwarrantyinfoes = $this->WOOptionWarrantyInfoPayments->patchEntity($wooptionwarrantyinfoes, $postData);
                     
-                    if ($this->CustomerAircraftWOOptionWarrantyInfoes->save($wooptionwarrantyinfoes)) {
+                    if ($this->WOOptionWarrantyInfoPayments->save($wooptionwarrantyinfoes)) {
                         if(!empty($is_add)){
-                            $this->AircraftWOItemHistory->saveWOItemOptionMiscFuelChargesHistory($wooptionmiscfuelcharges);
+                            $this->AircraftWOItemHistory->saveWOItemOptionWarrantyInfoHistory($wooptionwarrantyinfoes);
                         }
 
                         $response = ['status'=>'success', 'message'=>''];
@@ -5559,9 +6095,17 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     //echo "<pre>";print_r($postData);exit;
                     $wooptiontaxinfoes = $this->CustomerAircraftWOOptionTaxInfoes->find('all')->where(['wo_item_id'=>$postData['wo_item_id']])->select($this->CustomerAircraftWOOptionTaxInfoes)->first();
@@ -5606,9 +6150,17 @@
                     $authUserData = $this->Authentication->getResult()->getData();
                     //echo "<pre>";print_r($postData);exit;
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     
                     $is_add = 0;
                     if(empty($postData['extra_taxes_id'])){
@@ -5633,7 +6185,15 @@
 
                         $newaddedtax = '<div class="wo-option-extra-taxes-list wo-option-extra-taxes-list-active" data-val="'.$extra_taxes_id.'">'.$wooptionextrataxes->extra_tax_name.'</div>';
 
-                        $response = ['status'=>'success', 'message'=>'', 'extra_taxes_id'=>$extra_taxes_id, 'newaddedtax'=>$newaddedtax];
+                        $tax_id = $wooptionextrataxes->tax_id;
+                        
+                        $view = new View();
+                        $html = $view->element('Inventory/customer_otc/aircraft_wo_option_taxinfo_extra_tax_setup', ['wooptionextrataxes'=>$wooptionextrataxes, 'tax_id'=>$tax_id]);
+
+                        // Example: Return HTML as JSON for AJAX
+                        $this->autoRender = false;
+
+                        $response = ['status'=>'success', 'message'=>'', 'extra_taxes_id'=>$extra_taxes_id, 'newaddedtax'=>$newaddedtax, 'html'=>$html];
                         echo json_encode($response);die;
                     }else{
                         $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
@@ -5703,9 +6263,17 @@
                     $postData = $this->request->getData();
                     $authUserData = $this->Authentication->getResult()->getData();
 
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
 
                     //echo "<pre>";print_r($postData);exit;
                     $is_add = 0;
@@ -5820,9 +6388,17 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
                     //echo "<pre>";print_r($postData);exit;
-                    foreach($postData as $key=>$val){
-                        $postData[$key] = preg_replace('/[\$\%]/', '', $val);
+                    foreach ($postData as $key => $val) {
+                        // Check if value looks like a numeric/float string (e.g. "$1,234.50")
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?%?$/', trim($val))) {
+                            // Remove $ and , only
+                            $postData[$key] = str_replace(['$', ',', '%'], '', $val);
+                        } else {
+                            // Leave as is (no aggressive cleaning)
+                            $postData[$key] = $val;
+                        }
                     }
+
                     //echo "<pre>";print_r($postData);exit;
 
                     $authUserData = $this->Authentication->getResult()->getData();
@@ -6423,6 +6999,14 @@
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $authUserData = $this->Authentication->getResult()->getData();
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
 
                     if(empty($postData['wo_item_tool_id'])){
@@ -7089,6 +7673,14 @@
             }else{
                 if ($this->request->is('post') || $this->request->is('put')) {
                     $postData = $this->request->getData();
+                    foreach($postData as $key=>$val){
+                        if (is_string($val) && preg_match('/^\$?[\d,]+(\.\d+)?[%％]?$/u', trim($val))) {
+                            // Remove all $, , and both ASCII & Unicode percent signs
+                            $postData[$key] = preg_replace('/[\$,%％]/u', '', $val);
+                        } else {
+                            $postData[$key] = $val;
+                        }
+                    }
                     //echo "<pre>";print_r($postData);exit;
                     $authUserData = $this->Authentication->getResult()->getData();
 
@@ -7211,7 +7803,7 @@ Send: '.$messagedata['created_at'].'
 
                 $wooptionmessages = $this->CustomerOTC->getAircraftWOMsgList($work_order_id, $message_id);
                 $messageobj = $this->CustomerAircraftWOMessages->get($message_id);
-                if(empty($wooptionmessages->is_mark_read)){
+                if(empty($wooptionmessages->is_mark_read) && $authUserData['id'] == $messageobj->message_to){
                     $res = $this->CustomerAircraftWOMessages->updateAll(
                         array('updated_by'=>$authUserData['id'], 'updated_at'=>new \Cake\I18n\FrozenTime('now'), 'is_mark_read' => '1'),
                         array('id' => $message_id)
@@ -7515,15 +8107,18 @@ Send: '.$messagedata['created_at'].'
                     if(!empty($warranty_id)){
                         $work_order_id = $postData['work_order_id'];
                         $wo_item_id = $postData['wo_item_id'];
+                        $warranty_id = $postData['warranty_id'];
 
-                        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$work_order_id, 'company_id'=>$warranty_id])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->first();
+                        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$work_order_id])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->first();
                         
-                        if(empty($wooptionwarrantyinfoes)){
-                            $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->newEmptyEntity();
+                        if(!empty($wooptionwarrantyinfoes)){
+                            $wooptionwarrantyinfopayments = $this->WOOptionWarrantyInfoPayments->find('all')->where(['warranty_info_id'=>$wooptionwarrantyinfoes->id, 'company_id'=>$warranty_id])->select($this->WOOptionWarrantyInfoPayments)->first();
+                            if(empty($wooptionwarrantyinfopayments)){
+                                $wooptionwarrantyinfopayments = $this->CustomerAircraftWOOptionWarrantyInfoes->newEmptyEntity();
+                            }
                         }
-                        $wooptionwarrantyinfoes->company_id = $warranty_id;
-
-                        $this->set(compact('wooptionwarrantyinfoes', 'wo_item_id', 'work_order_id'));
+                        
+                        $this->set(compact('wooptionwarrantyinfoes', 'wooptionwarrantyinfopayments', 'wo_item_id', 'work_order_id', 'warranty_id'));
                         $this->viewBuilder()->setLayout('ajax');
                         $this->render('/element/Inventory/customer_otc/wo_option_warranty_info_payment');
                     }else{
@@ -7791,6 +8386,31 @@ Send: '.$messagedata['created_at'].'
                         $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
                         echo json_encode($response);die;
                     }
+                }else{
+                    $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
+                    echo json_encode($response);die;
+                }
+            }
+        }
+
+        public function getWOROList(){
+            if (!$this->request->is('ajax')) {
+                return $this->redirect(['action' => 'index']);
+            }else{
+                if ($this->request->is('post')) {
+                    $postData = $this->request->getData();
+
+                    $order_type = $postData['order_type'];
+                    $workorderlist = $this->CustomerOTC->getAircraftWODropDown($order_type);
+
+                    $options = '';
+                    if(!empty($workorderlist)){
+                        foreach($workorderlist as $workorder){
+                            $options .= '<option value="'.$workorder['id'].'">'.$workorder['work_order_no'].'</option>';
+                        }
+                    }
+                    $response = ['status'=>'success', 'message'=>'', 'options'=>$options];
+                    echo json_encode($response);die;
                 }else{
                     $response = ['status'=>'failure', 'message'=>'Something went wrong, please try again'];
                     echo json_encode($response);die;

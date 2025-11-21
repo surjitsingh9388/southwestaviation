@@ -174,19 +174,28 @@
             $inventoryvendors = $this->InventoryVendors->newEmptyEntity();
             if ($this->request->is('post')) {
                 $postData = $this->request->getData();
-                $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
-                $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
-                $postData['added_by'] = $authUserData['id'];
 
-                $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);
-                if ($this->InventoryVendors->save($inventoryvendors)) {
-                    $id = $inventoryvendors->id;
-                    
-                    $this->Flash->success(__('The vendor has been saved.'));
-                    return $this->redirect(['action' => 'detail', $id]);
+                $exists = $this->InventoryVendors->exists([
+                    'LOWER(name)' => strtolower($postData['name'])
+                ]);
+
+                if (!$exists) {
+                    $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
+                    $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
+                    $postData['added_by'] = $authUserData['id'];
+
+                    $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);
+                    if ($this->InventoryVendors->save($inventoryvendors)) {
+                        $id = $inventoryvendors->id;
+                        
+                        $this->Flash->success(__('The vendor has been saved.'));
+                        return $this->redirect(['action' => 'detail', $id]);
+                    }
+
+                    $this->Flash->error(__('The vendor could not be saved. Please, try again.'));
+                }else{
+                    $this->Flash->error(__('Vendor already exists.'));
                 }
-
-                $this->Flash->error(__('The vendor could not be saved. Please, try again.'));
             }
             
             $countries = $this->Address->getCountryList();
@@ -211,22 +220,32 @@
             if ($this->request->is(['patch', 'post', 'put'])) {
                 
                 $postData = $this->request->getData();
-                $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
-                $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
 
-                $postData['updated_by'] = $authUserData['id'];
+                $exists = $this->InventoryVendors->exists([
+                    'LOWER(name)' => strtolower($postData['name']),
+                    'id !=' => $id
+                ]);
 
-                $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);//print_r($part);exit;
-                if ($this->InventoryVendors->save($inventoryvendors)) {
-                    $this->Flash->success(__('The vendor has been saved.'));
-                    return $this->redirect(['action' => 'detail', $id]);
+                if (!$exists) {
+                    $postData['province'] = $postData['country'] != '231' ? $postData['province'] : '';
+                    $postData['state'] = $postData['country'] == '231' ? $postData['state'] : '';
+
+                    $postData['updated_by'] = $authUserData['id'];
+
+                    $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);//print_r($part);exit;
+                    if ($this->InventoryVendors->save($inventoryvendors)) {
+                        $this->Flash->success(__('The vendor has been saved.'));
+                        return $this->redirect(['action' => 'detail', $id]);
+                    }
+
+                    $this->Flash->error(__('The vendor could not be saved. Please, try again.'));
+                }else{
+                    $this->Flash->error(__('Vendor already exists.'));
                 }
-
-                $this->Flash->error(__('The vendor could not be saved. Please, try again.'));
             }
             
             $countries = $this->Address->getCountryList();
-            $states = $this->Address->getStateListByCountryId($inventoryvendors->country);
+            $states = !empty($inventoryvendors->country) ? $this->Address->getStateListByCountryId($inventoryvendors->country) : '';
             $this->set(compact('inventoryvendors', 'actionItems', 'countries', 'states'));
         }
         
@@ -245,7 +264,7 @@
             $inventoryvendors = $this->InventoryVendors->get($id);
             
             $countries = $this->Address->getCountryList();
-            $states = $this->Address->getStateListByCountryId($inventoryvendors->country);
+            $states = !empty($inventoryvendors->country) ? $this->Address->getStateListByCountryId($inventoryvendors->country) : '';
             $this->set(compact('inventoryvendors', 'actionItems', 'countries', 'states'));
         }
 
@@ -257,16 +276,25 @@
                 
                 $authUserData = $this->Authentication->getResult()->getData();
                 $postData = $this->request->getData();
-                $postData['added_by'] = $authUserData['id'];
-                $inventoryvendors = $this->InventoryVendors->newEmptyEntity();
-                $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);
-                if ($this->InventoryVendors->save($inventoryvendors)) {
-                    $id = $inventoryvendors->id;
 
-                    $invvendor = array('id'=>$id, 'name'=>$postData['name']);
-                    $result = array('status'=>'success', 'message'=>"Saved successfully.", 'invvendor'=>$invvendor);
-                } else {
-                    $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                $exists = $this->InventoryVendors->exists([
+                    'LOWER(name)' => strtolower($postData['name'])
+                ]);
+
+                if (!$exists) {
+                    $postData['added_by'] = $authUserData['id'];
+                    $inventoryvendors = $this->InventoryVendors->newEmptyEntity();
+                    $inventoryvendors = $this->InventoryVendors->patchEntity($inventoryvendors, $postData);
+                    if ($this->InventoryVendors->save($inventoryvendors)) {
+                        $id = $inventoryvendors->id;
+
+                        $invvendor = array('id'=>$id, 'name'=>$postData['name']);
+                        $result = array('status'=>'success', 'message'=>"Saved successfully.", 'invvendor'=>$invvendor);
+                    } else {
+                        $result = array('status'=>'failure', 'message'=>'Something went wrong. Please try again');
+                    }
+                }else{
+                    $result = array('status'=>'failure', 'message'=>'Vendor already exists.');
                 }
 
                 echo json_encode($result);die;

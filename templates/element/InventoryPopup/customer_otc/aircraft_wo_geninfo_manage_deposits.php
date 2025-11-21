@@ -22,7 +22,7 @@
                                             <label class="control-label" for="reference">Amount to Add</label>
                                             <div class="form-input-frame">
                                                 <?php 
-                                                $amount_to_add = !empty($optiongeninfodeposits->amount_to_add) ? '$'.number_format($optiongeninfodeposits->amount_to_add, 2) : '$0.00';
+                                                $amount_to_add = !empty($optiongeninfodeposits->amount_to_add) ? '$'.number_format((float)$optiongeninfodeposits->amount_to_add, 2) : '$0.00';
 
                                                 echo $this->Form->control('amount_to_add', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'amount_to_add', 'value'=>$amount_to_add)); ?>
                                             </div>
@@ -169,7 +169,7 @@
                                                 $deposittr .= '<tr class="wo-gen-info-deposit" data-val="'.$deposits['id'].'">';
                                                 $deposittr .= '<td>'.$deposits['deposit_date'].'</td>';
                                                 $deposittr .= '<td>'.$deposits['customers']['customer_name'].'</td>';
-                                                $deposittr .= '<td>'.(!empty($deposits['amount_to_add']) ? '$'.number_format($deposits['amount_to_add'], 2) : '$0.00').'</td>';
+                                                $deposittr .= '<td>'.(!empty($deposits['amount_to_add']) ? '$'.number_format((float)$deposits['amount_to_add'], 2) : '$0.00').'</td>';
                                                 $deposittr .= '<td>'.$deposits['check_number'].'</td>';
                                                 $deposittr .= '<td>'.$woPaymentMethod[$deposits['payment_method']].'</td>';
                                                 $deposittr .= '</tr>';
@@ -189,7 +189,9 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-4" for="reference">Total Amount</label>
                                             <div class="col-md-8">
-                                                <?php echo $this->Form->control('deposit_total_amount', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$total_amount, 'id'=>'deposit_total_amount')); ?>
+                                                <?php 
+                                                $total_amount = !empty($total_amount) ? '$'.number_format((float)$total_amount, 2) : '$0.00';
+                                                echo $this->Form->control('deposit_total_amount', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$total_amount, 'id'=>'deposit_total_amount')); ?>
                                             </div>
                                         </div>
                                     </div>

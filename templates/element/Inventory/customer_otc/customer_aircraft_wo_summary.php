@@ -20,9 +20,9 @@
                     <label class="control-label" for="reference">Estimated Hours</label>
                     <div class="form-input-frame">
                         <?php 
-                        $estimated_hour = !empty($aircraftwoitemoverviews->estimated_hour) ? number_format($aircraftwoitemoverviews->estimated_hour, 2) : '0.00';
+                        $estimated_hour = !empty($aircraftwoitemoverviews->estimated_hour) ? number_format((float)$aircraftwoitemoverviews->estimated_hour, 2) : '0.00';
 
-                        echo $this->Form->control('estimated_hrs_for_item', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$estimated_hour)); ?>
+                        echo $this->Form->control('estimated_hrs_for_item', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$estimated_hour)); ?>
                     </div>
                 </div>
             </div>
@@ -31,9 +31,9 @@
                     <label class="control-label" for="reference">Hours Worked</label>
                     <div class="form-input-frame">
                         <?php 
-                        $total_hrs_for_item = !empty($aircraftwoitemservices->total_hrs_for_item) ? number_format($aircraftwoitemservices->total_hrs_for_item, 2) : '0.00';
+                        $total_hrs_for_item = !empty($aircraftwoitemservices->total_hrs_for_item) ? number_format((float)$aircraftwoitemservices->total_hrs_for_item, 2) : '0.00';
 
-                        echo $this->Form->control('total_hrs_for_item', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$total_hrs_for_item)); ?>
+                        echo $this->Form->control('total_hrs_for_item', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$total_hrs_for_item)); ?>
                     </div>
                 </div>
             </div>
@@ -42,10 +42,10 @@
                     <label class="control-label" for="reference">Hours Left</label>
                     <div class="form-input-frame">
                         <?php 
-                        $hrsleft = $estimated_hour-$total_hrs_for_item;
-                        $hrsleft = !empty($hrsleft) ? number_format($hrsleft, 2) : '0.00';
+                        $hrsleft = (float)$estimated_hour-(float)$total_hrs_for_item;
+                        $hrsleft = !empty($hrsleft) ? number_format((float)$hrsleft, 2) : '0.00';
 
-                        echo $this->Form->control('hour_left', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$hrsleft)); ?>
+                        echo $this->Form->control('hour_left', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$hrsleft)); ?>
                     </div>
                 </div>
             </div>
@@ -64,9 +64,9 @@
                     <label class="control-label" for="reference">Total Estimat Hrs</label>
                     <div class="form-input-frame">
                         <?php 
-                        $totalestimatedhour = !empty($woitemsummary['totalestimatedhour']) ? number_format($woitemsummary['totalestimatedhour'], 2) : '0.00';
+                        $totalestimatedhour = !empty($woitemsummary['totalestimatedhour']) ? number_format((float)$woitemsummary['totalestimatedhour'], 2) : '0.00';
 
-                        echo $this->Form->control('aircraft_wo_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$totalestimatedhour, 'disabled'=>$isdisabled)); ?>
+                        echo $this->Form->control('total_wo_estimated_hours', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$totalestimatedhour, 'disabled'=>$isdisabled)); ?>
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
                     <label class="control-label" for="reference">Total Hrs Worked</label>
                     <div class="form-input-frame">
                         <?php 
-                        $aircraft_wo_no = !empty($woitemsummary['aircraft_wo_no']) ? number_format($woitemsummary['aircraft_wo_no'], 2) : '0.00';
+                        $aircraft_wo_no = !empty($woitemsummary['aircraft_wo_no']) ? number_format((float)$woitemsummary['aircraft_wo_no'], 2) : '0.00';
 
-                        echo $this->Form->control('aircraft_wo_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$aircraft_wo_no, 'disabled'=>$isdisabled)); ?>
+                        echo $this->Form->control('total_wo_hour_worked', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$aircraft_wo_no, 'disabled'=>$isdisabled)); ?>
                     </div>
                 </div>
             </div>
@@ -87,9 +87,9 @@
                     <div class="form-input-frame">
                         <?php 
                         $totalhrsleft = $woitemsummary['totalestimatedhour'] - $woitemsummary['totaltechhour'];
-                        $totalhrsleft = !empty($totalhrsleft) ? number_format($totalhrsleft, 2) : '0.00';
+                        $totalhrsleft = !empty($totalhrsleft) ? number_format((float)$totalhrsleft, 2) : '0.00';
 
-                        echo $this->Form->control('aircraft_wo_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$totalhrsleft, 'disabled'=>$isdisabled)); ?>
+                        echo $this->Form->control('total_wo_hrs_left', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'readonly'=>'readonly', 'value'=>$totalhrsleft, 'disabled'=>$isdisabled)); ?>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="form-group">
                     <label class="control-label" for="reference">Hour Adjustment</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('aircraft_wo_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'disabled'=>$isdisabled)); ?>
+                        <?php echo $this->Form->control('wo_hour_ajustment', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'disabled'=>$isdisabled)); ?>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="form-group">
                     <label class="control-label" for="reference">Adjust Rate / Hour</label>
                     <div class="form-input-frame">
-                        <?php echo $this->Form->control('aircraft_wo_no', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'value'=>ESTIMATEDRATE, 'disabled'=>$isdisabled)); ?>
+                        <?php echo $this->Form->control('wo_adjust_rate_hour', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'value'=>ESTIMATEDRATE, 'disabled'=>$isdisabled)); ?>
                     </div>
                 </div>
             </div>

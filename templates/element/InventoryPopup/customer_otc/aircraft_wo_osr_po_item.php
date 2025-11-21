@@ -33,7 +33,8 @@
                                 <div class="form-input-frame">
                                     <?php
                                     $destinationArr = ['1'=>'Work Order', '2'=>'Repair Order'];
-                                    echo $this->Form->control('destination_id', array('options' => $destinationArr, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'osr_po_item_destination_id'));
+                                    $destination_id = !empty($woosrpoitems->destination_id) ? $woosrpoitems->destination_id : $work_order_type;
+                                    echo $this->Form->control('destination_id', array('options' => $destinationArr, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'osr_po_item_destination_id', 'value'=>$destination_id));
                                     ?>
                                 </div>
                             </div>
@@ -44,7 +45,8 @@
                                 <label class="control-label" for="reference">Destination</label>
                                 <div class="form-input-frame">
                                     <?php
-                                    echo $this->Form->control('destination', array('options' => $wodropdown, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'osr_po_item_destination'));
+                                    $destination = !empty($woosrpoitems->destination) ? $woosrpoitems->destination : $work_order_id;
+                                    echo $this->Form->control('destination', array('options' => $wodropdown, 'empty' => '', 'class' => 'form-control selectpicker', 'data-show-subtext' => true, 'data-live-search' => true, 'label' => false, 'id' => 'osr_po_item_destination', 'value'=>$destination));
                                     ?>
                                 </div>
                             </div>
@@ -97,7 +99,7 @@
                                     <?php 
                                     $labor_cost = '$0.00';
                                     if(!empty($woosrpoitems->labor_cost)){
-                                        $labor_cost = '$'.number_format($woosrpoitems->labor_cost, 2);
+                                        $labor_cost = '$'.number_format((float)$woosrpoitems->labor_cost, 2);
                                     }
                                     echo $this->Form->control('labor_cost', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'labor_cost', 'value'=>$labor_cost)); ?>
                                 </div>
@@ -111,7 +113,7 @@
                                     <?php 
                                     $part_cost = '$0.00';
                                     if(!empty($woosrpoitems->part_cost)){
-                                        $part_cost = '$'.number_format($woosrpoitems->part_cost, 2);
+                                        $part_cost = '$'.number_format((float)$woosrpoitems->part_cost, 2);
                                     }
                                     echo $this->Form->control('part_cost', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'part_cost', 'value'=>$part_cost)); ?>
                                 </div>
@@ -165,7 +167,7 @@
                                     <?php 
                                     $labor_charge = '$0.00';
                                     if(!empty($woosrpoitems->labor_charge)){
-                                        $labor_charge = '$'.number_format($woosrpoitems->labor_charge, 2);
+                                        $labor_charge = '$'.number_format((float)$woosrpoitems->labor_charge, 2);
                                     }
                                     echo $this->Form->control('labor_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'labor_charge', 'value'=>$labor_charge)); ?>
                                 </div>
@@ -179,7 +181,7 @@
                                     <?php 
                                     $parts_charge = '$0.00';
                                     if(!empty($woosrpoitems->parts_charge)){
-                                        $parts_charge = '$'.number_format($woosrpoitems->parts_charge, 2);
+                                        $parts_charge = '$'.number_format((float)$woosrpoitems->parts_charge, 2);
                                     }
                                     
                                     echo $this->Form->control('parts_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'parts_charge', 'value'=>$parts_charge)); ?>
@@ -210,7 +212,7 @@
                                     <?php 
                                     $ship_out = '$0.00';
                                     if(!empty($woosrpoitems->ship_out)){
-                                        $ship_out = '$'.number_format($woosrpoitems->ship_out, 2);
+                                        $ship_out = '$'.number_format((float)$woosrpoitems->ship_out, 2);
                                     }
                                     echo $this->Form->control('ship_out', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ship_out', 'value'=>$ship_out)); ?>
                                 </div>
@@ -224,7 +226,7 @@
                                     <?php 
                                     $ship_in = '$0.00';
                                     if(!empty($woosrpoitems->ship_in)){
-                                        $ship_in = '$'.number_format($woosrpoitems->ship_in, 2);
+                                        $ship_in = '$'.number_format((float)$woosrpoitems->ship_in, 2);
                                     }
                                     echo $this->Form->control('ship_in', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'ship_in', 'value'=>$ship_in)); ?>
                                 </div>
@@ -239,9 +241,10 @@
                                 <div class="form-input-frame">
                                     <?php 
                                     $owner = '0.00%';
-                                    if(!empty($woosrpoitems->owner)){
-                                        $owner = number_format($woosrpoitems->owner, 2).'%';
+                                    if (!empty($woosrpoitems->owner) && is_numeric($woosrpoitems->owner)) {
+                                        $owner = number_format((float)$woosrpoitems->owner, 2) . '%';
                                     }
+
                                     echo $this->Form->control('owner', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'value'=>$owner)); ?>
                                 </div>
                             </div>
@@ -257,7 +260,7 @@
                                     <?php 
                                     $mparts_cost = '$0.00';
                                     if(!empty($woosrpoitems->mparts_cost)){
-                                        $mparts_cost = '$'.number_format($woosrpoitems->mparts_cost, 2);
+                                        $mparts_cost = '$'.number_format((float)$woosrpoitems->mparts_cost, 2);
                                     }
                                     echo $this->Form->control('mparts_cost', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'disabled'=>$poitemdisable, 'id'=>'mparts_cost', 'value'=>$mparts_cost)); ?>
                                 </div>
@@ -271,7 +274,7 @@
                                     <?php 
                                     $mparts_retail = '$0.00';
                                     if(!empty($woosrpoitems->mparts_retail)){
-                                        $mparts_retail = '$'.number_format($woosrpoitems->mparts_retail, 2);
+                                        $mparts_retail = '$'.number_format((float)$woosrpoitems->mparts_retail, 2);
                                     }
                                     echo $this->Form->control('mparts_retail', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'disabled'=>$poitemdisable, 'id'=>'mparts_retail', 'value'=>$mparts_retail)); ?>
                                 </div>
@@ -313,3 +316,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var getWOROListURL = "<?php echo $this->Url->build(['controller'=>'InventoryCustomers', 'action'=>'getWOROList']); ?>";
+</script>

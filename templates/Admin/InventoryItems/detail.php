@@ -429,7 +429,7 @@ var qantitiesDetPageURL = "<?php echo $this->Url->build(['controller'=>'Inventor
 var deleteThresholdsURL = "<?php echo $this->Url->build(['controller'=>'InventoryItems', 'action'=>'deleteThresholds']); ?>";
 var getInventoryItemPopupURL = "<?php echo $this->Url->build(['controller'=>'InventoryItems', 'action'=>'getInventoryItemPopupData']); ?>";
 var purchaseOrderListPageURL = "<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'index']); ?>";
-var ajaxListPageSearchURL = "<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'ajaxInventoryPurchaseOrdersearch', 'inv_item_id'=>$invenotryitems->id]); ?>";
+var ajaxListPageSearchURL = "<?php echo $this->Url->build(['controller'=>'InventoryPurchaseOrders', 'action'=>'ajaxInventoryPurchaseOrdersearch', '?'=>['inv_item_id'=>$invenotryitems->id]]); ?>";
 var pagelimit = <?php echo PAGINATION_LIMIT;?>;
 var pdfPagTitle = 'PURCHASE ORDER';
 var ajaxOpenActionSelectPopupURL = "<?php echo $this->Url->build(['controller'=>'InventoryItems', 'action'=>'ajaxOpenActionSelectPopup']); ?>";

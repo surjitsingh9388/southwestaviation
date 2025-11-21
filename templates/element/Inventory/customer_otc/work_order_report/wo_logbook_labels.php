@@ -15,7 +15,9 @@
                 if(!empty($postData['date_option']) && $postData['date_option'] == '1'){ 
                     $use_today_date = date('m/d/Y'); 
                 }else{ 
-                    $use_today_date = date('m/d/Y', strtotime($postData['use_today_date'])); 
+                    $use_today_date = $postData['use_today_date']; 
+                    $use_today_date = \Cake\I18n\FrozenDate::createFromFormat('m-d-Y', $use_today_date);
+                    $use_today_date = $use_today_date->format('m/d/Y');
                 }
                 
                 if(!empty($postData['log_book_category']) && ($postData['log_book_category'] == '1' || $postData['log_book_category'] == '2')){ 

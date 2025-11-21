@@ -243,7 +243,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Ship In</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('part_ship_in', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_part_ship_in')); ?>
+                                <?php echo $this->Form->control('part_ship_in', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_part_ship_in')); ?>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Ship Out</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('part_ship_out', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_part_ship_out')); ?>
+                                <?php echo $this->Form->control('part_ship_out', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_part_ship_out')); ?>
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Qty On Other OTC Quotes</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('qty_on_other_otc_quotes', array('type' => 'number', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
+                                <?php echo $this->Form->control('qty_on_other_otc_quotes', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '')); ?>
                             </div>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Cost In MParts</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('cost_in_mparts', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_cost')); ?>
+                                <?php echo $this->Form->control('cost_in_mparts', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '$0.00', 'id' => 'wo_item_part_cost')); ?>
                             </div>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Retail Price in MParts</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('general_retail', array('class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_general_retail')); ?>
+                                <?php echo $this->Form->control('general_retail', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete' => 'off', 'placeholder' => '', 'id' => 'wo_item_part_general_retail')); ?>
                             </div>
                         </div>
                     </div>

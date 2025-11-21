@@ -177,31 +177,96 @@ $(document).on('click', '.checkUserTimeClockStatus', function(e){
     }
 });
 
-$(document).on('click', '.markUserTimeClockBtn', function(e){
-    var user_time_clock_code = $.trim($('#user_time_clock_code').val());
-    if(user_time_clock_code != '' && user_time_clock_code != undefined){
-        $('.loader').show();
-        $.ajax({
-            url: markUserTimeClockURL,
-            type: 'post',
-            data: {user_time_clock_code:user_time_clock_code},
-            dataType: 'text',
-            success: function (response) {
-                $('.loader').hide();
-                var obj = JSON.parse(response);
-                $('#user_time_clock_code').val('');
-                alert(obj.message);
-                if(obj.status == 'success'){
-                    $('#userTimeClockPopup').modal('hide');
+$(document).on('click', '.markUserTimeClockBtn', function (e) {
+    e.preventDefault();
 
-                    $('#inventoryToolsList').html(obj.time_clock_data);
-                }
-            }
-        });
-    }else{
+    var user_time_clock_code = $.trim($('#user_time_clock_code').val());
+    if (user_time_clock_code === '') {
         alert('Please enter a Time Clock code and try again.');
+        return;
+    }
+
+    // Show loader
+    $('.loader').show();
+
+    // Geo-fence center (8720 Jack Bates Ave, Tulsa, OK 74132)
+    const fenceCenter = { lat: 36.0484, lng: -95.9919 };
+    const allowedRadius = 1500; // meters
+
+    // Try to get user's current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+
+                // Calculate distance using Haversine formula
+                const R = 6371e3; // Earth radius in meters
+                const φ1 = fenceCenter.lat * Math.PI / 180;
+                const φ2 = userLat * Math.PI / 180;
+                const Δφ = (userLat - fenceCenter.lat) * Math.PI / 180;
+                const Δλ = (userLng - fenceCenter.lng) * Math.PI / 180;
+
+                const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                    Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                const distance = R * c;
+
+                const isWithinFence = distance <= allowedRadius;
+
+                // Submit with geolocation data
+                submitUserTimeClock(user_time_clock_code, userLat, userLng, isWithinFence);
+            },
+            function (error) {
+                $('.loader').hide();
+                if (error.code === error.PERMISSION_DENIED) {
+                    //if (confirm('Location access denied. Do you want to continue (remote access will be checked)?')) {
+                        // Proceed with remote access check (no GPS)
+                        submitUserTimeClock(user_time_clock_code, '', '', 0);
+                    //}
+                } else {
+                    alert('Unable to get your location. Please enable GPS and try again.');
+                }
+            },
+            { timeout: 8000 } // 8 seconds timeout
+        );
+    } else {
+        $('.loader').hide();
+        alert('Geolocation is not supported by your browser.');
     }
 });
+
+function submitUserTimeClock(user_time_clock_code, latitude, longitude, isWithinFence) {
+    $.ajax({
+        url: markUserTimeClockURL,
+        type: 'post',
+        dataType: 'json',
+        data: {
+            user_time_clock_code: user_time_clock_code,
+            latitude: latitude,
+            longitude: longitude,
+            is_within_fence: isWithinFence ? 1 : 0
+        },
+        success: function (obj) {
+            $('.loader').hide();
+            $('#user_time_clock_code').val('');
+
+            if (obj.status === 'success') {
+                alert(obj.message);
+                $('#userTimeClockPopup').modal('hide');
+                $('#inventoryToolsList').html(obj.time_clock_data);
+            } else {
+                alert(obj.message);
+            }
+        },
+        error: function () {
+            $('.loader').hide();
+            alert('Something went wrong. Please try again.');
+        }
+    });
+}
+
 
 $(document).on('click', '.load_time_clock_record', function(e){
     var user_id = $.trim($('#time_clock_adjustment_user_id').val());
@@ -419,9 +484,9 @@ function downloadPDFAjax(url, params){
 }
 
 $(document).on('click', '.sendWOViewMessage', function(e){
-    var message_to = $('#message-to').val();
-    var message_subject = $('#message-subject').val();
-    var message = $('#message').val();
+    var message_to = $.trim($('#message-to').val());
+    var message_subject = $.trim($('#message-subject').val());
+    var message = $.trim($('#message').val());
 
     if(message_to != '' && message_subject != '' && message != ''){
         $('.loader').show();

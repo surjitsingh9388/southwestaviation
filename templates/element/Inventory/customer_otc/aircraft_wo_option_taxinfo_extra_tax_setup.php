@@ -192,7 +192,7 @@
                         <?php 
                         $tax_percentage = '0.00%';
                         if(!empty($wooptionextrataxes->tax_percentage)){
-                            $tax_percentage = number_format($wooptionextrataxes->tax_percentage, 2).'%';
+                            $tax_percentage = number_format((float)$wooptionextrataxes->tax_percentage, 2).'%';
                         }
                         echo $this->Form->control('tax_percentage', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'id'=>'tax_percentage', 'value'=>$tax_percentage)); ?>
                     </div>
@@ -217,12 +217,12 @@
                     <label class="control-label" for="reference">Minimum Amount to Charge</label>
                     <div class="form-input-frame">
                         <?php 
-                        $minimum_amount_to_charge = '0.00%';
+                        $minimum_amount_to_charge = '';
                         if(!empty($wooptionextrataxes->minimum_amount_to_charge)){
-                            $minimum_amount_to_charge = number_format($wooptionextrataxes->minimum_amount_to_charge, 2).'%';
+                            $minimum_amount_to_charge = '$'.number_format((float)$wooptionextrataxes->minimum_amount_to_charge, 2);
                         }
 
-                        echo $this->Form->control('minimum_amount_to_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'id'=>'minimum_amount_to_charge', 'value'=>$minimum_amount_to_charge)); ?>
+                        echo $this->Form->control('minimum_amount_to_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'minimum_amount_to_charge', 'value'=>$minimum_amount_to_charge)); ?>
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@
                         <?php 
                         $maximum_amount_to_charge = '$0.00';
                         if(!empty($wooptionextrataxes->maximum_amount_to_charge)){
-                            $maximum_amount_to_charge = '$'.number_format($wooptionextrataxes->maximum_amount_to_charge, 2);
+                            $maximum_amount_to_charge = '$'.number_format((float)$wooptionextrataxes->maximum_amount_to_charge, 2);
                         }
 
                         echo $this->Form->control('maximum_amount_to_charge', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'id'=>'maximum_amount_to_charge', 'value'=>$maximum_amount_to_charge)); ?>

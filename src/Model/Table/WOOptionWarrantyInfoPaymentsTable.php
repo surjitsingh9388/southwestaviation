@@ -8,7 +8,7 @@ use Cake\Validation\Validator;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\FactoryLocator;
 
-class CustomerAircraftWOOptionWarrantyInfoesTable extends Table
+class WOOptionWarrantyInfoPaymentsTable extends Table
 {
     /**
      * Initialize method
@@ -19,7 +19,7 @@ class CustomerAircraftWOOptionWarrantyInfoesTable extends Table
     public function initialize(array $config):void
     {
         parent::initialize($config);
-        $this->setTable('customer_aircraft_wo_option_warranty_infoes');
+        $this->setTable('wo_option_warranty_info_payments');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
         $this->addBehavior('Timestamp');        
@@ -38,10 +38,6 @@ class CustomerAircraftWOOptionWarrantyInfoesTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id');
-        
-        $validator
-            ->integer('wo_item_id')
-            ->notEmptyString('wo_item_id');
         
         return $validator;
     }

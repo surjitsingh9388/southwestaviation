@@ -38,7 +38,7 @@
                                     <?php 
                                     $epa_charge_amount = '';
                                     if(!empty($wooptionmiscchargs->epa_charge_amount)){
-                                        $epa_charge_amount = '$'.number_format($wooptionmiscchargs->epa_charge_amount, 2);
+                                        $epa_charge_amount = '$'.number_format((float)$wooptionmiscchargs->epa_charge_amount, 2);
                                     }
 
                                     echo $this->Form->control('epa_charge_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'epa_charge_amount', 'value'=>$epa_charge_amount)); ?>
@@ -78,7 +78,7 @@
                                     <?php 
                                     $oil_analysis_amount = '';
                                     if(!empty($wooptionmiscchargs->oil_analysis_amount)){
-                                        $oil_analysis_amount = '$'.number_format($wooptionmiscchargs->oil_analysis_amount, 2);
+                                        $oil_analysis_amount = '$'.number_format((float)$wooptionmiscchargs->oil_analysis_amount, 2);
                                     }
 
                                     echo $this->Form->control('oil_analysis_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'oil_analysis_amount', 'value'=>$oil_analysis_amount)); ?>
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference"># Tires</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('tire', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                                    <?php echo $this->Form->control('tire', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                     <?php 
                                     $amount_per_tire = '';
                                     if(!empty($wooptionmiscchargs->amount_per_tire)){
-                                        $amount_per_tire = '$'.number_format($wooptionmiscchargs->amount_per_tire, 2);
+                                        $amount_per_tire = '$'.number_format((float)$wooptionmiscchargs->amount_per_tire, 2);
                                     }
                                     echo $this->Form->control('amount_per_tire', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'id'=>'amount_per_tire', 'value'=>$amount_per_tire)); ?>
                                 </div>
@@ -149,7 +149,7 @@
                                     <?php 
                                     $mis_charge_amount = '';
                                     if(!empty($wooptionmiscchargs->mis_charge_amount)){
-                                        $mis_charge_amount = '$'.number_format($wooptionmiscchargs->mis_charge_amount, 2);
+                                        $mis_charge_amount = '$'.number_format((float)$wooptionmiscchargs->mis_charge_amount, 2);
                                     }
                                     
                                     echo $this->Form->control('mis_charge_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'mis_charge_amount', 'value'=>$mis_charge_amount)); ?>
@@ -180,7 +180,7 @@
                                     <?php 
                                     $pilot_services_amount = '';
                                     if(!empty($wooptionmiscchargs->pilot_services_amount)){
-                                        $pilot_services_amount = '$'.number_format($wooptionmiscchargs->pilot_services_amount, 2);
+                                        $pilot_services_amount = '$'.number_format((float)$wooptionmiscchargs->pilot_services_amount, 2);
                                     }
                                     
                                     echo $this->Form->control('pilot_services_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'pilot_services_amount', 'value'=>$pilot_services_amount)); ?>
@@ -211,7 +211,7 @@
                                     <?php 
                                     $tax_credit_amount = '';
                                     if(!empty($wooptionmiscchargs->tax_credit_amount)){
-                                        $tax_credit_amount = '$'.number_format($wooptionmiscchargs->tax_credit_amount, 2);
+                                        $tax_credit_amount = '$'.number_format((float)$wooptionmiscchargs->tax_credit_amount, 2);
                                     }
                                     
                                     echo $this->Form->control('tax_credit_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'tax_credit_amount', 'value'=>$tax_credit_amount)); ?>
@@ -254,7 +254,7 @@
                                 <?php 
                                 $shop_supplies_amount = '';
                                 if(!empty($wooptionmiscchargs->shop_supplies_amount)){
-                                    $shop_supplies_amount = '$'.number_format($wooptionmiscchargs->shop_supplies_amount, 2);
+                                    $shop_supplies_amount = '$'.number_format((float)$wooptionmiscchargs->shop_supplies_amount, 2);
                                 }
 
                                 echo $this->Form->control('shop_supplies_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'shop_supplies_amount', 'value'=>$shop_supplies_amount)); ?>
@@ -280,7 +280,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference">Break-off Amount</label>
                             <div class="col-md-4">
-                                <?php echo $this->Form->control('break_off_amount', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00')); ?>
+                                <?php echo $this->Form->control('break_off_amount', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00')); ?>
                             </div>
                         </div>
                     </div>
@@ -288,7 +288,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference"><-Break-off %</label>
                             <div class="col-md-4">
-                                <?php echo $this->Form->control('break_off_percentage', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%')); ?>
+                                <?php echo $this->Form->control('break_off_percentage', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%')); ?>
                             </div>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-8" for="reference">Above Break-off %</label>
                             <div class="col-md-4">
-                                <?php echo $this->Form->control('above_break_off_percentage', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%')); ?>
+                                <?php echo $this->Form->control('above_break_off_percentage', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%')); ?>
                             </div>
                         </div>
                     </div>
@@ -306,7 +306,7 @@
           
                 <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Fuel</legend>
-                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <?php
                         $charge_for_fuel_chk = '';
                         if(@$wooptionmiscchargs->charge_for_fuel == '1'){
@@ -320,7 +320,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="reference">Gallons</label>
                                 <div class="form-input-frame">
-                                    <?php echo $this->Form->control('fuel_gallons', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00')); ?>
+                                    <?php echo $this->Form->control('fuel_gallons', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00')); ?>
                                 </div>
                             </div>
                         </div>
@@ -336,11 +336,11 @@
                                 </div>
                             </div>
                         </div>
-                       <div class="col-md-1 col-sm-1 col-xs-12">
+                        <div class="col-md-1 col-sm-1 col-xs-12">
                             <label class="control-label" for="reference">&nbsp;</label>
                             <div class="form-group">=</div>
                         </div>
-                        <div class="col-md-1 col-sm-1 col-xs-12" style="padding:0px;">
+                        <div class="col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
                             <div class="form-group">
                                 <label class="control-label" for="reference">Total</label>
                                 <div class="form-input-frame">
@@ -350,7 +350,7 @@
                                         $total_charges = $wooptionmiscchargs->fuel_gallons*$wooptionmiscchargs->fuel_price;
                                     }
 
-                                    echo $this->Form->control('fuel_total_charges', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'value'=>$total_charges, 'id'=>'fuel_total_charges', 'id'=>'fuel_total_charges')); ?>
+                                    echo $this->Form->control('fuel_total_charges', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'value'=>$total_charges, 'id'=>'fuel_total_charges', 'id'=>'fuel_total_charges')); ?>
                                 </div>
                             </div>
                         </div>
@@ -377,8 +377,8 @@
                                     $fuelchargestr = '';
                                     foreach($wooptionmiscfuelchargs as $fuelcharges){
                                         $fuelchargestr .= '<tr class="wo-mis-fuel-charges" data-val="'.$fuelcharges['id'].'">';
-                                        $fuelchargestr .= '<td>'.number_format($fuelcharges['gallon'], 2).'</td>';
-                                        $fuelchargestr .= '<td>'.'$'.number_format($fuelcharges['price'], 2).'</td>';
+                                        $fuelchargestr .= '<td>'.number_format((float)$fuelcharges['gallon'], 2).'</td>';
+                                        $fuelchargestr .= '<td>'.'$'.number_format((float)$fuelcharges['price'], 2).'</td>';
                                         $fuelchargestr .= '<td>'.'$'.number_format(($fuelcharges['gallon']*$fuelcharges['price']), 2).'</td>';
                                         $fuelchargestr .= '<td><i class="fa fa-times remove-wo-misc-fuel-charges" title="Delete fuel charges" data-val="'.$fuelcharges['id'].'" style="cursor:pointer;"></i></td>';
                                         $fuelchargestr .= '</tr>';

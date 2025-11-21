@@ -57,7 +57,7 @@
                     <label class="control-label" for="reference">Min. Hours Worked Per Item</label>
                     <div class="form-input-frame">
                         <?php 
-                        $min_hour_worked_per_item = !empty($wooptiongeninfoes->min_hour_worked_per_item) ? number_format($wooptiongeninfoes->min_hour_worked_per_item, 2) : '0.00';
+                        $min_hour_worked_per_item = !empty($wooptiongeninfoes->min_hour_worked_per_item) ? number_format((float)$wooptiongeninfoes->min_hour_worked_per_item, 2) : '0.00';
 
                         echo $this->Form->control('min_hour_worked_per_item', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00', 'value'=>$min_hour_worked_per_item)); ?>
                     </div>
@@ -68,7 +68,7 @@
                     <label class="control-label" for="reference">Overtime Hrs.</label>
                     <div class="form-input-frame">
                         <?php 
-                        $overtime_hrs = !empty($wooptiongeninfoes->overtime_hrs) ? number_format($wooptiongeninfoes->overtime_hrs, 2) : '0.00';
+                        $overtime_hrs = !empty($wooptiongeninfoes->overtime_hrs) ? number_format((float)$wooptiongeninfoes->overtime_hrs, 2) : '0.00';
 
                         echo $this->Form->control('overtime_hrs', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$overtime_hrs)); ?>
                     </div>
@@ -79,7 +79,7 @@
                     <label class="control-label" for="reference">Add Hrs. Inspection</label>
                     <div class="form-input-frame">
                         <?php 
-                        $add_hrs_inspection = !empty($wooptiongeninfoes->add_hrs_inspection) ? number_format($wooptiongeninfoes->add_hrs_inspection, 2) : '0.00';
+                        $add_hrs_inspection = !empty($wooptiongeninfoes->add_hrs_inspection) ? number_format((float)$wooptiongeninfoes->add_hrs_inspection, 2) : '0.00';
 
                         echo $this->Form->control('add_hrs_inspection', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>$add_hrs_inspection)); ?>
                     </div>
@@ -151,7 +151,7 @@
                         <label class="control-label" for="reference">Total Deposit Amount</label>
                         <div class="form-input-frame">
                             <?php 
-                            $total_deposit_amount = !empty($wooptiongeninfoes->total_deposit_amount) ? '$'.number_format($wooptiongeninfoes->total_deposit_amount, 2) : '$0.00';
+                            $total_deposit_amount = !empty($wooptiongeninfoes->total_deposit_amount) ? '$'.number_format((float)$wooptiongeninfoes->total_deposit_amount, 2) : '$0.00';
 
                             echo $this->Form->control('total_deposit_amount', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'readonly'=>'readonly', 'value'=>$total_deposit_amount)); ?>
                         </div>

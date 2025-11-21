@@ -2,23 +2,23 @@ $(document).ready(function() {
     var currentUrl = window.location.href;
 
     // Define URLs where you want to hide the first column
-    var hideColumnUrls = [
+    /*var hideColumnUrls = [
         'inventory_requests',
         'inventory_repair_orders',
         'inventory_purchase_orders',
         'inventory_shipping_orders'
-    ];
+    ];*/
 
     // Check if current URL matches any of those
-    var shouldHideColumn = hideColumnUrls.some(function(url) {
+    /*var shouldHideColumn = hideColumnUrls.some(function(url) {
         return currentUrl.includes(url);
-    });
+    });*/
 
     var dataTable = $('#datatableListingPage').DataTable({
         'order': [$("#FilterBy").val(), 'asc'],
         columnDefs: [{
             "targets": [0],
-            visible: !shouldHideColumn,
+            //visible: !shouldHideColumn,
             orderable: false,
             className: "check noExl"
         }],
@@ -963,7 +963,7 @@ $(document).on('click', '#unlinkOrder', function(e){
 });
 
 $(document).on('blur', '#unit-cost, #exchange-cost, #exchange-price, #company-purchase-price, #retail-price, #overhauled-cost, #inventory_cost, #exchange_cost, #exchange_price, #retail_price, #company_purchase_price', function(e){
-    let value = $(this).val().replace(/\$/g, '');
+    let value = $(this).val().replace(/[^a-zA-Z0-9.]/g, '');
     if($.trim(value) != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val('$'+value);
@@ -971,7 +971,7 @@ $(document).on('blur', '#unit-cost, #exchange-cost, #exchange-price, #company-pu
 });
 
 $(document).on('blur', '#safety-stock-threshold, #weight, #inventory_qty', function(e){
-    let value = $(this).val().replace(/\$/g, '');
+    let value = $(this).val().replace(/[^a-zA-Z0-9.]/g, '');
     if($.trim(value) != ''){
         value = parseFloat(value).toFixed(2);
         $(this).val(value);

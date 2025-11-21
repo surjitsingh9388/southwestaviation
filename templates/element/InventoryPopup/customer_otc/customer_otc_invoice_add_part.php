@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="reference">Qty Needed</label>
                                     <div class="form-input-frame">
-                                        <?php echo $this->Form->control('qty_needed', array('type'=>'number','class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>'1')); ?>
+                                        <?php echo $this->Form->control('qty_needed', array('type'=>'text','class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'value'=>'1')); ?>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="reference">Qty Stk</label>
                                     <div class="form-input-frame">
-                                        <?php echo $this->Form->control('qty_stock', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'readonly'=>'readonly', 'id'=>'part_qty_stock')); ?>
+                                        <?php echo $this->Form->control('qty_stock', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'readonly'=>'readonly', 'id'=>'part_qty_stock')); ?>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Qty (Cust. Owned)</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('qty_cust_owned', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly')); ?>
+                                <?php echo $this->Form->control('qty_cust_owned', array('type' => 'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0', 'readonly'=>'readonly')); ?>
                             </div>
                         </div>
                         <div class="form-check">

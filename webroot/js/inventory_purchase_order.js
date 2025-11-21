@@ -79,7 +79,9 @@ $(document).ready(function() {
         disableEnableSaveInvPOBtn();
     });
 
-    disableEnableSaveInvPOBtn();
+    setInterval(function() {
+        disableEnableSaveInvPOBtn();
+    }, 1000);
 
     //disableEnableSaveInvPORecBtn();
 

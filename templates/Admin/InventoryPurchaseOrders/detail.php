@@ -357,7 +357,7 @@ echo $this->Html->css('inventory_purchase_order');
 
                                                     if(!empty($val['noninventory_item'])){
                                                     ?>
-                                                    <button type="button" class="btn btn-primary btn-sm <?php if(empty($val['received'])){ ?> receivedbtnclick <?php } ?>" id="po-detail-line-item-close-button-1" style="cursor: pointer;" <?php if(!empty($invitmreceived[$val['id']])){ ?> disabled <?php } ?> data-val="<?php echo $val['id']; ?>">Close</button>
+                                                    <button type="button" class="btn btn-primary btn-sm <?php if(empty($invitmreceived[$val['id']])){ ?> receivedbtnclick <?php } ?>" id="po-detail-line-item-close-button-1" style="cursor: pointer;" <?php if(!empty($invitmreceived[$val['id']])){ ?> disabled <?php } ?> data-val="<?php echo $val['id']; ?>">Close</button>
                                                     <?php }else{ ?>
                                                     <div class="btn-group btn-group-sm">
                                                         <button type="button" data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false">Actions <span class="caret"></span></button>

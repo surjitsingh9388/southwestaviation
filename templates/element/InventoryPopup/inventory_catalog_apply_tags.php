@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body">
                 <div  class="row">
-                    <div  class="col-md-12">
+                    <div  class="col-sm-12">
                         <div class="form-group">
                             <label class="col-sm-3 control-label">
                                 Tags
@@ -50,16 +50,16 @@
                 </div>
 
                 <div  class="clearfix" style="margin-top: 10px;">
-                    <div  class="col-md-8">
+                    <div  class="col-md-7 col-sm-7">
                         Add to selected items or replace existing tags?
                     </div>
-                    <div  class="col-md-4">
+                    <div  class="col-md-5 col-sm-5">
                         <div  class="btn-group pull-right">
                             <label  class="btn btn-default tagsbtnactivity active" data-val='1' style="cursor: pointer;">Add</label>
                             <label  class="btn btn-default tagsbtnactivity" data-val='2' style="cursor: pointer;">Replace</label>
                         </div>
                     </div>
-                    <div  class="col-md-12" style="height: 30px;">
+                    <div  class="col-sm-12" style="height: 30px;">
                         <p  class="error-text" style="display:none;">Selected items will have all of their existing tags replaced with the above tags.</p>
                     </div>
                 </div>

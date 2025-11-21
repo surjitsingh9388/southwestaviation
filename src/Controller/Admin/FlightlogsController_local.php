@@ -1453,30 +1453,34 @@ class FlightlogsController extends AppController
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">';
+                        <div class="col-md-12">';
                             $chk = '';
                             if(!empty($params['pilot_flying'])) {
                                 $chk = "checked='checked'";
                             }
                             $initHtml .= '<input type="checkbox" name="pilot_flying" '.$chk.'> Pilot Flying
                         </div>
-                   
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Duty Start Date</label>
                             <input type="text" name="duty_start_date" value="'.$params['duty_start_date'].'" class="form-control datePicker dtStartD">
                         </div>
-               
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Estimated Duty On</label>
                             <input type="text" name="duty_on" value="'.$dutyOn.'" class="form-control timePicker" placeholder="00.00">
                         </div>
-               
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Estimated Duty Off</label>
                             <input type="text" name="duty_off" value="'.$dutyOff.'" class="form-control timePicker" placeholder="00.00">
                         </div>
-                  
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Required Rest</label>
                             <select name="required_rest" class="form-control col-md-6 col-xs-12 requiredRestCls">';
                                 $restArr = [0, 8, 9, 10, 11, 12, 16];
@@ -1493,8 +1497,9 @@ class FlightlogsController extends AppController
                                 }
                                 $initHtml .= '</select>
                         </div>
-                 
-                        <div class="col-sm-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Which legs should this apply to</label>
                             <br>';
                             $chk = '';
@@ -1688,7 +1693,7 @@ class FlightlogsController extends AppController
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label>Crew Member Type</label>
                             <select name="member_type" class="form-control col-md-6 col-xs-12 landingCls">';
                             $restArr = ['pic', 'sic'];
@@ -1701,21 +1706,23 @@ class FlightlogsController extends AppController
                             }
                             $initHtml .= '</select>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label>Duty Start Date</label>
                             <input type="text" name="duty_start_date" value="'.$params['duty_start_date'].'" class="form-control datePicker dtStartD">
                         </div>
-                 
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label>Estimated Duty On</label>
                             <input type="text" name="duty_on" value="'.$dutyOn.'" class="form-control timePicker" placeholder="00.00">
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label>Estimated Duty Off</label>
                             <input type="text" name="duty_off" value="'.$dutyOff.'" class="form-control timePicker" placeholder="00.00">
                         </div>
-                   
-                        <div class="col-sm-6">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Required Rest</label>
                             <select name="required_rest" class="form-control col-md-6 col-xs-12 requiredRestCls">';
                                 $restArr = [0, 8, 9, 10, 11, 12, 16];
@@ -1732,8 +1739,9 @@ class FlightlogsController extends AppController
                                 }
                                 $initHtml .= '</select>
                         </div>
-                   
-                        <div class="col-sm-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <label>Which legs should this apply to</label>
                             <br>';
                             $chk = '';
@@ -1775,14 +1783,15 @@ class FlightlogsController extends AppController
                 $updHtml .= '<div>
                         <input type="hidden" name="id" value="'.$record['id'].'">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-md-12">
                                 <label>Crew Member</label>
                                 <select name="crew_member" class="form-control col-md-6 col-xs-12">
                                     <option value="'.$record['crew_member'].'">'.$crewName.'</option>
                                 </select>
                             </div>
-                      
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label>Crew Member Type</label>
                                 <select name="member_type" class="form-control col-md-6 col-xs-12 landingCls">';
                                 $restArr = ['pic', 'sic'];
@@ -1795,21 +1804,23 @@ class FlightlogsController extends AppController
                                 }
                                 $updHtml .= '</select>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <label>Duty Start Date</label>
                                 <input type="text" name="duty_start_date" value="'.date('m/d/Y', strtotime($record['duty_start_date'])).'" class="form-control datePicker dtStartD">
                             </div>
-                      
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label>Estimated Duty On</label>
                                 <input type="text" name="duty_on" value="'.$dutyOn.'" class="form-control timePicker" placeholder="00.00">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <label>Estimated Duty Off</label>
                                 <input type="text" name="duty_off" value="'.$dutyOff.'" class="form-control timePicker" placeholder="00.00">
                             </div>
-                      
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label>Required Rest</label>
                                 <select name="required_rest" class="form-control col-md-6 col-xs-12 requiredRestCls">';
                                     $restArr = [0, 8, 9, 10, 11, 12, 16];
@@ -1826,8 +1837,9 @@ class FlightlogsController extends AppController
                                     }
                                     $updHtml .= '</select>
                             </div>
-                       
-                            <div class="col-sm-12">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <label>Which legs should this apply to</label>
                                 <br>';
                                 $chk = '';

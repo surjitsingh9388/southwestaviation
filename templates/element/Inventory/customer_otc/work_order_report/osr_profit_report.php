@@ -83,11 +83,11 @@
                         <td class="border-btm ps-0" style="font-size:12px;"><?php echo $row['wo_item_position']; ?></td>
                         <td class="border-btm" style="font-size:12px;"><?php echo !empty($row['vendors']['vendor_name']) ? $row['vendors']['vendor_name'] : ''; ?></td>
                         <td class="border-btm" style="font-size:12px;"><?php echo !empty($row['osr_infoes']['osr_invoice_no']) ? $row['osr_infoes']['osr_invoice_no'] : ''; ?></td>
-                        <td class="border-btm" style="font-size:12px;"><?php echo number_format($labor_cost, 2); ?></td>
-                        <td class="border-btm" style="font-size:12px;"><?php echo number_format($labor_charge, 2); ?></td>
-                        <td class="border-btm" style="font-size:12px;"><?php echo number_format($parts_cost, 2); ?></td>
-                        <td class="border-btm" style="font-size:12px;"><?php echo number_format($parts_charges, 2); ?></td>
-                        <td class="border-btm text-end pe-0" style="font-size:12px;"><?php echo number_format($total_profit, 2); ?></td>
+                        <td class="border-btm" style="font-size:12px;"><?php echo number_format((float)$labor_cost, 2); ?></td>
+                        <td class="border-btm" style="font-size:12px;"><?php echo number_format((float)$labor_charge, 2); ?></td>
+                        <td class="border-btm" style="font-size:12px;"><?php echo number_format((float)$parts_cost, 2); ?></td>
+                        <td class="border-btm" style="font-size:12px;"><?php echo number_format((float)$parts_charges, 2); ?></td>
+                        <td class="border-btm text-end pe-0" style="font-size:12px;"><?php echo number_format((float)$total_profit, 2); ?></td>
                     </tr>
                     <?php }} ?>
                 </table>
@@ -107,7 +107,7 @@
                             <strong>Total Labor (Cost):</strong>
                         </td>
                         <td class="text-end" style="padding-right: 0; font-size:12px;" width="30%">
-                            <?php echo '$'.number_format($total_labor_cost, 2); ?>
+                            <?php echo '$'.number_format((float)$total_labor_cost, 2); ?>
                         </td>
                     </tr>
                     <tr style="margin:0px; padding:0px;">
@@ -115,7 +115,7 @@
                             <strong>Total Labor (Charge):</strong>
                         </td>
                         <td class="text-end" style="margin:0px; padding:0px; font-size:12px;">
-                            <?php echo '$'.number_format($total_labor_charge, 2); ?>
+                            <?php echo '$'.number_format((float)$total_labor_charge, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -128,7 +128,7 @@
                             if(!empty($total_labor_cost) || !empty($total_labor_charge)){
                                 $total_labor_profit = $total_labor_charge - $total_labor_cost;
                             } 
-                            echo '$'.number_format($total_labor_profit, 2); ?>
+                            echo '$'.number_format((float)$total_labor_profit, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -136,7 +136,7 @@
                             <strong>Total Parts (Cost):</strong>
                         </td>
                         <td class="text-end" style="padding-top: 15px; padding-right: 0; font-size:12px;">
-                            <?php echo '$'.number_format($total_parts_cost, 2); ?>
+                            <?php echo '$'.number_format((float)$total_parts_cost, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -144,7 +144,7 @@
                             <strong>Total Parts (Charge):</strong>
                         </td>
                         <td class="text-end pe-0" style="padding-right: 0; font-size:12px;">
-                            <?php echo '$'.number_format($total_parts_charge, 2); ?>
+                            <?php echo '$'.number_format((float)$total_parts_charge, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -157,7 +157,7 @@
                             if(!empty($total_parts_cost) || !empty($total_parts_charge)){
                                 $total_parts_profit = $total_parts_charge - $total_parts_cost;
                             } 
-                            echo '$'.number_format($total_parts_profit, 2); ?>
+                            echo '$'.number_format((float)$total_parts_profit, 2); ?>
                         </td>
                     </tr>
                     <tr>

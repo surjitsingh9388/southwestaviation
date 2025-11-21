@@ -24,7 +24,7 @@
 
                         $labor_discount_percentage = '0.00%';
                         if(!empty($wooptionpricinginfoes->labor_discount_percentage)){
-                            $labor_discount_percentage = number_format($wooptionpricinginfoes->labor_discount_percentage, 2).'%';
+                            $labor_discount_percentage = number_format((float)$wooptionpricinginfoes->labor_discount_percentage, 2).'%';
                         }
                         ?>
                         <input type="checkbox" name="labor_discount" value="1" <?php echo $labor_discount_chk; ?> />&nbsp;Labor % Discount
@@ -40,7 +40,7 @@
                             <?php 
                             $flat_discount_amount = '$0.00';
                             if(!empty($wooptionpricinginfoes->flat_discount_amount)){
-                                $flat_discount_amount = '$'.number_format($wooptionpricinginfoes->flat_discount_amount, 2);
+                                $flat_discount_amount = '$'.number_format((float)$wooptionpricinginfoes->flat_discount_amount, 2);
                             }
                             
                             echo $this->Form->control('flat_discount_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'flat_discount_amount', 'value'=>$flat_discount_amount)); ?>
@@ -77,7 +77,7 @@
                             <?php 
                             $parts_discount_percentage = '0.00%';
                             if(!empty($wooptionpricinginfoes->parts_discount_percentage)){
-                                $parts_discount_percentage = number_format($wooptionpricinginfoes->parts_discount_percentage, 2).'%';
+                                $parts_discount_percentage = number_format((float)$wooptionpricinginfoes->parts_discount_percentage, 2).'%';
                             }
                             
                             echo $this->Form->control('parts_discount_percentage', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'0.00%', 'id'=>'parts_discount_percentage', 'value'=>$parts_discount_percentage)); ?>
@@ -91,7 +91,7 @@
                             <?php 
                             $parts_flat_discount_amount = '$0.00';
                             if(!empty($wooptionpricinginfoes->parts_flat_discount_amount)){
-                                $parts_flat_discount_amount = '$'.number_format($wooptionpricinginfoes->parts_flat_discount_amount, 2);
+                                $parts_flat_discount_amount = '$'.number_format((float)$wooptionpricinginfoes->parts_flat_discount_amount, 2);
                             }
 
                             echo $this->Form->control('parts_flat_discount_amount', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'$0.00', 'id'=>'parts_flat_discount_amount', 'value'=>$parts_flat_discount_amount)); ?>

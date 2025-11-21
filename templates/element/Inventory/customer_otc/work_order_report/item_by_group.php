@@ -88,7 +88,7 @@
                         </td>
                         <td width="35%">
                             <p class="headingTitle nowrap" style="font-size:22px;">
-                                Hrs Worked / Est Hrs: <?php echo number_format($hour_worked, 2).'/'.number_format($estimated_hour, 2).' ('.number_format($avg_hour_worked, 2).'%'.')'; ?>
+                                Hrs Worked / Est Hrs: <?php echo number_format((float)$hour_worked, 2).'/'.number_format((float)$estimated_hour, 2).' ('.number_format((float)$avg_hour_worked, 2).'%'.')'; ?>
                             </p>
                         </td>
                         <td class="pe-0" width="35%">
@@ -141,8 +141,8 @@
                         <td class="border-btm" style="font-size:22px;"><?php echo $row['wo_discrepancy']; ?></td>
                         <td class="border-btm" style="font-size:22px;"><?php echo $row['wo_corrective_action']; ?></td>
                         <td class="border-btm" style="font-size:22px;"><?php echo $aircraftWOCategory[$row['wo_item_overview']['wo_category']]; ?></td>
-                        <td class="border-btm" style="font-size:22px;"><?php echo (!empty($row['wo_item_overview']['estimated_hour']) ? number_format($row['wo_item_overview']['estimated_hour'], 2) : '0.00'); ?></td>
-                        <td class="border-btm" style="font-size:22px;"><?php echo number_format($hour_worked, 2); ?></td>
+                        <td class="border-btm" style="font-size:22px;"><?php echo (!empty($row['wo_item_overview']['estimated_hour']) ? number_format((float)$row['wo_item_overview']['estimated_hour'], 2) : '0.00'); ?></td>
+                        <td class="border-btm" style="font-size:22px;"><?php echo number_format((float)$hour_worked, 2); ?></td>
                         <td class="border-btm pe-0" style="font-size:22px;"><?php echo $aircraftWOItemStatus[$row['wo_item_status']]; ?></td>
                     </tr>
                     <?php }} ?>

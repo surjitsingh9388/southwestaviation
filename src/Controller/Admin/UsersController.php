@@ -564,6 +564,8 @@ class UsersController extends AppController
                         }
                     }
                 }
+                $this->Flash->success('User created successfully.');
+
                 return $this->redirect(['action' => 'index']);
             }else{
                 $error = $user->getErrors();
@@ -671,6 +673,7 @@ class UsersController extends AppController
             $postData['is_manager'] = !empty($postData['is_manager']) ? $postData['is_manager'] : '0';
             $postData['direct_manager_id'] = !empty($postData['direct_manager_id']) ? $postData['direct_manager_id'] : '0';
             $postData['team_member_id'] = !empty($postData['team_member_id']) ? implode(',', $postData['team_member_id']) : '';
+            $postData['remote_access'] = !empty($postData['remote_access']) ? $postData['remote_access'] : '0';
             
             // check if new password not empty, set the new password
             if (!empty($new_password) && !empty($confirm_password)) {

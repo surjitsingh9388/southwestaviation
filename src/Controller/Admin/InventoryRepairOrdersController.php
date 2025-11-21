@@ -1272,7 +1272,7 @@
                     $inventorydata = [];
                     $inventorydata['inventory_item_id'] = $postData['inventory_item_id'][$i];
                     $inventorydata['location_id']       = $postData['location_id'][$i];
-                    $inventorydata['received']          = date("Y-m-d");
+                    $inventorydata['received']          = new \Cake\I18n\FrozenTime('now');
                     $inventorydata['notes']             = $postData['notes'][$i];
                     $inventorydata['currency']          = $postData['currency'][$i];
                     $inventorydata['cost']              = $postData['cost'][$i];

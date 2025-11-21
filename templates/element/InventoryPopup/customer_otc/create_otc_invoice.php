@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label class="control-label" for="reference">Created By</label>
                             <div class="form-input-frame">
-                                <?php echo $this->Form->control('added_by', array('class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'')); ?>
+                                <?php echo $this->Form->control('added_by', array('type'=>'text', 'class' => 'form-control', 'label' => false, 'autocomplete'=>'off', 'placeholder'=>'', 'readonly'=>'readonly')); ?>
                             </div>
                         </div>
 

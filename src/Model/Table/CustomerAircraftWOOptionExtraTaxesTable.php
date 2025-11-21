@@ -40,8 +40,8 @@ class CustomerAircraftWOOptionExtraTaxesTable extends Table
         }*/
 
         if(!empty($entity->id)){
-            $CustomerAircraftWOOptionGeneralInfoesModel =  FactoryLocator::get('Table')->get('CustomerAircraftWOOptionGeneralInfoes');
-            $aircraftwoitems = $CustomerAircraftWOOptionGeneralInfoesModel->get($entity->id);
+            $CustomerAircraftWOOptionExtraTaxesModel =  FactoryLocator::get('Table')->get('CustomerAircraftWOOptionExtraTaxes');
+            $aircraftwoitems = $CustomerAircraftWOOptionExtraTaxesModel->get($entity->id);
             $AircraftWOItemHistoriesModel =  FactoryLocator::get('Table')->get('AircraftWOItemHistories');
             
             $AircraftWOItemHistories = $AircraftWOItemHistoriesModel->newEmptyEntity();
@@ -135,7 +135,7 @@ class CustomerAircraftWOOptionExtraTaxesTable extends Table
                 
                 $AircraftWOItemHistories->user_id = $entity->updated_by;
                 $AircraftWOItemHistories->description = $description;
-                $AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
+                //$AircraftWOItemHistoriesModel->save($AircraftWOItemHistories);
             }
         }
 

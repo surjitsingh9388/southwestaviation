@@ -209,7 +209,7 @@
                 <td class="text-center">
                     <span>Total Balance Due &nbsp;&nbsp;&nbsp;</span>     
                     <?php if($report_type != '18' && $report_type != '19'){ ?>
-                    <strong class="value-title"><u><?php echo '$'.number_format($totalbalancedue, 2); ?></u></strong>
+                    <strong class="value-title"><u><?php echo '$'.number_format((float)$totalbalancedue, 2); ?></u></strong>
                     <?php } ?>
                     <span> &nbsp;&nbsp;&nbsp;(See Below For Cost Table)</span>
                 </td>
@@ -306,8 +306,8 @@
                                 }
                             ?>
                             <p>
-                                <span style="padding: 5px 10px 0 0">Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($labor_charge, 2);} ?>,</span>
-                                <span style="padding: 5px 10px 0 0">Parts: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($parts_charge, 2);} ?>,</span>
+                                <span style="padding: 5px 10px 0 0">Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$labor_charge, 2);} ?>,</span>
+                                <span style="padding: 5px 10px 0 0">Parts: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$parts_charge, 2);} ?>,</span>
                                 <?php if($report_type != '16'){ ?>
                                 <span style="padding: 5px 10px 0 0">Parts No: <?php echo $osrinfo['osr_part_number']; ?></span>
                                 <?php } ?>
@@ -341,7 +341,7 @@
                                             }else if($row['wo_item_overview']['way_of_billing'] == '3'){
                                                 $hour_worked = 'N/C';
                                             }else{
-                                                $hour_worked = number_format($hour_worked, 2);
+                                                $hour_worked = number_format((float)$hour_worked, 2);
                                             }
                                             
                                             echo $hour_worked; 
@@ -350,7 +350,7 @@
                                     </td>
                                     <td width="150px">
                                         <p><strong>Subtotal</strong></p>
-                                        <p><strong><?php  if($report_type != '18' && $report_type != '19'){echo '$'.number_format($subtotal, 2);} ?></strong></p>
+                                        <p><strong><?php  if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$subtotal, 2);} ?></strong></p>
                                     </td>
                                 </tr>
                             </table>
@@ -394,13 +394,13 @@
     <table class="cust-invoice-table cust-invoice-table-body bg-gray border-btm">
         <tr>
             <td width="18%" style="text-align:left;">
-                <strong>Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($total_labor_charges, 2);} ?></strong>
+                <strong>Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$total_labor_charges, 2);} ?></strong>
             </td>
             <td width="18%" style="text-align:left;">
-                <strong>Parts: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($total_item_part_charges, 2);} ?></strong>
+                <strong>Parts: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$total_item_part_charges, 2);} ?></strong>
             </td>
             <td width="18%" style="text-align:left;">
-                <strong>Shipping: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($total_shipping_charges, 2);} ?></strong>
+                <strong>Shipping: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$total_shipping_charges, 2);} ?></strong>
             </td>
             <td width="23%" style="text-align:left;">
                 <strong>Outside Repair: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format(($total_labor_charges+$total_part_charges), 2);} ?></strong>
@@ -424,35 +424,35 @@
         <tr>
             <td>
                 <p>Pilot Services</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($pilot_services_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$pilot_services_amount, 2);} ?></p>
             </td>
             <td>
                 <p>Tire Disposal</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($amount_per_tire, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$amount_per_tire, 2);} ?></p>
             </td>
             <td>
                 <p>EPA Charge</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($epa_charge_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$epa_charge_amount, 2);} ?></p>
             </td>
             <td>
                 <p>Oil Analysis</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($oil_analysis_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$oil_analysis_amount, 2);} ?></p>
             </td>
             <td>
                 <p>Shop Supplies</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($shop_supplies_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$shop_supplies_amount, 2);} ?></p>
             </td>
             <td>
                 <p>Fuel</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($fuel_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$fuel_amount, 2);} ?></p>
             </td>
             <td>
                 <p>Misc.</p>
-                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($mis_charge_amount, 2);} ?></p>
+                <p><?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$mis_charge_amount, 2);} ?></p>
             </td>
             <td class="text-end">
                 <p><strong>Subtotal<strong></p>
-                <p><strong><?php if($report_type != '18' && $report_type != '19'){echo (!empty($addl_charges_sub_total) ? '$'.number_format($addl_charges_sub_total, 2) : '$0.00');} ?></strong></p>
+                <p><strong><?php if($report_type != '18' && $report_type != '19'){echo (!empty($addl_charges_sub_total) ? '$'.number_format((float)$addl_charges_sub_total, 2) : '$0.00');} ?></strong></p>
             </td>
         </tr>
     </table>
@@ -472,12 +472,12 @@
                                 <tr>
                                     <td>
                                         <p>
-                                            Shop Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($final_labor_charges, 2);} ?>
+                                            Shop Labor: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$final_labor_charges, 2);} ?>
                                         </p>
                                     </td>
                                     <td>
                                         <p>
-                                            Outside Repair: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($total_outside_repair_charges, 2); } ?>
+                                            Outside Repair: <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$total_outside_repair_charges, 2); } ?>
                                         </p>
                                     </td>
                                 </tr>
@@ -490,7 +490,7 @@
                                         <strong>Total Labor:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($final_labor_charges, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$final_labor_charges, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -498,7 +498,7 @@
                                         <strong>Total Parts:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($final_item_part_charges, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$final_item_part_charges, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -506,7 +506,7 @@
                                         <strong>Total Shipping:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($final_shipping_charges, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$final_shipping_charges, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -514,7 +514,7 @@
                                         <strong>Total Outside Repair:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($final_outside_repair_charges, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$final_outside_repair_charges, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -522,7 +522,7 @@
                                         <strong>Additional Charges:</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($addl_charges_sub_total, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$addl_charges_sub_total, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -546,7 +546,7 @@
                                         <strong>Deposit(s) and Credit(s):</strong>
                                     </td>
                                     <td class="text-end" style="padding-right: 0">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($total_deposits, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$total_deposits, 2);} ?>
                                     </td>
                                 </tr>
                                 <tr class="td-border">
@@ -554,7 +554,7 @@
                                         <strong>Balance Due (USD):</strong>
                                     </td>
                                     <td class="text-end pe-1">
-                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format($totalbalancedue, 2);} ?>
+                                        <?php if($report_type != '18' && $report_type != '19'){echo '$'.number_format((float)$totalbalancedue, 2);} ?>
                                     </td>
                                 </tr>
                             </table>

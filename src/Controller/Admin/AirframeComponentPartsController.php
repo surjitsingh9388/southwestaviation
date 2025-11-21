@@ -1130,7 +1130,7 @@ class AirframeComponentPartsController extends AppController
                     </div>
                 </div>
             </div>';
-            $tHtml .= '<div class="overflow-x-axis">
+            $tHtml .= '<div class="overflow-x-axis table-responsive">
                 <table id="customReportPopup" class="table table-hover table-header-dark">
                     <thead>
                         <tr>

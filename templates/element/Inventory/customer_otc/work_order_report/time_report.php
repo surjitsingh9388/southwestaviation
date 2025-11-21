@@ -145,10 +145,10 @@
                         ?>
                         <tr>
                             <td class="border-btm ps-0"><?php echo !empty($row['full_name']) ? $row['full_name'] : ''; ?></td>
-                            <td class="border-btm"><?php echo number_format($hrs_worked, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$hrs_worked, 2); ?></td>
                             <td class="border-btm">0.00</td>
                             <td class="border-btm">0.00</td>
-                            <td class="border-btm"><?php echo number_format($overtime_hrs, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$overtime_hrs, 2); ?></td>
                             <td class="border-btm">0.00</td>
                             <td class="border-btm">0.00</td>
                             <td class="border-btm text-end pe-0">0.00</td>
@@ -161,9 +161,9 @@
                     if(!empty($reportdata['wo_item'])){
                     foreach($reportdata['wo_item'] as $keys=>$row){
                         $total_hrs_for_items = !empty($row['services_details']['total_hrs_for_items']) ? $row['services_details']['total_hrs_for_items'] : '0.00';
-                        $total_hrs_for_items = !empty($total_hrs_for_items) ? number_format($total_hrs_for_items, 2) : '0.00';
+                        $total_hrs_for_items = !empty($total_hrs_for_items) ? number_format((float)$total_hrs_for_items, 2) : '0.00';
                         $estimated_hrs = $row['wo_item_overview']['estimated_hour'];
-                        $estimated_hrs = !empty($estimated_hrs) ? number_format($estimated_hrs, 2) : '0.00';
+                        $estimated_hrs = !empty($estimated_hrs) ? number_format((float)$estimated_hrs, 2) : '0.00';
                     ?>
                     <table class="item-group-table">
                         <tr>
@@ -178,8 +178,8 @@
                             <td class="border-top ps-0"><?php echo $row['wo_item_position']; ?></td>
                             <td class="border-top"><?php echo $row['wo_discrepancy']; ?></td>
                             <td class="border-top"><?php echo $row['wo_corrective_action']; ?></td>
-                            <td class="border-top"><?php echo number_format($estimated_hrs, 2); ?></td>
-                            <td class="border-top text-end pe-0"><?php echo number_format($total_hrs_for_items, 2); ?></td>
+                            <td class="border-top"><?php echo number_format((float)$estimated_hrs, 2); ?></td>
+                            <td class="border-top text-end pe-0"><?php echo number_format((float)$total_hrs_for_items, 2); ?></td>
                         </tr>
                         <?php if($report_type == '66' && !empty($row['item_notes'])){ ?>
                         <tr>
@@ -256,9 +256,9 @@
                         <tr>
                             <td class="border-btm ps-0"><?php echo $row['wo_item_position']; ?></td>
                             <td class="border-btm"><?php echo $row['wo_discrepancy']; ?></td>
-                            <td class="border-btm"><?php echo number_format($total_estimated_hrs, 2); ?></td>
-                            <td class="border-btm"><?php echo number_format($total_hrs_worked, 2); ?></td>
-                            <td class="border-btm text-end pe-0"><?php echo number_format($hours_over_estimate, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$total_estimated_hrs, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$total_hrs_worked, 2); ?></td>
+                            <td class="border-btm text-end pe-0"><?php echo number_format((float)$hours_over_estimate, 2); ?></td>
                         </tr>
                         <?php }}} ?>
                     </table>
@@ -284,8 +284,8 @@
                             <td class="border-top"><?php echo $row['wo_discrepancy']; ?></td>
                             <td class="border-top"><?php echo $row['wo_corrective_action']; ?></td>
                             <td class="border-top"><?php echo $inspected_by; ?></td>
-                            <td class="border-top"><?php echo !empty($row['services_details'][0]['estimated_hrs_for_item']) ? number_format($row['services_details'][0]['estimated_hrs_for_item'], 2) : ''; ?></td>
-                            <td class="border-top text-end pe-0"><?php echo !empty($row['services_details'][0]['total_hrs_for_item']) ? number_format($row['services_details'][0]['total_hrs_for_item'], 2) : '0.00'; ?></td>
+                            <td class="border-top"><?php echo !empty($row['services_details'][0]['estimated_hrs_for_item']) ? number_format((float)$row['services_details'][0]['estimated_hrs_for_item'], 2) : ''; ?></td>
+                            <td class="border-top text-end pe-0"><?php echo !empty($row['services_details'][0]['total_hrs_for_item']) ? number_format((float)$row['services_details'][0]['total_hrs_for_item'], 2) : '0.00'; ?></td>
                         </tr>
                         <?php if(!empty($row['services_details'])){ ?>
                         <tr>
@@ -303,9 +303,9 @@
                                     ?>
                                     <tr>
                                         <td class="ps-0"><?php echo $services['users']['full_name']; ?></td>
-                                        <td ><?php echo number_format($services['hrs_worked'], 2); ?></td>
-                                        <td><?php echo number_format($services['service_override_hrs'], 2); ?></td>
-                                        <td><?php echo number_format($services['total_hrs_for_tech'], 2); ?></td>
+                                        <td ><?php echo number_format((float)$services['hrs_worked'], 2); ?></td>
+                                        <td><?php echo number_format((float)$services['service_override_hrs'], 2); ?></td>
+                                        <td><?php echo number_format((float)$services['total_hrs_for_tech'], 2); ?></td>
                                         <td class="text-end pe-0"><?php //echo $servicelogs['services_logs']['hours_worked']; ?></td>
                                     </tr>
                                     <?php } ?>
@@ -349,7 +349,7 @@
                                                 <tr>
                                                     <td class="border-btm ps-0"><?php echo $itemsdet['wo_item_position']; ?></td>
                                                     <td class="border-btm"><?php echo $itemsdet['wo_discrepancy']; ?></td>
-                                                    <td class="border-btm text-end pe-0"><?php echo number_format($itemsdet['total_hrs_worked'], 2); ?></td>
+                                                    <td class="border-btm text-end pe-0"><?php echo number_format((float)$itemsdet['total_hrs_worked'], 2); ?></td>
                                                 </tr>
                                                 <?php } ?>
                                             </table>
@@ -385,9 +385,9 @@
                         <tr>
                             <td class="border-btm ps-0"><?php echo $row['wo_item_position']; ?></td>
                             <td class="border-btm"><?php echo $row['wo_discrepancy']; ?></td>
-                            <td class="border-btm"><?php echo number_format($estimated_hrs, 2); ?></td>
-                            <td class="border-btm"><?php echo number_format($hrs_worked, 2); ?></td>
-                            <td class="border-btm"><?php echo number_format($overtime_hrs, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$estimated_hrs, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$hrs_worked, 2); ?></td>
+                            <td class="border-btm"><?php echo number_format((float)$overtime_hrs, 2); ?></td>
                             <td class="border-btm"><?php echo !empty($row['signoff_details']) ? 'Yes' : 'No'; ?></td>
                             <td class="border-btm text-end pe-0"><?php echo $aircraftWOItemStatus[$row['wo_item_status']]; ?></td>
                         </tr>
@@ -409,7 +409,7 @@
                             <strong>Total Estimated Hours:</strong>
                         </td>
                         <td class="text-end" style="padding-right: 0">
-                            <?php echo number_format($total_estimated_hrs, 2); ?>
+                            <?php echo number_format((float)$total_estimated_hrs, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -417,7 +417,7 @@
                             <strong>Total Regular Hours:</strong>
                         </td>
                         <td class="text-end" style="margin:0px; padding:0px;">
-                            <?php echo number_format($total_hrs_worked, 2); ?>
+                            <?php echo number_format((float)$total_hrs_worked, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -425,7 +425,7 @@
                             <strong>Total Overtime Hours:</strong>
                         </td>
                         <td class="text-end" style="padding-top: 15px; padding-right: 0">
-                            <?php echo number_format($total_overtime_hrs, 2); ?>
+                            <?php echo number_format((float)$total_overtime_hrs, 2); ?>
                         </td>
                     </tr>
                     
@@ -443,7 +443,7 @@
                             <strong>Total Regular Hrs</strong>
                         </td>
                         <td class="text-end" style="padding-right: 0;">
-                            <?php echo number_format($total_hrs_worked, 2); ?>
+                            <?php echo number_format((float)$total_hrs_worked, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -451,7 +451,7 @@
                             <strong>Total Overtime Hours</strong>
                         </td>
                         <td class="text-end" style="padding-right: 0;;">
-                            <?php echo number_format($total_overtime_hrs, 2); ?>
+                            <?php echo number_format((float)$total_overtime_hrs, 2); ?>
                         </td>
                     </tr>
                     <tr>
@@ -478,7 +478,7 @@
                         <td class="text-end">
                             <strong>Total Hours Over Estimate: </strong>
                         </td>
-                        <td class="text-end" style="padding-right: 0;"><?php echo number_format($total_hours_over_estimates, 2); ?></td>
+                        <td class="text-end" style="padding-right: 0;"><?php echo number_format((float)$total_hours_over_estimates, 2); ?></td>
                     </tr>
                     <?php } ?>
                 </table>

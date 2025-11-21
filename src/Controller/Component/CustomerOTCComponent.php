@@ -306,8 +306,8 @@ class CustomerOTCComponent extends Component {
             $tblrow .= '<td>'.$row['qty_cust_owned'].'</td>';
             $tblrow .= '<td>'.$row['invitm']['part_number'].'</td>';
             $tblrow .= '<td>'.$row['part_description'].'</td>';
-            $tblrow .= '<td>'.$row['price_each'].'</td>';
-            $tblrow .= '<td>'.$totalprice.'</td>';
+            $tblrow .= '<td>$'.(!empty($row['price_each']) ? number_format((float)$row['price_each'],2) : '0.00').'</td>';
+            $tblrow .= '<td>$'.(!empty($totalprice) ? number_format((float)$totalprice,2) : '0.00').'</td>';
             $tblrow .= '</tr>';
 
             $totalpartsubtotal += $totalprice;
@@ -364,30 +364,33 @@ class CustomerOTCComponent extends Component {
         return $returnArr;
     }
 
-    public function getOTCInvoiceNumber(){
+    public function getOTCInvoiceNumber()
+    {
         $this->CustomerOTCInfoInvoices = $this->getController()->fetchTable('CustomerOTCInfoInvoices');
-        $otcinfoinvoices = $this->CustomerOTCInfoInvoices->find('all')->select($this->CustomerOTCInfoInvoices)->all()->last();
-        
-        $currentyear = date('y');
-        if(!empty($otcinfoinvoices)){
-            $otcinvoicearr = explode('-', $otcinfoinvoices->otc_invoice_no);
-            if($otcinvoicearr[0] == $currentyear){
-                $otcinvoiceid = $otcinvoicearr[1]+1;
-                $remaingtoaddzero = 4-strlen($otcinvoiceid);
-                $invoice_number = $otcinvoicearr[0].'-';
-                for($i=1; $i<=$remaingtoaddzero; $i++){
-                    $invoice_number .= '0';
-                }
-                $invoice_number .= $otcinvoiceid;
-            }else{
-                $invoice_number = $currentyear.'-0001';
+
+        // Fetch the latest invoice number with a hyphen (e.g., YY-NNNN)
+        $otcinfoinvoice = $this->CustomerOTCInfoInvoices
+            ->find()
+            ->where(['otc_invoice_no LIKE' => '%-%'])
+            ->orderDesc('id')
+            ->first();
+
+        $currentYear = date('y');
+        $invoiceNumber = "{$currentYear}-0001"; // Default starting invoice
+
+        if ($otcinfoinvoice) {
+            $parts = explode('-', $otcinfoinvoice->otc_invoice_no);
+
+            // Ensure valid format and matching year
+            if (count($parts) === 2 && $parts[0] === $currentYear) {
+                $nextId = (int)$parts[1] + 1;
+                $invoiceNumber = sprintf('%s-%04d', $currentYear, $nextId);
             }
-        }else{
-            $invoice_number = $currentyear.'-0001';
         }
-        
-        return $invoice_number;
+
+        return $invoiceNumber;
     }
+
 
     public function getCustomerOTCPageInfo($customer_id, $aircraft_id=''){
         $this->CustomerOTCAircrafts = $this->getController()->fetchTable('CustomerOTCAircrafts');
@@ -449,29 +452,31 @@ class CustomerOTCComponent extends Component {
         return $returnArr;
     }
 
-    public function getAircraftWorkOrderNumber(){
+    public function getAircraftWorkOrderNumber()
+    {
         $this->CustomerAircraftWorkOrders = $this->getController()->fetchTable('CustomerAircraftWorkOrders');
-        $aircraftworkorders = $this->CustomerAircraftWorkOrders->find('all', array('order' => 'work_order_no ASC'))->select($this->CustomerAircraftWorkOrders)->all()->last();
-        
-        $currentyear = date('y');
-        if(!empty($aircraftworkorders)){
-            $wonoarr = explode('-', $aircraftworkorders->work_order_no);
-            if($wonoarr[0] == $currentyear){
-                $aircraftworkorderid = $wonoarr[1]+1;
-                $remaingtoaddzero = 4-strlen($aircraftworkorderid);
-                $work_order_number = $wonoarr[0].'-';
-                for($i=1; $i<=$remaingtoaddzero; $i++){
-                    $work_order_number .= '0';
-                }
-                $work_order_number .= $aircraftworkorderid;
-            }else{
-                $work_order_number = $currentyear.'-0001';
+
+        // Get the most recent work order that contains a hyphen (e.g., YY-NNNN)
+        $aircraftWorkOrder = $this->CustomerAircraftWorkOrders
+            ->find()
+            ->where(['work_order_no LIKE' => '%-%'])
+            ->orderDesc('id')
+            ->first();
+
+        $currentYear = date('y');
+        $workOrderNumber = "{$currentYear}-0001"; // Default if no record found
+
+        if ($aircraftWorkOrder) {
+            $parts = explode('-', $aircraftWorkOrder->work_order_no);
+
+            // Validate format and year match before incrementing
+            if (count($parts) === 2 && $parts[0] === $currentYear) {
+                $nextId = (int)$parts[1] + 1;
+                $workOrderNumber = sprintf('%s-%04d', $currentYear, $nextId);
             }
-        }else{
-            $work_order_number = $currentyear.'-0001';
         }
 
-        return $work_order_number;
+        return $workOrderNumber;
     }
 
     public function getWrkOrderAllTabData($postData){
@@ -714,45 +719,59 @@ class CustomerOTCComponent extends Component {
         return $summarydata;
     }
 
-    public function getAircraftWOOSRPONumber($postData){
+    public function getAircraftWOOSRPONumber($postData)
+    {
         $this->CustomerAircraftWOOSRInfoes = $this->getController()->fetchTable('CustomerAircraftWOOSRInfoes');
-        $woosrinfocount = 0;
-        if(!empty($postData['osr_purchase_order_no'])){
-            $woosrinfocount = $this->CustomerAircraftWOOSRInfoes->find('all')->where(['osr_purchase_order_no'=>$postData['osr_purchase_order_no']])->select($this->CustomerAircraftWOOSRInfoes)->count();
-        }
-        
-        if(empty($woosrinfocount)){
-            $woosrinfodet = $this->CustomerAircraftWOOSRInfoes->find('all', array('order' => 'osr_purchase_order_no ASC'))->where(['is_add_to_po'=>'1'])->select(['osr_purchase_order_no'])->all()->last();
-            
-            $currentyear = date('y');
-            if(!empty($woosrinfodet)){
-                $otcinvoicearr = explode('-', $woosrinfodet->osr_purchase_order_no);
-                if($otcinvoicearr[0] == $currentyear){
-                    $aircraftworkorderid = $otcinvoicearr[1]+1;
-                    $remaingtoaddzero = 4-strlen($aircraftworkorderid);
-                    $osr_purchase_order_no = $otcinvoicearr[0].'-';
-                    for($i=1; $i<=$remaingtoaddzero; $i++){
-                        $osr_purchase_order_no .= '0';
-                    }
-                    $osr_purchase_order_no .= $aircraftworkorderid;
-                }else{
-                    $osr_purchase_order_no = $currentyear.'-0001';
-                }
-            }else{
-                $osr_purchase_order_no = $currentyear.'-0001';
+
+        $status = 'failure';
+        $message = '';
+        $osrPurchaseOrderNo = '';
+
+        // Check if PO number already exists for given item
+        if (!empty($postData['osr_purchase_order_no'])) {
+            $existingCount = $this->CustomerAircraftWOOSRInfoes
+                ->find()
+                ->where(['osr_purchase_order_no' => $postData['osr_purchase_order_no']])
+                ->count();
+
+            if ($existingCount > 0) {
+                return [
+                    'status' => 'failure',
+                    'message' => 'A Purchase Order number already exists for this item and cannot be added. 
+                                Remove the Purchase Order Number information on this screen and try again.',
+                    'osr_purchase_order_no' => ''
+                ];
             }
-            
-            $message = '';
-            $status = 'success';
-        }else{
-            $message = 'A Purchase Order number already exists for this item and cannot be added.
-
-Remove the Purchase Order Number information on this screen and try again.';
-            $osr_purchase_order_no = '';
-            $status = 'failure';
         }
 
-        return $resp = ['status'=>$status, 'message'=>$message, 'osr_purchase_order_no'=>$osr_purchase_order_no];
+        // Get the latest OSR PO number that includes a hyphen (e.g., 24-0005)
+        $latestPO = $this->CustomerAircraftWOOSRInfoes
+            ->find()
+            ->select(['osr_purchase_order_no'])
+            ->where([
+                'is_add_to_po' => 1,
+                'osr_purchase_order_no LIKE' => '%-%'
+            ])
+            ->orderDesc('id')
+            ->first();
+
+        $currentYear = date('y');
+        $osrPurchaseOrderNo = "{$currentYear}-0001"; // default number
+
+        if ($latestPO) {
+            $parts = explode('-', $latestPO->osr_purchase_order_no);
+
+            if (count($parts) === 2 && $parts[0] === $currentYear && is_numeric($parts[1])) {
+                $nextId = (int)$parts[1] + 1;
+                $osrPurchaseOrderNo = sprintf('%s-%04d', $currentYear, $nextId);
+            }
+        }
+
+        return [
+            'status' => 'success',
+            'message' => '',
+            'osr_purchase_order_no' => $osrPurchaseOrderNo
+        ];
     }
 
     public function getAircraftWOOSRRONumber($postData){
@@ -827,38 +846,41 @@ Remove the Purchase Order Number information on this screen and try again.';
     public function getAllServiceItemOnPO($osr_po_id){
         $this->CustomerAircraftWOOSRPOItems = $this->getController()->fetchTable('CustomerAircraftWOOSRPOItems');
 
-        $allserviceitemspo = $this->CustomerAircraftWOOSRPOItems->find('all')
-                                                                ->where(['osr_po_id'=>$osr_po_id, 'mark_arrived'=>'0'])
-                                                                ->select($this->CustomerAircraftWOOSRPOItems)
-                                                                ->select(['work_order.work_order_no', 'work_order.order_type', 'wo_item.wo_item_position'])
-                                                                ->join([
-                                                                    'work_order' => [
-                                                                        'table' => 'customer_aircraft_work_orders',
-                                                                        'type' => 'LEFT',
-                                                                        'conditions' => 'work_order.id = CustomerAircraftWOOSRPOItems.destination',
-                                                                    ]
-                                                                ])
-                                                                ->join([
-                                                                    'wo_osr_info_poes' => [
-                                                                        'table' => 'customer_aircraft_wo_osr_info_poes',
-                                                                        'type' => 'LEFT',
-                                                                        'conditions' => 'wo_osr_info_poes.id = CustomerAircraftWOOSRPOItems.osr_po_id',
-                                                                    ]
-                                                                ])
-                                                                ->join([
-                                                                    'wo_osr_infoes' => [
-                                                                        'table' => 'customer_aircraft_wo_osr_infoes',
-                                                                        'type' => 'LEFT',
-                                                                        'conditions' => 'wo_osr_infoes.osr_purchase_order_no = wo_osr_info_poes.po_no',
-                                                                    ]
-                                                                ])
-                                                                ->join([
-                                                                    'wo_item' => [
-                                                                        'table' => 'customer_aircraft_wo_items',
-                                                                        'type' => 'LEFT',
-                                                                        'conditions' => 'wo_item.id = wo_osr_infoes.wo_item_id',
-                                                                    ]
-                                                                ]);
+        $allserviceitemspo = $this->CustomerAircraftWOOSRPOItems
+                                ->find()
+                                ->distinct(['CustomerAircraftWOOSRPOItems.id'])
+                                ->where(['CustomerAircraftWOOSRPOItems.osr_po_id' => $osr_po_id, 'CustomerAircraftWOOSRPOItems.mark_arrived' => '0'])
+                                ->select($this->CustomerAircraftWOOSRPOItems)
+                                ->select(['work_order.work_order_no', 'work_order.order_type', 'wo_item.wo_item_position'])
+                                ->join([
+                                    'work_order' => [
+                                        'table' => 'customer_aircraft_work_orders',
+                                        'type' => 'LEFT',
+                                        'conditions' => 'work_order.id = CustomerAircraftWOOSRPOItems.destination',
+                                    ]
+                                ])
+                                ->join([
+                                    'wo_osr_info_poes' => [
+                                        'table' => 'customer_aircraft_wo_osr_info_poes',
+                                        'type' => 'LEFT',
+                                        'conditions' => 'wo_osr_info_poes.id = CustomerAircraftWOOSRPOItems.osr_po_id',
+                                    ]
+                                ])
+                                ->join([
+                                    'wo_osr_infoes' => [
+                                        'table' => 'customer_aircraft_wo_osr_infoes',
+                                        'type' => 'LEFT',
+                                        'conditions' => 'wo_osr_infoes.osr_purchase_order_no = wo_osr_info_poes.po_no',
+                                    ]
+                                ])
+                                ->join([
+                                    'wo_item' => [
+                                        'table' => 'customer_aircraft_wo_items',
+                                        'type' => 'LEFT',
+                                        'conditions' => 'wo_item.id = wo_osr_infoes.wo_item_id',
+                                    ]
+                                ]);
+
 
         return $allserviceitemspo;
     }
@@ -873,9 +895,9 @@ Remove the Purchase Order Number information on this screen and try again.';
         return $osrVendorInfoMedia;
     }
 
-    public function getAircraftWODropDown(){
+    public function getAircraftWODropDown($order_type='1'){
         $this->CustomerAircraftWorkOrders = $this->getController()->fetchTable('CustomerAircraftWorkOrders');
-        $workorderlists = $this->CustomerAircraftWorkOrders->find('all')->where(['wo_status'=>'1'])->select(['id', 'work_order_no']);
+        $workorderlists = $this->CustomerAircraftWorkOrders->find('all')->where(['wo_status'=>'1', 'order_type'=>$order_type])->select(['id', 'work_order_no']);
         $workorderarr = [];
         if($workorderlists->count() > 0){
             foreach($workorderlists as $workorder){
@@ -884,6 +906,13 @@ Remove the Purchase Order Number information on this screen and try again.';
         }
         
         return $workorderarr;
+    }
+
+    public function getAircraftWorkOrder($work_order_id){
+        $this->CustomerAircraftWorkOrders = $this->getController()->fetchTable('CustomerAircraftWorkOrders');
+        $workorderdet = $this->CustomerAircraftWorkOrders->get($work_order_id);
+        
+        return $workorderdet;
     }
 
     public function getAllOSRByWOId($work_order_id){
@@ -986,11 +1015,25 @@ Remove the Purchase Order Number information on this screen and try again.';
 
         $wooptiongeninfoes = $this->CustomerAircraftWOOptionGeneralInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionGeneralInfoes)->first();
         if(!empty($wooptiongeninfoes)){
-            $wooptiongeninfodeposit = $this->CustomerAircraftWOOptionGenInfoDeposits->find('all')->where(['general_info_id'=>$wooptiongeninfoes->id]);
-            $wooptiongeninfodeposit = $wooptiongeninfodeposit->select(['totalamounttoadd' => $wooptiongeninfodeposit->func()->sum('amount_to_add') ])->first();
-            $wooptiongeninfoes->total_deposit_amount = (!empty($wooptiongeninfodeposit->totalamounttoadd) && (float)$wooptiongeninfodeposit->totalamounttoadd > 0)
-                ? number_format((float)$wooptiongeninfodeposit->totalamounttoadd, 2)
-                : '';
+            $wooptiongeninfodeposit = $this->CustomerAircraftWOOptionGenInfoDeposits
+                                            ->find()
+                                            ->select([
+                                                'totalamounttoadd' => $this->CustomerAircraftWOOptionGenInfoDeposits
+                                                    ->find()
+                                                    ->func()
+                                                    ->sum('amount_to_add')
+                                            ])
+                                            ->where(['general_info_id' => $wooptiongeninfoes->id])
+                                            ->first();
+
+            $wooptiongeninfoes->total_deposit_amount = (
+                                            !empty($wooptiongeninfodeposit) &&
+                                            !empty($wooptiongeninfodeposit->totalamounttoadd) &&
+                                            $wooptiongeninfodeposit->totalamounttoadd > 0
+                                        )
+                                            ? $wooptiongeninfodeposit->totalamounttoadd
+                                            : '0.00';
+
 
         }
 
@@ -1003,7 +1046,7 @@ Remove the Purchase Order Number information on this screen and try again.';
 
         $wooptionpricinginfoes = $this->CustomerAircraftWOOptionPricingInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionPricingInfoes)->first();
 
-        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->first();
+        $wooptionwarrantyinfoes = $this->CustomerAircraftWOOptionWarrantyInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionWarrantyInfoes)->orderDesc('id')->first();
 
         $wooptiontaxinfoes = $this->CustomerAircraftWOOptionTaxInfoes->find('all')->where(['work_order_id'=>$postData['work_order_id']])->select($this->CustomerAircraftWOOptionTaxInfoes)->first();
 
@@ -1059,10 +1102,10 @@ Remove the Purchase Order Number information on this screen and try again.';
             $whereArr['work_order_id'] = $work_order_id;
         }
 
-        if ($user_id != '1') {
+        //if ($user_id != '1') {
             $wherecond[] = "msg.added_by = :added_by";
             $whereArr['added_by'] = $user_id;
-        }
+        //}
 
         if (!empty($message_id)) {
             $wherecond[] = "msg.id = :message_id";
@@ -1122,6 +1165,9 @@ Remove the Purchase Order Number information on this screen and try again.';
 
         if ($user_id != '1') {
             $wherecond[] = "msg.message_to = :message_to";
+            $whereArr['message_to'] = $user_id;
+        }else{
+            $wherecond[] = "msg.added_by != :message_to";
             $whereArr['message_to'] = $user_id;
         }
 
@@ -2433,13 +2479,66 @@ Remove the Purchase Order Number information on this screen and try again.';
     }
 
     public function getWOItemServicesTotalTechHrs($wo_item_id, $services_id){
-        $connection = ConnectionManager::get('default');
+        $this->AircraftWOItemServiceLogs = $this->getController()->fetchTable('AircraftWOItemServiceLogs');
+        $currentdatetime =  new \Cake\I18n\FrozenTime('now');
+        $servicelogs = $this->AircraftWOItemServiceLogs->find('all')
+                                                    ->where(['AircraftWOItemServiceLogs.wo_services_id'=>$services_id])
+                                                    ->select(['login_time', 'logout_time', 'hours_worked'])
+                                                    ->toArray();
+        $total_hour_for_tech = 0;
+        if(!empty($servicelogs)){
+            foreach($servicelogs as $logs){
+                if(empty($logs['logout_time'])){
+                    $milliseconds = strtotime($currentdatetime) - strtotime($logs['login_time']);
+                    $calulatedtime = $milliseconds / 3600;
+                    $hours_worked = round($calulatedtime, 2);
+                }else{
+                    $hours_worked = $logs['hours_worked'];
+                }
+                $total_hour_for_tech += $hours_worked;
+            }
+            
+        }
+
+        return $total_hour_for_tech;
+    }
+
+    public function getWOItemServicesTotalItemHrs($wo_item_id){
+        $this->CustomerAircraftWOItemServices = $this->getController()->fetchTable('CustomerAircraftWOItemServices');
+        $this->AircraftWOItemServiceLogs = $this->getController()->fetchTable('AircraftWOItemServiceLogs');
         
-        $woservicedata = $connection->execute(
-            "SELECT SUM(total_hrs_for_tech) as totaltechhour from customer_aircraft_wo_item_services where id != :services_id and wo_item_id = :wo_item_id",
-            ['wo_item_id' => $wo_item_id, 'services_id'=>$services_id])->fetch('assoc');
-        
-        return $woservicedata['totaltechhour'];
+        $woitemservicesdet = $this->CustomerAircraftWOItemServices->find('all')
+                                                                ->where(['CustomerAircraftWOItemServices.wo_item_id'=>$wo_item_id])
+                                                                ->select(['id'])
+                                                                ->toArray();
+                
+        $total_hour_for_item = 0;
+        if(!empty($woitemservicesdet)){
+            $currentdatetime =  new \Cake\I18n\FrozenTime('now');
+            foreach($woitemservicesdet as $servicekey=>$services){
+                $servicelogs = $this->AircraftWOItemServiceLogs->find('all')
+                                                        ->where(['AircraftWOItemServiceLogs.wo_services_id'=>$services['id']])
+                                                        ->select(['login_time', 'logout_time', 'hours_worked'])
+                                                        ->toArray();
+                $total_hour_for_tech = 0;
+                if(!empty($servicelogs)){
+                    foreach($servicelogs as $logs){
+                        if(empty($logs['logout_time'])){
+                            $milliseconds = strtotime($currentdatetime) - strtotime($logs['login_time']);
+                            $calulatedtime = $milliseconds / 3600;
+                            $hours_worked = round($calulatedtime, 2);
+                        }else{
+                            $hours_worked = $logs['hours_worked'];
+                        }
+                        $total_hour_for_tech += $hours_worked;
+                    }
+                    
+                }
+                $total_hour_for_item += $total_hour_for_tech;
+            }
+        }
+
+        return $total_hour_for_item;
     }
 
     public function validateUserAccessCode($time_clock_code){
@@ -2504,6 +2603,13 @@ Remove the Purchase Order Number information on this screen and try again.';
         $this->CustomerOTCAircrafts = $this->getController()->fetchTable('CustomerOTCAircrafts');
         $customerAircrafts = $this->CustomerOTCAircrafts->find('all')
                                                     ->select(['CustomerOTCAircrafts.id', 'CustomerOTCAircrafts.aircraft_registration_number', 'CustomerOTCAircrafts.aircraft_year', 'CustomerOTCAircrafts.aircraft_serial', 'aircraft_model.model', 'aircraft_make.make'])
+                                                    ->join([
+                                                        'customers' => [
+                                                            'table' => 'inventory_customers',
+                                                            'type' => 'INNER',
+                                                            'conditions' => 'customers.id = CustomerOTCAircrafts.customer_id',
+                                                        ]
+                                                    ])
                                                     ->join([
                                                         'aircraft_model' => [
                                                             'table' => 'customer_otc_aircraft_model',
@@ -2868,6 +2974,7 @@ Remove the Purchase Order Number information on this screen and try again.';
 
             $this->CustomerAircraftWOOSRInfoes = $this->getController()->fetchTable('CustomerAircraftWOOSRInfoes');
             $this->CustomerAircraftWOItemServices = $this->getController()->fetchTable('CustomerAircraftWOItemServices');
+            $this->AircraftWOItemServiceLogs = $this->getController()->fetchTable('AircraftWOItemServiceLogs');
             $this->CustomerAircraftWOOptionWarrantyInfoes = $this->getController()->fetchTable('CustomerAircraftWOOptionWarrantyInfoes');
             $this->CustomerAircraftWOItemParts = $this->getController()->fetchTable('CustomerAircraftWOItemParts');
             
@@ -2898,8 +3005,33 @@ Remove the Purchase Order Number information on this screen and try again.';
 
                 $woitemservicesdet = $this->CustomerAircraftWOItemServices->find('all')
                                                                 ->where(['CustomerAircraftWOItemServices.wo_item_id'=>$rows['id']])
-                                                                ->select(['total_hrs_for_tech'])
+                                                                ->select(['id', 'total_hrs_for_tech'])
                                                                 ->toArray();
+                if(!empty($woitemservicesdet)){
+                    $currentdatetime =  new \Cake\I18n\FrozenTime('now');
+                    foreach($woitemservicesdet as $servicekey=>$services){
+                        $servicelogs = $this->AircraftWOItemServiceLogs->find('all')
+                                                                ->where(['AircraftWOItemServiceLogs.wo_services_id'=>$services['id']])
+                                                                ->select(['login_time', 'logout_time', 'hours_worked'])
+                                                                ->toArray();
+                        $total_hrs_for_tech = 0;
+                        if(!empty($servicelogs)){
+                            foreach($servicelogs as $logs){
+                                if(empty($logs['logout_time'])){
+                                    $milliseconds = strtotime($currentdatetime) - strtotime($logs['login_time']);
+                                    $calulatedtime = $milliseconds / 3600;
+                                    $hours_worked = round($calulatedtime, 2);
+                                }else{
+                                    $hours_worked = $logs['hours_worked'];
+                                }
+                                $total_hrs_for_tech += $hours_worked;
+                            }
+                            
+                        }
+                        $woitemservicesdet[$servicekey]['total_hrs_for_tech'] = $total_hrs_for_tech;
+                    }
+                }
+                
                 $woitemdet[$key]['services_details'] = $woitemservicesdet;
 
                 $woitemdet[$key]['part_details'] = $this->getWOItemPartDetails($rows['id']);
@@ -3611,17 +3743,21 @@ Remove the Purchase Order Number information on this screen and try again.';
 
     public function getWorkOrderWarrantyList($work_order_id){
         $this->CustomerAircraftWOItems = $this->getController()->fetchTable('CustomerAircraftWOItems');
-        $warrantylist = $this->CustomerAircraftWOItems->find('all')
-                                                    ->where(['CustomerAircraftWOItems.work_order_id'=>$work_order_id, 'wo_item_overviews.warranty !='=>''])
+        $warrantylist = $this->CustomerAircraftWOItems->find()
                                                     ->select(['wo_item_overviews.warranty'])
-                                                    ->distinct()
+                                                    ->distinct(['wo_item_overviews.warranty'])
                                                     ->join([
-                                                        'wo_item_overviews'=>[
-                                                            'table'=>'customer_aircraft_wo_item_overviews',
-                                                            'type'=>'INNER',
-                                                            'conditions'=>'wo_item_overviews.wo_item_id = CustomerAircraftWOItems.id'
+                                                        'wo_item_overviews' => [
+                                                            'table' => 'customer_aircraft_wo_item_overviews',
+                                                            'type' => 'INNER',
+                                                            'conditions' => 'wo_item_overviews.wo_item_id = CustomerAircraftWOItems.id',
                                                         ]
-                                                    ]);
+                                                    ])
+                                                    ->where([
+                                                        'CustomerAircraftWOItems.work_order_id' => $work_order_id,
+                                                        'wo_item_overviews.warranty !=' => ''
+                                                    ])
+                                                    ->all();
 
         return $warrantylist;
     }
@@ -3654,5 +3790,14 @@ Remove the Purchase Order Number information on this screen and try again.';
                                                                 ->toArray();
         
         return $woitempartsdet;
+    }
+
+    public function getAircraftWOViewOptionWarrantyInfo($misc_charges_id){
+        $this->CustomerAircraftWOOptionMiscFuelCharges = $this->getController()->fetchTable('CustomerAircraftWOOptionMiscFuelCharges');
+        $miscfuelchargeslist = $this->CustomerAircraftWOOptionMiscFuelCharges->find('all')
+                                                    ->where(['misc_charges_id'=>$misc_charges_id])
+                                                    ->select($this->CustomerAircraftWOOptionMiscFuelCharges);
+
+        return $miscfuelchargeslist;
     }
 }

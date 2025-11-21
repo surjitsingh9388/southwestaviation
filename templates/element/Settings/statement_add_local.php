@@ -1,5 +1,5 @@
 <div id="statementsAddModel" class="modal fade page-content" role="dialog" style="background: transparent;">
-    <div class="modal-dialog"> 
+    <div class="modal-dialog" style="width: 30%;"> 
         <div class="modal-content">
             <div class="modal-header" style="background-color: #e5e5e5;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
